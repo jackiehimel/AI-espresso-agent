@@ -472,6 +472,60 @@ def _build_client():
         return None
 
 
+# Card thumbnails display at 160px; 512px covers 3x retina with headroom for email.
+EDITION_PNG_MAX_WIDTH = 512
+
+
+def compress_edition_pngs(
+    image_paths: list[Path],
+    *,
+    max_width: int = EDITION_PNG_MAX_WIDTH,
+) -> dict[str, Any]:
+    """
+    Resize oversized illustration PNGs and re-save with optimize=True.
+    Skips paths that are missing or when Pillow is unavailable.
+    """
+    try:
+        from PIL import Image
+    except ImportError:
+        return {
+            "compressed": [],
+            "skipped": [str(p) for p in image_paths],
+            "reason": "pillow_unavailable",
+        }
+
+    compressed: list[str] = []
+    skipped: list[str] = []
+    for raw in image_paths:
+        path = Path(raw)
+        if not path.is_file():
+            skipped.append(str(path))
+            continue
+        before = path.stat().st_size
+        try:
+            with Image.open(path) as img:
+                if img.mode != "RGB":
+                    img = img.convert("RGB")
+                w, h = img.size
+                if max(w, h) > max_width:
+                    scale = max_width / float(max(w, h))
+                    new_size = (max(1, int(w * scale)), max(1, int(h * scale)))
+                    resample = getattr(Image, "Resampling", Image).LANCZOS
+                    img = img.resize(new_size, resample)
+                path.parent.mkdir(parents=True, exist_ok=True)
+                img.save(path, format="PNG", optimize=True)
+            after = path.stat().st_size
+            compressed.append(str(path))
+            print(
+                f"  [compress] {path.name}: {before // 1024}KB → {after // 1024}KB",
+                file=sys.stderr,
+            )
+        except Exception as e:
+            print(f"  [compress fail] {path}: {e}", file=sys.stderr)
+            skipped.append(str(path))
+    return {"compressed": compressed, "skipped": skipped}
+
+
 def render_images(
     render_result: dict[str, Any],
     edition_data: dict[str, Any],
@@ -508,7 +562,13 @@ def render_images(
         ok = _run_image_cli(prompt, no_ext, "1:1")
         (generated if ok else missing).append(str(path))
 
-    return {"generated": generated, "missing": missing, "prompts": prompts}
+    compress_result = compress_edition_pngs([Path(p) for p in generated])
+    return {
+        "generated": generated,
+        "missing": missing,
+        "prompts": prompts,
+        "compress": compress_result,
+    }
 
 
 if __name__ == "__main__":

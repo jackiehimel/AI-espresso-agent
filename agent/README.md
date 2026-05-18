@@ -30,9 +30,20 @@ Output:
 
 The `editions/` directory at the repo root is the contract surface that the AI Garage portal consumes via its existing `sync-espresso.mjs` script.
 
-### Dev backfill (`run_chain.py`)
+### Dev backfill (multiple dates)
 
-Runs `espresso_agent.run(date, mode="agent")` for a hard-coded list of dates (see the script). Use when you need several consecutive editions locally so each day's `archive.jsonl` entry feeds the next run's dedupe. Not used by CI — production uses `.github/workflows/daily-edition.yml` only.
+There is no `run_chain.py` in this repo. To backfill several consecutive editions locally (so each day's `archive.jsonl` entry feeds the next run's dedupe), loop `espresso_agent.run` yourself:
+
+```bash
+cd agent
+for d in 2026-05-16 2026-05-17 2026-05-18; do
+  python3 -c "import datetime as dt, espresso_agent; \
+    espresso_agent.run(dt.date.fromisoformat('$d'), dry_run=False, use_cache=True, mode='agent')"
+  python3 render_edition.py "$d"
+done
+```
+
+Not used by CI — production uses `.github/workflows/daily-edition.yml` only.
 
 ## Architecture
 
@@ -266,7 +277,7 @@ python send_email.py ../editions/edition_1_variant_c.html ../editions/edition_1_
 ## Repository layout
 
 ```
-AI-ESPRESSO-MAIN/
+ai-espresso-finalized/
 ├── agent/
 │   ├── espresso_agent.py     # entry point, controller helpers, ranking prompts
 │   ├── espresso_loop.py      # Scout bootstrap, native tool_use editor, ship gates
@@ -274,7 +285,6 @@ AI-ESPRESSO-MAIN/
 │   ├── render_images.py      # generate four illustrations per edition
 │   ├── render_edition.py     # CLI that chains both renderers
 │   ├── send_email.py         # SMTP delivery with inline-image rewrite
-│   ├── run_chain.py          # dev backfill: runs agent mode for a list of dates
 │   ├── sources.yaml          # source catalog
 │   ├── requirements.txt
 │   ├── README.md

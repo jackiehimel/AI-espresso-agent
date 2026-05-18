@@ -55,6 +55,7 @@ xAI launched Grok Build, a coding agent that lets you describe an app idea in a 
 
 ### The plain-English explainer
 
+*Great for onboarding, stakeholder memos, or prepping for cross-functional meetings.*
 
 
 ```
@@ -63,4 +64,4 @@ Explain [topic or concept] in plain English for someone smart but unfamiliar wit
 
 ---
 
-*brewed by ai espresso · [spot something off?](mailto:jacqueline.himel@vanderbilt.edu?subject=AI%20Espresso%20issue%20report) · [repo](https://github.com/jackiehimel/AI-ESPRESSO-MAIN)*
+*brewed by ai espresso · [spot something off?](mailto:jhimel@solvd.com?subject=AI%20Espresso%20issue%20report) · [repo](https://github.com/jackiehimel/ai-espresso-finalized)*

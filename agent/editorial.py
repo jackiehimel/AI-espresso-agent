@@ -16,27 +16,18 @@ from constitution import FAILURE_PRIMARY_RE
 
 # ── Rotating masthead voice (deterministic per edition date) ──────────
 
+# Rotating editorial personas (stable per date) — not displayed on the public masthead.
 VOICE_CHARACTERS: list[str] = [
-    "Tony Stark",
-    "Steve Rogers",
-    "Natasha Romanoff",
-    "Thor",
-    "Bruce Banner",
-    "Dumbledore",
-    "Professor McGonagall",
-    "Hermione Granger",
-    "Professor Snape",
-    "Jon Snow",
-    "Tyrion Lannister",
-    "Arya Stark",
-    "Luke Skywalker",
-    "Princess Leia",
-    "Yoda",
-    "Obi-Wan Kenobi",
-    "Woody",
-    "Buzz Lightyear",
-    "Elsa",
-    "Simba",
+    "The Skeptic",
+    "The Builder",
+    "The Strategist",
+    "The Editor",
+    "The Curator",
+    "The Analyst",
+    "The Pragmatist",
+    "The Scout",
+    "The Critic",
+    "The Brief",
 ]
 
 # Persona slot → orange category label on news cards (variant_c).

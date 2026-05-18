@@ -42,7 +42,23 @@
 - [x] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE — merged `5b9e7c4`
 - [x] Phase 2.3 Deterministic path dev-only / aligned — merged `98ba480`
 - [ ] Phase 3 Editorial quality pass + clean prod edition
-- [ ] Phase 4 External polish
+- [x] Phase 4 External polish — merged (see handoff below; commit on `main` after this session)
+
+### Session handoff (Phase 4 — public edition polish) — MERGED
+
+**Tests (2026-05-18):** `85` ran, `OK` (`3` skipped). Command: `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v`.
+
+**Shipped in `polish: public edition HTML and assets`:**
+- `render_html.py`: Solvd footer (`jhimel@solvd.com`), repo `ai-espresso-finalized`; no `T1`/`T2` in public HTML.
+- `render_images.py`: `compress_edition_pngs` (max width 512, `optimize=True`) after illustration gen (~2.5MB → ~500KB per card on edition_4).
+- `agent/README.md`: dev backfill shell loop; removed missing `run_chain.py` references.
+- `editorial.py`: neutral `VOICE_CHARACTERS` (no Marvel/film IPs).
+- `agent/tests/test_render_polish.py`: footer, hidden tiers, compress helper.
+- `editions/edition_4_*`: regenerated HTML/MD + compressed assets.
+
+**Preview:** `cd agent && python3 preview_edition.py 2026-05-18 --render-only --no-images` (serves `editions/`; images at 160px CSS from 512px PNGs).
+
+**Next session:** **Prompt 7** — Phase **3** (editorial quality + clean prod edition). Phase **1.1** archive upsert still open if doing ops first.
 
 ### Session handoff (Phase 2.3 — deterministic fallback dev-only) — MERGED
 
@@ -55,8 +71,6 @@
 - `test_daily_workflow.py`: CI workflow must use `mode='agent'` only; no fallback env in non-comment lines.
 
 **Phase 2 complete.** Agent strength track done (2.1 rubric, 2.2 constitution backstop, 2.3 dev-only deterministic).
-
-**Next session:** **Prompt 6** — Phase **3** (editorial quality + clean prod edition) *or* Phase **4** (polish). Pick one per PR. Phase **1.1** archive upsert still open if doing ops first.
 
 ### Session handoff (Phase 2.2 — narrow constitution backstop)
 
@@ -80,7 +94,9 @@
 
 **Next session:** **Prompt 5** — Phase **2.3 only** (deterministic fallback dev-only). See handoff above for 2.2.
 
-**Still open from audit:** Phase 1.1 archive ops; footer email / repo URL; large PNGs; `run_chain.py` doc.
+**Still open from audit:** Phase 1.1 archive ops.
+
+**Resolved (4):** footer Solvd contact + `ai-espresso-finalized` repo URL; source tiers hidden in public HTML; PNG compress on render; README no longer references missing `run_chain.py`; editorial `VOICE_CHARACTERS` (no Marvel IPs).
 
 **Resolved (2.3):** `RANKING_SYSTEM` documented as deprecated dev-only (not second product); production workflow guarded.
 
@@ -100,7 +116,7 @@
 
 **Blockers:** duplicate `archive.jsonl` per day; no dev archive skip.
 
-**High:** footer personal email + stale repo URL; ~2.5MB PNGs; `run_chain.py` doc missing.
+**Resolved (4):** footer personal email + stale repo URL; ~2.5MB PNGs; `run_chain.py` doc missing.
 
 **Resolved (1.2/1.3):** QOTD fake API success; render exit 0 with missing images; daily cron skips tests.
 
@@ -110,6 +126,6 @@
 
 **Resolved (2.3):** deterministic fallback documented dev-only; `daily-edition.yml` never sets fallback env; `RANKING_SYSTEM` marked deprecated vs agent rubric.
 
-**Working well:** native tool_use loop, approve→ship lock, constitution gate vs bad critic approve, full agent_trace, **82 tests** (2 skipped).
+**Working well:** native tool_use loop, approve→ship lock, constitution gate vs bad critic approve, full agent_trace, **85 tests** (3 skipped).
 
 **Sample edition:** `2026-05-18` / edition_4 — agent shipped after critic revise; trace at `agent/data/editions/2026-05-18.json`.

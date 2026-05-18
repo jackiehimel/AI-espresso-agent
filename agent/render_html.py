@@ -38,6 +38,31 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 EDITIONS_DIR = REPO_ROOT / "editions"
 DATA_EDITIONS_DIR = Path(__file__).resolve().parent / "data" / "editions"
 
+# Public footer (Solvd internal edition — not personal email or stale repo name).
+FOOTER_CONTACT_EMAIL = "jhimel@solvd.com"
+FOOTER_REPO_URL = "https://github.com/jackiehimel/ai-espresso-finalized"
+FOOTER_CONTACT_SUBJECT = "AI%20Espresso%20issue%20report"
+
+
+def edition_footer_html() -> str:
+    mailto = (
+        f"mailto:{FOOTER_CONTACT_EMAIL}?subject={FOOTER_CONTACT_SUBJECT}"
+    )
+    return (
+        f'brewed by ai espresso · <a href="{mailto}">spot something off?</a> · '
+        f'<a href="{FOOTER_REPO_URL}">repo</a>'
+    )
+
+
+def edition_footer_md() -> str:
+    mailto = (
+        f"mailto:{FOOTER_CONTACT_EMAIL}?subject={FOOTER_CONTACT_SUBJECT}"
+    )
+    return (
+        f"*brewed by ai espresso · [spot something off?]({mailto}) · "
+        f"[repo]({FOOTER_REPO_URL})*"
+    )
+
 
 # ---------- issue numbering ----------
 def next_issue_number(editions_dir: Path = EDITIONS_DIR) -> int:
@@ -288,10 +313,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     margin: 0; border-top: 1px solid #F0E5D1; padding-top: 8px;
   }}
   .source a {{ color: #1A1108; text-decoration: none; font-weight: 700; }}
-  .source-tier {{
-    font-family: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
-    font-size: 10px; color: #999999; margin-left: 6px;
-  }}
 
   .prompt-card {{
     background: linear-gradient(165deg, #FFF8E8 0%, #FFF4D6 55%, #F9E9C8 100%);
@@ -443,7 +464,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 {qotd_section}
 
   <footer class="footer">
-    brewed by ai espresso · <a href="mailto:jacqueline.himel@vanderbilt.edu?subject=AI%20Espresso%20issue%20report">spot something off?</a> · <a href="https://github.com/jackiehimel/AI-ESPRESSO-MAIN">repo</a>
+    {footer_html}
   </footer>
 
 </div>
@@ -497,7 +518,7 @@ STORY_CARD_TEMPLATE = """    <article class="card">
         <p class="category {cat_cls}">{cat_label}</p>
         <h2 class="headline">{headline}</h2>
         <p class="kicker">{kicker}</p>
-        <p class="source"><a href="{source_url}">{source_name}</a> · {source_date}<span class="source-tier">T{tier}</span></p>
+        <p class="source"><a href="{source_url}">{source_name}</a> · {source_date}</p>
       </div>
     </article>"""
 
@@ -544,7 +565,7 @@ MD_TEMPLATE = """# ai espresso ☕ — Edition {issue_num} · Variant C (Newspap
 
 ---
 
-*brewed by ai espresso · [spot something off?](mailto:jacqueline.himel@vanderbilt.edu?subject=AI%20Espresso%20issue%20report) · [repo](https://github.com/jackiehimel/AI-ESPRESSO-MAIN)*
+{footer_md}
 """
 
 MD_STORY_TEMPLATE = """![{alt}]({image})
@@ -706,7 +727,6 @@ def render_edition(
         kicker = derive_kicker(s)
         source_name = s.get("source_name") or s.get("source", "Source")
         source_url = s.get("source_url") or s.get("url", "#")
-        tier = int(s.get("tier") or 1)
         html_cards.append(STORY_CARD_TEMPLATE.format(
             image_block=_card_image_block(issue_num, idx, alt, editions_dir),
             cat_label=cat_label,
@@ -716,7 +736,6 @@ def render_edition(
             source_url=escape(source_url, quote=True),
             source_name=escape(source_name),
             source_date=dates["source_short"],
-            tier=tier,
         ))
         md_stories.append(MD_STORY_TEMPLATE.format(
             alt=alt,
@@ -760,6 +779,7 @@ def render_edition(
         edition_cards=edition_cards,
         qotd_section=qotd_section,
         qotd_script=qotd_script,
+        footer_html=edition_footer_html(),
     )
 
     prompt_title_md = f"### {prompt_title}\n\n" if prompt_title else ""
@@ -773,6 +793,7 @@ def render_edition(
         prompt_alt="Try this prompt",
         prompt_image=prompt_img,
         prompt_body=prompt_body,
+        footer_md=edition_footer_md(),
     )
 
     editions_dir.mkdir(parents=True, exist_ok=True)
