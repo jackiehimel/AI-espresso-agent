@@ -1,65 +1,51 @@
 # ai espresso ☕ — Edition 4 · Variant C (Newspaper Comic · Snackable)
 
-**TUE · MAY 19 · 2026**
+**MON · MAY 18 · 2026**
 
 ---
 
-![Baidu's AI revenue just overtook its search ads for the first time](edition_4/assets/variant_c_01.png)
+![Gates Foundation commits $200M to Anthropic for global health AI work](edition_4/assets/variant_c_01.png)
 
 **MARKET**
 
-## Baidu's AI revenue just overtook its search ads for the first time
+## Gates Foundation commits $200M to Anthropic for global health AI work
 
-China's search giant posted only a 1% revenue drop this quarter because AI product sales grew faster than its legacy ad business shrank. It's the first time Baidu has made more from AI tools than from the search advertising that built the company.
+The Bill & Melinda Gates Foundation is investing $200 million in Anthropic to develop AI tools for global health and development challenges. The partnership will focus on building Claude-based solutions for disease surveillance, agricultural planning, and educational access in low-resource settings.
 
-*A major internet company just crossed the threshold where AI became its primary business.*
+*One of the world's largest philanthropies is now directly funding frontier AI development for public health.*
 
-[Bloomberg Technology](https://www.bloomberg.com/news/articles/2026-05-18/baidu-tops-sales-estimates-in-endorsement-of-agentic-ai-pivot) · May 19
+[Anthropic News](https://www.anthropic.com/news/gates-foundation-partnership) · May 18
 
 ---
 
-![Google's AI coding agent just designed algorithms faster than human experts](edition_4/assets/variant_c_02.png)
+![Nvidia's CEO says China will let US AI chips back in](edition_4/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## Google's AI coding agent just designed algorithms faster than human experts
+## Nvidia's CEO says China will let US AI chips back in
 
-AlphaEvolve uses Gemini to write and test algorithms automatically, then keeps improving them through trial and error. Google says it's already speeding up data center operations and helping scientists discover new materials—work that normally takes specialists weeks or months.
+Jensen Huang, speaking days after joining Trump's China summit, said he expects Chinese authorities to eventually allow American AI chip imports again. No timeline was given, but it signals a potential thaw in tech trade restrictions that have shaped the chip industry for years.
 
-*AI can now write optimized code for specific problems without human experts doing the heavy lifting.*
+*If it happens, US chipmakers could access the world's largest AI market again.*
 
-[Google DeepMind Blog](https://deepmind.google/blog/alphaevolve-impact/) · May 19
-
----
-
-![Anthropic acquires Stainless, the company that builds SDK generators](edition_4/assets/variant_c_03.png)
-
-**INDUSTRY**
-
-## Anthropic acquires Stainless, the company that builds SDK generators
-
-Anthropic bought Stainless, a dev tools startup that auto-generates SDKs from API specs. Stainless already builds the official SDKs for Claude, OpenAI, and a dozen other APIs. The team joins Anthropic to keep working on developer tooling.
-
-*The SDK layer just became part of Claude's core infrastructure instead of a vendor relationship.*
-
-[Anthropic News](https://www.anthropic.com/news/anthropic-acquires-stainless) · May 19
+[Bloomberg Technology](https://www.bloomberg.com/news/articles/2026-05-18/nvidia-s-ceo-says-china-will-open-its-market-to-ai-chips-from-us) · May 18
 
 ---
 
 
 ---
 
-![Try this prompt](edition_4/assets/variant_c_04.png)
+![Try this prompt](edition_4/assets/variant_c_03.png)
 
 **☕ Try this prompt**
 
-### The zombie metric
+### The confidence audit
 
-*Before the next dashboard review or quarterly planning deck.*
+*Before you hit send on anything that commits your team to a timeline or a number.*
 
 
 ```
-I'm tracking a metric that everyone reports but nobody acts on. Describe it in two sentences below. Then tell me: what behavior would actually change if this number moved 30% in either direction? If the answer is nothing, give me one metric that would make someone pick up the phone.
+I'm about to paste something I wrote that sounds confident. Your job: find every sentence where I'm actually guessing, hedging, or hoping no one asks a follow-up question. Quote each one back to me, then tell me which gaps I can fill in an hour and which ones mean I'm not ready to send this yet.
 ```
 
 ---

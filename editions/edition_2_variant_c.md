@@ -4,62 +4,48 @@
 
 ---
 
-![Anthropic and Gates Foundation launch $200M partnership for global health AI](edition_2/assets/variant_c_01.png)
+![Anthropic just entered Elon Musk's entire SpaceX compute infrastructure](edition_2/assets/variant_c_01.png)
 
 **MARKET**
 
-## Anthropic and Gates Foundation launch $200M partnership for global health AI
+## Anthropic just entered Elon Musk's entire SpaceX compute infrastructure
 
-The Gates Foundation is committing $200 million to work with Anthropic on AI applications for global health and development. The partnership will focus on using Claude to accelerate vaccine research, improve disease surveillance in low-resource settings, and help health workers in developing countries access medical knowledge.
+Claude's usage limits are going up across paid tiers, and Anthropic signed a compute deal with SpaceX to tap into its infrastructure. The partnership gives Anthropic access to SpaceX's hardware for training and inference while SpaceX gets enterprise-grade AI tools for engineering and operations.
 
-*One of the world's largest philanthropic organizations is betting big on frontier AI for healthcare access.*
+*SpaceX's compute cluster could help Anthropic scale without building everything in-house.*
 
-[Anthropic News](https://www.anthropic.com/news/gates-foundation-partnership) · May 18
-
----
-
-![YouTube now lets anyone flag AI deepfakes of themselves](edition_2/assets/variant_c_02.png)
-
-**EVERYDAY**
-
-## YouTube now lets anyone flag AI deepfakes of themselves
-
-YouTube expanded access to its face-detection tool that finds AI-generated videos using your likeness without permission. Previously limited to big channels and agencies, the tool is now open to all creators 18+. You submit a photo, and YouTube scans uploads to catch deepfakes. The company says it'll review flagged videos 'within days' and may remove them.
-
-*First major platform giving ordinary people a way to fight back against AI impersonation at scale.*
-
-[Engadget — AI](https://www.engadget.com/2174282/youtube-likeness-detection-ai-deepfakes-expansion/) · May 18
+[Anthropic News](https://www.anthropic.com/news/higher-limits-spacex) · May 18
 
 ---
 
-![Grok can now write and deploy code directly in your X posts](edition_2/assets/variant_c_03.png)
+![Meta's SAM 3.1 can now track objects across video in real time](edition_2/assets/variant_c_02.png)
 
 **BUILD**
 
-## Grok can now write and deploy code directly in your X posts
+## Meta's SAM 3.1 can now track objects across video in real time
 
-xAI launched Grok Build, a coding agent that lets you describe an app idea in a post on X and get working code you can edit and deploy. It runs in your browser, handles React apps and interactive demos, and can iterate based on your feedback—all without leaving the platform.
+Meta released SAM 3.1, an updated computer vision model that tracks and segments objects across video frames as they happen. The new version runs faster than its predecessor and uses two new techniques — multiplexing (processing multiple objects simultaneously) and global reasoning (understanding relationships between objects across the entire scene) — to handle complex videos with many moving parts.
 
-*Coding agents are moving from IDE plugins to social platforms where non-developers already spend time.*
+*Real-time video understanding just got more practical for apps that need to follow multiple things at once.*
 
-[Engadget — AI](https://www.engadget.com/2173482/xai-coding-agent-grok-build/) · May 18
-
----
-
+[Meta AI Blog](https://ai.meta.com/blog/segment-anything-model-3/) · May 18
 
 ---
 
-![Try this prompt](edition_2/assets/variant_c_04.png)
+
+---
+
+![Try this prompt](edition_2/assets/variant_c_03.png)
 
 **☕ Try this prompt**
 
-### The plain-English explainer
+### The jargon translator
 
-*Great for onboarding, stakeholder memos, or prepping for cross-functional meetings.*
+*Before sending anything outside your immediate team.*
 
 
 ```
-Explain [topic or concept] in plain English for someone smart but unfamiliar with the domain. No jargon. Use analogies where helpful. Structure it as: what it is, why it matters, and one concrete example. Keep it under 200 words.
+I'm about to paste something I wrote that uses too much insider language. Rewrite it so someone two levels away from my daily work can understand it in one read. Keep the stakes and specifics. Cut every term that needs a glossary. If you have to explain what something is, I used jargon.
 ```
 
 ---
