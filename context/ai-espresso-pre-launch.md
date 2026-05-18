@@ -42,7 +42,7 @@
 - [x] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE — merged `5b9e7c4`
 - [x] Phase 2.3 Deterministic path dev-only / aligned — merged `98ba480`
 - [ ] Phase 3 Editorial quality pass + clean prod edition
-- [x] Phase 4 External polish — merged (see handoff below; commit on `main` after this session)
+- [x] Phase 4 External polish — merged `bd43630`
 
 ### Session handoff (Phase 4 — public edition polish) — MERGED
 
