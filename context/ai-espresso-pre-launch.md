@@ -40,7 +40,7 @@
 - [x] Phase 1.3 CI/workflow guards + alerts — merged `10e4dfc`
 - [x] Phase 2.1 Unified rubric in prompts — merged `b4a8563`
 - [x] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE — merged `5b9e7c4`
-- [x] Phase 2.3 Deterministic path dev-only / aligned — merged (see handoff below)
+- [x] Phase 2.3 Deterministic path dev-only / aligned — merged `98ba480`
 - [ ] Phase 3 Editorial quality pass + clean prod edition
 - [ ] Phase 4 External polish
 
