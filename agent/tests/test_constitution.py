@@ -53,6 +53,11 @@ class NarrowBackstopTests(unittest.TestCase):
         self.assertTrue(is_ai_load_bearing(h))
         self.assertTrue(passes_constitution(h))
 
+    def test_source_ai_context_can_satisfy_ai_hook(self):
+        h = "SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking"
+        reasons = constitution_violations(h, source_name="Meta AI Blog")
+        self.assertFalse(any("AI is not load-bearing" in r for r in reasons))
+
 
 class PromptLedEditorialTests(unittest.TestCase):
     """Sociology, PR, office openings — prompts judge; narrow gate does not block."""

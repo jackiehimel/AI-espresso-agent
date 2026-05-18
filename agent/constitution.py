@@ -68,9 +68,10 @@ def constitution_violations(
     source_name: str | None = None,
 ) -> list[str]:
     """Human-readable rejection reasons; empty list means pass."""
-    del source_name  # reserved; no source-based carve-out
     reasons: list[str] = []
     blob = _text(headline, blurb)
+    source_blob = (source_name or "").strip()
+    source_implies_ai = bool(source_blob and AI_LEXICON_RE.search(source_blob))
 
     if not blob:
         return ["empty headline"]
@@ -78,7 +79,7 @@ def constitution_violations(
     if FAILURE_PRIMARY_RE.search(blob):
         reasons.append("AI failure is the primary story frame, not the AI news hook")
 
-    if not AI_LEXICON_RE.search(blob):
+    if not AI_LEXICON_RE.search(blob) and not source_implies_ai:
         reasons.append("AI is not load-bearing — headline works without an AI news hook")
 
     if not is_celebration_tone(headline, blurb) and not any("failure" in r for r in reasons):
