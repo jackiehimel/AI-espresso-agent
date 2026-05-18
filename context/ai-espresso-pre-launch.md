@@ -38,11 +38,17 @@
 - [ ] Phase 1.1 Archive upsert + ESPRESSO_SKIP_ARCHIVE
 - [x] Phase 1.2 QOTD honest UX — merged `10e4dfc` (with 1.3 in same PR)
 - [x] Phase 1.3 CI/workflow guards + alerts — merged `10e4dfc`
-- [ ] Phase 2.1 Unified rubric in prompts
+- [x] Phase 2.1 Unified rubric in prompts
 - [ ] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE
 - [ ] Phase 2.3 Deterministic path dev-only / aligned
 - [ ] Phase 3 Editorial quality pass + clean prod edition
 - [ ] Phase 4 External polish
+
+### Session handoff (Phase 2.1 — unified prompts)
+
+**Tests (2026-05-18):** `73` ran, `OK` (`2` skipped). Command: `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v`.
+
+**Phase 2.1 intent:** `_EDITORIAL_RUBRIC` in `espresso_loop.py` shared by Scout/Editor/Critic; audience = any Solvd employee; lab partnerships OK with hook; HBR/workforce sociology reject; deepfake scandal vs detection-product distinction; `constitution_prompt_block()` unchanged at tail.
 
 ### Session handoff (after PR merge `10e4dfc`)
 
