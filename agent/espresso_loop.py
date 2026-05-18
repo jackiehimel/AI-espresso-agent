@@ -931,6 +931,26 @@ def tool_self_critique(state: AgentState, args: dict) -> dict:
 def tool_ship_edition(state: AgentState, args: dict, rules: dict) -> dict:
     gate = validate_ship_gates(state, rules)
     if not gate["ok"]:
+        min_picks = _min_picks_required(state)
+        critic_only_block = all("self_critique must approve" in e for e in gate["errors"])
+        if (
+            critic_only_block
+            and _weak_pool_waiver(state)
+            and len(state.picks) >= min_picks
+        ):
+            state.shipped = True
+            state.trace.append(TraceEvent(
+                ts=time.time(), role="system", kind="finalize",
+                result_summary=(
+                    "weak-pool critic override: shipped complete slate after repeated revise "
+                    "with no deterministic gate errors"
+                ),
+            ))
+            return {
+                "shipped": True,
+                "override": "weak_pool_critic_override",
+                "picks": {s: p["headline"] for s, p in state.picks.items()},
+            }
         if (state.last_critic_verdict or {}).get("verdict") == "approve":
             state.last_critic_verdict = None
             state.trace.append(TraceEvent(

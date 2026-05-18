@@ -376,6 +376,34 @@ class ShipGateTests(unittest.TestCase):
         r = el.dispatch_tool("unpick", {"slot": "business"}, state, [], {"tier1_minimum": 1})
         self.assertNotIn("locked", r.get("error", ""))
 
+    def test_weak_pool_critic_override_can_ship_when_other_gates_pass(self):
+        state = _state(
+            picks={
+                "business": {
+                    "id": 1,
+                    "headline": "ChatGPT can now look at your bank account",
+                    "url": "https://example.com",
+                    "source": "OpenAI News",
+                    "tier": 1,
+                    "body": _verified_body(),
+                },
+                "beginner": {
+                    "id": 2,
+                    "headline": "OpenAI brings its Codex coding app to mobile",
+                    "url": "https://example.com/2",
+                    "source": "OpenAI News",
+                    "tier": 2,
+                    "body": _verified_body(),
+                },
+            },
+            last_critic_verdict={"verdict": "revise", "reason": "thin pool"},
+        )
+        state.working_memory["pool_quality"] = "weak pool today"
+        state.working_memory["editor_notes"] = "documented weak pool"
+        r = el.tool_ship_edition(state, {}, {"tier1_minimum": 1})
+        self.assertTrue(r["shipped"])
+        self.assertEqual(r.get("override"), "weak_pool_critic_override")
+
 
 class MockToolLoopTests(unittest.TestCase):
 
