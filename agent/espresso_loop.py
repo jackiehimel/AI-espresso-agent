@@ -572,8 +572,9 @@ def tool_search_news(state: AgentState, args: dict) -> dict:
     query = (args.get("query") or "").strip()
     if not query:
         return {"error": "missing query"}
-    if _search_calls_used(state) >= 2:
-        return {"error": "search_news limit reached (max 2 per edition)"}
+    limit = _search_call_limit(state)
+    if _search_calls_used(state) >= limit:
+        return {"error": f"search_news limit reached (max {limit} per edition)"}
 
     import shutil
     from espresso_agent import search_allowed_domains
@@ -690,6 +691,11 @@ def tool_unpick(state: AgentState, args: dict, vendor_patterns) -> dict:
 
 def _search_calls_used(state: AgentState) -> int:
     return state.search_calls_used
+
+
+def _search_call_limit(state: AgentState) -> int:
+    # Weak pools need extra discovery room; keep normal days tighter.
+    return 4 if _weak_pool_waiver(state) else 3
 
 
 def _weak_pool_waiver(state: AgentState) -> bool:
@@ -1347,7 +1353,7 @@ def agentic_select(
         fresh.append(c)
     fresh.sort(key=lambda c: (c.tier, c.source_name))
 
-    # Cap pool: at most 4 per source, 40 total
+    # Cap pool: at most 4 per source, 60 total
     per_source = {}
     capped = []
     for c in fresh:
@@ -1356,7 +1362,7 @@ def agentic_select(
             continue
         per_source[c.source_name] = n + 1
         capped.append(c)
-        if len(capped) >= 40:
+        if len(capped) >= 60:
             break
 
     # Slot rules
@@ -1409,7 +1415,7 @@ def agentic_select(
     state = AgentState(
         today=today,
         needed_slots=needed_slots,
-        shortlist=shortlist[:15],
+        shortlist=shortlist[:20],
         candidates_by_id=cand_by_id,
         archive_headlines=archive_headlines,
     )

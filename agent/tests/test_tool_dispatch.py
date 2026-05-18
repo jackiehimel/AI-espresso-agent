@@ -109,9 +109,17 @@ class ToolDispatchTests(unittest.TestCase):
 
     def test_search_news_limit(self):
         state = _state()
-        state.search_calls_used = 2
+        state.search_calls_used = 3
         r = el.tool_search_news(state, {"query": "ai apps"})
         self.assertIn("limit", r.get("error", ""))
+
+    def test_search_news_weak_pool_limit(self):
+        state = _state()
+        state.working_memory["pool_quality"] = "weak pool today"
+        state.working_memory["editor_notes"] = "thin pool; keep quality bar"
+        state.search_calls_used = 4
+        r = el.tool_search_news(state, {"query": "ai apps"})
+        self.assertIn("max 4", r.get("error", ""))
 
     def test_search_news_auth_failure_does_not_count_budget(self):
         from unittest.mock import patch
