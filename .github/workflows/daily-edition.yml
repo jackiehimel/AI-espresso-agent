@@ -52,6 +52,7 @@ jobs:
             echo "value=$(TZ=America/New_York date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
           fi
 
+      # Production: agent tool_use loop only (no legacy rank_and_select fallback).
       - name: Generate edition JSON (agent mode)
         working-directory: agent
         env:

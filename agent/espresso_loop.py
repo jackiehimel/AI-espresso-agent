@@ -7,8 +7,9 @@ Python dispatches tools and enforces ship gates; the model decides when
 to loop, search, critique, and call ship_edition.
 
 On hard budget exhaustion with an approved slate, the caller salvages picks.
-Genuine failure (no recoverable slate) raises AgenticSelectFailed unless
-ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1.
+Genuine failure (no recoverable slate) raises AgenticSelectFailed. The caller
+may fall back to rank_and_select only when ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1
+(local dev emergency — never set in CI / daily-edition.yml).
 """
 
 from __future__ import annotations

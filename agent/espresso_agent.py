@@ -443,6 +443,17 @@ def append_archive(edition: Edition) -> None:
 # LLM: ranking + rewriting
 # ───────────────────────────────────────────────────────────────────────
 
+# DEPRECATED — local dev / emergency only. Production and CI must use
+# mode="agent" (Scout → Editor tool_use loop in espresso_loop.py).
+#
+# RANKING_SYSTEM is NOT kept in sync with _EDITORIAL_RUBRIC in
+# espresso_loop.py. Do not treat rank_and_select as a second product
+# editorial brain. Never set ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK in
+# .github/workflows/daily-edition.yml or any scheduled/production job.
+#
+# Emergency use only:
+#   ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1 python espresso_agent.py --mode agent
+#   python espresso_agent.py --mode deterministic   # explicit legacy pipeline
 RANKING_SYSTEM = """\
 You are the editorial brain behind AI Espresso, an internal daily news
 brief for Solvd — a ~3,000-person software services company. The readers
@@ -1166,6 +1177,7 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
                     "result_summary": f"agent mode crashed: {e}",
                 })
 
+            # Dev-only: see RANKING_SYSTEM deprecation block above.
             if os.environ.get("ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK") == "1":
                 print("[espresso] ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1 — rank_and_select", file=sys.stderr)
                 stories = rank_and_select(client, candidates, archive_fps, rules, date)
@@ -1239,8 +1251,16 @@ def main():
     p.add_argument("--date", default=None, help="ISO date, defaults to today")
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--use-cache", action="store_true", help="use cached source HTML")
-    p.add_argument("--mode", default="agent", choices=["agent", "deterministic"],
-                   help="agent (Scout→Editor→Critic LLM loop) or deterministic (v2.1 fixed pipeline)")
+    p.add_argument(
+        "--mode",
+        default="agent",
+        choices=["agent", "deterministic"],
+        help=(
+            "agent (Scout→Editor→Critic tool_use loop; production default) or "
+            "deterministic (legacy rank_and_select — local dev emergency only, "
+            "not used in daily-edition.yml)"
+        ),
+    )
     args = p.parse_args()
 
     date = dt.date.fromisoformat(args.date) if args.date else dt.date.today()
