@@ -1,65 +1,51 @@
 # ai espresso ☕ — Edition 4 · Variant C (Newspaper Comic · Snackable)
 
-**TUE · MAY 19 · 2026**
+**MON · MAY 18 · 2026**
 
 ---
 
-![Baidu's AI revenue just overtook its search ads for the first time](edition_4/assets/variant_c_01.png)
+![Anthropic just entered Elon Musk's entire SpaceX compute infrastructure](edition_4/assets/variant_c_01.png)
 
 **MARKET**
 
-## Baidu's AI revenue just overtook its search ads for the first time
+## Anthropic just entered Elon Musk's entire SpaceX compute infrastructure
 
-China's search giant posted only a 1% revenue drop this quarter because AI product sales grew faster than its legacy ad business shrank. It's the first time Baidu has made more from AI tools than from the search advertising that built the company.
+Claude's usage limits are going up across paid tiers, and Anthropic signed a compute deal with SpaceX to tap into its infrastructure. The partnership gives Anthropic access to SpaceX's hardware for training and inference while SpaceX gets enterprise-grade AI tools for engineering and operations.
 
-*A major internet company just crossed the threshold where AI became its primary business.*
+*SpaceX's compute cluster could help Anthropic scale without building everything in-house.*
 
-[Bloomberg Technology](https://www.bloomberg.com/news/articles/2026-05-18/baidu-tops-sales-estimates-in-endorsement-of-agentic-ai-pivot) · May 19
-
----
-
-![Google's AI coding agent just designed algorithms faster than human experts](edition_4/assets/variant_c_02.png)
-
-**EVERYDAY**
-
-## Google's AI coding agent just designed algorithms faster than human experts
-
-AlphaEvolve uses Gemini to write and test algorithms automatically, then keeps improving them through trial and error. Google says it's already speeding up data center operations and helping scientists discover new materials—work that normally takes specialists weeks or months.
-
-*AI can now write optimized code for specific problems without human experts doing the heavy lifting.*
-
-[Google DeepMind Blog](https://deepmind.google/blog/alphaevolve-impact/) · May 19
+[Anthropic News](https://www.anthropic.com/news/higher-limits-spacex) · May 18
 
 ---
 
-![Anthropic acquires Stainless, the company that builds SDK generators](edition_4/assets/variant_c_03.png)
+![Meta's SAM 3.1 can now track objects across video in real time](edition_4/assets/variant_c_02.png)
 
-**INDUSTRY**
+**BUILD**
 
-## Anthropic acquires Stainless, the company that builds SDK generators
+## Meta's SAM 3.1 can now track objects across video in real time
 
-Anthropic bought Stainless, a dev tools startup that auto-generates SDKs from API specs. Stainless already builds the official SDKs for Claude, OpenAI, and a dozen other APIs. The team joins Anthropic to keep working on developer tooling.
+Meta released SAM 3.1, an updated computer vision model that tracks and segments objects across video frames as they happen. The new version runs faster than its predecessor and uses two new techniques — multiplexing (processing multiple objects simultaneously) and global reasoning (understanding relationships between objects across the entire scene) — to handle complex videos with many moving parts.
 
-*The SDK layer just became part of Claude's core infrastructure instead of a vendor relationship.*
+*Real-time video understanding just got more practical for apps that need to follow multiple things at once.*
 
-[Anthropic News](https://www.anthropic.com/news/anthropic-acquires-stainless) · May 19
+[Meta AI Blog](https://ai.meta.com/blog/segment-anything-model-3/) · May 18
 
 ---
 
 
 ---
 
-![Try this prompt](edition_4/assets/variant_c_04.png)
+![Try this prompt](edition_4/assets/variant_c_03.png)
 
 **☕ Try this prompt**
 
-### The zombie metric
+### The jargon translator
 
-*Before the next dashboard review or quarterly planning deck.*
+*Before sending anything outside your immediate team.*
 
 
 ```
-I'm tracking a metric that everyone reports but nobody acts on. Describe it in two sentences below. Then tell me: what behavior would actually change if this number moved 30% in either direction? If the answer is nothing, give me one metric that would make someone pick up the phone.
+I'm about to paste something I wrote that uses too much insider language. Rewrite it so someone two levels away from my daily work can understand it in one read. Keep the stakes and specifics. Cut every term that needs a glossary. If you have to explain what something is, I used jargon.
 ```
 
 ---
