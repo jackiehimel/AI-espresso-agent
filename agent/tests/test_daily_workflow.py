@@ -38,6 +38,12 @@ class DailyEditionWorkflowTests(unittest.TestCase):
         self.assertIn("skipping Slack notification", text)
         self.assertIn("::warning::Slack failure notification failed", text)
 
+    def test_render_output_is_parsed_without_stdin_heredoc_conflict(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("OUTPUT_JSON=\"$OUTPUT\" python - <<'PY'", text)
+        self.assertIn("json.loads(os.environ[\"OUTPUT_JSON\"])", text)
+        self.assertNotIn("echo \"$OUTPUT\" | python - <<'PY'", text)
+
 
 if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))

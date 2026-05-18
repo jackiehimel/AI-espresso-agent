@@ -78,9 +78,9 @@ jobs:
           set -euo pipefail
           OUTPUT=$(python render_edition.py "${{ steps.date.outputs.value }}")
           echo "$OUTPUT"
-          echo "$OUTPUT" | python - <<'PY'
-          import json, os, sys
-          data = json.load(sys.stdin)
+          OUTPUT_JSON="$OUTPUT" python - <<'PY'
+          import json, os
+          data = json.loads(os.environ["OUTPUT_JSON"])
           out = os.environ["GITHUB_OUTPUT"]
           with open(out, "a", encoding="utf-8") as f:
               f.write(f"issue_num={data['issue_num']}\n")
