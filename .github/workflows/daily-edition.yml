@@ -1,0 +1,104 @@
+name: Daily AI Espresso edition
+
+# Runs every day at ~7:00 AM Eastern (GitHub cron uses UTC; drifts ±1h with DST).
+on:
+  schedule:
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Override edition date (YYYY-MM-DD). Defaults to today UTC."
+        required: false
+      skip_email:
+        description: "Set to 'true' to render but not send the email."
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install agent dependencies
+        working-directory: agent
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Resolve edition date
+        id: date
+        run: |
+          if [ -n "${{ inputs.date }}" ]; then
+            echo "value=${{ inputs.date }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=$(TZ=America/New_York date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate edition JSON (agent mode)
+        working-directory: agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+        run: |
+          python -c "
+          import datetime as dt
+          import espresso_agent
+          d = dt.date.fromisoformat('${{ steps.date.outputs.value }}')
+          espresso_agent.run(d, dry_run=False, use_cache=False, mode='agent')
+          "
+
+      - name: Render HTML + Markdown + illustrations
+        working-directory: agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          export PATH="${GITHUB_WORKSPACE}/agent/bin:${PATH}"
+          python render_edition.py "${{ steps.date.outputs.value }}"
+
+      - name: Send edition email
+        if: ${{ inputs.skip_email != 'true' }}
+        working-directory: agent
+        env:
+          AI_ESPRESSO_FROM: ${{ secrets.AI_ESPRESSO_FROM }}
+          AI_ESPRESSO_TO: ${{ secrets.AI_ESPRESSO_TO }}
+          AI_ESPRESSO_FROM_NAME: "AI Espresso"
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: |
+          # Resolve which edition_N_variant_c.* the renderer just produced.
+          # render_edition.py prints the issue number to stdout; instead of
+          # parsing that we just pick the highest-numbered file in editions/.
+          HTML=$(ls -1 ../editions/edition_*_variant_c.html | sort -V | tail -1)
+          MD=$(ls -1 ../editions/edition_*_variant_c.md   | sort -V | tail -1)
+          echo "Emailing $HTML"
+          python send_email.py "$HTML" "$MD" || {
+            echo "::warning::Email step failed but edition is committed"
+            exit 0
+          }
+
+      - name: Commit + push if anything changed
+        run: |
+          git config user.name "Jackie Himel"
+          git config user.email "142959852+jackiehimel@users.noreply.github.com"
+          git add editions/ agent/data/editions/ agent/data/archive.jsonl
+          if git diff --cached --quiet; then
+            echo "No new files to commit."
+          else
+            git commit -m "Daily edition for ${{ steps.date.outputs.value }}"
+            git push
+          fi

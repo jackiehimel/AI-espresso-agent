@@ -1,0 +1,747 @@
+"""
+render_html.py — render a JSON edition into the variant_c HTML + Markdown
+shape expected by the AI Garage portal sync.
+
+Outputs two files at the repo root's editions/ dir:
+    editions/edition_N_variant_c.html
+    editions/edition_N_variant_c.md
+where N is the next monotonic issue number.
+
+The HTML template is a 1:1 copy of the variant_c reference shipped in
+ai-garage/editions/latest.html, with story content swapped in. The
+manifest sniffer in sync-espresso.mjs looks for:
+    NO.&nbsp;NNN          (label)
+    DAY DD.MM.YY         (date)
+    N&nbsp;SHOTS          (shot count)
+    <span style="display:none">HEADLINE</span>  (preheader)
+All four are embedded.
+
+Image paths reference edition_N/assets/variant_c_NN.png relative to the
+edition HTML. render_images.py is responsible for producing those PNGs.
+"""
+
+from __future__ import annotations
+
+import json
+import re
+from datetime import datetime
+from html import escape
+from pathlib import Path
+from typing import Any
+
+from editorial import slot_label
+
+
+# ---------- paths ----------
+REPO_ROOT = Path(__file__).resolve().parent.parent
+EDITIONS_DIR = REPO_ROOT / "editions"
+DATA_EDITIONS_DIR = Path(__file__).resolve().parent / "data" / "editions"
+
+
+# ---------- issue numbering ----------
+def next_issue_number(editions_dir: Path = EDITIONS_DIR) -> int:
+    """Find the highest existing edition_N and return N + 1. Start at 1."""
+    editions_dir.mkdir(parents=True, exist_ok=True)
+    pattern = re.compile(r"^edition_(\d+)(?:_variant_[a-z0-9]+)?\.(?:html|md)$")
+    nums = []
+    for f in editions_dir.iterdir():
+        m = pattern.match(f.name)
+        if m:
+            nums.append(int(m.group(1)))
+    return (max(nums) + 1) if nums else 1
+
+
+def edition_has_assets(issue_num: int, editions_dir: Path = EDITIONS_DIR) -> bool:
+    """True when all four variant_c PNGs exist for this issue."""
+    return all(
+        (editions_dir / image_filename(issue_num, i)).is_file()
+        for i in range(1, 5)
+    )
+
+
+def resolve_issue_num(
+    issue_num: int | None,
+    editions_dir: Path = EDITIONS_DIR,
+) -> int:
+    """Pick issue number for render; reuse latest issue that already has assets."""
+    if issue_num is not None:
+        return issue_num
+    with_assets = []
+    for p in editions_dir.iterdir():
+        if not p.is_dir() or not p.name.startswith("edition_"):
+            continue
+        suffix = p.name.removeprefix("edition_")
+        if not suffix.isdigit():
+            continue
+        n = int(suffix)
+        if edition_has_assets(n, editions_dir):
+            with_assets.append(n)
+    if with_assets:
+        return max(with_assets)
+    return next_issue_number(editions_dir)
+
+
+# ---------- date formatting ----------
+DAYS = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+          "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+
+
+def format_dateline(date_iso: str) -> dict[str, str]:
+    """Return all the date strings the template + sniffer need."""
+    d = datetime.strptime(date_iso, "%Y-%m-%d").date()
+    day_abbr = DAYS[d.weekday()]
+    month_abbr = MONTHS[d.month - 1]
+    return {
+        "iso": date_iso,
+        "dateline_html": f"{day_abbr.title()} &middot; {month_abbr.title()} {d.day} &middot; {d.year}",
+        "dateline_md": f"{day_abbr} · {month_abbr} {d.day} · {d.year}",
+        # Match visible dateline (archive/manifest); avoid DD.MM.YY (reads as "May 26").
+        "sniffer_date": (
+            f"{day_abbr}&nbsp;&middot;&nbsp;{month_abbr}&nbsp;{d.day}"
+            f"&nbsp;&middot;&nbsp;{d.year}"
+        ),
+        "source_short": f"{month_abbr.title()} {d.day}",
+    }
+
+
+# ---------- kicker derivation ----------
+def derive_kicker(story: dict[str, Any]) -> str:
+    """
+    The variant_c template uses a short italic 'kicker' line under the headline
+    (e.g. "$5B/year — months after Musk was publicly trashing them."). Our
+    agent's JSON has `blurb` (the body) and `why_it_matters` (the angle). We
+    prefer why_it_matters as the kicker; fall back to the first sentence of
+    blurb if missing.
+    """
+    why = (story.get("why_it_matters") or "").strip()
+    if why:
+        # Bold the first numeric-looking phrase if present, like the template
+        # does. Best-effort: match $5B, 180 production sites, +15.2%, etc.
+        m = re.search(r"(\$?\d[\d,.]*\s*(?:%|[A-Za-z][\w/+\-]*)?)", why)
+        if m and len(m.group(0)) >= 3:
+            span = m.group(0)
+            why = why.replace(span, f"<strong>{escape(span)}</strong>", 1)
+        else:
+            why = escape(why)
+        return why
+    blurb = (story.get("blurb") or "").strip()
+    first = blurb.split(". ")[0].rstrip(".")
+    return escape(first)
+
+
+# ---------- image filename convention ----------
+def image_filename(issue: int, idx: int) -> str:
+    """edition_N/assets/variant_c_01.png style path."""
+    return f"edition_{issue}/assets/variant_c_{idx:02d}.png"
+
+
+def _card_image_block(
+    issue_num: int,
+    idx: int,
+    alt: str,
+    editions_dir: Path,
+) -> str:
+    """Image markup; cream placeholder block if the PNG is missing."""
+    rel = image_filename(issue_num, idx)
+    if not (editions_dir / rel).is_file():
+        return (
+            '      <div class="card-image card-image--placeholder" '
+            'aria-hidden="true"></div>\n'
+        )
+    return f'      <img class="card-image" src="{rel}" alt="{escape(alt)}">\n'
+
+
+# ---------- HTML template ----------
+HTML_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Espresso · Edition {issue_num} · Variant C</title>
+<!-- preheader (hidden, used by manifest sniffer) -->
+<span style="display:none">{preheader}</span>
+<!-- sniffer-friendly meta tokens -->
+<meta name="ai-espresso-issue" content="NO.&nbsp;{issue_padded}">
+<meta name="ai-espresso-date" content="{sniffer_date}">
+<meta name="ai-espresso-shots" content="4&nbsp;SHOTS">
+<style>
+  *, *::before, *::after {{ box-sizing: border-box; }}
+  body {{
+    margin: 0;
+    padding: 24px 16px;
+    background-color: #F4EFE6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: #1A1108;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }}
+  .container {{ max-width: 1100px; margin: 0 auto; }}
+
+  .masthead {{ text-align: center; padding: 8px 16px 10px 16px; }}
+  .wordmark {{
+    font-size: 44px; font-weight: 800; letter-spacing: -0.035em;
+    margin: 0; color: #1A1108; line-height: 1;
+  }}
+  .wordmark .cup {{ font-weight: 400; margin-left: 4px; }}
+  .dateline {{
+    font-size: 11px; font-weight: 700; color: #8B6F47;
+    letter-spacing: 0.22em; text-transform: uppercase; margin: 10px 0 0 0;
+  }}
+
+  .edition-grid {{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto;
+  }}
+  .story-cards {{
+    grid-column: 1 / span 3;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: stretch;
+  }}
+  .story-cards .card {{
+    height: 100%;
+  }}
+  .story-cards .card-body {{
+    flex: 1 1 auto;
+    min-height: 0;
+  }}
+  .story-cards .kicker {{
+    flex: 1 1 auto;
+  }}
+  .story-cards .source {{
+    margin-top: auto;
+  }}
+  .edition-grid .prompt-card {{
+    grid-column: 4;
+  }}
+  .section-divider {{
+    display: none;
+    text-align: center; color: #C9A671; font-size: 13px;
+    letter-spacing: 0.35em; margin: 10px 0; user-select: none;
+  }}
+  .card {{
+    background-color: #FFFFFF; border-radius: 12px; overflow: hidden;
+    border: none;
+    box-shadow: 0 1px 2px rgba(28,17,10,0.04), 0 4px 12px rgba(28,17,10,0.05);
+    display: flex; flex-direction: column;
+    height: auto;
+  }}
+  .card-image {{
+    width: 160px;
+    height: 160px;
+    max-width: calc(100% - 24px);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 12px auto 0 auto;
+    flex-shrink: 0;
+  }}
+  .card-image--placeholder {{
+    width: 160px;
+    height: 160px;
+    max-width: calc(100% - 24px);
+    aspect-ratio: 1 / 1;
+    display: block;
+    margin: 12px auto 0 auto;
+    background-color: #F5F0E8;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }}
+  .card-body {{
+    padding: 12px 14px 14px 14px;
+    display: flex; flex-direction: column; flex: 0 1 auto;
+    justify-content: flex-start;
+  }}
+  .category {{
+    font-size: 10px; font-weight: 800; letter-spacing: 0.18em;
+    text-transform: uppercase; margin: 0 0 6px 0;
+  }}
+  .category.market {{ color: #00955A; }}
+  .category.everyday {{ color: #D14A0E; }}
+  .category.build {{ color: #C13B0E; }}
+  .category.industry {{ color: #5C6B8A; }}
+  .category.news {{ color: #8B6F47; }}
+  .headline {{
+    font-size: 15px; font-weight: 700; line-height: 1.25;
+    margin: 0 0 6px 0; color: #1A1108; letter-spacing: -0.01em;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }}
+  .kicker {{
+    font-size: 13px; color: #1A1108; margin: 0 0 8px 0;
+    font-style: italic; font-weight: 500; line-height: 1.4;
+    flex: 0 0 auto;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }}
+  .source {{
+    font-size: 11px; color: #8B6F47; letter-spacing: 0.02em;
+    margin: 0; border-top: 1px solid #F0E5D1; padding-top: 8px;
+  }}
+  .source a {{ color: #1A1108; text-decoration: none; font-weight: 700; }}
+  .source-tier {{
+    font-family: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+    font-size: 10px; color: #999999; margin-left: 6px;
+  }}
+
+  .prompt-card {{
+    background: linear-gradient(165deg, #FFF8E8 0%, #FFF4D6 55%, #F9E9C8 100%);
+    border: 1px dashed #C9A671;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(193, 59, 14, 0.08);
+    align-self: start;
+  }}
+  .prompt-card .card-image,
+  .prompt-card .card-image--placeholder {{
+    display: none;
+  }}
+  .prompt-card .card-body {{
+    display: flex; flex-direction: column;
+    justify-content: flex-start;
+    padding: 14px 14px 14px 14px;
+  }}
+  .prompt-tag {{
+    display: block;
+    font-size: 13px; font-weight: 800; letter-spacing: 0.18em;
+    color: #B8340A; text-transform: uppercase; margin: 0 0 12px 0;
+    background-color: #F2C9B8; padding: 8px 12px; border-radius: 6px;
+    text-align: center;
+  }}
+  .prompt-title {{
+    font-size: 14px; font-weight: 800; line-height: 1.25;
+    margin: 0 0 10px 0; color: #1A1108; letter-spacing: -0.01em;
+  }}
+  .prompt-code-wrap {{
+    position: relative;
+    flex: 0 0 auto;
+  }}
+  .prompt-copy {{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid #E8DCC8;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    color: #6D4C41;
+    cursor: pointer;
+  }}
+  .prompt-copy:hover {{
+    color: #1A1108;
+    border-color: #C9A671;
+    background-color: #FFFDF8;
+  }}
+  .prompt-copy:focus-visible {{
+    outline: 2px solid #D14A0E;
+    outline-offset: 2px;
+  }}
+  .prompt-copy--done {{
+    color: #00955A;
+    border-color: #00955A;
+  }}
+  .prompt-code {{
+    background-color: #FFFFFF; border: 1px solid #E8DCC8; border-radius: 6px;
+    padding: 10px 36px 10px 12px;
+    font-family: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+    font-size: 11px; color: #1A1108; line-height: 1.5; white-space: pre-wrap;
+  }}
+
+  .qotd {{
+    margin: 28px auto 0 auto; max-width: 520px; text-align: center;
+  }}
+  .qotd-label {{
+    font-size: 10px; font-weight: 800; letter-spacing: 0.22em;
+    color: #D14A0E; text-transform: uppercase; margin: 0 0 10px 0;
+  }}
+  .qotd-question {{
+    font-size: 15px; font-weight: 600; color: #1A1108; margin: 0 0 12px 0;
+    line-height: 1.4;
+  }}
+  .qotd-form {{ display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }}
+  .qotd-input {{
+    flex: 1 1 220px; max-width: 320px; padding: 10px 14px; border-radius: 10px;
+    border: 1px solid #E8DCC8; font-size: 13px; font-family: inherit;
+    background-color: #FFFFFF;
+  }}
+  .qotd-submit {{
+    padding: 10px 18px; border-radius: 10px; border: none;
+    background-color: #D14A0E; color: #FFFFFF; font-weight: 700;
+    font-size: 12px; cursor: pointer; letter-spacing: 0.04em;
+  }}
+  .qotd-submit:disabled {{ opacity: 0.6; cursor: default; }}
+  .qotd-done {{ font-size: 12px; color: #00955A; margin: 10px 0 0 0; display: none; }}
+
+  .footer {{
+    text-align: center; padding: 28px 16px 8px 16px;
+    font-size: 11px; color: #8B6F47; line-height: 1.7; letter-spacing: 0.04em;
+  }}
+  .footer a {{ color: #8B6F47; text-decoration: underline; }}
+
+  @media (max-width: 1279px) and (min-width: 768px) {{
+    .edition-grid {{ grid-template-columns: 1fr; }}
+    .story-cards {{
+      grid-column: 1;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }}
+    .edition-grid .prompt-card {{ grid-column: 1; }}
+    .section-divider {{ display: block; grid-column: 1 / -1; }}
+  }}
+  @media (max-width: 767px) {{
+    .edition-grid {{ grid-template-columns: 1fr; gap: 14px; }}
+    .story-cards {{
+      grid-column: 1;
+      grid-template-columns: 1fr;
+    }}
+    .edition-grid .prompt-card {{ grid-column: 1; }}
+    .section-divider {{ display: none; }}
+  }}
+  @media (max-width: 520px) {{
+    .wordmark {{ font-size: 36px; }}
+    body {{ padding: 18px 12px; }}
+    .card-body {{ padding: 16px 18px 18px 18px; }}
+    .headline {{ font-size: 19px; }}
+    .kicker {{ font-size: 14.5px; }}
+    .prompt-code {{ font-size: 12px; }}
+  }}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="masthead">
+    <h1 class="wordmark">ai espresso<span class="cup">&nbsp;☕</span></h1>
+    <p class="dateline">{dateline_html}</p>
+  </header>
+
+  <section class="edition-grid">
+{edition_cards}
+  </section>
+
+  <section class="qotd" id="qotd">
+    <p class="qotd-label">Question of the day</p>
+    <p class="qotd-question">{daily_question}</p>
+    <form class="qotd-form" id="qotd-form">
+      <input class="qotd-input" type="text" name="answer" maxlength="280"
+        placeholder="Your one-sentence take&hellip;" required aria-label="Your answer">
+      <button class="qotd-submit" type="submit">Submit</button>
+    </form>
+    <p class="qotd-done" id="qotd-done">Thanks — recorded.</p>
+  </section>
+
+  <footer class="footer">
+    brewed by ai espresso · <a href="mailto:jacqueline.himel@vanderbilt.edu?subject=AI%20Espresso%20issue%20report">spot something off?</a> · <a href="https://github.com/jackiehimel/AI-ESPRESSO-MAIN">repo</a>
+  </footer>
+
+</div>
+<script>
+(function () {{
+  var form = document.getElementById("qotd-form");
+  var done = document.getElementById("qotd-done");
+  if (!form) return;
+  form.addEventListener("submit", function (e) {{
+    e.preventDefault();
+    var input = form.querySelector("input[name=answer]");
+    var btn = form.querySelector("button[type=submit]");
+    btn.disabled = true;
+    fetch("/api/daily-question", {{
+      method: "POST",
+      headers: {{ "Content-Type": "application/json" }},
+      body: JSON.stringify({{ date: {date_json}, answer: (input && input.value) || "" }})
+    }}).catch(function () {{}}).finally(function () {{
+      if (done) done.style.display = "block";
+      if (input) input.disabled = true;
+    }});
+  }});
+}})();
+(function () {{
+  var btn = document.querySelector(".prompt-copy");
+  var code = document.querySelector(".prompt-code");
+  if (!btn || !code) return;
+  function copyPrompt() {{
+    var text = code.textContent || "";
+    function onSuccess() {{
+      btn.classList.add("prompt-copy--done");
+      btn.setAttribute("aria-label", "Copied");
+      btn.setAttribute("title", "Copied");
+      setTimeout(function () {{
+        btn.classList.remove("prompt-copy--done");
+        btn.setAttribute("aria-label", "Copy prompt to clipboard");
+        btn.setAttribute("title", "Copy to clipboard");
+      }}, 2000);
+    }}
+    if (navigator.clipboard && navigator.clipboard.writeText) {{
+      navigator.clipboard.writeText(text).then(onSuccess).catch(fallback);
+      return;
+    }}
+    fallback();
+    function fallback() {{
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try {{
+        if (document.execCommand("copy")) onSuccess();
+      }} finally {{
+        document.body.removeChild(ta);
+      }}
+    }}
+  }}
+  btn.addEventListener("click", copyPrompt);
+}})();
+</script>
+</body>
+</html>
+"""
+
+STORY_CARD_TEMPLATE = """    <article class="card">
+{image_block}      <div class="card-body">
+        <p class="category {cat_cls}">{cat_label}</p>
+        <h2 class="headline">{headline}</h2>
+        <p class="kicker">{kicker}</p>
+        <p class="source"><a href="{source_url}">{source_name}</a> · {source_date}<span class="source-tier">T{tier}</span></p>
+      </div>
+    </article>"""
+
+PROMPT_CARD_TEMPLATE = """    <article class="card prompt-card">
+{image_block}      <div class="card-body">
+        <p class="prompt-tag">☕ Try this prompt</p>
+{prompt_title_block}        <div class="prompt-code-wrap">
+          <button type="button" class="prompt-copy" aria-label="Copy prompt to clipboard" title="Copy to clipboard">
+            {copy_icon}
+          </button>
+          <div class="prompt-code">{prompt_body}</div>
+        </div>
+      </div>
+    </article>"""
+
+PROMPT_COPY_ICON = (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" '
+    'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+    'stroke-linejoin="round" aria-hidden="true">'
+    '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>'
+    '<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>'
+    "</svg>"
+)
+
+
+# ---------- Markdown template ----------
+MD_TEMPLATE = """# ai espresso ☕ — Edition {issue_num} · Variant C (Newspaper Comic · Snackable)
+
+**{dateline_md}**
+
+---
+
+{md_stories}
+---
+
+![{prompt_alt}]({prompt_image})
+
+**☕ Try this prompt**
+
+{prompt_title_md}
+
+```
+{prompt_body}
+```
+
+---
+
+*brewed by ai espresso · [spot something off?](mailto:jacqueline.himel@vanderbilt.edu?subject=AI%20Espresso%20issue%20report) · [repo](https://github.com/jackiehimel/AI-ESPRESSO-MAIN)*
+"""
+
+MD_STORY_TEMPLATE = """![{alt}]({image})
+
+**{cat_upper}**
+
+## {headline}
+
+{blurb}
+
+*{why_plain}*
+
+[{source_name}]({source_url}) · {source_date}
+
+---
+
+"""
+
+
+# ---------- manifest preheader (hidden only) ----------
+PREHEADER_MAX_CHARS = 140
+
+
+def derive_preheader(stories: list[dict[str, Any]]) -> str:
+    """Hidden sniffer text from story headlines — not shown on the page."""
+    headlines = [
+        (s.get("headline") or "").strip().rstrip(".")
+        for s in stories[:3]
+        if (s.get("headline") or "").strip()
+    ]
+    if not headlines:
+        return "AI Espresso daily edition"
+    joined = " · ".join(headlines)
+    if len(joined) <= PREHEADER_MAX_CHARS:
+        return joined
+    return headlines[0][:PREHEADER_MAX_CHARS].rstrip()
+
+
+def _prompt_title_block(title: str) -> str:
+    title = (title or "").strip()
+    if not title:
+        return ""
+    return f'        <h2 class="prompt-title">{escape(title)}</h2>\n'
+
+
+# ---------- main render ----------
+def render_edition(
+    edition_json_path: Path,
+    issue_num: int | None = None,
+    editions_dir: Path = EDITIONS_DIR,
+) -> dict[str, Any]:
+    """
+    Render the given edition JSON into edition_N_variant_c.{html,md} under
+    editions_dir. Returns a dict with the issue number and output paths.
+    """
+    data = json.loads(edition_json_path.read_text())
+    stories = data.get("stories", [])
+    if len(stories) < 3:
+        raise ValueError(f"Edition has {len(stories)} stories; need 3.")
+    prompt = data.get("try_this_prompt") or {}
+
+    issue_num = resolve_issue_num(issue_num, editions_dir)
+    issue_padded = f"{issue_num:03d}"
+    dates = format_dateline(data["date"])
+    preheader = derive_preheader(stories)
+    daily_question = escape(
+        (data.get("daily_question") or "What's one AI tool you'd actually use at work this week?").strip()
+    )
+    date_json = json.dumps(data["date"])
+
+    # ---- story cards ----
+    html_cards = []
+    md_stories = []
+    for idx, s in enumerate(stories[:3], start=1):
+        cat_label, cat_cls = slot_label(s.get("slot", ""))
+        img = image_filename(issue_num, idx)
+        headline = s.get("headline", "").strip()
+        alt = headline[:120]
+        kicker = derive_kicker(s)
+        source_name = s.get("source_name") or s.get("source", "Source")
+        source_url = s.get("source_url") or s.get("url", "#")
+        tier = int(s.get("tier") or 1)
+        html_cards.append(STORY_CARD_TEMPLATE.format(
+            image_block=_card_image_block(issue_num, idx, alt, editions_dir),
+            cat_label=cat_label,
+            cat_cls=cat_cls,
+            headline=escape(headline),
+            kicker=kicker,  # already escaped + may contain <strong>
+            source_url=escape(source_url, quote=True),
+            source_name=escape(source_name),
+            source_date=dates["source_short"],
+            tier=tier,
+        ))
+        md_stories.append(MD_STORY_TEMPLATE.format(
+            alt=alt,
+            image=img,
+            cat_upper=cat_label,
+            headline=headline,
+            blurb=(s.get("blurb") or "").strip(),
+            why_plain=(s.get("why_it_matters") or "").strip(),
+            source_name=source_name,
+            source_url=source_url,
+            source_date=dates["source_short"],
+        ))
+
+    prompt_img = image_filename(issue_num, 4)
+    prompt_body = (prompt.get("prompt") or "").strip()
+    prompt_tip_raw = (prompt.get("tool_hint") or "").strip()
+    prompt_title = (prompt.get("title") or "").strip()
+    prompt_alt = (prompt_title or "AI Espresso prompt card")[:120]
+    prompt_card = PROMPT_CARD_TEMPLATE.format(
+        image_block=_card_image_block(issue_num, 4, prompt_alt, editions_dir),
+        prompt_title_block=_prompt_title_block(prompt_title),
+        prompt_body=escape(prompt_body),
+        copy_icon=PROMPT_COPY_ICON,
+    )
+    story_cards_row = (
+        '    <div class="story-cards">\n'
+        + "\n".join(html_cards[:2])
+        + '\n      <p class="section-divider">/ / /</p>\n'
+        + "\n".join(html_cards[2:3])
+        + "\n    </div>"
+    )
+    edition_cards = story_cards_row + "\n" + prompt_card
+
+    html = HTML_TEMPLATE.format(
+        issue_num=issue_num,
+        issue_padded=issue_padded,
+        preheader=escape(preheader),
+        sniffer_date=dates["sniffer_date"],
+        dateline_html=dates["dateline_html"],
+        edition_cards=edition_cards,
+        daily_question=daily_question,
+        date_json=date_json,
+    )
+
+    prompt_title_md = f"### {prompt_title}\n\n" if prompt_title else ""
+    md = MD_TEMPLATE.format(
+        issue_num=issue_num,
+        dateline_md=dates["dateline_md"],
+        prompt_title_md=prompt_title_md,
+        md_stories="".join(md_stories),
+        prompt_alt="Try this prompt",
+        prompt_image=prompt_img,
+        prompt_body=prompt_body,
+    )
+
+    editions_dir.mkdir(parents=True, exist_ok=True)
+    html_path = editions_dir / f"edition_{issue_num}_variant_c.html"
+    md_path = editions_dir / f"edition_{issue_num}_variant_c.md"
+    html_path.write_text(html)
+    md_path.write_text(md)
+
+    return {
+        "issue_num": issue_num,
+        "html_path": str(html_path),
+        "md_path": str(md_path),
+        "image_paths": [
+            editions_dir / image_filename(issue_num, i) for i in range(1, 5)
+        ],
+        "stories": stories[:3],
+        "prompt": {"body": prompt_body, "tool_hint": prompt_tip_raw},
+        "preheader": preheader,
+    }
+
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) < 2:
+        print("usage: render_html.py <edition_json_path> [issue_num]")
+        sys.exit(1)
+    result = render_edition(
+        Path(sys.argv[1]),
+        issue_num=int(sys.argv[2]) if len(sys.argv) > 2 else None,
+    )
+    print(json.dumps({
+        "issue_num": result["issue_num"],
+        "html_path": result["html_path"],
+        "md_path": result["md_path"],
+        "image_paths_expected": [str(p) for p in result["image_paths"]],
+    }, indent=2))

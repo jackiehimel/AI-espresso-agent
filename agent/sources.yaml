@@ -1,0 +1,301 @@
+# AI Espresso — source allow-list
+# Edit this file to add, drop, or retier sources. The agent reads it on every run.
+#
+# Tiering philosophy (revised — "exciting first, prestigious second"):
+#   Tier 1 — the labs themselves AND the consumer/tech press that breaks
+#            launches and demos people actually screenshot (Verge, TechCrunch,
+#            404 Media, Platformer, The Information, HN front page).
+#   Tier 2 — high-signal analysis that humanizes what shipped.
+#   Tier 3 — aggregators used ONLY to detect stories Tier 1/2 missed.
+#   Tier 4 — cross-industry verticals (rotates in once or twice a week).
+#
+# Each source: name, tier (1-4), url, kind (rss|html), enabled, weight (optional).
+
+sources:
+  # ─── TIER 1 — AI labs (the source-of-record for launches) ──────────────
+  - name: Anthropic News
+    tier: 1
+    url: https://www.anthropic.com/news
+    kind: html
+    enabled: true
+  - name: OpenAI News
+    tier: 1
+    url: https://openai.com/news/
+    kind: html
+    enabled: true
+  - name: Google DeepMind Blog
+    tier: 1
+    url: https://deepmind.google/discover/blog/
+    kind: html
+    enabled: true
+  - name: Meta AI Blog
+    tier: 1
+    url: https://ai.meta.com/blog/
+    kind: html
+    enabled: true
+  - name: Mistral News
+    tier: 1
+    url: https://mistral.ai/news/
+    kind: html
+    enabled: true
+  - name: xAI Blog
+    tier: 1
+    url: https://x.ai/blog
+    kind: html
+    enabled: true
+  - name: Cohere Blog
+    tier: 1
+    url: https://cohere.com/blog
+    kind: html
+    enabled: true
+
+  # ─── TIER 1 — Consumer-tech press that captures excitement ─────────────
+  # These outlets are where "wait, AI can do that?" stories tend to land
+  # first. Verge and TechCrunch break product launches; 404 Media and
+  # Platformer carry the cultural / labor angle; The Information has the
+  # business-stakes scoops; HN front page is a live taste check.
+  - name: The Verge — AI
+    tier: 1
+    url: https://www.theverge.com/ai-artificial-intelligence
+    kind: html
+    enabled: true
+  - name: TechCrunch — AI
+    tier: 1
+    url: https://techcrunch.com/category/artificial-intelligence/
+    kind: html
+    enabled: true
+  - name: 404 Media
+    tier: 1
+    url: https://www.404media.co/
+    kind: html
+    enabled: true
+  - name: Platformer (Casey Newton)
+    tier: 1
+    url: https://www.platformer.news/
+    kind: html
+    enabled: true
+  - name: The Information — AI
+    tier: 1
+    url: https://www.theinformation.com/topics/ai
+    kind: html
+    enabled: true
+    paywall: true
+  - name: Hacker News (front page)
+    tier: 1
+    url: https://news.ycombinator.com/news
+    kind: html
+    enabled: true
+  - name: Ars Technica — AI
+    tier: 1
+    url: https://arstechnica.com/ai/
+    kind: html
+    enabled: true
+  - name: 9to5Mac — AI
+    tier: 1
+    url: https://9to5mac.com/guides/ai/
+    kind: html
+    enabled: true
+  - name: Mashable — AI
+    tier: 1
+    url: https://mashable.com/category/artificial-intelligence
+    kind: html
+    enabled: true
+  - name: Wired — AI
+    tier: 1
+    url: https://www.wired.com/tag/artificial-intelligence/
+    kind: html
+    enabled: true
+  - name: Engadget — AI
+    tier: 1
+    url: https://www.engadget.com/category/ai/
+    kind: html
+    enabled: true
+  - name: Rest of World
+    tier: 1
+    url: https://restofworld.org/topic/ai/
+    kind: html
+    enabled: true
+  - name: Product Hunt — AI launches
+    tier: 1
+    url: https://www.producthunt.com/topics/artificial-intelligence
+    kind: html
+    enabled: true
+
+  # ─── TIER 1 — Major paper AI desks (use for stakes, not vibes) ─────────
+  # These outlets bot-block their section-listing HTML aggressively
+  # (Cloudflare/Akamai TLS fingerprinting), so we use their RSS feeds.
+  # We still respect the paywall — RSS gives us headline + summary only,
+  # which is exactly what we want for ranking.
+  - name: NYT — Technology
+    tier: 1
+    url: https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml
+    kind: rss
+    enabled: true
+    paywall: true
+  - name: WSJ — Tech
+    tier: 1
+    url: https://feeds.content.dowjones.io/public/rss/RSSWSJD
+    kind: rss
+    enabled: true
+    paywall: true
+  - name: FT — Technology
+    tier: 1
+    url: https://www.ft.com/technology?format=rss
+    kind: rss
+    enabled: true
+    paywall: true
+  - name: Bloomberg Technology
+    tier: 1
+    url: https://feeds.bloomberg.com/technology/news.rss
+    kind: rss
+    enabled: true
+    paywall: true
+  - name: BBC Technology
+    tier: 1
+    url: https://www.bbc.com/news/technology
+    kind: html
+    enabled: true
+  - name: CNBC — Technology
+    tier: 1
+    url: https://www.cnbc.com/id/19854910/device/rss/rss.html
+    kind: rss
+    enabled: true
+
+  # ─── TIER 1 — Research firehose (heavily filtered) ─────────────────────
+  - name: arXiv cs.AI (frontier-lab filtered)
+    tier: 1
+    url: https://arxiv.org/list/cs.AI/new
+    kind: html
+    enabled: true
+    research: true
+  - name: Hugging Face — Daily Papers
+    tier: 1
+    url: https://huggingface.co/papers
+    kind: html
+    enabled: true
+    research: true
+
+  # ─── TIER 2 — High-signal analysis that humanizes what shipped ─────────
+  - name: Latent Space (Swyx)
+    tier: 2
+    url: https://www.latent.space/
+    kind: html
+    enabled: true
+  - name: Stratechery (Ben Thompson)
+    tier: 2
+    url: https://stratechery.com/
+    kind: html
+    enabled: true
+  - name: Import AI (Jack Clark)
+    tier: 2
+    url: https://jack-clark.net/
+    kind: html
+    enabled: true
+  - name: The Pragmatic Engineer
+    tier: 2
+    url: https://newsletter.pragmaticengineer.com/
+    kind: html
+    enabled: true
+  - name: Simon Willison's blog
+    tier: 2
+    url: https://simonwillison.net/
+    kind: html
+    enabled: true
+  - name: One Useful Thing (Ethan Mollick)
+    tier: 2
+    url: https://www.oneusefulthing.org/
+    kind: html
+    enabled: true
+  - name: Don't Worry About the Vase (Zvi Mowshowitz)
+    tier: 2
+    url: https://thezvi.substack.com/
+    kind: html
+    enabled: true
+
+  # ─── TIER 3 — Aggregators (breadth check; never quoted directly) ───────
+  - name: The Rundown AI
+    tier: 3
+    url: https://www.therundown.ai/
+    kind: html
+    enabled: true
+    aggregator: true
+  - name: Superhuman AI
+    tier: 3
+    url: https://www.joinsuperhuman.ai/
+    kind: html
+    enabled: false
+    aggregator: true
+  - name: TLDR AI
+    tier: 3
+    url: https://tldr.tech/ai
+    kind: html
+    enabled: true
+    aggregator: true
+
+  # ─── TIER 4 — Cross-industry verticals (rotating slot) ─────────────────
+  - name: STAT News — AI
+    tier: 4
+    url: https://www.statnews.com/category/artificial-intelligence/
+    kind: html
+    enabled: false
+    vertical: healthcare
+  - name: Endpoints News — Generative AI
+    tier: 4
+    url: https://endpoints.news/tag/generative-ai/
+    kind: html
+    enabled: false
+    vertical: healthcare
+  - name: FierceHealthcare — AI
+    tier: 4
+    url: https://www.fiercehealthcare.com/ai-and-machine-learning
+    kind: html
+    enabled: true
+    vertical: healthcare
+  - name: Supply Chain Dive — AI
+    tier: 4
+    url: https://www.supplychaindive.com/topic/artificial-intelligence/
+    kind: html
+    enabled: false
+    vertical: supply_chain
+  - name: FreightWaves — AI
+    tier: 4
+    url: https://www.freightwaves.com/news/tag/artificial-intelligence
+    kind: html
+    enabled: true
+    vertical: supply_chain
+  - name: MIT Technology Review — AI
+    tier: 4
+    url: https://www.technologyreview.com/topic/artificial-intelligence/
+    kind: html
+    enabled: true
+    vertical: smb
+  - name: Axios AI+
+    tier: 4
+    url: https://www.axios.com/technology/artificial-intelligence
+    kind: html
+    enabled: false
+    vertical: cross
+  - name: Semafor Technology
+    tier: 4
+    url: https://www.semafor.com/vertical/technology
+    kind: html
+    enabled: false
+    vertical: cross
+  - name: IndustryWeek — Technology
+    tier: 4
+    url: https://www.industryweek.com/technology-and-iiot
+    kind: html
+    enabled: true
+    vertical: manufacturing
+  # NOTE: HBR, MIT Sloan, a16z, and MIT Sloan Review are intentionally
+  # *not* listed. They generate "3 habits for AI teams" style think pieces
+  # that consistently fail the vibe filter (see espresso_agent.py). They
+  # can be added back as Tier 4 if you need a CXO-leadership angle.
+
+# ─── CONFIGURATION RULES ─────────────────────────────────────────────────
+rules:
+  tier1_minimum: 1            # at least one Tier 1 story per edition
+  total_stories: 3            # 3 stories + 1 try-this-prompt tile = 4 across
+  tier4_rotation_days: [1, 4] # Mon (1) and Thu (4) include a Tier 4 story
+  dedupe_window_days: 30      # don't repeat a story or source-event within 30d
+  paywall_handling: headline_only   # never fabricate body for paywalled sources
