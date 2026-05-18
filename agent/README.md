@@ -127,12 +127,15 @@ Production and `.github/workflows/daily-edition.yml` always use `mode="agent"`. 
 | `mode="agent"` (default) | Scout → Editor → Critic native `tool_use` loop |
 | `mode="deterministic"` | Skip the agent loop; run `rank_and_select` directly (legacy) |
 | `ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1` | After agent failure with no recoverable slate, run `rank_and_select` instead of failing |
+| `ESPRESSO_SKIP_ARCHIVE=1` | Dev/local only: write edition JSON but skip `append_archive` in `write_edition` (does not replace Phase 1.1 upsert-by-date) |
 
 Use the env flag or `--mode deterministic` only on your machine when debugging source fetch or ranking plumbing — never in CI, cron, or client-facing runs. Example:
 
 ```bash
 # Agent failed; inspect trace first — fallback is last resort:
 ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1 python3 espresso_agent.py --date 2026-05-18 --mode agent
+# Local agent run without mutating archive.jsonl:
+ESPRESSO_SKIP_ARCHIVE=1 python3 espresso_agent.py --date 2026-05-19 --use-cache --mode agent
 # Or explicit legacy pipeline:
 python3 espresso_agent.py --date 2026-05-18 --mode deterministic
 ```

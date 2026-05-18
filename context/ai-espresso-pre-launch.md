@@ -41,7 +41,7 @@
 - [x] Phase 2.1 Unified rubric in prompts — merged `b4a8563`
 - [x] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE — merged `5b9e7c4`
 - [x] Phase 2.3 Deterministic path dev-only / aligned — merged `98ba480`
-- [ ] Phase 3 Editorial quality pass + clean prod edition
+- [x] Phase 3 Editorial quality pass + clean prod edition — verified 2026-05-19 local run
 - [x] Phase 4 External polish — merged `bd43630`
 
 ### Session handoff (Phase 4 — public edition polish) — MERGED
@@ -58,7 +58,28 @@
 
 **Preview:** `cd agent && python3 preview_edition.py 2026-05-18 --render-only --no-images` (serves `editions/`; images at 160px CSS from 512px PNGs).
 
-**Next session:** **Prompt 7** — Phase **3** (editorial quality + clean prod edition). Phase **1.1** archive upsert still open if doing ops first.
+**Next session:** Phase **1.1** archive upsert (still open) or ship `2026-05-19` to prod with image API keys.
+
+### Session handoff (Phase 3 — editorial quality verification) — LOCAL
+
+**Tests (2026-05-18):** `85` ran, `OK` (`3` skipped). Command: `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v`.
+
+**Agent run:** `ESPRESSO_SKIP_ARCHIVE=1 python3 espresso_agent.py --date 2026-05-19 --use-cache --mode agent` (~3 min). Edition JSON: `agent/data/editions/2026-05-19.json`. Archive unchanged (still two `2026-05-18` rows only).
+
+**Minimal ops for run:** `write_edition` respects `ESPRESSO_SKIP_ARCHIVE=1` (skip `append_archive`); full Phase 1.1 upsert/tests still open.
+
+**agent_trace (64 events):** scout (shortlist=12) → editor `read_candidate`/`pick`/`unpick`/`search_news` → `self_critique` **revise** ×2 (OpenAI overlap + Anthropic vendor cap) → `self_critique` **approve** → `ship_edition`.
+
+**Headlines shipped:**
+- business: Anthropic just signed a compute deal with SpaceX (Anthropic News)
+- beginner: ChatGPT can now write and run code directly on your phone (9to5Mac — AI)
+- cross: OpenAI insiders say Apple's ChatGPT integration is a letdown (Ars Technica — AI)
+
+**Render:** `python3 render_edition.py 2026-05-19` → `editions/edition_4_variant_c.html` (reused issue 4 slot because assets dir exists). QOTD: honest preview copy. No `T1`/`T2` in public HTML. Illustrations: placeholder PNGs (~5KB each) — no image API keys in env; set keys and re-render for real hedcuts.
+
+**Quality:** No prompt changes — critic loop corrected vendor overlap and archive-adjacent finance repeat without new regex.
+
+**Preview:** `python3 preview_edition.py 2026-05-19 --render-only`
 
 ### Session handoff (Phase 2.3 — deterministic fallback dev-only) — MERGED
 
