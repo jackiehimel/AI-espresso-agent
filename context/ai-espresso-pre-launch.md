@@ -1,5 +1,8 @@
 # AI Espresso — Pre-launch context
 
+**GitHub:** https://github.com/jackiehimel/ai-espresso-finalized (private)  
+**Baseline commit:** `a776f26` — tag with `git tag pre-launch-baseline` to revert anytime.
+
 ## 2026-05-18 — Execution playbook (fix order without context rot)
 
 **Verdict:** Not launch-ready. Agent loop is real (native `tool_use` Editor, ship gates, trace). Fix ops/trust first, then rubric-in-prompts, never expand regex constitution.
