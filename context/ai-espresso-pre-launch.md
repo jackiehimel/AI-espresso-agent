@@ -36,8 +36,8 @@
 ### Completed (check off as merged)
 
 - [ ] Phase 1.1 Archive upsert + ESPRESSO_SKIP_ARCHIVE
-- [ ] Phase 1.2 QOTD honest UX
-- [ ] Phase 1.3 CI/workflow guards + alerts
+- [x] Phase 1.2 QOTD honest UX
+- [x] Phase 1.3 CI/workflow guards + alerts
 - [ ] Phase 2.1 Unified rubric in prompts
 - [ ] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE
 - [ ] Phase 2.3 Deterministic path dev-only / aligned

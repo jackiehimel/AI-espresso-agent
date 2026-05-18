@@ -23,6 +23,7 @@ edition HTML. render_images.py is responsible for producing those PNGs.
 from __future__ import annotations
 
 import json
+import os
 import re
 from datetime import datetime
 from html import escape
@@ -384,6 +385,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }}
   .qotd-submit:disabled {{ opacity: 0.6; cursor: default; }}
   .qotd-done {{ font-size: 12px; color: #00955A; margin: 10px 0 0 0; display: none; }}
+  .qotd-error {{ font-size: 12px; color: #B8340A; margin: 10px 0 0 0; display: none; }}
+  .qotd-preview {{
+    font-size: 12px; color: #8B6F47; margin: 0; line-height: 1.5;
+  }}
 
   .footer {{
     text-align: center; padding: 28px 16px 8px 16px;
@@ -431,16 +436,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 {edition_cards}
   </section>
 
-  <section class="qotd" id="qotd">
-    <p class="qotd-label">Question of the day</p>
-    <p class="qotd-question">{daily_question}</p>
-    <form class="qotd-form" id="qotd-form">
-      <input class="qotd-input" type="text" name="answer" maxlength="280"
-        placeholder="Your one-sentence take&hellip;" required aria-label="Your answer">
-      <button class="qotd-submit" type="submit">Submit</button>
-    </form>
-    <p class="qotd-done" id="qotd-done">Thanks — recorded.</p>
-  </section>
+{qotd_section}
 
   <footer class="footer">
     brewed by ai espresso · <a href="mailto:jacqueline.himel@vanderbilt.edu?subject=AI%20Espresso%20issue%20report">spot something off?</a> · <a href="https://github.com/jackiehimel/AI-ESPRESSO-MAIN">repo</a>
@@ -448,25 +444,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 </div>
 <script>
-(function () {{
-  var form = document.getElementById("qotd-form");
-  var done = document.getElementById("qotd-done");
-  if (!form) return;
-  form.addEventListener("submit", function (e) {{
-    e.preventDefault();
-    var input = form.querySelector("input[name=answer]");
-    var btn = form.querySelector("button[type=submit]");
-    btn.disabled = true;
-    fetch("/api/daily-question", {{
-      method: "POST",
-      headers: {{ "Content-Type": "application/json" }},
-      body: JSON.stringify({{ date: {date_json}, answer: (input && input.value) || "" }})
-    }}).catch(function () {{}}).finally(function () {{
-      if (done) done.style.display = "block";
-      if (input) input.disabled = true;
-    }});
-  }});
-}})();
+{qotd_script}
 (function () {{
   var btn = document.querySelector(".prompt-copy");
   var code = document.querySelector(".prompt-code");
@@ -609,6 +587,76 @@ def _prompt_title_block(title: str) -> str:
     return f'        <h2 class="prompt-title">{escape(title)}</h2>\n'
 
 
+def qotd_api_base() -> str | None:
+    """Base URL for QOTD API (no trailing slash). Unset = static/preview edition."""
+    raw = (os.environ.get("AI_ESPRESSO_QOTD_API_URL") or "").strip()
+    if not raw:
+        return None
+    return raw.rstrip("/")
+
+
+def build_qotd_section(daily_question: str, api_base: str | None) -> str:
+    """QOTD block: interactive form when hosted, honest preview copy otherwise."""
+    label = (
+        '  <section class="qotd" id="qotd">\n'
+        '    <p class="qotd-label">Question of the day</p>\n'
+        f'    <p class="qotd-question">{daily_question}</p>\n'
+    )
+    if api_base:
+        return (
+            label
+            + '    <form class="qotd-form" id="qotd-form">\n'
+            + '      <input class="qotd-input" type="text" name="answer" maxlength="280"\n'
+            + '        placeholder="Your one-sentence take&hellip;" required aria-label="Your answer">\n'
+            + '      <button class="qotd-submit" type="submit">Submit</button>\n'
+            + "    </form>\n"
+            + '    <p class="qotd-done" id="qotd-done">Thanks — recorded.</p>\n'
+            + '    <p class="qotd-error" id="qotd-error"></p>\n'
+            + "  </section>"
+        )
+    return (
+        label
+        + '    <p class="qotd-preview">Preview edition — answers are collected when this issue is hosted online.</p>\n'
+        + "  </section>"
+    )
+
+
+def build_qotd_script(date_json: str, api_base: str | None) -> str:
+    """Client script for QOTD submit; empty when no API base (static editions)."""
+    if not api_base:
+        return ""
+    api_url_json = json.dumps(f"{api_base}/api/daily-question")
+    return f"""(function () {{
+  var form = document.getElementById("qotd-form");
+  var done = document.getElementById("qotd-done");
+  var err = document.getElementById("qotd-error");
+  if (!form) return;
+  form.addEventListener("submit", function (e) {{
+    e.preventDefault();
+    var input = form.querySelector("input[name=answer]");
+    var btn = form.querySelector("button[type=submit]");
+    if (err) {{ err.style.display = "none"; err.textContent = ""; }}
+    btn.disabled = true;
+    fetch({api_url_json}, {{
+      method: "POST",
+      headers: {{ "Content-Type": "application/json" }},
+      body: JSON.stringify({{ date: {date_json}, answer: (input && input.value) || "" }})
+    }}).then(function (res) {{
+      if (!res.ok) throw new Error("request failed");
+      if (done) done.style.display = "block";
+      if (input) input.disabled = true;
+    }}).catch(function () {{
+      if (err) {{
+        err.textContent = "Could not save your answer. Please try again later.";
+        err.style.display = "block";
+      }}
+      btn.disabled = false;
+    }});
+  }});
+}})();
+"""
+
+
 # ---------- main render ----------
 def render_edition(
     edition_json_path: Path,
@@ -633,6 +681,9 @@ def render_edition(
         (data.get("daily_question") or "What's one AI tool you'd actually use at work this week?").strip()
     )
     date_json = json.dumps(data["date"])
+    api_base = qotd_api_base()
+    qotd_section = build_qotd_section(daily_question, api_base)
+    qotd_script = build_qotd_script(date_json, api_base)
 
     # ---- story cards ----
     html_cards = []
@@ -696,8 +747,8 @@ def render_edition(
         sniffer_date=dates["sniffer_date"],
         dateline_html=dates["dateline_html"],
         edition_cards=edition_cards,
-        daily_question=daily_question,
-        date_json=date_json,
+        qotd_section=qotd_section,
+        qotd_script=qotd_script,
     )
 
     prompt_title_md = f"### {prompt_title}\n\n" if prompt_title else ""
