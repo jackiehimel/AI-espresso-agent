@@ -422,20 +422,15 @@ def extract_candidates(html: str, source: Source, max_n: int = 8) -> list[Candid
 
 
 def load_archive(days: int = 30) -> set[str]:
-    """Return the set of fingerprints used in editions within the lookback window."""
+    """Return fingerprints from compacted archive rows within the lookback window."""
     if not ARCHIVE_FILE.exists():
         return set()
     cutoff = (dt.date.today() - dt.timedelta(days=days)).isoformat()
     seen: set[str] = set()
-    with open(ARCHIVE_FILE) as f:
-        for line in f:
-            try:
-                rec = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            if rec.get("date", "") >= cutoff:
-                for fp in rec.get("fingerprints", []):
-                    seen.add(fp)
+    for rec in _load_archive_records_compacted():
+        if rec.get("date", "") >= cutoff:
+            for fp in rec.get("fingerprints", []):
+                seen.add(fp)
     return seen
 
 
@@ -1099,15 +1094,14 @@ def rank_and_select(
 def recent_archive_headlines(n: int) -> list[str]:
     if not ARCHIVE_FILE.exists():
         return []
+    rows = sorted(
+        _load_archive_records_compacted(),
+        key=lambda rec: rec.get("date", ""),
+        reverse=True,
+    )
     out: list[str] = []
-    with open(ARCHIVE_FILE) as f:
-        lines = f.readlines()
-    for line in reversed(lines[-15:]):
-        try:
-            rec = json.loads(line)
-            out.extend(rec.get("headlines", []))
-        except json.JSONDecodeError:
-            continue
+    for rec in rows:
+        out.extend(rec.get("headlines", []))
         if len(out) >= n:
             break
     return out[:n]

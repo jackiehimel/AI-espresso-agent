@@ -10,7 +10,14 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from espresso_agent import Edition, Story, append_archive, write_edition
+from espresso_agent import (
+    Edition,
+    Story,
+    append_archive,
+    load_archive,
+    recent_archive_headlines,
+    write_edition,
+)
 
 
 def _minimal_edition(date: str = "2099-01-01") -> Edition:
@@ -114,6 +121,58 @@ class WriteEditionArchiveTests(unittest.TestCase):
             by_date = {row["date"]: row for row in rows}
             self.assertEqual(["new"], by_date["2026-05-18"]["fingerprints"])
             self.assertEqual(["fp-test-001"], by_date["2026-05-19"]["fingerprints"])
+
+    def test_load_archive_uses_last_row_per_duplicate_date(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            archive_file = Path(tmp) / "archive.jsonl"
+            archive_file.write_text(
+                "\n".join([
+                    json.dumps({
+                        "date": "2099-01-01",
+                        "fingerprints": ["stale-fp"],
+                        "headlines": ["stale"],
+                    }),
+                    json.dumps({
+                        "date": "2099-01-01",
+                        "fingerprints": ["winning-fp"],
+                        "headlines": ["winning"],
+                    }),
+                ])
+                + "\n",
+                encoding="utf-8",
+            )
+            with patch("espresso_agent.ARCHIVE_FILE", archive_file):
+                fps = load_archive(days=3650)
+            self.assertEqual({"winning-fp"}, fps)
+            self.assertNotIn("stale-fp", fps)
+
+    def test_recent_archive_headlines_uses_last_row_per_duplicate_date(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            archive_file = Path(tmp) / "archive.jsonl"
+            archive_file.write_text(
+                "\n".join([
+                    json.dumps({
+                        "date": "2098-12-31",
+                        "fingerprints": ["a"],
+                        "headlines": ["older headline"],
+                    }),
+                    json.dumps({
+                        "date": "2099-01-01",
+                        "fingerprints": ["b"],
+                        "headlines": ["stale headline"],
+                    }),
+                    json.dumps({
+                        "date": "2099-01-01",
+                        "fingerprints": ["c"],
+                        "headlines": ["newest headline"],
+                    }),
+                ])
+                + "\n",
+                encoding="utf-8",
+            )
+            with patch("espresso_agent.ARCHIVE_FILE", archive_file):
+                headlines = recent_archive_headlines(5)
+            self.assertEqual(["newest headline", "older headline"], headlines)
 
 
 if __name__ == "__main__":
