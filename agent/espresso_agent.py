@@ -134,6 +134,9 @@ class Source:
     # section-listing HTML. We still respect their paywall on individual
     # articles — we only ever read the listing pages for headlines + URLs.
     prestige: bool = False
+    # When url is a mirror RSS host (e.g. githubusercontent.com), search_domain
+    # keeps search_news allow-list aligned with the real publisher.
+    search_domain: str | None = None
 
 
 @dataclass
@@ -222,9 +225,16 @@ def search_allowed_domains() -> set[str]:
     sources, _ = load_sources()
     allowed: set[str] = set(SEARCH_ALLOWLIST_EXTRA)
     for s in sources:
-        host = urlparse(s.url).netloc.lower()
+        raw = (s.search_domain or s.url).strip()
+        if not raw:
+            continue
+        if "://" not in raw:
+            raw = f"https://{raw}"
+        host = urlparse(raw).netloc.lower()
         if host.startswith("www."):
             host = host[4:]
+        if host in {"raw.githubusercontent.com", "github.com"}:
+            continue
         allowed.add(host)
         # also add the registrable form (foo.bar.com → bar.com)
         parts = host.split(".")
@@ -1096,7 +1106,8 @@ def write_edition(edition: Edition, dry_run: bool = False) -> Path:
 
     if not dry_run:
         out.write_text(json.dumps(payload, indent=2))
-        append_archive(edition)
+        if os.environ.get("ESPRESSO_SKIP_ARCHIVE") != "1":
+            append_archive(edition)
     return out
 
 

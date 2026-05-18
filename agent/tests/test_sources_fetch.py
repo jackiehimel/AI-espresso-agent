@@ -7,7 +7,7 @@ import unittest
 
 import yaml
 
-from espresso_agent import fetch_url, load_sources
+from espresso_agent import extract_candidates, fetch_url, load_sources
 
 
 @unittest.skipIf(
@@ -21,9 +21,12 @@ class EnabledSourcesFetchTests(unittest.TestCase):
         self.assertGreater(len(enabled), 10)
         failures: list[str] = []
         for s in enabled:
-            html = fetch_url(s.url, use_cache=False, prestige=s.prestige or s.paywall)
-            if not html or len(html) < 500:
+            body = fetch_url(s.url, use_cache=False, prestige=s.prestige or s.paywall)
+            if not body or len(body) < 500:
                 failures.append(f"{s.name} ({s.url})")
+                continue
+            if s.kind == "rss" and not extract_candidates(body, s, max_n=1):
+                failures.append(f"{s.name} ({s.url}) — RSS returned no items")
         self.assertFalse(failures, "fetch failed:\n" + "\n".join(failures))
 
 

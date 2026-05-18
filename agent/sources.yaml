@@ -10,43 +10,51 @@
 #   Tier 4 — cross-industry verticals (rotates in once or twice a week).
 #
 # Each source: name, tier (1-4), url, kind (rss|html), enabled, weight (optional).
+# Prefer kind: rss — listing-page HTML is often 403 from CI/datacenter IPs.
+# Labs without a public feed use mirror RSS (Olshansk/rss-feeds or 0xSMW/rss-feeds);
+# item links still point at the vendor's site.
 
 sources:
   # ─── TIER 1 — AI labs (the source-of-record for launches) ──────────────
   - name: Anthropic News
     tier: 1
-    url: https://www.anthropic.com/news
-    kind: html
+    url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_news.xml
+    kind: rss
+    search_domain: anthropic.com
     enabled: true
   - name: OpenAI News
     tier: 1
-    url: https://openai.com/news/
-    kind: html
+    url: https://openai.com/news/rss.xml
+    kind: rss
     enabled: true
   - name: Google DeepMind Blog
     tier: 1
-    url: https://deepmind.google/discover/blog/
-    kind: html
+    url: https://deepmind.google/blog/rss.xml
+    kind: rss
     enabled: true
   - name: Meta AI Blog
     tier: 1
-    url: https://ai.meta.com/blog/
-    kind: html
+    url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_meta_ai.xml
+    kind: rss
+    search_domain: ai.meta.com
     enabled: true
   - name: Mistral News
     tier: 1
-    url: https://mistral.ai/news/
-    kind: html
+    url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_mistral.xml
+    kind: rss
+    search_domain: mistral.ai
     enabled: true
   - name: xAI Blog
     tier: 1
-    url: https://x.ai/blog
-    kind: html
+    url: https://raw.githubusercontent.com/0xSMW/rss-feeds/main/feeds/feed_xai_news.xml
+    kind: rss
+    search_domain: x.ai
     enabled: true
   - name: Cohere Blog
     tier: 1
-    url: https://cohere.com/blog
-    kind: html
+    url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_cohere.xml
+    kind: rss
+    search_domain: cohere.com
     enabled: true
 
   # ─── TIER 1 — Consumer-tech press that captures excitement ─────────────
@@ -56,59 +64,60 @@ sources:
   # business-stakes scoops; HN front page is a live taste check.
   - name: The Verge — AI
     tier: 1
-    url: https://www.theverge.com/ai-artificial-intelligence
-    kind: html
+    url: https://www.theverge.com/rss/ai-artificial-intelligence/index.xml
+    kind: rss
     enabled: true
   - name: TechCrunch — AI
     tier: 1
-    url: https://techcrunch.com/category/artificial-intelligence/
-    kind: html
+    url: https://techcrunch.com/category/artificial-intelligence/feed/
+    kind: rss
     enabled: true
   - name: 404 Media
     tier: 1
-    url: https://www.404media.co/
-    kind: html
+    url: https://www.404media.co/rss
+    kind: rss
     enabled: true
   - name: Platformer (Casey Newton)
     tier: 1
-    url: https://www.platformer.news/
-    kind: html
+    url: https://www.platformer.news/feed
+    kind: rss
     enabled: true
   - name: The Information — AI
     tier: 1
-    url: https://www.theinformation.com/topics/ai
-    kind: html
+    url: https://www.theinformation.com/feed
+    kind: rss
     enabled: true
     paywall: true
   - name: Hacker News (front page)
     tier: 1
-    url: https://news.ycombinator.com/news
-    kind: html
+    url: https://hnrss.org/frontpage
+    kind: rss
+    search_domain: news.ycombinator.com
     enabled: true
   - name: Ars Technica — AI
     tier: 1
-    url: https://arstechnica.com/ai/
-    kind: html
+    url: https://feeds.arstechnica.com/arstechnica/technology-lab
+    kind: rss
     enabled: true
   - name: 9to5Mac — AI
     tier: 1
-    url: https://9to5mac.com/guides/ai/
-    kind: html
+    url: https://9to5mac.com/feed/
+    kind: rss
     enabled: true
   - name: Mashable — AI
     tier: 1
-    url: https://mashable.com/category/artificial-intelligence
-    kind: html
+    url: https://mashable.com/feeds/rss/all
+    kind: rss
     enabled: true
   - name: Wired — AI
     tier: 1
-    url: https://www.wired.com/tag/artificial-intelligence/
-    kind: html
+    url: https://www.wired.com/feed/tag/ai/latest/rss
+    kind: rss
     enabled: true
   - name: Engadget — AI
     tier: 1
-    url: https://www.engadget.com/category/ai/
-    kind: html
+    url: https://www.engadget.com/rss.xml
+    kind: rss
     enabled: true
   - name: Rest of World
     tier: 1
@@ -117,8 +126,8 @@ sources:
     enabled: true
   - name: Product Hunt — AI launches
     tier: 1
-    url: https://www.producthunt.com/topics/artificial-intelligence
-    kind: html
+    url: https://www.producthunt.com/feed
+    kind: rss
     enabled: true
 
   # ─── TIER 1 — Major paper AI desks (use for stakes, not vibes) ─────────
@@ -152,8 +161,8 @@ sources:
     paywall: true
   - name: BBC Technology
     tier: 1
-    url: https://www.bbc.com/news/technology
-    kind: html
+    url: https://feeds.bbci.co.uk/news/technology/rss.xml
+    kind: rss
     enabled: true
   - name: CNBC — Technology
     tier: 1
@@ -178,38 +187,38 @@ sources:
   # ─── TIER 2 — High-signal analysis that humanizes what shipped ─────────
   - name: Latent Space (Swyx)
     tier: 2
-    url: https://www.latent.space/
-    kind: html
+    url: https://www.latent.space/feed
+    kind: rss
     enabled: true
   - name: Stratechery (Ben Thompson)
     tier: 2
-    url: https://stratechery.com/
-    kind: html
+    url: https://stratechery.com/feed/
+    kind: rss
     enabled: true
   - name: Import AI (Jack Clark)
     tier: 2
-    url: https://jack-clark.net/
-    kind: html
+    url: https://jack-clark.net/feed/
+    kind: rss
     enabled: true
   - name: The Pragmatic Engineer
     tier: 2
-    url: https://newsletter.pragmaticengineer.com/
-    kind: html
+    url: https://newsletter.pragmaticengineer.com/feed
+    kind: rss
     enabled: true
   - name: Simon Willison's blog
     tier: 2
-    url: https://simonwillison.net/
-    kind: html
+    url: https://simonwillison.net/atom/everything/
+    kind: rss
     enabled: true
   - name: One Useful Thing (Ethan Mollick)
     tier: 2
-    url: https://www.oneusefulthing.org/
-    kind: html
+    url: https://www.oneusefulthing.org/feed
+    kind: rss
     enabled: true
   - name: Don't Worry About the Vase (Zvi Mowshowitz)
     tier: 2
-    url: https://thezvi.substack.com/
-    kind: html
+    url: https://thezvi.substack.com/feed
+    kind: rss
     enabled: true
 
   # ─── TIER 3 — Aggregators (breadth check; never quoted directly) ───────
@@ -227,8 +236,8 @@ sources:
     aggregator: true
   - name: TLDR AI
     tier: 3
-    url: https://tldr.tech/ai
-    kind: html
+    url: https://tldr.tech/api/rss/ai
+    kind: rss
     enabled: true
     aggregator: true
 
