@@ -12,6 +12,7 @@ from espresso_agent import extract_candidates, fetch_url, load_sources
 CI_OPTIONAL_FLAKY_FEEDS = {
     "The Information — AI",
     "Don't Worry About the Vase (Zvi Mowshowitz)",
+    "FreightWaves — AI",
 }
 
 
