@@ -185,26 +185,81 @@ def validate_edition_stories(stories: list[dict[str, Any]]) -> list[str]:
 
 
 # ── Try-this-prompt card (fourth tile) ────────────────────────────────
-# Generated fresh each edition from that day's stories via prompt_tile.py.
+# Generated fresh each edition via prompt_tile.py (not tied to daily stories).
+
+PROMPT_TILE_STYLE_EXAMPLES = [
+    {
+        "title": "The skeptical reviewer",
+        "prompt": (
+            "You're a skeptical staff engineer who's seen this movie before. "
+            "I'm about to describe an idea in 3–6 sentences. Don't encourage me. "
+            "Find the weakest assumption, the part that only works in a demo, and the question "
+            "I'm avoiding. End with one sentence I can actually ship this week anyway."
+        ),
+        "tool_hint": "When you're excited about something and need friction, not validation.",
+    },
+    {
+        "title": "The elevator betrayal",
+        "prompt": (
+            "I have 90 seconds before a VP stops pretending to listen. Turn my messy explanation "
+            "below into: one hook sentence, three concrete nouns, and a closing line that sounds "
+            "like a decision already made — not a request for more meetings."
+        ),
+        "tool_hint": "Rehearse out loud before the real call.",
+    },
+    {
+        "title": "The meeting that shouldn't exist",
+        "prompt": (
+            "Read what I'm about to send. If this could be a two-line Slack message, write those "
+            "two lines. If it actually needs a meeting, give me a 4-line agenda where the first "
+            "line is the decision we're making at the end."
+        ),
+        "tool_hint": "Before you hit Send on the calendar invite.",
+    },
+]
 
 PROMPT_TILE_SYSTEM = (
-    "You write paste-ready AI prompts for AI Espresso, an internal Solvd daily brief. "
-    "Warm, colleague-to-colleague tone. Respond with JSON only."
+    "You write the daily 'Try this prompt' for AI Espresso — Solvd's internal AI brief. "
+    "Readers already use Claude/ChatGPT. Give one copy-paste prompt block that does a sharp, "
+    "useful mental move in one sitting (friction, rehearsal, truth-check, tighten prose, kill a "
+    "useless meeting). Warm, slightly irreverent colleague voice — never corporate filler. "
+    "No profanity. No bracket placeholders like Paste [topic]. Respond with JSON only."
 )
 
 PROMPT_TILE_TEMPLATE = """\
-Write the "Try this prompt" card for AI Espresso.
+Write one "Try this prompt" card for AI Espresso.
 
-Today's stories (context only — do not echo headlines):
-{story_summaries}
+Do NOT tie the prompt to today's news, a product launch, or a specific industry.
+Do NOT use bracket placeholders (no "Paste [X]", no "[topic]", no "[paste notes]").
+Do NOT use profanity or insult the reader.
 
-Return JSON with:
-- title: a named tool in the form "The [thing]" (e.g. "The meeting recap", "The pros-and-cons")
-- prompt: a quick, useful, copy-pasteable prompt body; second person; one [placeholder]; max 60 words
-- tool_hint: one short footer line
-- kicker: optional; leave empty string unless one line is truly needed
+STYLE (match these examples — same voice, new idea each day):
 
-Pick something universally useful for any Solvd employee (decision memo, meeting recap, pros-and-cons, plain-English explainer, spending audit, etc.).
+Example A — title: "The skeptical reviewer"
+prompt: You're a skeptical staff engineer who's seen this movie before. I'm about to describe an idea in 3–6 sentences. Don't encourage me. Find the weakest assumption, the part that only works in a demo, and the question I'm avoiding. End with one sentence I can actually ship this week anyway.
+tool_hint: When you're excited about something and need friction, not validation.
 
+Example B — title: "The elevator betrayal"
+prompt: I have 90 seconds before a VP stops pretending to listen. Turn my messy explanation below into: one hook sentence, three concrete nouns, and a closing line that sounds like a decision already made — not a request for more meetings.
+tool_hint: Rehearse out loud before the real call.
+
+Example C — title: "The meeting that shouldn't exist"
+prompt: Read what I'm about to send. If this could be a two-line Slack message, write those two lines. If it actually needs a meeting, give me a 4-line agenda where the first line is the decision we're making at the end.
+tool_hint: Before you hit Send on the calendar invite.
+
+BAR — never ship:
+• "Explain … in plain English", generic pros/cons, "summarize this article"
+• "Return:" followed by a long bullet laundry list
+• Paste [anything] or any [square-bracket] input slot
+• Teaching what AI is or how to prompt in general
+
+REQUIREMENTS:
+• title: starts with "The " — short memorable name (like the examples)
+• prompt: single copy-paste block; second person or natural "I … below / I'm about to …";
+  implies where the reader adds their text without [brackets]; about 30–55 words
+• tool_hint: one line — when you'd actually use this (not which app to open)
+• kicker: always empty string ""
+
+Return JSON only:
 {{ "title": "...", "kicker": "", "prompt": "...", "tool_hint": "..." }}
 """

@@ -320,6 +320,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     font-size: 14px; font-weight: 800; line-height: 1.25;
     margin: 0 0 10px 0; color: #1A1108; letter-spacing: -0.01em;
   }}
+  .prompt-tool-hint {{
+    font-size: 14px; font-style: italic; color: #5C4A3A;
+    margin: 0 0 10px 0; line-height: 1.4;
+  }}
   .prompt-code-wrap {{
     position: relative;
     flex: 0 0 auto;
@@ -500,7 +504,7 @@ STORY_CARD_TEMPLATE = """    <article class="card">
 PROMPT_CARD_TEMPLATE = """    <article class="card prompt-card">
 {image_block}      <div class="card-body">
         <p class="prompt-tag">☕ Try this prompt</p>
-{prompt_title_block}        <div class="prompt-code-wrap">
+{prompt_title_block}{prompt_tool_hint_block}        <div class="prompt-code-wrap">
           <button type="button" class="prompt-copy" aria-label="Copy prompt to clipboard" title="Copy to clipboard">
             {copy_icon}
           </button>
@@ -533,8 +537,7 @@ MD_TEMPLATE = """# ai espresso ☕ — Edition {issue_num} · Variant C (Newspap
 
 **☕ Try this prompt**
 
-{prompt_title_md}
-
+{prompt_title_md}{prompt_tool_hint_md}
 ```
 {prompt_body}
 ```
@@ -585,6 +588,13 @@ def _prompt_title_block(title: str) -> str:
     if not title:
         return ""
     return f'        <h2 class="prompt-title">{escape(title)}</h2>\n'
+
+
+def _prompt_tool_hint_block(tool_hint: str) -> str:
+    hint = (tool_hint or "").strip()
+    if not hint:
+        return ""
+    return f'        <p class="prompt-tool-hint">{escape(hint)}</p>\n'
 
 
 def qotd_api_base() -> str | None:
@@ -728,6 +738,7 @@ def render_edition(
     prompt_card = PROMPT_CARD_TEMPLATE.format(
         image_block=_card_image_block(issue_num, 4, prompt_alt, editions_dir),
         prompt_title_block=_prompt_title_block(prompt_title),
+        prompt_tool_hint_block=_prompt_tool_hint_block(prompt_tip_raw),
         prompt_body=escape(prompt_body),
         copy_icon=PROMPT_COPY_ICON,
     )
@@ -752,10 +763,12 @@ def render_edition(
     )
 
     prompt_title_md = f"### {prompt_title}\n\n" if prompt_title else ""
+    prompt_tool_hint_md = f"*{prompt_tip_raw}*\n\n" if prompt_tip_raw else ""
     md = MD_TEMPLATE.format(
         issue_num=issue_num,
         dateline_md=dates["dateline_md"],
         prompt_title_md=prompt_title_md,
+        prompt_tool_hint_md=prompt_tool_hint_md,
         md_stories="".join(md_stories),
         prompt_alt="Try this prompt",
         prompt_image=prompt_img,

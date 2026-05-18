@@ -1,8 +1,8 @@
 """
 prompt_tile.py — daily "Try this prompt" generation for AI Espresso.
 
-One LLM call per edition using PROMPT_TILE_TEMPLATE from editorial.py,
-grounded in that day's picked stories (no rotating template library).
+One LLM call per edition using PROMPT_TILE_TEMPLATE from editorial.py.
+Snack-size, voice-forward prompts — not tied to that day's stories.
 """
 
 from __future__ import annotations
@@ -18,18 +18,37 @@ from editorial import PROMPT_TILE_SYSTEM, PROMPT_TILE_TEMPLATE
 
 EDITIONS_DIR = Path(__file__).resolve().parent / "data" / "editions"
 
-PROMPT_TILE_MAX_CHARS = 420
-PROMPT_TILE_MIN_CHARS = 80
-PROMPT_TILE_MAX_WORDS = 60
-PROMPT_TILE_MIN_WORDS = 15
+PROMPT_TILE_MAX_CHARS = 520
+PROMPT_TILE_MIN_CHARS = 120
+PROMPT_TILE_MAX_WORDS = 65
+PROMPT_TILE_MIN_WORDS = 25
 PROMPT_SIMILARITY_LOOKBACK = 14
 PROMPT_SIMILARITY_THRESHOLD = 0.40
 
-TASK_VERB_RE = re.compile(
-    r"\b(review|draft|explain|compare|decide|rewrite|debug|help|turn|build|write|read|produce|flag)\b",
+BRACKET_PLACEHOLDER_RE = re.compile(r"\[[^\]]+\]")
+INPUT_CUE_RE = re.compile(
+    r"\b("
+    r"below|what i wrote|what i'm about to|i'm about to|my messy|"
+    r"i have \d+ seconds|in \d+[–-]\d+ sentences|in \d+ sentences"
+    r")\b",
     re.I,
 )
-PLACEHOLDER_RE = re.compile(r"\[[^\]]+\]")
+GENERIC_ARCHETYPE_RE = re.compile(
+    r"explain .{0,40}plain english|pros and cons|eli5|paste \[|summarize (this|the) article",
+    re.I,
+)
+BULLET_LAUNDRY_RE = re.compile(r"return:\s*(\d+\s+)?(bullet|bullets|items)", re.I)
+PROFANITY_RE = re.compile(
+    r"\b(fuck|shit|damn|hell|ass|bullshit|crap)\b",
+    re.I,
+)
+TASK_VERB_RE = re.compile(
+    r"\b("
+    r"review|draft|explain|compare|decide|rewrite|debug|help|turn|build|write|read|"
+    r"produce|flag|find|list|give|mark|tell|say|ship"
+    r")\b",
+    re.I,
+)
 
 
 def recent_prompt_bodies(n: int = PROMPT_SIMILARITY_LOOKBACK) -> list[str]:
@@ -94,13 +113,19 @@ def validate_prompt_tile(tile: dict, recent: list[str] | None = None) -> list[st
         reasons.append(f"too short ({word_count} words; min {PROMPT_TILE_MIN_WORDS})")
     if word_count > PROMPT_TILE_MAX_WORDS:
         reasons.append(f"too long ({word_count} words; max {PROMPT_TILE_MAX_WORDS})")
-    if prompt.count("[") > 2:
-        reasons.append("too many [placeholder] fields — use one clear input")
+    if BRACKET_PLACEHOLDER_RE.search(prompt):
+        reasons.append("no [bracket] placeholders — use natural cues like below or I'm about to")
+    if not INPUT_CUE_RE.search(prompt):
+        reasons.append("missing natural input cue (e.g. below, I'm about to, what I wrote)")
+    if GENERIC_ARCHETYPE_RE.search(prompt):
+        reasons.append("generic beginner prompt (plain-English explainer, pros/cons, etc.)")
+    if BULLET_LAUNDRY_RE.search(prompt):
+        reasons.append('avoid "Return:" bullet laundry lists')
+    if PROFANITY_RE.search(prompt):
+        reasons.append("profanity not allowed")
     if re.search(r"\*\*[^*]+\*\*", prompt):
         reasons.append("avoid **section** headers — use plain prose")
-    if not PLACEHOLDER_RE.search(prompt):
-        reasons.append("missing [placeholder] for user input")
-    if not TASK_VERB_RE.search(prompt[:200]):
+    if not TASK_VERB_RE.search(prompt[:240]):
         reasons.append("no clear task verb in opening")
     if re.search(r"^\s*\d+[\).]\s", prompt, re.MULTILINE):
         reasons.append("contains numbered list")
@@ -113,13 +138,16 @@ def validate_prompt_tile(tile: dict, recent: list[str] | None = None) -> list[st
         reasons.append("title missing or too short")
     elif not title.lower().startswith("the "):
         reasons.append('title must be a named tool starting with "The "')
+    tool_hint = (tile.get("tool_hint") or "").strip()
+    if not tool_hint:
+        reasons.append("tool_hint is empty")
+    elif len(tool_hint) < 12:
+        reasons.append("tool_hint too short")
+    elif len(tool_hint) > 160:
+        reasons.append("tool_hint too long")
     kicker = (tile.get("kicker") or "").strip()
-    if not kicker:
-        reasons.append("kicker is empty")
-    elif "paste" not in kicker.lower():
-        reasons.append("kicker should say what to paste and which tool")
-    elif len(kicker) > 120:
-        reasons.append("kicker too long — keep to one short line")
+    if kicker and len(kicker) > 120:
+        reasons.append("kicker too long — leave empty or one short line")
     if recent is not None and _too_similar(prompt, recent):
         reasons.append("too similar to a recent edition prompt")
     return reasons
@@ -136,10 +164,8 @@ def normalize_prompt_tile(tile: dict) -> dict:
 
 
 def build_prompt_tile(client: Any, call_llm_json: Any, stories: list[Any]) -> dict:
-    """Generate the fourth card from today's stories via one LLM call."""
-    summaries = "\n".join(
-        f"- [{s.slot}] {s.headline} — {s.why_it_matters}" for s in stories
-    )
+    """Generate the fourth card via one LLM call (stories unused; kept for call-site compat)."""
+    del stories
     schema = {
         "type": "object",
         "properties": {
@@ -148,9 +174,8 @@ def build_prompt_tile(client: Any, call_llm_json: Any, stories: list[Any]) -> di
             "prompt": {"type": "string"},
             "tool_hint": {"type": "string"},
         },
-        "required": ["title", "kicker", "prompt", "tool_hint"],
+        "required": ["title", "prompt", "tool_hint"],
     }
-    user = PROMPT_TILE_TEMPLATE.format(story_summaries=summaries)
     recent = recent_prompt_bodies()
     last_reasons: list[str] = []
 
@@ -162,7 +187,11 @@ def build_prompt_tile(client: Any, call_llm_json: Any, stories: list[Any]) -> di
                 else ""
             )
             raw = call_llm_json(
-                client, PROMPT_TILE_SYSTEM, user + correction, schema, max_tokens=2000,
+                client,
+                PROMPT_TILE_SYSTEM,
+                PROMPT_TILE_TEMPLATE + correction,
+                schema,
+                max_tokens=2000,
             )
             tile = normalize_prompt_tile(raw)
             last_reasons = validate_prompt_tile(tile, recent)
