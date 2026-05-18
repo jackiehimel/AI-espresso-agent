@@ -107,6 +107,33 @@ class ToolDispatchTests(unittest.TestCase):
         el.tool_unpick(state, {"slot": "business"}, vendor_patterns=[])
         self.assertNotIn("business", state.picks)
 
+    def test_pick_rejects_duplicate_story_across_slots(self):
+        state = _state(
+            shortlist=[
+                {
+                    "id": 1,
+                    "headline": "OpenAI ships X",
+                    "url": "https://openai.com/x",
+                    "source": "OpenAI",
+                    "tier": 1,
+                    "body": _verified_body(),
+                }
+            ],
+        )
+        first = el.tool_pick(
+            state,
+            {"slot": "business", "id": 1, "reason": "strong"},
+            vendor_patterns=[],
+        )
+        self.assertTrue(first["ok"])
+        second = el.tool_pick(
+            state,
+            {"slot": "beginner", "id": 1, "reason": "reuse"},
+            vendor_patterns=[],
+        )
+        self.assertIn("duplicate story across slots", second.get("error", ""))
+        self.assertEqual(second.get("conflict_slot"), "business")
+
     def test_search_news_limit(self):
         state = _state()
         state.search_calls_used = 3

@@ -633,6 +633,24 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
     found = next((c for c in state.shortlist + state.extra_candidates if c["id"] == int(cid)), None)
     if not found:
         return {"error": f"no candidate with id={cid}"}
+    for existing_slot, existing_pick in state.picks.items():
+        if existing_slot == slot:
+            continue
+        same_id = int(existing_pick.get("id", -1)) == int(found["id"])
+        same_url = (existing_pick.get("url") or "").strip().lower() == (
+            found.get("url") or ""
+        ).strip().lower()
+        same_headline = (existing_pick.get("headline") or "").strip().lower() == (
+            found.get("headline") or ""
+        ).strip().lower()
+        if same_id or same_url or same_headline:
+            return {
+                "error": (
+                    "duplicate story across slots is not allowed; pick a distinct "
+                    "candidate for this slot"
+                ),
+                "conflict_slot": existing_slot,
+            }
     from editorial import validate_pick_has_body
 
     pick_issues = validate_pick_has_body(found)
