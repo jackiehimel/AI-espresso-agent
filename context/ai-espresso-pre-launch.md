@@ -36,20 +36,36 @@
 ### Completed (check off as merged)
 
 - [ ] Phase 1.1 Archive upsert + ESPRESSO_SKIP_ARCHIVE
-- [x] Phase 1.2 QOTD honest UX
-- [x] Phase 1.3 CI/workflow guards + alerts
+- [x] Phase 1.2 QOTD honest UX — merged `10e4dfc` (with 1.3 in same PR)
+- [x] Phase 1.3 CI/workflow guards + alerts — merged `10e4dfc`
 - [ ] Phase 2.1 Unified rubric in prompts
 - [ ] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE
 - [ ] Phase 2.3 Deterministic path dev-only / aligned
 - [ ] Phase 3 Editorial quality pass + clean prod edition
 - [ ] Phase 4 External polish
 
+### Session handoff (after PR merge `10e4dfc`)
+
+**Tests (2026-05-18):** `73` ran, `OK` (`2` skipped fixtures). Command: `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v`.
+
+**Shipped in `fix: QOTD and daily workflow guards`:**
+- QOTD: default static editions show honest preview copy (no form / fake “Thanks — recorded”). Set `AI_ESPRESSO_QOTD_API_URL` at render time for hosted submit (`{base}/api/daily-question`); success only on `res.ok`.
+- `render_edition.py`: exit `1` when illustrations missing unless `--allow-missing-images`.
+- `daily-edition.yml`: unit tests before generate; render JSON outputs → email paths; `notify-failure` job writes step summary.
+- New tests: `test_qotd.py`, `test_render_edition.py`. `edition_4_variant_c.html` regenerated with preview QOTD.
+
+**Next session:** **Prompt 1** in `context/ai-espresso-session-prompts.md` — Phase **1.1 only** (archive upsert, `ESPRESSO_SKIP_ARCHIVE`, preview `dry_run` defaults, dedupe `2026-05-18` archive rows). Do not start 2.x until 1.1 is merged.
+
+**Still open from audit:** duplicate archive per day; no `ESPRESSO_SKIP_ARCHIVE`; constitution/editorial regex bloat; footer email / repo URL; `RANKING_SYSTEM` mismatch; large PNGs; `run_chain.py` doc.
+
 ## 2026-05-18 — Pre-launch audit summary
 
-**Blockers:** duplicate `archive.jsonl` per day; no dev archive skip; QOTD fake API success; hardcoded editorial regex in `constitution.py` / `editorial.py`.
+**Blockers:** duplicate `archive.jsonl` per day; no dev archive skip; hardcoded editorial regex in `constitution.py` / `editorial.py`.
 
-**High:** footer personal email + stale repo URL; `RANKING_SYSTEM` vs agent audience mismatch; render exit 0 with missing images; ~2.5MB PNGs; `run_chain.py` doc missing; daily cron skips tests.
+**High:** footer personal email + stale repo URL; `RANKING_SYSTEM` vs agent audience mismatch; ~2.5MB PNGs; `run_chain.py` doc missing.
 
-**Working well:** native tool_use loop, approve→ship lock, constitution gate vs bad critic approve, full agent_trace, 64 tests passing.
+**Resolved (1.2/1.3):** QOTD fake API success; render exit 0 with missing images; daily cron skips tests.
+
+**Working well:** native tool_use loop, approve→ship lock, constitution gate vs bad critic approve, full agent_trace, **73 tests** (2 skipped).
 
 **Sample edition:** `2026-05-18` / edition_4 — agent shipped after critic revise; trace at `agent/data/editions/2026-05-18.json`.
