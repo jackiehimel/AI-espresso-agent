@@ -1,219 +1,197 @@
 {
   "date": "2026-05-19",
-  "generated_at": "2026-05-18T16:51:35.829243Z",
+  "generated_at": "2026-05-18T20:15:08.645180Z",
   "model": "claude-sonnet-4-5",
   "stories": [
     {
       "slot": "business",
-      "headline": "Anthropic just signed a compute deal with SpaceX",
-      "blurb": "Anthropic announced higher usage limits for Claude and a new compute partnership with SpaceX. The deal suggests Anthropic is securing infrastructure beyond traditional cloud providers as demand for AI inference grows.",
-      "why_it_matters": "SpaceX entering AI compute signals how competitive the race for GPU capacity has become.",
-      "source_name": "Anthropic News",
-      "source_url": "https://www.anthropic.com/news/higher-limits-spacex",
+      "headline": "Baidu's AI revenue just overtook its search ads for the first time",
+      "blurb": "China's search giant posted only a 1% revenue drop this quarter because AI product sales grew faster than its legacy ad business shrank. It's the first time Baidu has made more from AI tools than from the search advertising that built the company.",
+      "why_it_matters": "A major internet company just crossed the threshold where AI became its primary business.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-05-18/baidu-tops-sales-estimates-in-endorsement-of-agentic-ai-pivot",
       "tier": 1,
-      "original_headline": "May 6, 2026 Announcements Higher usage limits for Claude and a compute deal with SpaceX",
-      "fingerprint": "b2b662819df74b44"
+      "original_headline": "Baidu AI Sales Eclipse Waning Legacy Ads for the First Time",
+      "fingerprint": "11231917dea51200"
     },
     {
       "slot": "beginner",
-      "headline": "ChatGPT can now write and run code directly on your phone",
-      "blurb": "OpenAI just added Codex \u2014 its code-writing AI \u2014 to the ChatGPT mobile app on iPhone, iPad, and Android. You can now ask ChatGPT to write a script, test an API, or debug code right in the app, and it'll execute the code and show you the output without switching to a desktop.",
-      "why_it_matters": "You no longer need a laptop to prototype ideas or fix bugs with AI assistance.",
-      "source_name": "9to5Mac \u2014 AI",
-      "source_url": "https://9to5mac.com/2026/05/14/openai-brings-codex-control-to-chatgpt-for-iphone-and-android/",
+      "headline": "Google's AI coding agent just designed algorithms faster than human experts",
+      "blurb": "AlphaEvolve uses Gemini to write and test algorithms automatically, then keeps improving them through trial and error. Google says it's already speeding up data center operations and helping scientists discover new materials\u2014work that normally takes specialists weeks or months.",
+      "why_it_matters": "AI can now write optimized code for specific problems without human experts doing the heavy lifting.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/alphaevolve-impact/",
       "tier": 1,
-      "original_headline": "OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features",
-      "fingerprint": "c39264e5e03e9088"
+      "original_headline": "AlphaEvolve: How our Gemini-powered coding agent is scaling impact across fields",
+      "fingerprint": "80b2484b655a75ef"
     },
     {
       "slot": "cross",
-      "headline": "OpenAI insiders say Apple's ChatGPT integration is a letdown",
-      "blurb": "According to sources at OpenAI, the company feels disappointed by how Apple integrated ChatGPT into iOS. The implementation reportedly falls short of expectations, leaving OpenAI's team feeling 'burned' by the partnership. Specific technical or user experience complaints weren't detailed in available reporting.",
-      "why_it_matters": "Even major AI partnerships can stumble on execution \u2014 distribution matters less if the integration frustrates users.",
-      "source_name": "Ars Technica \u2014 AI",
-      "source_url": "https://arstechnica.com/tech-policy/2026/05/openai-feels-burned-by-apples-crappy-chatgpt-integration-insiders-say/",
+      "headline": "Anthropic acquires Stainless, the company that builds SDK generators",
+      "blurb": "Anthropic bought Stainless, a dev tools startup that auto-generates SDKs from API specs. Stainless already builds the official SDKs for Claude, OpenAI, and a dozen other APIs. The team joins Anthropic to keep working on developer tooling.",
+      "why_it_matters": "The SDK layer just became part of Claude's core infrastructure instead of a vendor relationship.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
       "tier": 1,
-      "original_headline": "OpenAI feels \u201cburned\u201d by Apple\u2019s crappy ChatGPT integration, insiders say",
-      "fingerprint": "94d70a363e61a44a"
+      "original_headline": "Anthropic acquires Stainless",
+      "fingerprint": "7945a3af70b99953"
     }
   ],
   "try_this_prompt": {
-    "title": "The footnote audit",
+    "title": "The zombie metric",
     "kicker": "",
-    "prompt": "I'm about to paste something I wrote that feels too long. Don't summarize it. Instead, find every sentence that's doing throat-clearing, hedging, or saying the same thing twice. Quote each one back to me with a three-word reason it can go. Then show me the tighter version.",
-    "tool_hint": "When your draft is done but you know it's puffy."
+    "prompt": "I'm tracking a metric that everyone reports but nobody acts on. Describe it in two sentences below. Then tell me: what behavior would actually change if this number moved 30% in either direction? If the answer is nothing, give me one metric that would make someone pick up the phone.",
+    "tool_hint": "Before the next dashboard review or quarterly planning deck."
   },
-  "daily_question": "If you could put one AI feature on your phone's home screen, what would it do?",
+  "daily_question": "If AI companies are buying the tools that build their tools, what's the last thing you'd want automated away?",
   "notes": [
     "mode: agent"
   ],
   "agent_trace": [
     {
-      "ts": 1779122955.593638,
+      "ts": 1779135135.942043,
       "role": "scout",
       "kind": "handoff",
       "name": "",
       "args": null,
-      "result_summary": "shortlist=12, gaps=['No consumer lifestyle or wearable angle \u2014 pool skews enterprise/finance/infrastructure.', \"Missing fun 'try this today' features \u2014 mostly partnerships and market moves, light on hands-on tools.\", \"Heavy on AI-incidental stories (Waymo routing glitch, car surveillance, vigilante trap) that fail the 'AI is the subject doing something cool' test.\"]",
+      "result_summary": "shortlist=13, gaps=[\"Heavy on lab releases and partnerships; light on fun consumer tools or 'try this today' angles.\", 'No mobile-first AI features or wearable updates \u2014 missing accessible hardware hooks.', 'Musk/OpenAI lawsuit dominated multiple outlets but is legal drama, not capability news \u2014 pool skewed toward courtroom angle.']",
       "thinking": "",
       "tool_use_id": ""
     },
     {
-      "ts": 1779122959.267085,
+      "ts": 1779135139.8011243,
       "role": "editor",
       "kind": "tool_call",
       "name": "read_candidate",
       "args": {
-        "id": 3
+        "id": 8
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_01UF1DSeuHyp83ehqyZXhtHr"
+      "tool_use_id": "toolu_01X4S61SDXGebRyx8c7Fz4nq"
     },
     {
-      "ts": 1779122959.3529532,
+      "ts": 1779135145.6316304,
       "role": "editor",
       "kind": "tool_result",
       "name": "read_candidate",
       "args": null,
-      "result_summary": "{\"candidate\": {\"id\": 3, \"headline\": \"OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features\", \"source\": \"9to5Mac \\u2014 AI\", \"tier\": 1, \"url\": \"https://9to5mac.com/2026/05/14/openai-brings-codex-control-to-chatgpt-for-iphone-and-android/\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 90, \"persona\": \"engineer\", \"why\": \"OpenAI ships coding agent (Codex) straight to mobile \\u2014 huge capability unlock, engineers can code on the go, passes 'wait AI can do THAT?' test.\", \"body\": \"OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features - 9to5Mac Skip to main content Apps AI OpenAI Codex OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features Zac Hall | May 14 2026 - 1:14 pm PT 1 Comment OpenAI has released ",
+      "result_summary": "{\"candidate\": {\"id\": 8, \"headline\": \"Anthropic acquires Stainless\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/anthropic-acquires-stainless\", \"vertical\": null, \"blurb\": \"Anthropic acquires Stainless\", \"paywall\": false, \"score\": 85, \"persona\": \"engineer\", \"why\": \"Anthropic acquires the team behind Stainless (SDK code-gen tooling) \\u2014 direct capability play for better API dev experience.\", \"body\": \"Announcements Anthropic acquires Stainless May 18, 2026 The frontier of AI is shifting from models that answer to agents that act\\u2014and agents are only as capable as the systems they can reach. Today, Anthropic is acquiring Stainless, a leader in SDKs and MCP server tooling, to extend that reach even further. Founded in 2022, Stainless has powered the gener",
       "thinking": "",
-      "tool_use_id": "toolu_01UF1DSeuHyp83ehqyZXhtHr"
+      "tool_use_id": "toolu_01X4S61SDXGebRyx8c7Fz4nq"
     },
     {
-      "ts": 1779122959.352997,
+      "ts": 1779135145.6316648,
       "role": "editor",
       "kind": "tool_call",
       "name": "read_candidate",
       "args": {
-        "id": 0
+        "id": 20
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_01NWGJgEUeBcUn7VGiTpxpER"
+      "tool_use_id": "toolu_0174eyMJotfXHYgQCmHQeHXp"
     },
     {
-      "ts": 1779122959.4124858,
+      "ts": 1779135145.7397106,
       "role": "editor",
       "kind": "tool_result",
       "name": "read_candidate",
       "args": null,
-      "result_summary": "{\"candidate\": {\"id\": 0, \"headline\": \"OpenAI just released new personal finance features for ChatGPT customers\", \"source\": \"9to5Mac \\u2014 AI\", \"tier\": 1, \"url\": \"https://9to5mac.com/2026/05/15/openai-just-released-new-personal-finance-features-for-chatgpt-customers/\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 85, \"persona\": \"beginner\", \"why\": \"ChatGPT adds personal finance features \\u2014 concrete capability users can try this week, extends the 'connect your bank' theme we shipped last week but adds new actions.\", \"body\": \"OpenAI just released new personal finance features for ChatGPT customers - 9to5Mac Skip to main content Apps ChatGPT AI OpenAI OpenAI just released new personal finance features for ChatGPT customers Zac Hall | May 15 2026 - 9:54 am PT 6 Comments OpenAI i",
+      "result_summary": "{\"candidate\": {\"id\": 20, \"headline\": \"Baidu AI Sales Eclipse Waning Legacy Ads for the First Time\", \"source\": \"Bloomberg Technology\", \"tier\": 1, \"url\": \"https://www.bloomberg.com/news/articles/2026-05-18/baidu-tops-sales-estimates-in-endorsement-of-agentic-ai-pivot\", \"vertical\": null, \"blurb\": \"Baidu Inc. posted a better-than-feared 1% drop in revenue after growth in nascent AI businesses offset a steady decline in traditional internet revenue, buying the search leader time to catch rivals such as Alibaba Group Holding Ltd. in the post-ChatGPT era.\", \"paywall\": true, \"score\": 82, \"persona\": \"business\", \"why\": \"Baidu's AI revenue overtakes legacy ads for the first time \\u2014 concrete pivot proof, not just a forecast.\", \"body\": \"Baidu Inc. posted a better-than-feared 1% drop in revenue afte",
       "thinking": "",
-      "tool_use_id": "toolu_01NWGJgEUeBcUn7VGiTpxpER"
+      "tool_use_id": "toolu_0174eyMJotfXHYgQCmHQeHXp"
     },
     {
-      "ts": 1779122959.412519,
+      "ts": 1779135145.7397306,
       "role": "editor",
       "kind": "tool_call",
       "name": "read_candidate",
       "args": {
-        "id": 6
+        "id": 40
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_01Jz1dQ7YB92YkhpNSBjUU7L"
+      "tool_use_id": "toolu_01RdZsjWELtaJH34rE95XBZQ"
     },
     {
-      "ts": 1779122960.5874062,
+      "ts": 1779135146.073622,
       "role": "editor",
       "kind": "tool_result",
       "name": "read_candidate",
       "args": null,
-      "result_summary": "{\"candidate\": {\"id\": 6, \"headline\": \"May 6, 2026 Announcements Higher usage limits for Claude and a compute deal with SpaceX\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/higher-limits-spacex\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 82, \"persona\": \"engineer\", \"why\": \"Anthropic raises usage limits + SpaceX compute deal \\u2014 frontier player power-move, scarcity angle (more Claude capacity), recognizable partner.\", \"body\": \"Announcements Higher usage limits for Claude and a compute deal with SpaceX May 6, 2026 We\\u2019ve agreed to a partnership with SpaceX that will substantially increase our compute capacity. This, along with our other recent compute deals, means that we\\u2019ve been able to increase our usage limits for Claude Code and ",
+      "result_summary": "{\"candidate\": {\"id\": 40, \"headline\": \"AlphaEvolve: How our Gemini-powered coding agent is scaling impact across fields\", \"source\": \"Google DeepMind Blog\", \"tier\": 1, \"url\": \"https://deepmind.google/blog/alphaevolve-impact/\", \"vertical\": null, \"blurb\": \"Explore how AlphaEvolve's Gemini-powered algorithms are driving impact across business, infrastructure, and science.\", \"paywall\": false, \"score\": 80, \"persona\": \"engineer\", \"why\": \"AlphaEvolve: Gemini-powered coding agent scaling across fields \\u2014 DeepMind shipping a real coding agent with cross-domain examples.\", \"body\": \"AlphaEvolve: Gemini-powered coding agent scaling impact across fields \\u2014 Google DeepMind Skip to main content May 7, 2026 Science AlphaEvolve: How our Gemini-powered coding agent is scaling impact across fields Alph",
       "thinking": "",
-      "tool_use_id": "toolu_01Jz1dQ7YB92YkhpNSBjUU7L"
+      "tool_use_id": "toolu_01RdZsjWELtaJH34rE95XBZQ"
     },
     {
-      "ts": 1779122960.587462,
+      "ts": 1779135146.0736566,
       "role": "editor",
       "kind": "tool_call",
       "name": "read_candidate",
       "args": {
-        "id": 7
+        "id": 57
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_012G2a6YvyAhDHkDpxN2JTp3"
+      "tool_use_id": "toolu_01WL77cSjtZeTfvMFwuqeVWC"
     },
     {
-      "ts": 1779122965.74479,
+      "ts": 1779135147.0003755,
       "role": "editor",
       "kind": "tool_result",
       "name": "read_candidate",
       "args": null,
-      "result_summary": "{\"candidate\": {\"id\": 7, \"headline\": \"May 5, 2026 Announcements Agents for financial services\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/finance-agents\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 78, \"persona\": \"cross\", \"why\": \"Anthropic launches finance-specific agents \\u2014 vertical use case, cross-industry hook for asset management / banking readers.\", \"body\": \"Announcements Agents for financial services May 5, 2026 We\\u2019re releasing ten ready-to-run agent templates for the most time-consuming work in financial services: building pitchbooks, screening KYC files, and closing the books at month-end. Each one ships as a plugin in Claude Cowork and Claude Code, and as a cookbook for Claude Managed Agents , so a team can put Claude on r",
+      "result_summary": "{\"candidate\": {\"id\": 57, \"headline\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence\", \"source\": \"Meta AI Blog\", \"tier\": 1, \"url\": \"https://ai.meta.com/blog/introducing-muse-spark-msl/\", \"vertical\": null, \"blurb\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence\", \"paywall\": false, \"score\": 78, \"persona\": \"beginner\", \"why\": \"Meta launches Muse Spark, framed as 'personal superintelligence' \\u2014 ambitious capability claim, curious hook for any reader.\", \"body\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence Products AI Research Resources About Get Llama Try Meta AI FEATURED Introducing Muse Spark: Scaling Towards Personal Superintelligence April 8, 2026 \\u2022 15 minute read Today, we\\u2019re excited to introduce Muse Spark, the f",
       "thinking": "",
-      "tool_use_id": "toolu_012G2a6YvyAhDHkDpxN2JTp3"
+      "tool_use_id": "toolu_01WL77cSjtZeTfvMFwuqeVWC"
     },
     {
-      "ts": 1779122969.795145,
+      "ts": 1779135150.3828065,
       "role": "editor",
       "kind": "tool_call",
-      "name": "check_archive",
+      "name": "read_candidate",
       "args": {
-        "headline": "OpenAI brings Codex to ChatGPT for iPhone"
+        "id": 59
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_01FFYyiorbuhJNYA7FRnLeEt"
+      "tool_use_id": "toolu_01AkWKYc1x42CS23oBxNHcGi"
     },
     {
-      "ts": 1779122969.795243,
+      "ts": 1779135151.2142055,
       "role": "editor",
       "kind": "tool_result",
-      "name": "check_archive",
+      "name": "read_candidate",
       "args": null,
-      "result_summary": "{\"matches\": [], \"is_duplicate\": false}",
+      "result_summary": "{\"candidate\": {\"id\": 59, \"headline\": \"SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking With Multiplexing and Global Reasoning\", \"source\": \"Meta AI Blog\", \"tier\": 1, \"url\": \"https://ai.meta.com/blog/segment-anything-model-3/\", \"vertical\": null, \"blurb\": \"SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking With Multiplexing and Global Reasoning\", \"paywall\": false, \"score\": 76, \"persona\": \"engineer\", \"why\": \"SAM 3.1 ships real-time video detection with multiplexing and global reasoning \\u2014 upgraded computer-vision model you can try.\", \"body\": \"SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking With Multiplexing and Global Reasoning Products AI Research Resources About Get Llama Try Meta AI FEATURED Computer Vision SAM",
       "thinking": "",
-      "tool_use_id": "toolu_01FFYyiorbuhJNYA7FRnLeEt"
+      "tool_use_id": "toolu_01AkWKYc1x42CS23oBxNHcGi"
     },
     {
-      "ts": 1779122969.795269,
+      "ts": 1779135151.2142391,
       "role": "editor",
       "kind": "tool_call",
-      "name": "check_archive",
+      "name": "read_candidate",
       "args": {
-        "headline": "ChatGPT personal finance features"
+        "id": 41
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_0147H1jSKHdzp7DkmVuptYmv"
+      "tool_use_id": "toolu_016u7uMDiwheFUyrDbKYqVWD"
     },
     {
-      "ts": 1779122969.795295,
+      "ts": 1779135151.5486581,
       "role": "editor",
       "kind": "tool_result",
-      "name": "check_archive",
+      "name": "read_candidate",
       "args": null,
-      "result_summary": "{\"matches\": [], \"is_duplicate\": false}",
+      "result_summary": "{\"candidate\": {\"id\": 41, \"headline\": \"Enabling a new model for healthcare with AI co-clinician\", \"source\": \"Google DeepMind Blog\", \"tier\": 1, \"url\": \"https://deepmind.google/blog/ai-co-clinician/\", \"vertical\": null, \"blurb\": \"Researching the path to AI-augmented care and development of an AI co-clinician.\", \"paywall\": false, \"score\": 75, \"persona\": \"cross\", \"why\": \"DeepMind unveils AI co-clinician for healthcare \\u2014 concrete vertical deployment, not a think piece.\", \"body\": \"AI co-clinician: researching the path toward AI-augmented care \\u2014 Google DeepMind Skip to main content April 30, 2026 Science Enabling a new model for healthcare with AI co-clinician Alan Karthikesalingam, Vivek Natarajan and Pushmeet Kohli Share Health systems worldwide are striving for better outcomes, lower c",
       "thinking": "",
-      "tool_use_id": "toolu_0147H1jSKHdzp7DkmVuptYmv"
+      "tool_use_id": "toolu_016u7uMDiwheFUyrDbKYqVWD"
     },
     {
-      "ts": 1779122969.7953012,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "check_archive",
-      "args": {
-        "headline": "Anthropic SpaceX compute deal"
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_018SeuQydJdXLQbt6L4SAHno"
-    },
-    {
-      "ts": 1779122969.795319,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "check_archive",
-      "args": null,
-      "result_summary": "{\"matches\": [], \"is_duplicate\": false}",
-      "thinking": "",
-      "tool_use_id": "toolu_018SeuQydJdXLQbt6L4SAHno"
-    },
-    {
-      "ts": 1779122969.795326,
+      "ts": 1779135151.548691,
       "role": "editor",
       "kind": "tool_call",
       "name": "read_candidate",
@@ -222,192 +200,278 @@
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_015TD692XJsH1kmY6cjE9iYn"
+      "tool_use_id": "toolu_017aUunbZwZDExx3xQUZSuPr"
     },
     {
-      "ts": 1779122970.0427258,
+      "ts": 1779135151.6957104,
       "role": "editor",
       "kind": "tool_result",
       "name": "read_candidate",
       "args": null,
-      "result_summary": "{\"candidate\": {\"id\": 11, \"headline\": \"OpenAI feels \\u201cburned\\u201d by Apple\\u2019s crappy ChatGPT integration, insiders say\", \"source\": \"Ars Technica \\u2014 AI\", \"tier\": 1, \"url\": \"https://arstechnica.com/tech-policy/2026/05/openai-feels-burned-by-apples-crappy-chatgpt-integration-insiders-say/\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 75, \"persona\": \"business\", \"why\": \"OpenAI reportedly 'burned' by Apple's ChatGPT integration \\u2014 market rivalry drama, insider framing passes competitive-move test.\", \"body\": \"OpenAI feels \\u201cburned\\u201d by Apple\\u2019s crappy ChatGPT integration, insiders say - Ars Technica Skip to content Text settings Story text Size Small Standard Large Width * Standard Wide Links Standard Orange * Subscribers only Learn more Minimize to nav O",
+      "result_summary": "{\"candidate\": {\"id\": 11, \"headline\": \"Introducing Claude for Small Business\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/claude-for-small-business\", \"vertical\": null, \"blurb\": \"Introducing Claude for Small Business\", \"paywall\": false, \"score\": 72, \"persona\": \"beginner\", \"why\": \"Claude for Small Business launches \\u2014 accessible tier for non-enterprise teams, practical hook.\", \"body\": \"Announcements Introducing Claude for Small Business May 13, 2026 We're launching Claude for Small Business \\u2014a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses depend on\\u2014to help small business owners take full advantage of AI and cross off items on the to-do list. Small businesses account for 44% of U.S. GDP and em",
       "thinking": "",
-      "tool_use_id": "toolu_015TD692XJsH1kmY6cjE9iYn"
+      "tool_use_id": "toolu_017aUunbZwZDExx3xQUZSuPr"
     },
     {
-      "ts": 1779122977.711811,
+      "ts": 1779135155.7015243,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "check_archive",
+      "args": {
+        "headline": "Anthropic acquires Stainless"
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_014LxaQLQMwPqz5dWVJyiz8z"
+    },
+    {
+      "ts": 1779135155.7016506,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "check_archive",
+      "args": null,
+      "result_summary": "{\"matches\": [], \"is_duplicate\": false}",
+      "thinking": "",
+      "tool_use_id": "toolu_014LxaQLQMwPqz5dWVJyiz8z"
+    },
+    {
+      "ts": 1779135155.7016835,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "check_archive",
+      "args": {
+        "headline": "Baidu AI Sales Eclipse Legacy Ads"
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01JGt6jVAPftwLXVSqEfa2Fs"
+    },
+    {
+      "ts": 1779135155.7017293,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "check_archive",
+      "args": null,
+      "result_summary": "{\"matches\": [], \"is_duplicate\": false}",
+      "thinking": "",
+      "tool_use_id": "toolu_01JGt6jVAPftwLXVSqEfa2Fs"
+    },
+    {
+      "ts": 1779135155.7017415,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "check_archive",
+      "args": {
+        "headline": "Muse Spark Personal Superintelligence Meta"
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_018TrrGBNcNvtb7DHWjFMAsk"
+    },
+    {
+      "ts": 1779135155.701779,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "check_archive",
+      "args": null,
+      "result_summary": "{\"matches\": [], \"is_duplicate\": false}",
+      "thinking": "",
+      "tool_use_id": "toolu_018TrrGBNcNvtb7DHWjFMAsk"
+    },
+    {
+      "ts": 1779135160.915728,
       "role": "editor",
       "kind": "tool_call",
       "name": "update_memory",
       "args": {
         "key": "pool_quality",
-        "value": "Strong pool with multiple high-scoring Tier 1 launches. Top candidates are concrete product features (Codex on mobile, ChatGPT finance tools) and frontier-lab power moves (Anthropic-SpaceX compute deal). All pass the 'try it' or 'wow really?' test."
+        "value": "Strong lab announcements from Tier 1 sources (Anthropic, Meta, DeepMind, Baidu). Good mix of capability launches and market moves. Anthropic Stainless acquisition is a clear power move. Baidu revenue crossover is concrete business news. Muse Spark has ambitious hook but may lean toward product launch without clear try-it angle. Pool lacks consumer-facing tools but has solid fundamentals."
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_01LDzQc4NhvqWwU9xvG3ETD2"
+      "tool_use_id": "toolu_01BdLFEp72TQYPva5ro1YQyy"
     },
     {
-      "ts": 1779122977.711916,
+      "ts": 1779135160.9157567,
       "role": "editor",
       "kind": "tool_result",
       "name": "update_memory",
       "args": null,
-      "result_summary": "{\"ok\": true, \"working_memory\": {\"pool_quality\": \"Strong pool with multiple high-scoring Tier 1 launches. Top candidates are concrete product features (Codex on mobile, ChatGPT finance tools) and frontier-lab power moves (Anthropic-SpaceX compute deal). All pass the 'try it' or 'wow really?' test.\", \"coverage_gaps\": [\"No consumer lifestyle or wearable angle \\u2014 pool skews enterprise/finance/infrastructure.\", \"Missing fun 'try this today' features \\u2014 mostly partnerships and market moves, light on hands-on tools.\", \"Heavy on AI-incidental stories (Waymo routing glitch, car surveillance, vigilante trap) that fail the 'AI is the subject doing something cool' test.\"], \"critique_history\": [], \"editor_notes\": \"\", \"decisions\": []}}",
+      "result_summary": "{\"ok\": true, \"working_memory\": {\"pool_quality\": \"Strong lab announcements from Tier 1 sources (Anthropic, Meta, DeepMind, Baidu). Good mix of capability launches and market moves. Anthropic Stainless acquisition is a clear power move. Baidu revenue crossover is concrete business news. Muse Spark has ambitious hook but may lean toward product launch without clear try-it angle. Pool lacks consumer-facing tools but has solid fundamentals.\", \"coverage_gaps\": [\"Heavy on lab releases and partnerships; light on fun consumer tools or 'try this today' angles.\", \"No mobile-first AI features or wearable updates \\u2014 missing accessible hardware hooks.\", \"Musk/OpenAI lawsuit dominated multiple outlets but is legal drama, not capability news \\u2014 pool skewed toward courtroom angle.\"], \"critique_hist",
       "thinking": "",
-      "tool_use_id": "toolu_01LDzQc4NhvqWwU9xvG3ETD2"
+      "tool_use_id": "toolu_01BdLFEp72TQYPva5ro1YQyy"
     },
     {
-      "ts": 1779122977.712003,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "update_memory",
-      "args": {
-        "key": "decisions",
-        "value": "Initial review: IDs 3, 0, and 6 are all strong contenders. However, need to check vendor cap \u2014 multiple OpenAI stories. ID 3 (Codex mobile) and ID 0 (finance features) are both OpenAI. ID 6 (Anthropic SpaceX) could work as third. ID 7 (Anthropic finance agents) is also strong for cross slot. Need to balance OpenAI vs Anthropic picks."
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01NJ3RGm1F5kUuiu127pNkno"
-    },
-    {
-      "ts": 1779122977.712051,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "update_memory",
-      "args": null,
-      "result_summary": "{\"ok\": true, \"working_memory\": {\"pool_quality\": \"Strong pool with multiple high-scoring Tier 1 launches. Top candidates are concrete product features (Codex on mobile, ChatGPT finance tools) and frontier-lab power moves (Anthropic-SpaceX compute deal). All pass the 'try it' or 'wow really?' test.\", \"coverage_gaps\": [\"No consumer lifestyle or wearable angle \\u2014 pool skews enterprise/finance/infrastructure.\", \"Missing fun 'try this today' features \\u2014 mostly partnerships and market moves, light on hands-on tools.\", \"Heavy on AI-incidental stories (Waymo routing glitch, car surveillance, vigilante trap) that fail the 'AI is the subject doing something cool' test.\"], \"critique_history\": [], \"editor_notes\": \"\", \"decisions\": [\"Initial review: IDs 3, 0, and 6 are all strong contenders. Howe",
-      "thinking": "",
-      "tool_use_id": "toolu_01NJ3RGm1F5kUuiu127pNkno"
-    },
-    {
-      "ts": 1779122988.256642,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "pick",
-      "args": {
-        "slot": "beginner",
-        "id": 0,
-        "reason": "Concrete try-it-today feature: ChatGPT adds personal finance tools users can connect this week. Practical, accessible, passes 'I want to try that' test. 9to5Mac Tier 1."
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_013pzfTA1sXJDpZreRk9VhcR"
-    },
-    {
-      "ts": 1779122988.256829,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "pick",
-      "args": null,
-      "result_summary": "{\"ok\": true, \"slot\": \"beginner\", \"picked\": {\"id\": 0, \"headline\": \"OpenAI just released new personal finance features for ChatGPT customers\", \"source\": \"9to5Mac \\u2014 AI\", \"tier\": 1, \"url\": \"https://9to5mac.com/2026/05/15/openai-just-released-new-personal-finance-features-for-chatgpt-customers/\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 85, \"persona\": \"beginner\", \"why\": \"ChatGPT adds personal finance features \\u2014 concrete capability users can try this week, extends the 'connect your bank' theme we shipped last week but adds new actions.\", \"body\": \"OpenAI just released new personal finance features for ChatGPT customers - 9to5Mac Skip to main content Apps ChatGPT AI OpenAI OpenAI just released new personal finance features for ChatGPT customers Zac Hall | May 15 2026 - 9",
-      "thinking": "",
-      "tool_use_id": "toolu_013pzfTA1sXJDpZreRk9VhcR"
-    },
-    {
-      "ts": 1779122988.2568781,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "pick",
-      "args": {
-        "slot": "engineer",
-        "id": 3,
-        "reason": "OpenAI ships coding agent (Codex) straight to mobile - huge 'wait AI can do THAT?' capability unlock. Engineers can code on iPhone/Android. Clear wow-factor product launch from Tier 1 9to5Mac."
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01PKyP64182J8YDk1LPt5H56"
-    },
-    {
-      "ts": 1779122988.256896,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "pick",
-      "args": null,
-      "result_summary": "{\"error\": \"invalid slot 'engineer'; needed: ['business', 'beginner', 'cross']\"}",
-      "thinking": "",
-      "tool_use_id": "toolu_01PKyP64182J8YDk1LPt5H56"
-    },
-    {
-      "ts": 1779122988.256926,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "pick",
-      "args": {
-        "slot": "cross",
-        "id": 7,
-        "reason": "Anthropic launches ready-to-run finance agents for pitchbooks, KYC, month-end close. Cross-industry hook for banking/asset management readers, concrete vertical use case. Tier 1 lab announcement."
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01MPZqTA2pWM6FmRXbPFFAdn"
-    },
-    {
-      "ts": 1779122988.257052,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "pick",
-      "args": null,
-      "result_summary": "{\"ok\": true, \"slot\": \"cross\", \"picked\": {\"id\": 7, \"headline\": \"May 5, 2026 Announcements Agents for financial services\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/finance-agents\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 78, \"persona\": \"cross\", \"why\": \"Anthropic launches finance-specific agents \\u2014 vertical use case, cross-industry hook for asset management / banking readers.\", \"body\": \"Announcements Agents for financial services May 5, 2026 We\\u2019re releasing ten ready-to-run agent templates for the most time-consuming work in financial services: building pitchbooks, screening KYC files, and closing the books at month-end. Each one ships as a plugin in Claude Cowork and Claude Code, and as a cookbook for Claude Managed Agents , so ",
-      "thinking": "",
-      "tool_use_id": "toolu_01MPZqTA2pWM6FmRXbPFFAdn"
-    },
-    {
-      "ts": 1779122996.1770291,
+      "ts": 1779135170.190586,
       "role": "editor",
       "kind": "tool_call",
       "name": "pick",
       "args": {
         "slot": "business",
-        "id": 3,
-        "reason": "OpenAI ships Codex coding agent to mobile (iPhone, iPad, Android) - massive capability unlock and product launch. Works for business audience as major market move showing AI agents going mainstream on phones. Tier 1 9to5Mac."
+        "id": 20,
+        "reason": "Baidu's AI revenue overtaking legacy ads for the first time is a concrete business milestone that shows the AI pivot is real, not just forecast. Bloomberg Tier 1, passes subject-line test with clear market move."
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_01Lu5cFnMBz8DBjJx4fxtPzd"
+      "tool_use_id": "toolu_01UBYrUPBkUHmiaw4XjHNzhe"
     },
     {
-      "ts": 1779122996.177134,
+      "ts": 1779135170.1906524,
       "role": "editor",
       "kind": "tool_result",
       "name": "pick",
       "args": null,
-      "result_summary": "{\"ok\": true, \"slot\": \"business\", \"picked\": {\"id\": 3, \"headline\": \"OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features\", \"source\": \"9to5Mac \\u2014 AI\", \"tier\": 1, \"url\": \"https://9to5mac.com/2026/05/14/openai-brings-codex-control-to-chatgpt-for-iphone-and-android/\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 90, \"persona\": \"engineer\", \"why\": \"OpenAI ships coding agent (Codex) straight to mobile \\u2014 huge capability unlock, engineers can code on the go, passes 'wait AI can do THAT?' test.\", \"body\": \"OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features - 9to5Mac Skip to main content Apps AI OpenAI Codex OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features Zac Hall | May 14 2026 - 1:14 pm PT 1",
+      "result_summary": "{\"ok\": true, \"slot\": \"business\", \"picked\": {\"id\": 20, \"headline\": \"Baidu AI Sales Eclipse Waning Legacy Ads for the First Time\", \"source\": \"Bloomberg Technology\", \"tier\": 1, \"url\": \"https://www.bloomberg.com/news/articles/2026-05-18/baidu-tops-sales-estimates-in-endorsement-of-agentic-ai-pivot\", \"vertical\": null, \"blurb\": \"Baidu Inc. posted a better-than-feared 1% drop in revenue after growth in nascent AI businesses offset a steady decline in traditional internet revenue, buying the search leader time to catch rivals such as Alibaba Group Holding Ltd. in the post-ChatGPT era.\", \"paywall\": true, \"score\": 82, \"persona\": \"business\", \"why\": \"Baidu's AI revenue overtakes legacy ads for the first time \\u2014 concrete pivot proof, not just a forecast.\", \"body\": \"Baidu Inc. posted a better-than-f",
       "thinking": "",
-      "tool_use_id": "toolu_01Lu5cFnMBz8DBjJx4fxtPzd"
+      "tool_use_id": "toolu_01UBYrUPBkUHmiaw4XjHNzhe"
     },
     {
-      "ts": 1779123001.102816,
+      "ts": 1779135170.1906846,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "slot": "beginner",
+        "id": 57,
+        "reason": "Meta's Muse Spark with \"personal superintelligence\" framing is an ambitious capability claim that will make any reader curious. Strong hook, accessible angle, passes \"didn't know AI could do that\" test."
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01Jfte3pb27JgEhNLevindpE"
+    },
+    {
+      "ts": 1779135170.1907554,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"slot\": \"beginner\", \"picked\": {\"id\": 57, \"headline\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence\", \"source\": \"Meta AI Blog\", \"tier\": 1, \"url\": \"https://ai.meta.com/blog/introducing-muse-spark-msl/\", \"vertical\": null, \"blurb\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence\", \"paywall\": false, \"score\": 78, \"persona\": \"beginner\", \"why\": \"Meta launches Muse Spark, framed as 'personal superintelligence' \\u2014 ambitious capability claim, curious hook for any reader.\", \"body\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence Products AI Research Resources About Get Llama Try Meta AI FEATURED Introducing Muse Spark: Scaling Towards Personal Superintelligence April 8, 2026 \\u2022 15 minute read Today, we\\u2019re excited t",
+      "thinking": "",
+      "tool_use_id": "toolu_01Jfte3pb27JgEhNLevindpE"
+    },
+    {
+      "ts": 1779135170.190773,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "slot": "cross",
+        "id": 8,
+        "reason": "Anthropic acquiring Stainless (SDK tooling leader) is a strategic power move that signals the shift from models to agents. Crosses engineering and business interests, clear \"what the hell is happening\" news hook."
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01FK3zZ1wFJCgnkapJAMvbKF"
+    },
+    {
+      "ts": 1779135170.19083,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"slot\": \"cross\", \"picked\": {\"id\": 8, \"headline\": \"Anthropic acquires Stainless\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/anthropic-acquires-stainless\", \"vertical\": null, \"blurb\": \"Anthropic acquires Stainless\", \"paywall\": false, \"score\": 85, \"persona\": \"engineer\", \"why\": \"Anthropic acquires the team behind Stainless (SDK code-gen tooling) \\u2014 direct capability play for better API dev experience.\", \"body\": \"Announcements Anthropic acquires Stainless May 18, 2026 The frontier of AI is shifting from models that answer to agents that act\\u2014and agents are only as capable as the systems they can reach. Today, Anthropic is acquiring Stainless, a leader in SDKs and MCP server tooling, to extend that reach even further. Founded in 2022, Stain",
+      "thinking": "",
+      "tool_use_id": "toolu_01FK3zZ1wFJCgnkapJAMvbKF"
+    },
+    {
+      "ts": 1779135174.528381,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "update_memory",
+      "args": {
+        "key": "decisions",
+        "value": "Initial picks: Baidu AI revenue milestone (business), Muse Spark personal superintelligence (beginner), Anthropic acquires Stainless (cross). All Tier 1, good vendor mix (Baidu, Meta, Anthropic), passes editorial tests with concrete news hooks. Mix of market move, capability claim, and strategic acquisition."
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01XmPXUuuMmNwtxZyEhb67vV"
+    },
+    {
+      "ts": 1779135174.5284126,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "update_memory",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"working_memory\": {\"pool_quality\": \"Strong lab announcements from Tier 1 sources (Anthropic, Meta, DeepMind, Baidu). Good mix of capability launches and market moves. Anthropic Stainless acquisition is a clear power move. Baidu revenue crossover is concrete business news. Muse Spark has ambitious hook but may lean toward product launch without clear try-it angle. Pool lacks consumer-facing tools but has solid fundamentals.\", \"coverage_gaps\": [\"Heavy on lab releases and partnerships; light on fun consumer tools or 'try this today' angles.\", \"No mobile-first AI features or wearable updates \\u2014 missing accessible hardware hooks.\", \"Musk/OpenAI lawsuit dominated multiple outlets but is legal drama, not capability news \\u2014 pool skewed toward courtroom angle.\"], \"critique_hist",
+      "thinking": "",
+      "tool_use_id": "toolu_01XmPXUuuMmNwtxZyEhb67vV"
+    },
+    {
+      "ts": 1779135174.5284452,
       "role": "editor",
       "kind": "tool_call",
       "name": "self_critique",
       "args": {},
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_0126vcBd18KfHSTRXMaUnUDo"
+      "tool_use_id": "toolu_01WaPzikduYRBDMisVFmuLW3"
     },
     {
-      "ts": 1779123008.974468,
+      "ts": 1779135183.2567763,
       "role": "critic",
       "kind": "handoff",
       "name": "",
       "args": null,
-      "result_summary": "revise: Two OpenAI picks with overlapping finance hooks, and Recent editions already covered ChatGPT bank account integration 30",
+      "result_summary": "revise: Muse Spark fails verification \u2014 body excerpt is a truncated blog intro with no substance to judge the actual capability ",
       "thinking": "",
       "tool_use_id": ""
     },
     {
-      "ts": 1779123008.974656,
+      "ts": 1779135183.2568007,
       "role": "editor",
       "kind": "tool_result",
       "name": "self_critique",
       "args": null,
-      "result_summary": "{\"verdict\": \"revise\", \"reason\": \"Two OpenAI picks with overlapping finance hooks, and Recent editions already covered ChatGPT bank account integration 30 days ago. Beginner slot repeats that story's territory.\", \"issues\": [\"beginner: ChatGPT finance features too similar to 'ChatGPT can now look at your bank account' from Recent editions \\u2014 both are personal finance tool integrations. Need a different topic.\", \"beginner + business: Two OpenAI picks (finance features + Codex mobile). While distinct products, Editor should consider swapping one for Anthropic-SpaceX compute deal (id=6) or another non-OpenAI story to diversify vendor mix.\", \"cross: Anthropic finance agents is solid vertical hook, but combined with OpenAI finance features creates finance-heavy edition. Consider whether slate",
+      "result_summary": "{\"verdict\": \"revise\", \"reason\": \"Muse Spark fails verification \\u2014 body excerpt is a truncated blog intro with no substance to judge the actual capability or 'personal superintelligence' claim. Needs read_candidate to confirm it's not just a product-launch press release with a buzzword hook. Baidu story also needs verification: 'better-than-feared 1% drop' suggests revenue declined overall, contradicting 'AI Sales Eclipse' headline claim.\", \"issues\": [\"beginner: Muse Spark body excerpt is incomplete blog header without substance \\u2014 cannot verify if 'personal superintelligence' is a real capability hook or vendor marketing. Editor must read_candidate to confirm this isn't a bare product launch.\", \"business: Baidu headline claims 'AI Sales Eclipse Waning Legacy Ads for the First Time'",
       "thinking": "",
-      "tool_use_id": "toolu_0126vcBd18KfHSTRXMaUnUDo"
+      "tool_use_id": "toolu_01WaPzikduYRBDMisVFmuLW3"
     },
     {
-      "ts": 1779123012.8476841,
+      "ts": 1779135187.467179,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "read_candidate",
+      "args": {
+        "id": 57
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_012vbykpVkYvx9dyBZLPsMsU"
+    },
+    {
+      "ts": 1779135187.4672174,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "read_candidate",
+      "args": null,
+      "result_summary": "{\"candidate\": {\"id\": 57, \"headline\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence\", \"source\": \"Meta AI Blog\", \"tier\": 1, \"url\": \"https://ai.meta.com/blog/introducing-muse-spark-msl/\", \"vertical\": null, \"blurb\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence\", \"paywall\": false, \"score\": 78, \"persona\": \"beginner\", \"why\": \"Meta launches Muse Spark, framed as 'personal superintelligence' \\u2014 ambitious capability claim, curious hook for any reader.\", \"body\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence Products AI Research Resources About Get Llama Try Meta AI FEATURED Introducing Muse Spark: Scaling Towards Personal Superintelligence April 8, 2026 \\u2022 15 minute read Today, we\\u2019re excited to introduce Muse Spark, the f",
+      "thinking": "",
+      "tool_use_id": "toolu_012vbykpVkYvx9dyBZLPsMsU"
+    },
+    {
+      "ts": 1779135187.4672456,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "read_candidate",
+      "args": {
+        "id": 20
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01Gk2iKx1FzRy93VNsG6GyTt"
+    },
+    {
+      "ts": 1779135187.46727,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "read_candidate",
+      "args": null,
+      "result_summary": "{\"candidate\": {\"id\": 20, \"headline\": \"Baidu AI Sales Eclipse Waning Legacy Ads for the First Time\", \"source\": \"Bloomberg Technology\", \"tier\": 1, \"url\": \"https://www.bloomberg.com/news/articles/2026-05-18/baidu-tops-sales-estimates-in-endorsement-of-agentic-ai-pivot\", \"vertical\": null, \"blurb\": \"Baidu Inc. posted a better-than-feared 1% drop in revenue after growth in nascent AI businesses offset a steady decline in traditional internet revenue, buying the search leader time to catch rivals such as Alibaba Group Holding Ltd. in the post-ChatGPT era.\", \"paywall\": true, \"score\": 82, \"persona\": \"business\", \"why\": \"Baidu's AI revenue overtakes legacy ads for the first time \\u2014 concrete pivot proof, not just a forecast.\", \"body\": \"Baidu Inc. posted a better-than-feared 1% drop in revenue afte",
+      "thinking": "",
+      "tool_use_id": "toolu_01Gk2iKx1FzRy93VNsG6GyTt"
+    },
+    {
+      "ts": 1779135191.407321,
       "role": "editor",
       "kind": "tool_call",
       "name": "unpick",
@@ -416,64 +480,20 @@
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_01YRhzYseQ18Neoj2SaJ7sUB"
+      "tool_use_id": "toolu_019pnhqDyzbyYXkYAbuo1sPY"
     },
     {
-      "ts": 1779123012.84776,
+      "ts": 1779135191.4073765,
       "role": "editor",
       "kind": "tool_result",
       "name": "unpick",
       "args": null,
-      "result_summary": "{\"ok\": true, \"unpicked\": {\"id\": 0, \"headline\": \"OpenAI just released new personal finance features for ChatGPT customers\", \"source\": \"9to5Mac \\u2014 AI\", \"tier\": 1, \"url\": \"https://9to5mac.com/2026/05/15/openai-just-released-new-personal-finance-features-for-chatgpt-customers/\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 85, \"persona\": \"beginner\", \"why\": \"ChatGPT adds personal finance features \\u2014 concrete capability users can try this week, extends the 'connect your bank' theme we shipped last week but adds new actions.\", \"body\": \"OpenAI just released new personal finance features for ChatGPT customers - 9to5Mac Skip to main content Apps ChatGPT AI OpenAI OpenAI just released new personal finance features for ChatGPT customers Zac Hall | May 15 2026 - 9:54 am PT 6 Commen",
+      "result_summary": "{\"ok\": true, \"unpicked\": {\"id\": 57, \"headline\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence\", \"source\": \"Meta AI Blog\", \"tier\": 1, \"url\": \"https://ai.meta.com/blog/introducing-muse-spark-msl/\", \"vertical\": null, \"blurb\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence\", \"paywall\": false, \"score\": 78, \"persona\": \"beginner\", \"why\": \"Meta launches Muse Spark, framed as 'personal superintelligence' \\u2014 ambitious capability claim, curious hook for any reader.\", \"body\": \"Introducing Muse Spark: Scaling Towards Personal Superintelligence Products AI Research Resources About Get Llama Try Meta AI FEATURED Introducing Muse Spark: Scaling Towards Personal Superintelligence April 8, 2026 \\u2022 15 minute read Today, we\\u2019re excited to introduce Muse S",
       "thinking": "",
-      "tool_use_id": "toolu_01YRhzYseQ18Neoj2SaJ7sUB"
+      "tool_use_id": "toolu_019pnhqDyzbyYXkYAbuo1sPY"
     },
     {
-      "ts": 1779123012.847788,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "read_candidate",
-      "args": {
-        "id": 28
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01Y7Uuww3xhBaHXCXG3rvMRG"
-    },
-    {
-      "ts": 1779123012.926792,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "read_candidate",
-      "args": null,
-      "result_summary": "{\"candidate\": {\"id\": 28, \"headline\": \"LinkedIn doesn't want your AI slop anymore\", \"source\": \"Engadget \\u2014 AI\", \"tier\": 1, \"url\": \"https://www.engadget.com/2174163/linkedin-doesnt-want-your-ai-slop-anymore/\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 65, \"persona\": \"beginner\", \"why\": \"LinkedIn bans AI slop submissions \\u2014 platform quality move, practical 'this affects your workflow' angle if it shows how detection works.\", \"body\": \"LinkedIn Doesn't Want Your AI Slop Anymore News Social Media LinkedIn doesn't want your AI slop anymore By Karissa Bell May 18, 2026 10:00 am EST Thrive Studios ID/Shutterstock LinkedIn has long been on the frontlines of the AI slopidemic. Now, the company is taking new steps to reduce the reach of posts that bear the hallmarks of AI-genera",
-      "thinking": "",
-      "tool_use_id": "toolu_01Y7Uuww3xhBaHXCXG3rvMRG"
-    },
-    {
-      "ts": 1779123012.926826,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "read_candidate",
-      "args": {
-        "id": 16
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01YR2CgWSfDrhWAaCjaJNVDj"
-    },
-    {
-      "ts": 1779123013.021337,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "read_candidate",
-      "args": null,
-      "result_summary": "{\"candidate\": {\"id\": 16, \"headline\": \"Dell Sells 1,000 AI Servers With Nvidia Chips in Current Quarter\", \"source\": \"Bloomberg Technology\", \"tier\": 1, \"url\": \"https://www.bloomberg.com/news/articles/2026-05-18/dell-sells-1-000-ai-servers-with-nvidia-chips-in-current-quarter\", \"vertical\": null, \"blurb\": \"Dell Technologies Inc. said it added 1,000 customers for a key AI product line in the past quarter as the company tries to capture business from traditional large businesses taking on new artificial intelligence workloads.\", \"paywall\": true, \"score\": 72, \"persona\": \"business\", \"why\": \"Dell ships 1,000 AI servers with Nvidia chips in Q2 \\u2014 scale signal, concrete shipment numbers show demand is real, not just forecast.\", \"body\": \"Dell Technologies Inc. said it added 1,000 customers for a k",
-      "thinking": "",
-      "tool_use_id": "toolu_01YR2CgWSfDrhWAaCjaJNVDj"
-    },
-    {
-      "ts": 1779123021.78233,
+      "ts": 1779135191.407407,
       "role": "editor",
       "kind": "tool_call",
       "name": "unpick",
@@ -482,251 +502,458 @@
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_0173mG5suAgyB5fZ7Qndkn2D"
+      "tool_use_id": "toolu_01NtMkDoVmd4B9KzkJSJ8XwD"
     },
     {
-      "ts": 1779123021.782366,
+      "ts": 1779135191.4074478,
       "role": "editor",
       "kind": "tool_result",
       "name": "unpick",
       "args": null,
-      "result_summary": "{\"ok\": true, \"unpicked\": {\"id\": 3, \"headline\": \"OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features\", \"source\": \"9to5Mac \\u2014 AI\", \"tier\": 1, \"url\": \"https://9to5mac.com/2026/05/14/openai-brings-codex-control-to-chatgpt-for-iphone-and-android/\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 90, \"persona\": \"engineer\", \"why\": \"OpenAI ships coding agent (Codex) straight to mobile \\u2014 huge capability unlock, engineers can code on the go, passes 'wait AI can do THAT?' test.\", \"body\": \"OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features - 9to5Mac Skip to main content Apps AI OpenAI Codex OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features Zac Hall | May 14 2026 - 1:14 pm PT 1 Comment OpenAI ha",
+      "result_summary": "{\"ok\": true, \"unpicked\": {\"id\": 20, \"headline\": \"Baidu AI Sales Eclipse Waning Legacy Ads for the First Time\", \"source\": \"Bloomberg Technology\", \"tier\": 1, \"url\": \"https://www.bloomberg.com/news/articles/2026-05-18/baidu-tops-sales-estimates-in-endorsement-of-agentic-ai-pivot\", \"vertical\": null, \"blurb\": \"Baidu Inc. posted a better-than-feared 1% drop in revenue after growth in nascent AI businesses offset a steady decline in traditional internet revenue, buying the search leader time to catch rivals such as Alibaba Group Holding Ltd. in the post-ChatGPT era.\", \"paywall\": true, \"score\": 82, \"persona\": \"business\", \"why\": \"Baidu's AI revenue overtakes legacy ads for the first time \\u2014 concrete pivot proof, not just a forecast.\", \"body\": \"Baidu Inc. posted a better-than-feared 1% drop in r",
       "thinking": "",
-      "tool_use_id": "toolu_0173mG5suAgyB5fZ7Qndkn2D"
+      "tool_use_id": "toolu_01NtMkDoVmd4B9KzkJSJ8XwD"
     },
     {
-      "ts": 1779123021.782389,
+      "ts": 1779135197.4310858,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "read_candidate",
+      "args": {
+        "id": 40
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_016bNeoPdc2RxjH9NZBTp5Rz"
+    },
+    {
+      "ts": 1779135197.4311218,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "read_candidate",
+      "args": null,
+      "result_summary": "{\"candidate\": {\"id\": 40, \"headline\": \"AlphaEvolve: How our Gemini-powered coding agent is scaling impact across fields\", \"source\": \"Google DeepMind Blog\", \"tier\": 1, \"url\": \"https://deepmind.google/blog/alphaevolve-impact/\", \"vertical\": null, \"blurb\": \"Explore how AlphaEvolve's Gemini-powered algorithms are driving impact across business, infrastructure, and science.\", \"paywall\": false, \"score\": 80, \"persona\": \"engineer\", \"why\": \"AlphaEvolve: Gemini-powered coding agent scaling across fields \\u2014 DeepMind shipping a real coding agent with cross-domain examples.\", \"body\": \"AlphaEvolve: Gemini-powered coding agent scaling impact across fields \\u2014 Google DeepMind Skip to main content May 7, 2026 Science AlphaEvolve: How our Gemini-powered coding agent is scaling impact across fields Alph",
+      "thinking": "",
+      "tool_use_id": "toolu_016bNeoPdc2RxjH9NZBTp5Rz"
+    },
+    {
+      "ts": 1779135197.4311514,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "read_candidate",
+      "args": {
+        "id": 11
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_0115GjDqWeagGAXAM5Vxtziw"
+    },
+    {
+      "ts": 1779135197.4311836,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "read_candidate",
+      "args": null,
+      "result_summary": "{\"candidate\": {\"id\": 11, \"headline\": \"Introducing Claude for Small Business\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/claude-for-small-business\", \"vertical\": null, \"blurb\": \"Introducing Claude for Small Business\", \"paywall\": false, \"score\": 72, \"persona\": \"beginner\", \"why\": \"Claude for Small Business launches \\u2014 accessible tier for non-enterprise teams, practical hook.\", \"body\": \"Announcements Introducing Claude for Small Business May 13, 2026 We're launching Claude for Small Business \\u2014a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses depend on\\u2014to help small business owners take full advantage of AI and cross off items on the to-do list. Small businesses account for 44% of U.S. GDP and em",
+      "thinking": "",
+      "tool_use_id": "toolu_0115GjDqWeagGAXAM5Vxtziw"
+    },
+    {
+      "ts": 1779135197.431195,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "read_candidate",
+      "args": {
+        "id": 41
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01TsUX2KmJyQvpizkEmRPcRN"
+    },
+    {
+      "ts": 1779135197.431224,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "read_candidate",
+      "args": null,
+      "result_summary": "{\"candidate\": {\"id\": 41, \"headline\": \"Enabling a new model for healthcare with AI co-clinician\", \"source\": \"Google DeepMind Blog\", \"tier\": 1, \"url\": \"https://deepmind.google/blog/ai-co-clinician/\", \"vertical\": null, \"blurb\": \"Researching the path to AI-augmented care and development of an AI co-clinician.\", \"paywall\": false, \"score\": 75, \"persona\": \"cross\", \"why\": \"DeepMind unveils AI co-clinician for healthcare \\u2014 concrete vertical deployment, not a think piece.\", \"body\": \"AI co-clinician: researching the path toward AI-augmented care \\u2014 Google DeepMind Skip to main content April 30, 2026 Science Enabling a new model for healthcare with AI co-clinician Alan Karthikesalingam, Vivek Natarajan and Pushmeet Kohli Share Health systems worldwide are striving for better outcomes, lower c",
+      "thinking": "",
+      "tool_use_id": "toolu_01TsUX2KmJyQvpizkEmRPcRN"
+    },
+    {
+      "ts": 1779135203.8128178,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "search_news",
+      "args": {
+        "query": "AI company market revenue earnings launch May 2026"
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01Uoz2R6SCZ3tbioCz4WqzB3"
+    },
+    {
+      "ts": 1779135204.5773954,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "search_news",
+      "args": null,
+      "result_summary": "{\"added\": 0, \"entries\": [], \"rejected_domains\": [\"21goatsfp.com\", \"investing.com\", \"nerdwallet.com\", \"pnc.com\", \"goldmansachs.com\"]}",
+      "thinking": "",
+      "tool_use_id": "toolu_01Uoz2R6SCZ3tbioCz4WqzB3"
+    },
+    {
+      "ts": 1779135214.47674,
       "role": "editor",
       "kind": "tool_call",
       "name": "pick",
       "args": {
         "slot": "business",
-        "id": 6,
-        "reason": "Anthropic partners with SpaceX for massive compute capacity increase, raises Claude usage limits - frontier-lab power move with recognizable partner (SpaceX), scarcity/scale angle. Directly benefits users with higher limits. Tier 1 lab news."
+        "id": 20,
+        "reason": "Baidu's AI revenue overtaking legacy ads is a concrete first-time market milestone. Bloomberg Tier 1. The blurb confirms AI business growth offset traditional revenue decline, supporting the headline claim. Passes 'wow really?' test for any business reader."
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_01Ticq478LsxWEdiu8yFbhKu"
+      "tool_use_id": "toolu_01M1fLyStgYJegDFBL3DowcY"
     },
     {
-      "ts": 1779123021.78243,
+      "ts": 1779135214.4768074,
       "role": "editor",
       "kind": "tool_result",
       "name": "pick",
       "args": null,
-      "result_summary": "{\"ok\": true, \"slot\": \"business\", \"picked\": {\"id\": 6, \"headline\": \"May 6, 2026 Announcements Higher usage limits for Claude and a compute deal with SpaceX\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/higher-limits-spacex\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 82, \"persona\": \"engineer\", \"why\": \"Anthropic raises usage limits + SpaceX compute deal \\u2014 frontier player power-move, scarcity angle (more Claude capacity), recognizable partner.\", \"body\": \"Announcements Higher usage limits for Claude and a compute deal with SpaceX May 6, 2026 We\\u2019ve agreed to a partnership with SpaceX that will substantially increase our compute capacity. This, along with our other recent compute deals, means that we\\u2019ve been able to increase our usag",
+      "result_summary": "{\"ok\": true, \"slot\": \"business\", \"picked\": {\"id\": 20, \"headline\": \"Baidu AI Sales Eclipse Waning Legacy Ads for the First Time\", \"source\": \"Bloomberg Technology\", \"tier\": 1, \"url\": \"https://www.bloomberg.com/news/articles/2026-05-18/baidu-tops-sales-estimates-in-endorsement-of-agentic-ai-pivot\", \"vertical\": null, \"blurb\": \"Baidu Inc. posted a better-than-feared 1% drop in revenue after growth in nascent AI businesses offset a steady decline in traditional internet revenue, buying the search leader time to catch rivals such as Alibaba Group Holding Ltd. in the post-ChatGPT era.\", \"paywall\": true, \"score\": 82, \"persona\": \"business\", \"why\": \"Baidu's AI revenue overtakes legacy ads for the first time \\u2014 concrete pivot proof, not just a forecast.\", \"body\": \"Baidu Inc. posted a better-than-f",
       "thinking": "",
-      "tool_use_id": "toolu_01Ticq478LsxWEdiu8yFbhKu"
+      "tool_use_id": "toolu_01M1fLyStgYJegDFBL3DowcY"
     },
     {
-      "ts": 1779123021.78244,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "search_news",
-      "args": {
-        "query": "AI wearable consumer feature launch May 2026"
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01TfNjcZe4sfBqghoPJmJxqe"
-    },
-    {
-      "ts": 1779123022.2659771,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "search_news",
-      "args": null,
-      "result_summary": "{\"added\": 0, \"entries\": [], \"rejected_domains\": [\"plaud.ai\", \"the-gadgeteer.com\", \"indiatoday.in\", \"the-gadgeteer.com\", \"wareable.com\"]}",
-      "thinking": "",
-      "tool_use_id": "toolu_01TfNjcZe4sfBqghoPJmJxqe"
-    },
-    {
-      "ts": 1779123025.289419,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "search_news",
-      "args": {
-        "query": "ChatGPT Google AI new feature try launch May 2026"
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01KpmfCjNWSTGh8VkSmbBndT"
-    },
-    {
-      "ts": 1779123025.969734,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "search_news",
-      "args": null,
-      "result_summary": "{\"added\": 2, \"entries\": [{\"id\": 10000, \"headline\": \"What I Learned After Testing Every New ChatGPT Feature in 2026 ...\", \"url\": \"https://digitalstrategyai.substack.com/p/what-i-learned-after-testing-every\", \"source\": \"digitalstrategyai.substack.com\", \"tier\": 2, \"vertical\": null, \"persona\": \"unknown\", \"via_search\": true, \"snippet\": \"In April 2026, OpenAI launched **Workspace Agents**, and I think this is the most important update I have tested all year.\\nThink of an agent as a coworker that lives inside ChatGPT.\\nYou describe what \"}, {\"id\": 10001, \"headline\": \"ChatGPT \\u2014 Release Notes | OpenAI Help Center\", \"url\": \"https://help.openai.com/en/articles/6825453-chatgpt-release-notes\", \"source\": \"help.openai.com\", \"tier\": 2, \"vertical\": null, \"persona\": \"unknown\", \"via_search\": true, \"snip",
-      "thinking": "",
-      "tool_use_id": "toolu_01KpmfCjNWSTGh8VkSmbBndT"
-    },
-    {
-      "ts": 1779123034.661528,
+      "ts": 1779135214.4768395,
       "role": "editor",
       "kind": "tool_call",
       "name": "pick",
       "args": {
         "slot": "beginner",
-        "id": 3,
-        "reason": "OpenAI ships Codex coding agent to iPhone/iPad/Android - massive 'wait AI can do THAT?' moment. Code on your phone is accessible, surprising, concrete try-it feature. Perfect beginner wow-factor. Tier 1 9to5Mac."
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01Miu5YWtgQsPwdDvVLta6Qb"
-    },
-    {
-      "ts": 1779123034.661654,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "pick",
-      "args": null,
-      "result_summary": "{\"ok\": true, \"slot\": \"beginner\", \"picked\": {\"id\": 3, \"headline\": \"OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features\", \"source\": \"9to5Mac \\u2014 AI\", \"tier\": 1, \"url\": \"https://9to5mac.com/2026/05/14/openai-brings-codex-control-to-chatgpt-for-iphone-and-android/\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 90, \"persona\": \"engineer\", \"why\": \"OpenAI ships coding agent (Codex) straight to mobile \\u2014 huge capability unlock, engineers can code on the go, passes 'wait AI can do THAT?' test.\", \"body\": \"OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features - 9to5Mac Skip to main content Apps AI OpenAI Codex OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features Zac Hall | May 14 2026 - 1:14 pm PT 1",
-      "thinking": "",
-      "tool_use_id": "toolu_01Miu5YWtgQsPwdDvVLta6Qb"
-    },
-    {
-      "ts": 1779123036.39228,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "self_critique",
-      "args": {},
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01KcXDFVjyZ6SDC1F36BcqQM"
-    },
-    {
-      "ts": 1779123044.951668,
-      "role": "critic",
-      "kind": "handoff",
-      "name": "",
-      "args": null,
-      "result_summary": "revise: Two Anthropic picks in a 3-story edition creates vendor imbalance, and finance agents (cross slot) overlaps thematically",
-      "thinking": "",
-      "tool_use_id": ""
-    },
-    {
-      "ts": 1779123044.9517,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "self_critique",
-      "args": null,
-      "result_summary": "{\"verdict\": \"revise\", \"reason\": \"Two Anthropic picks in a 3-story edition creates vendor imbalance, and finance agents (cross slot) overlaps thematically with the SpaceX compute deal (business slot) \\u2014 both are Anthropic infrastructure/partnership announcements. The Codex mobile story is excellent, but pairing two Anthropic stories limits vendor diversity when strong alternatives exist.\", \"issues\": [\"cross + business slots: Both Anthropic picks (finance agents + SpaceX compute deal). Constitution requires three different vendors or 2 + non-vendor story. Swap one Anthropic pick for ID 0 (OpenAI finance features for ChatGPT) or ID 11 (OpenAI-Apple drama) to diversify vendor mix.\", \"cross slot: Finance agents is a solid vertical launch, but consider if ID 11 (OpenAI feels 'burned' by Appl",
-      "thinking": "",
-      "tool_use_id": "toolu_01KcXDFVjyZ6SDC1F36BcqQM"
-    },
-    {
-      "ts": 1779123053.411326,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "update_memory",
-      "args": {
-        "key": "decisions",
-        "value": "Critique flags 2 Anthropic picks as vendor-heavy for 3-story edition. Options: (1) Keep business=SpaceX, swap cross to non-Anthropic story like OpenAI-Apple drama (ID 11); (2) Keep cross=finance agents, swap business to different vendor. ID 11 (OpenAI-Apple friction) is market rivalry drama - passes competitive-move test but might be more gossip than substance."
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01PKVa8rXLZvQeqiGskpNXob"
-    },
-    {
-      "ts": 1779123053.411377,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "update_memory",
-      "args": null,
-      "result_summary": "{\"ok\": true, \"working_memory\": {\"pool_quality\": \"Strong pool with multiple high-scoring Tier 1 launches. Top candidates are concrete product features (Codex on mobile, ChatGPT finance tools) and frontier-lab power moves (Anthropic-SpaceX compute deal). All pass the 'try it' or 'wow really?' test.\", \"coverage_gaps\": [\"No consumer lifestyle or wearable angle \\u2014 pool skews enterprise/finance/infrastructure.\", \"Missing fun 'try this today' features \\u2014 mostly partnerships and market moves, light on hands-on tools.\", \"Heavy on AI-incidental stories (Waymo routing glitch, car surveillance, vigilante trap) that fail the 'AI is the subject doing something cool' test.\"], \"critique_history\": [{\"verdict\": \"revise\", \"reason\": \"Two OpenAI picks with overlapping finance hooks, and Recent editions",
-      "thinking": "",
-      "tool_use_id": "toolu_01PKVa8rXLZvQeqiGskpNXob"
-    },
-    {
-      "ts": 1779123058.676474,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "unpick",
-      "args": {
-        "slot": "cross"
-      },
-      "result_summary": "",
-      "thinking": "",
-      "tool_use_id": "toolu_01LZESih36eCHVQ8DJWNYVGR"
-    },
-    {
-      "ts": 1779123058.676596,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "unpick",
-      "args": null,
-      "result_summary": "{\"ok\": true, \"unpicked\": {\"id\": 7, \"headline\": \"May 5, 2026 Announcements Agents for financial services\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/finance-agents\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 78, \"persona\": \"cross\", \"why\": \"Anthropic launches finance-specific agents \\u2014 vertical use case, cross-industry hook for asset management / banking readers.\", \"body\": \"Announcements Agents for financial services May 5, 2026 We\\u2019re releasing ten ready-to-run agent templates for the most time-consuming work in financial services: building pitchbooks, screening KYC files, and closing the books at month-end. Each one ships as a plugin in Claude Cowork and Claude Code, and as a cookbook for Claude Managed Agents , so a team can put ",
-      "thinking": "",
-      "tool_use_id": "toolu_01LZESih36eCHVQ8DJWNYVGR"
-    },
-    {
-      "ts": 1779123058.676636,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "pick",
-      "args": {
-        "slot": "cross",
         "id": 11,
-        "reason": "OpenAI reportedly frustrated with Apple's ChatGPT integration quality - market rivalry drama between two tech giants. Competitive-move angle, insider reporting makes AI power dynamics visible. Ars Technica Tier 1, diversifies vendor mix beyond just AI labs."
+        "reason": "Claude for Small Business launches with connectors and workflows for small business tools. Practical, accessible angle - not enterprise-only. Passes 'I want to try that' test for any Solvd employee at a smaller team."
       },
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_01PqfZxJ6GnTgKRYo5ntddJy"
+      "tool_use_id": "toolu_0181uQUfU3iHaHPBKXUsRw9y"
     },
     {
-      "ts": 1779123058.6767318,
+      "ts": 1779135214.4769073,
       "role": "editor",
       "kind": "tool_result",
       "name": "pick",
       "args": null,
-      "result_summary": "{\"ok\": true, \"slot\": \"cross\", \"picked\": {\"id\": 11, \"headline\": \"OpenAI feels \\u201cburned\\u201d by Apple\\u2019s crappy ChatGPT integration, insiders say\", \"source\": \"Ars Technica \\u2014 AI\", \"tier\": 1, \"url\": \"https://arstechnica.com/tech-policy/2026/05/openai-feels-burned-by-apples-crappy-chatgpt-integration-insiders-say/\", \"vertical\": null, \"blurb\": \"\", \"paywall\": false, \"score\": 75, \"persona\": \"business\", \"why\": \"OpenAI reportedly 'burned' by Apple's ChatGPT integration \\u2014 market rivalry drama, insider framing passes competitive-move test.\", \"body\": \"OpenAI feels \\u201cburned\\u201d by Apple\\u2019s crappy ChatGPT integration, insiders say - Ars Technica Skip to content Text settings Story text Size Small Standard Large Width * Standard Wide Links Standard Orange * Subscribers only Le",
+      "result_summary": "{\"ok\": true, \"slot\": \"beginner\", \"picked\": {\"id\": 11, \"headline\": \"Introducing Claude for Small Business\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/claude-for-small-business\", \"vertical\": null, \"blurb\": \"Introducing Claude for Small Business\", \"paywall\": false, \"score\": 72, \"persona\": \"beginner\", \"why\": \"Claude for Small Business launches \\u2014 accessible tier for non-enterprise teams, practical hook.\", \"body\": \"Announcements Introducing Claude for Small Business May 13, 2026 We're launching Claude for Small Business \\u2014a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses depend on\\u2014to help small business owners take full advantage of AI and cross off items on the to-do list. Small businesses accou",
       "thinking": "",
-      "tool_use_id": "toolu_01PqfZxJ6GnTgKRYo5ntddJy"
+      "tool_use_id": "toolu_0181uQUfU3iHaHPBKXUsRw9y"
     },
     {
-      "ts": 1779123063.302531,
+      "ts": 1779135217.648162,
       "role": "editor",
       "kind": "tool_call",
       "name": "self_critique",
       "args": {},
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_01KkGWgUvrzR9tb1GDP9z9w1"
+      "tool_use_id": "toolu_01BRYoSMqExnz3UrRbu639Sb"
     },
     {
-      "ts": 1779123070.1271198,
+      "ts": 1779135226.788427,
       "role": "critic",
       "kind": "handoff",
       "name": "",
       "args": null,
-      "result_summary": "approve: All three picks pass editorial tests: Anthropic-SpaceX compute deal is a recognizable power-move with user benefit (high",
+      "result_summary": "revise: Two Anthropic picks in a 3-story slate creates vendor overload. 'Claude for Small Business' is a bare product launch wit",
       "thinking": "",
       "tool_use_id": ""
     },
     {
-      "ts": 1779123070.127151,
+      "ts": 1779135226.7884543,
       "role": "editor",
       "kind": "tool_result",
       "name": "self_critique",
       "args": null,
-      "result_summary": "{\"verdict\": \"approve\", \"reason\": \"All three picks pass editorial tests: Anthropic-SpaceX compute deal is a recognizable power-move with user benefit (higher limits); Codex on mobile is concrete try-it surprise ('code on your phone'); OpenAI-Apple friction is market rivalry between tech giants. Different vendors (Anthropic, OpenAI, Apple angle), different hooks (infrastructure scale, mobile capability, competitive drama). No repeats from Recent editions\\u2014ChatGPT bank account story is distinct from Codex mobile coding agent. Mix balances useful (limits up, mobile coding) with 'what the hell is happening' (partnership drama). All Tier 1, all verified, all would make someone more curious about AI.\", \"issues\": [], \"budget_warning\": \"soft budget warning: 28/40 tool calls used\"}",
+      "result_summary": "{\"verdict\": \"revise\", \"reason\": \"Two Anthropic picks in a 3-story slate creates vendor overload. 'Claude for Small Business' is a bare product launch without a compelling news hook beyond 'we made connectors for SMBs' \\u2014 fails the 'would they screenshot this?' test. The acquisition is the strong Anthropic story; beginner slot needs a different vendor with a more exciting capability.\", \"issues\": [\"beginner: Two Anthropic stories (acquisition + SMB launch) in 3-pick slate. 'Claude for Small Business' reads as product-line extension, not a 'wow really?' moment. Swap for Muse Spark (Meta, ambitious personal-AI hook) or another beginner-friendly capability from different vendor.\", \"beginner: 'Introducing Claude for Small Business' headline is press-release framing. Even if kept, needs rewri",
       "thinking": "",
-      "tool_use_id": "toolu_01KkGWgUvrzR9tb1GDP9z9w1"
+      "tool_use_id": "toolu_01BRYoSMqExnz3UrRbu639Sb"
     },
     {
-      "ts": 1779123077.3362792,
+      "ts": 1779135231.3206737,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "slot": "beginner"
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_012GicXwPFnV7iifkF372QLW"
+    },
+    {
+      "ts": 1779135231.3207226,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"unpicked\": {\"id\": 11, \"headline\": \"Introducing Claude for Small Business\", \"source\": \"Anthropic News\", \"tier\": 1, \"url\": \"https://www.anthropic.com/news/claude-for-small-business\", \"vertical\": null, \"blurb\": \"Introducing Claude for Small Business\", \"paywall\": false, \"score\": 72, \"persona\": \"beginner\", \"why\": \"Claude for Small Business launches \\u2014 accessible tier for non-enterprise teams, practical hook.\", \"body\": \"Announcements Introducing Claude for Small Business May 13, 2026 We're launching Claude for Small Business \\u2014a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses depend on\\u2014to help small business owners take full advantage of AI and cross off items on the to-do list. Small businesses account for 44% of U.S.",
+      "thinking": "",
+      "tool_use_id": "toolu_012GicXwPFnV7iifkF372QLW"
+    },
+    {
+      "ts": 1779135239.0703142,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "check_archive",
+      "args": {
+        "headline": "DeepMind AI co-clinician healthcare"
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01SMXKo1r37ni1jNF2sLCMMg"
+    },
+    {
+      "ts": 1779135239.070363,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "check_archive",
+      "args": null,
+      "result_summary": "{\"matches\": [], \"is_duplicate\": false, \"budget_warning\": \"soft budget warning: 29/40 tool calls used\"}",
+      "thinking": "",
+      "tool_use_id": "toolu_01SMXKo1r37ni1jNF2sLCMMg"
+    },
+    {
+      "ts": 1779135239.070393,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "slot": "beginner",
+        "id": 41,
+        "reason": "DeepMind's AI co-clinician for healthcare is accessible to any reader and shows AI in an unexpected field. The body confirms it's about AI-augmented care with real deployment research, not just a think piece. Different vendor (DeepMind vs Anthropic/Baidu), passes 'didn't know AI could do that' test."
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_014jk2UV19bhEVv1n8MU7uMH"
+    },
+    {
+      "ts": 1779135239.070473,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"slot\": \"beginner\", \"picked\": {\"id\": 41, \"headline\": \"Enabling a new model for healthcare with AI co-clinician\", \"source\": \"Google DeepMind Blog\", \"tier\": 1, \"url\": \"https://deepmind.google/blog/ai-co-clinician/\", \"vertical\": null, \"blurb\": \"Researching the path to AI-augmented care and development of an AI co-clinician.\", \"paywall\": false, \"score\": 75, \"persona\": \"cross\", \"why\": \"DeepMind unveils AI co-clinician for healthcare \\u2014 concrete vertical deployment, not a think piece.\", \"body\": \"AI co-clinician: researching the path toward AI-augmented care \\u2014 Google DeepMind Skip to main content April 30, 2026 Science Enabling a new model for healthcare with AI co-clinician Alan Karthikesalingam, Vivek Natarajan and Pushmeet Kohli Share Health systems worldwide are striving",
+      "thinking": "",
+      "tool_use_id": "toolu_014jk2UV19bhEVv1n8MU7uMH"
+    },
+    {
+      "ts": 1779135242.8985026,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "self_critique",
+      "args": {},
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01K6Hn18Tzy5NWt4nf15YX1A"
+    },
+    {
+      "ts": 1779135251.784126,
+      "role": "critic",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "revise: DeepMind healthcare pick fails verification and framing tests. The body excerpt shows an April 30, 2026 date but today i",
+      "thinking": "",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1779135251.7841542,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "self_critique",
+      "args": null,
+      "result_summary": "{\"verdict\": \"revise\", \"reason\": \"DeepMind healthcare pick fails verification and framing tests. The body excerpt shows an April 30, 2026 date but today is May 19 \\u2014 this is 19-day-old content being presented as fresh news. More critically, the excerpt reads like a research announcement ('researching the path toward') rather than a shipped capability or deployment. The headline 'Enabling a new model for healthcare' uses weak consultancy language ('enabling a model') instead of concrete subject+verb. This doesn't pass the show-don't-tell test \\u2014 what specifically shipped or became possible? Without full body verification, cannot confirm this isn't a think piece about potential future healthcare AI rather than a try-it or deployment story.\", \"issues\": [\"beginner slot: DeepMind healthc",
+      "thinking": "",
+      "tool_use_id": "toolu_01K6Hn18Tzy5NWt4nf15YX1A"
+    },
+    {
+      "ts": 1779135254.7002585,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "slot": "beginner"
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01DQrfcSf2M24SEUcLjTB3Aj"
+    },
+    {
+      "ts": 1779135254.700307,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"unpicked\": {\"id\": 41, \"headline\": \"Enabling a new model for healthcare with AI co-clinician\", \"source\": \"Google DeepMind Blog\", \"tier\": 1, \"url\": \"https://deepmind.google/blog/ai-co-clinician/\", \"vertical\": null, \"blurb\": \"Researching the path to AI-augmented care and development of an AI co-clinician.\", \"paywall\": false, \"score\": 75, \"persona\": \"cross\", \"why\": \"DeepMind unveils AI co-clinician for healthcare \\u2014 concrete vertical deployment, not a think piece.\", \"body\": \"AI co-clinician: researching the path toward AI-augmented care \\u2014 Google DeepMind Skip to main content April 30, 2026 Science Enabling a new model for healthcare with AI co-clinician Alan Karthikesalingam, Vivek Natarajan and Pushmeet Kohli Share Health systems worldwide are striving for better outcom",
+      "thinking": "",
+      "tool_use_id": "toolu_01DQrfcSf2M24SEUcLjTB3Aj"
+    },
+    {
+      "ts": 1779135257.60437,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "read_candidate",
+      "args": {
+        "id": 59
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01KG4tZpHdqeujj4G7Dvefh3"
+    },
+    {
+      "ts": 1779135257.6044102,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "read_candidate",
+      "args": null,
+      "result_summary": "{\"candidate\": {\"id\": 59, \"headline\": \"SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking With Multiplexing and Global Reasoning\", \"source\": \"Meta AI Blog\", \"tier\": 1, \"url\": \"https://ai.meta.com/blog/segment-anything-model-3/\", \"vertical\": null, \"blurb\": \"SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking With Multiplexing and Global Reasoning\", \"paywall\": false, \"score\": 76, \"persona\": \"engineer\", \"why\": \"SAM 3.1 ships real-time video detection with multiplexing and global reasoning \\u2014 upgraded computer-vision model you can try.\", \"body\": \"SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking With Multiplexing and Global Reasoning Products AI Research Resources About Get Llama Try Meta AI FEATURED Computer Vision SAM",
+      "thinking": "",
+      "tool_use_id": "toolu_01KG4tZpHdqeujj4G7Dvefh3"
+    },
+    {
+      "ts": 1779135257.604441,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "read_candidate",
+      "args": {
+        "id": 31
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_0126xiJpWUMnhKpRZGap1Z8v"
+    },
+    {
+      "ts": 1779135258.2376912,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "read_candidate",
+      "args": null,
+      "result_summary": "{\"candidate\": {\"id\": 31, \"headline\": \"Cohere signs world chess champion Magnus Carlsen as brand ambassador\", \"source\": \"Cohere Blog\", \"tier\": 1, \"url\": \"https://cohere.com/blog/cohere-signs-world-chess-champion-magnus-carlsen\", \"vertical\": null, \"blurb\": \"Carlsen will bring his iconic reputation and strategic thinking to strengthen the company's brand and mission\", \"paywall\": false, \"score\": 70, \"persona\": \"beginner\", \"why\": \"Cohere signs Magnus Carlsen as brand ambassador \\u2014 unusual cultural move, makes AI feel like a consumer brand.\", \"body\": \"Cohere signs world chess champion Magnus Carlsen as brand ambassador Feb 13, 2026 1 minute read Cohere signs world chess champion Magnus Carlsen as brand ambassador Carlsen will bring his iconic reputation and strategic thinking to strengthen t",
+      "thinking": "",
+      "tool_use_id": "toolu_0126xiJpWUMnhKpRZGap1Z8v"
+    },
+    {
+      "ts": 1779135262.4169934,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "search_news",
+      "args": {
+        "query": "\"AI\" \"launched\" OR \"released\" OR \"available now\" consumer tool May 18 19 2026"
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01VosfG3karQ1heoD3x2eCpB"
+    },
+    {
+      "ts": 1779135263.0952842,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "search_news",
+      "args": null,
+      "result_summary": "{\"added\": 0, \"entries\": [], \"rejected_domains\": [\"iteache.com\", \"allinoneaicenter.com\", \"blog.mean.ceo\", \"aitoolsrecap.com\", \"youtube.com\"], \"budget_warning\": \"soft budget warning: 35/40 tool calls used\"}",
+      "thinking": "",
+      "tool_use_id": "toolu_01VosfG3karQ1heoD3x2eCpB"
+    },
+    {
+      "ts": 1779135270.5723302,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "check_archive",
+      "args": {
+        "headline": "AlphaEvolve Gemini coding agent DeepMind"
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01BrGZvgB9UTMnxJRxsb7HiH"
+    },
+    {
+      "ts": 1779135270.5723784,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "check_archive",
+      "args": null,
+      "result_summary": "{\"matches\": [], \"is_duplicate\": false, \"budget_warning\": \"soft budget warning: 36/40 tool calls used\"}",
+      "thinking": "",
+      "tool_use_id": "toolu_01BrGZvgB9UTMnxJRxsb7HiH"
+    },
+    {
+      "ts": 1779135275.6862462,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "slot": "beginner",
+        "id": 40,
+        "reason": "AlphaEvolve is DeepMind's Gemini-powered coding agent scaling across business, infrastructure, and science. The 'how AI codes across fields' angle is accessible to any reader - passes 'didn't know AI could do that' test. May 7 date is 12 days ago but still fresh, different vendor from Anthropic/Baidu."
+      },
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_012mcuvP7Kj2WVQKdwinWDYc"
+    },
+    {
+      "ts": 1779135275.6863143,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"slot\": \"beginner\", \"picked\": {\"id\": 40, \"headline\": \"AlphaEvolve: How our Gemini-powered coding agent is scaling impact across fields\", \"source\": \"Google DeepMind Blog\", \"tier\": 1, \"url\": \"https://deepmind.google/blog/alphaevolve-impact/\", \"vertical\": null, \"blurb\": \"Explore how AlphaEvolve's Gemini-powered algorithms are driving impact across business, infrastructure, and science.\", \"paywall\": false, \"score\": 80, \"persona\": \"engineer\", \"why\": \"AlphaEvolve: Gemini-powered coding agent scaling across fields \\u2014 DeepMind shipping a real coding agent with cross-domain examples.\", \"body\": \"AlphaEvolve: Gemini-powered coding agent scaling impact across fields \\u2014 Google DeepMind Skip to main content May 7, 2026 Science AlphaEvolve: How our Gemini-powered coding agent is scal",
+      "thinking": "",
+      "tool_use_id": "toolu_012mcuvP7Kj2WVQKdwinWDYc"
+    },
+    {
+      "ts": 1779135279.0038114,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "self_critique",
+      "args": {},
+      "result_summary": "",
+      "thinking": "",
+      "tool_use_id": "toolu_01PD9N2D4xz7NSsswiqdgEJg"
+    },
+    {
+      "ts": 1779135286.6398466,
+      "role": "critic",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "approve: Strong slate with three distinct vendors (Anthropic, Baidu, DeepMind), all Tier 1 primaries, verified with full body con",
+      "thinking": "",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1779135286.639873,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "self_critique",
+      "args": null,
+      "result_summary": "{\"verdict\": \"approve\", \"reason\": \"Strong slate with three distinct vendors (Anthropic, Baidu, DeepMind), all Tier 1 primaries, verified with full body content. Anthropic-Stainless acquisition passes 'what the hell is happening' market-move test \\u2014 SDK tooling acquisition signals models-to-agents shift. Baidu revenue milestone is concrete business news with a first-time market crossover hook. AlphaEvolve is a Gemini coding agent scaling across fields with accessible 'didn't know AI could do that' framing. All three pass show-don't-tell, subject-line, and editorial tests. Mix leans toward strategic/capability over try-it-today, but pool lacks strong consumer tools and every pick supports a celebration-tone headline. No repeats, no exclusions, no vendor overload. Would any Solvd employee ",
+      "thinking": "",
+      "tool_use_id": "toolu_01PD9N2D4xz7NSsswiqdgEJg"
+    },
+    {
+      "ts": 1779135289.033394,
       "role": "editor",
       "kind": "tool_call",
       "name": "ship_edition",
       "args": {},
       "result_summary": "",
       "thinking": "",
-      "tool_use_id": "toolu_016RN9qDGBi8KnBbNF2MKiMj"
+      "tool_use_id": "toolu_01XN69m8WAchKSvaHckn4Tp4"
     },
     {
-      "ts": 1779123077.336429,
+      "ts": 1779135289.0335312,
       "role": "editor",
       "kind": "finalize",
       "name": "",
@@ -736,44 +963,47 @@
       "tool_use_id": ""
     },
     {
-      "ts": 1779123077.336457,
+      "ts": 1779135289.0335524,
       "role": "editor",
       "kind": "tool_result",
       "name": "ship_edition",
       "args": null,
-      "result_summary": "{\"shipped\": true, \"picks\": {\"business\": \"May 6, 2026 Announcements Higher usage limits for Claude and a compute deal with SpaceX\", \"beginner\": \"OpenAI brings Codex to ChatGPT for iPhone, iPad, and Android with these features\", \"cross\": \"OpenAI feels \\u201cburned\\u201d by Apple\\u2019s crappy ChatGPT integration, insiders say\"}, \"budget_warning\": \"soft budget warning: 29/40 tool calls used\"}",
+      "result_summary": "{\"shipped\": true, \"picks\": {\"cross\": \"Anthropic acquires Stainless\", \"business\": \"Baidu AI Sales Eclipse Waning Legacy Ads for the First Time\", \"beginner\": \"AlphaEvolve: How our Gemini-powered coding agent is scaling impact across fields\"}, \"budget_warning\": \"soft budget warning: 39/40 tool calls used\"}",
       "thinking": "",
-      "tool_use_id": "toolu_016RN9qDGBi8KnBbNF2MKiMj"
+      "tool_use_id": "toolu_01XN69m8WAchKSvaHckn4Tp4"
     },
     {
       "role": "system",
       "kind": "memory",
       "result_summary": "final working memory",
       "working_memory": {
-        "pool_quality": "Strong pool with multiple high-scoring Tier 1 launches. Top candidates are concrete product features (Codex on mobile, ChatGPT finance tools) and frontier-lab power moves (Anthropic-SpaceX compute deal). All pass the 'try it' or 'wow really?' test.",
+        "pool_quality": "Strong lab announcements from Tier 1 sources (Anthropic, Meta, DeepMind, Baidu). Good mix of capability launches and market moves. Anthropic Stainless acquisition is a clear power move. Baidu revenue crossover is concrete business news. Muse Spark has ambitious hook but may lean toward product launch without clear try-it angle. Pool lacks consumer-facing tools but has solid fundamentals.",
         "coverage_gaps": [
-          "No consumer lifestyle or wearable angle \u2014 pool skews enterprise/finance/infrastructure.",
-          "Missing fun 'try this today' features \u2014 mostly partnerships and market moves, light on hands-on tools.",
-          "Heavy on AI-incidental stories (Waymo routing glitch, car surveillance, vigilante trap) that fail the 'AI is the subject doing something cool' test."
+          "Heavy on lab releases and partnerships; light on fun consumer tools or 'try this today' angles.",
+          "No mobile-first AI features or wearable updates \u2014 missing accessible hardware hooks.",
+          "Musk/OpenAI lawsuit dominated multiple outlets but is legal drama, not capability news \u2014 pool skewed toward courtroom angle."
         ],
         "critique_history": [
           {
             "verdict": "revise",
-            "reason": "Two OpenAI picks with overlapping finance hooks, and Recent editions already covered ChatGPT bank account integration 30 days ago. Beginner slot repeats that story's territory."
+            "reason": "Muse Spark fails verification \u2014 body excerpt is a truncated blog intro with no substance to judge the actual capability or 'personal superintelligence' claim. Needs read_candidate to confirm it's not "
           },
           {
             "verdict": "revise",
-            "reason": "Two Anthropic picks in a 3-story edition creates vendor imbalance, and finance agents (cross slot) overlaps thematically with the SpaceX compute deal (business slot) \u2014 both are Anthropic infrastructur"
+            "reason": "Two Anthropic picks in a 3-story slate creates vendor overload. 'Claude for Small Business' is a bare product launch without a compelling news hook beyond 'we made connectors for SMBs' \u2014 fails the 'wo"
+          },
+          {
+            "verdict": "revise",
+            "reason": "DeepMind healthcare pick fails verification and framing tests. The body excerpt shows an April 30, 2026 date but today is May 19 \u2014 this is 19-day-old content being presented as fresh news. More critic"
           },
           {
             "verdict": "approve",
-            "reason": "All three picks pass editorial tests: Anthropic-SpaceX compute deal is a recognizable power-move with user benefit (higher limits); Codex on mobile is concrete try-it surprise ('code on your phone'); "
+            "reason": "Strong slate with three distinct vendors (Anthropic, Baidu, DeepMind), all Tier 1 primaries, verified with full body content. Anthropic-Stainless acquisition passes 'what the hell is happening' market"
           }
         ],
         "editor_notes": "",
         "decisions": [
-          "Initial review: IDs 3, 0, and 6 are all strong contenders. However, need to check vendor cap \u2014 multiple OpenAI stories. ID 3 (Codex mobile) and ID 0 (finance features) are both OpenAI. ID 6 (Anthropic SpaceX) could work as third. ID 7 (Anthropic finance agents) is also strong for cross slot. Need to balance OpenAI vs Anthropic picks.",
-          "Critique flags 2 Anthropic picks as vendor-heavy for 3-story edition. Options: (1) Keep business=SpaceX, swap cross to non-Anthropic story like OpenAI-Apple drama (ID 11); (2) Keep cross=finance agents, swap business to different vendor. ID 11 (OpenAI-Apple friction) is market rivalry drama - passes competitive-move test but might be more gossip than substance."
+          "Initial picks: Baidu AI revenue milestone (business), Muse Spark personal superintelligence (beginner), Anthropic acquires Stainless (cross). All Tier 1, good vendor mix (Baidu, Meta, Anthropic), passes editorial tests with concrete news hooks. Mix of market move, capability claim, and strategic acquisition."
         ]
       }
     }

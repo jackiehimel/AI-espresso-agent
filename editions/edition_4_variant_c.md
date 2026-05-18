@@ -4,45 +4,45 @@
 
 ---
 
-![Anthropic just signed a compute deal with SpaceX](edition_4/assets/variant_c_01.png)
+![Baidu's AI revenue just overtook its search ads for the first time](edition_4/assets/variant_c_01.png)
 
 **MARKET**
 
-## Anthropic just signed a compute deal with SpaceX
+## Baidu's AI revenue just overtook its search ads for the first time
 
-Anthropic announced higher usage limits for Claude and a new compute partnership with SpaceX. The deal suggests Anthropic is securing infrastructure beyond traditional cloud providers as demand for AI inference grows.
+China's search giant posted only a 1% revenue drop this quarter because AI product sales grew faster than its legacy ad business shrank. It's the first time Baidu has made more from AI tools than from the search advertising that built the company.
 
-*SpaceX entering AI compute signals how competitive the race for GPU capacity has become.*
+*A major internet company just crossed the threshold where AI became its primary business.*
 
-[Anthropic News](https://www.anthropic.com/news/higher-limits-spacex) · May 19
+[Bloomberg Technology](https://www.bloomberg.com/news/articles/2026-05-18/baidu-tops-sales-estimates-in-endorsement-of-agentic-ai-pivot) · May 19
 
 ---
 
-![ChatGPT can now write and run code directly on your phone](edition_4/assets/variant_c_02.png)
+![Google's AI coding agent just designed algorithms faster than human experts](edition_4/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## ChatGPT can now write and run code directly on your phone
+## Google's AI coding agent just designed algorithms faster than human experts
 
-OpenAI just added Codex — its code-writing AI — to the ChatGPT mobile app on iPhone, iPad, and Android. You can now ask ChatGPT to write a script, test an API, or debug code right in the app, and it'll execute the code and show you the output without switching to a desktop.
+AlphaEvolve uses Gemini to write and test algorithms automatically, then keeps improving them through trial and error. Google says it's already speeding up data center operations and helping scientists discover new materials—work that normally takes specialists weeks or months.
 
-*You no longer need a laptop to prototype ideas or fix bugs with AI assistance.*
+*AI can now write optimized code for specific problems without human experts doing the heavy lifting.*
 
-[9to5Mac — AI](https://9to5mac.com/2026/05/14/openai-brings-codex-control-to-chatgpt-for-iphone-and-android/) · May 19
+[Google DeepMind Blog](https://deepmind.google/blog/alphaevolve-impact/) · May 19
 
 ---
 
-![OpenAI insiders say Apple's ChatGPT integration is a letdown](edition_4/assets/variant_c_03.png)
+![Anthropic acquires Stainless, the company that builds SDK generators](edition_4/assets/variant_c_03.png)
 
 **INDUSTRY**
 
-## OpenAI insiders say Apple's ChatGPT integration is a letdown
+## Anthropic acquires Stainless, the company that builds SDK generators
 
-According to sources at OpenAI, the company feels disappointed by how Apple integrated ChatGPT into iOS. The implementation reportedly falls short of expectations, leaving OpenAI's team feeling 'burned' by the partnership. Specific technical or user experience complaints weren't detailed in available reporting.
+Anthropic bought Stainless, a dev tools startup that auto-generates SDKs from API specs. Stainless already builds the official SDKs for Claude, OpenAI, and a dozen other APIs. The team joins Anthropic to keep working on developer tooling.
 
-*Even major AI partnerships can stumble on execution — distribution matters less if the integration frustrates users.*
+*The SDK layer just became part of Claude's core infrastructure instead of a vendor relationship.*
 
-[Ars Technica — AI](https://arstechnica.com/tech-policy/2026/05/openai-feels-burned-by-apples-crappy-chatgpt-integration-insiders-say/) · May 19
+[Anthropic News](https://www.anthropic.com/news/anthropic-acquires-stainless) · May 19
 
 ---
 
@@ -53,13 +53,13 @@ According to sources at OpenAI, the company feels disappointed by how Apple inte
 
 **☕ Try this prompt**
 
-### The footnote audit
+### The zombie metric
 
-*When your draft is done but you know it's puffy.*
+*Before the next dashboard review or quarterly planning deck.*
 
 
 ```
-I'm about to paste something I wrote that feels too long. Don't summarize it. Instead, find every sentence that's doing throat-clearing, hedging, or saying the same thing twice. Quote each one back to me with a three-word reason it can go. Then show me the tighter version.
+I'm tracking a metric that everyone reports but nobody acts on. Describe it in two sentences below. Then tell me: what behavior would actually change if this number moved 30% in either direction? If the answer is nothing, give me one metric that would make someone pick up the phone.
 ```
 
 ---
