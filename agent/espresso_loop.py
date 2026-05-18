@@ -1243,6 +1243,30 @@ def run_tool_agent(state: AgentState, vendor_patterns, rules: dict, gaps: list[s
         })
         shipped = _run_tool_agent_loop(client, model, messages, state, vendor_patterns, rules)
 
+    # Finalization recovery: if the slate is complete but we ran out of budget
+    # before the final self_critique -> ship_edition cycle, grant one short lap.
+    if (
+        not shipped
+        and len(state.picks) >= min_picks
+        and state.tool_calls >= state.hard_budget
+    ):
+        extra = 6
+        state.hard_budget = state.tool_calls + extra
+        state.trace.append(TraceEvent(
+            ts=time.time(), role="system", kind="handoff",
+            result_summary=(
+                f"finalization recovery lap (+{extra} tool calls, budget now {state.hard_budget})"
+            ),
+        ))
+        messages.append({
+            "role": "user",
+            "content": (
+                "Finalization lap: slate is complete. Do not unpick. "
+                "Call self_critique once, then ship_edition if approved."
+            ),
+        })
+        shipped = _run_tool_agent_loop(client, model, messages, state, vendor_patterns, rules)
+
     if state.tool_calls >= state.hard_budget and not shipped:
         state.trace.append(TraceEvent(
             ts=time.time(), role="system", kind="error",
