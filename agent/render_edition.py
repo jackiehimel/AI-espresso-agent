@@ -28,12 +28,22 @@ from render_html import DATA_EDITIONS_DIR, EDITIONS_DIR, render_edition
 from render_images import render_images
 
 
-def exit_code_for_images(image_result: dict, *, allow_missing: bool) -> int:
-    """Return 1 when required illustrations are missing (CI gate)."""
+def exit_code_for_images(
+    image_result: dict,
+    *,
+    allow_missing: bool,
+    image_paths: list[Path] | None = None,
+) -> int:
+    """Return 1 when required illustrations are missing or too small (CI gate)."""
     if allow_missing:
         return 0
     if image_result.get("missing"):
         return 1
+    if image_paths:
+        for raw in image_paths:
+            path = Path(raw)
+            if not path.is_file() or path.stat().st_size <= 10_000:
+                return 1
     return 0
 
 
@@ -96,7 +106,11 @@ def main() -> int:
             "images": {"generated": [], "missing": []},
         }
         print(json.dumps(payload, indent=2))
-        return exit_code_for_images(payload["images"], allow_missing=args.allow_missing_images)
+        return exit_code_for_images(
+            payload["images"],
+            allow_missing=args.allow_missing_images,
+            image_paths=result.get("image_paths"),
+        )
 
     print("[render] generating illustrations...", file=sys.stderr)
     image_result = render_images(result, edition_data)

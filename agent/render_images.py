@@ -371,6 +371,10 @@ def _prompt_for_card(
     return _build_image_prompt(scene, profile, "1:1")
 
 
+def _illustration_ok(path: Path) -> bool:
+    return path.is_file() and path.stat().st_size > 10_000
+
+
 def _write_placeholder_png(path: Path, aspect_ratio: str) -> bool:
     try:
         from PIL import Image, ImageDraw
@@ -386,6 +390,12 @@ def _write_placeholder_png(path: Path, aspect_ratio: str) -> bool:
     path.parent.mkdir(parents=True, exist_ok=True)
     img.save(path)
     return path.exists()
+
+
+def _fallback_placeholder(path: Path, aspect_ratio: str) -> bool:
+    """Write a dev preview placeholder but report failure for CI/production gates."""
+    _write_placeholder_png(path, aspect_ratio)
+    return False
 
 
 def _find_asi_cli() -> str | None:
@@ -423,13 +433,17 @@ def _run_image_cli(prompt: str, filename_no_ext: Path, aspect_ratio: str) -> boo
     out_path = Path(str(filename_no_ext) + ".png")
     safe_prompt = _normalize_prompt_for_cli(prompt)
 
+    if _illustration_ok(out_path):
+        print(f"  [skip] keeping existing {out_path.name}", file=sys.stderr)
+        return True
+
     if _run_gemini_inprocess(safe_prompt, out_path, aspect_ratio):
         print("  backend: gemini (nano banana)", file=sys.stderr)
         return True
 
     if not cli:
         print("  [skip] asi-generate-image not on PATH; using placeholder", file=sys.stderr)
-        return _write_placeholder_png(out_path, aspect_ratio)
+        return _fallback_placeholder(out_path, aspect_ratio)
 
     payload = json.dumps({
         "prompt": safe_prompt,
@@ -450,16 +464,16 @@ def _run_image_cli(prompt: str, filename_no_ext: Path, aspect_ratio: str) -> boo
         )
         if result.returncode != 0:
             print(f"  [error] {result.stderr[:300]}", file=sys.stderr)
-            return _write_placeholder_png(out_path, aspect_ratio)
-        if out_path.exists() and out_path.stat().st_size > 10_000:
+            return _fallback_placeholder(out_path, aspect_ratio)
+        if _illustration_ok(out_path):
             return True
-        return _write_placeholder_png(out_path, aspect_ratio)
+        return _fallback_placeholder(out_path, aspect_ratio)
     except subprocess.TimeoutExpired:
         print("  [timeout] image gen exceeded 180s", file=sys.stderr)
-        return _write_placeholder_png(out_path, aspect_ratio)
+        return _fallback_placeholder(out_path, aspect_ratio)
     except Exception as e:
         print(f"  [exception] {e}", file=sys.stderr)
-        return _write_placeholder_png(out_path, aspect_ratio)
+        return _fallback_placeholder(out_path, aspect_ratio)
 
 
 def _build_client():
