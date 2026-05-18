@@ -700,9 +700,10 @@ def render_edition(
     """
     data = json.loads(edition_json_path.read_text())
     stories = data.get("stories", [])
-    if len(stories) < 3:
-        raise ValueError(f"Edition has {len(stories)} stories; need 3.")
+    if len(stories) < 2:
+        raise ValueError(f"Edition has {len(stories)} stories; need at least 2.")
     prompt = data.get("try_this_prompt") or {}
+    story_limit = min(len(stories), 3)
 
     issue_num = resolve_issue_num(issue_num, editions_dir)
     issue_padded = f"{issue_num:03d}"
@@ -719,7 +720,7 @@ def render_edition(
     # ---- story cards ----
     html_cards = []
     md_stories = []
-    for idx, s in enumerate(stories[:3], start=1):
+    for idx, s in enumerate(stories[:story_limit], start=1):
         cat_label, cat_cls = slot_label(s.get("slot", ""))
         img = image_filename(issue_num, idx)
         headline = s.get("headline", "").strip()
@@ -749,7 +750,8 @@ def render_edition(
             source_date=dates["source_short"],
         ))
 
-    prompt_img = image_filename(issue_num, 4)
+    prompt_idx = story_limit + 1
+    prompt_img = image_filename(issue_num, prompt_idx)
     prompt_body = (prompt.get("prompt") or "").strip()
     prompt_tip_raw = (prompt.get("tool_hint") or "").strip()
     prompt_title = (prompt.get("title") or "").strip()
@@ -761,11 +763,15 @@ def render_edition(
         prompt_body=escape(prompt_body),
         copy_icon=PROMPT_COPY_ICON,
     )
+    divider_block = (
+        '\n      <p class="section-divider">/ / /</p>\n' + "\n".join(html_cards[2:3])
+        if story_limit >= 3
+        else ""
+    )
     story_cards_row = (
         '    <div class="story-cards">\n'
         + "\n".join(html_cards[:2])
-        + '\n      <p class="section-divider">/ / /</p>\n'
-        + "\n".join(html_cards[2:3])
+        + divider_block
         + "\n    </div>"
     )
     edition_cards = story_cards_row + "\n" + prompt_card
@@ -807,9 +813,9 @@ def render_edition(
         "html_path": str(html_path),
         "md_path": str(md_path),
         "image_paths": [
-            editions_dir / image_filename(issue_num, i) for i in range(1, 5)
+            editions_dir / image_filename(issue_num, i) for i in range(1, prompt_idx + 1)
         ],
-        "stories": stories[:3],
+        "stories": stories[:story_limit],
         "prompt": {"body": prompt_body, "tool_hint": prompt_tip_raw},
         "preheader": preheader,
     }

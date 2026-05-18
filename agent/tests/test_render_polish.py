@@ -1,5 +1,6 @@
 """Phase 4 polish: public HTML footer, hidden tiers, PNG compression."""
 
+import json
 import sys
 import tempfile
 import unittest
@@ -38,6 +39,49 @@ class PublicHtmlPolishTests(unittest.TestCase):
             self.assertNotIn(">T2<", html)
             self.assertIn(FOOTER_REPO_URL, html)
             self.assertIn(FOOTER_CONTACT_EMAIL, html)
+
+    def test_render_supports_two_story_weak_pool_editions(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            edition = out / "two-story.json"
+            edition.write_text(
+                json.dumps(
+                    {
+                        "date": "2026-05-18",
+                        "stories": [
+                            {
+                                "slot": "business",
+                                "headline": "Anthropic raises Claude usage limits",
+                                "blurb": "Higher limits for paying users.",
+                                "why_it_matters": "More work can run without context resets.",
+                                "source_name": "Anthropic News",
+                                "source_url": "https://example.com/a",
+                                "tier": 1,
+                            },
+                            {
+                                "slot": "engineer",
+                                "headline": "Meta AI ships real-time video tracking update",
+                                "blurb": "Faster model for live computer vision tasks.",
+                                "why_it_matters": "Developers can prototype faster on edge workloads.",
+                                "source_name": "Meta AI Blog",
+                                "source_url": "https://example.com/b",
+                                "tier": 1,
+                            },
+                        ],
+                        "try_this_prompt": {
+                            "title": "Try this prompt",
+                            "prompt": "Summarize today's two strongest AI moves.",
+                            "tool_hint": "Paste into your assistant.",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            result = render_edition(edition, issue_num=77, editions_dir=out)
+            html = Path(result["html_path"]).read_text(encoding="utf-8")
+            self.assertNotIn("Edition has 2 stories", html)
+            self.assertEqual(len(result["stories"]), 2)
+            self.assertEqual(len(result["image_paths"]), 3)
 
 
 class CompressEditionPngTests(unittest.TestCase):
