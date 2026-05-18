@@ -10,8 +10,8 @@
 | Gate | Status |
 |------|--------|
 | Unit tests | **98** ran, **OK**, **0** skipped — `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v` |
-| CI (`Tests` workflow) | Green on `03d96b7` — https://github.com/jackiehimel/ai-espresso-finalized/actions/runs/26053716886 |
-| `origin/main` | `03d96b7` (includes `991f54c` archive upsert, `7a49d5f` compact reads, illustration gate) |
+| CI (`Tests` workflow) | Green on `105112f` — https://github.com/jackiehimel/ai-espresso-finalized/actions/runs/26053716886 (last green before doc commit; re-run after each push) |
+| `origin/main` | `105112f` (closure stack: `991f54c` archive, `7a49d5f` compact reads, `03d96b7` illustration gate) |
 | Archive | Single row per date; `load_archive` / `recent_archive_headlines` use compacted reads |
 | Verification edition | `agent/data/editions/2026-05-19.json`; HTML `editions/edition_4_variant_c.html` |
 | Illustrations | Production PNGs on edition 4 (~500KB each); `render_edition.py 2026-05-19` exits **0** without `--allow-missing-images` |
@@ -27,6 +27,23 @@
 - `SLACK_WEBHOOK_URL` (optional failure alerts)
 
 Re-run: `gh workflow run "Daily AI Espresso edition" --ref main -f date=2026-05-19 -f skip_email=true`
+
+### Rollback pointers (record after every push + green CI)
+
+Before pushing risky ops/runtime changes (Phases 4–5 of operational closure, or any future main deploy), capture **`previous_main_sha`** = `origin/main` immediately before push, then **`current_sha`** = new `origin/main` after push once **Tests** is green. Instant rollback (only with explicit approval):
+
+```bash
+git push origin <previous_main_sha>:main
+```
+
+| When | `previous_main_sha` | `current_sha` | Green CI run |
+|------|---------------------|---------------|--------------|
+| Operational closure — first ship (archive + CI fixtures) | `f312fd3` | `991f54c` | https://github.com/jackiehimel/ai-espresso-finalized/actions/runs/26053358627 |
+| Operational closure — archive read compaction | `991f54c` | `7a49d5f` | https://github.com/jackiehimel/ai-espresso-finalized/actions/runs/26053463976 |
+| Operational closure — illustration gate | `7a49d5f` | `03d96b7` | https://github.com/jackiehimel/ai-espresso-finalized/actions/runs/26053716886 |
+| Operational closure — head (docs + render HTML) | `03d96b7` | `105112f` | (docs-only push; re-verify Tests if code changes follow) |
+
+**Baseline tag (broader revert):** `pre-launch-baseline` → `a776f26`
 
 ## 2026-05-18 — Execution playbook (fix order without context rot)
 
@@ -56,7 +73,32 @@ Re-run: `gh workflow run "Daily AI Espresso edition" --ref main -f date=2026-05-
 - **End each session:** update "Completed" below; paste test count; note any rubric prompt diff intent.
 - **Per-PR prompt to agent:** scope to one phase; link this file; repeat agent non-negotiables; forbid drive-by refactors.
 - **Verification gate before "done":** tests green; for agent-touching PRs, inspect `agent_trace` on a dry run or fixture; for render PRs, open HTML locally.
+- **After push + green CI:** append a row to **Rollback pointers** (`previous_main_sha`, `current_sha`, CI run URL).
 - **Do not** batch "all audit fixes" in one thread — context window rot is the main risk.
+
+### Operational closure gates (post pre-launch)
+
+Use when running operational closure (multi-phase ship to `main`) or similar post-launch ops work.
+
+**Phase 1 — Ship + CI**
+
+1. `previous_main_sha=$(git rev-parse origin/main)` before push.
+2. Push; wait for **Tests** workflow success on `current_sha`.
+3. Record both SHAs + CI URL in **Rollback pointers** (table above).
+
+**Phase 3 — Workspace hygiene (strict)**
+
+Exit only when `git status` contains **only paths expected for the current phase** — not “clean enough” or “intentional-looking” stray files.
+
+| Phase / work | Allowed in `git status` (and nothing else) |
+|--------------|------------------------------------------|
+| 1 — agent/CI code | `agent/**`, `.github/workflows/**`, `context/**` (if updating docs), `agent/data/archive.jsonl` |
+| 2 — archive read hardening | Same as phase 1 code paths + test files touched |
+| 3 — hygiene only | **Empty** after restore/delete, OR only deletions of explicitly removed accidental paths (e.g. stray `editions/edition_2_*`) |
+| 4 — render / illustrations | `editions/edition_<N>_*`, `editions/edition_<N>/assets/*`, `agent/data/editions/<date>.json` for the edition being rendered |
+| 5–6 — workflow / docs | Workflow log URLs in docs only; code changes limited to `context/**` or paths listed for that sub-step |
+
+If status shows unrelated edition assets, `.gitignore`, or `.cursor/` noise, **restore or delete** until the allowlist matches — do not carry into the next commit.
 
 ### Completed (check off as merged)
 
