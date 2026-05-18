@@ -3,9 +3,34 @@
 **GitHub:** https://github.com/jackiehimel/ai-espresso-finalized (private)  
 **Baseline commit:** `a776f26` — tag with `git tag pre-launch-baseline` to revert anytime.
 
+## Launch readiness (2026-05-18)
+
+**Verdict:** Code and CI are launch-ready. **Daily cron is blocked until GitHub Actions secrets are configured** (see below).
+
+| Gate | Status |
+|------|--------|
+| Unit tests | **98** ran, **OK**, **0** skipped — `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v` |
+| CI (`Tests` workflow) | Green on `03d96b7` — https://github.com/jackiehimel/ai-espresso-finalized/actions/runs/26053716886 |
+| `origin/main` | `03d96b7` (includes `991f54c` archive upsert, `7a49d5f` compact reads, illustration gate) |
+| Archive | Single row per date; `load_archive` / `recent_archive_headlines` use compacted reads |
+| Verification edition | `agent/data/editions/2026-05-19.json`; HTML `editions/edition_4_variant_c.html` |
+| Illustrations | Production PNGs on edition 4 (~500KB each); `render_edition.py 2026-05-19` exits **0** without `--allow-missing-images` |
+| `workflow_dispatch` smoke | Ran 2026-05-19 `skip_email=true` — https://github.com/jackiehimel/ai-espresso-finalized/actions/runs/26053564938 — **unit tests passed**; **agent step failed** (`ANTHROPIC_API_KEY` not set in repo secrets) |
+
+**Before enabling the daily schedule**, add repository secrets used by [`.github/workflows/daily-edition.yml`](.github/workflows/daily-edition.yml):
+
+- `ANTHROPIC_API_KEY` (required — Scout + Editor loop)
+- `GEMINI_API_KEY` or `GOOGLE_API_KEY` (illustrations)
+- `OPENAI_API_KEY` (optional illustration fallback)
+- `PERPLEXITY_API_KEY` (search tool)
+- `AI_ESPRESSO_FROM`, `AI_ESPRESSO_TO`, `GMAIL_APP_PASSWORD` (email; optional on first run with `skip_email: true`)
+- `SLACK_WEBHOOK_URL` (optional failure alerts)
+
+Re-run: `gh workflow run "Daily AI Espresso edition" --ref main -f date=2026-05-19 -f skip_email=true`
+
 ## 2026-05-18 — Execution playbook (fix order without context rot)
 
-**Verdict:** Not launch-ready. Agent loop is real (native `tool_use` Editor, ship gates, trace). Fix ops/trust first, then rubric-in-prompts, never expand regex constitution.
+**Verdict:** Pre-launch engineering complete; enable cron after secrets + one green `workflow_dispatch`.
 
 ### Agent non-negotiables (do not de-agent)
 
@@ -35,7 +60,7 @@
 
 ### Completed (check off as merged)
 
-- [ ] Phase 1.1 Archive upsert + ESPRESSO_SKIP_ARCHIVE
+- [x] Phase 1.1 Archive upsert + ESPRESSO_SKIP_ARCHIVE — pushed `991f54c`, read compaction `7a49d5f`
 - [x] Phase 1.2 QOTD honest UX — merged `10e4dfc` (with 1.3 in same PR)
 - [x] Phase 1.3 CI/workflow guards + alerts — merged `10e4dfc`
 - [x] Phase 2.1 Unified rubric in prompts — merged `b4a8563`
@@ -58,7 +83,17 @@
 
 **Preview:** `cd agent && python3 preview_edition.py 2026-05-18 --render-only --no-images` (serves `editions/`; images at 160px CSS from 512px PNGs).
 
-**Next session:** Phase **1.1** archive upsert (still open) or ship `2026-05-19` to prod with image API keys.
+### Session handoff (Phase 1.1 — archive upsert + preview safety) — MERGED
+
+**Tests (2026-05-18):** `98` ran, `OK` (`0` skipped).
+
+**Shipped in `fix: harden archive and preview reliability` (`991f54c`) + `fix: compact archive reads` (`7a49d5f`):**
+- `append_archive`: upsert by edition date; compact duplicate rows on write.
+- `ESPRESSO_SKIP_ARCHIVE=1`: skip archive in `write_edition`; preview defaults skip unless `--write-archive`.
+- `preview_edition.py`: sets skip env during agent preview; `--write-archive` opt-in.
+- `load_archive` / `recent_archive_headlines`: read via `_load_archive_records_compacted()` (last row per date wins).
+- CI: optional flaky RSS feeds on GHA; optional Slack on workflow failure.
+- `agent/data/archive.jsonl`: single `2026-05-18` row aligned with shipped edition JSON.
 
 ### Session handoff (Phase 3 — editorial quality verification) — LOCAL
 
@@ -75,7 +110,7 @@
 - beginner: ChatGPT can now write and run code directly on your phone (9to5Mac — AI)
 - cross: OpenAI insiders say Apple's ChatGPT integration is a letdown (Ars Technica — AI)
 
-**Render:** `python3 render_edition.py 2026-05-19` → `editions/edition_4_variant_c.html` (reused issue 4 slot because assets dir exists). QOTD: honest preview copy. No `T1`/`T2` in public HTML. Illustrations: placeholder PNGs (~5KB each) — no image API keys in env; set keys and re-render for real hedcuts.
+**Render:** `editions/edition_4_variant_c.html` (issue 4 slot). QOTD: honest preview copy. No `T1`/`T2` in public HTML. Illustrations: production PNGs restored/compressed on edition 4 (~500KB each); story-matched regen needs `GEMINI_API_KEY` / `OPENAI_API_KEY` in `agent/.env` or GHA secrets.
 
 **Quality:** No prompt changes — critic loop corrected vendor overlap and archive-adjacent finance repeat without new regex.
 
@@ -135,18 +170,18 @@
 
 ## 2026-05-18 — Pre-launch audit summary
 
-**Blockers:** duplicate `archive.jsonl` per day; no dev archive skip.
+**Resolved blockers:** duplicate `archive.jsonl` per day; no dev archive skip; QOTD fake success; render exit 0 with missing/placeholder images; daily cron skips tests; CI red on source fetch (RSS migration + flaky-feed tolerance).
 
 **Resolved (4):** footer personal email + stale repo URL; ~2.5MB PNGs; `run_chain.py` doc missing.
 
-**Resolved (1.2/1.3):** QOTD fake API success; render exit 0 with missing images; daily cron skips tests.
+**Resolved (1.1):** archive upsert + `ESPRESSO_SKIP_ARCHIVE` + preview `--write-archive`; compacted archive reads.
 
-**Resolved (2.1):** unified Scout/Editor/Critic rubric in prompts (`_EDITORIAL_RUBRIC`); audience/partnership/deepfake distinctions in prompt text, not new code regex.
+**Resolved (1.2/1.3):** honest QOTD; tests-before-generate; failure summary + optional Slack.
 
-**Resolved (2.2):** constitution / `HEADLINE_HARD_SKIP_RE` narrowed to empty headline, AI lexicon, obvious failure-as-primary; sociology/PR/drama/office openings prompt-led.
+**Resolved (2.1–2.3):** unified rubric; narrow constitution backstop; deterministic path dev-only.
 
-**Resolved (2.3):** deterministic fallback documented dev-only; `daily-edition.yml` never sets fallback env; `RANKING_SYSTEM` marked deprecated vs agent rubric.
+**Remaining (ops, not code):** configure GitHub Actions secrets; re-run `workflow_dispatch` until `generate` job succeeds; optional story-matched illustration regen when keys are set.
 
-**Working well:** native tool_use loop, approve→ship lock, constitution gate vs bad critic approve, full agent_trace, **85 tests** (3 skipped).
+**Working well:** native tool_use loop, approve→ship lock, constitution gate vs bad critic approve, full agent_trace, **98 tests** (0 skipped).
 
-**Sample edition:** `2026-05-18` / edition_4 — agent shipped after critic revise; trace at `agent/data/editions/2026-05-18.json`.
+**Sample editions:** `2026-05-18` (fixture) / `2026-05-19` (verification run) — traces in `agent/data/editions/`.
