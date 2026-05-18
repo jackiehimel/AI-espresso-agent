@@ -30,6 +30,14 @@ class DailyEditionWorkflowTests(unittest.TestCase):
                 f"production workflow must not set fallback env: {line!r}",
             )
 
+    def test_failure_notification_has_optional_slack_webhook(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("name: Optional Slack failure notification", text)
+        self.assertIn("SLACK_WEBHOOK_URL", text)
+        self.assertIn("if [ -z \"${SLACK_WEBHOOK_URL:-}\" ]; then", text)
+        self.assertIn("skipping Slack notification", text)
+        self.assertIn("::warning::Slack failure notification failed", text)
+
 
 if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))

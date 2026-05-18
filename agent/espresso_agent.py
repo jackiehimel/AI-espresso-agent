@@ -18,7 +18,7 @@ Pipeline (in order):
   7. Generate a "try this prompt" matched to today's stories
   8. Generate a daily-question seed
   9. Write edition JSON to data/editions/YYYY-MM-DD.json
- 10. Append to data/archive.jsonl for future dedupe
+ 10. Upsert data/archive.jsonl for future dedupe
 
 Usage:
     python espresso_agent.py                 # run today's edition
@@ -439,14 +439,67 @@ def load_archive(days: int = 30) -> set[str]:
     return seen
 
 
+def _normalized_archive_record(rec: dict[str, Any]) -> dict[str, Any] | None:
+    date = rec.get("date")
+    if not isinstance(date, str) or not date:
+        return None
+    fingerprints = rec.get("fingerprints")
+    headlines = rec.get("headlines")
+    return {
+        "date": date,
+        "fingerprints": fingerprints if isinstance(fingerprints, list) else [],
+        "headlines": headlines if isinstance(headlines, list) else [],
+    }
+
+
+def _load_archive_records_compacted() -> list[dict[str, Any]]:
+    """Load archive rows and compact duplicates by date (last valid row wins)."""
+    if not ARCHIVE_FILE.exists():
+        return []
+    rows: list[dict[str, Any]] = []
+    index_by_date: dict[str, int] = {}
+    with open(ARCHIVE_FILE, encoding="utf-8") as f:
+        for line in f:
+            try:
+                raw = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(raw, dict):
+                continue
+            rec = _normalized_archive_record(raw)
+            if rec is None:
+                continue
+            date = rec["date"]
+            if date in index_by_date:
+                rows[index_by_date[date]] = rec
+            else:
+                index_by_date[date] = len(rows)
+                rows.append(rec)
+    return rows
+
+
+def _write_archive_records(rows: list[dict[str, Any]]) -> None:
+    ARCHIVE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(ARCHIVE_FILE, "w", encoding="utf-8") as f:
+        for rec in rows:
+            f.write(json.dumps(rec) + "\n")
+
+
 def append_archive(edition: Edition) -> None:
+    """Upsert archive by edition date and compact any existing duplicate rows."""
     rec = {
         "date": edition.date,
         "fingerprints": [s.fingerprint for s in edition.stories],
         "headlines": [s.headline for s in edition.stories],
     }
-    with open(ARCHIVE_FILE, "a") as f:
-        f.write(json.dumps(rec) + "\n")
+    rows = _load_archive_records_compacted()
+    for idx, existing in enumerate(rows):
+        if existing.get("date") == edition.date:
+            rows[idx] = rec
+            break
+    else:
+        rows.append(rec)
+    _write_archive_records(rows)
 
 
 # ───────────────────────────────────────────────────────────────────────

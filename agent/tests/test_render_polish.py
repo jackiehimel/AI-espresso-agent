@@ -26,7 +26,7 @@ class PublicHtmlPolishTests(unittest.TestCase):
         self.assertNotIn("AI-ESPRESSO-MAIN", html)
 
     def test_rendered_html_hides_source_tiers(self):
-        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-16.json"
+        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-18.json"
         if not edition.exists():
             self.skipTest("fixture edition missing")
         with tempfile.TemporaryDirectory() as tmp:

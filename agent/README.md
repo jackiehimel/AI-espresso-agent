@@ -20,7 +20,10 @@ python3 render_edition.py $(date +%Y-%m-%d)
 python3 preview_edition.py $(date +%Y-%m-%d) --use-cache
 python3 preview_edition.py 2026-05-18 --render-only   # re-render + open existing JSON
 python3 preview_edition.py 2026-05-18 --no-images     # faster, broken image icons OK
+python3 preview_edition.py 2026-05-18 --write-archive # opt in to archive mutation
 ```
+
+`preview_edition.py` skips archive writes by default (sets `ESPRESSO_SKIP_ARCHIVE=1` during preview runs) so local previews do not mutate cross-edition memory.
 
 Output:
 - `data/editions/YYYY-MM-DD.json` — raw edition data + agent trace
@@ -227,6 +230,7 @@ Required repo secrets:
 | `AI_ESPRESSO_FROM` | Sender address, e.g. `you@gmail.com` |
 | `AI_ESPRESSO_TO`   | Comma-separated recipients, e.g. `you@work.com` |
 | `GMAIL_APP_PASSWORD` | 16-char Gmail [app password](https://myaccount.google.com/apppasswords) used for SMTP |
+| `SLACK_WEBHOOK_URL` | Optional — when set, `notify-failure` posts workflow failures to Slack; if unset, Slack step is skipped |
 
 The workflow has `permissions: contents: write` so it can push commits. To run without sending the email, dispatch the workflow manually with `skip_email=true`.
 

@@ -132,5 +132,40 @@ jobs:
             echo ""
             echo "Check the generate job logs for agent, render, or email errors."
             echo ""
-            echo "_Slack: wire \`SLACK_WEBHOOK_URL\` secret and a notify step when ready._"
+            echo "_Optional Slack: set \`SLACK_WEBHOOK_URL\` to enable webhook alerts._"
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Optional Slack failure notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -z "${SLACK_WEBHOOK_URL:-}" ]; then
+            echo "SLACK_WEBHOOK_URL not set; skipping Slack notification."
+            exit 0
+          fi
+
+          python - <<'PY' > payload.json
+          import json
+          import os
+
+          payload = {
+              "text": "Daily AI Espresso edition failed",
+              "blocks": [
+                  {
+                      "type": "section",
+                      "text": {"type": "mrkdwn", "text": "*Daily AI Espresso edition failed*"},
+                  },
+                  {
+                      "type": "section",
+                      "text": {"type": "mrkdwn", "text": f"Run: {os.environ['RUN_URL']}"},
+                  },
+              ],
+          }
+          print(json.dumps(payload))
+          PY
+
+          curl --fail --show-error --silent --max-time 10 --retry 2 \
+            -H "Content-Type: application/json" \
+            -d @payload.json \
+            "$SLACK_WEBHOOK_URL" || echo "::warning::Slack failure notification failed"
