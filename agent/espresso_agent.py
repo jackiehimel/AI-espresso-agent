@@ -50,7 +50,6 @@ from bs4 import BeautifulSoup
 from prompt_tile import build_prompt_tile as _build_prompt_tile_llm
 
 from editorial import (
-    DRAMA_HEADLINE_RE,
     HEADLINE_HARD_SKIP_RE,
     validate_edition_stories,
     validate_hook,

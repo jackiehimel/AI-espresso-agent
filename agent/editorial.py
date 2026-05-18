@@ -12,6 +12,8 @@ import datetime as dt
 import re
 from typing import Any
 
+from constitution import FAILURE_PRIMARY_RE
+
 # ── Rotating masthead voice (deterministic per edition date) ──────────
 
 VOICE_CHARACTERS: list[str] = [
@@ -70,21 +72,8 @@ COPY_BANNED_WORDS_RE = re.compile(
     re.I,
 )
 
-# Drama-as-hook: AI incidental to lawsuit / founder feud (HARD EXCLUDE cousin)
-DRAMA_HEADLINE_RE = re.compile(
-    r"(musk|elon).*(trial|lawsuit|court)|(trial|lawsuit).*(musk|openai|altman)|"
-    r"founder\s+breakup|nonprofit\s+trial|breakup\s+playbook|"
-    r"legal\s+battle\s+with\s+elon|vs\.?\s+altman",
-    re.I,
-)
-
-HEADLINE_HARD_SKIP_RE = re.compile(
-    r"(spin(?:s|ning)?\s+out|enterprise ai services|mortgage broker|"
-    r"brokers? (?:are )?worried|insider trading in prediction|"
-    r"trapped in|cul-de-sac|got stuck|become trapped|driverless cars become|"
-    r"musk.*trial|nonprofit trial|founder breakup|lawsuit wraps)",
-    re.I,
-)
+# Narrow failure-as-primary backstop (shared with constitution.py ship gate).
+HEADLINE_HARD_SKIP_RE = FAILURE_PRIMARY_RE
 
 # Minimum article HTML text after a successful article fetch.
 MIN_VERIFIED_BODY_CHARS = 120
@@ -167,10 +156,8 @@ def validate_story_copy(story: dict[str, Any]) -> list[str]:
     if m:
         reasons.append(f"banned copy word: {m.group(0)}")
     hl = story.get("headline") or story.get("original_headline") or ""
-    if DRAMA_HEADLINE_RE.search(hl):
-        reasons.append("drama-as-hook headline (AI incidental to legal/feud story)")
     if HEADLINE_HARD_SKIP_RE.search(hl):
-        reasons.append("headline matches hard-skip pattern")
+        reasons.append("headline uses failure-as-primary frame (constitution backstop)")
     return reasons
 
 

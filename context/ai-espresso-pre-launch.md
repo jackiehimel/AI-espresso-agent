@@ -38,17 +38,35 @@
 - [ ] Phase 1.1 Archive upsert + ESPRESSO_SKIP_ARCHIVE
 - [x] Phase 1.2 QOTD honest UX — merged `10e4dfc` (with 1.3 in same PR)
 - [x] Phase 1.3 CI/workflow guards + alerts — merged `10e4dfc`
-- [x] Phase 2.1 Unified rubric in prompts
-- [ ] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE
+- [x] Phase 2.1 Unified rubric in prompts — merged `b4a8563`
+- [x] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE
 - [ ] Phase 2.3 Deterministic path dev-only / aligned
 - [ ] Phase 3 Editorial quality pass + clean prod edition
 - [ ] Phase 4 External polish
 
-### Session handoff (Phase 2.1 — unified prompts)
+### Session handoff (Phase 2.2 — narrow constitution backstop)
+
+**Tests (2026-05-18):** `79` ran, `OK` (`2` skipped). Command: `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v`.
+
+**Shipped (local, PR title `refactor: narrow constitution to ship backstop`):**
+- `constitution.py`: removed `HARD_REJECT_PATTERNS`, `NO_HOOK_RE`, `INCIDENTAL_FAILURE_RE`, broad `AI_FAILURE_TONE_RE` / layoff lexicon; kept `AI_LEXICON_RE` + narrow `FAILURE_PRIMARY_RE` (slop, glitch, trapped, fails again, refuses to help).
+- `editorial.py`: `HEADLINE_HARD_SKIP_RE` aliases `FAILURE_PRIMARY_RE`; removed `DRAMA_HEADLINE_RE`.
+- Tests document prompt-led cases (HBR, office opening, legal drama) vs code backstop (Waymo trapped, slop, refuses).
+
+**Next session:** Prompt 5 — Phase **2.3 only** (deterministic fallback dev-only). Do not start 2.3 until 2.2 is merged.
+
+### Session handoff (after PR merge `b4a8563` — Phase 2.1)
 
 **Tests (2026-05-18):** `73` ran, `OK` (`2` skipped). Command: `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v`.
 
-**Phase 2.1 intent:** `_EDITORIAL_RUBRIC` in `espresso_loop.py` shared by Scout/Editor/Critic; audience = any Solvd employee; lab partnerships OK with hook; HBR/workforce sociology reject; deepfake scandal vs detection-product distinction; `constitution_prompt_block()` unchanged at tail.
+**Shipped in `refactor: unify agent editorial prompts`:**
+- `_EDITORIAL_RUBRIC` in `espresso_loop.py` shared by Scout/Editor/Critic (role-specific tails only).
+- Audience: any Solvd employee (not non-technical-only). Lab partnerships OK with hook; HBR/workforce sociology reject; deepfake scandal vs detection-product feature clarified.
+- `constitution_prompt_block()` still appended to all three system prompts; tool loop and `dispatch_tool` gates unchanged.
+
+**Next session:** **Prompt 5** — Phase **2.3 only** (deterministic fallback dev-only). See handoff above for 2.2.
+
+**Still open from audit:** Phase 1.1 archive ops; footer email / repo URL; `RANKING_SYSTEM` mismatch; large PNGs; `run_chain.py` doc.
 
 ### Session handoff (after PR merge `10e4dfc`)
 
@@ -60,18 +78,20 @@
 - `daily-edition.yml`: unit tests before generate; render JSON outputs → email paths; `notify-failure` job writes step summary.
 - New tests: `test_qotd.py`, `test_render_edition.py`. `edition_4_variant_c.html` regenerated with preview QOTD.
 
-**Next session:** **Prompt 1** in `context/ai-espresso-session-prompts.md` — Phase **1.1 only** (archive upsert, `ESPRESSO_SKIP_ARCHIVE`, preview `dry_run` defaults, dedupe `2026-05-18` archive rows). Do not start 2.x until 1.1 is merged.
-
-**Still open from audit:** duplicate archive per day; no `ESPRESSO_SKIP_ARCHIVE`; constitution/editorial regex bloat; footer email / repo URL; `RANKING_SYSTEM` mismatch; large PNGs; `run_chain.py` doc.
+**Historical note:** 1.1 archive ops still open; 2.1 rubric merged in `b4a8563` (see handoff above).
 
 ## 2026-05-18 — Pre-launch audit summary
 
-**Blockers:** duplicate `archive.jsonl` per day; no dev archive skip; hardcoded editorial regex in `constitution.py` / `editorial.py`.
+**Blockers:** duplicate `archive.jsonl` per day; no dev archive skip.
 
 **High:** footer personal email + stale repo URL; `RANKING_SYSTEM` vs agent audience mismatch; ~2.5MB PNGs; `run_chain.py` doc missing.
 
 **Resolved (1.2/1.3):** QOTD fake API success; render exit 0 with missing images; daily cron skips tests.
 
-**Working well:** native tool_use loop, approve→ship lock, constitution gate vs bad critic approve, full agent_trace, **73 tests** (2 skipped).
+**Resolved (2.1):** unified Scout/Editor/Critic rubric in prompts (`_EDITORIAL_RUBRIC`); audience/partnership/deepfake distinctions in prompt text, not new code regex.
+
+**Resolved (2.2):** constitution / `HEADLINE_HARD_SKIP_RE` narrowed to empty headline, AI lexicon, obvious failure-as-primary; sociology/PR/drama/office openings prompt-led.
+
+**Working well:** native tool_use loop, approve→ship lock, constitution gate vs bad critic approve, full agent_trace, **79 tests** (2 skipped).
 
 **Sample edition:** `2026-05-18` / edition_4 — agent shipped after critic revise; trace at `agent/data/editions/2026-05-18.json`.

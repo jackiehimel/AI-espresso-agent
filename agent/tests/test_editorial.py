@@ -44,14 +44,23 @@ class StoryCopyValidationTests(unittest.TestCase):
         issues = ed.validate_story_copy(story)
         self.assertTrue(any("redefine" in r for r in issues))
 
-    def test_drama_headline_flagged(self):
+    def test_failure_primary_headline_flagged(self):
+        story = {
+            "headline": "Waymo cars become trapped in Atlanta suburb after glitch",
+            "blurb": "Routing failed again.",
+            "why_it_matters": "AV reliability question.",
+        }
+        issues = ed.validate_story_copy(story)
+        self.assertTrue(any("failure-as-primary" in r for r in issues))
+
+    def test_drama_headline_not_blocked_by_narrow_gate(self):
         story = {
             "headline": "OpenAI's nonprofit trial with Elon Musk just wrapped",
             "blurb": "Court ended arguments.",
             "why_it_matters": "Legal outcome pending.",
         }
-        issues = ed.validate_story_copy(story)
-        self.assertTrue(any("drama" in r for r in issues))
+        issues = [r for r in ed.validate_story_copy(story) if "failure-as-primary" in r]
+        self.assertEqual(issues, [])
 
     def test_product_story_clean(self):
         story = {
