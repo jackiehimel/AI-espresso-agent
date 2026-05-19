@@ -96,7 +96,7 @@ class ValidatePromptTileTests(unittest.TestCase):
 class RenderLayoutTests(unittest.TestCase):
 
     def test_html_has_minimal_masthead(self):
-        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-16.json"
+        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-18.json"
         if not edition.exists():
             self.skipTest("fixture edition missing")
         result = render_edition(edition, issue_num=2)
@@ -106,7 +106,7 @@ class RenderLayoutTests(unittest.TestCase):
         self.assertIn('class="wordmark"', html)
         self.assertIn('class="dateline"', html)
         self.assertIn("border: 1px dashed #C9A671", html)
-        self.assertIn("background-color: #FFF4D6", html)
+        self.assertIn("background: linear-gradient(165deg, #FFF8E8 0%, #FFF4D6 55%, #F9E9C8 100%)", html)
 
 
 if __name__ == "__main__":

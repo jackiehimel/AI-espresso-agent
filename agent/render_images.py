@@ -371,6 +371,10 @@ def _prompt_for_card(
     return _build_image_prompt(scene, profile, "1:1")
 
 
+def _illustration_ok(path: Path) -> bool:
+    return path.is_file() and path.stat().st_size > 10_000
+
+
 def _write_placeholder_png(path: Path, aspect_ratio: str) -> bool:
     try:
         from PIL import Image, ImageDraw
@@ -386,6 +390,12 @@ def _write_placeholder_png(path: Path, aspect_ratio: str) -> bool:
     path.parent.mkdir(parents=True, exist_ok=True)
     img.save(path)
     return path.exists()
+
+
+def _fallback_placeholder(path: Path, aspect_ratio: str) -> bool:
+    """Write a dev preview placeholder but report failure for CI/production gates."""
+    _write_placeholder_png(path, aspect_ratio)
+    return False
 
 
 def _find_asi_cli() -> str | None:
@@ -423,13 +433,17 @@ def _run_image_cli(prompt: str, filename_no_ext: Path, aspect_ratio: str) -> boo
     out_path = Path(str(filename_no_ext) + ".png")
     safe_prompt = _normalize_prompt_for_cli(prompt)
 
+    if _illustration_ok(out_path):
+        print(f"  [skip] keeping existing {out_path.name}", file=sys.stderr)
+        return True
+
     if _run_gemini_inprocess(safe_prompt, out_path, aspect_ratio):
         print("  backend: gemini (nano banana)", file=sys.stderr)
         return True
 
     if not cli:
         print("  [skip] asi-generate-image not on PATH; using placeholder", file=sys.stderr)
-        return _write_placeholder_png(out_path, aspect_ratio)
+        return _fallback_placeholder(out_path, aspect_ratio)
 
     payload = json.dumps({
         "prompt": safe_prompt,
@@ -450,16 +464,16 @@ def _run_image_cli(prompt: str, filename_no_ext: Path, aspect_ratio: str) -> boo
         )
         if result.returncode != 0:
             print(f"  [error] {result.stderr[:300]}", file=sys.stderr)
-            return _write_placeholder_png(out_path, aspect_ratio)
-        if out_path.exists() and out_path.stat().st_size > 10_000:
+            return _fallback_placeholder(out_path, aspect_ratio)
+        if _illustration_ok(out_path):
             return True
-        return _write_placeholder_png(out_path, aspect_ratio)
+        return _fallback_placeholder(out_path, aspect_ratio)
     except subprocess.TimeoutExpired:
         print("  [timeout] image gen exceeded 180s", file=sys.stderr)
-        return _write_placeholder_png(out_path, aspect_ratio)
+        return _fallback_placeholder(out_path, aspect_ratio)
     except Exception as e:
         print(f"  [exception] {e}", file=sys.stderr)
-        return _write_placeholder_png(out_path, aspect_ratio)
+        return _fallback_placeholder(out_path, aspect_ratio)
 
 
 def _build_client():
@@ -470,6 +484,60 @@ def _build_client():
         return anthropic.Anthropic()
     except Exception:
         return None
+
+
+# Card thumbnails display at 160px; 512px covers 3x retina with headroom for email.
+EDITION_PNG_MAX_WIDTH = 512
+
+
+def compress_edition_pngs(
+    image_paths: list[Path],
+    *,
+    max_width: int = EDITION_PNG_MAX_WIDTH,
+) -> dict[str, Any]:
+    """
+    Resize oversized illustration PNGs and re-save with optimize=True.
+    Skips paths that are missing or when Pillow is unavailable.
+    """
+    try:
+        from PIL import Image
+    except ImportError:
+        return {
+            "compressed": [],
+            "skipped": [str(p) for p in image_paths],
+            "reason": "pillow_unavailable",
+        }
+
+    compressed: list[str] = []
+    skipped: list[str] = []
+    for raw in image_paths:
+        path = Path(raw)
+        if not path.is_file():
+            skipped.append(str(path))
+            continue
+        before = path.stat().st_size
+        try:
+            with Image.open(path) as img:
+                if img.mode != "RGB":
+                    img = img.convert("RGB")
+                w, h = img.size
+                if max(w, h) > max_width:
+                    scale = max_width / float(max(w, h))
+                    new_size = (max(1, int(w * scale)), max(1, int(h * scale)))
+                    resample = getattr(Image, "Resampling", Image).LANCZOS
+                    img = img.resize(new_size, resample)
+                path.parent.mkdir(parents=True, exist_ok=True)
+                img.save(path, format="PNG", optimize=True)
+            after = path.stat().st_size
+            compressed.append(str(path))
+            print(
+                f"  [compress] {path.name}: {before // 1024}KB → {after // 1024}KB",
+                file=sys.stderr,
+            )
+        except Exception as e:
+            print(f"  [compress fail] {path}: {e}", file=sys.stderr)
+            skipped.append(str(path))
+    return {"compressed": compressed, "skipped": skipped}
 
 
 def render_images(
@@ -508,7 +576,13 @@ def render_images(
         ok = _run_image_cli(prompt, no_ext, "1:1")
         (generated if ok else missing).append(str(path))
 
-    return {"generated": generated, "missing": missing, "prompts": prompts}
+    compress_result = compress_edition_pngs([Path(p) for p in generated])
+    return {
+        "generated": generated,
+        "missing": missing,
+        "prompts": prompts,
+        "compress": compress_result,
+    }
 
 
 if __name__ == "__main__":

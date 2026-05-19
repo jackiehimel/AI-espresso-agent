@@ -43,7 +43,7 @@ class QotdSectionTests(unittest.TestCase):
             self.assertEqual(qotd_api_base(), "https://x.test")
 
     def test_rendered_html_preview_by_default(self):
-        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-16.json"
+        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-18.json"
         if not edition.exists():
             self.skipTest("fixture edition missing")
         env = {k: v for k, v in os.environ.items() if k != "AI_ESPRESSO_QOTD_API_URL"}

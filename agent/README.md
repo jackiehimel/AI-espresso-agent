@@ -20,7 +20,10 @@ python3 render_edition.py $(date +%Y-%m-%d)
 python3 preview_edition.py $(date +%Y-%m-%d) --use-cache
 python3 preview_edition.py 2026-05-18 --render-only   # re-render + open existing JSON
 python3 preview_edition.py 2026-05-18 --no-images     # faster, broken image icons OK
+python3 preview_edition.py 2026-05-18 --write-archive # opt in to archive mutation
 ```
+
+`preview_edition.py` skips archive writes by default (sets `ESPRESSO_SKIP_ARCHIVE=1` during preview runs) so local previews do not mutate cross-edition memory.
 
 Output:
 - `data/editions/YYYY-MM-DD.json` — raw edition data + agent trace
@@ -30,9 +33,20 @@ Output:
 
 The `editions/` directory at the repo root is the contract surface that the AI Garage portal consumes via its existing `sync-espresso.mjs` script.
 
-### Dev backfill (`run_chain.py`)
+### Dev backfill (multiple dates)
 
-Runs `espresso_agent.run(date, mode="agent")` for a hard-coded list of dates (see the script). Use when you need several consecutive editions locally so each day's `archive.jsonl` entry feeds the next run's dedupe. Not used by CI — production uses `.github/workflows/daily-edition.yml` only.
+There is no `run_chain.py` in this repo. To backfill several consecutive editions locally (so each day's `archive.jsonl` entry feeds the next run's dedupe), loop `espresso_agent.run` yourself:
+
+```bash
+cd agent
+for d in 2026-05-16 2026-05-17 2026-05-18; do
+  python3 -c "import datetime as dt, espresso_agent; \
+    espresso_agent.run(dt.date.fromisoformat('$d'), dry_run=False, use_cache=True, mode='agent')"
+  python3 render_edition.py "$d"
+done
+```
+
+Not used by CI — production uses `.github/workflows/daily-edition.yml` only.
 
 ## Architecture
 
@@ -116,12 +130,15 @@ Production and `.github/workflows/daily-edition.yml` always use `mode="agent"`. 
 | `mode="agent"` (default) | Scout → Editor → Critic native `tool_use` loop |
 | `mode="deterministic"` | Skip the agent loop; run `rank_and_select` directly (legacy) |
 | `ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1` | After agent failure with no recoverable slate, run `rank_and_select` instead of failing |
+| `ESPRESSO_SKIP_ARCHIVE=1` | Dev/local only: write edition JSON but skip `append_archive` in `write_edition` (does not replace Phase 1.1 upsert-by-date) |
 
 Use the env flag or `--mode deterministic` only on your machine when debugging source fetch or ranking plumbing — never in CI, cron, or client-facing runs. Example:
 
 ```bash
 # Agent failed; inspect trace first — fallback is last resort:
 ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1 python3 espresso_agent.py --date 2026-05-18 --mode agent
+# Local agent run without mutating archive.jsonl:
+ESPRESSO_SKIP_ARCHIVE=1 python3 espresso_agent.py --date 2026-05-19 --use-cache --mode agent
 # Or explicit legacy pipeline:
 python3 espresso_agent.py --date 2026-05-18 --mode deterministic
 ```
@@ -213,6 +230,7 @@ Required repo secrets:
 | `AI_ESPRESSO_FROM` | Sender address, e.g. `you@gmail.com` |
 | `AI_ESPRESSO_TO`   | Comma-separated recipients, e.g. `you@work.com` |
 | `GMAIL_APP_PASSWORD` | 16-char Gmail [app password](https://myaccount.google.com/apppasswords) used for SMTP |
+| `SLACK_WEBHOOK_URL` | Optional — when set, `notify-failure` posts workflow failures to Slack; if unset, Slack step is skipped |
 
 The workflow has `permissions: contents: write` so it can push commits. To run without sending the email, dispatch the workflow manually with `skip_email=true`.
 
@@ -266,7 +284,7 @@ python send_email.py ../editions/edition_1_variant_c.html ../editions/edition_1_
 ## Repository layout
 
 ```
-AI-ESPRESSO-MAIN/
+ai-espresso-finalized/
 ├── agent/
 │   ├── espresso_agent.py     # entry point, controller helpers, ranking prompts
 │   ├── espresso_loop.py      # Scout bootstrap, native tool_use editor, ship gates
@@ -274,7 +292,6 @@ AI-ESPRESSO-MAIN/
 │   ├── render_images.py      # generate four illustrations per edition
 │   ├── render_edition.py     # CLI that chains both renderers
 │   ├── send_email.py         # SMTP delivery with inline-image rewrite
-│   ├── run_chain.py          # dev backfill: runs agent mode for a list of dates
 │   ├── sources.yaml          # source catalog
 │   ├── requirements.txt
 │   ├── README.md

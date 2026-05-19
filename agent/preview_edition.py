@@ -9,6 +9,7 @@ Usage:
     python3 preview_edition.py 2026-05-18 --render-only        # skip agent; use existing JSON
     python3 preview_edition.py 2026-05-18 --no-images          # text-only (faster)
     python3 preview_edition.py 2026-05-18 --no-open            # print URL only
+    python3 preview_edition.py 2026-05-18 --write-archive      # opt in to archive mutation
 
 Serves from editions/ so card images resolve (edition_N/assets/...).
 """
@@ -18,6 +19,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 import subprocess
 import sys
 import webbrowser
@@ -46,11 +48,20 @@ def _print_picks(edition_json: Path) -> None:
     print(file=sys.stderr)
 
 
-def _run_agent(date: dt.date, use_cache: bool) -> None:
+def _run_agent(date: dt.date, use_cache: bool, write_archive: bool) -> None:
     import espresso_agent
 
     print(f"\n[preview] running agent for {date} (use_cache={use_cache})…", file=sys.stderr)
-    espresso_agent.run(date, dry_run=False, use_cache=use_cache, mode="agent")
+    old_skip_archive = os.environ.get("ESPRESSO_SKIP_ARCHIVE")
+    try:
+        if not write_archive:
+            os.environ["ESPRESSO_SKIP_ARCHIVE"] = "1"
+        espresso_agent.run(date, dry_run=False, use_cache=use_cache, mode="agent")
+    finally:
+        if old_skip_archive is None:
+            os.environ.pop("ESPRESSO_SKIP_ARCHIVE", None)
+        else:
+            os.environ["ESPRESSO_SKIP_ARCHIVE"] = old_skip_archive
 
 
 def _run_render(date: str, no_images: bool) -> dict:
@@ -110,6 +121,11 @@ def main() -> int:
     parser.add_argument("date", nargs="?", default=None, help="YYYY-MM-DD (default: today)")
     parser.add_argument("--render-only", action="store_true", help="Skip agent; use existing JSON")
     parser.add_argument("--use-cache", action="store_true", help="Pass use_cache=True to agent fetch")
+    parser.add_argument(
+        "--write-archive",
+        action="store_true",
+        help="Allow preview runs to append/upsert archive memory",
+    )
     parser.add_argument("--no-images", action="store_true", help="Skip illustration generation")
     parser.add_argument("--no-open", action="store_true", help="Print URL only; do not open browser")
     parser.add_argument("--port", type=int, default=DEFAULT_PORT, help=f"Local server port (default {DEFAULT_PORT})")
@@ -119,7 +135,7 @@ def main() -> int:
     edition_json = DATA_EDITIONS_DIR / f"{date.isoformat()}.json"
 
     if not args.render_only:
-        _run_agent(date, use_cache=args.use_cache)
+        _run_agent(date, use_cache=args.use_cache, write_archive=args.write_archive)
     elif not edition_json.exists():
         print(f"error: no {edition_json}; run without --render-only first", file=sys.stderr)
         return 1

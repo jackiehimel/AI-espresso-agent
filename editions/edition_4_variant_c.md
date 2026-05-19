@@ -1,48 +1,48 @@
 # ai espresso ☕ — Edition 4 · Variant C (Newspaper Comic · Snackable)
 
-**MON · MAY 18 · 2026**
+**TUE · MAY 19 · 2026**
 
 ---
 
-![Anthropic and Gates Foundation launch $200M partnership for global health AI](edition_4/assets/variant_c_01.png)
+![Anthropic just signed a compute deal with SpaceX](edition_4/assets/variant_c_01.png)
 
 **MARKET**
 
-## Anthropic and Gates Foundation launch $200M partnership for global health AI
+## Anthropic just signed a compute deal with SpaceX
 
-The Gates Foundation is committing $200 million to work with Anthropic on AI applications for global health and development. The partnership will focus on using Claude to accelerate vaccine research, improve disease surveillance in low-resource settings, and help health workers in developing countries access medical knowledge.
+Anthropic announced higher usage limits for Claude and a new compute partnership with SpaceX. The deal suggests Anthropic is securing infrastructure beyond traditional cloud providers as demand for AI inference grows.
 
-*One of the world's largest philanthropic organizations is betting big on frontier AI for healthcare access.*
+*SpaceX entering AI compute signals how competitive the race for GPU capacity has become.*
 
-[Anthropic News](https://www.anthropic.com/news/gates-foundation-partnership) · May 18
+[Anthropic News](https://www.anthropic.com/news/higher-limits-spacex) · May 19
 
 ---
 
-![YouTube now lets anyone flag AI deepfakes of themselves](edition_4/assets/variant_c_02.png)
+![ChatGPT can now write and run code directly on your phone](edition_4/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## YouTube now lets anyone flag AI deepfakes of themselves
+## ChatGPT can now write and run code directly on your phone
 
-YouTube expanded access to its face-detection tool that finds AI-generated videos using your likeness without permission. Previously limited to big channels and agencies, the tool is now open to all creators 18+. You submit a photo, and YouTube scans uploads to catch deepfakes. The company says it'll review flagged videos 'within days' and may remove them.
+OpenAI just added Codex — its code-writing AI — to the ChatGPT mobile app on iPhone, iPad, and Android. You can now ask ChatGPT to write a script, test an API, or debug code right in the app, and it'll execute the code and show you the output without switching to a desktop.
 
-*First major platform giving ordinary people a way to fight back against AI impersonation at scale.*
+*You no longer need a laptop to prototype ideas or fix bugs with AI assistance.*
 
-[Engadget — AI](https://www.engadget.com/2174282/youtube-likeness-detection-ai-deepfakes-expansion/) · May 18
+[9to5Mac — AI](https://9to5mac.com/2026/05/14/openai-brings-codex-control-to-chatgpt-for-iphone-and-android/) · May 19
 
 ---
 
-![Grok can now write and deploy code directly in your X posts](edition_4/assets/variant_c_03.png)
+![OpenAI insiders say Apple's ChatGPT integration is a letdown](edition_4/assets/variant_c_03.png)
 
-**BUILD**
+**INDUSTRY**
 
-## Grok can now write and deploy code directly in your X posts
+## OpenAI insiders say Apple's ChatGPT integration is a letdown
 
-xAI launched Grok Build, a coding agent that lets you describe an app idea in a post on X and get working code you can edit and deploy. It runs in your browser, handles React apps and interactive demos, and can iterate based on your feedback—all without leaving the platform.
+According to sources at OpenAI, the company feels disappointed by how Apple integrated ChatGPT into iOS. The implementation reportedly falls short of expectations, leaving OpenAI's team feeling 'burned' by the partnership. Specific technical or user experience complaints weren't detailed in available reporting.
 
-*Coding agents are moving from IDE plugins to social platforms where non-developers already spend time.*
+*Even major AI partnerships can stumble on execution — distribution matters less if the integration frustrates users.*
 
-[Engadget — AI](https://www.engadget.com/2173482/xai-coding-agent-grok-build/) · May 18
+[Ars Technica — AI](https://arstechnica.com/tech-policy/2026/05/openai-feels-burned-by-apples-crappy-chatgpt-integration-insiders-say/) · May 19
 
 ---
 
@@ -53,14 +53,15 @@ xAI launched Grok Build, a coding agent that lets you describe an app idea in a 
 
 **☕ Try this prompt**
 
-### The plain-English explainer
+### The footnote audit
 
+*When your draft is done but you know it's puffy.*
 
 
 ```
-Explain [topic or concept] in plain English for someone smart but unfamiliar with the domain. No jargon. Use analogies where helpful. Structure it as: what it is, why it matters, and one concrete example. Keep it under 200 words.
+I'm about to paste something I wrote that feels too long. Don't summarize it. Instead, find every sentence that's doing throat-clearing, hedging, or saying the same thing twice. Quote each one back to me with a three-word reason it can go. Then show me the tighter version.
 ```
 
 ---
 
-*brewed by ai espresso · [spot something off?](mailto:jacqueline.himel@vanderbilt.edu?subject=AI%20Espresso%20issue%20report) · [repo](https://github.com/jackiehimel/AI-ESPRESSO-MAIN)*
+*brewed by ai espresso · [spot something off?](mailto:jhimel@solvd.com?subject=AI%20Espresso%20issue%20report) · [repo](https://github.com/jackiehimel/ai-espresso-finalized)*
