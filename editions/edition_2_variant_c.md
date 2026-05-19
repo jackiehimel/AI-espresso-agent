@@ -4,31 +4,31 @@
 
 ---
 
-![Anthropic just entered Elon Musk's entire SpaceX compute infrastructure](edition_2/assets/variant_c_01.png)
+![Gates Foundation commits $200M to Anthropic for global health AI work](edition_2/assets/variant_c_01.png)
 
 **MARKET**
 
-## Anthropic just entered Elon Musk's entire SpaceX compute infrastructure
+## Gates Foundation commits $200M to Anthropic for global health AI work
 
-Claude's usage limits are going up across paid tiers, and Anthropic signed a compute deal with SpaceX to tap into its infrastructure. The partnership gives Anthropic access to SpaceX's hardware for training and inference while SpaceX gets enterprise-grade AI tools for engineering and operations.
+The Bill & Melinda Gates Foundation is investing $200 million in Anthropic to develop AI tools for global health and development challenges. The partnership will focus on building Claude-based solutions for disease surveillance, agricultural planning, and educational access in low-resource settings.
 
-*SpaceX's compute cluster could help Anthropic scale without building everything in-house.*
+*One of the world's largest philanthropies is now directly funding frontier AI development for public health.*
 
-[Anthropic News](https://www.anthropic.com/news/higher-limits-spacex) · May 18
+[Anthropic News](https://www.anthropic.com/news/gates-foundation-partnership) · May 18
 
 ---
 
-![Meta's SAM 3.1 can now track objects across video in real time](edition_2/assets/variant_c_02.png)
+![Nvidia's CEO says China will let US AI chips back in](edition_2/assets/variant_c_02.png)
 
-**BUILD**
+**EVERYDAY**
 
-## Meta's SAM 3.1 can now track objects across video in real time
+## Nvidia's CEO says China will let US AI chips back in
 
-Meta released SAM 3.1, an updated computer vision model that tracks and segments objects across video frames as they happen. The new version runs faster than its predecessor and uses two new techniques — multiplexing (processing multiple objects simultaneously) and global reasoning (understanding relationships between objects across the entire scene) — to handle complex videos with many moving parts.
+Jensen Huang, speaking days after joining Trump's China summit, said he expects Chinese authorities to eventually allow American AI chip imports again. No timeline was given, but it signals a potential thaw in tech trade restrictions that have shaped the chip industry for years.
 
-*Real-time video understanding just got more practical for apps that need to follow multiple things at once.*
+*If it happens, US chipmakers could access the world's largest AI market again.*
 
-[Meta AI Blog](https://ai.meta.com/blog/segment-anything-model-3/) · May 18
+[Bloomberg Technology](https://www.bloomberg.com/news/articles/2026-05-18/nvidia-s-ceo-says-china-will-open-its-market-to-ai-chips-from-us) · May 18
 
 ---
 
@@ -39,13 +39,13 @@ Meta released SAM 3.1, an updated computer vision model that tracks and segments
 
 **☕ Try this prompt**
 
-### The jargon translator
+### The confidence audit
 
-*Before sending anything outside your immediate team.*
+*Before you hit send on anything that commits your team to a timeline or a number.*
 
 
 ```
-I'm about to paste something I wrote that uses too much insider language. Rewrite it so someone two levels away from my daily work can understand it in one read. Keep the stakes and specifics. Cut every term that needs a glossary. If you have to explain what something is, I used jargon.
+I'm about to paste something I wrote that sounds confident. Your job: find every sentence where I'm actually guessing, hedging, or hoping no one asks a follow-up question. Quote each one back to me, then tell me which gaps I can fill in an hour and which ones mean I'm not ready to send this yet.
 ```
 
 ---

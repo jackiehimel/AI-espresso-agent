@@ -1,51 +1,65 @@
 # ai espresso ☕ — Edition 4 · Variant C (Newspaper Comic · Snackable)
 
-**MON · MAY 18 · 2026**
+**TUE · MAY 19 · 2026**
 
 ---
 
-![Gates Foundation commits $200M to Anthropic for global health AI work](edition_4/assets/variant_c_01.png)
+![Google and Blackstone are launching a cloud company built on Google chips](edition_4/assets/variant_c_01.png)
 
 **MARKET**
 
-## Gates Foundation commits $200M to Anthropic for global health AI work
+## Google and Blackstone are launching a cloud company built on Google chips
 
-The Bill & Melinda Gates Foundation is investing $200 million in Anthropic to develop AI tools for global health and development challenges. The partnership will focus on building Claude-based solutions for disease surveillance, agricultural planning, and educational access in low-resource settings.
+Alphabet's Google is teaming up with private equity giant Blackstone to create a new AI cloud business that will run on Google's own chips, taking aim at fast-growing competitors like CoreWeave. The joint venture marks Google's latest push to compete in the booming market for AI infrastructure beyond its core cloud division.
 
-*One of the world's largest philanthropies is now directly funding frontier AI development for public health.*
+*Google is betting it can win cloud customers by offering its custom AI chips through a separate company.*
 
-[Anthropic News](https://www.anthropic.com/news/gates-foundation-partnership) · May 18
+[Bloomberg Technology](https://www.bloomberg.com/news/articles/2026-05-19/google-to-create-ai-cloud-business-with-blackstone-wsj-says) · May 19
 
 ---
 
-![Nvidia's CEO says China will let US AI chips back in](edition_4/assets/variant_c_02.png)
+![Anthropic raises Claude's usage limits and partners with SpaceX on compute](edition_4/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## Nvidia's CEO says China will let US AI chips back in
+## Anthropic raises Claude's usage limits and partners with SpaceX on compute
 
-Jensen Huang, speaking days after joining Trump's China summit, said he expects Chinese authorities to eventually allow American AI chip imports again. No timeline was given, but it signals a potential thaw in tech trade restrictions that have shaped the chip industry for years.
+Anthropic announced higher usage caps for Claude across all subscription tiers and a new compute partnership with SpaceX. The company didn't specify exact new limits, but existing users will see increased message allowances. The SpaceX deal brings additional infrastructure to support Claude's growing demand.
 
-*If it happens, US chipmakers could access the world's largest AI market again.*
+*More headroom for teams hitting Claude's daily caps, plus infrastructure backing from SpaceX.*
 
-[Bloomberg Technology](https://www.bloomberg.com/news/articles/2026-05-18/nvidia-s-ceo-says-china-will-open-its-market-to-ai-chips-from-us) · May 18
+[Anthropic News](https://www.anthropic.com/news/higher-limits-spacex) · May 19
+
+---
+
+![Meta built an AI that learns your habits and runs your apps for you](edition_4/assets/variant_c_03.png)
+
+**INDUSTRY**
+
+## Meta built an AI that learns your habits and runs your apps for you
+
+Muse Spark is Meta's new AI agent that watches how you use your phone, learns your routines, and can take actions across apps — like ordering food, booking rides, or managing your calendar — without you opening them. It's designed to become a personal assistant that knows your preferences and handles tasks end-to-end.
+
+*AI is moving from answering questions to actually doing things on your behalf across multiple apps.*
+
+[Meta AI Blog](https://ai.meta.com/blog/introducing-muse-spark-msl/) · May 19
 
 ---
 
 
 ---
 
-![Try this prompt](edition_4/assets/variant_c_03.png)
+![Try this prompt](edition_4/assets/variant_c_04.png)
 
 **☕ Try this prompt**
 
-### The confidence audit
+### The ghost writer test
 
-*Before you hit send on anything that commits your team to a timeline or a number.*
+*Before you ship the doc, email, or brief you've been staring at too long.*
 
 
 ```
-I'm about to paste something I wrote that sounds confident. Your job: find every sentence where I'm actually guessing, hedging, or hoping no one asks a follow-up question. Quote each one back to me, then tell me which gaps I can fill in an hour and which ones mean I'm not ready to send this yet.
+I just wrote something below. Read it, then write the worst possible version someone could create by skimming mine for thirty seconds—same structure, same length, zero thought. Now show me which of my sentences were already that empty.
 ```
 
 ---
