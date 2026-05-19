@@ -99,6 +99,11 @@ class SearchAllowlistTests(unittest.TestCase):
         allowed = ea.search_allowed_domains()
         self.assertTrue(ea.is_search_domain_allowed("https://anthropic.com/news", allowed))
         self.assertTrue(ea.is_search_domain_allowed("https://openai.com/news/x", allowed))
+        self.assertTrue(ea.is_search_domain_allowed("https://blog.google/technology/ai", allowed))
+        self.assertTrue(ea.is_search_domain_allowed("https://www.microsoft.com/en-us/ai/blog/", allowed))
+        self.assertTrue(ea.is_search_domain_allowed("https://github.blog/changelog/", allowed))
+        self.assertTrue(ea.is_search_domain_allowed("https://cursor.com/changelog", allowed))
+        self.assertTrue(ea.is_search_domain_allowed("https://github.com/getcursor/cursor/releases", allowed))
 
     def test_random_blog_blocked(self):
         allowed = ea.search_allowed_domains()
@@ -108,6 +113,14 @@ class SearchAllowlistTests(unittest.TestCase):
         self.assertFalse(
             ea.is_search_domain_allowed("https://buzzfeed.com/ai-tools", allowed)
         )
+
+    def test_semafor_vertical_source_is_rss_enabled(self):
+        sources, _ = ea.load_sources()
+        semafor = next((s for s in sources if s.name == "Semafor Technology"), None)
+        self.assertIsNotNone(semafor)
+        assert semafor is not None
+        self.assertEqual(semafor.kind, "rss")
+        self.assertEqual(semafor.tier, 4)
 
 
 class Tier1ShipGateTests(unittest.TestCase):

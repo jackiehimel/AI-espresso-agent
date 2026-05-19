@@ -4,62 +4,48 @@
 
 ---
 
-![Anthropic just signed a compute deal with SpaceX](edition_4/assets/variant_c_01.png)
+![Anthropic acquires Stainless, the API tooling company](edition_4/assets/variant_c_01.png)
 
 **MARKET**
 
-## Anthropic just signed a compute deal with SpaceX
+## Anthropic acquires Stainless, the API tooling company
 
-Anthropic announced higher usage limits for Claude and a new compute partnership with SpaceX. The deal suggests Anthropic is securing infrastructure beyond traditional cloud providers as demand for AI inference grows.
+Anthropic bought Stainless, a startup that auto-generates SDKs and API tooling for developers. Stainless already builds the official SDKs for Claude's API — now that team is coming in-house to make building with Claude easier across languages.
 
-*SpaceX entering AI compute signals how competitive the race for GPU capacity has become.*
+*Better developer tools mean faster Claude adoption, especially for teams shipping production AI features.*
 
-[Anthropic News](https://www.anthropic.com/news/higher-limits-spacex) · May 19
+[Anthropic News](https://www.anthropic.com/news/anthropic-acquires-stainless) · May 19
 
 ---
 
-![ChatGPT can now write and run code directly on your phone](edition_4/assets/variant_c_02.png)
+![Meta's new SAM 3.1 can track objects in video twice as fast](edition_4/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## ChatGPT can now write and run code directly on your phone
+## Meta's new SAM 3.1 can track objects in video twice as fast
 
-OpenAI just added Codex — its code-writing AI — to the ChatGPT mobile app on iPhone, iPad, and Android. You can now ask ChatGPT to write a script, test an API, or debug code right in the app, and it'll execute the code and show you the output without switching to a desktop.
+Meta upgraded its Segment Anything Model to track objects in real-time video at double the speed. The new version can follow multiple things at once across a video — like tracking every person in a crowd scene or every car on a street — without slowing down. It runs faster on cheaper hardware, making video analysis more practical for everyday apps.
 
-*You no longer need a laptop to prototype ideas or fix bugs with AI assistance.*
+*Real-time video understanding just got fast enough to run in normal applications, not just research labs.*
 
-[9to5Mac — AI](https://9to5mac.com/2026/05/14/openai-brings-codex-control-to-chatgpt-for-iphone-and-android/) · May 19
-
----
-
-![OpenAI insiders say Apple's ChatGPT integration is a letdown](edition_4/assets/variant_c_03.png)
-
-**INDUSTRY**
-
-## OpenAI insiders say Apple's ChatGPT integration is a letdown
-
-According to sources at OpenAI, the company feels disappointed by how Apple integrated ChatGPT into iOS. The implementation reportedly falls short of expectations, leaving OpenAI's team feeling 'burned' by the partnership. Specific technical or user experience complaints weren't detailed in available reporting.
-
-*Even major AI partnerships can stumble on execution — distribution matters less if the integration frustrates users.*
-
-[Ars Technica — AI](https://arstechnica.com/tech-policy/2026/05/openai-feels-burned-by-apples-crappy-chatgpt-integration-insiders-say/) · May 19
+[Meta AI Blog](https://ai.meta.com/blog/segment-anything-model-3/) · May 19
 
 ---
 
 
 ---
 
-![Try this prompt](edition_4/assets/variant_c_04.png)
+![Try this prompt](edition_4/assets/variant_c_03.png)
 
 **☕ Try this prompt**
 
-### The footnote audit
+### The honest rewrite
 
-*When your draft is done but you know it's puffy.*
+*Before you send the email you've been wordsmithing for 40 minutes.*
 
 
 ```
-I'm about to paste something I wrote that feels too long. Don't summarize it. Instead, find every sentence that's doing throat-clearing, hedging, or saying the same thing twice. Quote each one back to me with a three-word reason it can go. Then show me the tighter version.
+I just wrote something that's technically accurate but sounds like a compliance document. Paste it below, then rewrite it so a smart 12-year-old would understand—but keep every fact intact. If you cut jargon, show me what it actually meant.
 ```
 
 ---

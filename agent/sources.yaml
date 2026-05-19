@@ -32,6 +32,12 @@ sources:
     url: https://deepmind.google/blog/rss.xml
     kind: rss
     enabled: true
+  - name: Google AI Blog
+    tier: 1
+    url: https://blog.google/technology/ai/rss/
+    kind: rss
+    search_domain: blog.google
+    enabled: true
   - name: Meta AI Blog
     tier: 1
     url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_meta_ai.xml
@@ -55,6 +61,24 @@ sources:
     url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_cohere.xml
     kind: rss
     search_domain: cohere.com
+    enabled: true
+  - name: Microsoft AI Blog
+    tier: 1
+    url: https://www.microsoft.com/en-us/ai/blog/feed/
+    kind: rss
+    search_domain: microsoft.com
+    enabled: true
+  - name: Cursor Blog (official)
+    tier: 1
+    url: https://cursor.com/atom.xml
+    kind: rss
+    search_domain: cursor.com
+    enabled: true
+  - name: Cursor Changelog (official)
+    tier: 1
+    url: https://cursor.com/changelog/rss.xml
+    kind: rss
+    search_domain: cursor.com
     enabled: true
 
   # ─── TIER 1 — Consumer-tech press that captures excitement ─────────────
@@ -183,6 +207,13 @@ sources:
     kind: html
     enabled: true
     research: true
+  - name: Google Research Blog
+    tier: 1
+    url: https://research.google/blog/rss/
+    kind: rss
+    search_domain: research.google
+    enabled: true
+    research: true
 
   # ─── TIER 2 — High-signal analysis that humanizes what shipped ─────────
   - name: Latent Space (Swyx)
@@ -219,6 +250,42 @@ sources:
     tier: 2
     url: https://thezvi.substack.com/feed
     kind: rss
+    enabled: true
+  - name: Hugging Face Blog
+    tier: 2
+    url: https://huggingface.co/blog/feed.xml
+    kind: rss
+    search_domain: huggingface.co
+    enabled: true
+  - name: GitHub Changelog
+    tier: 2
+    url: https://github.blog/changelog/feed/
+    kind: rss
+    search_domain: github.blog
+    enabled: true
+  - name: Cursor GitHub releases
+    tier: 2
+    url: https://github.com/getcursor/cursor/releases.atom
+    kind: rss
+    search_domain: github.com
+    enabled: false
+  - name: OpenAI Python SDK releases
+    tier: 2
+    url: https://github.com/openai/openai-python/releases.atom
+    kind: rss
+    search_domain: github.com
+    enabled: false
+  - name: Anthropic Python SDK releases
+    tier: 2
+    url: https://github.com/anthropics/anthropic-sdk-python/releases.atom
+    kind: rss
+    search_domain: github.com
+    enabled: false
+  - name: Microsoft AutoGen releases
+    tier: 2
+    url: https://github.com/microsoft/autogen/releases.atom
+    kind: rss
+    search_domain: github.com
     enabled: true
 
   # ─── TIER 3 — Aggregators (breadth check; never quoted directly) ───────
@@ -286,9 +353,9 @@ sources:
     vertical: cross
   - name: Semafor Technology
     tier: 4
-    url: https://www.semafor.com/vertical/technology
-    kind: html
-    enabled: false
+    url: https://semafor.com/rss.xml
+    kind: rss
+    enabled: true
     vertical: cross
   - name: IndustryWeek — Technology
     tier: 4

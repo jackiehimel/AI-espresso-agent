@@ -143,6 +143,11 @@ EDITORIAL DNA — mix biased toward fun and useful:
     surprising real-world use, productivity wins, AI in unexpected fields.
   • At most ONE 'state of the world' story for substance (big partnership,
     regulation shift, product war) when it still passes the editorial test.
+  • THIRD-CARD FALLBACK LANE (quality-only, never filler): if hard-news options
+    are redundant or thin, the third slot may be a "cool and new" AI story
+    with a concrete capability/tool/workflow unlock people can try this week.
+    It still needs a clear hook, verified body text, and AI as the subject.
+    Reject generic "AI tools roundups" or marketing fluff.
 
 NEWS-HOOK REQUIREMENT — beyond "vendor launched a thing":
   Acceptable hooks: competitive/market move, scale/scarcity, capability
@@ -229,12 +234,18 @@ If you unpick everything to reset, re-pick immediately in the same pass.
 WHEN TO USE search_news (max 2 per edition):
   • Scout gaps + shortlist feels dry/academic after first picks
   • After self_critique revise when pool lacks fun/useful angles
+  • To fill the third slot with a cool/new capability drop when hard-news
+    candidates are repetitive
+  • If working_memory.aggregator_signals is non-empty, use the extra search
+    call to chase a primary-source confirmation before discarding the lead
   • Do NOT search before trying the shortlist first
 
 RULES:
   • Vendor cap: at most 2 stories per vendor (pick tool enforces).
   • Tier 1 minimum: at least one Tier 1 source (ship_edition enforces).
   • Mix vibes — not all model launches or all cautionary AI-failure stories.
+  • At most one legal-primary story, and only if the legal outcome has a
+    concrete near-term consequence for AI access/governance/market structure.
   • ship_edition fails without self_critique approve (no shortcuts).
 
 Use tools in any order that makes editorial sense. You control the loop.
@@ -253,7 +264,9 @@ ROLE-SPECIFIC CHECKS:
   • Source mix: at least one Tier 1 primary. Flag if two+ picks are Tier 3
     summaries when Tier 1 coverage of the same launch exists.
   • Lawsuit / trial / founder feud as PRIMARY angle → REVISE unless the
-    story is a shipped product or capability (legal drama as backdrop only).
+    legal outcome materially changes AI product access, governance, or market
+    structure (e.g., injunction, enforceable ruling, ownership/control shift,
+    or damages with near-term product consequence).
 
 HARD REJECT — send back if ANY pick matches hard exclusions above, repeats
 a topic from Recent editions (last 30d), or uses AI-as-villain / incidental
@@ -265,10 +278,15 @@ REVISE if:
     ChatGPT finance).
   • Academic paper needs topic explained vs launch/product/event story.
   • All three picks share the same vibe (all launches, all drama, all research).
+  • The third slot is only "newsy enough" but not actually interesting. On thin
+    days, require a cool/new capability or workflow unlock instead of filler.
   • verified: false — Editor must read_candidate or swap. Paywalled Tier-1
     with body_source rss_summary OK if verified is true.
   • Workforce sociology, hiring demographics, generational labor trends, or
     consultancy think pieces — even from Tier 1.
+  • Legal coverage is mostly courtroom drama/opinion with no concrete
+    consequence for AI products, distribution, or governance.
+  • More than one legal-primary story appears in the slate.
   • Weak-pool waiver is NOT permission for filler, unverified picks, or
     "best of a bad sociology pool." Revise with search_news before mediocrity.
 
@@ -276,6 +294,10 @@ APPROVE if:
   • Any Solvd employee would be more curious about AI, not less.
   • Three different vendors (or 2 + non-vendor story).
   • Majority fun, useful, or 'wow really?' — market rivalry counts as positive.
+  • If hard-news is thin, the third card is still high-signal: a new
+    capability/tool/workflow drop with direct user utility.
+  • One legal-primary story is acceptable only when it has a concrete,
+    near-term AI consequence (access, governance, ownership, enforceable ruling).
   • Every story passes subject-line + show-don't-tell; you can name each hook.
   • Slate could be rewritten as Rundown/Verge-style headlines without stretching.
 
@@ -325,6 +347,7 @@ def _default_working_memory() -> dict:
     return {
         "pool_quality": "",
         "coverage_gaps": [],
+        "aggregator_signals": [],
         "critique_history": [],
         "editor_notes": "",
         "decisions": [],
@@ -572,8 +595,9 @@ def tool_search_news(state: AgentState, args: dict) -> dict:
     query = (args.get("query") or "").strip()
     if not query:
         return {"error": "missing query"}
-    if _search_calls_used(state) >= 2:
-        return {"error": "search_news limit reached (max 2 per edition)"}
+    limit = _search_call_limit(state)
+    if _search_calls_used(state) >= limit:
+        return {"error": f"search_news limit reached (max {limit} per edition)"}
 
     import shutil
     from espresso_agent import search_allowed_domains
@@ -632,6 +656,24 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
     found = next((c for c in state.shortlist + state.extra_candidates if c["id"] == int(cid)), None)
     if not found:
         return {"error": f"no candidate with id={cid}"}
+    for existing_slot, existing_pick in state.picks.items():
+        if existing_slot == slot:
+            continue
+        same_id = int(existing_pick.get("id", -1)) == int(found["id"])
+        same_url = (existing_pick.get("url") or "").strip().lower() == (
+            found.get("url") or ""
+        ).strip().lower()
+        same_headline = (existing_pick.get("headline") or "").strip().lower() == (
+            found.get("headline") or ""
+        ).strip().lower()
+        if same_id or same_url or same_headline:
+            return {
+                "error": (
+                    "duplicate story across slots is not allowed; pick a distinct "
+                    "candidate for this slot"
+                ),
+                "conflict_slot": existing_slot,
+            }
     from editorial import validate_pick_has_body
 
     pick_issues = validate_pick_has_body(found)
@@ -692,6 +734,116 @@ def _search_calls_used(state: AgentState) -> int:
     return state.search_calls_used
 
 
+def _search_call_limit(state: AgentState) -> int:
+    # Weak pools need extra discovery room; aggregator signal gaps get one bonus search.
+    base = 4 if _weak_pool_waiver(state) else 3
+    has_aggregator_signal = bool(state.working_memory.get("aggregator_signals"))
+    return base + 1 if has_aggregator_signal else base
+
+
+_AGGREGATOR_SIGNAL_PATTERNS: dict[str, re.Pattern[str]] = {
+    "cursor_composer": re.compile(r"\bcursor\b|\bcomposer\b", re.IGNORECASE),
+    "odyssey_world_models": re.compile(r"\bodyssey\b|\bstarchild\b|\bagora\b", re.IGNORECASE),
+    "chatgpt_finance": re.compile(
+        r"chatgpt.*bank|personal finance|connect(?:ing)? (?:a )?bank account",
+        re.IGNORECASE,
+    ),
+    "terminal_agents_learning": re.compile(
+        r"terminal agents?|learn from (?:their )?failed commands?",
+        re.IGNORECASE,
+    ),
+    "musk_openai_lawsuit": re.compile(
+        r"musk.*lawsuit.*openai|lawsuit.*openai.*musk",
+        re.IGNORECASE,
+    ),
+}
+
+
+def _uncovered_aggregator_signals(candidates: list) -> list[str]:
+    """Return high-signal aggregator themes not present in primary-source candidates."""
+    agg_text = "\n".join(
+        f"{c.headline}\n{getattr(c, 'blurb', '')}\n{c.url}"
+        for c in candidates
+        if getattr(c, "aggregator", False)
+    )
+    primary_text = "\n".join(
+        f"{c.headline}\n{getattr(c, 'blurb', '')}\n{c.url}"
+        for c in candidates
+        if not getattr(c, "aggregator", False)
+    )
+    if not agg_text:
+        return []
+
+    uncovered: list[str] = []
+    for label, pattern in _AGGREGATOR_SIGNAL_PATTERNS.items():
+        if pattern.search(agg_text) and not pattern.search(primary_text):
+            uncovered.append(label)
+    return uncovered
+
+
+_LEGAL_OUTCOME_RE = re.compile(
+    r"\b(jury|verdict|ruling|injunction|dismiss(?:ed|al)?|appeal|lawsuit|court|trial|settle(?:ment|d)?)\b",
+    re.IGNORECASE,
+)
+_LEGAL_CONSEQUENCE_RE = re.compile(
+    r"\b(governance|control|ownership|access|distribution|damages|enforce|partnership|market|product|platform|nonprofit|for-profit|restructur(?:e|ing)|board|charter|public benefit)\b",
+    re.IGNORECASE,
+)
+_LEGAL_AI_ENTITY_RE = re.compile(
+    r"\b(openai|anthropic|google|deepmind|meta|microsoft|xai|mistral|cohere|cursor|sam altman|elon musk)\b",
+    re.IGNORECASE,
+)
+
+
+def _is_high_impact_legal_candidate(candidate: Any) -> bool:
+    text = " ".join(
+        [
+            str(getattr(candidate, "headline", "") or ""),
+            str(getattr(candidate, "blurb", "") or ""),
+            str(getattr(candidate, "url", "") or ""),
+        ]
+    )
+    return bool(
+        _LEGAL_OUTCOME_RE.search(text)
+        and _LEGAL_AI_ENTITY_RE.search(text)
+        and _LEGAL_CONSEQUENCE_RE.search(text)
+    )
+
+
+def _inject_high_impact_legal_candidate(
+    capped: list,
+    fresh: list,
+    per_source: dict[str, int],
+    max_total: int = 60,
+    max_per_source: int = 4,
+) -> None:
+    """Ensure one high-impact legal candidate reaches Scout when present."""
+    if any(_is_high_impact_legal_candidate(c) for c in capped):
+        return
+    legal = next((c for c in fresh if _is_high_impact_legal_candidate(c)), None)
+    if legal is None:
+        return
+
+    legal_source = getattr(legal, "source_name", "")
+    if len(capped) < max_total and per_source.get(legal_source, 0) < max_per_source:
+        capped.append(legal)
+        per_source[legal_source] = per_source.get(legal_source, 0) + 1
+        return
+
+    for i in range(len(capped) - 1, -1, -1):
+        victim = capped[i]
+        victim_source = getattr(victim, "source_name", "")
+        if _is_high_impact_legal_candidate(victim):
+            continue
+        if victim_source == legal_source and per_source.get(legal_source, 0) >= max_per_source:
+            continue
+        capped[i] = legal
+        if victim_source:
+            per_source[victim_source] = max(0, per_source.get(victim_source, 1) - 1)
+        per_source[legal_source] = per_source.get(legal_source, 0) + 1
+        return
+
+
 def _weak_pool_waiver(state: AgentState) -> bool:
     pool = (state.working_memory.get("pool_quality") or "").lower()
     notes = (state.working_memory.get("editor_notes") or "").strip()
@@ -699,7 +851,7 @@ def _weak_pool_waiver(state: AgentState) -> bool:
 
 
 def _min_picks_required(state: AgentState) -> int:
-    return 2 if _weak_pool_waiver(state) else len(state.needed_slots)
+    return len(state.needed_slots)
 
 
 def _tier1_counts(state: AgentState, need_t1: int) -> tuple[int, bool]:
@@ -722,6 +874,7 @@ def _compress_shortlist_brief(state: AgentState) -> str:
 def validate_ship_gates(state: AgentState, rules: dict) -> dict:
     """Deterministic ship_edition checks. Returns {ok, errors, warnings}."""
     need_t1 = rules.get("tier1_minimum", 1)
+    max_non_load_bearing_cards = int(rules.get("max_non_load_bearing_cards", 1))
     min_picks = _min_picks_required(state)
     have_t1, tier1_ok = _tier1_counts(state, need_t1)
     critic_ok = (state.last_critic_verdict or {}).get("verdict") == "approve"
@@ -734,7 +887,7 @@ def validate_ship_gates(state: AgentState, rules: dict) -> dict:
         errors.append(
             f"need {min_picks} pick(s), have {pick_count}; missing slots: {missing}"
         )
-    elif not _weak_pool_waiver(state) and missing:
+    elif missing:
         errors.append(f"unfilled required slots: {missing}")
     if not tier1_ok:
         errors.append(f"need {need_t1} tier-1 pick(s), have {have_t1}")
@@ -743,11 +896,6 @@ def validate_ship_gates(state: AgentState, rules: dict) -> dict:
         errors.append(
             f"self_critique must approve before ship (last verdict: {verdict})"
         )
-    if pick_count == 2 and not _weak_pool_waiver(state):
-        errors.append(
-            "2-story edition requires note_weak_pool and pool_quality mentioning 'weak'"
-        )
-
     from editorial import validate_pick_has_body
 
     for slot, pick in state.picks.items():
@@ -756,13 +904,23 @@ def validate_ship_gates(state: AgentState, rules: dict) -> dict:
 
     from constitution import constitution_violations
 
+    non_load_bearing_slots: list[str] = []
     for slot, pick in state.picks.items():
         for reason in constitution_violations(
             pick.get("headline", ""),
             pick.get("blurb"),
             source_name=pick.get("source"),
         ):
+            if reason.startswith("AI is not load-bearing"):
+                non_load_bearing_slots.append(slot)
+                continue
             errors.append(f"[{slot}] constitution: {reason}")
+
+    if len(non_load_bearing_slots) > max_non_load_bearing_cards:
+        errors.append(
+            "constitution: too many non-load-bearing stories "
+            f"({len(non_load_bearing_slots)} > {max_non_load_bearing_cards})"
+        )
 
     return {"ok": not errors, "errors": errors, "tier1_count": have_t1, "pick_count": pick_count}
 
@@ -855,15 +1013,7 @@ def tool_self_critique(state: AgentState, args: dict) -> dict:
             "body_excerpt": body[:400] + ("…" if len(body) > 400 else ""),
         })
     pool_brief = _compress_shortlist_brief(state)
-    weak = _weak_pool_waiver(state)
-    edition_mode = (
-        f"Documented weak-pool edition: {len(state.picks)} stories (minimum {min_picks}). "
-        "You may approve 2 picks ONLY if they are verified product/capability news — "
-        "not workforce think pieces or fetch-failed filler. If the pool is thin, "
-        "revise and tell the Editor to search_news rather than approving sociology."
-        if weak
-        else f"Standard 3-story edition: {len(state.picks)} picks."
-    )
+    edition_mode = f"Standard 3-story edition: {len(state.picks)} picks."
     prompt = (
         f"Today is {state.today.isoformat()}. {edition_mode}\n\n"
         f"The Editor picked:\n\n"
@@ -907,6 +1057,7 @@ def tool_self_critique(state: AgentState, args: dict) -> dict:
 def tool_ship_edition(state: AgentState, args: dict, rules: dict) -> dict:
     gate = validate_ship_gates(state, rules)
     if not gate["ok"]:
+        min_picks = _min_picks_required(state)
         if (state.last_critic_verdict or {}).get("verdict") == "approve":
             state.last_critic_verdict = None
             state.trace.append(TraceEvent(
@@ -984,7 +1135,7 @@ EDITOR_TOOLS: list[dict] = [
     },
     {
         "name": "search_news",
-        "description": "Web search beyond the daily fetch (max 2 per edition).",
+        "description": "Web search beyond the daily fetch (bounded calls per edition).",
         "input_schema": {
             "type": "object",
             "properties": {"query": {"type": "string"}},
@@ -1237,6 +1388,30 @@ def run_tool_agent(state: AgentState, vendor_patterns, rules: dict, gaps: list[s
         })
         shipped = _run_tool_agent_loop(client, model, messages, state, vendor_patterns, rules)
 
+    # Finalization recovery: if the slate is complete but we ran out of budget
+    # before the final self_critique -> ship_edition cycle, grant one short lap.
+    if (
+        not shipped
+        and len(state.picks) >= min_picks
+        and state.tool_calls >= state.hard_budget
+    ):
+        extra = 6
+        state.hard_budget = state.tool_calls + extra
+        state.trace.append(TraceEvent(
+            ts=time.time(), role="system", kind="handoff",
+            result_summary=(
+                f"finalization recovery lap (+{extra} tool calls, budget now {state.hard_budget})"
+            ),
+        ))
+        messages.append({
+            "role": "user",
+            "content": (
+                "Finalization lap: slate is complete. Do not unpick. "
+                "Call self_critique once, then ship_edition if approved."
+            ),
+        })
+        shipped = _run_tool_agent_loop(client, model, messages, state, vendor_patterns, rules)
+
     if state.tool_calls >= state.hard_budget and not shipped:
         state.trace.append(TraceEvent(
             ts=time.time(), role="system", kind="error",
@@ -1335,6 +1510,8 @@ def agentic_select(
     caller should fall back to deterministic. meta has editor_notes and
     working_memory for edition.notes / observability.
     """
+    uncovered_agg_signals = _uncovered_aggregator_signals(candidates)
+
     # First-pass dedupe (same as deterministic)
     fresh = []
     seen_fps = set(archive_fps)
@@ -1347,7 +1524,7 @@ def agentic_select(
         fresh.append(c)
     fresh.sort(key=lambda c: (c.tier, c.source_name))
 
-    # Cap pool: at most 4 per source, 40 total
+    # Cap pool: at most 4 per source, 60 total
     per_source = {}
     capped = []
     for c in fresh:
@@ -1356,8 +1533,9 @@ def agentic_select(
             continue
         per_source[c.source_name] = n + 1
         capped.append(c)
-        if len(capped) >= 40:
+        if len(capped) >= 60:
             break
+    _inject_high_impact_legal_candidate(capped, fresh, per_source, max_total=60, max_per_source=4)
 
     # Slot rules
     is_rotation = today.weekday() in rules.get("tier4_rotation_days", [1, 4])
@@ -1409,11 +1587,25 @@ def agentic_select(
     state = AgentState(
         today=today,
         needed_slots=needed_slots,
-        shortlist=shortlist[:15],
+        shortlist=shortlist[:20],
         candidates_by_id=cand_by_id,
         archive_headlines=archive_headlines,
     )
     state.working_memory["coverage_gaps"] = gaps or []
+    if uncovered_agg_signals:
+        state.working_memory["aggregator_signals"] = uncovered_agg_signals
+        state.trace.append(
+            TraceEvent(
+                ts=time.time(),
+                role="system",
+                kind="handoff",
+                result_summary=(
+                    "aggregator signal gap: "
+                    + ", ".join(uncovered_agg_signals)
+                    + " (extra search_news call enabled)"
+                ),
+            )
+        )
     state.trace.append(TraceEvent(
         ts=time.time(), role="scout", kind="handoff",
         result_summary=f"shortlist={len(shortlist)}, gaps={gaps}",

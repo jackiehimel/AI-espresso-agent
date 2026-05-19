@@ -1,6 +1,8 @@
 """Tests for daily LLM-generated prompt tile."""
 
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -96,17 +98,59 @@ class ValidatePromptTileTests(unittest.TestCase):
 class RenderLayoutTests(unittest.TestCase):
 
     def test_html_has_minimal_masthead(self):
-        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-18.json"
-        if not edition.exists():
-            self.skipTest("fixture edition missing")
-        result = render_edition(edition, issue_num=2)
-        html = Path(result["html_path"]).read_text()
-        self.assertNotIn('class="voice-line"', html)
-        self.assertNotIn('class="hook"', html)
-        self.assertIn('class="wordmark"', html)
-        self.assertIn('class="dateline"', html)
-        self.assertIn("border: 1px dashed #C9A671", html)
-        self.assertIn("background: linear-gradient(165deg, #FFF8E8 0%, #FFF4D6 55%, #F9E9C8 100%)", html)
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            edition = out / "three-story.json"
+            edition.write_text(
+                json.dumps(
+                    {
+                        "date": "2026-05-19",
+                        "stories": [
+                            {
+                                "slot": "business",
+                                "headline": "Anthropic ships enterprise memory controls",
+                                "blurb": "Admins can now define workspace retention settings.",
+                                "why_it_matters": "Teams get concrete governance over long-running AI work.",
+                                "source_name": "Anthropic News",
+                                "source_url": "https://example.com/a",
+                                "tier": 1,
+                            },
+                            {
+                                "slot": "beginner",
+                                "headline": "Google previews AI glasses for daily navigation",
+                                "blurb": "Wearable assistant now reads signs and live context.",
+                                "why_it_matters": "Hands-free AI becomes usable in everyday tasks.",
+                                "source_name": "CNBC — Technology",
+                                "source_url": "https://example.com/b",
+                                "tier": 1,
+                            },
+                            {
+                                "slot": "cross",
+                                "headline": "Meta adds real-time scene tracking for creators",
+                                "blurb": "New model tracks multiple objects in live video.",
+                                "why_it_matters": "Faster iteration for media and simulation workflows.",
+                                "source_name": "Meta AI Blog",
+                                "source_url": "https://example.com/c",
+                                "tier": 1,
+                            },
+                        ],
+                        "try_this_prompt": {
+                            "title": "The skeptics pass",
+                            "prompt": "I am pasting a launch note. Tell me what is real versus brand language.",
+                            "tool_hint": "Use before forwarding internal summaries.",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            result = render_edition(edition, issue_num=2, editions_dir=out)
+            html = Path(result["html_path"]).read_text()
+            self.assertNotIn('class="voice-line"', html)
+            self.assertNotIn('class="hook"', html)
+            self.assertIn('class="wordmark"', html)
+            self.assertIn('class="dateline"', html)
+            self.assertIn("border: 1px dashed #C9A671", html)
+            self.assertIn("background: linear-gradient(165deg, #FFF8E8 0%, #FFF4D6 55%, #F9E9C8 100%)", html)
 
 
 if __name__ == "__main__":
