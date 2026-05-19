@@ -19,6 +19,52 @@ from render_images import EDITION_PNG_MAX_WIDTH, compress_edition_pngs
 
 class PublicHtmlPolishTests(unittest.TestCase):
 
+    def _write_three_story_fixture(self, out_dir: Path) -> Path:
+        edition = out_dir / "three-story.json"
+        edition.write_text(
+            json.dumps(
+                {
+                    "date": "2026-05-19",
+                    "stories": [
+                        {
+                            "slot": "business",
+                            "headline": "Anthropic ships enterprise memory controls",
+                            "blurb": "Admins can now define workspace retention settings.",
+                            "why_it_matters": "Teams get concrete governance over long-running AI work.",
+                            "source_name": "Anthropic News",
+                            "source_url": "https://example.com/a",
+                            "tier": 1,
+                        },
+                        {
+                            "slot": "beginner",
+                            "headline": "Google previews AI glasses for daily navigation",
+                            "blurb": "Wearable assistant now reads signs and live context.",
+                            "why_it_matters": "Hands-free AI becomes usable in everyday tasks.",
+                            "source_name": "CNBC — Technology",
+                            "source_url": "https://example.com/b",
+                            "tier": 1,
+                        },
+                        {
+                            "slot": "cross",
+                            "headline": "Meta adds real-time scene tracking for creators",
+                            "blurb": "New model tracks multiple objects in live video.",
+                            "why_it_matters": "Faster iteration for media and simulation workflows.",
+                            "source_name": "Meta AI Blog",
+                            "source_url": "https://example.com/c",
+                            "tier": 1,
+                        },
+                    ],
+                    "try_this_prompt": {
+                        "title": "The skeptics pass",
+                        "prompt": "I am pasting a launch note. Tell me what is real versus brand language.",
+                        "tool_hint": "Use before forwarding internal summaries.",
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+        return edition
+
     def test_footer_uses_solvd_contact_and_repo(self):
         html = edition_footer_html()
         self.assertIn(FOOTER_CONTACT_EMAIL, html)
@@ -27,12 +73,9 @@ class PublicHtmlPolishTests(unittest.TestCase):
         self.assertNotIn("AI-ESPRESSO-MAIN", html)
 
     def test_rendered_html_hides_source_tiers(self):
-        editions_dir = Path(__file__).resolve().parent.parent / "data" / "editions"
-        edition = editions_dir / "2026-05-19.json"
-        if not edition.exists():
-            self.skipTest("3-story fixture edition missing")
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp)
+            edition = self._write_three_story_fixture(out)
             result = render_edition(edition, issue_num=99, editions_dir=out)
             html = Path(result["html_path"]).read_text()
             self.assertNotIn("source-tier", html)

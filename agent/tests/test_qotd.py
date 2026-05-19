@@ -1,7 +1,9 @@
 """Tests for honest QOTD rendering (preview vs hosted API)."""
 
+import json
 import os
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -17,6 +19,52 @@ from render_html import (
 
 
 class QotdSectionTests(unittest.TestCase):
+
+    def _write_three_story_fixture(self, out_dir: Path) -> Path:
+        edition = out_dir / "three-story.json"
+        edition.write_text(
+            json.dumps(
+                {
+                    "date": "2026-05-19",
+                    "stories": [
+                        {
+                            "slot": "business",
+                            "headline": "Anthropic ships enterprise memory controls",
+                            "blurb": "Admins can now define workspace retention settings.",
+                            "why_it_matters": "Teams get concrete governance over long-running AI work.",
+                            "source_name": "Anthropic News",
+                            "source_url": "https://example.com/a",
+                            "tier": 1,
+                        },
+                        {
+                            "slot": "beginner",
+                            "headline": "Google previews AI glasses for daily navigation",
+                            "blurb": "Wearable assistant now reads signs and live context.",
+                            "why_it_matters": "Hands-free AI becomes usable in everyday tasks.",
+                            "source_name": "CNBC — Technology",
+                            "source_url": "https://example.com/b",
+                            "tier": 1,
+                        },
+                        {
+                            "slot": "cross",
+                            "headline": "Meta adds real-time scene tracking for creators",
+                            "blurb": "New model tracks multiple objects in live video.",
+                            "why_it_matters": "Faster iteration for media and simulation workflows.",
+                            "source_name": "Meta AI Blog",
+                            "source_url": "https://example.com/c",
+                            "tier": 1,
+                        },
+                    ],
+                    "try_this_prompt": {
+                        "title": "The skeptics pass",
+                        "prompt": "I am pasting a launch note. Tell me what is real versus brand language.",
+                        "tool_hint": "Use before forwarding internal summaries.",
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+        return edition
 
     def test_preview_mode_no_form_or_fake_success(self):
         html = build_qotd_section("What is AI?", api_base=None)
@@ -43,17 +91,15 @@ class QotdSectionTests(unittest.TestCase):
             self.assertEqual(qotd_api_base(), "https://x.test")
 
     def test_rendered_html_preview_by_default(self):
-        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-19.json"
-        if not edition.exists():
-            self.skipTest("3-story fixture edition missing")
-        env = {k: v for k, v in os.environ.items() if k != "AI_ESPRESSO_QOTD_API_URL"}
-        with patch.dict(os.environ, env, clear=True):
-            result = render_edition(edition, issue_num=99)
-        html = Path(result["html_path"]).read_text()
-        self.assertIn("Preview edition", html)
-        self.assertNotIn('id="qotd-form"', html)
-        Path(result["html_path"]).unlink(missing_ok=True)
-        Path(result["md_path"]).unlink(missing_ok=True)
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            edition = self._write_three_story_fixture(out)
+            env = {k: v for k, v in os.environ.items() if k != "AI_ESPRESSO_QOTD_API_URL"}
+            with patch.dict(os.environ, env, clear=True):
+                result = render_edition(edition, issue_num=99, editions_dir=out)
+            html = Path(result["html_path"]).read_text()
+            self.assertIn("Preview edition", html)
+            self.assertNotIn('id="qotd-form"', html)
 
 
 if __name__ == "__main__":
