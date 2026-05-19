@@ -13,6 +13,7 @@ CI_OPTIONAL_FLAKY_FEEDS = {
     "The Information — AI",
     "Don't Worry About the Vase (Zvi Mowshowitz)",
     "FreightWaves — AI",
+    "Microsoft AI Blog",
 }
 
 
