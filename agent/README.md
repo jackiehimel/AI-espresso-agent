@@ -105,7 +105,26 @@ Runs an Anthropic native `tool_use` loop. The model chooses tools and order; Pyt
 
 ### Controller (`espresso_loop.py` — `agentic_select()`)
 
-Scout bootstrap → `run_tool_agent()` (soft budget 25, hard budget 40 tool calls). Records every event to `agent_trace` including `tool_use_id`. Falls back to deterministic `rank_and_select` on LLM errors or failed ship.
+Scout bootstrap → `run_tool_agent()` (soft budget 25, hard budget 40 tool calls). Records every event to `agent_trace` including `tool_use_id`. On unrecoverable agent failure, the run writes `data/editions/YYYY-MM-DD.failed.json` and **raises** (CI fails). It does **not** silently fall back unless you opt in locally (see below).
+
+### Deterministic fallback (local dev emergency only)
+
+Production and `.github/workflows/daily-edition.yml` always use `mode="agent"`. The legacy `rank_and_select` path (`RANKING_SYSTEM` in `espresso_agent.py`) is **deprecated** and is **not** kept in sync with `_EDITORIAL_RUBRIC` in `espresso_loop.py` — do not rely on it for editorial quality.
+
+| Knob | Purpose |
+|---|---|
+| `mode="agent"` (default) | Scout → Editor → Critic native `tool_use` loop |
+| `mode="deterministic"` | Skip the agent loop; run `rank_and_select` directly (legacy) |
+| `ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1` | After agent failure with no recoverable slate, run `rank_and_select` instead of failing |
+
+Use the env flag or `--mode deterministic` only on your machine when debugging source fetch or ranking plumbing — never in CI, cron, or client-facing runs. Example:
+
+```bash
+# Agent failed; inspect trace first — fallback is last resort:
+ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1 python3 espresso_agent.py --date 2026-05-18 --mode agent
+# Or explicit legacy pipeline:
+python3 espresso_agent.py --date 2026-05-18 --mode deterministic
+```
 
 ## Rendering
 

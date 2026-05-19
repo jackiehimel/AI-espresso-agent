@@ -39,6 +39,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run unit tests
+        working-directory: agent
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
       - name: Resolve edition date
         id: date
         run: |
@@ -48,6 +52,7 @@ jobs:
             echo "value=$(TZ=America/New_York date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
           fi
 
+      # Production: agent tool_use loop only (no legacy rank_and_select fallback).
       - name: Generate edition JSON (agent mode)
         working-directory: agent
         env:
@@ -62,6 +67,7 @@ jobs:
           "
 
       - name: Render HTML + Markdown + illustrations
+        id: render
         working-directory: agent
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -69,7 +75,18 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           export PATH="${GITHUB_WORKSPACE}/agent/bin:${PATH}"
-          python render_edition.py "${{ steps.date.outputs.value }}"
+          set -euo pipefail
+          OUTPUT=$(python render_edition.py "${{ steps.date.outputs.value }}")
+          echo "$OUTPUT"
+          echo "$OUTPUT" | python - <<'PY'
+          import json, os, sys
+          data = json.load(sys.stdin)
+          out = os.environ["GITHUB_OUTPUT"]
+          with open(out, "a", encoding="utf-8") as f:
+              f.write(f"issue_num={data['issue_num']}\n")
+              f.write(f"html_path={data['html_path']}\n")
+              f.write(f"md_path={data['md_path']}\n")
+          PY
 
       - name: Send edition email
         if: ${{ inputs.skip_email != 'true' }}
@@ -80,12 +97,9 @@ jobs:
           AI_ESPRESSO_FROM_NAME: "AI Espresso"
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: |
-          # Resolve which edition_N_variant_c.* the renderer just produced.
-          # render_edition.py prints the issue number to stdout; instead of
-          # parsing that we just pick the highest-numbered file in editions/.
-          HTML=$(ls -1 ../editions/edition_*_variant_c.html | sort -V | tail -1)
-          MD=$(ls -1 ../editions/edition_*_variant_c.md   | sort -V | tail -1)
-          echo "Emailing $HTML"
+          HTML="${{ steps.render.outputs.html_path }}"
+          MD="${{ steps.render.outputs.md_path }}"
+          echo "Emailing edition ${{ steps.render.outputs.issue_num }}: $HTML"
           python send_email.py "$HTML" "$MD" || {
             echo "::warning::Email step failed but edition is committed"
             exit 0
@@ -102,3 +116,21 @@ jobs:
             git commit -m "Daily edition for ${{ steps.date.outputs.value }}"
             git push
           fi
+
+  notify-failure:
+    runs-on: ubuntu-latest
+    needs: generate
+    if: failure()
+    steps:
+      - name: Workflow failure summary
+        run: |
+          {
+            echo "## Daily edition workflow failed"
+            echo ""
+            echo "- **Workflow:** ${{ github.workflow }}"
+            echo "- **Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo ""
+            echo "Check the generate job logs for agent, render, or email errors."
+            echo ""
+            echo "_Slack: wire \`SLACK_WEBHOOK_URL\` secret and a notify step when ready._"
+          } >> "$GITHUB_STEP_SUMMARY"

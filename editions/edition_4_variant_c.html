@@ -229,6 +229,10 @@
   }
   .qotd-submit:disabled { opacity: 0.6; cursor: default; }
   .qotd-done { font-size: 12px; color: #00955A; margin: 10px 0 0 0; display: none; }
+  .qotd-error { font-size: 12px; color: #B8340A; margin: 10px 0 0 0; display: none; }
+  .qotd-preview {
+    font-size: 12px; color: #8B6F47; margin: 0; line-height: 1.5;
+  }
 
   .footer {
     text-align: center; padding: 28px 16px 8px 16px;
@@ -321,12 +325,7 @@
   <section class="qotd" id="qotd">
     <p class="qotd-label">Question of the day</p>
     <p class="qotd-question">If you could deploy one AI feature directly into a social platform you use daily, what would it do?</p>
-    <form class="qotd-form" id="qotd-form">
-      <input class="qotd-input" type="text" name="answer" maxlength="280"
-        placeholder="Your one-sentence take&hellip;" required aria-label="Your answer">
-      <button class="qotd-submit" type="submit">Submit</button>
-    </form>
-    <p class="qotd-done" id="qotd-done">Thanks — recorded.</p>
+    <p class="qotd-preview">Preview edition — answers are collected when this issue is hosted online.</p>
   </section>
 
   <footer class="footer">
@@ -335,25 +334,7 @@
 
 </div>
 <script>
-(function () {
-  var form = document.getElementById("qotd-form");
-  var done = document.getElementById("qotd-done");
-  if (!form) return;
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var input = form.querySelector("input[name=answer]");
-    var btn = form.querySelector("button[type=submit]");
-    btn.disabled = true;
-    fetch("/api/daily-question", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ date: "2026-05-18", answer: (input && input.value) || "" })
-    }).catch(function () {}).finally(function () {
-      if (done) done.style.display = "block";
-      if (input) input.disabled = true;
-    });
-  });
-})();
+
 (function () {
   var btn = document.querySelector(".prompt-copy");
   var code = document.querySelector(".prompt-code");

@@ -1,5 +1,8 @@
 # AI Espresso — Pre-launch context
 
+**GitHub:** https://github.com/jackiehimel/ai-espresso-finalized (private)  
+**Baseline commit:** `a776f26` — tag with `git tag pre-launch-baseline` to revert anytime.
+
 ## 2026-05-18 — Execution playbook (fix order without context rot)
 
 **Verdict:** Not launch-ready. Agent loop is real (native `tool_use` Editor, ship gates, trace). Fix ops/trust first, then rubric-in-prompts, never expand regex constitution.
@@ -33,20 +36,80 @@
 ### Completed (check off as merged)
 
 - [ ] Phase 1.1 Archive upsert + ESPRESSO_SKIP_ARCHIVE
-- [ ] Phase 1.2 QOTD honest UX
-- [ ] Phase 1.3 CI/workflow guards + alerts
-- [ ] Phase 2.1 Unified rubric in prompts
-- [ ] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE
-- [ ] Phase 2.3 Deterministic path dev-only / aligned
+- [x] Phase 1.2 QOTD honest UX — merged `10e4dfc` (with 1.3 in same PR)
+- [x] Phase 1.3 CI/workflow guards + alerts — merged `10e4dfc`
+- [x] Phase 2.1 Unified rubric in prompts — merged `b4a8563`
+- [x] Phase 2.2 Shrink constitution / HEADLINE_HARD_SKIP_RE — merged `5b9e7c4`
+- [x] Phase 2.3 Deterministic path dev-only / aligned — merged (see handoff below)
 - [ ] Phase 3 Editorial quality pass + clean prod edition
 - [ ] Phase 4 External polish
 
+### Session handoff (Phase 2.3 — deterministic fallback dev-only) — MERGED
+
+**Tests (2026-05-18):** `82` ran, `OK` (`2` skipped). Command: `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v`.
+
+**Shipped in `docs: deterministic fallback dev-only`:**
+- `RANKING_SYSTEM` deprecation block: not synced with `_EDITORIAL_RUBRIC`; never enable in `daily-edition.yml`.
+- `agent/README.md`: deterministic fallback table; fixed misleading “always falls back” copy.
+- `daily-edition.yml`: production comment — agent loop only (no legacy fallback env).
+- `test_daily_workflow.py`: CI workflow must use `mode='agent'` only; no fallback env in non-comment lines.
+
+**Phase 2 complete.** Agent strength track done (2.1 rubric, 2.2 constitution backstop, 2.3 dev-only deterministic).
+
+**Next session:** **Prompt 6** — Phase **3** (editorial quality + clean prod edition) *or* Phase **4** (polish). Pick one per PR. Phase **1.1** archive upsert still open if doing ops first.
+
+### Session handoff (Phase 2.2 — narrow constitution backstop)
+
+**Tests (2026-05-18):** `79` ran, `OK` (`2` skipped). Command: `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v`.
+
+**Shipped (local, PR title `refactor: narrow constitution to ship backstop`):**
+- `constitution.py`: removed `HARD_REJECT_PATTERNS`, `NO_HOOK_RE`, `INCIDENTAL_FAILURE_RE`, broad `AI_FAILURE_TONE_RE` / layoff lexicon; kept `AI_LEXICON_RE` + narrow `FAILURE_PRIMARY_RE` (slop, glitch, trapped, fails again, refuses to help).
+- `editorial.py`: `HEADLINE_HARD_SKIP_RE` aliases `FAILURE_PRIMARY_RE`; removed `DRAMA_HEADLINE_RE`.
+- Tests document prompt-led cases (HBR, office opening, legal drama) vs code backstop (Waymo trapped, slop, refuses).
+
+**Next session:** (done) Phase 2.3 merged — see handoff above.
+
+### Session handoff (after PR merge `b4a8563` — Phase 2.1)
+
+**Tests (2026-05-18):** `73` ran, `OK` (`2` skipped). Command: `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v`.
+
+**Shipped in `refactor: unify agent editorial prompts`:**
+- `_EDITORIAL_RUBRIC` in `espresso_loop.py` shared by Scout/Editor/Critic (role-specific tails only).
+- Audience: any Solvd employee (not non-technical-only). Lab partnerships OK with hook; HBR/workforce sociology reject; deepfake scandal vs detection-product feature clarified.
+- `constitution_prompt_block()` still appended to all three system prompts; tool loop and `dispatch_tool` gates unchanged.
+
+**Next session:** **Prompt 5** — Phase **2.3 only** (deterministic fallback dev-only). See handoff above for 2.2.
+
+**Still open from audit:** Phase 1.1 archive ops; footer email / repo URL; large PNGs; `run_chain.py` doc.
+
+**Resolved (2.3):** `RANKING_SYSTEM` documented as deprecated dev-only (not second product); production workflow guarded.
+
+### Session handoff (after PR merge `10e4dfc`)
+
+**Tests (2026-05-18):** `73` ran, `OK` (`2` skipped fixtures). Command: `cd agent && python3 -m unittest discover -s tests -p "test_*.py" -v`.
+
+**Shipped in `fix: QOTD and daily workflow guards`:**
+- QOTD: default static editions show honest preview copy (no form / fake “Thanks — recorded”). Set `AI_ESPRESSO_QOTD_API_URL` at render time for hosted submit (`{base}/api/daily-question`); success only on `res.ok`.
+- `render_edition.py`: exit `1` when illustrations missing unless `--allow-missing-images`.
+- `daily-edition.yml`: unit tests before generate; render JSON outputs → email paths; `notify-failure` job writes step summary.
+- New tests: `test_qotd.py`, `test_render_edition.py`. `edition_4_variant_c.html` regenerated with preview QOTD.
+
+**Historical note:** 1.1 archive ops still open; 2.1 rubric merged in `b4a8563` (see handoff above).
+
 ## 2026-05-18 — Pre-launch audit summary
 
-**Blockers:** duplicate `archive.jsonl` per day; no dev archive skip; QOTD fake API success; hardcoded editorial regex in `constitution.py` / `editorial.py`.
+**Blockers:** duplicate `archive.jsonl` per day; no dev archive skip.
 
-**High:** footer personal email + stale repo URL; `RANKING_SYSTEM` vs agent audience mismatch; render exit 0 with missing images; ~2.5MB PNGs; `run_chain.py` doc missing; daily cron skips tests.
+**High:** footer personal email + stale repo URL; ~2.5MB PNGs; `run_chain.py` doc missing.
 
-**Working well:** native tool_use loop, approve→ship lock, constitution gate vs bad critic approve, full agent_trace, 64 tests passing.
+**Resolved (1.2/1.3):** QOTD fake API success; render exit 0 with missing images; daily cron skips tests.
+
+**Resolved (2.1):** unified Scout/Editor/Critic rubric in prompts (`_EDITORIAL_RUBRIC`); audience/partnership/deepfake distinctions in prompt text, not new code regex.
+
+**Resolved (2.2):** constitution / `HEADLINE_HARD_SKIP_RE` narrowed to empty headline, AI lexicon, obvious failure-as-primary; sociology/PR/drama/office openings prompt-led.
+
+**Resolved (2.3):** deterministic fallback documented dev-only; `daily-edition.yml` never sets fallback env; `RANKING_SYSTEM` marked deprecated vs agent rubric.
+
+**Working well:** native tool_use loop, approve→ship lock, constitution gate vs bad critic approve, full agent_trace, **82 tests** (2 skipped).
 
 **Sample edition:** `2026-05-18` / edition_4 — agent shipped after critic revise; trace at `agent/data/editions/2026-05-18.json`.
