@@ -96,9 +96,9 @@ class ValidatePromptTileTests(unittest.TestCase):
 class RenderLayoutTests(unittest.TestCase):
 
     def test_html_has_minimal_masthead(self):
-        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-18.json"
+        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-19.json"
         if not edition.exists():
-            self.skipTest("fixture edition missing")
+            self.skipTest("3-story fixture edition missing")
         result = render_edition(edition, issue_num=2)
         html = Path(result["html_path"]).read_text()
         self.assertNotIn('class="voice-line"', html)

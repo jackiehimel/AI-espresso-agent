@@ -700,8 +700,8 @@ def render_edition(
     """
     data = json.loads(edition_json_path.read_text())
     stories = data.get("stories", [])
-    if len(stories) < 2:
-        raise ValueError(f"Edition has {len(stories)} stories; need at least 2.")
+    if len(stories) < 3:
+        raise ValueError(f"Edition has {len(stories)} stories; need 3.")
     prompt = data.get("try_this_prompt") or {}
     story_limit = min(len(stories), 3)
 

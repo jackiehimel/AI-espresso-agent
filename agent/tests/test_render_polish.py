@@ -27,9 +27,10 @@ class PublicHtmlPolishTests(unittest.TestCase):
         self.assertNotIn("AI-ESPRESSO-MAIN", html)
 
     def test_rendered_html_hides_source_tiers(self):
-        edition = Path(__file__).resolve().parent.parent / "data" / "editions" / "2026-05-18.json"
+        editions_dir = Path(__file__).resolve().parent.parent / "data" / "editions"
+        edition = editions_dir / "2026-05-19.json"
         if not edition.exists():
-            self.skipTest("fixture edition missing")
+            self.skipTest("3-story fixture edition missing")
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp)
             result = render_edition(edition, issue_num=99, editions_dir=out)
@@ -40,7 +41,7 @@ class PublicHtmlPolishTests(unittest.TestCase):
             self.assertIn(FOOTER_REPO_URL, html)
             self.assertIn(FOOTER_CONTACT_EMAIL, html)
 
-    def test_render_supports_two_story_weak_pool_editions(self):
+    def test_render_rejects_two_story_editions(self):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp)
             edition = out / "two-story.json"
@@ -77,11 +78,8 @@ class PublicHtmlPolishTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            result = render_edition(edition, issue_num=77, editions_dir=out)
-            html = Path(result["html_path"]).read_text(encoding="utf-8")
-            self.assertNotIn("Edition has 2 stories", html)
-            self.assertEqual(len(result["stories"]), 2)
-            self.assertEqual(len(result["image_paths"]), 3)
+            with self.assertRaisesRegex(ValueError, "Edition has 2 stories; need 3\\."):
+                render_edition(edition, issue_num=77, editions_dir=out)
 
 
 class CompressEditionPngTests(unittest.TestCase):

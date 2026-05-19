@@ -101,6 +101,7 @@ CONSTITUTION (ship gate enforces a narrow code backstop — do not contradict):
   • ACCEPT: AI is the news hook + celebration tone (capability, market move, partnership power-move).
   • REJECT in prompts: sociology/HBR, consultancy PR, office openings without a hook, legal drama;
     AI incidental (robot trapped, routing glitch); stories where failure is the news.
-  • Code backstop only: empty headline, no AI lexicon, obvious failure-as-primary (slop, glitch, trapped).
+  • Code backstop only: empty headline, obvious failure-as-primary (slop, glitch, trapped), and
+    a cap on non-load-bearing picks (at most one card may rely on "cool/new" utility over strict AI-hook framing).
   • Market rivalry and talent moves are OK. Critic judges borderline slates; ship gate catches egregious cases.
 """.strip()

@@ -4,6 +4,7 @@ import datetime as dt
 import sys
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
@@ -148,6 +149,187 @@ class ToolDispatchTests(unittest.TestCase):
         r = el.tool_search_news(state, {"query": "ai apps"})
         self.assertIn("max 4", r.get("error", ""))
 
+    def test_search_news_limit_gets_bonus_from_aggregator_signals(self):
+        state = _state()
+        state.working_memory["aggregator_signals"] = ["cursor_composer"]
+        self.assertEqual(el._search_call_limit(state), 4)
+        state.search_calls_used = 4
+        r = el.tool_search_news(state, {"query": "ai apps"})
+        self.assertIn("max 4", r.get("error", ""))
+
+    def test_search_news_limit_weak_pool_plus_aggregator_bonus(self):
+        state = _state()
+        state.working_memory["pool_quality"] = "weak pool today"
+        state.working_memory["editor_notes"] = "thin pool; keep quality bar"
+        state.working_memory["aggregator_signals"] = ["odyssey_world_models"]
+        self.assertEqual(el._search_call_limit(state), 5)
+
+    def test_uncovered_aggregator_signals_detected_when_primary_missing(self):
+        candidates = [
+            SimpleNamespace(
+                headline="Cursor Composer 2.5 nears coding frontier",
+                blurb="new coding model",
+                url="https://tldr.tech/ai/2026-05-19",
+                aggregator=True,
+            ),
+            SimpleNamespace(
+                headline="Generic AI story from primary source",
+                blurb="",
+                url="https://example.com/story",
+                aggregator=False,
+            ),
+        ]
+        signals = el._uncovered_aggregator_signals(candidates)
+        self.assertIn("cursor_composer", signals)
+
+    def test_uncovered_aggregator_signals_cleared_when_primary_present(self):
+        candidates = [
+            SimpleNamespace(
+                headline="Cursor Composer 2.5 nears coding frontier",
+                blurb="new coding model",
+                url="https://tldr.tech/ai/2026-05-19",
+                aggregator=True,
+            ),
+            SimpleNamespace(
+                headline="Cursor releases Composer 2.5",
+                blurb="official changelog post",
+                url="https://cursor.com/changelog/composer-2-5",
+                aggregator=False,
+            ),
+        ]
+        signals = el._uncovered_aggregator_signals(candidates)
+        self.assertNotIn("cursor_composer", signals)
+
+    def test_high_impact_legal_candidate_detection(self):
+        legal = SimpleNamespace(
+            headline="Jury rejects Elon Musk lawsuit against OpenAI, reshaping governance control",
+            blurb="The ruling changes ownership control and market access assumptions.",
+            url="https://example.com/legal-story",
+            source_name="Semafor Technology",
+            tier=4,
+            aggregator=False,
+        )
+        self.assertTrue(el._is_high_impact_legal_candidate(legal))
+
+    def test_high_impact_legal_candidate_rejects_courtroom_drama_without_consequence(self):
+        legal = SimpleNamespace(
+            headline="Court hears Musk and OpenAI arguments in headline lawsuit",
+            blurb="High-profile legal drama continues without ruling details.",
+            url="https://example.com/legal-drama",
+            source_name="Semafor Technology",
+            tier=4,
+            aggregator=False,
+        )
+        self.assertFalse(el._is_high_impact_legal_candidate(legal))
+
+    def test_high_impact_legal_candidate_requires_ai_entity(self):
+        legal = SimpleNamespace(
+            headline="Jury verdict reshapes governance control at major media conglomerate",
+            blurb="Ruling changes board ownership and platform distribution rights.",
+            url="https://example.com/non-ai-legal-story",
+            source_name="Business Desk",
+            tier=4,
+            aggregator=False,
+        )
+        self.assertFalse(el._is_high_impact_legal_candidate(legal))
+
+    def test_high_impact_legal_injected_into_capped_pool(self):
+        legal = SimpleNamespace(
+            headline="Jury rejects Elon Musk lawsuit against OpenAI, reshaping governance control",
+            blurb="Ruling has product access and governance impact.",
+            url="https://example.com/legal-story",
+            source_name="Semafor Technology",
+            tier=4,
+            aggregator=False,
+        )
+        fresh = [
+            SimpleNamespace(
+                headline=f"Story {i}",
+                blurb="normal item",
+                url=f"https://example.com/{i}",
+                source_name=f"source-{i % 10}",
+                tier=1,
+                aggregator=False,
+            )
+            for i in range(60)
+        ]
+        fresh.append(legal)
+        capped = fresh[:60].copy()
+        per_source = {}
+        for c in capped:
+            per_source[c.source_name] = per_source.get(c.source_name, 0) + 1
+
+        el._inject_high_impact_legal_candidate(capped, fresh, per_source, max_total=60, max_per_source=4)
+        self.assertTrue(any(getattr(c, "url", "") == legal.url for c in capped))
+
+    def test_high_impact_legal_injection_skips_low_impact_legal_candidate(self):
+        low_impact_legal = SimpleNamespace(
+            headline="Court hearing continues in Musk v OpenAI legal battle",
+            blurb="Arguments continue as courtroom drama unfolds.",
+            url="https://example.com/low-impact-legal",
+            source_name="Semafor Technology",
+            tier=4,
+            aggregator=False,
+        )
+        fresh = [
+            SimpleNamespace(
+                headline=f"Story {i}",
+                blurb="normal item",
+                url=f"https://example.com/{i}",
+                source_name=f"source-{i % 10}",
+                tier=1,
+                aggregator=False,
+            )
+            for i in range(60)
+        ]
+        fresh.append(low_impact_legal)
+        capped = fresh[:60].copy()
+        per_source = {}
+        for c in capped:
+            per_source[c.source_name] = per_source.get(c.source_name, 0) + 1
+
+        el._inject_high_impact_legal_candidate(capped, fresh, per_source, max_total=60, max_per_source=4)
+        self.assertFalse(any(getattr(c, "url", "") == low_impact_legal.url for c in capped))
+
+    def test_high_impact_legal_injection_does_not_add_second_legal_candidate(self):
+        existing_legal = SimpleNamespace(
+            headline="Jury rejects Elon Musk lawsuit against OpenAI, reshaping governance control",
+            blurb="Ruling changes governance control.",
+            url="https://example.com/existing-legal",
+            source_name="Semafor Technology",
+            tier=4,
+            aggregator=False,
+        )
+        another_legal = SimpleNamespace(
+            headline="Trial ruling alters OpenAI board charter and ownership structure",
+            blurb="Enforceable ruling changes board control and product access terms.",
+            url="https://example.com/another-legal",
+            source_name="Legal Desk",
+            tier=4,
+            aggregator=False,
+        )
+        capped = [existing_legal] + [
+            SimpleNamespace(
+                headline=f"Story {i}",
+                blurb="normal item",
+                url=f"https://example.com/{i}",
+                source_name=f"source-{i % 10}",
+                tier=1,
+                aggregator=False,
+            )
+            for i in range(59)
+        ]
+        fresh = capped + [another_legal]
+        per_source = {}
+        for c in capped:
+            per_source[c.source_name] = per_source.get(c.source_name, 0) + 1
+
+        el._inject_high_impact_legal_candidate(capped, fresh, per_source, max_total=60, max_per_source=4)
+        legal_count = sum(1 for c in capped if el._is_high_impact_legal_candidate(c))
+        self.assertEqual(legal_count, 1)
+        self.assertTrue(any(getattr(c, "url", "") == existing_legal.url for c in capped))
+        self.assertFalse(any(getattr(c, "url", "") == another_legal.url for c in capped))
+
     def test_search_news_auth_failure_does_not_count_budget(self):
         from unittest.mock import patch
 
@@ -223,6 +405,16 @@ class ToolDispatchTests(unittest.TestCase):
         self.assertTrue(r.get("ok"))
         self.assertNotIn("beginner", state.picks)
 
+    def test_editorial_rubric_includes_third_card_fallback_lane(self):
+        self.assertIn("THIRD-CARD FALLBACK LANE", el._EDITORIAL_RUBRIC)
+        self.assertIn("quality-only, never filler", el._EDITORIAL_RUBRIC)
+        self.assertIn("capability/tool/workflow unlock", el._EDITORIAL_RUBRIC)
+
+    def test_critic_instructions_require_high_signal_third_slot(self):
+        self.assertIn("third slot", el._CRITIC_TAIL.lower())
+        self.assertIn("cool/new capability", el._CRITIC_TAIL)
+        self.assertIn("direct user utility", el._CRITIC_TAIL)
+
 
 class ShipGateTests(unittest.TestCase):
 
@@ -277,7 +469,7 @@ class ShipGateTests(unittest.TestCase):
         gate = el.validate_ship_gates(state, {"tier1_minimum": 1})
         self.assertFalse(gate["ok"])
 
-    def test_weak_pool_two_picks_allowed(self):
+    def test_weak_pool_two_picks_not_allowed(self):
         state = _state(
             picks={
                 "business": {
@@ -302,7 +494,7 @@ class ShipGateTests(unittest.TestCase):
         state.working_memory["pool_quality"] = "weak pool today"
         state.working_memory["editor_notes"] = "Skipping engineer — thin pool"
         gate = el.validate_ship_gates(state, {"tier1_minimum": 1})
-        self.assertTrue(gate["ok"])
+        self.assertFalse(gate["ok"])
 
     def test_two_picks_without_weak_note_blocked(self):
         state = _state(
@@ -356,6 +548,36 @@ class ShipGateTests(unittest.TestCase):
         self.assertFalse(gate["ok"])
         self.assertTrue(any("constitution" in e for e in gate["errors"]))
 
+    def test_ship_allows_one_non_load_bearing_card(self):
+        picks = self._three_picks()
+        picks["cross"] = picks.pop("engineer")
+        picks["cross"]["headline"] = "Cursor ships AI Shadow Workspace for background code iteration"
+        picks["beginner"]["headline"] = "Shadow Workspace now runs in the background while you code"
+        state = _state(
+            needed_slots=["business", "beginner", "cross"],
+            picks=picks,
+            last_critic_verdict={"verdict": "approve", "reason": "cool mix"},
+        )
+        gate = el.validate_ship_gates(state, {"tier1_minimum": 1})
+        self.assertTrue(gate["ok"], gate["errors"])
+
+    def test_ship_blocks_when_two_cards_are_non_load_bearing(self):
+        picks = self._three_picks()
+        picks["cross"] = picks.pop("engineer")
+        picks["beginner"]["headline"] = "Shadow Workspace now runs in the background while you code"
+        picks["cross"]["headline"] = "New automation workflow ships this week"
+        state = _state(
+            needed_slots=["business", "beginner", "cross"],
+            picks=picks,
+            last_critic_verdict={"verdict": "approve", "reason": "cool mix"},
+        )
+        gate = el.validate_ship_gates(state, {"tier1_minimum": 1})
+        self.assertFalse(gate["ok"])
+        self.assertTrue(
+            any("too many non-load-bearing stories" in e for e in gate["errors"]),
+            gate["errors"],
+        )
+
     def test_approve_lock_blocks_unpick(self):
         state = _state(
             picks=self._three_picks(),
@@ -376,7 +598,7 @@ class ShipGateTests(unittest.TestCase):
         r = el.dispatch_tool("unpick", {"slot": "business"}, state, [], {"tier1_minimum": 1})
         self.assertNotIn("locked", r.get("error", ""))
 
-    def test_weak_pool_critic_override_can_ship_when_other_gates_pass(self):
+    def test_weak_pool_critic_override_does_not_bypass_ship_gates(self):
         state = _state(
             picks={
                 "business": {
@@ -401,8 +623,7 @@ class ShipGateTests(unittest.TestCase):
         state.working_memory["pool_quality"] = "weak pool today"
         state.working_memory["editor_notes"] = "documented weak pool"
         r = el.tool_ship_edition(state, {}, {"tier1_minimum": 1})
-        self.assertTrue(r["shipped"])
-        self.assertEqual(r.get("override"), "weak_pool_critic_override")
+        self.assertFalse(r["shipped"])
 
 
 class MockToolLoopTests(unittest.TestCase):
