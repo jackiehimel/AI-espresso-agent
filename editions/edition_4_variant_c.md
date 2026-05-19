@@ -4,62 +4,48 @@
 
 ---
 
-![Google and Blackstone are launching a cloud company built on Google chips](edition_4/assets/variant_c_01.png)
+![Anthropic acquires Stainless, the API tooling company](edition_4/assets/variant_c_01.png)
 
 **MARKET**
 
-## Google and Blackstone are launching a cloud company built on Google chips
+## Anthropic acquires Stainless, the API tooling company
 
-Alphabet's Google is teaming up with private equity giant Blackstone to create a new AI cloud business that will run on Google's own chips, taking aim at fast-growing competitors like CoreWeave. The joint venture marks Google's latest push to compete in the booming market for AI infrastructure beyond its core cloud division.
+Anthropic bought Stainless, a startup that auto-generates SDKs and API tooling for developers. Stainless already builds the official SDKs for Claude's API — now that team is coming in-house to make building with Claude easier across languages.
 
-*Google is betting it can win cloud customers by offering its custom AI chips through a separate company.*
+*Better developer tools mean faster Claude adoption, especially for teams shipping production AI features.*
 
-[Bloomberg Technology](https://www.bloomberg.com/news/articles/2026-05-19/google-to-create-ai-cloud-business-with-blackstone-wsj-says) · May 19
+[Anthropic News](https://www.anthropic.com/news/anthropic-acquires-stainless) · May 19
 
 ---
 
-![Anthropic raises Claude's usage limits and partners with SpaceX on compute](edition_4/assets/variant_c_02.png)
+![Meta's new SAM 3.1 can track objects in video twice as fast](edition_4/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## Anthropic raises Claude's usage limits and partners with SpaceX on compute
+## Meta's new SAM 3.1 can track objects in video twice as fast
 
-Anthropic announced higher usage caps for Claude across all subscription tiers and a new compute partnership with SpaceX. The company didn't specify exact new limits, but existing users will see increased message allowances. The SpaceX deal brings additional infrastructure to support Claude's growing demand.
+Meta upgraded its Segment Anything Model to track objects in real-time video at double the speed. The new version can follow multiple things at once across a video — like tracking every person in a crowd scene or every car on a street — without slowing down. It runs faster on cheaper hardware, making video analysis more practical for everyday apps.
 
-*More headroom for teams hitting Claude's daily caps, plus infrastructure backing from SpaceX.*
+*Real-time video understanding just got fast enough to run in normal applications, not just research labs.*
 
-[Anthropic News](https://www.anthropic.com/news/higher-limits-spacex) · May 19
-
----
-
-![Meta built an AI that learns your habits and runs your apps for you](edition_4/assets/variant_c_03.png)
-
-**INDUSTRY**
-
-## Meta built an AI that learns your habits and runs your apps for you
-
-Muse Spark is Meta's new AI agent that watches how you use your phone, learns your routines, and can take actions across apps — like ordering food, booking rides, or managing your calendar — without you opening them. It's designed to become a personal assistant that knows your preferences and handles tasks end-to-end.
-
-*AI is moving from answering questions to actually doing things on your behalf across multiple apps.*
-
-[Meta AI Blog](https://ai.meta.com/blog/introducing-muse-spark-msl/) · May 19
+[Meta AI Blog](https://ai.meta.com/blog/segment-anything-model-3/) · May 19
 
 ---
 
 
 ---
 
-![Try this prompt](edition_4/assets/variant_c_04.png)
+![Try this prompt](edition_4/assets/variant_c_03.png)
 
 **☕ Try this prompt**
 
-### The ghost writer test
+### The honest rewrite
 
-*Before you ship the doc, email, or brief you've been staring at too long.*
+*Before you send the email you've been wordsmithing for 40 minutes.*
 
 
 ```
-I just wrote something below. Read it, then write the worst possible version someone could create by skimming mine for thirty seconds—same structure, same length, zero thought. Now show me which of my sentences were already that empty.
+I just wrote something that's technically accurate but sounds like a compliance document. Paste it below, then rewrite it so a smart 12-year-old would understand—but keep every fact intact. If you cut jargon, show me what it actually meant.
 ```
 
 ---
