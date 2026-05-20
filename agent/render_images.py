@@ -1,5 +1,5 @@
 """
-render_images.py — generate the four illustrations a variant_c edition needs.
+render_images.py — generate the illustration set a variant_c edition needs.
 
 Each card gets a distinct composition, accent color, and visual metaphor (think
 Christoph Niemann / Saul Steinberg editorial wit — not clipart still-lifes).
@@ -15,6 +15,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from card_config import STORY_CARD_COUNT
+
 
 def _normalize_prompt_for_cli(prompt: str) -> str:
     """Replace Unicode punctuation that breaks ASCII stderr/subprocess on some macOS shells."""
@@ -28,8 +30,8 @@ def _normalize_prompt_for_cli(prompt: str) -> str:
     return prompt
 
 
-# Per-card art direction so the four tiles don't look like clones.
-# card_index: 0–2 = stories (engineer, beginner, business order), 3 = prompt tile
+# Per-card art direction so tiles don't look like clones.
+# card_index: 0..(STORY_CARD_COUNT-1) = stories, STORY_CARD_COUNT = prompt tile
 # Vintage newspaper engraving — slate-blue ink on aged cream (original variant_c look).
 ILLUSTRATION_STYLE = (
     "Vintage newspaper editorial engraving illustration, fine steel-blue charcoal ink "
@@ -59,6 +61,12 @@ CARD_PROFILES: list[dict[str, str]] = [
         "accent": "slate-blue charcoal ink on cream paper only",
         "mood": "literal and calm",
         "technique": "fine cross-hatching and stippling, engraving linework",
+    },
+    {
+        "composition": "Playful centered square, one bold metaphor, maximum breathing room.",
+        "accent": "slate-blue charcoal ink on cream paper only",
+        "mood": "literal and calm",
+        "technique": "fine cross-hatching, engraving linework, not faint",
     },
     {
         "composition": "Playful centered square, one bold metaphor, maximum breathing room.",
@@ -308,8 +316,8 @@ def _resolve_prompt_scene(client: Any | None, prompt_card: dict[str, Any]) -> st
             "reviewing spending, no people or readable numbers."
         )
     blurb = f"{kicker}\n{body}"[:500]
-    profile = CARD_PROFILES[3]
-    return _resolve_scene(client, title, blurb, kicker, "prompt", 3, profile)
+    profile = CARD_PROFILES[STORY_CARD_COUNT]
+    return _resolve_scene(client, title, blurb, kicker, "prompt", STORY_CARD_COUNT, profile)
 
 
 def _strip_image_trigger_phrases(prompt: str) -> str:
@@ -353,7 +361,7 @@ def _prompt_for_story(
     client: Any | None,
     card_index: int,
 ) -> str:
-    profile = CARD_PROFILES[min(card_index, 2)]
+    profile = CARD_PROFILES[min(card_index, STORY_CARD_COUNT - 1)]
     headline = (story.get("headline") or "").strip()
     blurb = (story.get("blurb") or "").strip()
     why = (story.get("why_it_matters") or "").strip()
@@ -366,7 +374,7 @@ def _prompt_for_card(
     prompt_card: dict[str, Any],
     client: Any | None,
 ) -> str:
-    profile = CARD_PROFILES[3]
+    profile = CARD_PROFILES[STORY_CARD_COUNT]
     scene = _resolve_prompt_scene(client, prompt_card)
     return _build_image_prompt(scene, profile, "1:1")
 
@@ -545,16 +553,17 @@ def render_images(
     edition_data: dict[str, Any],
 ) -> dict[str, Any]:
     image_paths = render_result["image_paths"]
-    stories = edition_data.get("stories", [])[:3]
+    stories = edition_data.get("stories", [])[:STORY_CARD_COUNT]
     prompt_card = edition_data.get("try_this_prompt") or {}
 
     client = _build_client()
     generated, missing, prompts = [], [], []
 
-    for i, (story, path) in enumerate(zip(stories, image_paths[:3]), start=0):
+    total_cards = STORY_CARD_COUNT + 1
+    for i, (story, path) in enumerate(zip(stories, image_paths[:STORY_CARD_COUNT]), start=0):
         no_ext = Path(str(path).removesuffix(".png"))
-        print(f"  [{i + 1}/4] {story.get('headline', '')[:60]}...", file=sys.stderr)
-        profile = CARD_PROFILES[min(i, 2)]
+        print(f"  [{i + 1}/{total_cards}] {story.get('headline', '')[:60]}...", file=sys.stderr)
+        profile = CARD_PROFILES[min(i, STORY_CARD_COUNT - 1)]
         prompt = _prompt_for_story(story, client, i)
         prompts.append(prompt)
         ok = _run_image_cli(prompt, no_ext, "1:1")
@@ -562,15 +571,15 @@ def render_images(
             f"{story.get('headline', '')} {story.get('blurb', '')}".lower()
         ):
             safe_prompt = _build_image_prompt(_safe_social_coding_scene(), profile, "1:1")
-            print("  [retry] card 3 safe brand-free scene", file=sys.stderr)
+            print("  [retry] safe brand-free social scene", file=sys.stderr)
             prompts[-1] = safe_prompt
             ok = _run_image_cli(safe_prompt, no_ext, "1:1")
         (generated if ok else missing).append(str(path))
 
-    if len(image_paths) >= 4:
-        path = image_paths[3]
+    if len(image_paths) >= total_cards:
+        path = image_paths[STORY_CARD_COUNT]
         no_ext = Path(str(path).removesuffix(".png"))
-        print(f"  [4/4] prompt: {prompt_card.get('title', '')[:60]}...", file=sys.stderr)
+        print(f"  [{total_cards}/{total_cards}] prompt: {prompt_card.get('title', '')[:60]}...", file=sys.stderr)
         prompt = _prompt_for_card(prompt_card, client)
         prompts.append(prompt)
         ok = _run_image_cli(prompt, no_ext, "1:1")

@@ -28,6 +28,7 @@ from urllib.parse import urlparse
 
 import httpx
 
+from card_config import needed_slots_for_rules
 from constitution import constitution_prompt_block
 
 _CONSTITUTION_PROMPT = constitution_prompt_block()
@@ -219,7 +220,7 @@ DEFAULT STRATEGY:
   1. Review the Scout shortlist. Try shortlist picks before searching.
   2. read_candidate FIRST for every candidate you might pick. Only pick with
      a real article body (not fetch failed). Never pick from headline alone.
-  3. pick one story per needed slot (usually 3). Each pick must pass the rubric.
+  3. pick one story per needed slot (usually 4). Each pick must pass the rubric.
   4. self_critique when you have a full slate.
   5. If revise → unpick flagged slots, search_news or read_candidate, re-pick.
   6. When self_critique approves → ship_edition.
@@ -277,7 +278,7 @@ REVISE if:
     (same product line). Two OpenAI picks OK if distinct (Codex mobile vs
     ChatGPT finance).
   • Academic paper needs topic explained vs launch/product/event story.
-  • All three picks share the same vibe (all launches, all drama, all research).
+  • All picks share the same vibe (all launches, all drama, all research).
   • The third slot is only "newsy enough" but not actually interesting. On thin
     days, require a cool/new capability or workflow unlock instead of filler.
   • verified: false — Editor must read_candidate or swap. Paywalled Tier-1
@@ -1013,7 +1014,7 @@ def tool_self_critique(state: AgentState, args: dict) -> dict:
             "body_excerpt": body[:400] + ("…" if len(body) > 400 else ""),
         })
     pool_brief = _compress_shortlist_brief(state)
-    edition_mode = f"Standard 3-story edition: {len(state.picks)} picks."
+    edition_mode = f"Standard 4-story edition: {len(state.picks)} picks."
     prompt = (
         f"Today is {state.today.isoformat()}. {edition_mode}\n\n"
         f"The Editor picked:\n\n"
@@ -1538,9 +1539,7 @@ def agentic_select(
     _inject_high_impact_legal_candidate(capped, fresh, per_source, max_total=60, max_per_source=4)
 
     # Slot rules
-    is_rotation = today.weekday() in rules.get("tier4_rotation_days", [1, 4])
-    needed_slots = ["business", "beginner", "engineer"] if not is_rotation \
-        else ["business", "beginner", "cross"]
+    needed_slots = needed_slots_for_rules(today, rules)
 
     # Build candidate dicts for the agent (with ids)
     candidates_payload = []

@@ -9,7 +9,7 @@ Usage:
 Pipeline:
   1. Load data/editions/<DATE>.json
   2. Render HTML + MD to ../editions/edition_N_variant_c.{html,md}
-  3. Generate the 4 illustrations to ../editions/edition_N/assets/
+  3. Generate story + prompt illustrations to ../editions/edition_N/assets/
 
 This is the entry point the daily cron calls after the agent has produced
 its JSON output.
@@ -24,6 +24,7 @@ import sys
 from pathlib import Path
 
 from load_env import load_env_file
+from card_config import STORY_CARD_COUNT
 from render_html import DATA_EDITIONS_DIR, EDITIONS_DIR, render_edition
 from render_images import render_images
 
@@ -87,7 +88,8 @@ def main() -> int:
             "html_path": str(EDITIONS_DIR / f"edition_{issue_num}_variant_c.html"),
             "md_path": str(EDITIONS_DIR / f"edition_{issue_num}_variant_c.md"),
             "image_paths": [
-                EDITIONS_DIR / image_filename(issue_num, i) for i in range(1, 5)
+                EDITIONS_DIR / image_filename(issue_num, i)
+                for i in range(1, STORY_CARD_COUNT + 2)
             ],
         }
         print("[render] --images-only: skipping HTML", file=sys.stderr)

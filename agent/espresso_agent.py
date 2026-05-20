@@ -12,8 +12,8 @@ Pipeline (in order):
      - Tier 4: cross-industry vertical, only on rotation days
   3. Load archive (past 30d of editions) for dedupe
   4. Rank candidates against the Solvd-engineer relevance rubric using an LLM
-  5. Apply mix logic: 1 business/leadership, 1 beginner-friendly, 1 engineer-focused
-     (+ Tier 4 cross-industry slot on rotation days, displacing one of the three)
+  5. Apply mix logic: 1 business/leadership, 1 beginner-friendly, 1 engineer-focused,
+     1 cross-industry
   6. Write punchy news-flash headlines + ~50-word blurbs
   7. Generate a "try this prompt" matched to today's stories
   8. Generate a daily-question seed
@@ -47,6 +47,7 @@ import httpx
 import subprocess
 from bs4 import BeautifulSoup
 
+from card_config import needed_slots_for_rules
 from prompt_tile import build_prompt_tile as _build_prompt_tile_llm
 
 from editorial import (
@@ -637,8 +638,8 @@ story probably reads like an ad — skip it.
 
 ──────────────── PERSONA SPREAD ────────────────
 
-Try to land each edition's 3 stories across DIFFERENT personas, not
-three variants of the same vibe:
+Try to land each edition's stories across DIFFERENT personas, not
+four variants of the same vibe:
 
   - One for the consumer / everyone ("what AI can do for me today")
   - One for the builder / engineer ("what AI can do for the work")
@@ -971,10 +972,7 @@ def rank_and_select(
     # Replace `fresh` with `capped` since IDs reference capped order
     fresh = capped
     # Apply mix logic
-    is_rotation_day = today.weekday() in rules.get("tier4_rotation_days", [1, 4])
-    needed_slots = ["business", "beginner", "engineer"]
-    if is_rotation_day:
-        needed_slots = ["business", "beginner", "cross"]  # cross displaces engineer on rotation
+    needed_slots = needed_slots_for_rules(today, rules)
 
     selected: dict[str, Candidate] = {}
     vendor_counts: dict[str, int] = {}
@@ -1001,13 +999,13 @@ def rank_and_select(
         selected[slot] = c
         if vendor:
             vendor_counts[vendor] = vendor_counts.get(vendor, 0) + 1
-        if len(selected) == 3:
+        if len(selected) == len(needed_slots):
             break
 
     # Fallback: fill any missing slots with the best remaining candidates.
     # Diversity cap still applies, but we relax it as a last resort if no
     # other candidate exists.
-    if len(selected) < 3:
+    if len(selected) < len(needed_slots):
         for relax_diversity in (False, True):
             for r, c in ranked:
                 if c.fingerprint in {s.fingerprint for s in selected.values()}:
@@ -1025,9 +1023,9 @@ def rank_and_select(
                         if vendor:
                             vendor_counts[vendor] = vendor_counts.get(vendor, 0) + 1
                         break
-                if len(selected) == 3:
+                if len(selected) == len(needed_slots):
                     break
-            if len(selected) == 3:
+            if len(selected) == len(needed_slots):
                 break
 
     # Tier 1 minimum check

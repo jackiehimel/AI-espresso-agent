@@ -30,6 +30,7 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
+from card_config import STORY_CARD_COUNT
 from editorial import slot_label
 
 
@@ -78,10 +79,10 @@ def next_issue_number(editions_dir: Path = EDITIONS_DIR) -> int:
 
 
 def edition_has_assets(issue_num: int, editions_dir: Path = EDITIONS_DIR) -> bool:
-    """True when all four variant_c PNGs exist for this issue."""
+    """True when all expected variant_c PNGs exist for this issue."""
     return all(
         (editions_dir / image_filename(issue_num, i)).is_file()
-        for i in range(1, 5)
+        for i in range(1, STORY_CARD_COUNT + 2)
     )
 
 
@@ -190,7 +191,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <!-- sniffer-friendly meta tokens -->
 <meta name="ai-espresso-issue" content="NO.&nbsp;{issue_padded}">
 <meta name="ai-espresso-date" content="{sniffer_date}">
-<meta name="ai-espresso-shots" content="4&nbsp;SHOTS">
+<meta name="ai-espresso-shots" content="{shots_label}">
 <style>
   *, *::before, *::after {{ box-sizing: border-box; }}
   body {{
@@ -218,16 +219,16 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   .edition-grid {{
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 20px;
     align-items: start;
     max-width: 1100px;
     margin: 0 auto;
   }}
   .story-cards {{
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 4;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 20px;
     align-items: stretch;
   }}
@@ -245,7 +246,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     margin-top: auto;
   }}
   .edition-grid .prompt-card {{
-    grid-column: 4;
+    grid-column: 5;
   }}
   .section-divider {{
     display: none;
@@ -605,7 +606,7 @@ def derive_preheader(stories: list[dict[str, Any]]) -> str:
     """Hidden sniffer text from story headlines — not shown on the page."""
     headlines = [
         (s.get("headline") or "").strip().rstrip(".")
-        for s in stories[:3]
+        for s in stories[:STORY_CARD_COUNT]
         if (s.get("headline") or "").strip()
     ]
     if not headlines:
@@ -712,10 +713,10 @@ def render_edition(
     """
     data = json.loads(edition_json_path.read_text())
     stories = data.get("stories", [])
-    if len(stories) < 3:
-        raise ValueError(f"Edition has {len(stories)} stories; need 3.")
+    if len(stories) < STORY_CARD_COUNT:
+        raise ValueError(f"Edition has {len(stories)} stories; need {STORY_CARD_COUNT}.")
     prompt = data.get("try_this_prompt") or {}
-    story_limit = min(len(stories), 3)
+    story_limit = min(len(stories), STORY_CARD_COUNT)
 
     issue_num = resolve_issue_num(issue_num, editions_dir)
     issue_padded = f"{issue_num:03d}"
@@ -728,6 +729,7 @@ def render_edition(
     api_base = qotd_api_base()
     qotd_section = build_qotd_section(daily_question, api_base)
     qotd_script = build_qotd_script(date_json, api_base)
+    shots_label = f"{story_limit + 1}&nbsp;SHOTS"
 
     # ---- story cards ----
     html_cards = []
@@ -776,21 +778,15 @@ def render_edition(
     prompt_title = (prompt.get("title") or "").strip()
     prompt_alt = (prompt_title or "AI Espresso prompt card")[:120]
     prompt_card = PROMPT_CARD_TEMPLATE.format(
-        image_block=_card_image_block(issue_num, 4, prompt_alt, editions_dir),
+        image_block=_card_image_block(issue_num, prompt_idx, prompt_alt, editions_dir),
         prompt_title_block=_prompt_title_block(prompt_title),
         prompt_tool_hint_block=_prompt_tool_hint_block(prompt_tip_raw),
         prompt_body=escape(prompt_body),
         copy_icon=PROMPT_COPY_ICON,
     )
-    divider_block = (
-        '\n      <p class="section-divider">/ / /</p>\n' + "\n".join(html_cards[2:3])
-        if story_limit >= 3
-        else ""
-    )
     story_cards_row = (
         '    <div class="story-cards">\n'
-        + "\n".join(html_cards[:2])
-        + divider_block
+        + "\n".join(html_cards[:story_limit])
         + "\n    </div>"
     )
     edition_cards = story_cards_row + "\n" + prompt_card
@@ -800,6 +796,7 @@ def render_edition(
         issue_padded=issue_padded,
         preheader=escape(preheader),
         sniffer_date=dates["sniffer_date"],
+        shots_label=shots_label,
         dateline_html=dates["dateline_html"],
         edition_cards=edition_cards,
         qotd_section=qotd_section,
