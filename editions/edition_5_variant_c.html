@@ -344,7 +344,13 @@
   <section class="qotd" id="qotd">
     <p class="qotd-label">Question of the day</p>
     <p class="qotd-question">If your IDE could acquire one AI feature from a competitor today, what would you steal?</p>
-    <p class="qotd-preview">Preview edition — answers are collected when this issue is hosted online.</p>
+    <form class="qotd-form" id="qotd-form">
+      <input class="qotd-input" type="text" name="answer" maxlength="280"
+        placeholder="Your one-sentence take&hellip;" required aria-label="Your answer">
+      <button class="qotd-submit" type="submit">Submit</button>
+    </form>
+    <p class="qotd-done" id="qotd-done">Thanks — recorded.</p>
+    <p class="qotd-error" id="qotd-error"></p>
   </section>
 
   <footer class="footer">
@@ -353,6 +359,34 @@
 
 </div>
 <script>
+(function () {
+  var form = document.getElementById("qotd-form");
+  var done = document.getElementById("qotd-done");
+  var err = document.getElementById("qotd-error");
+  if (!form) return;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var input = form.querySelector("input[name=answer]");
+    var btn = form.querySelector("button[type=submit]");
+    if (err) { err.style.display = "none"; err.textContent = ""; }
+    btn.disabled = true;
+    fetch("https://ai-garage-navy.vercel.app/api/daily-question", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ date: "2026-05-19", answer: (input && input.value) || "" })
+    }).then(function (res) {
+      if (!res.ok) throw new Error("request failed");
+      if (done) done.style.display = "block";
+      if (input) input.disabled = true;
+    }).catch(function () {
+      if (err) {
+        err.textContent = "Could not save your answer. Please try again later.";
+        err.style.display = "block";
+      }
+      btn.disabled = false;
+    });
+  });
+})();
 
 (function () {
   var btn = document.querySelector(".prompt-copy");
