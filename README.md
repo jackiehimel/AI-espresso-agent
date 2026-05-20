@@ -11,6 +11,13 @@ A Python agent that produces a daily AI news digest. Each run:
 
 Output is written to `editions/` (rendered files) and `agent/data/editions/` (raw JSON + agent trace).
 
+## Recent milestones (May 2026)
+
+- Strengthened story-selection guardrails so weak-pool and duplicate-story paths recover safely.
+- Hardened archive, render, and source-ingestion reliability for CI and production edition runs.
+- Improved production email UX with hosted prompt form support and fully clickable story cards.
+- Completed pre-launch launch-gate documentation and rollback/runbook notes for operations.
+
 ## Quick start
 
 ```bash
