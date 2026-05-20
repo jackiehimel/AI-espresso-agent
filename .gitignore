@@ -9,3 +9,7 @@ agent/data/.cache/
 .pytest_cache/
 .venv/
 venv/
+context/
+agent/data/editions/*.failed.json
+CHANGELOG.md
+INTERNAL.md
