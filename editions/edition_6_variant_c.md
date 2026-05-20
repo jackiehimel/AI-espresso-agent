@@ -1,62 +1,62 @@
 # ai espresso ☕ — Edition 6 · Variant C (Newspaper Comic · Snackable)
 
-**TUE · MAY 19 · 2026**
+**WED · MAY 20 · 2026**
 
 ---
 
-![Polymarket lets you bet on when OpenAI or Anthropic will IPO](edition_6/assets/variant_c_01.png)
+![OpenAI will now let companies reserve compute so their AI apps don't slow down](edition_6/assets/variant_c_01.png)
 
 **MARKET**
 
-## Polymarket lets you bet on when OpenAI or Anthropic will IPO
+## OpenAI will now let companies reserve compute so their AI apps don't slow down
 
-The prediction market is launching contracts tied to private AI companies — you can now speculate on whether Anthropic hits a $100B valuation, when OpenAI goes public, or what their shares trade for on secondary markets. It's basically a futures market for pre-IPO milestones.
+OpenAI's new Guaranteed Capacity lets businesses pre-book processing power for their AI applications. Sam Altman said the company will still keep enough capacity for ChatGPT and Codex, but enterprises can now pay to ensure their custom models run at consistent speeds even during peak times.
 
-*Price discovery for private AI companies just moved from whisper networks to a public market.*
+*Companies building on OpenAI can finally avoid the performance lottery that comes with shared infrastructure*
 
-[CNBC — Technology](https://www.cnbc.com/2026/05/19/polymarket-launches-private-company-trading-so-investors-can-speculate-on-anthropic-openai.html) · May 19
+[CNBC — Technology](https://www.cnbc.com/2026/05/19/openai-announces-new-guaranteed-capacity-offering-for-customers-to-secure-compute.html) · May 20
 
 ---
 
-![Google previews AI-powered audio glasses launching this fall](edition_6/assets/variant_c_02.png)
+![Google is shipping smart glasses again, this time built around Gemini](edition_6/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## Google previews AI-powered audio glasses launching this fall
+## Google is shipping smart glasses again, this time built around Gemini
 
-At its annual developer conference, Google showed off new smart glasses with audio features for the first time. The company plans to release them later this year, marking its return to wearable glasses after Google Glass failed a decade ago.
+Google will release new AI-powered smart glasses this fall — its first since Google Glass flopped over a decade ago. The glasses let you talk to Gemini and get visual answers from what you're looking at, similar to Meta's Ray-Ban glasses but with Google's AI assistant baked in.
 
-*Google's betting consumers are finally ready for AI glasses that don't look like sci-fi props.*
+*Wearable AI is getting another shot now that the tech actually works conversationally.*
 
-[CNBC — Technology](https://www.cnbc.com/2026/05/19/google-gives-first-glimpse-of-new-ai-glasses-ahead-of-fall-launch-.html) · May 19
-
----
-
-![Google's Genie can now turn Street View into explorable 3D worlds](edition_6/assets/variant_c_03.png)
-
-**INDUSTRY**
-
-## Google's Genie can now turn Street View into explorable 3D worlds
-
-DeepMind's Project Genie — the AI that generates playable game environments from images — now works with Street View photos. Ultra subscribers can feed it any Street View location and get a navigable 3D space they can walk through. Google is rolling out access globally.
-
-*Street View's massive real-world dataset just became training data for spatial AI*
-
-[Google DeepMind Blog](https://deepmind.google/blog/simulate-real-world-places-with-project-genie-and-street-view/) · May 19
+[BBC Technology](https://www.bbc.com/news/articles/cvgz1ynq1nqo?at_medium=RSS&at_campaign=rss) · May 20
 
 ---
 
-![Cursor now lets AI code agents iterate invisibly in the background](edition_6/assets/variant_c_04.png)
+![Cursor now lets AI iterate on code in hidden workspaces](edition_6/assets/variant_c_03.png)
 
 **BUILD**
 
-## Cursor now lets AI code agents iterate invisibly in the background
+## Cursor now lets AI iterate on code in hidden workspaces
 
-Cursor built a 'shadow workspace' using hidden Electron windows and kernel-level folder proxies so AI agents can spin up parallel code iterations without touching your working files. The agent can test, break, and rewrite code behind the scenes while you keep working in your main editor.
+Cursor's new Shadow Workspace feature spins up invisible Electron windows and uses kernel-level folder proxies to let AI agents test and refine code changes in the background—without touching your actual project files or interrupting your work.
 
-*Agents can finally run trial-and-error loops without constantly overwriting your code or forcing you to stop.*
+*AI can now experiment freely while you keep coding, no git branches or manual cleanup required.*
 
-[Cursor Blog (official)](https://cursor.com/blog/shadow-workspace) · May 19
+[Cursor Blog (official)](https://cursor.com/blog/shadow-workspace) · May 20
+
+---
+
+![Google just launched Gemini 3.5 with live web access and tool use](edition_6/assets/variant_c_04.png)
+
+**INDUSTRY**
+
+## Google just launched Gemini 3.5 with live web access and tool use
+
+Gemini 3.5 can now search the web in real time, run code, and use external tools while answering questions—making it more like an agent than a chatbot. It's available today in Gemini Advanced and through the API, with a 1-million-token context window and improved performance on coding and math benchmarks.
+
+*Google's flagship model can finally act on information, not just retrieve it.*
+
+[Google AI Blog](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/) · May 20
 
 ---
 
@@ -67,13 +67,13 @@ Cursor built a 'shadow workspace' using hidden Electron windows and kernel-level
 
 **☕ Try this prompt**
 
-### The jargon detector
+### The jargon translator
 
-*Before you send anything up the chain or out to stakeholders.*
+*Before sending anything to customers, execs, or humans outside your team.*
 
 
 ```
-I'm about to paste something I wrote. Circle every word or phrase that someone outside my team wouldn't understand in under two seconds. Then rewrite just those parts so my manager's manager could forward it without a glossary. Keep everything else exactly the same.
+I'm about to paste something I wrote that probably sounds like I swallowed a whitepaper. Rewrite it so a smart 19-year-old would understand every sentence on first read. Keep my structure. Keep my point. Kill every word that exists only to sound professional.
 ```
 
 ---

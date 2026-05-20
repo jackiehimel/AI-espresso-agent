@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "published_at": "2026-05-20T04:00:44.631336+00:00",
+  "published_at": "2026-05-20T12:05:14.326536+00:00",
   "source_repo": "jackiehimel/ai-espresso-finalized",
   "source_ref": "main",
   "edition": {
     "number": 6,
     "base": "edition_6_variant_c",
     "variant": "c",
-    "date": "2026-05-19"
+    "date": "2026-05-20"
   },
   "artifacts": {
     "html": {
