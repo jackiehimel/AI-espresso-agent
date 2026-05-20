@@ -10,6 +10,8 @@ A Python agent that produces a daily AI news digest. Each run:
 4. Optionally emails the rendered HTML inline via SMTP.
 
 Output is written to `editions/` (rendered files) and `agent/data/editions/` (raw JSON + agent trace).
+For downstream consumers, the daily workflow also publishes a stable artifact contract at
+`editions/publish/latest.json`.
 
 ## Recent milestones (May 2026)
 

@@ -98,6 +98,19 @@ jobs:
               f.write(f"md_path={data['md_path']}\n")
           PY
 
+      - name: Write publish manifest for downstream consumers
+        working-directory: agent
+        run: |
+          set -euo pipefail
+          python write_publish_manifest.py \
+            --issue-num "${{ steps.render.outputs.issue_num }}" \
+            --edition-date "${{ steps.date.outputs.value }}" \
+            --html-path "${{ steps.render.outputs.html_path }}" \
+            --md-path "${{ steps.render.outputs.md_path }}" \
+            --source-repo "${{ github.repository }}" \
+            --source-ref "main" \
+            --variant "c"
+
       - name: Check duplicate-send guard
         id: dedupe
         run: |

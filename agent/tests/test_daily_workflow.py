@@ -57,6 +57,13 @@ class DailyEditionWorkflowTests(unittest.TestCase):
         self.assertIn("already_sent", text)
         self.assertIn("Skipping email: edition for", text)
 
+    def test_workflow_writes_publish_manifest(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("name: Write publish manifest for downstream consumers", text)
+        self.assertIn("python write_publish_manifest.py", text)
+        self.assertIn("--issue-num", text)
+        self.assertIn("--source-repo", text)
+
 
 if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
