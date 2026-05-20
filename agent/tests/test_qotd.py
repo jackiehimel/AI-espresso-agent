@@ -54,6 +54,15 @@ class QotdSectionTests(unittest.TestCase):
                             "source_url": "https://example.com/c",
                             "tier": 1,
                         },
+                        {
+                            "slot": "engineer",
+                            "headline": "OpenAI ships constrained coding agent checkpoints",
+                            "blurb": "Developers can resume long coding runs without restarting.",
+                            "why_it_matters": "Long-running code tasks become more reliable.",
+                            "source_name": "OpenAI News",
+                            "source_url": "https://example.com/d",
+                            "tier": 1,
+                        },
                     ],
                     "try_this_prompt": {
                         "title": "The skeptics pass",

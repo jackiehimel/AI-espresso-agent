@@ -19,8 +19,8 @@ from render_images import EDITION_PNG_MAX_WIDTH, compress_edition_pngs
 
 class PublicHtmlPolishTests(unittest.TestCase):
 
-    def _write_three_story_fixture(self, out_dir: Path) -> Path:
-        edition = out_dir / "three-story.json"
+    def _write_four_story_fixture(self, out_dir: Path) -> Path:
+        edition = out_dir / "four-story.json"
         edition.write_text(
             json.dumps(
                 {
@@ -53,6 +53,15 @@ class PublicHtmlPolishTests(unittest.TestCase):
                             "source_url": "https://example.com/c",
                             "tier": 1,
                         },
+                        {
+                            "slot": "engineer",
+                            "headline": "OpenAI ships constrained coding agent checkpoints",
+                            "blurb": "Developers can resume long coding runs without restarting.",
+                            "why_it_matters": "Long-running code tasks become more reliable.",
+                            "source_name": "OpenAI News",
+                            "source_url": "https://example.com/d",
+                            "tier": 1,
+                        },
                     ],
                     "try_this_prompt": {
                         "title": "The skeptics pass",
@@ -75,7 +84,7 @@ class PublicHtmlPolishTests(unittest.TestCase):
     def test_rendered_html_hides_source_tiers(self):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp)
-            edition = self._write_three_story_fixture(out)
+            edition = self._write_four_story_fixture(out)
             result = render_edition(edition, issue_num=99, editions_dir=out)
             html = Path(result["html_path"]).read_text()
             self.assertNotIn("source-tier", html)
@@ -124,7 +133,7 @@ class PublicHtmlPolishTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            with self.assertRaisesRegex(ValueError, "Edition has 2 stories; need 3\\."):
+            with self.assertRaisesRegex(ValueError, "Edition has 2 stories; need 4\\."):
                 render_edition(edition, issue_num=77, editions_dir=out)
 
 
