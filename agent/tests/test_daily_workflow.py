@@ -69,6 +69,52 @@ class DailyEditionWorkflowTests(unittest.TestCase):
         self.assertIn("--issue-num", text)
         self.assertIn("--source-repo", text)
 
+    def test_dedupe_runs_before_generate(self):
+        """Regression: dedupe must come before generate so a committed edition
+        cannot be silently overwritten by a re-run, and force_resend can recover
+        without spending API budget on a fresh agent loop."""
+        text = WORKFLOW.read_text(encoding="utf-8")
+        dedupe_idx = text.find("- name: Check duplicate-send guard")
+        generate_idx = text.find("- name: Generate edition JSON (agent mode)")
+        render_idx = text.find("- name: Render HTML + Markdown + illustrations")
+        send_idx = text.find("- name: Send edition email")
+        self.assertGreater(dedupe_idx, 0)
+        self.assertGreater(generate_idx, 0)
+        self.assertGreater(render_idx, 0)
+        self.assertGreater(send_idx, 0)
+        self.assertLess(dedupe_idx, generate_idx, "dedupe must precede generate")
+        self.assertLess(generate_idx, render_idx, "generate must precede render")
+        self.assertLess(render_idx, send_idx, "render must precede send")
+
+    def test_generate_step_is_gated_on_dedupe(self):
+        """Generate step must be skipped when the edition is already committed
+        so a recovery re-run cannot overwrite a shipped slate."""
+        text = WORKFLOW.read_text(encoding="utf-8")
+        match = re.search(
+            r"- name: Generate edition JSON \(agent mode\)\n(.*?)\n      - name:",
+            text,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(match, "could not locate generate step")
+        block = match.group(1)
+        self.assertIn("if:", block, f"generate step missing `if:` gate: {block!r}")
+        self.assertIn("steps.dedupe.outputs.already_sent", block)
+        self.assertIn("!= 'true'", block)
+
+    def test_render_step_is_not_gated(self):
+        """Render must always run so it produces html_path/md_path/issue_num
+        outputs that the send and manifest steps depend on, even during a
+        recovery re-run where generate is skipped."""
+        text = WORKFLOW.read_text(encoding="utf-8")
+        match = re.search(
+            r"- name: Render HTML \+ Markdown \+ illustrations\n(.*?)\n        run:",
+            text,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(match)
+        header = match.group(1)
+        self.assertNotIn("if:", header, f"render must not have `if:`: {header!r}")
+
 
 class DedupeGuardBehaviorTests(unittest.TestCase):
     """Execute the exact bash from the duplicate-send guard against a real git

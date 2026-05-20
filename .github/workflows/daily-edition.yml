@@ -60,8 +60,30 @@ jobs:
             echo "value=$(TZ=America/New_York date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
           fi
 
+      # Decide up-front whether the edition is already committed for this date.
+      # When true, generation is skipped (no API spend, no risk of replacing the
+      # already-shipped slate); render runs idempotently to produce step outputs;
+      # the email step is gated below and only fires with force_resend=true.
+      - name: Check duplicate-send guard
+        id: dedupe
+        run: |
+          DATE="${{ steps.date.outputs.value }}"
+          EDITION_JSON="agent/data/editions/${DATE}.json"
+          if git ls-files --error-unmatch "$EDITION_JSON" > /dev/null 2>&1; then
+            echo "already_sent=true" >> "$GITHUB_OUTPUT"
+            echo "Edition artifact already tracked for $DATE; skip regenerate + duplicate send."
+          elif [ -n "$(git log --grep="^Daily edition for $DATE$" -n 1 --pretty=format:%H)" ]; then
+            echo "already_sent=true" >> "$GITHUB_OUTPUT"
+            echo "Edition already recorded by commit for $DATE; skip regenerate + duplicate send."
+          else
+            echo "already_sent=false" >> "$GITHUB_OUTPUT"
+          fi
+
       # Production: agent tool_use loop only (no legacy rank_and_select fallback).
+      # Skipped when the edition for this date is already committed -- prevents
+      # accidentally overwriting a shipped slate during a recovery re-run.
       - name: Generate edition JSON (agent mode)
+        if: ${{ steps.dedupe.outputs.already_sent != 'true' }}
         working-directory: agent
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -110,21 +132,6 @@ jobs:
             --source-repo "${{ github.repository }}" \
             --source-ref "main" \
             --variant "c"
-
-      - name: Check duplicate-send guard
-        id: dedupe
-        run: |
-          DATE="${{ steps.date.outputs.value }}"
-          EDITION_JSON="agent/data/editions/${DATE}.json"
-          if git ls-files --error-unmatch "$EDITION_JSON" > /dev/null 2>&1; then
-            echo "already_sent=true" >> "$GITHUB_OUTPUT"
-            echo "Edition artifact already tracked for $DATE; skip duplicate send."
-          elif [ -n "$(git log --grep="^Daily edition for $DATE$" -n 1 --pretty=format:%H)" ]; then
-            echo "already_sent=true" >> "$GITHUB_OUTPUT"
-            echo "Edition already recorded by commit for $DATE; skip duplicate send."
-          else
-            echo "already_sent=false" >> "$GITHUB_OUTPUT"
-          fi
 
       - name: Send edition email
         if: ${{ inputs.skip_email != 'true' && (steps.dedupe.outputs.already_sent != 'true' || inputs.force_resend == 'true') }}
