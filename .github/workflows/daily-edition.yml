@@ -119,7 +119,7 @@ jobs:
           if git ls-files --error-unmatch "$EDITION_JSON" > /dev/null 2>&1; then
             echo "already_sent=true" >> "$GITHUB_OUTPUT"
             echo "Edition artifact already tracked for $DATE; skip duplicate send."
-          elif git log --grep="^Daily edition for $DATE$" -n 1 --oneline > /dev/null; then
+          elif [ -n "$(git log --grep="^Daily edition for $DATE$" -n 1 --pretty=format:%H)" ]; then
             echo "already_sent=true" >> "$GITHUB_OUTPUT"
             echo "Edition already recorded by commit for $DATE; skip duplicate send."
           else

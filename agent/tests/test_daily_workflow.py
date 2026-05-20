@@ -1,6 +1,11 @@
 """Guards on production daily-edition workflow (no deterministic fallback in CI)."""
 
+import re
+import shutil
+import subprocess
 import sys
+import tempfile
+import textwrap
 import unittest
 from pathlib import Path
 
@@ -63,6 +68,97 @@ class DailyEditionWorkflowTests(unittest.TestCase):
         self.assertIn("python write_publish_manifest.py", text)
         self.assertIn("--issue-num", text)
         self.assertIn("--source-repo", text)
+
+
+class DedupeGuardBehaviorTests(unittest.TestCase):
+    """Execute the exact bash from the duplicate-send guard against a real git
+    repo to lock in correct behavior. Regression coverage for the bug where
+    `git log --grep` returns exit 0 with no matches, which made the elif branch
+    always set already_sent=true."""
+
+    def setUp(self):
+        if shutil.which("git") is None:
+            self.skipTest("git not available")
+        if shutil.which("bash") is None:
+            self.skipTest("bash not available")
+        self.tmp = Path(tempfile.mkdtemp(prefix="dedupe-guard-"))
+        self._git("init", "-q", "-b", "main")
+        self._git("config", "user.email", "test@example.com")
+        self._git("config", "user.name", "Test")
+        self._git("commit", "--allow-empty", "-q", "-m", "root")
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _git(self, *args):
+        subprocess.run(["git", *args], cwd=self.tmp, check=True, capture_output=True)
+
+    def _extract_dedupe_script(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        match = re.search(
+            r"- name: Check duplicate-send guard.*?^      - name:",
+            text,
+            re.DOTALL | re.MULTILINE,
+        )
+        self.assertIsNotNone(match, "could not locate dedupe guard step")
+        step_block = match.group(0)
+        lines = step_block.splitlines()
+        try:
+            run_idx = next(i for i, ln in enumerate(lines) if ln.strip() == "run: |")
+        except StopIteration:  # pragma: no cover - structural
+            self.fail("dedupe step has no `run: |` block")
+        body_lines = []
+        for ln in lines[run_idx + 1:]:
+            if ln.startswith("      - name:"):
+                break
+            if ln.startswith("          "):
+                body_lines.append(ln[10:])
+            elif ln.strip() == "":
+                body_lines.append("")
+            else:
+                break
+        return "\n".join(body_lines)
+
+    def _run_dedupe(self, date: str) -> str:
+        script = self._extract_dedupe_script()
+        github_output = self.tmp / "github_output"
+        github_output.write_text("", encoding="utf-8")
+        rendered = script.replace("${{ steps.date.outputs.value }}", date)
+        wrapped = f"set -e\nexport GITHUB_OUTPUT={github_output}\n{rendered}\n"
+        subprocess.run(
+            ["bash", "-c", wrapped],
+            cwd=self.tmp,
+            check=True,
+            capture_output=True,
+        )
+        return github_output.read_text(encoding="utf-8")
+
+    def test_fresh_date_is_not_marked_already_sent(self):
+        """No prior commit, file not tracked. already_sent must be false."""
+        out = self._run_dedupe("2099-01-01")
+        self.assertIn("already_sent=false", out, f"got: {out!r}")
+        self.assertNotIn("already_sent=true", out)
+
+    def test_already_committed_file_marks_already_sent(self):
+        editions_dir = self.tmp / "agent" / "data" / "editions"
+        editions_dir.mkdir(parents=True)
+        (editions_dir / "2099-02-02.json").write_text("{}", encoding="utf-8")
+        self._git("add", "agent/data/editions/2099-02-02.json")
+        self._git("commit", "-q", "-m", "Daily edition for 2099-02-02")
+        out = self._run_dedupe("2099-02-02")
+        self.assertIn("already_sent=true", out, f"got: {out!r}")
+
+    def test_commit_message_match_marks_already_sent_even_if_file_deleted(self):
+        editions_dir = self.tmp / "agent" / "data" / "editions"
+        editions_dir.mkdir(parents=True)
+        target = editions_dir / "2099-03-03.json"
+        target.write_text("{}", encoding="utf-8")
+        self._git("add", "agent/data/editions/2099-03-03.json")
+        self._git("commit", "-q", "-m", "Daily edition for 2099-03-03")
+        self._git("rm", "-q", "agent/data/editions/2099-03-03.json")
+        self._git("commit", "-q", "-m", "remove stale artifact")
+        out = self._run_dedupe("2099-03-03")
+        self.assertIn("already_sent=true", out, f"got: {out!r}")
 
 
 if __name__ == "__main__":
