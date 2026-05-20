@@ -44,6 +44,11 @@ class DailyEditionWorkflowTests(unittest.TestCase):
         self.assertIn("json.loads(os.environ[\"OUTPUT_JSON\"])", text)
         self.assertNotIn("echo \"$OUTPUT\" | python - <<'PY'", text)
 
+    def test_render_sets_qotd_api_base_for_hosted_form(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("AI_ESPRESSO_QOTD_API_URL", text)
+        self.assertIn("https://ai-garage-navy.vercel.app", text)
+
 
 if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))

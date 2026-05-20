@@ -83,6 +83,9 @@ class PublicHtmlPolishTests(unittest.TestCase):
             self.assertNotIn(">T2<", html)
             self.assertIn(FOOTER_REPO_URL, html)
             self.assertIn(FOOTER_CONTACT_EMAIL, html)
+            self.assertIn('class="card-link" href="https://example.com/a"', html)
+            self.assertIn('class="headline-link" href="https://example.com/b"', html)
+            self.assertIn('class="source-link" href="https://example.com/c"', html)
 
     def test_render_rejects_two_story_editions(self):
         with tempfile.TemporaryDirectory() as tmp:

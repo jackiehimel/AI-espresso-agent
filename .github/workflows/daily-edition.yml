@@ -73,6 +73,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Ensure emailed HTML uses hosted QOTD form (not preview fallback copy).
+          AI_ESPRESSO_QOTD_API_URL: https://ai-garage-navy.vercel.app
         run: |
           export PATH="${GITHUB_WORKSPACE}/agent/bin:${PATH}"
           set -euo pipefail

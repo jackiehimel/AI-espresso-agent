@@ -286,6 +286,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     display: flex; flex-direction: column; flex: 0 1 auto;
     justify-content: flex-start;
   }}
+  .card-link {{
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }}
   .category {{
     font-size: 10px; font-weight: 800; letter-spacing: 0.18em;
     text-transform: uppercase; margin: 0 0 6px 0;
@@ -300,6 +305,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     margin: 0 0 6px 0; color: #1A1108; letter-spacing: -0.01em;
     display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
     overflow: hidden;
+  }}
+  .headline-link {{
+    color: #1A1108;
+    text-decoration: none;
+  }}
+  .headline-link:hover {{
+    text-decoration: underline;
   }}
   .kicker {{
     font-size: 13px; color: #1A1108; margin: 0 0 8px 0;
@@ -516,9 +528,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 STORY_CARD_TEMPLATE = """    <article class="card">
 {image_block}      <div class="card-body">
         <p class="category {cat_cls}">{cat_label}</p>
-        <h2 class="headline">{headline}</h2>
+        <h2 class="headline"><a class="headline-link" href="{source_url}">{headline}</a></h2>
         <p class="kicker">{kicker}</p>
-        <p class="source"><a href="{source_url}">{source_name}</a> · {source_date}</p>
+        <p class="source"><a class="source-link" href="{source_url}">{source_name}</a> · {source_date}</p>
       </div>
     </article>"""
 
@@ -728,13 +740,20 @@ def render_edition(
         kicker = derive_kicker(s)
         source_name = s.get("source_name") or s.get("source", "Source")
         source_url = s.get("source_url") or s.get("url", "#")
+        source_url_html = escape(source_url, quote=True)
+        image_markup = _card_image_block(issue_num, idx, alt, editions_dir).rstrip("\n")
+        image_block = (
+            f'      <a class="card-link" href="{source_url_html}">\n'
+            f"{image_markup}\n"
+            "      </a>\n"
+        )
         html_cards.append(STORY_CARD_TEMPLATE.format(
-            image_block=_card_image_block(issue_num, idx, alt, editions_dir),
+            image_block=image_block,
             cat_label=cat_label,
             cat_cls=cat_cls,
             headline=escape(headline),
             kicker=kicker,  # already escaped + may contain <strong>
-            source_url=escape(source_url, quote=True),
+            source_url=source_url_html,
             source_name=escape(source_name),
             source_date=dates["source_short"],
         ))
