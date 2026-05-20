@@ -13,9 +13,17 @@ on:
         description: "Set to 'true' to render but not send the email."
         required: false
         default: "false"
+      force_resend:
+        description: "Set to 'true' to bypass duplicate-send guard for this date."
+        required: false
+        default: "false"
 
 permissions:
   contents: write
+
+concurrency:
+  group: daily-edition-${{ github.ref }}-${{ inputs.date || 'today' }}
+  cancel-in-progress: false
 
 jobs:
   generate:
@@ -90,8 +98,23 @@ jobs:
               f.write(f"md_path={data['md_path']}\n")
           PY
 
+      - name: Check duplicate-send guard
+        id: dedupe
+        run: |
+          DATE="${{ steps.date.outputs.value }}"
+          EDITION_JSON="agent/data/editions/${DATE}.json"
+          if git ls-files --error-unmatch "$EDITION_JSON" > /dev/null 2>&1; then
+            echo "already_sent=true" >> "$GITHUB_OUTPUT"
+            echo "Edition artifact already tracked for $DATE; skip duplicate send."
+          elif git log --grep="^Daily edition for $DATE$" -n 1 --oneline > /dev/null; then
+            echo "already_sent=true" >> "$GITHUB_OUTPUT"
+            echo "Edition already recorded by commit for $DATE; skip duplicate send."
+          else
+            echo "already_sent=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Send edition email
-        if: ${{ inputs.skip_email != 'true' }}
+        if: ${{ inputs.skip_email != 'true' && (steps.dedupe.outputs.already_sent != 'true' || inputs.force_resend == 'true') }}
         working-directory: agent
         env:
           AI_ESPRESSO_FROM: ${{ secrets.AI_ESPRESSO_FROM }}
@@ -106,6 +129,11 @@ jobs:
             echo "::warning::Email step failed but edition is committed"
             exit 0
           }
+
+      - name: Duplicate send guard note
+        if: ${{ inputs.skip_email != 'true' && steps.dedupe.outputs.already_sent == 'true' && inputs.force_resend != 'true' }}
+        run: |
+          echo "Skipping email: edition for ${{ steps.date.outputs.value }} was already recorded in git history."
 
       - name: Commit + push if anything changed
         run: |

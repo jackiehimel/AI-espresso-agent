@@ -49,6 +49,14 @@ class DailyEditionWorkflowTests(unittest.TestCase):
         self.assertIn("AI_ESPRESSO_QOTD_API_URL", text)
         self.assertIn("https://ai-garage-navy.vercel.app", text)
 
+    def test_email_has_duplicate_send_guard(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("force_resend", text)
+        self.assertIn("name: Send edition email", text)
+        self.assertIn("id: dedupe", text)
+        self.assertIn("already_sent", text)
+        self.assertIn("Skipping email: edition for", text)
+
 
 if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
