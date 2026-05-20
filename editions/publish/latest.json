@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "published_at": "2026-05-20T12:05:14.326536+00:00",
-  "source_repo": "jackiehimel/ai-espresso-finalized",
+  "source_repo": "jackiehimel/AI-espresso-agent",
   "source_ref": "main",
   "edition": {
     "number": 6,
@@ -12,32 +12,32 @@
   "artifacts": {
     "html": {
       "path": "editions/edition_6_variant_c.html",
-      "url": "https://raw.githubusercontent.com/jackiehimel/ai-espresso-finalized/main/editions/edition_6_variant_c.html"
+      "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_6_variant_c.html"
     },
     "markdown": {
       "path": "editions/edition_6_variant_c.md",
-      "url": "https://raw.githubusercontent.com/jackiehimel/ai-espresso-finalized/main/editions/edition_6_variant_c.md"
+      "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_6_variant_c.md"
     },
     "assets": [
       {
         "path": "editions/edition_6/assets/variant_c_01.png",
-        "url": "https://raw.githubusercontent.com/jackiehimel/ai-espresso-finalized/main/editions/edition_6/assets/variant_c_01.png"
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_6/assets/variant_c_01.png"
       },
       {
         "path": "editions/edition_6/assets/variant_c_02.png",
-        "url": "https://raw.githubusercontent.com/jackiehimel/ai-espresso-finalized/main/editions/edition_6/assets/variant_c_02.png"
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_6/assets/variant_c_02.png"
       },
       {
         "path": "editions/edition_6/assets/variant_c_03.png",
-        "url": "https://raw.githubusercontent.com/jackiehimel/ai-espresso-finalized/main/editions/edition_6/assets/variant_c_03.png"
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_6/assets/variant_c_03.png"
       },
       {
         "path": "editions/edition_6/assets/variant_c_04.png",
-        "url": "https://raw.githubusercontent.com/jackiehimel/ai-espresso-finalized/main/editions/edition_6/assets/variant_c_04.png"
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_6/assets/variant_c_04.png"
       },
       {
         "path": "editions/edition_6/assets/variant_c_05.png",
-        "url": "https://raw.githubusercontent.com/jackiehimel/ai-espresso-finalized/main/editions/edition_6/assets/variant_c_05.png"
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_6/assets/variant_c_05.png"
       }
     ]
   }

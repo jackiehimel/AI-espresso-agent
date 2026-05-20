@@ -50,4 +50,4 @@ I'm about to paste something I wrote that sounds confident. Your job: find every
 
 ---
 
-*brewed by ai espresso · [spot something off?](mailto:jhimel@solvd.com?subject=AI%20Espresso%20issue%20report) · [repo](https://github.com/jackiehimel/ai-espresso-finalized)*
+*brewed by ai espresso · [spot something off?](mailto:jhimel@solvd.com?subject=AI%20Espresso%20issue%20report) · [repo](https://github.com/jackiehimel/AI-espresso-agent)*

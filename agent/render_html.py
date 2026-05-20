@@ -41,8 +41,9 @@ DATA_EDITIONS_DIR = Path(__file__).resolve().parent / "data" / "editions"
 
 # Public footer (Solvd internal edition — not personal email or stale repo name).
 FOOTER_CONTACT_EMAIL = "jhimel@solvd.com"
-FOOTER_REPO_URL = "https://github.com/jackiehimel/ai-espresso-finalized"
+FOOTER_REPO_URL = "https://github.com/jackiehimel/AI-espresso-agent"
 FOOTER_CONTACT_SUBJECT = "AI%20Espresso%20issue%20report"
+EDITION_TAGLINE = "your morning cup of AI"
 
 
 def edition_footer_html() -> str:
@@ -214,7 +215,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .wordmark .cup {{ font-weight: 400; margin-left: 4px; }}
   .dateline {{
     font-size: 11px; font-weight: 700; color: #8B6F47;
-    letter-spacing: 0.22em; text-transform: uppercase; margin: 10px 0 0 0;
+    letter-spacing: 0.22em; text-transform: uppercase; margin: 8px 0 0 0;
+  }}
+  .tagline {{
+    font-size: 20px;
+    font-weight: 550;
+    color: #5C4A3A;
+    letter-spacing: 0.01em;
+    margin: 6px 0 0 0;
   }}
 
   .edition-grid {{
@@ -467,6 +475,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   <header class="masthead">
     <h1 class="wordmark">ai espresso<span class="cup">&nbsp;☕</span></h1>
+    <p class="tagline">{tagline_html}</p>
     <p class="dateline">{dateline_html}</p>
   </header>
 
@@ -560,6 +569,7 @@ PROMPT_COPY_ICON = (
 # ---------- Markdown template ----------
 MD_TEMPLATE = """# ai espresso ☕ — Edition {issue_num} · Variant C (Newspaper Comic · Snackable)
 
+*{tagline_md}*
 **{dateline_md}**
 
 ---
@@ -798,6 +808,7 @@ def render_edition(
         sniffer_date=dates["sniffer_date"],
         shots_label=shots_label,
         dateline_html=dates["dateline_html"],
+        tagline_html=escape(EDITION_TAGLINE),
         edition_cards=edition_cards,
         qotd_section=qotd_section,
         qotd_script=qotd_script,
@@ -809,6 +820,7 @@ def render_edition(
     md = MD_TEMPLATE.format(
         issue_num=issue_num,
         dateline_md=dates["dateline_md"],
+        tagline_md=EDITION_TAGLINE,
         prompt_title_md=prompt_title_md,
         prompt_tool_hint_md=prompt_tool_hint_md,
         md_stories="".join(md_stories),
