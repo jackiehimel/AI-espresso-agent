@@ -1,51 +1,102 @@
 # AI Espresso
 
-Shippable package for Solvd AI Garage integration (agent + `editions/` publish surface).
+AI Espresso generates a daily AI news edition: three curated story cards plus one "Try this prompt" card, rendered for web/email distribution.
 
-A Python agent that produces a daily AI news digest. Each run:
+## Features
 
-1. Pulls candidate stories from ~45 sources (RSS, blogs, primary press) defined in `agent/sources.yaml`.
-2. Runs a three-role LLM loop (Scout, Editor, Critic) over those candidates to select three stories plus one prompt-of-the-day.
-3. Renders the result to HTML and Markdown and generates four illustrations (one per card).
-4. Optionally emails the rendered HTML inline via SMTP.
+- Multi-step editorial pipeline (Scout -> Editor -> Critic) with tool-based story selection
+- Source ingestion from a tiered catalog in `agent/sources.yaml`
+- Rendered outputs in both HTML and Markdown
+- Edition image generation for card assets
+- Publish manifest at `editions/publish/latest.json` for downstream consumers
+- Optional email delivery with inline images
 
-Output is written to `editions/` (rendered files) and `agent/data/editions/` (raw JSON + agent trace).
-For downstream consumers, the daily workflow also publishes a stable artifact contract at
-`editions/publish/latest.json`.
+## High-Level Architecture
 
-## Recent milestones (May 2026)
+1. `agent/espresso_agent.py` runs the daily selection pipeline and writes edition JSON.
+2. `agent/render_edition.py` renders that JSON to HTML/Markdown and image assets.
+3. `agent/write_publish_manifest.py` updates a stable pointer to the latest published files.
+4. `agent/send_email.py` can send the rendered edition via SMTP.
 
-- Strengthened story-selection guardrails so weak-pool and duplicate-story paths recover safely.
-- Hardened archive, render, and source-ingestion reliability for CI and production edition runs.
-- Improved production email UX with hosted prompt form support and fully clickable story cards.
-- Completed pre-launch launch-gate documentation and rollback/runbook notes for operations.
+## Prerequisites
 
-## Quick start
+- Python 3.11+
+- `pip`
+- API keys for model/search/image services, depending on how you run the pipeline
+
+## Quick Start
 
 ```bash
 cd agent
-pip install -r requirements.txt
-export ANTHROPIC_API_KEY=sk-ant-...
+python3 -m pip install -r requirements.txt
+export ANTHROPIC_API_KEY=your_key_here
 
-# 1. Generate today's edition JSON
-python3 -c "import datetime as dt, espresso_agent; \
-  espresso_agent.run(dt.date.today(), dry_run=False, use_cache=True, mode='agent')"
+# Generate an edition JSON for today
+python3 espresso_agent.py --use-cache
 
-# 2. Render to HTML + Markdown + illustrations (optional: --no-images)
-python3 render_edition.py $(date +%Y-%m-%d)
+# Render HTML + Markdown + assets for today
+python3 render_edition.py "$(date +%Y-%m-%d)"
 ```
 
-## Tests
+## Usage
+
+Generate a specific date:
+
+```bash
+cd agent
+python3 espresso_agent.py --date 2026-05-20 --use-cache
+python3 render_edition.py 2026-05-20
+```
+
+Preview in a browser:
+
+```bash
+cd agent
+python3 preview_edition.py 2026-05-20 --render-only
+```
+
+Send a dry-run email:
+
+```bash
+cd agent
+AI_ESPRESSO_FROM=you@example.com \
+AI_ESPRESSO_TO=team@example.com \
+AI_ESPRESSO_DRY_RUN=1 \
+python3 send_email.py ../editions/edition_1_variant_c.html ../editions/edition_1_variant_c.md
+```
+
+## Outputs
+
+- `agent/data/editions/YYYY-MM-DD.json` - raw edition payload and trace
+- `editions/edition_N_variant_c.html` - rendered HTML edition
+- `editions/edition_N_variant_c.md` - rendered Markdown edition
+- `editions/edition_N/assets/variant_c_*.png` - card images
+- `editions/publish/latest.json` - machine-readable latest-edition manifest
+
+## Automation
+
+- `/.github/workflows/daily-edition.yml` runs daily at 7:00 AM ET.
+- `/.github/workflows/tests.yml` runs unit tests on pushes and pull requests that touch `agent/**`.
+
+## Testing
 
 ```bash
 cd agent
 python3 -m unittest discover -s tests -p "test_*.py" -v
 ```
 
-## Automation
+## Repository Structure
 
-[`.github/workflows/daily-edition.yml`](.github/workflows/daily-edition.yml) runs daily at `0 11 * * *` UTC (7am ET during EDT, 6am ET during EST — GitHub Actions does not observe DST). Steps: generate → render → email → commit.
+```text
+ai-espresso-finalized/
+├── agent/                      # generation, rendering, email, and tests
+├── editions/                   # published HTML/MD/assets and latest manifest
+├── .github/workflows/          # scheduled edition + CI test workflows
+└── README.md
+```
 
-## Docs
+## Contributing
 
-Full architecture, agent loop, output schema, secrets, and downstream sync contract: [agent/README.md](agent/README.md).
+- Keep changes scoped and testable.
+- Run the unit test suite before opening a PR.
+- If you change output contracts, verify `editions/publish/latest.json` still reflects rendered artifacts.

@@ -13,4 +13,5 @@ context/
 agent/data/editions/*.failed.json
 CHANGELOG.md
 INTERNAL.md
+README.internal.md
 .cursor/
