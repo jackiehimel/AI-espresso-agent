@@ -34,11 +34,12 @@ def _normalize_prompt_for_cli(prompt: str) -> str:
 # card_index: 0..(STORY_CARD_COUNT-1) = stories, STORY_CARD_COUNT = prompt tile
 # Vintage newspaper engraving — slate-blue ink on aged cream (original variant_c look).
 ILLUSTRATION_STYLE = (
-    "Vintage newspaper editorial engraving illustration, fine steel-blue charcoal ink "
-    "with dense cross-hatching and stippling for shadows, warm aged-paper cream background, "
-    "Wall Street Journal hedcut or 1960s New Yorker spot-drawing quality, confident linework, "
-    "readable at card thumbnail size. NOT photorealistic, NOT flat cartoon clipart, "
-    "NOT light pencil sketch, NOT washed-out watercolor, NOT pure black ink on white."
+    "Vintage newspaper editorial engraving illustration with crisp steel-blue ink lines, "
+    "high-contrast cross-hatching and stippled shadows, warm aged-cream paper background, "
+    "confident linework, single focal subject, readable at small card size. "
+    "Consistent publication look across the whole set. "
+    "NOT photorealistic, NOT flat clipart, NOT faint pencil sketch, "
+    "NOT washed-out watercolor, NOT pure black ink on white."
 )
 
 # Composition-only — mood must come from the story scene, not fixed card index
@@ -86,11 +87,12 @@ TEXT_SUPPRESSION = (
 
 def _style_envelope(profile: dict[str, str]) -> str:
     return (
-        "Contemporary editorial illustration for a smart Sunday magazine — "
-        "Christoph Niemann / Saul Steinberg sensibility: witty visual metaphor, "
-        "dark bold hand-drawn ink on warm cream paper, NOT light pencil sketch, "
-        "NOT washed out, NOT photorealistic, NOT generic clipart, NOT brown monotone "
-        "still-life, NOT every object on a café table. "
+        "Editorial newspaper engraving with polished publication quality — "
+        "clear visual metaphor, dark confident steel-blue ink, warm cream paper, "
+        "clean high-contrast line art, and consistent finish across cards. "
+        "NOT light pencil sketch, NOT washed out, NOT photorealistic, "
+        "NOT generic clipart, NOT brown monotone still-life, "
+        "NOT every object on a cafe table. "
         f"Mood: {profile['mood']}. Technique: {profile['technique']}. "
         f"Accent color: {profile['accent']}. "
         "No people, no faces, no hands, no robots, no brains, no circuit boards, "
