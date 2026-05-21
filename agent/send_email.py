@@ -30,11 +30,153 @@ import smtplib
 import sys
 from email.message import EmailMessage
 from email.utils import formataddr, make_msgid
+from html import escape
 from pathlib import Path
+
+from bs4 import BeautifulSoup
 
 
 SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 587
+EMAIL_OUTER_MAX_WIDTH = 680
+EMAIL_CARD_MAX_WIDTH = 420
+EMAIL_IMAGE_SIZE = 160
+CATEGORY_COLORS = {
+    "market": "#00955A",
+    "everyday": "#D14A0E",
+    "build": "#C13B0E",
+    "industry": "#5C6B8A",
+    "news": "#8B6F47",
+}
+
+
+def _node_text(node, default: str = "") -> str:
+    return node.get_text(" ", strip=True) if node else default
+
+def _stabilize_inline_img_tags(html: str) -> str:
+    """Give CID images explicit dimensions for Outlook."""
+    pattern = re.compile(
+        r'<img([^>]*?)src="(cid:[^"]+)"([^>]*)>',
+        re.IGNORECASE,
+    )
+
+    def repl(match: re.Match) -> str:
+        before, src, after = match.groups()
+        # Explicit width/height attributes are more reliable than CSS-only sizing in Outlook.
+        return (
+            f'<img{before}src="{src}"{after} width="{EMAIL_IMAGE_SIZE}" height="{EMAIL_IMAGE_SIZE}" '
+            f'style="display:block;width:{EMAIL_IMAGE_SIZE}px;height:{EMAIL_IMAGE_SIZE}px;max-width:{EMAIL_IMAGE_SIZE}px;'
+            'border:0;outline:none;text-decoration:none;margin:12px auto 0 auto;">'
+        )
+
+    return pattern.sub(repl, html)
+
+
+def _build_email_safe_html(html: str) -> str:
+    """Convert web layout HTML into a robust email layout."""
+    soup = BeautifulSoup(html, "html.parser")
+    container = soup.select_one(".container") or soup
+
+    wordmark = container.select_one(".wordmark")
+    tagline = container.select_one(".tagline")
+    dateline = container.select_one(".dateline")
+    footer = container.select_one(".footer")
+
+    story_rows = []
+    for card in container.select(".story-cards .card"):
+        img = card.select_one(".card-image")
+        category = card.select_one(".category")
+        headline_link = card.select_one(".headline-link")
+        kicker = card.select_one(".kicker")
+        source = card.select_one(".source")
+        source_link = source.select_one("a") if source else None
+        source_tail = ""
+        if source:
+            source_tail = source.get_text(" ", strip=True)
+            if source_link:
+                source_name_text = source_link.get_text(" ", strip=True)
+                source_tail = source_tail.removeprefix(source_name_text).strip()
+
+        cat_cls = ""
+        if category:
+            classes = category.get("class", [])
+            cat_cls = next((c for c in classes if c in CATEGORY_COLORS), "")
+        cat_color = CATEGORY_COLORS.get(cat_cls, "#8B6F47")
+
+        img_src = img.get("src", "") if img else ""
+        img_alt = img.get("alt", "") if img else ""
+        headline_href = headline_link.get("href", "#") if headline_link else "#"
+        headline_text = headline_link.get_text(" ", strip=True) if headline_link else ""
+        category_text = _node_text(category)
+        kicker_html = kicker.decode_contents() if kicker else ""
+        source_name = _node_text(source_link)
+        source_href = source_link.get("href", "#") if source_link else "#"
+
+        story_rows.append(
+            "<tr><td align=\"center\" style=\"padding:0 0 18px 0;\">"
+            f"<table role=\"presentation\" width=\"{EMAIL_CARD_MAX_WIDTH}\" cellpadding=\"0\" cellspacing=\"0\" "
+            f"style=\"width:100%;max-width:{EMAIL_CARD_MAX_WIDTH}px;background:#FFFFFF;border:1px solid #EFE5D6;border-radius:12px;\">"
+            "<tr><td align=\"center\" style=\"padding:12px 12px 0 12px;\">"
+            f"<img src=\"{escape(img_src, quote=True)}\" alt=\"{escape(img_alt, quote=True)}\" "
+            f"width=\"{EMAIL_IMAGE_SIZE}\" height=\"{EMAIL_IMAGE_SIZE}\" "
+            f"style=\"display:block;width:{EMAIL_IMAGE_SIZE}px;height:{EMAIL_IMAGE_SIZE}px;border:0;outline:none;text-decoration:none;\">"
+            "</td></tr>"
+            "<tr><td style=\"padding:12px 14px 14px 14px;\">"
+            f"<p style=\"margin:0 0 6px 0;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:{cat_color};\">{escape(category_text)}</p>"
+            f"<h2 style=\"margin:0 0 6px 0;font-size:15px;line-height:1.25;font-weight:700;color:#1A1108;\">"
+            f"<a href=\"{escape(headline_href, quote=True)}\" style=\"color:#1A1108;text-decoration:none;\">{escape(headline_text)}</a></h2>"
+            f"<p style=\"margin:0 0 8px 0;font-size:13px;line-height:1.4;font-style:italic;color:#1A1108;\">{kicker_html}</p>"
+            "<p style=\"margin:0;border-top:1px solid #F0E5D1;padding-top:8px;font-size:11px;color:#8B6F47;\">"
+            f"<a href=\"{escape(source_href, quote=True)}\" style=\"color:#1A1108;text-decoration:none;font-weight:700;\">{escape(source_name)}</a>"
+            f"{(' ' + escape(source_tail)) if source_tail else ''}</p>"
+            "</td></tr></table></td></tr>"
+        )
+
+    prompt_row = ""
+    prompt_card = container.select_one(".prompt-card")
+    if prompt_card:
+        prompt_tag = prompt_card.select_one(".prompt-tag")
+        prompt_title = prompt_card.select_one(".prompt-title")
+        prompt_hint = prompt_card.select_one(".prompt-tool-hint")
+        prompt_code = prompt_card.select_one(".prompt-code")
+        prompt_row = (
+            "<tr><td align=\"center\" style=\"padding:0 0 18px 0;\">"
+            f"<table role=\"presentation\" width=\"{EMAIL_CARD_MAX_WIDTH}\" cellpadding=\"0\" cellspacing=\"0\" "
+            f"style=\"width:100%;max-width:{EMAIL_CARD_MAX_WIDTH}px;background:#FFF8E8;border:1px dashed #C9A671;border-radius:12px;\">"
+            "<tr><td style=\"padding:14px;\">"
+            f"<p style=\"margin:0 0 12px 0;font-size:13px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:#B8340A;"
+            f"background:#F2C9B8;padding:8px 12px;border-radius:6px;text-align:center;\">{escape(_node_text(prompt_tag))}</p>"
+            f"<p style=\"margin:0 0 10px 0;font-size:14px;line-height:1.25;font-weight:800;color:#1A1108;\">{escape(_node_text(prompt_title))}</p>"
+            f"<p style=\"margin:0 0 10px 0;font-size:14px;line-height:1.35;font-style:italic;color:#5C4A3A;\">{escape(_node_text(prompt_hint))}</p>"
+            f"<div style=\"background:#FFFFFF;border:1px solid #E8DCC8;border-radius:6px;padding:10px 12px;font-family:Consolas,Menlo,monospace;"
+            f"font-size:11px;line-height:1.5;color:#1A1108;white-space:pre-wrap;\">{escape(_node_text(prompt_code))}</div>"
+            "</td></tr></table></td></tr>"
+        )
+
+    footer_html = footer.decode_contents() if footer else ""
+    wordmark_html = wordmark.decode_contents() if wordmark else "ai espresso"
+    tagline_text = _node_text(tagline, "your morning cup of AI")
+    dateline_text = _node_text(dateline)
+
+    return (
+        "<!doctype html><html><head><meta charset=\"utf-8\">"
+        "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
+        "</head><body style=\"margin:0;padding:0;background:#F4EFE6;"
+        "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#1A1108;\">"
+        "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#F4EFE6;\">"
+        "<tr><td align=\"center\" style=\"padding:24px 16px;\">"
+        f"<table role=\"presentation\" width=\"{EMAIL_OUTER_MAX_WIDTH}\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;max-width:{EMAIL_OUTER_MAX_WIDTH}px;\">"
+        "<tr><td style=\"text-align:center;padding:8px 16px 10px 16px;\">"
+        f"<h1 style=\"margin:0;font-size:44px;line-height:1;font-weight:800;color:#1A1108;\">{wordmark_html}</h1>"
+        f"<p style=\"margin:6px 0 0 0;font-size:20px;font-weight:550;color:#5C4A3A;\">{escape(tagline_text)}</p>"
+        f"<p style=\"margin:8px 0 0 0;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#8B6F47;\">{escape(dateline_text)}</p>"
+        "</td></tr>"
+        f"{''.join(story_rows)}"
+        f"{prompt_row}"
+        "<tr><td style=\"text-align:center;padding:28px 16px 8px 16px;font-size:11px;color:#8B6F47;line-height:1.7;letter-spacing:0.04em;\">"
+        f"{footer_html}</td></tr>"
+        "</table></td></tr></table></body></html>"
+    )
 
 
 def _rewrite_html_for_inline_images(html: str, asset_dir: Path) -> tuple[str, list[tuple[str, Path]]]:
@@ -122,6 +264,8 @@ def send_edition_email(
     asset_dir = html_path.parent / edition_stem / "assets"
 
     html_rewritten, inline = _rewrite_html_for_inline_images(html, asset_dir)
+    html_rewritten = _stabilize_inline_img_tags(html_rewritten)
+    html_rewritten = _build_email_safe_html(html_rewritten)
     plain = _plain_text_from_md(md) if md else "Open in an HTML-capable mail client to view today's edition."
 
     if not subject:

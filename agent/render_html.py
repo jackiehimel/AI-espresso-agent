@@ -442,7 +442,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }}
   .footer a {{ color: #8B6F47; text-decoration: underline; }}
 
-  @media (max-width: 1279px) and (min-width: 768px) {{
+  @media (max-width: 1279px) and (min-width: 960px) {{
     .edition-grid {{ grid-template-columns: 1fr; }}
     .story-cards {{
       grid-column: 1;
@@ -450,6 +450,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }}
     .edition-grid .prompt-card {{ grid-column: 1; }}
     .section-divider {{ display: block; grid-column: 1 / -1; }}
+  }}
+  @media (max-width: 959px) and (min-width: 768px) {{
+    .edition-grid {{ grid-template-columns: 1fr; gap: 14px; }}
+    .story-cards {{
+      grid-column: 1;
+      grid-template-columns: 1fr;
+    }}
+    .edition-grid .prompt-card {{ grid-column: 1; }}
+    .section-divider {{ display: none; }}
   }}
   @media (max-width: 767px) {{
     .edition-grid {{ grid-template-columns: 1fr; gap: 14px; }}
