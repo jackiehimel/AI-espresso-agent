@@ -14,6 +14,8 @@ CI_OPTIONAL_FLAKY_FEEDS = {
     "Don't Worry About the Vase (Zvi Mowshowitz)",
     "FreightWaves — AI",
     "Microsoft AI Blog",
+    "Rest of World",
+    "Import AI (Jack Clark)",
 }
 
 
@@ -22,6 +24,10 @@ CI_OPTIONAL_FLAKY_FEEDS = {
     "set ESPRESSO_SKIP_NETWORK_TESTS=1 to skip",
 )
 class EnabledSourcesFetchTests(unittest.TestCase):
+    def test_ci_optional_flaky_feeds_cover_known_unstable_endpoints(self):
+        self.assertIn("Rest of World", CI_OPTIONAL_FLAKY_FEEDS)
+        self.assertIn("Import AI (Jack Clark)", CI_OPTIONAL_FLAKY_FEEDS)
+
     def test_each_enabled_source_returns_html(self):
         sources, _rules = load_sources()
         enabled = [s for s in sources if s.enabled]
