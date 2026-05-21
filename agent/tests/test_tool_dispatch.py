@@ -5,6 +5,7 @@ import sys
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
@@ -18,7 +19,7 @@ def _verified_body(chars: int = 150) -> str:
 def _state(**kwargs) -> el.AgentState:
     defaults = dict(
         today=dt.date(2026, 5, 17),
-        needed_slots=["business", "beginner", "engineer"],
+        needed_slots=["business", "beginner", "engineer", "cross"],
         shortlist=[],
         candidates_by_id={},
         archive_headlines=[],
@@ -418,15 +419,16 @@ class ToolDispatchTests(unittest.TestCase):
 
 class ShipGateTests(unittest.TestCase):
 
-    def _three_picks(self, tier1: int = 1):
+    def _four_picks(self, tier1: int = 1):
         picks = {}
-        tiers = [1, 2, 2] if tier1 else [2, 2, 2]
+        tiers = [1, 2, 2, 2] if tier1 else [2, 2, 2, 2]
         headlines = {
             "business": "Anthropic and BlackRock partner on AI for asset management",
             "beginner": "ChatGPT can now look at your bank account",
             "engineer": "OpenAI brings its Codex coding app to mobile",
+            "cross": "CFTC runs ML models to flag suspicious bets on Polymarket",
         }
-        for slot, tier in zip(["business", "beginner", "engineer"], tiers):
+        for slot, tier in zip(["business", "beginner", "engineer", "cross"], tiers):
             picks[slot] = {
                 "id": 1,
                 "headline": headlines[slot],
@@ -439,7 +441,7 @@ class ShipGateTests(unittest.TestCase):
 
     def test_self_critique_rejects_unverified_picks_without_llm(self):
         state = _state(
-            picks=self._three_picks(),
+            picks=self._four_picks(),
         )
         for p in state.picks.values():
             p.pop("body", None)
@@ -448,14 +450,14 @@ class ShipGateTests(unittest.TestCase):
         self.assertTrue(verdict["issues"])
 
     def test_ship_blocked_without_critique(self):
-        state = _state(picks=self._three_picks())
+        state = _state(picks=self._four_picks())
         gate = el.validate_ship_gates(state, {"tier1_minimum": 1})
         self.assertFalse(gate["ok"])
         self.assertTrue(any("self_critique" in e for e in gate["errors"]))
 
     def test_ship_ok_after_approve(self):
         state = _state(
-            picks=self._three_picks(),
+            picks=self._four_picks(),
             last_critic_verdict={"verdict": "approve", "reason": "good mix"},
         )
         gate = el.validate_ship_gates(state, {"tier1_minimum": 1})
@@ -463,7 +465,7 @@ class ShipGateTests(unittest.TestCase):
 
     def test_ship_blocked_no_tier1(self):
         state = _state(
-            picks=self._three_picks(tier1=0),
+            picks=self._four_picks(tier1=0),
             last_critic_verdict={"verdict": "approve", "reason": "ok"},
         )
         gate = el.validate_ship_gates(state, {"tier1_minimum": 1})
@@ -523,7 +525,7 @@ class ShipGateTests(unittest.TestCase):
 
     def test_tool_ship_edition_sets_shipped(self):
         state = _state(
-            picks=self._three_picks(),
+            picks=self._four_picks(),
             last_critic_verdict={"verdict": "approve", "reason": "ok"},
         )
         r = el.tool_ship_edition(state, {}, {"tier1_minimum": 1})
@@ -531,7 +533,7 @@ class ShipGateTests(unittest.TestCase):
         self.assertTrue(state.shipped)
 
     def test_ship_rejects_waymo_even_if_critic_approved(self):
-        picks = self._three_picks()
+        picks = self._four_picks()
         picks["beginner"] = {
             "id": 9,
             "headline": "Waymo driverless cars become trapped in Atlanta suburb after glitch",
@@ -549,12 +551,11 @@ class ShipGateTests(unittest.TestCase):
         self.assertTrue(any("constitution" in e for e in gate["errors"]))
 
     def test_ship_allows_one_non_load_bearing_card(self):
-        picks = self._three_picks()
-        picks["cross"] = picks.pop("engineer")
+        picks = self._four_picks()
         picks["cross"]["headline"] = "Cursor ships AI Shadow Workspace for background code iteration"
         picks["beginner"]["headline"] = "Shadow Workspace now runs in the background while you code"
         state = _state(
-            needed_slots=["business", "beginner", "cross"],
+            needed_slots=["business", "beginner", "cross", "engineer"],
             picks=picks,
             last_critic_verdict={"verdict": "approve", "reason": "cool mix"},
         )
@@ -562,12 +563,11 @@ class ShipGateTests(unittest.TestCase):
         self.assertTrue(gate["ok"], gate["errors"])
 
     def test_ship_blocks_when_two_cards_are_non_load_bearing(self):
-        picks = self._three_picks()
-        picks["cross"] = picks.pop("engineer")
+        picks = self._four_picks()
         picks["beginner"]["headline"] = "Shadow Workspace now runs in the background while you code"
         picks["cross"]["headline"] = "New automation workflow ships this week"
         state = _state(
-            needed_slots=["business", "beginner", "cross"],
+            needed_slots=["business", "beginner", "cross", "engineer"],
             picks=picks,
             last_critic_verdict={"verdict": "approve", "reason": "cool mix"},
         )
@@ -580,14 +580,14 @@ class ShipGateTests(unittest.TestCase):
 
     def test_approve_lock_blocks_unpick(self):
         state = _state(
-            picks=self._three_picks(),
+            picks=self._four_picks(),
             last_critic_verdict={"verdict": "approve", "reason": "ok"},
         )
         r = el.dispatch_tool("unpick", {"slot": "business"}, state, [], {"tier1_minimum": 1})
         self.assertIn("locked", r.get("error", ""))
 
     def test_ship_gate_failure_clears_approve_lock(self):
-        picks = self._three_picks()
+        picks = self._four_picks()
         picks["beginner"]["headline"] = "Waymo driverless cars become trapped in Atlanta suburb after glitch"
         state = _state(
             picks=picks,
@@ -635,6 +635,7 @@ class MockToolLoopTests(unittest.TestCase):
             "Anthropic and BlackRock partner on AI for asset management",
             "ChatGPT can now look at your bank account",
             "OpenAI brings its Codex coding app to mobile",
+            "CFTC runs ML models to flag suspicious bets on Polymarket",
         ]
         state = _state(
             shortlist=[
@@ -648,10 +649,10 @@ class MockToolLoopTests(unittest.TestCase):
                     "persona": "business",
                     "body": _verified_body(),
                 }
-                for i in range(3)
+                for i in range(4)
             ],
         )
-        state.candidates_by_id = {i: state.shortlist[i] for i in range(3)}
+        state.candidates_by_id = {i: state.shortlist[i] for i in range(4)}
         state.working_memory["coverage_gaps"] = []
 
         class FakeBlock:
@@ -675,12 +676,13 @@ class MockToolLoopTests(unittest.TestCase):
                     FakeBlock("pick", {"slot": "business", "id": 0, "reason": "x"}, "tu1"),
                     FakeBlock("pick", {"slot": "beginner", "id": 1, "reason": "y"}, "tu2"),
                     FakeBlock("pick", {"slot": "engineer", "id": 2, "reason": "z"}, "tu3"),
+                    FakeBlock("pick", {"slot": "cross", "id": 3, "reason": "w"}, "tu4"),
                 ])
             if call_count["n"] == 2:
-                return FakeResp([FakeBlock("self_critique", {}, "tu4")])
+                return FakeResp([FakeBlock("self_critique", {}, "tu5")])
             if call_count["n"] == 3:
                 state.last_critic_verdict = {"verdict": "approve", "reason": "ok", "issues": []}
-                return FakeResp([FakeBlock("ship_edition", {}, "tu5")])
+                return FakeResp([FakeBlock("ship_edition", {}, "tu6")])
             return FakeResp([])
 
         mock_client = MagicMock()
@@ -696,7 +698,174 @@ class MockToolLoopTests(unittest.TestCase):
 
         self.assertTrue(ok)
         self.assertTrue(state.shipped)
-        self.assertEqual(len(state.picks), 3)
+        self.assertEqual(len(state.picks), 4)
+
+    def test_run_tool_agent_grants_finalization_lap_on_stall_without_budget_exhaustion(self):
+        state = _state(
+            picks={
+                "business": {
+                    "id": 1,
+                    "headline": "Anthropic and BlackRock partner on AI for asset management",
+                    "url": "https://example.com/1",
+                    "source": "x",
+                    "tier": 1,
+                    "body": _verified_body(),
+                },
+                "beginner": {
+                    "id": 2,
+                    "headline": "ChatGPT can now look at your bank account",
+                    "url": "https://example.com/2",
+                    "source": "y",
+                    "tier": 2,
+                    "body": _verified_body(),
+                },
+                "engineer": {
+                    "id": 3,
+                    "headline": "OpenAI brings its Codex coding app to mobile",
+                    "url": "https://example.com/3",
+                    "source": "z",
+                    "tier": 2,
+                    "body": _verified_body(),
+                },
+                "cross": {
+                    "id": 4,
+                    "headline": "CFTC runs ML models to flag suspicious bets on Polymarket",
+                    "url": "https://example.com/4",
+                    "source": "w",
+                    "tier": 2,
+                    "body": _verified_body(),
+                },
+            },
+            last_critic_verdict={"verdict": "revise", "reason": "same issue repeats"},
+        )
+        state.tool_calls = 12
+        state.hard_budget = 40
+        state.working_memory["forced_convergence"] = {
+            "active": True,
+            "revise_streak": 3,
+            "no_improvement_revise_streak": 2,
+            "last_signature": "business:1|beginner:2|engineer:3|cross:4",
+            "last_issue_classes": ["vendor_mix"],
+        }
+
+        with patch.object(el, "_anthropic_client", return_value=(object(), "test-model")):
+            with patch.object(el, "_run_tool_agent_loop", side_effect=[False, True]) as mock_loop:
+                ok = el.run_tool_agent(state, [], {"tier1_minimum": 1}, [])
+
+        self.assertTrue(ok)
+        self.assertEqual(mock_loop.call_count, 2)
+        self.assertTrue(state.working_memory["finalization_contract"]["active"])
+
+
+class LoopGuardrailTests(unittest.TestCase):
+
+    def _state_with_picks(self) -> el.AgentState:
+        state = _state(
+            picks={
+                "business": {
+                    "id": 1,
+                    "headline": "Anthropic and BlackRock partner on AI for asset management",
+                    "url": "https://example.com/1",
+                    "source": "x",
+                    "tier": 1,
+                    "body": _verified_body(),
+                },
+                "beginner": {
+                    "id": 2,
+                    "headline": "ChatGPT can now look at your bank account",
+                    "url": "https://example.com/2",
+                    "source": "y",
+                    "tier": 2,
+                    "body": _verified_body(),
+                },
+                "engineer": {
+                    "id": 3,
+                    "headline": "OpenAI brings its Codex coding app to mobile",
+                    "url": "https://example.com/3",
+                    "source": "z",
+                    "tier": 2,
+                    "body": _verified_body(),
+                },
+                "cross": {
+                    "id": 4,
+                    "headline": "CFTC runs ML models to flag suspicious bets on Polymarket",
+                    "url": "https://example.com/4",
+                    "source": "w",
+                    "tier": 2,
+                    "body": _verified_body(),
+                },
+            },
+        )
+        return state
+
+    def test_revise_streak_enables_forced_convergence(self):
+        state = self._state_with_picks()
+        repeated = {
+            "verdict": "revise",
+            "reason": "same vendor redundancy and duplication",
+            "issues": ["vendor concentration", "duplicate event"],
+        }
+        with patch.object(el, "llm_json", return_value=repeated):
+            el.tool_self_critique(state, {})
+            el.tool_self_critique(state, {})
+            el.tool_self_critique(state, {})
+        forced = state.working_memory.get("forced_convergence", {})
+        self.assertTrue(forced.get("active"))
+        self.assertGreaterEqual(forced.get("no_improvement_revise_streak", 0), 2)
+
+    def test_repick_oscillation_blocked_after_revise_unpick(self):
+        state = self._state_with_picks()
+        state.last_critic_verdict = {
+            "verdict": "revise",
+            "reason": "duplicate/vendor issue",
+            "issues": ["same vendor"],
+        }
+        removed = state.picks["beginner"]["id"]
+        unpick = el.tool_unpick(state, {"slot": "beginner"}, vendor_patterns=[])
+        self.assertTrue(unpick["ok"])
+
+        shortlist_entry = {
+            "id": removed,
+            "headline": "ChatGPT can now look at your bank account",
+            "url": "https://example.com/2",
+            "source": "y",
+            "tier": 2,
+            "body": _verified_body(),
+        }
+        state.shortlist = [shortlist_entry]
+        repick = el.tool_pick(
+            state,
+            {"slot": "beginner", "id": removed, "reason": "trying same again"},
+            vendor_patterns=[],
+        )
+        self.assertIn("do-not-repick", repick.get("error", ""))
+
+    def test_finalization_contract_blocks_exploration(self):
+        state = self._state_with_picks()
+        state.working_memory["finalization_contract"] = {
+            "active": True,
+            "phase": "await_critique",
+            "targeted_swaps_used": 0,
+        }
+        blocked = el.dispatch_tool(
+            "search_news",
+            {"query": "fresh angle"},
+            state,
+            [],
+            {"tier1_minimum": 1},
+        )
+        self.assertIn("finalization contract", blocked.get("error", ""))
+
+    def test_stall_summary_records_revise_loop(self):
+        state = self._state_with_picks()
+        state.working_memory["forced_convergence"] = {
+            "active": True,
+            "no_improvement_revise_streak": 3,
+            "revise_streak": 3,
+            "last_signature": "business:1|beginner:2|engineer:3|cross:4",
+        }
+        summary = el._stall_reason_summary(state)
+        self.assertIn("revise_loop", summary)
 
 
 if __name__ == "__main__":

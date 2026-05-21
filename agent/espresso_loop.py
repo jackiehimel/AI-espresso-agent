@@ -350,6 +350,20 @@ def _default_working_memory() -> dict:
         "coverage_gaps": [],
         "aggregator_signals": [],
         "critique_history": [],
+        "loop_telemetry": [],
+        "forced_convergence": {
+            "active": False,
+            "revise_streak": 0,
+            "no_improvement_revise_streak": 0,
+            "last_signature": "",
+            "last_issue_classes": [],
+        },
+        "do_not_repick": {},
+        "finalization_contract": {
+            "active": False,
+            "phase": "off",
+            "targeted_swaps_used": 0,
+        },
         "editor_notes": "",
         "decisions": [],
     }
@@ -377,6 +391,110 @@ class AgentState:
     search_calls_used: int = 0
     pick_turn_by_slot: dict[str, int] = field(default_factory=dict)
     archive_checked_after_pick: bool = False
+
+
+def _current_slate_signature(state: AgentState) -> str:
+    rows = []
+    for slot in sorted(state.picks.keys()):
+        pick = state.picks.get(slot, {})
+        rows.append(f"{slot}:{pick.get('id', '?')}")
+    return "|".join(rows)
+
+
+def _issue_classes(verdict: dict) -> list[str]:
+    blob = " ".join(
+        [str(verdict.get("reason") or "")]
+        + [str(x) for x in (verdict.get("issues") or [])]
+    ).lower()
+    classes: list[str] = []
+    if any(k in blob for k in ["duplicate", "repeat", "same-day", "same event", "same vendor"]):
+        classes.append("duplication_or_vendor")
+    if any(k in blob for k in ["vendor", "concentration", "same-vendor"]):
+        classes.append("vendor_mix")
+    if any(k in blob for k in ["archive", "30d", "cross-edition", "uniqueness"]):
+        classes.append("cross_edition_uniqueness")
+    if any(k in blob for k in ["hook", "subject-line", "jargon", "concrete capability"]):
+        classes.append("quality_hook")
+    return classes
+
+
+def _record_critique_telemetry(state: AgentState, verdict: dict) -> None:
+    forced = state.working_memory.setdefault("forced_convergence", {
+        "active": False,
+        "revise_streak": 0,
+        "no_improvement_revise_streak": 0,
+        "last_signature": "",
+        "last_issue_classes": [],
+    })
+    signature = _current_slate_signature(state)
+    classes = _issue_classes(verdict)
+    verdict_name = (verdict.get("verdict") or "").lower()
+
+    if verdict_name == "revise":
+        forced["revise_streak"] = int(forced.get("revise_streak", 0)) + 1
+        if forced.get("last_signature") == signature:
+            forced["no_improvement_revise_streak"] = int(
+                forced.get("no_improvement_revise_streak", 0)
+            ) + 1
+        else:
+            forced["no_improvement_revise_streak"] = 0
+        forced["last_signature"] = signature
+        forced["last_issue_classes"] = classes
+        forced["active"] = bool(
+            int(forced.get("revise_streak", 0)) >= 3
+            or int(forced.get("no_improvement_revise_streak", 0)) >= 2
+        )
+    elif verdict_name == "approve":
+        forced["active"] = False
+        forced["revise_streak"] = 0
+        forced["no_improvement_revise_streak"] = 0
+        forced["last_signature"] = signature
+        forced["last_issue_classes"] = []
+
+    loop = state.working_memory.setdefault("loop_telemetry", [])
+    loop.append({
+        "verdict": verdict_name,
+        "signature": signature,
+        "issue_classes": classes,
+        "remaining_budget": max(state.hard_budget - state.tool_calls, 0),
+    })
+    state.working_memory["loop_telemetry"] = loop[-12:]
+
+
+def _stall_reason_summary(state: AgentState) -> str:
+    forced = state.working_memory.get("forced_convergence") or {}
+    if forced.get("active"):
+        classes = forced.get("last_issue_classes") or []
+        classes_str = ",".join(classes) if classes else "unknown"
+        return (
+            "revise_loop_no_improvement "
+            f"(revise_streak={forced.get('revise_streak', 0)}, "
+            f"no_improve={forced.get('no_improvement_revise_streak', 0)}, "
+            f"issue_classes={classes_str})"
+        )
+    verdict = (state.last_critic_verdict or {}).get("verdict")
+    if verdict == "revise":
+        return "critic_revise_without_recovery"
+    if len(state.picks) < _min_picks_required(state):
+        return "incomplete_slate"
+    return "unknown_stall"
+
+
+def _needs_finalization_recovery(state: AgentState, min_picks: int) -> bool:
+    if len(state.picks) < min_picks:
+        return False
+    if state.tool_calls >= state.hard_budget:
+        return True
+    verdict = (state.last_critic_verdict or {}).get("verdict")
+    if verdict != "revise":
+        return False
+    forced = state.working_memory.get("forced_convergence") or {}
+    if forced.get("active"):
+        return True
+    return any(
+        ev.kind == "error" and ev.result_summary == "model ended turn without tool_use"
+        for ev in state.trace[-4:]
+    )
 
 
 def _detect_vendor(headline: str, url: str, vendor_patterns) -> str | None:
@@ -654,6 +772,16 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
         return {"error": f"invalid slot {slot!r}; needed: {state.needed_slots}"}
     if cid is None:
         return {"error": "missing id"}
+    do_not_repick = state.working_memory.setdefault("do_not_repick", {})
+    blocked_ids = set(do_not_repick.get(slot, []))
+    if int(cid) in blocked_ids:
+        return {
+            "error": (
+                "do-not-repick guard: this candidate was just unpicked after a revise verdict. "
+                "Choose a different candidate for this slot."
+            ),
+            "candidate_id": int(cid),
+        }
     found = next((c for c in state.shortlist + state.extra_candidates if c["id"] == int(cid)), None)
     if not found:
         return {"error": f"no candidate with id={cid}"}
@@ -694,6 +822,12 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
     state.picks[slot] = found
     state.pick_turn_by_slot[slot] = state.tool_calls
     state.archive_checked_after_pick = False
+    contract = state.working_memory.setdefault("finalization_contract", {})
+    if contract.get("active") and contract.get("phase") == "await_targeted_swap":
+        used = int(contract.get("targeted_swaps_used", 0))
+        contract["targeted_swaps_used"] = used + 1
+        contract["phase"] = "await_recritique"
+        state.working_memory["finalization_contract"] = contract
     if nv:
         state.vendor_counts[nv] = state.vendor_counts.get(nv, 0) + 1
     return {
@@ -724,6 +858,12 @@ def tool_unpick(state: AgentState, args: dict, vendor_patterns) -> dict:
             ),
         }
     old = state.picks.pop(slot)
+    if (state.last_critic_verdict or {}).get("verdict") == "revise":
+        do_not_repick = state.working_memory.setdefault("do_not_repick", {})
+        slot_block = set(do_not_repick.get(slot, []))
+        slot_block.add(int(old.get("id", -1)))
+        do_not_repick[slot] = sorted(x for x in slot_block if x >= 0)
+        state.working_memory["do_not_repick"] = do_not_repick
     ov = _detect_vendor(old["headline"], old["url"], vendor_patterns)
     if ov and state.vendor_counts.get(ov, 0) > 0:
         state.vendor_counts[ov] -= 1
@@ -995,6 +1135,7 @@ def tool_self_critique(state: AgentState, args: dict) -> dict:
             "issues": unverified,
         }
         state.last_critic_verdict = verdict
+        _record_critique_telemetry(state, verdict)
         return verdict
 
     picks_payload = []
@@ -1042,12 +1183,28 @@ def tool_self_critique(state: AgentState, args: dict) -> dict:
             "hint": "fix picks or retry self_critique",
         }
     state.last_critic_verdict = verdict
+    _record_critique_telemetry(state, verdict)
     history = state.working_memory.setdefault("critique_history", [])
     history.append({
         "verdict": verdict.get("verdict"),
         "reason": (verdict.get("reason") or "")[:200],
     })
     state.working_memory["critique_history"] = history[-5:]
+    contract = state.working_memory.setdefault("finalization_contract", {})
+    if contract.get("active"):
+        if (verdict.get("verdict") or "").lower() == "approve":
+            contract["phase"] = "await_ship"
+        else:
+            contract["phase"] = "await_targeted_swap"
+            contract["targeted_swaps_used"] = 0
+        state.working_memory["finalization_contract"] = contract
+    forced = state.working_memory.get("forced_convergence") or {}
+    if forced.get("active") and (verdict.get("verdict") or "").lower() == "revise":
+        contract = state.working_memory.setdefault("finalization_contract", {})
+        contract["active"] = True
+        contract["phase"] = "await_targeted_swap"
+        contract["targeted_swaps_used"] = 0
+        state.working_memory["finalization_contract"] = contract
     state.trace.append(TraceEvent(
         ts=time.time(), role="critic", kind="handoff",
         result_summary=f"{verdict.get('verdict')}: {verdict.get('reason', '')[:120]}",
@@ -1191,7 +1348,7 @@ EDITOR_TOOLS: list[dict] = [
     },
     {
         "name": "note_weak_pool",
-        "description": "Document a weak news day; required before shipping 2 stories.",
+        "description": "Document weak-pool constraints and request a focused completion path.",
         "input_schema": {
             "type": "object",
             "properties": {
@@ -1221,6 +1378,29 @@ def dispatch_tool(
     vendor_patterns,
     rules: dict,
 ) -> dict:
+    contract = state.working_memory.get("finalization_contract") or {}
+    if contract.get("active"):
+        phase = contract.get("phase", "off")
+        min_picks = _min_picks_required(state)
+        if len(state.picks) >= min_picks and name in {"read_candidate", "search_news", "check_archive"}:
+            return {
+                "error": (
+                    "finalization contract active: exploration is frozen until "
+                    "self_critique/ship flow completes."
+                ),
+            }
+        if phase == "await_critique" and name != "self_critique":
+            return {"error": "finalization contract: call self_critique first"}
+        if phase == "await_ship" and name != "ship_edition":
+            return {"error": "finalization contract: critic approved; call ship_edition"}
+        if phase == "await_targeted_swap":
+            if name not in {"pick", "unpick"}:
+                return {"error": "finalization contract: apply one targeted swap before re-critique"}
+            if name == "pick" and int(contract.get("targeted_swaps_used", 0)) >= 1:
+                return {"error": "finalization contract: targeted swap already used; call self_critique"}
+        if phase == "await_recritique" and name != "self_critique":
+            return {"error": "finalization contract: call self_critique after targeted swap"}
+
     if (
         (state.last_critic_verdict or {}).get("verdict") == "approve"
         and not state.shipped
@@ -1389,26 +1569,31 @@ def run_tool_agent(state: AgentState, vendor_patterns, rules: dict, gaps: list[s
         })
         shipped = _run_tool_agent_loop(client, model, messages, state, vendor_patterns, rules)
 
-    # Finalization recovery: if the slate is complete but we ran out of budget
-    # before the final self_critique -> ship_edition cycle, grant one short lap.
+    # Finalization recovery: if the slate is complete and the loop stalls
+    # before a successful self_critique -> ship_edition cycle, grant one short lap.
     if (
         not shipped
-        and len(state.picks) >= min_picks
-        and state.tool_calls >= state.hard_budget
+        and _needs_finalization_recovery(state, min_picks)
     ):
         extra = 6
         state.hard_budget = state.tool_calls + extra
         state.trace.append(TraceEvent(
             ts=time.time(), role="system", kind="handoff",
             result_summary=(
-                f"finalization recovery lap (+{extra} tool calls, budget now {state.hard_budget})"
+                f"stalled finalization recovery lap (+{extra} tool calls, budget now {state.hard_budget})"
             ),
         ))
+        state.working_memory["finalization_contract"] = {
+            "active": True,
+            "phase": "await_critique",
+            "targeted_swaps_used": 0,
+        }
         messages.append({
             "role": "user",
             "content": (
-                "Finalization lap: slate is complete. Do not unpick. "
-                "Call self_critique once, then ship_edition if approved."
+                "Finalization lap: slate is complete and candidate exploration is frozen. "
+                "Call self_critique once. If approved, call ship_edition immediately. "
+                "If revise, do one issue-targeted swap, then self_critique again."
             ),
         })
         shipped = _run_tool_agent_loop(client, model, messages, state, vendor_patterns, rules)
@@ -1416,7 +1601,10 @@ def run_tool_agent(state: AgentState, vendor_patterns, rules: dict, gaps: list[s
     if state.tool_calls >= state.hard_budget and not shipped:
         state.trace.append(TraceEvent(
             ts=time.time(), role="system", kind="error",
-            result_summary=f"hard tool budget exhausted ({state.tool_calls})",
+            result_summary=(
+                f"hard tool budget exhausted ({state.tool_calls}); "
+                f"stall={_stall_reason_summary(state)}"
+            ),
         ))
     return shipped
 
