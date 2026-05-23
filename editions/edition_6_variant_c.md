@@ -1,62 +1,63 @@
 # ai espresso ☕ — Edition 6 · Variant C (Newspaper Comic · Snackable)
 
-**WED · MAY 20 · 2026**
+*your morning cup of AI*
+**SAT · MAY 23 · 2026**
 
 ---
 
-![OpenAI will now let companies reserve compute so their AI apps don't slow down](edition_6/assets/variant_c_01.png)
+![DeepSeek just made its cheapest prices permanent](edition_6/assets/variant_c_01.png)
 
 **MARKET**
 
-## OpenAI will now let companies reserve compute so their AI apps don't slow down
+## DeepSeek just made its cheapest prices permanent
 
-OpenAI's new Guaranteed Capacity lets businesses pre-book processing power for their AI applications. Sam Altman said the company will still keep enough capacity for ChatGPT and Codex, but enterprises can now pay to ensure their custom models run at consistent speeds even during peak times.
+The Chinese AI startup is keeping its V4-Pro model at 75% off the original launch price — so what was a temporary developer deal is now the standard rate. That means API calls stay a quarter of what they cost when the model first shipped.
 
-*Companies building on OpenAI can finally avoid the performance lottery that comes with shared infrastructure*
+*Pricing pressure on frontier models just became structural, not promotional.*
 
-[CNBC — Technology](https://www.cnbc.com/2026/05/19/openai-announces-new-guaranteed-capacity-offering-for-customers-to-secure-compute.html) · May 20
+[Bloomberg Technology](https://www.bloomberg.com/news/articles/2026-05-23/deepseek-to-make-permanent-75-discount-on-flagship-ai-model) · May 23
 
 ---
 
-![Google is shipping smart glasses again, this time built around Gemini](edition_6/assets/variant_c_02.png)
+![Google's Mac app is getting a voice assistant and an agent this summer](edition_6/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## Google is shipping smart glasses again, this time built around Gemini
+## Google's Mac app is getting a voice assistant and an agent this summer
 
-Google will release new AI-powered smart glasses this fall — its first since Google Glass flopped over a decade ago. The glasses let you talk to Gemini and get visual answers from what you're looking at, similar to Meta's Ray-Ban glasses but with Google's AI assistant baked in.
+The Gemini Mac app will add two new features: 'Spark,' an agent that can act on your behalf, and voice control so you can talk to it hands-free. Google previewed both at I/O 2026 and says they'll ship sometime this summer.
 
-*Wearable AI is getting another shot now that the tech actually works conversationally.*
+*Gemini is catching up to ChatGPT's desktop features while adding agent capabilities*
 
-[BBC Technology](https://www.bbc.com/news/articles/cvgz1ynq1nqo?at_medium=RSS&at_campaign=rss) · May 20
+[9to5Mac — AI](https://9to5google.com/2026/05/22/gemini-mac-spark-control-summer/) · May 23
 
 ---
 
-![Cursor now lets AI iterate on code in hidden workspaces](edition_6/assets/variant_c_03.png)
+![Cursor now works inside Jira tickets](edition_6/assets/variant_c_03.png)
 
 **BUILD**
 
-## Cursor now lets AI iterate on code in hidden workspaces
+## Cursor now works inside Jira tickets
 
-Cursor's new Shadow Workspace feature spins up invisible Electron windows and uses kernel-level folder proxies to let AI agents test and refine code changes in the background—without touching your actual project files or interrupting your work.
+Anysphere just shipped Cursor directly into Jira, so you can use AI code editing without leaving your project management tool. Write, debug, and generate code in ticket descriptions, comments, or wherever you're tracking work.
 
-*AI can now experiment freely while you keep coding, no git branches or manual cleanup required.*
+*Engineers can now prototype fixes or write code snippets without context-switching to their IDE.*
 
-[Cursor Blog (official)](https://cursor.com/blog/shadow-workspace) · May 20
+[Cursor Changelog (official)](https://cursor.com/changelog/05-19-26) · May 23
 
 ---
 
-![Google just launched Gemini 3.5 with live web access and tool use](edition_6/assets/variant_c_04.png)
+![AI cuts years off the hunt for brain disease drugs](edition_6/assets/variant_c_04.png)
 
 **INDUSTRY**
 
-## Google just launched Gemini 3.5 with live web access and tool use
+## AI cuts years off the hunt for brain disease drugs
 
-Gemini 3.5 can now search the web in real time, run code, and use external tools while answering questions—making it more like an agent than a chatbot. It's available today in Gemini Advanced and through the API, with a 1-million-token context window and improved performance on coding and math benchmarks.
+Researchers used machine learning to screen thousands of existing compounds for their ability to cross the blood-brain barrier and target motor neuron disease. The system identified promising candidates in weeks instead of years, focusing on drugs already approved for other uses that could be repurposed as affordable treatments for conditions like MND and Alzheimer's.
 
-*Google's flagship model can finally act on information, not just retrieve it.*
+*Repurposing existing drugs could get treatments to patients faster and cheaper than developing new ones from scratch.*
 
-[Google AI Blog](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/) · May 20
+[BBC Technology](https://www.bbc.com/news/articles/cdrp3zzzp71o?at_medium=RSS&at_campaign=rss) · May 23
 
 ---
 
@@ -67,13 +68,13 @@ Gemini 3.5 can now search the web in real time, run code, and use external tools
 
 **☕ Try this prompt**
 
-### The jargon translator
+### The ghost deadline
 
-*Before sending anything to customers, execs, or humans outside your team.*
+*When you've been polishing something forever and need to just ship it.*
 
 
 ```
-I'm about to paste something I wrote that probably sounds like I swallowed a whitepaper. Rewrite it so a smart 19-year-old would understand every sentence on first read. Keep my structure. Keep my point. Kill every word that exists only to sound professional.
+I'm about to paste something I wrote that has no real deadline. Pretend it's due in 48 hours and a smart person is waiting. Cut everything that's hedging, every sentence that's just throat-clearing, and show me what's left. Then tell me if the idea still stands.
 ```
 
 ---
