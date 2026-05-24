@@ -1,63 +1,63 @@
 # ai espresso ☕ — Edition 6 · Variant C (Newspaper Comic · Snackable)
 
 *your morning cup of AI*
-**SAT · MAY 23 · 2026**
+**SUN · MAY 24 · 2026**
 
 ---
 
-![DeepSeek just made its cheapest prices permanent](edition_6/assets/variant_c_01.png)
+![Anthropic launches Claude for Small Business at $30/month per user](edition_6/assets/variant_c_01.png)
 
 **MARKET**
 
-## DeepSeek just made its cheapest prices permanent
+## Anthropic launches Claude for Small Business at $30/month per user
 
-The Chinese AI startup is keeping its V4-Pro model at 75% off the original launch price — so what was a temporary developer deal is now the standard rate. That means API calls stay a quarter of what they cost when the model first shipped.
+Small teams can now get Claude Team features — shared billing, centralized admin, and usage analytics — at half the price of the full Team plan. The tier is aimed at businesses with fewer than 10 employees who want collaboration tools without enterprise overhead.
 
-*Pricing pressure on frontier models just became structural, not promotional.*
+*Makes AI collaboration accessible to the smallest companies at a price point they can actually afford.*
 
-[Bloomberg Technology](https://www.bloomberg.com/news/articles/2026-05-23/deepseek-to-make-permanent-75-discount-on-flagship-ai-model) · May 23
+[Anthropic News](https://www.anthropic.com/news/claude-for-small-business) · May 24
 
 ---
 
-![Google's Mac app is getting a voice assistant and an agent this summer](edition_6/assets/variant_c_02.png)
+![Google's Genie can now turn Street View photos into playable 3D worlds](edition_6/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## Google's Mac app is getting a voice assistant and an agent this summer
+## Google's Genie can now turn Street View photos into playable 3D worlds
 
-The Gemini Mac app will add two new features: 'Spark,' an agent that can act on your behalf, and voice control so you can talk to it hands-free. Google previewed both at I/O 2026 and says they'll ship sometime this summer.
+Google AI Ultra subscribers can now feed Project Genie a Street View image and get back an interactive 3D environment they can walk through. The AI generates a simulated world from a single photo, letting you explore real places as if you're there—no game engine required.
 
-*Gemini is catching up to ChatGPT's desktop features while adding agent capabilities*
+*AI can now turn any photograph into a space you can move around in.*
 
-[9to5Mac — AI](https://9to5google.com/2026/05/22/gemini-mac-spark-control-summer/) · May 23
+[Google DeepMind Blog](https://deepmind.google/blog/simulate-real-world-places-with-project-genie-and-street-view/) · May 24
 
 ---
 
-![Cursor now works inside Jira tickets](edition_6/assets/variant_c_03.png)
+![Cursor now gives AI agents their own dev environments in the cloud](edition_6/assets/variant_c_03.png)
 
 **BUILD**
 
-## Cursor now works inside Jira tickets
+## Cursor now gives AI agents their own dev environments in the cloud
 
-Anysphere just shipped Cursor directly into Jira, so you can use AI code editing without leaving your project management tool. Write, debug, and generate code in ticket descriptions, comments, or wherever you're tracking work.
+Cursor just launched cloud dev environments for its AI agents — complete with cloned repos, installed dependencies, credentials, and build tools. The setup mirrors what you'd have on your laptop, so agents can handle full engineering tasks without bouncing back to your local machine.
 
-*Engineers can now prototype fixes or write code snippets without context-switching to their IDE.*
+*AI coding agents can now finish tasks end-to-end without needing your actual computer running.*
 
-[Cursor Changelog (official)](https://cursor.com/changelog/05-19-26) · May 23
+[Cursor Changelog (official)](https://cursor.com/changelog/05-13-26) · May 24
 
 ---
 
-![AI cuts years off the hunt for brain disease drugs](edition_6/assets/variant_c_04.png)
+![This indie app tries to be the AI assistant that knows what you need before you ask](edition_6/assets/variant_c_04.png)
 
 **INDUSTRY**
 
-## AI cuts years off the hunt for brain disease drugs
+## This indie app tries to be the AI assistant that knows what you need before you ask
 
-Researchers used machine learning to screen thousands of existing compounds for their ability to cross the blood-brain barrier and target motor neuron disease. The system identified promising candidates in weeks instead of years, focusing on drugs already approved for other uses that could be repurposed as affordable treatments for conditions like MND and Alzheimer's.
+Poppy is a new iOS app that aims to surface helpful context proactively instead of waiting for you to prompt it. Unlike Siri or ChatGPT, which respond to requests, Poppy monitors your digital life and tries to offer relevant information before you realize you need it.
 
-*Repurposing existing drugs could get treatments to patients faster and cheaper than developing new ones from scratch.*
+*Shows how indie developers are experimenting with ambient AI that anticipates rather than reacts.*
 
-[BBC Technology](https://www.bbc.com/news/articles/cdrp3zzzp71o?at_medium=RSS&at_campaign=rss) · May 23
+[9to5Mac — AI](https://9to5mac.com/2026/05/23/indie-app-spotlight-poppy-proactive-ai-assistant-digital-management-organization/) · May 24
 
 ---
 
@@ -68,13 +68,13 @@ Researchers used machine learning to screen thousands of existing compounds for 
 
 **☕ Try this prompt**
 
-### The ghost deadline
+### The confidence tax
 
-*When you've been polishing something forever and need to just ship it.*
+*When your draft feels long but you can't find what to cut.*
 
 
 ```
-I'm about to paste something I wrote that has no real deadline. Pretend it's due in 48 hours and a smart person is waiting. Cut everything that's hedging, every sentence that's just throat-clearing, and show me what's left. Then tell me if the idea still stands.
+I'm about to paste something I wrote. Don't improve it. Tell me which sentences exist only because I was worried you'd think I'm stupid, which clauses are pre-emptive apologies, and which phrases are doing everyone's thinking for them. Then show me the same thing with all that stripped out.
 ```
 
 ---
