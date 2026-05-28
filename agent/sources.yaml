@@ -371,7 +371,9 @@ sources:
 # ─── CONFIGURATION RULES ─────────────────────────────────────────────────
 rules:
   tier1_minimum: 1            # at least one Tier 1 story per edition
-  total_stories: 3            # 3 stories + 1 try-this-prompt tile = 4 across
+  total_stories: 4            # 4 stories + 1 try-this-prompt tile = 5 across
   tier4_rotation_days: [1, 4] # Mon (1) and Thu (4) include a Tier 4 story
   dedupe_window_days: 30      # don't repeat a story or source-event within 30d
+  max_story_age_days: 7       # reject stale stories unless they are within 7 days
+  allow_paywalled_stories: false  # avoid stories users cannot open
   paywall_handling: headline_only   # never fabricate body for paywalled sources

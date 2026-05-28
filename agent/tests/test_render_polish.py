@@ -1,10 +1,13 @@
 """Phase 4 polish: public HTML footer, hidden tiers, PNG compression."""
 
+import hashlib
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
@@ -15,6 +18,9 @@ from render_html import (
     render_edition,
 )
 from render_images import EDITION_PNG_MAX_WIDTH, compress_edition_pngs
+from render_images import _can_reuse_existing_illustration, _prompt_digest_path
+from render_images import _curated_scene
+from render_images import _run_image_cli
 
 
 class PublicHtmlPolishTests(unittest.TestCase):
@@ -154,6 +160,38 @@ class CompressEditionPngTests(unittest.TestCase):
             with Image.open(path) as img:
                 self.assertLessEqual(max(img.size), EDITION_PNG_MAX_WIDTH)
             self.assertLess(path.stat().st_size, before)
+
+
+class IllustrationCacheTests(unittest.TestCase):
+
+    def test_existing_image_reused_only_when_prompt_digest_matches(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "variant_c_01.png"
+            path.write_bytes(b"x" * 12_000)  # pass _illustration_ok size gate
+            digest_path = _prompt_digest_path(path)
+            digest_path.write_text("abc123", encoding="utf-8")
+            self.assertFalse(_can_reuse_existing_illustration(path, "new prompt"))
+
+            digest_path.write_text(
+                hashlib.sha1("new prompt".encode("utf-8")).hexdigest(),
+                encoding="utf-8",
+            )
+            self.assertTrue(_can_reuse_existing_illustration(path, "new prompt"))
+
+    def test_run_image_cli_keeps_prior_image_on_timeout(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp) / "variant_c_01"
+            png = Path(str(base) + ".png")
+            original = b"z" * 12_000
+            png.write_bytes(original)
+
+            with patch("render_images._find_asi_cli", return_value="/tmp/fake-cli"), patch(
+                "subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="fake", timeout=300)
+            ):
+                ok = _run_image_cli("prompt changed", base, "1:1")
+
+            self.assertTrue(ok)
+            self.assertEqual(png.read_bytes(), original)
 
 
 if __name__ == "__main__":

@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+from email.utils import parsedate_to_datetime
 import hashlib
 import json
 import os
@@ -48,6 +49,7 @@ import subprocess
 from bs4 import BeautifulSoup
 
 from card_config import needed_slots_for_rules
+from freshness import infer_date_from_url
 from prompt_tile import build_prompt_tile as _build_prompt_tile_llm
 
 from editorial import (
@@ -151,6 +153,7 @@ class Candidate:
     vertical: str | None = None
     aggregator: bool = False
     fingerprint: str = ""  # for dedupe
+    published_date: str | None = None  # ISO YYYY-MM-DD when available
 
     def __post_init__(self):
         if not self.fingerprint:
@@ -191,6 +194,70 @@ def fingerprint_of(headline: str, url: str) -> str:
     norm = re.sub(r"[^a-z0-9 ]+", "", headline.lower()).strip()
     host = urlparse(url).netloc.lower()
     return hashlib.sha1(f"{host}|{norm}".encode()).hexdigest()[:16]
+
+
+def _parse_published_date(item) -> dt.date | None:
+    for tag_name in ("pubDate", "published", "updated"):
+        node = item.find(tag_name)
+        if not node:
+            continue
+        raw = node.get_text(" ", strip=True)
+        if not raw:
+            continue
+        try:
+            return parsedate_to_datetime(raw).date()
+        except Exception:
+            pass
+        try:
+            return dt.date.fromisoformat(raw[:10])
+        except ValueError:
+            continue
+    for candidate in item.find_all():
+        name = (candidate.name or "").lower()
+        if name.endswith("date"):
+            raw = candidate.get_text(" ", strip=True)
+            if not raw:
+                continue
+            try:
+                return dt.date.fromisoformat(raw[:10])
+            except ValueError:
+                continue
+    return None
+
+
+def infer_candidate_date(candidate: Candidate) -> dt.date | None:
+    if candidate.published_date:
+        try:
+            return dt.date.fromisoformat(candidate.published_date)
+        except ValueError:
+            pass
+    return infer_date_from_url(candidate.url)
+
+
+def _filter_stale_candidates(
+    candidates: list[Candidate],
+    today: dt.date,
+    max_age_days: int,
+) -> list[Candidate]:
+    fresh: list[Candidate] = []
+    stale_count = 0
+    for cand in candidates:
+        published = infer_candidate_date(cand)
+        if published is None:
+            fresh.append(cand)
+            continue
+        age = (today - published).days
+        if age > max_age_days:
+            stale_count += 1
+            continue
+        fresh.append(cand)
+    if stale_count:
+        print(
+            f"[espresso] freshness filter dropped {stale_count} stale candidate(s) "
+            f"(>{max_age_days} days old)",
+            file=sys.stderr,
+        )
+    return fresh
 
 
 def load_sources() -> tuple[list[Source], dict]:
@@ -360,6 +427,7 @@ def extract_rss_candidates(xml: str, source: Source, max_n: int = 8) -> list[Can
             continue
         seen.add(href)
         blurb = _rss_item_summary(item)
+        published = _parse_published_date(item) or infer_date_from_url(href)
         out.append(Candidate(
             headline=title,
             url=href,
@@ -369,6 +437,7 @@ def extract_rss_candidates(xml: str, source: Source, max_n: int = 8) -> list[Can
             paywall=source.paywall,
             vertical=source.vertical,
             aggregator=source.aggregator,
+            published_date=published.isoformat() if published else None,
         ))
         if len(out) >= max_n:
             break
@@ -745,6 +814,9 @@ HEADLINES (max ~12 words, verbs forward when possible):
   Why the bad examples are bad: they read like a press release, they
   contain words like "strategic", "deployment", "tier", and they don't
   make anyone curious.
+  Keep the AI hook explicit in the headline. If AI/agent/model is the
+  mechanism, say "AI", "agent", or the model/tool name in plain language.
+  Never rewrite into a generic market/health/business headline that hides AI.
 
 BLURBS (~30-55 words, 1-2 sentences):
   Plain English. Concrete and specific. Lead with what's new and what
@@ -1161,6 +1233,8 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
     print(f"[espresso] {date} — {len(sources)} enabled sources", file=sys.stderr)
 
     candidates = fetch_all_candidates(sources, use_cache=use_cache)
+    max_story_age_days = int(rules.get("max_story_age_days", 7))
+    candidates = _filter_stale_candidates(candidates, date, max_story_age_days)
     archive_fps = load_archive(days=rules.get("dedupe_window_days", 30))
     print(f"[espresso] {len(archive_fps)} archived fingerprints (dedupe window)", file=sys.stderr)
 
@@ -1169,18 +1243,65 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
     agent_meta: dict = {}
     agent_used = False
     if mode == "agent":
+        from espresso_loop import AgenticSelectFailed, agentic_select, write_agent_failure_artifact
+
+        max_attempts_raw = os.environ.get("ESPRESSO_AGENT_MAX_ATTEMPTS", "2").strip()
         try:
-            from espresso_loop import agentic_select
-            archive_titles = recent_archive_headlines(30)
-            selected_cands, agent_trace, agent_meta = agentic_select(
-                candidates=candidates,
-                archive_fps=archive_fps,
-                rules=rules,
-                today=date,
-                vendor_patterns=VENDOR_PATTERNS,
-                archive_headlines=archive_titles,
-            )
-            agent_used = True
+            max_attempts = max(1, int(max_attempts_raw))
+        except ValueError:
+            max_attempts = 2
+
+        selected_cands: list[Candidate] = []
+        last_error: Exception | None = None
+        for attempt in range(1, max_attempts + 1):
+            try:
+                archive_titles = recent_archive_headlines(30)
+                selected_cands, agent_trace, agent_meta = agentic_select(
+                    candidates=candidates,
+                    archive_fps=archive_fps,
+                    rules=rules,
+                    today=date,
+                    vendor_patterns=VENDOR_PATTERNS,
+                    archive_headlines=archive_titles,
+                )
+                agent_used = True
+                if attempt > 1:
+                    print(
+                        f"[espresso] recovered on agent attempt {attempt}/{max_attempts}",
+                        file=sys.stderr,
+                    )
+                break
+            except Exception as e:
+                last_error = e
+                if isinstance(e, AgenticSelectFailed):
+                    fail_path = write_agent_failure_artifact(date, e.trace, e.meta)
+                    agent_trace = e.trace
+                    agent_meta = e.meta
+                    print(
+                        f"[espresso] agent attempt {attempt}/{max_attempts} failed "
+                        f"(no recoverable slate): {e}; trace at {fail_path}",
+                        file=sys.stderr,
+                    )
+                else:
+                    print(f"[espresso] agent attempt {attempt}/{max_attempts} failed: {e}", file=sys.stderr)
+                    agent_trace.append({
+                        "role": "system",
+                        "kind": "error",
+                        "result_summary": f"agent mode crashed: {e}",
+                    })
+                if attempt < max_attempts:
+                    continue
+
+        if not agent_used:
+            # Dev-only: see RANKING_SYSTEM deprecation block above.
+            if os.environ.get("ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK") == "1":
+                print("[espresso] ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1 — rank_and_select", file=sys.stderr)
+                stories = rank_and_select(client, candidates, archive_fps, rules, date)
+            elif last_error is not None:
+                raise last_error
+            else:
+                raise RuntimeError("agent mode failed without a captured error")
+        else:
             # Rewrite each selected Candidate into a Story using the slot the agent assigned
             stories = []
             for c in selected_cands:
@@ -1215,30 +1336,6 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
                     fingerprint=c.fingerprint,
                 ))
             print(f"[espresso] AGENT MODE: selected {len(stories)} stories via {len(agent_trace)} trace events", file=sys.stderr)
-        except Exception as e:
-            from espresso_loop import AgenticSelectFailed, write_agent_failure_artifact
-
-            if isinstance(e, AgenticSelectFailed):
-                fail_path = write_agent_failure_artifact(date, e.trace, e.meta)
-                agent_trace = e.trace
-                print(
-                    f"[espresso] agent failed (no recoverable slate): {e}; trace at {fail_path}",
-                    file=sys.stderr,
-                )
-            else:
-                print(f"[espresso] agent mode failed: {e}", file=sys.stderr)
-                agent_trace.append({
-                    "role": "system",
-                    "kind": "error",
-                    "result_summary": f"agent mode crashed: {e}",
-                })
-
-            # Dev-only: see RANKING_SYSTEM deprecation block above.
-            if os.environ.get("ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK") == "1":
-                print("[espresso] ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1 — rank_and_select", file=sys.stderr)
-                stories = rank_and_select(client, candidates, archive_fps, rules, date)
-            else:
-                raise
     else:
         stories = rank_and_select(client, candidates, archive_fps, rules, date)
     print(f"[espresso] selected {len(stories)} stories", file=sys.stderr)

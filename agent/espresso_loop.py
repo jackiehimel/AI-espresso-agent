@@ -30,6 +30,7 @@ import httpx
 
 from card_config import needed_slots_for_rules
 from constitution import constitution_prompt_block
+from freshness import infer_date_from_text, infer_date_from_url
 
 _CONSTITUTION_PROMPT = constitution_prompt_block()
 
@@ -497,6 +498,23 @@ def _needs_finalization_recovery(state: AgentState, min_picks: int) -> bool:
     )
 
 
+def _infer_candidate_date(entry: dict) -> dt.date | None:
+    raw = (entry.get("published_date") or "").strip()
+    if raw:
+        try:
+            return dt.date.fromisoformat(raw[:10])
+        except ValueError:
+            pass
+    url_date = infer_date_from_url(entry.get("url") or "")
+    if url_date is not None:
+        return url_date
+    text = " ".join(
+        str(entry.get(k, "") or "")
+        for k in ("body", "blurb", "snippet", "headline")
+    )
+    return infer_date_from_text(text)
+
+
 def _detect_vendor(headline: str, url: str, vendor_patterns) -> str | None:
     hay = f" {headline.lower()} {urlparse(url).netloc.lower()} "
     for vendor, needles in vendor_patterns:
@@ -669,6 +687,7 @@ def _apply_search_hits(state: AgentState, hits: list[dict], allowed: list[str]) 
         if not is_search_domain_allowed(url, allowed):
             rejected.append(hit.get("domain") or url)
             continue
+        url_date = infer_date_from_url(url)
         entry = {
             "id": state.next_id,
             "headline": title,
@@ -679,6 +698,7 @@ def _apply_search_hits(state: AgentState, hits: list[dict], allowed: list[str]) 
             "persona": "unknown",
             "via_search": True,
             "snippet": (hit.get("snippet") or "")[:200],
+            "published_date": url_date.isoformat() if url_date else None,
         }
         state.next_id += 1
         state.extra_candidates.append(entry)
@@ -764,7 +784,7 @@ def tool_check_archive(state: AgentState, args: dict) -> dict:
     return {"matches": matches, "is_duplicate": bool(matches)}
 
 
-def tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
+def tool_pick(state: AgentState, args: dict, vendor_patterns, rules: dict | None = None) -> dict:
     slot = args.get("slot")
     cid = args.get("id")
     reason = args.get("reason", "")
@@ -808,6 +828,25 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
     pick_issues = validate_pick_has_body(found)
     if pick_issues:
         return {"error": "; ".join(pick_issues), "candidate_id": cid}
+    cfg = rules or {}
+    if bool(found.get("paywall")) and not bool(cfg.get("allow_paywalled_stories", False)):
+        return {
+            "error": "paywalled story blocked by policy; choose a non-paywalled source",
+            "candidate_id": cid,
+        }
+    max_age_days = int(cfg.get("max_story_age_days", 7))
+    published = _infer_candidate_date(found)
+    if published is not None:
+        age = (state.today - published).days
+        if age > max_age_days:
+            return {
+                "error": (
+                    f"stale story: {age} days old exceeds max_story_age_days={max_age_days}. "
+                    "Pick a fresher candidate."
+                ),
+                "candidate_id": cid,
+                "published_date": published.isoformat(),
+            }
     # Bookkeeping: if slot was previously picked, decrement old vendor
     if slot in state.picks:
         old = state.picks[slot]
@@ -1417,7 +1456,7 @@ def dispatch_tool(
     if name == "check_archive":
         return tool_check_archive(state, tool_input)
     if name == "pick":
-        return tool_pick(state, tool_input, vendor_patterns)
+        return tool_pick(state, tool_input, vendor_patterns, rules)
     if name == "unpick":
         return tool_unpick(state, tool_input, vendor_patterns)
     if name == "update_memory":
@@ -1659,6 +1698,7 @@ def _resolve_picks_to_candidates(
                 url=entry["url"],
                 source_name=entry["source"],
                 tier=entry["tier"],
+                published_date=entry.get("published_date"),
             )
         cand._agent_slot = slot  # type: ignore[attr-defined]
         selected.append(cand)
@@ -1741,6 +1781,7 @@ def agentic_select(
             "tier": c.tier,
             "url": c.url,
             "vertical": c.vertical,
+            "published_date": getattr(c, "published_date", None),
         })
 
     # SCOUT
@@ -1764,6 +1805,7 @@ def agentic_select(
             "vertical": c.vertical,
             "blurb": c.blurb,
             "paywall": c.paywall,
+            "published_date": getattr(c, "published_date", None),
             "score": entry.get("score", 0),
             "persona": entry.get("persona", "unknown"),
             "why": entry.get("why", ""),
@@ -1815,8 +1857,7 @@ def agentic_select(
             "working_memory": state.working_memory,
             "shipped": False,
             "salvaged": True,
-            "salvage_reason": salvage_reason,
-        }
+            "salvage_reason": salvage_reason,        }
         return selected, trace_dicts, meta
 
     if state.shipped and len(state.picks) >= min_picks:
@@ -1826,8 +1867,7 @@ def agentic_select(
             "working_memory": state.working_memory,
             "shipped": True,
             "salvaged": False,
-            "salvage_reason": None,
-        }
+            "salvage_reason": None,        }
         return selected, trace_dicts, meta
 
     meta = {

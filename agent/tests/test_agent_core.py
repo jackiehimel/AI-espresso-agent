@@ -10,6 +10,7 @@
 
 import sys
 import unittest
+from unittest import mock
 from pathlib import Path
 
 # make agent/ importable when tests run from repo root
@@ -129,7 +130,7 @@ class Tier1ShipGateTests(unittest.TestCase):
         _, rules = ea.load_sources()
         state = el.AgentState(
             today=__import__("datetime").date(2026, 5, 17),
-            needed_slots=["business", "beginner", "engineer"],
+            needed_slots=["business", "beginner", "engineer", "cross"],
             shortlist=[],
             candidates_by_id={},
             archive_headlines=[],
@@ -137,6 +138,7 @@ class Tier1ShipGateTests(unittest.TestCase):
                 "business": {"id": 1, "headline": "x", "url": "u", "tier": 2},
                 "beginner": {"id": 2, "headline": "y", "url": "u", "tier": 2},
                 "engineer": {"id": 3, "headline": "z", "url": "u", "tier": 2},
+                "cross": {"id": 4, "headline": "q", "url": "u", "tier": 2},
             },
             last_critic_verdict={"verdict": "approve", "reason": "ok"},
         )
@@ -147,7 +149,7 @@ class Tier1ShipGateTests(unittest.TestCase):
         _, rules = ea.load_sources()
         state = el.AgentState(
             today=__import__("datetime").date(2026, 5, 17),
-            needed_slots=["business", "beginner", "engineer"],
+            needed_slots=["business", "beginner", "engineer", "cross"],
             shortlist=[],
             candidates_by_id={},
             archive_headlines=[],
@@ -169,6 +171,13 @@ class Tier1ShipGateTests(unittest.TestCase):
                 "engineer": {
                     "id": 3,
                     "headline": "OpenAI brings its Codex coding app to mobile",
+                    "url": "u",
+                    "tier": 2,
+                    "body": "Verified excerpt " * 20,
+                },
+                "cross": {
+                    "id": 4,
+                    "headline": "CFTC runs ML models to flag suspicious bets on Polymarket",
                     "url": "u",
                     "tier": 2,
                     "body": "Verified excerpt " * 20,
@@ -199,6 +208,95 @@ class RssSummaryTests(unittest.TestCase):
         cands = ea.extract_rss_candidates(xml, source, max_n=1)
         self.assertEqual(len(cands), 1)
         self.assertIn("Paywalled lede", cands[0].blurb)
+
+    def test_rss_candidate_captures_published_date(self):
+        xml = """<?xml version="1.0"?>
+        <rss><channel><item>
+          <title>Cursor in Jira</title>
+          <link>https://cursor.com/changelog/05-19-26</link>
+          <pubDate>Tue, 19 May 2026 12:00:00 GMT</pubDate>
+          <description><![CDATA[<p>Cursor is now available in Jira.</p>]]></description>
+        </item></channel></rss>"""
+        source = ea.Source(
+            name="Cursor Changelog",
+            url="https://cursor.com/changelog/rss.xml",
+            tier=1,
+            kind="rss",
+        )
+        cands = ea.extract_rss_candidates(xml, source, max_n=1)
+        self.assertEqual(len(cands), 1)
+        self.assertEqual(cands[0].published_date, "2026-05-19")
+
+
+class FreshnessTests(unittest.TestCase):
+
+    def test_filter_stale_candidates_drops_old_published_date(self):
+        today = __import__("datetime").date(2026, 5, 27)
+        stale = ea.Candidate(
+            headline="Old changelog",
+            url="https://cursor.com/changelog/05-19-26",
+            source_name="Cursor",
+            tier=1,
+            published_date="2026-05-19",
+        )
+        fresh = ea.Candidate(
+            headline="Fresh launch",
+            url="https://example.com/2026/05/26/fresh-launch",
+            source_name="Example",
+            tier=1,
+            published_date="2026-05-26",
+        )
+        kept = ea._filter_stale_candidates([stale, fresh], today, max_age_days=7)
+        self.assertEqual(len(kept), 1)
+        self.assertEqual(kept[0].headline, "Fresh launch")
+
+
+class AgentRetryTests(unittest.TestCase):
+
+    def test_agent_mode_retries_after_agentic_failure(self):
+        day = __import__("datetime").date(2026, 5, 26)
+        selected = []
+        slots = ["business", "beginner", "engineer", "cross"]
+        for idx, slot in enumerate(slots):
+            cand = ea.Candidate(
+                headline=f"Story {idx}",
+                url=f"https://example.com/{idx}",
+                source_name="Example",
+                tier=1 if idx == 0 else 2,
+                blurb="Verified excerpt " * 5,
+            )
+            setattr(cand, "_agent_slot", slot)
+            selected.append(cand)
+
+        first_error = el.AgenticSelectFailed("first attempt failed", trace=[], meta={})
+        side_effects = [
+            first_error,
+            (selected, [{"role": "system", "kind": "handoff"}], {"working_memory": {}, "shipped": True}),
+        ]
+
+        with (
+            mock.patch.object(ea, "load_sources", return_value=([], {})),
+            mock.patch.object(ea, "fetch_all_candidates", return_value=selected),
+            mock.patch.object(ea, "load_archive", return_value=set()),
+            mock.patch.object(ea, "recent_archive_headlines", return_value=[]),
+            mock.patch.object(ea, "build_prompt_tile", return_value={"prompt": "x"}),
+            mock.patch.object(ea, "build_daily_question", return_value="q"),
+            mock.patch.object(
+                ea,
+                "call_llm_json",
+                return_value={
+                    "headline": "H",
+                    "blurb": "B",
+                    "why_it_matters": "W",
+                },
+            ),
+            mock.patch.object(el, "write_agent_failure_artifact", return_value=Path("fail.json")),
+            mock.patch.object(el, "agentic_select", side_effect=side_effects) as mocked_select,
+        ):
+            out = ea.run(day, dry_run=True, use_cache=True, mode="agent")
+
+        self.assertEqual(out.name, "2026-05-26.json")
+        self.assertEqual(mocked_select.call_count, 2)
 
 
 if __name__ == "__main__":

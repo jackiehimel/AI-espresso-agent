@@ -7,6 +7,7 @@ Christoph Niemann / Saul Steinberg editorial wit — not clipart still-lifes).
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import shutil
@@ -385,6 +386,32 @@ def _illustration_ok(path: Path) -> bool:
     return path.is_file() and path.stat().st_size > 10_000
 
 
+def _prompt_digest(prompt: str) -> str:
+    return hashlib.sha1(prompt.encode("utf-8")).hexdigest()
+
+
+def _prompt_digest_path(image_path: Path) -> Path:
+    return image_path.with_suffix(".prompt.sha1")
+
+
+def _can_reuse_existing_illustration(image_path: Path, prompt: str) -> bool:
+    if not _illustration_ok(image_path):
+        return False
+    digest_path = _prompt_digest_path(image_path)
+    if not digest_path.is_file():
+        return False
+    try:
+        existing = digest_path.read_text(encoding="utf-8").strip()
+    except OSError:
+        return False
+    return bool(existing) and existing == _prompt_digest(prompt)
+
+
+def _write_prompt_digest(image_path: Path, prompt: str) -> None:
+    digest_path = _prompt_digest_path(image_path)
+    digest_path.write_text(_prompt_digest(prompt), encoding="utf-8")
+
+
 def _write_placeholder_png(path: Path, aspect_ratio: str) -> bool:
     try:
         from PIL import Image, ImageDraw
@@ -442,14 +469,33 @@ def _run_image_cli(prompt: str, filename_no_ext: Path, aspect_ratio: str) -> boo
     cli = _find_asi_cli()
     out_path = Path(str(filename_no_ext) + ".png")
     safe_prompt = _normalize_prompt_for_cli(prompt)
+    prior_bytes: bytes | None = None
 
-    if _illustration_ok(out_path):
+    if _can_reuse_existing_illustration(out_path, safe_prompt):
         print(f"  [skip] keeping existing {out_path.name}", file=sys.stderr)
         return True
+    if _illustration_ok(out_path):
+        print(f"  [regen] {out_path.name} prompt changed; regenerating", file=sys.stderr)
+        try:
+            prior_bytes = out_path.read_bytes()
+        except OSError:
+            prior_bytes = None
 
-    if _run_gemini_inprocess(safe_prompt, out_path, aspect_ratio):
-        print("  backend: gemini (nano banana)", file=sys.stderr)
-        return True
+    def _restore_prior_if_available() -> bool:
+        if prior_bytes is None:
+            return False
+        try:
+            out_path.write_bytes(prior_bytes)
+            return _illustration_ok(out_path)
+        except OSError:
+            return False
+
+    # In-process Gemini calls can hang without a reliable timeout; keep this opt-in.
+    if os.environ.get("ESPRESSO_IMAGE_INPROCESS") == "1":
+        if _run_gemini_inprocess(safe_prompt, out_path, aspect_ratio):
+            print("  backend: gemini (nano banana)", file=sys.stderr)
+            _write_prompt_digest(out_path, safe_prompt)
+            return True
 
     if not cli:
         print("  [skip] asi-generate-image not on PATH; using placeholder", file=sys.stderr)
@@ -474,15 +520,28 @@ def _run_image_cli(prompt: str, filename_no_ext: Path, aspect_ratio: str) -> boo
         )
         if result.returncode != 0:
             print(f"  [error] {result.stderr[:300]}", file=sys.stderr)
+            if _restore_prior_if_available():
+                print("  [keep] preserving previous illustration after generation error", file=sys.stderr)
+                return True
             return _fallback_placeholder(out_path, aspect_ratio)
         if _illustration_ok(out_path):
+            _write_prompt_digest(out_path, safe_prompt)
+            return True
+        if _restore_prior_if_available():
+            print("  [keep] preserving previous illustration after invalid output", file=sys.stderr)
             return True
         return _fallback_placeholder(out_path, aspect_ratio)
     except subprocess.TimeoutExpired:
-        print("  [timeout] image gen exceeded 180s", file=sys.stderr)
+        print("  [timeout] image gen exceeded 300s", file=sys.stderr)
+        if _restore_prior_if_available():
+            print("  [keep] preserving previous illustration after timeout", file=sys.stderr)
+            return True
         return _fallback_placeholder(out_path, aspect_ratio)
     except Exception as e:
         print(f"  [exception] {e}", file=sys.stderr)
+        if _restore_prior_if_available():
+            print("  [keep] preserving previous illustration after exception", file=sys.stderr)
+            return True
         return _fallback_placeholder(out_path, aspect_ratio)
 
 
