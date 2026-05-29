@@ -79,34 +79,32 @@ def next_issue_number(editions_dir: Path = EDITIONS_DIR) -> int:
     return (max(nums) + 1) if nums else 1
 
 
-def edition_has_assets(issue_num: int, editions_dir: Path = EDITIONS_DIR) -> bool:
-    """True when all expected variant_c PNGs exist for this issue."""
-    return all(
-        (editions_dir / image_filename(issue_num, i)).is_file()
-        for i in range(1, STORY_CARD_COUNT + 2)
-    )
-
-
 def resolve_issue_num(
     issue_num: int | None,
+    data: dict[str, Any],
+    edition_json_path: Path | None = None,
     editions_dir: Path = EDITIONS_DIR,
 ) -> int:
-    """Pick issue number for render; reuse latest issue that already has assets."""
+    """Assign a stable, per-edition issue number.
+
+    Numbers are keyed to the edition itself, not to whatever artifacts happen to
+    sit in ``editions_dir``. The first render of an edition claims the next free
+    number and persists it back into the edition JSON; later renders of the same
+    edition reuse that number, so re-runs are idempotent and a new date never
+    overwrites a previously shipped edition.
+    """
     if issue_num is not None:
         return issue_num
-    with_assets = []
-    for p in editions_dir.iterdir():
-        if not p.is_dir() or not p.name.startswith("edition_"):
-            continue
-        suffix = p.name.removeprefix("edition_")
-        if not suffix.isdigit():
-            continue
-        n = int(suffix)
-        if edition_has_assets(n, editions_dir):
-            with_assets.append(n)
-    if with_assets:
-        return max(with_assets)
-    return next_issue_number(editions_dir)
+    persisted = data.get("issue_num")
+    if isinstance(persisted, int) and persisted > 0:
+        return persisted
+    assigned = next_issue_number(editions_dir)
+    if edition_json_path is not None:
+        data["issue_num"] = assigned
+        edition_json_path.write_text(
+            json.dumps(data, indent=2) + "\n", encoding="utf-8"
+        )
+    return assigned
 
 
 # ---------- date formatting ----------
@@ -737,7 +735,7 @@ def render_edition(
     prompt = data.get("try_this_prompt") or {}
     story_limit = min(len(stories), STORY_CARD_COUNT)
 
-    issue_num = resolve_issue_num(issue_num, editions_dir)
+    issue_num = resolve_issue_num(issue_num, data, edition_json_path, editions_dir)
     issue_padded = f"{issue_num:03d}"
     dates = format_dateline(data["date"])
     preheader = derive_preheader(stories)

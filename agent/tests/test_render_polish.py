@@ -143,6 +143,64 @@ class PublicHtmlPolishTests(unittest.TestCase):
                 render_edition(edition, issue_num=77, editions_dir=out)
 
 
+class IssueNumberingTests(unittest.TestCase):
+    """A new edition date must never overwrite a previously numbered edition."""
+
+    _STORY = {
+        "slot": "business",
+        "headline": "Anthropic ships enterprise memory controls",
+        "blurb": "Admins can now define workspace retention settings.",
+        "why_it_matters": "Teams get concrete governance over long-running AI work.",
+        "source_name": "Anthropic News",
+        "source_url": "https://example.com/a",
+        "tier": 1,
+    }
+
+    def _fixture(self, out_dir: Path, name: str, date: str) -> Path:
+        edition = out_dir / name
+        edition.write_text(
+            json.dumps(
+                {
+                    "date": date,
+                    "stories": [dict(self._STORY) for _ in range(4)],
+                    "try_this_prompt": {
+                        "title": "Try this prompt",
+                        "prompt": "Summarize today's strongest AI move.",
+                        "tool_hint": "Paste into your assistant.",
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+        return edition
+
+    def test_first_render_assigns_next_number_and_persists_it(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            edition = self._fixture(out, "a.json", "2026-06-01")
+            result = render_edition(edition, editions_dir=out)
+            self.assertEqual(result["issue_num"], 1)
+            self.assertEqual(json.loads(edition.read_text())["issue_num"], 1)
+
+    def test_rerender_same_edition_reuses_persisted_number(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            edition = self._fixture(out, "a.json", "2026-06-01")
+            first = render_edition(edition, editions_dir=out)
+            second = render_edition(edition, editions_dir=out)
+            self.assertEqual(first["issue_num"], second["issue_num"])
+
+    def test_new_date_does_not_overwrite_existing_edition(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            first = render_edition(self._fixture(out, "a.json", "2026-06-01"), editions_dir=out)
+            second = render_edition(self._fixture(out, "b.json", "2026-06-02"), editions_dir=out)
+            self.assertEqual(first["issue_num"], 1)
+            self.assertEqual(second["issue_num"], 2)
+            self.assertTrue((out / "edition_1_variant_c.html").is_file())
+            self.assertTrue((out / "edition_2_variant_c.html").is_file())
+
+
 class CompressEditionPngTests(unittest.TestCase):
 
     def test_compress_resizes_large_png(self):
