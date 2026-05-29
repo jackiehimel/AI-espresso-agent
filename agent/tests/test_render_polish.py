@@ -1,10 +1,13 @@
 """Phase 4 polish: public HTML footer, hidden tiers, PNG compression."""
 
+import hashlib
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
@@ -15,6 +18,9 @@ from render_html import (
     render_edition,
 )
 from render_images import EDITION_PNG_MAX_WIDTH, compress_edition_pngs
+from render_images import _can_reuse_existing_illustration, _prompt_digest_path
+from render_images import _curated_scene
+from render_images import _run_image_cli
 
 
 class PublicHtmlPolishTests(unittest.TestCase):
@@ -137,6 +143,64 @@ class PublicHtmlPolishTests(unittest.TestCase):
                 render_edition(edition, issue_num=77, editions_dir=out)
 
 
+class IssueNumberingTests(unittest.TestCase):
+    """A new edition date must never overwrite a previously numbered edition."""
+
+    _STORY = {
+        "slot": "business",
+        "headline": "Anthropic ships enterprise memory controls",
+        "blurb": "Admins can now define workspace retention settings.",
+        "why_it_matters": "Teams get concrete governance over long-running AI work.",
+        "source_name": "Anthropic News",
+        "source_url": "https://example.com/a",
+        "tier": 1,
+    }
+
+    def _fixture(self, out_dir: Path, name: str, date: str) -> Path:
+        edition = out_dir / name
+        edition.write_text(
+            json.dumps(
+                {
+                    "date": date,
+                    "stories": [dict(self._STORY) for _ in range(4)],
+                    "try_this_prompt": {
+                        "title": "Try this prompt",
+                        "prompt": "Summarize today's strongest AI move.",
+                        "tool_hint": "Paste into your assistant.",
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+        return edition
+
+    def test_first_render_assigns_next_number_and_persists_it(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            edition = self._fixture(out, "a.json", "2026-06-01")
+            result = render_edition(edition, editions_dir=out)
+            self.assertEqual(result["issue_num"], 1)
+            self.assertEqual(json.loads(edition.read_text())["issue_num"], 1)
+
+    def test_rerender_same_edition_reuses_persisted_number(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            edition = self._fixture(out, "a.json", "2026-06-01")
+            first = render_edition(edition, editions_dir=out)
+            second = render_edition(edition, editions_dir=out)
+            self.assertEqual(first["issue_num"], second["issue_num"])
+
+    def test_new_date_does_not_overwrite_existing_edition(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            first = render_edition(self._fixture(out, "a.json", "2026-06-01"), editions_dir=out)
+            second = render_edition(self._fixture(out, "b.json", "2026-06-02"), editions_dir=out)
+            self.assertEqual(first["issue_num"], 1)
+            self.assertEqual(second["issue_num"], 2)
+            self.assertTrue((out / "edition_1_variant_c.html").is_file())
+            self.assertTrue((out / "edition_2_variant_c.html").is_file())
+
+
 class CompressEditionPngTests(unittest.TestCase):
 
     def test_compress_resizes_large_png(self):
@@ -154,6 +218,38 @@ class CompressEditionPngTests(unittest.TestCase):
             with Image.open(path) as img:
                 self.assertLessEqual(max(img.size), EDITION_PNG_MAX_WIDTH)
             self.assertLess(path.stat().st_size, before)
+
+
+class IllustrationCacheTests(unittest.TestCase):
+
+    def test_existing_image_reused_only_when_prompt_digest_matches(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "variant_c_01.png"
+            path.write_bytes(b"x" * 12_000)  # pass _illustration_ok size gate
+            digest_path = _prompt_digest_path(path)
+            digest_path.write_text("abc123", encoding="utf-8")
+            self.assertFalse(_can_reuse_existing_illustration(path, "new prompt"))
+
+            digest_path.write_text(
+                hashlib.sha1("new prompt".encode("utf-8")).hexdigest(),
+                encoding="utf-8",
+            )
+            self.assertTrue(_can_reuse_existing_illustration(path, "new prompt"))
+
+    def test_run_image_cli_keeps_prior_image_on_timeout(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp) / "variant_c_01"
+            png = Path(str(base) + ".png")
+            original = b"z" * 12_000
+            png.write_bytes(original)
+
+            with patch("render_images._find_asi_cli", return_value="/tmp/fake-cli"), patch(
+                "subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="fake", timeout=300)
+            ):
+                ok = _run_image_cli("prompt changed", base, "1:1")
+
+            self.assertTrue(ok)
+            self.assertEqual(png.read_bytes(), original)
 
 
 if __name__ == "__main__":

@@ -1,63 +1,62 @@
 # ai espresso ☕ — Edition 6 · Variant C (Newspaper Comic · Snackable)
 
-*your morning cup of AI*
-**SUN · MAY 24 · 2026**
+**WED · MAY 20 · 2026**
 
 ---
 
-![Anthropic launches Claude for Small Business at $30/month per user](edition_6/assets/variant_c_01.png)
+![OpenAI will now let companies reserve compute so their AI apps don't slow down](edition_6/assets/variant_c_01.png)
 
 **MARKET**
 
-## Anthropic launches Claude for Small Business at $30/month per user
+## OpenAI will now let companies reserve compute so their AI apps don't slow down
 
-Small teams can now get Claude Team features — shared billing, centralized admin, and usage analytics — at half the price of the full Team plan. The tier is aimed at businesses with fewer than 10 employees who want collaboration tools without enterprise overhead.
+OpenAI's new Guaranteed Capacity lets businesses pre-book processing power for their AI applications. Sam Altman said the company will still keep enough capacity for ChatGPT and Codex, but enterprises can now pay to ensure their custom models run at consistent speeds even during peak times.
 
-*Makes AI collaboration accessible to the smallest companies at a price point they can actually afford.*
+*Companies building on OpenAI can finally avoid the performance lottery that comes with shared infrastructure*
 
-[Anthropic News](https://www.anthropic.com/news/claude-for-small-business) · May 24
+[CNBC — Technology](https://www.cnbc.com/2026/05/19/openai-announces-new-guaranteed-capacity-offering-for-customers-to-secure-compute.html) · May 20
 
 ---
 
-![Google's Genie can now turn Street View photos into playable 3D worlds](edition_6/assets/variant_c_02.png)
+![Google is shipping smart glasses again, this time built around Gemini](edition_6/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## Google's Genie can now turn Street View photos into playable 3D worlds
+## Google is shipping smart glasses again, this time built around Gemini
 
-Google AI Ultra subscribers can now feed Project Genie a Street View image and get back an interactive 3D environment they can walk through. The AI generates a simulated world from a single photo, letting you explore real places as if you're there—no game engine required.
+Google will release new AI-powered smart glasses this fall — its first since Google Glass flopped over a decade ago. The glasses let you talk to Gemini and get visual answers from what you're looking at, similar to Meta's Ray-Ban glasses but with Google's AI assistant baked in.
 
-*AI can now turn any photograph into a space you can move around in.*
+*Wearable AI is getting another shot now that the tech actually works conversationally.*
 
-[Google DeepMind Blog](https://deepmind.google/blog/simulate-real-world-places-with-project-genie-and-street-view/) · May 24
+[BBC Technology](https://www.bbc.com/news/articles/cvgz1ynq1nqo?at_medium=RSS&at_campaign=rss) · May 20
 
 ---
 
-![Cursor now gives AI agents their own dev environments in the cloud](edition_6/assets/variant_c_03.png)
+![Cursor now lets AI iterate on code in hidden workspaces](edition_6/assets/variant_c_03.png)
 
 **BUILD**
 
-## Cursor now gives AI agents their own dev environments in the cloud
+## Cursor now lets AI iterate on code in hidden workspaces
 
-Cursor just launched cloud dev environments for its AI agents — complete with cloned repos, installed dependencies, credentials, and build tools. The setup mirrors what you'd have on your laptop, so agents can handle full engineering tasks without bouncing back to your local machine.
+Cursor's new Shadow Workspace feature spins up invisible Electron windows and uses kernel-level folder proxies to let AI agents test and refine code changes in the background—without touching your actual project files or interrupting your work.
 
-*AI coding agents can now finish tasks end-to-end without needing your actual computer running.*
+*AI can now experiment freely while you keep coding, no git branches or manual cleanup required.*
 
-[Cursor Changelog (official)](https://cursor.com/changelog/05-13-26) · May 24
+[Cursor Blog (official)](https://cursor.com/blog/shadow-workspace) · May 20
 
 ---
 
-![This indie app tries to be the AI assistant that knows what you need before you ask](edition_6/assets/variant_c_04.png)
+![Google just launched Gemini 3.5 with live web access and tool use](edition_6/assets/variant_c_04.png)
 
 **INDUSTRY**
 
-## This indie app tries to be the AI assistant that knows what you need before you ask
+## Google just launched Gemini 3.5 with live web access and tool use
 
-Poppy is a new iOS app that aims to surface helpful context proactively instead of waiting for you to prompt it. Unlike Siri or ChatGPT, which respond to requests, Poppy monitors your digital life and tries to offer relevant information before you realize you need it.
+Gemini 3.5 can now search the web in real time, run code, and use external tools while answering questions—making it more like an agent than a chatbot. It's available today in Gemini Advanced and through the API, with a 1-million-token context window and improved performance on coding and math benchmarks.
 
-*Shows how indie developers are experimenting with ambient AI that anticipates rather than reacts.*
+*Google's flagship model can finally act on information, not just retrieve it.*
 
-[9to5Mac — AI](https://9to5mac.com/2026/05/23/indie-app-spotlight-poppy-proactive-ai-assistant-digital-management-organization/) · May 24
+[Google AI Blog](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/) · May 20
 
 ---
 
@@ -68,15 +67,15 @@ Poppy is a new iOS app that aims to surface helpful context proactively instead 
 
 **☕ Try this prompt**
 
-### The confidence tax
+### The jargon translator
 
-*When your draft feels long but you can't find what to cut.*
+*Before sending anything to customers, execs, or humans outside your team.*
 
 
 ```
-I'm about to paste something I wrote. Don't improve it. Tell me which sentences exist only because I was worried you'd think I'm stupid, which clauses are pre-emptive apologies, and which phrases are doing everyone's thinking for them. Then show me the same thing with all that stripped out.
+I'm about to paste something I wrote that probably sounds like I swallowed a whitepaper. Rewrite it so a smart 19-year-old would understand every sentence on first read. Keep my structure. Keep my point. Kill every word that exists only to sound professional.
 ```
 
 ---
 
-*brewed by ai espresso · [spot something off?](mailto:jhimel@solvd.com?subject=AI%20Espresso%20issue%20report) · [repo](https://github.com/jackiehimel/AI-espresso-agent)*
+*brewed by ai espresso · [spot something off?](mailto:jhimel@solvd.com?subject=AI%20Espresso%20issue%20report) · [repo](https://github.com/jackiehimel/ai-espresso-finalized)*

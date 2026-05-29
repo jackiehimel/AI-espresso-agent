@@ -84,7 +84,30 @@ class ToolDispatchTests(unittest.TestCase):
         self.assertTrue(el.tool_pick(
             state, {"slot": "beginner", "id": 1, "reason": "verified rss"},
             vendor_patterns=[],
+            rules={"allow_paywalled_stories": True},
         )["ok"])
+
+    def test_pick_rejects_paywalled_story_by_default(self):
+        state = _state(
+            shortlist=[
+                {
+                    "id": 1,
+                    "headline": "FT paywalled story",
+                    "url": "https://www.ft.com/content/abc123",
+                    "source": "FT",
+                    "tier": 1,
+                    "paywall": True,
+                    "body": _verified_body(),
+                }
+            ],
+        )
+        result = el.tool_pick(
+            state,
+            {"slot": "business", "id": 1, "reason": "strong"},
+            vendor_patterns=[],
+            rules={"allow_paywalled_stories": False},
+        )
+        self.assertIn("paywalled story blocked by policy", result.get("error", ""))
 
     def test_pick_and_unpick(self):
         state = _state(
@@ -135,6 +158,29 @@ class ToolDispatchTests(unittest.TestCase):
         )
         self.assertIn("duplicate story across slots", second.get("error", ""))
         self.assertEqual(second.get("conflict_slot"), "business")
+
+    def test_pick_rejects_stale_story(self):
+        state = _state(
+            today=dt.date(2026, 5, 27),
+            shortlist=[
+                {
+                    "id": 1,
+                    "headline": "Cursor in Jira",
+                    "url": "https://cursor.com/changelog/05-19-26",
+                    "source": "Cursor Changelog",
+                    "tier": 1,
+                    "body": _verified_body(),
+                    "published_date": "2026-05-19",
+                }
+            ],
+        )
+        result = el.tool_pick(
+            state,
+            {"slot": "engineer", "id": 1, "reason": "seems relevant"},
+            vendor_patterns=[],
+            rules={"max_story_age_days": 7},
+        )
+        self.assertIn("stale story", result.get("error", ""))
 
     def test_search_news_limit(self):
         state = _state()

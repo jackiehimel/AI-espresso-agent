@@ -15,3 +15,8 @@ CHANGELOG.md
 INTERNAL.md
 README.internal.md
 .cursor/
+
+# Local-only working dirs (not part of the published repo)
+ai-garage/
+docs/
+agent/.claude/
