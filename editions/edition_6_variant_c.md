@@ -1,62 +1,63 @@
 # ai espresso ☕ — Edition 6 · Variant C (Newspaper Comic · Snackable)
 
-**WED · MAY 20 · 2026**
+*your morning cup of AI*
+**THU · MAY 28 · 2026**
 
 ---
 
-![OpenAI will now let companies reserve compute so their AI apps don't slow down](edition_6/assets/variant_c_01.png)
+![Mystery model Hy3 is crushing GPT-4o on OpenRouter's leaderboard](edition_6/assets/variant_c_01.png)
 
 **MARKET**
 
-## OpenAI will now let companies reserve compute so their AI apps don't slow down
+## Mystery model Hy3 is crushing GPT-4o on OpenRouter's leaderboard
 
-OpenAI's new Guaranteed Capacity lets businesses pre-book processing power for their AI applications. Sam Altman said the company will still keep enough capacity for ChatGPT and Codex, but enterprises can now pay to ensure their custom models run at consistent speeds even during peak times.
+An unidentified LLM called Hy3 has shot to the top of OpenRouter's user preference rankings, beating established models by a significant margin. No one knows who built it, what architecture it uses, or how it's trained—but developers are routing real queries to it.
 
-*Companies building on OpenAI can finally avoid the performance lottery that comes with shared infrastructure*
+*A completely anonymous AI model is now handling production workloads based purely on performance.*
 
-[CNBC — Technology](https://www.cnbc.com/2026/05/19/openai-announces-new-guaranteed-capacity-offering-for-customers-to-secure-compute.html) · May 20
+[Hacker News (front page)](https://minimaxir.com/2026/05/openrouter-hy3/) · May 28
 
 ---
 
-![Google is shipping smart glasses again, this time built around Gemini](edition_6/assets/variant_c_02.png)
+![You can now run AI chatbots directly on your iPhone](edition_6/assets/variant_c_02.png)
 
 **EVERYDAY**
 
-## Google is shipping smart glasses again, this time built around Gemini
+## You can now run AI chatbots directly on your iPhone
 
-Google will release new AI-powered smart glasses this fall — its first since Google Glass flopped over a decade ago. The glasses let you talk to Gemini and get visual answers from what you're looking at, similar to Meta's Ray-Ban glasses but with Google's AI assistant baked in.
+Several apps let you download and run AI models locally on your iPhone — no internet required. Your conversations stay on your device, and the chatbot works offline. The tradeoff: local models are smaller and less capable than cloud versions like ChatGPT.
 
-*Wearable AI is getting another shot now that the tech actually works conversationally.*
+*Privacy-conscious users get AI without sending data to servers.*
 
-[BBC Technology](https://www.bbc.com/news/articles/cvgz1ynq1nqo?at_medium=RSS&at_campaign=rss) · May 20
+[Engadget — AI](https://www.engadget.com/2182517/how-to-run-local-ai-chatbot-iphone/) · May 28
 
 ---
 
-![Cursor now lets AI iterate on code in hidden workspaces](edition_6/assets/variant_c_03.png)
+![Anthropic just released Claude Opus 4.8, its most capable model yet](edition_6/assets/variant_c_03.png)
 
 **BUILD**
 
-## Cursor now lets AI iterate on code in hidden workspaces
+## Anthropic just released Claude Opus 4.8, its most capable model yet
 
-Cursor's new Shadow Workspace feature spins up invisible Electron windows and uses kernel-level folder proxies to let AI agents test and refine code changes in the background—without touching your actual project files or interrupting your work.
+Claude Opus 4.8 is now available across all tiers. Anthropic says it outperforms the previous flagship on complex reasoning, coding, and extended context tasks, while maintaining the same speed and pricing as Opus 4.
 
-*AI can now experiment freely while you keep coding, no git branches or manual cleanup required.*
+*The new flagship raises the bar for what production AI can handle without changing your budget.*
 
-[Cursor Blog (official)](https://cursor.com/blog/shadow-workspace) · May 20
+[Anthropic News](https://www.anthropic.com/news/claude-opus-4-8) · May 28
 
 ---
 
-![Google just launched Gemini 3.5 with live web access and tool use](edition_6/assets/variant_c_04.png)
+![BMW puts humanoid robots on its assembly line in Europe](edition_6/assets/variant_c_04.png)
 
 **INDUSTRY**
 
-## Google just launched Gemini 3.5 with live web access and tool use
+## BMW puts humanoid robots on its assembly line in Europe
 
-Gemini 3.5 can now search the web in real time, run code, and use external tools while answering questions—making it more like an agent than a chatbot. It's available today in Gemini Advanced and through the API, with a 1-million-token context window and improved performance on coding and math benchmarks.
+BMW is deploying humanoid robots at a European car plant, expanding a trial that started in the US. The robots are designed to work alongside humans on tasks like installing door seals and moving parts—jobs that are physically demanding or repetitive.
 
-*Google's flagship model can finally act on information, not just retrieve it.*
+*Humanoid form factor means existing factory layouts don't need rebuilding for automation.*
 
-[Google AI Blog](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/) · May 20
+[BBC Technology](https://www.bbc.com/news/articles/cgmpwzzvxr2o?at_medium=RSS&at_campaign=rss) · May 28
 
 ---
 
@@ -69,11 +70,11 @@ Gemini 3.5 can now search the web in real time, run code, and use external tools
 
 ### The jargon translator
 
-*Before sending anything to customers, execs, or humans outside your team.*
+*Before sending anything to a new stakeholder, contractor, or your future self in six months.*
 
 
 ```
-I'm about to paste something I wrote that probably sounds like I swallowed a whitepaper. Rewrite it so a smart 19-year-old would understand every sentence on first read. Keep my structure. Keep my point. Kill every word that exists only to sound professional.
+I'm about to paste something I wrote that sounds too clever or too internal. Rewrite it so a smart outsider—someone who doesn't work here—gets it in one read. Keep my point, lose the acronyms and insider shorthand. If a sentence needs a glossary, kill it.
 ```
 
 ---
