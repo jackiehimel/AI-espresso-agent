@@ -86,13 +86,14 @@ function buildSystemPrompt(config) {
   const stackContext = config.stack?.length
     ? `Tech stack: ${config.stack.join(", ")}.`
     : "";
+  const languageContext = `Repository context: Python-first backend codebase with CI workflows.`;
 
   const blockPatterns = config.blockOn?.length
     ? `Always flag as critical (verdict: block) if you detect: ${config.blockOn.join(", ")}.`
     : "";
 
   const thresholds = config.warnThresholds
-    ? `Warn if estimated latency impact > ${config.warnThresholds.latency_ms}ms, bundle size increase > ${config.warnThresholds.bundle_kb}KB, new deps > ${config.warnThresholds.new_deps}, test coverage < ${config.warnThresholds.min_coverage_pct}%.`
+    ? `Warn if estimated latency impact > ${config.warnThresholds.latency_ms}ms, bundle size increase > ${config.warnThresholds.bundle_kb}KB (only when frontend/client assets are changed), new deps > ${config.warnThresholds.new_deps}, test coverage < ${config.warnThresholds.min_coverage_pct}%.`
     : "";
 
   const ignorePaths = config.ignorePaths?.length
@@ -102,6 +103,7 @@ function buildSystemPrompt(config) {
   return `You are an expert code impact analysis bot embedded in a CI pipeline. Analyze git diffs and produce a structured, actionable impact report.
 
 ${stackContext}
+${languageContext}
 ${blockPatterns}
 ${thresholds}
 ${ignorePaths}
@@ -119,7 +121,7 @@ Return this exact schema:
   "metrics": [
     { "label": "Latency impact", "value": "e.g. +110ms or Neutral", "trend": "up" | "down" | "neutral" },
     { "label": "DB query delta", "value": "e.g. N+1 or +2 queries", "trend": "up" | "down" | "neutral" },
-    { "label": "Bundle size delta", "value": "e.g. +42 KB or Neutral", "trend": "up" | "down" | "neutral" },
+    { "label": "Bundle/deploy artifact delta", "value": "e.g. +42 KB, Neutral, or N/A", "trend": "up" | "down" | "neutral" },
     { "label": "Test coverage", "value": "e.g. 84% or Unknown", "trend": "up" | "down" | "neutral" }
   ],
   "issues": [
@@ -145,6 +147,8 @@ Rules:
 - verdict must be "block" if any issue has severity "critical"
 - verdict must be "approve_with_suggestions" if there are warnings but no criticals
 - verdict must be "approve" only if there are zero critical or warning issues
+- Respect ignorePaths strictly: do not analyze or cite ignored files
+- For Python/backend-only diffs, avoid frontend-only findings (like bundle bloat) unless relevant files changed
 - Be specific and reference exact file names and symbols from the diff
 - fixes.codeSnippet should be concrete and corrected, not pseudocode
 - Keep descriptions concise and practical`;
