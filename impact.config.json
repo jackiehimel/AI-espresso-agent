@@ -1,0 +1,39 @@
+{
+  "stack": [
+    "Python",
+    "GitHub Actions",
+    "Anthropic Claude tool-use agent",
+    "HTML email rendering"
+  ],
+
+  "blockOn": [
+    "n_plus_one_queries",
+    "unhandled_auth_exceptions",
+    "exposed_secrets",
+    "missing_input_validation",
+    "unbounded_loops_over_db",
+    "sql_injection_risk",
+    "hardcoded_credentials"
+  ],
+
+  "warnThresholds": {
+    "latency_ms": 75,
+    "bundle_kb": 30,
+    "new_deps": 3,
+    "min_coverage_pct": 80
+  },
+
+  "ignorePaths": [
+    "editions/**",
+    "agent/data/editions/**",
+    "agent/data/archive.jsonl",
+    "agent/data/sent_editions.json",
+    "docs/**",
+    "*.md",
+    ".github/**"
+  ],
+
+  "blockMergeOnCritical": true,
+
+  "commentUpdateStrategy": "update_existing"
+}
