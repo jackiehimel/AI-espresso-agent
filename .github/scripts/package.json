@@ -1,0 +1,12 @@
+{
+  "name": "impact-agent",
+  "version": "1.0.0",
+  "description": "PR code impact analysis bot",
+  "main": "impact-agent.js",
+  "private": true,
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "@octokit/rest": "^21.0.0"
+  }
+}

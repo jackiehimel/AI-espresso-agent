@@ -1,0 +1,66 @@
+name: PR Impact Agent
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths-ignore:
+      - "editions/**"
+      - "agent/data/editions/**"
+      - "agent/data/archive.jsonl"
+      - "agent/data/sent_editions.json"
+      - "**/*.md"
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number to analyze (for smoke tests)"
+        required: true
+      base_branch:
+        description: "Base branch for the PR diff (defaults to main)"
+        required: false
+        default: "main"
+
+permissions:
+  pull-requests: write
+  issues: write
+  contents: read
+
+jobs:
+  impact-analysis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: .github/scripts/package.json
+
+      - name: Install dependencies
+        working-directory: .github/scripts
+        run: npm ci
+
+      - name: Resolve run context
+        id: context
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "pr_number=${{ inputs.pr_number }}" >> "$GITHUB_OUTPUT"
+            echo "base_branch=${{ inputs.base_branch }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "pr_number=${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
+            echo "base_branch=${{ github.event.pull_request.base.ref }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run impact agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.context.outputs.pr_number }}
+          REPO: ${{ github.repository }}
+          BASE_BRANCH: ${{ steps.context.outputs.base_branch }}
+        run: node .github/scripts/impact-agent.js
