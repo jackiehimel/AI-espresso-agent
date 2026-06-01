@@ -198,7 +198,7 @@ class ToolDispatchTests(unittest.TestCase):
             state,
             {"slot": "engineer", "id": 1, "reason": "seems relevant"},
             vendor_patterns=[],
-            rules={"max_story_age_days": 7},
+            rules={"max_story_age_days": 4},
         )
         self.assertIn("stale story", result.get("error", ""))
 

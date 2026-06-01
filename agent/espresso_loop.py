@@ -842,7 +842,7 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns, rules: dict | None
             "error": "paywalled story blocked by policy; choose a non-paywalled source",
             "candidate_id": cid,
         }
-    max_age_days = int(cfg.get("max_story_age_days", 7))
+    max_age_days = int(cfg.get("max_story_age_days", 4))
     published = _infer_candidate_date(found)
     if published is not None:
         age = (state.today - published).days
@@ -861,9 +861,15 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns, rules: dict | None
         ov = _detect_vendor(old["headline"], old["url"], vendor_patterns)
         if ov and state.vendor_counts.get(ov, 0) > 0:
             state.vendor_counts[ov] -= 1
+    vendor_cap = int(cfg.get("vendor_cap", 2))
     nv = _detect_vendor(found["headline"], found["url"], vendor_patterns)
-    if nv and state.vendor_counts.get(nv, 0) >= 2:
-        return {"error": f"vendor cap exceeded — {nv} already has 2 stories. Pick a different vendor."}
+    if nv and state.vendor_counts.get(nv, 0) >= vendor_cap:
+        return {
+            "error": (
+                f"vendor cap exceeded — {nv} already has {vendor_cap} stories. "
+                "Pick a different vendor."
+            )
+        }
     found = dict(found)
     found["pick_reason"] = reason
     state.picks[slot] = found
