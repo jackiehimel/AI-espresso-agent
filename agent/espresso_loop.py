@@ -226,10 +226,10 @@ DEFAULT STRATEGY:
   5. If revise → unpick flagged slots, search_news or read_candidate, re-pick.
   6. When self_critique approves → ship_edition.
 
-WEAK POOL DAYS — ship 2 stories ONLY if you:
+WEAK POOL DAYS — ship 3 stories ONLY if you:
   • set pool_quality in working_memory to mention "weak"
   • call note_weak_pool with reason and which slot you skip
-  • pick exactly 2 stories (not zero after note_weak_pool)
+  • pick exactly 3 stories (not zero after note_weak_pool)
   • self_critique → ship_edition when approved
 If you unpick everything to reset, re-pick immediately in the same pass.
 
@@ -805,6 +805,14 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns, rules: dict | None
     found = next((c for c in state.shortlist + state.extra_candidates if c["id"] == int(cid)), None)
     if not found:
         return {"error": f"no candidate with id={cid}"}
+    source_name = (found.get("source") or "").strip().lower()
+    if slot == "business" and "hacker news" in source_name:
+        return {
+            "error": (
+                "business slot requires a primary source; Hacker News-linked stories are not allowed here"
+            ),
+            "candidate_id": int(cid),
+        }
     for existing_slot, existing_pick in state.picks.items():
         if existing_slot == slot:
             continue
@@ -834,7 +842,7 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns, rules: dict | None
             "error": "paywalled story blocked by policy; choose a non-paywalled source",
             "candidate_id": cid,
         }
-    max_age_days = int(cfg.get("max_story_age_days", 7))
+    max_age_days = int(cfg.get("max_story_age_days", 4))
     published = _infer_candidate_date(found)
     if published is not None:
         age = (state.today - published).days
@@ -853,9 +861,15 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns, rules: dict | None
         ov = _detect_vendor(old["headline"], old["url"], vendor_patterns)
         if ov and state.vendor_counts.get(ov, 0) > 0:
             state.vendor_counts[ov] -= 1
+    vendor_cap = int(cfg.get("vendor_cap", 2))
     nv = _detect_vendor(found["headline"], found["url"], vendor_patterns)
-    if nv and state.vendor_counts.get(nv, 0) >= 2:
-        return {"error": f"vendor cap exceeded — {nv} already has 2 stories. Pick a different vendor."}
+    if nv and state.vendor_counts.get(nv, 0) >= vendor_cap:
+        return {
+            "error": (
+                f"vendor cap exceeded — {nv} already has {vendor_cap} stories. "
+                "Pick a different vendor."
+            )
+        }
     found = dict(found)
     found["pick_reason"] = reason
     state.picks[slot] = found
@@ -863,10 +877,12 @@ def tool_pick(state: AgentState, args: dict, vendor_patterns, rules: dict | None
     state.archive_checked_after_pick = False
     contract = state.working_memory.setdefault("finalization_contract", {})
     if contract.get("active") and contract.get("phase") == "await_targeted_swap":
-        used = int(contract.get("targeted_swaps_used", 0))
-        contract["targeted_swaps_used"] = used + 1
-        contract["phase"] = "await_recritique"
-        state.working_memory["finalization_contract"] = contract
+        min_picks = _min_picks_required(state)
+        if len(state.picks) >= min_picks:
+            used = int(contract.get("targeted_swaps_used", 0))
+            contract["targeted_swaps_used"] = used + 1
+            contract["phase"] = "await_recritique"
+            state.working_memory["finalization_contract"] = contract
     if nv:
         state.vendor_counts[nv] = state.vendor_counts.get(nv, 0) + 1
     return {
@@ -1031,7 +1047,10 @@ def _weak_pool_waiver(state: AgentState) -> bool:
 
 
 def _min_picks_required(state: AgentState) -> int:
-    return len(state.needed_slots)
+    required = len(state.needed_slots)
+    if _weak_pool_waiver(state) and required >= 4:
+        return required - 1
+    return required
 
 
 def _tier1_counts(state: AgentState, need_t1: int) -> tuple[int, bool]:
@@ -1063,11 +1082,12 @@ def validate_ship_gates(state: AgentState, rules: dict) -> dict:
     missing = [s for s in state.needed_slots if s not in state.picks]
 
     errors = []
+    allowed_missing = max(len(state.needed_slots) - min_picks, 0)
     if not picks_ok:
         errors.append(
             f"need {min_picks} pick(s), have {pick_count}; missing slots: {missing}"
         )
-    elif missing:
+    elif len(missing) > allowed_missing:
         errors.append(f"unfilled required slots: {missing}")
     if not tier1_ok:
         errors.append(f"need {need_t1} tier-1 pick(s), have {have_t1}")
@@ -1421,6 +1441,7 @@ def dispatch_tool(
     if contract.get("active"):
         phase = contract.get("phase", "off")
         min_picks = _min_picks_required(state)
+        slate_complete = len(state.picks) >= min_picks
         if len(state.picks) >= min_picks and name in {"read_candidate", "search_news", "check_archive"}:
             return {
                 "error": (
@@ -1433,11 +1454,19 @@ def dispatch_tool(
         if phase == "await_ship" and name != "ship_edition":
             return {"error": "finalization contract: critic approved; call ship_edition"}
         if phase == "await_targeted_swap":
-            if name not in {"pick", "unpick"}:
+            if not slate_complete:
+                if name == "ship_edition":
+                    return {
+                        "error": (
+                            "finalization contract: complete the required slate before "
+                            "self_critique/ship"
+                        ),
+                    }
+            elif name not in {"pick", "unpick"}:
                 return {"error": "finalization contract: apply one targeted swap before re-critique"}
-            if name == "pick" and int(contract.get("targeted_swaps_used", 0)) >= 1:
+            if slate_complete and name == "pick" and int(contract.get("targeted_swaps_used", 0)) >= 1:
                 return {"error": "finalization contract: targeted swap already used; call self_critique"}
-        if phase == "await_recritique" and name != "self_critique":
+        if phase == "await_recritique" and slate_complete and name != "self_critique":
             return {"error": "finalization contract: call self_critique after targeted swap"}
 
     if (

@@ -17,6 +17,7 @@ Config — set these as environment variables:
     AI_ESPRESSO_FROM_NAME   optional display name, e.g. "AI Espresso"
     GMAIL_APP_PASSWORD      16-char app password from Google account
     AI_ESPRESSO_DRY_RUN     "1" to print instead of send (for cron testing)
+    AI_ESPRESSO_EXPECTED_DATE  optional YYYY-MM-DD guard against stale sends
 
 Failures here never block the cron — render_edition still produces the
 HTML/MD on disk; email is a delivery sidecar.
@@ -25,9 +26,11 @@ HTML/MD on disk; email is a delivery sidecar.
 from __future__ import annotations
 
 import os
+import json
 import re
 import smtplib
 import sys
+import datetime as dt
 from email.message import EmailMessage
 from email.utils import formataddr, make_msgid
 from html import escape
@@ -217,6 +220,127 @@ def _plain_text_from_md(md: str) -> str:
     return out.strip()
 
 
+def _issue_num_from_html_path(html_path: Path) -> int | None:
+    m = re.search(r"edition_(\d+)_variant_[a-z]\.html$", html_path.name)
+    if not m:
+        return None
+    try:
+        return int(m.group(1))
+    except ValueError:
+        return None
+
+
+def _edition_date_for_issue(repo_root: Path, issue_num: int) -> str | None:
+    editions_dir = repo_root / "agent" / "data" / "editions"
+    if not editions_dir.is_dir():
+        return None
+    matches: list[str] = []
+    for path in editions_dir.glob("*.json"):
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if payload.get("issue_num") == issue_num:
+            date = payload.get("date")
+            if isinstance(date, str):
+                matches.append(date)
+    if len(matches) != 1:
+        return None
+    return matches[0]
+
+
+def _sent_log_path(repo_root: Path) -> Path:
+    return repo_root / "agent" / "data" / "sent_editions.json"
+
+
+def _load_sent_dates(path: Path) -> set[str]:
+    if not path.exists():
+        return set()
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return set()
+    rows = payload.get("sent_dates")
+    if not isinstance(rows, list):
+        return set()
+    return {d for d in rows if isinstance(d, str)}
+
+
+def _record_sent_date(path: Path, date_iso: str) -> None:
+    sent = _load_sent_dates(path)
+    sent.add(date_iso)
+    payload = {
+        "schema_version": 1,
+        "sent_dates": sorted(sent),
+        "updated_at": dt.datetime.now(dt.UTC).isoformat(),
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
+def _validate_expected_date_guard(html_path: Path, expected_date: str | None) -> str | None:
+    """Reject sends when the rendered artifact does not map to the expected edition date."""
+    if not expected_date:
+        return None
+    issue_num = _issue_num_from_html_path(html_path)
+    if issue_num is None:
+        return (
+            "stale-send guard: expected date is set, but HTML filename is not "
+            "edition_<N>_variant_<x>.html"
+        )
+
+    editions_dir = html_path.parent
+    if editions_dir.name != "editions":
+        return "stale-send guard: expected HTML under /editions"
+    repo_root = editions_dir.parent
+    edition_json = repo_root / "agent" / "data" / "editions" / f"{expected_date}.json"
+    if not edition_json.exists():
+        return (
+            f"stale-send guard: expected edition JSON missing for {expected_date} "
+            f"({edition_json})"
+        )
+    try:
+        payload = json.loads(edition_json.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return f"stale-send guard: failed to parse expected edition JSON: {exc}"
+    expected_issue = payload.get("issue_num")
+    if not isinstance(expected_issue, int):
+        return (
+            f"stale-send guard: expected edition JSON for {expected_date} has no issue_num"
+        )
+    if expected_issue != issue_num:
+        return (
+            f"stale-send guard: expected {expected_date} issue {expected_issue}, "
+            f"but HTML is issue {issue_num}"
+        )
+    return None
+
+
+def _resolve_target_date(html_path: Path, expected_date: str | None) -> tuple[str | None, str | None]:
+    """Return (date_iso, error)."""
+    if expected_date:
+        err = _validate_expected_date_guard(html_path, expected_date)
+        if err:
+            return None, err
+        return expected_date, None
+
+    issue_num = _issue_num_from_html_path(html_path)
+    if issue_num is None:
+        return None, (
+            "no-resend guard: expected edition filename edition_<N>_variant_<x>.html"
+        )
+    if html_path.parent.name != "editions":
+        return None, "no-resend guard: expected HTML under /editions"
+    repo_root = html_path.parent.parent
+    date_iso = _edition_date_for_issue(repo_root, issue_num)
+    if not date_iso:
+        return None, (
+            f"no-resend guard: could not resolve edition date for issue {issue_num}; "
+            "set AI_ESPRESSO_EXPECTED_DATE explicitly"
+        )
+    return date_iso, None
+
+
 def send_edition_email(
     html_path: Path | str,
     md_path: Path | str | None = None,
@@ -241,6 +365,7 @@ def send_edition_email(
     password = os.environ.get("GMAIL_APP_PASSWORD")
     sender_name = os.environ.get("AI_ESPRESSO_FROM_NAME", "AI Espresso")
     dry_run = os.environ.get("AI_ESPRESSO_DRY_RUN") == "1"
+    expected_date = (os.environ.get("AI_ESPRESSO_EXPECTED_DATE") or "").strip()
 
     if not sender or not recipients:
         return {
@@ -251,6 +376,16 @@ def send_edition_email(
         return {
             "sent": False,
             "reason": "GMAIL_APP_PASSWORD must be set (or AI_ESPRESSO_DRY_RUN=1)",
+        }
+    target_date, date_error = _resolve_target_date(html_path, expected_date or None)
+    if date_error:
+        return {"sent": False, "reason": date_error}
+    repo_root = html_path.parent.parent
+    sent_path = _sent_log_path(repo_root)
+    if target_date in _load_sent_dates(sent_path):
+        return {
+            "sent": False,
+            "reason": f"no-resend policy: edition date {target_date} already sent",
         }
 
     html = html_path.read_text(encoding="utf-8")
@@ -300,6 +435,7 @@ def send_edition_email(
     except (smtplib.SMTPException, OSError) as e:
         return {"sent": False, "reason": f"smtp: {e}"}
 
+    _record_sent_date(sent_path, target_date)
     return {"sent": True, "to": recipients, "subject": subject, "inline_images": len(inline)}
 
 
