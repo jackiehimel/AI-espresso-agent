@@ -109,13 +109,13 @@ Runs an Anthropic native `tool_use` loop. The model chooses tools and order; Pyt
 | `search_news(query)` | Web search beyond the daily fetch (max 2 per edition). See **search_news backends** above — prefer `PERPLEXITY_API_KEY` in production |
 | `check_archive(headline)` | Fuzzy dedupe against recent editions |
 | `update_memory(key, value)` | Write working memory (pool quality, gaps, notes) |
-| `note_weak_pool(reason, adjustments)` | Document a thin news day (required for 2-story editions) |
+| `note_weak_pool(reason, adjustments)` | Document a thin news day (required for 3-story weak-pool editions) |
 | `self_critique()` | Rubric review — returns `approve` or `revise` |
 | `ship_edition()` | Terminal tool when gates pass |
 
 ### Ship gates
 
-`ship_edition` succeeds only when: required picks are filled (3 normally, 2 on documented weak-pool days), tier-1 minimum is met, vendor cap respected, constitution checks pass (`constitution.py`), and the last `self_critique` was `approve`. If the Critic approves but `ship_edition` is not called (budget exhaust), the run **salvages** the approved slate (`mode: agent`, warning in notes). With zero recoverable picks, the run writes `data/editions/YYYY-MM-DD.failed.json` and fails CI unless `ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1` (local dev only).
+`ship_edition` succeeds only when: required picks are filled (4 normally, 3 on documented weak-pool days), tier-1 minimum is met, vendor cap respected, constitution checks pass (`constitution.py`), and the last `self_critique` was `approve`. If the Critic approves but `ship_edition` is not called (budget exhaust), the run **salvages** the approved slate (`mode: agent`, warning in notes). With zero recoverable picks, the run writes `data/editions/YYYY-MM-DD.failed.json` and fails CI unless `ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1` (local dev only).
 
 ### Controller (`espresso_loop.py` — `agentic_select()`)
 
