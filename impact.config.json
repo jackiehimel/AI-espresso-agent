@@ -34,6 +34,6 @@
   ],
 
   "blockMergeOnCritical": true,
-
-  "commentUpdateStrategy": "update_existing"
+  "commentUpdateStrategy": "update_existing",
+  "anthropicModel": "claude-sonnet-4-20250514"
 }

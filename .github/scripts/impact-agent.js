@@ -158,9 +158,14 @@ Rules:
 
 async function analyseWithClaude(diff, config) {
   console.log('🤖 Sending diff to Claude for analysis...');
+  const model =
+    process.env.ANTHROPIC_MODEL ||
+    config.anthropicModel ||
+    'claude-sonnet-4-20250514';
+  console.log(`🧠 Using model: ${model}`);
 
   const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model,
     max_tokens: 2000,
     system: buildSystemPrompt(config),
     messages: [
