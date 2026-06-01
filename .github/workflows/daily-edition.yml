@@ -13,10 +13,6 @@ on:
         description: "Set to 'true' to render but not send the email."
         required: false
         default: "false"
-      force_resend:
-        description: "Set to 'true' to bypass duplicate-send guard for this date."
-        required: false
-        default: "false"
 
 permissions:
   contents: write
@@ -63,7 +59,7 @@ jobs:
       # Decide up-front whether the edition is already committed for this date.
       # When true, generation is skipped (no API spend, no risk of replacing the
       # already-shipped slate); render runs idempotently to produce step outputs;
-      # the email step is gated below and only fires with force_resend=true.
+      # the email step only fires when already_sent=false (no resend override).
       - name: Check duplicate-send guard
         id: dedupe
         run: |
@@ -134,12 +130,13 @@ jobs:
             --variant "c"
 
       - name: Send edition email
-        if: ${{ inputs.skip_email != 'true' && (steps.dedupe.outputs.already_sent != 'true' || inputs.force_resend == 'true') }}
+        if: ${{ inputs.skip_email != 'true' && steps.dedupe.outputs.already_sent != 'true' }}
         working-directory: agent
         env:
           AI_ESPRESSO_FROM: ${{ secrets.AI_ESPRESSO_FROM }}
           AI_ESPRESSO_TO: ${{ secrets.AI_ESPRESSO_TO }}
           AI_ESPRESSO_FROM_NAME: "AI Espresso"
+          AI_ESPRESSO_EXPECTED_DATE: ${{ steps.date.outputs.value }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: |
           HTML="${{ steps.render.outputs.html_path }}"
@@ -151,7 +148,7 @@ jobs:
           }
 
       - name: Duplicate send guard note
-        if: ${{ inputs.skip_email != 'true' && steps.dedupe.outputs.already_sent == 'true' && inputs.force_resend != 'true' }}
+        if: ${{ inputs.skip_email != 'true' && steps.dedupe.outputs.already_sent == 'true' }}
         run: |
           echo "Skipping email: edition for ${{ steps.date.outputs.value }} was already recorded in git history."
 
@@ -159,7 +156,7 @@ jobs:
         run: |
           git config user.name "Jackie Himel"
           git config user.email "142959852+jackiehimel@users.noreply.github.com"
-          git add editions/ agent/data/editions/ agent/data/archive.jsonl
+          git add editions/ agent/data/editions/ agent/data/archive.jsonl agent/data/sent_editions.json
           if git diff --cached --quiet; then
             echo "No new files to commit."
           else

@@ -1233,7 +1233,7 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
     print(f"[espresso] {date} — {len(sources)} enabled sources", file=sys.stderr)
 
     candidates = fetch_all_candidates(sources, use_cache=use_cache)
-    max_story_age_days = int(rules.get("max_story_age_days", 7))
+    max_story_age_days = int(rules.get("max_story_age_days", 4))
     candidates = _filter_stale_candidates(candidates, date, max_story_age_days)
     archive_fps = load_archive(days=rules.get("dedupe_window_days", 30))
     print(f"[espresso] {len(archive_fps)} archived fingerprints (dedupe window)", file=sys.stderr)

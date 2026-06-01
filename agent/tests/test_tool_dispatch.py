@@ -109,6 +109,26 @@ class ToolDispatchTests(unittest.TestCase):
         )
         self.assertIn("paywalled story blocked by policy", result.get("error", ""))
 
+    def test_business_slot_rejects_hn_linked_story(self):
+        state = _state(
+            shortlist=[
+                {
+                    "id": 1,
+                    "headline": "The mysterious Hy3 LLM is topping OpenRouter rankings",
+                    "url": "https://minimaxir.com/2026/05/openrouter-hy3/",
+                    "source": "Hacker News (front page)",
+                    "tier": 1,
+                    "body": _verified_body(),
+                }
+            ],
+        )
+        result = el.tool_pick(
+            state,
+            {"slot": "business", "id": 1, "reason": "seems market-relevant"},
+            vendor_patterns=[],
+        )
+        self.assertIn("primary source", result.get("error", ""))
+
     def test_pick_and_unpick(self):
         state = _state(
             shortlist=[
@@ -178,7 +198,7 @@ class ToolDispatchTests(unittest.TestCase):
             state,
             {"slot": "engineer", "id": 1, "reason": "seems relevant"},
             vendor_patterns=[],
-            rules={"max_story_age_days": 7},
+            rules={"max_story_age_days": 4},
         )
         self.assertIn("stale story", result.get("error", ""))
 
@@ -544,6 +564,41 @@ class ShipGateTests(unittest.TestCase):
         gate = el.validate_ship_gates(state, {"tier1_minimum": 1})
         self.assertFalse(gate["ok"])
 
+    def test_weak_pool_three_picks_allowed(self):
+        state = _state(
+            picks={
+                "business": {
+                    "id": 1,
+                    "headline": "ChatGPT can now look at your bank account",
+                    "url": "https://example.com",
+                    "source": "x",
+                    "tier": 1,
+                    "body": _verified_body(),
+                },
+                "beginner": {
+                    "id": 2,
+                    "headline": "OpenAI brings its Codex coding app to mobile",
+                    "url": "https://example.com/2",
+                    "source": "y",
+                    "tier": 2,
+                    "body": _verified_body(),
+                },
+                "engineer": {
+                    "id": 3,
+                    "headline": "Claude now runs memory-aware coding agents in background tasks",
+                    "url": "https://example.com/3",
+                    "source": "z",
+                    "tier": 2,
+                    "body": _verified_body(),
+                },
+            },
+            last_critic_verdict={"verdict": "approve", "reason": "ok"},
+        )
+        state.working_memory["pool_quality"] = "weak pool today"
+        state.working_memory["editor_notes"] = "documented weak pool with constrained source quality"
+        gate = el.validate_ship_gates(state, {"tier1_minimum": 1})
+        self.assertTrue(gate["ok"], gate["errors"])
+
     def test_two_picks_without_weak_note_blocked(self):
         state = _state(
             picks={
@@ -901,6 +956,33 @@ class LoopGuardrailTests(unittest.TestCase):
             {"tier1_minimum": 1},
         )
         self.assertIn("finalization contract", blocked.get("error", ""))
+
+    def test_finalization_recritique_allows_fill_when_slate_incomplete(self):
+        state = self._state_with_picks()
+        state.picks.pop("cross")
+        state.shortlist = [
+            {
+                "id": 99,
+                "headline": "AI discovers new battery chemistry pathway for grid storage",
+                "url": "https://example.com/99",
+                "source": "x",
+                "tier": 1,
+                "body": _verified_body(),
+            }
+        ]
+        state.working_memory["finalization_contract"] = {
+            "active": True,
+            "phase": "await_recritique",
+            "targeted_swaps_used": 1,
+        }
+        picked = el.dispatch_tool(
+            "pick",
+            {"slot": "cross", "id": 99, "reason": "fill missing slot"},
+            state,
+            [],
+            {"tier1_minimum": 1},
+        )
+        self.assertTrue(picked.get("ok"), picked)
 
     def test_stall_summary_records_revise_loop(self):
         state = self._state_with_picks()

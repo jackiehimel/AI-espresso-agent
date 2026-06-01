@@ -139,8 +139,59 @@ class PublicHtmlPolishTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            with self.assertRaisesRegex(ValueError, "Edition has 2 stories; need 4\\."):
+            with self.assertRaisesRegex(ValueError, "Edition has 2 stories; need at least 3\\."):
                 render_edition(edition, issue_num=77, editions_dir=out)
+
+    def test_render_accepts_three_story_edition(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            edition = out / "three-story.json"
+            edition.write_text(
+                json.dumps(
+                    {
+                        "date": "2026-05-31",
+                        "stories": [
+                            {
+                                "slot": "business",
+                                "headline": "Anthropic expands enterprise guardrails",
+                                "blurb": "New policy controls are rolling out broadly.",
+                                "why_it_matters": "Teams can ship with clearer operational limits.",
+                                "source_name": "Anthropic News",
+                                "source_url": "https://example.com/a",
+                                "tier": 1,
+                            },
+                            {
+                                "slot": "engineer",
+                                "headline": "Cursor adds auto-review run mode",
+                                "blurb": "The agent now self-checks before handoff.",
+                                "why_it_matters": "Engineers spend less time on repetitive review loops.",
+                                "source_name": "Cursor Changelog",
+                                "source_url": "https://example.com/b",
+                                "tier": 1,
+                            },
+                            {
+                                "slot": "cross",
+                                "headline": "Hospital team improves diagnosis workflows with AI triage",
+                                "blurb": "A clinical team reports meaningful throughput gains.",
+                                "why_it_matters": "AI impact is measurable outside pure software teams.",
+                                "source_name": "OpenAI News",
+                                "source_url": "https://example.com/c",
+                                "tier": 1,
+                            },
+                        ],
+                        "try_this_prompt": {
+                            "title": "Try this prompt",
+                            "prompt": "Summarize today's strongest AI shift.",
+                            "tool_hint": "Paste into your assistant.",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            result = render_edition(edition, issue_num=88, editions_dir=out)
+            self.assertEqual(result["issue_num"], 88)
+            html = Path(result["html_path"]).read_text(encoding="utf-8")
+            self.assertIn("4&nbsp;SHOTS", html)
 
 
 class IssueNumberingTests(unittest.TestCase):

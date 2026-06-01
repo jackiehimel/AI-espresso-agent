@@ -246,7 +246,7 @@ class FreshnessTests(unittest.TestCase):
             tier=1,
             published_date="2026-05-26",
         )
-        kept = ea._filter_stale_candidates([stale, fresh], today, max_age_days=7)
+        kept = ea._filter_stale_candidates([stale, fresh], today, max_age_days=4)
         self.assertEqual(len(kept), 1)
         self.assertEqual(kept[0].headline, "Fresh launch")
 
