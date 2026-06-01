@@ -56,7 +56,7 @@ class DailyEditionWorkflowTests(unittest.TestCase):
 
     def test_email_has_duplicate_send_guard(self):
         text = WORKFLOW.read_text(encoding="utf-8")
-        self.assertIn("force_resend", text)
+        self.assertNotIn("force_resend", text)
         self.assertIn("name: Send edition email", text)
         self.assertIn("id: dedupe", text)
         self.assertIn("already_sent", text)
@@ -71,8 +71,8 @@ class DailyEditionWorkflowTests(unittest.TestCase):
 
     def test_dedupe_runs_before_generate(self):
         """Regression: dedupe must come before generate so a committed edition
-        cannot be silently overwritten by a re-run, and force_resend can recover
-        without spending API budget on a fresh agent loop."""
+        cannot be silently overwritten by a re-run and duplicate sends are
+        always prevented before any expensive generation step."""
         text = WORKFLOW.read_text(encoding="utf-8")
         dedupe_idx = text.find("- name: Check duplicate-send guard")
         generate_idx = text.find("- name: Generate edition JSON (agent mode)")
