@@ -386,12 +386,13 @@ def send_edition_email(
             "sent": False,
             "reason": "GMAIL_APP_PASSWORD must be set (or AI_ESPRESSO_DRY_RUN=1)",
         }
+    force_resend = os.environ.get("AI_ESPRESSO_FORCE_RESEND") == "1"
     target_date, date_error = _resolve_target_date(html_path, expected_date or None)
     if date_error:
         return {"sent": False, "reason": date_error}
     repo_root = html_path.parent.parent
     sent_path = _sent_log_path(repo_root)
-    if target_date in _load_sent_dates(sent_path):
+    if not force_resend and target_date in _load_sent_dates(sent_path):
         return {
             "sent": False,
             "reason": f"no-resend policy: edition date {target_date} already sent",

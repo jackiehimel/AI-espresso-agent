@@ -56,7 +56,6 @@ class DailyEditionWorkflowTests(unittest.TestCase):
 
     def test_email_has_duplicate_send_guard(self):
         text = WORKFLOW.read_text(encoding="utf-8")
-        self.assertNotIn("force_resend", text)
         self.assertIn("name: Send edition email", text)
         self.assertIn("id: dedupe", text)
         self.assertIn("already_sent", text)
@@ -170,6 +169,7 @@ class DedupeGuardBehaviorTests(unittest.TestCase):
         github_output = self.tmp / "github_output"
         github_output.write_text("", encoding="utf-8")
         rendered = script.replace("${{ steps.date.outputs.value }}", date)
+        rendered = rendered.replace("${{ inputs.force_resend }}", "false")
         wrapped = f"set -e\nexport GITHUB_OUTPUT={github_output}\n{rendered}\n"
         subprocess.run(
             ["bash", "-c", wrapped],

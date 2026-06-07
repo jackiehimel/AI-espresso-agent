@@ -13,6 +13,10 @@ on:
         description: "Set to 'true' to render but not send the email."
         required: false
         default: "false"
+      force_resend:
+        description: "Set to 'true' to bypass the duplicate-send guard and re-send."
+        required: false
+        default: "false"
 
 permissions:
   contents: write
@@ -64,15 +68,21 @@ jobs:
         id: dedupe
         run: |
           DATE="${{ steps.date.outputs.value }}"
-          EDITION_JSON="agent/data/editions/${DATE}.json"
-          if git ls-files --error-unmatch "$EDITION_JSON" > /dev/null 2>&1; then
-            echo "already_sent=true" >> "$GITHUB_OUTPUT"
-            echo "Edition artifact already tracked for $DATE; skip regenerate + duplicate send."
-          elif [ -n "$(git log --grep="^Daily edition for $DATE$" -n 1 --pretty=format:%H)" ]; then
-            echo "already_sent=true" >> "$GITHUB_OUTPUT"
-            echo "Edition already recorded by commit for $DATE; skip regenerate + duplicate send."
-          else
+          FORCE="${{ inputs.force_resend }}"
+          if [ "$FORCE" = "true" ]; then
             echo "already_sent=false" >> "$GITHUB_OUTPUT"
+            echo "force_resend=true: bypassing duplicate-send guard for $DATE."
+          else
+            EDITION_JSON="agent/data/editions/${DATE}.json"
+            if git ls-files --error-unmatch "$EDITION_JSON" > /dev/null 2>&1; then
+              echo "already_sent=true" >> "$GITHUB_OUTPUT"
+              echo "Edition artifact already tracked for $DATE; skip regenerate + duplicate send."
+            elif [ -n "$(git log --grep="^Daily edition for $DATE$" -n 1 --pretty=format:%H)" ]; then
+              echo "already_sent=true" >> "$GITHUB_OUTPUT"
+              echo "Edition already recorded by commit for $DATE; skip regenerate + duplicate send."
+            else
+              echo "already_sent=false" >> "$GITHUB_OUTPUT"
+            fi
           fi
 
       # Production: agent tool_use loop only (no legacy rank_and_select fallback).
@@ -138,6 +148,7 @@ jobs:
           AI_ESPRESSO_FROM_NAME: "AI Espresso"
           AI_ESPRESSO_EXPECTED_DATE: ${{ steps.date.outputs.value }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          AI_ESPRESSO_FORCE_RESEND: ${{ inputs.force_resend == 'true' && '1' || '0' }}
         run: |
           HTML="${{ steps.render.outputs.html_path }}"
           MD="${{ steps.render.outputs.md_path }}"
