@@ -1,221 +1,188 @@
 {
   "date": "2026-06-07",
-  "generated_at": "2026-06-07T22:11:19.462649Z",
+  "generated_at": "2026-06-07T23:26:07.804777Z",
   "model": "claude-sonnet-4-5",
   "stories": [
     {
-      "slot": "build",
-      "headline": "ChatGPT now has a lockdown mode to stop prompt injection leaks",
-      "blurb": "OpenAI launched Lockdown Mode to protect sensitive data when ChatGPT gets tricked by hidden instructions in documents or websites. It won't stop all prompt injections, but it's designed to prevent your private data from leaking when an attack succeeds.",
-      "why_it_matters": "Prompt injection is still an unsolved problem, but now there's a guard rail for your data.",
-      "source_name": "TechCrunch \u2014 AI",
-      "source_url": "https://techcrunch.com/2026/06/06/openai-unveils-lockdown-mode-to-protect-sensitive-data-from-prompt-injection-attacks/",
-      "tier": 1,
-      "original_headline": "OpenAI unveils Lockdown Mode to protect sensitive data from prompt injection attacks",
-      "fingerprint": "3c3153e2949eab6d"
-    },
-    {
       "slot": "market",
-      "headline": "Google is paying SpaceX nearly $1 billion a month for cloud computing",
-      "blurb": "SpaceX signed a deal with Google Cloud worth close to $1 billion per month, creating a major new revenue stream for the rocket company's AI infrastructure business as it prepares for an IPO. The agreement marks one of the largest cloud computing contracts in recent years.",
-      "why_it_matters": "SpaceX is now a serious player in enterprise AI infrastructure, not just rockets",
-      "source_name": "WSJ \u2014 Tech",
-      "source_url": "https://www.wsj.com/tech/google-to-pay-spacex-nearly-1-billion-a-month-in-cloud-computing-deal-788d8aaa?mod=rss_Technology",
+      "headline": "Google will pay SpaceX $920M per month for compute",
+      "blurb": "Google signed a deal to pay SpaceX nearly a billion dollars monthly for computing power, citing unexpected demand for its new AI products. The arrangement suggests Google's existing data center capacity can't keep up with how fast people are adopting its AI tools.",
+      "why_it_matters": "AI demand is now so intense that even Google needs to rent compute from a rocket company.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/05/google-will-pay-spacex-920m-per-month-for-compute/",
       "tier": 1,
-      "original_headline": "Google to Pay SpaceX Nearly $1 Billion a Month in Cloud-Computing Deal",
-      "fingerprint": "cc4daf94d884d77f"
+      "original_headline": "Google will pay SpaceX $920M per month for compute",
+      "fingerprint": "44f131c689876b98"
     },
     {
       "slot": "build",
-      "headline": "Cursor's design mode now lets you sketch UI changes with your mouse",
-      "blurb": "Cursor's browser-based design mode now accepts clicks, drawn sketches, or voice commands to tell its AI agent how to modify your UI. You can literally draw on a webpage to show what you want changed, and the agent updates the code.",
-      "why_it_matters": "Natural input methods \u2014 sketches, clicks, voice \u2014 are replacing written prompts for UI work.",
+      "headline": "Cursor SDK now lets you ship agents that review their own code",
+      "blurb": "Cursor's TypeScript and Python SDKs added auto-review (agents can critique their own output before committing), custom tools, nested subagents, and custom stores for state. You also get run correlation IDs for tracing multi-step workflows and lighter imports that speed up cold starts.",
+      "why_it_matters": "Auto-review means agents can catch their own mistakes before you do\u2014closer to self-correcting automation.",
       "source_name": "Cursor Changelog (official)",
-      "source_url": "https://cursor.com/changelog/design-mode-improvements",
+      "source_url": "https://cursor.com/changelog/sdk-updates-jun-2026",
       "tier": 1,
-      "original_headline": "Design Mode Improvements",
-      "fingerprint": "fa7a4f79c1d26025"
-    },
-    {
-      "slot": "everyday",
-      "headline": "Apple is about to relaunch Siri (again) at WWDC",
-      "blurb": "After years of falling behind in AI, Apple is set to unveil yet another Siri redesign at Monday's WWDC keynote. The Verge notes that playing catch-up might actually work in Apple's favor this time, as the company can learn from competitors' missteps before committing to a strategy.",
-      "why_it_matters": "Apple's slow-and-steady approach could mean a more polished AI assistant when it finally ships",
-      "source_name": "The Verge \u2014 AI",
-      "source_url": "https://www.theverge.com/tech/944245/apple-wwdc-2026-ai-siri-gemini",
-      "tier": 1,
-      "original_headline": "Here comes new Siri again",
-      "fingerprint": "3e968baf693f9936"
+      "original_headline": "Custom stores, custom tools, and auto-review for the Cursor SDK",
+      "fingerprint": "8abff6074cc2bb6d"
     },
     {
       "slot": "industry",
-      "headline": "China is training home robots by filming people fold laundry",
-      "blurb": "Chinese AI companies are collecting robotics training data directly in homes and small factories, recording ordinary people doing household tasks like folding clothes and washing dishes. The approach costs less and scales faster than the U.S. model of lab research and outsourced annotation, giving China an edge in teaching robots to handle real-world messiness.",
-      "why_it_matters": "Whoever collects the best mundane-task data first will likely dominate the home robotics market.",
-      "source_name": "Rest of World",
-      "source_url": "https://restofworld.org/2026/china-ai-robotics-training-data/",
+      "headline": "Companies are panicking over AI bills they can't predict or control",
+      "blurb": "After months of 'move fast' AI deployments, enterprises are hitting surprise six-figure token bills with no way to forecast spend. Teams that encouraged experimentation now scramble for usage caps, model downgrades, and kill switches as CFOs demand answers no one has.",
+      "why_it_matters": "The gold rush phase is over \u2014 now comes the part where someone has to explain the bill.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/05/the-token-bill-comes-due-inside-the-industry-scramble-to-manage-ais-runaway-costs/",
       "tier": 1,
-      "original_headline": "China is training a robot future \u2014 one folded shirt at a time Localized, low-cost data harvested in homes and factories gives China a scaling edge over the research-heavy and outsourced U.S. approach.",
-      "fingerprint": "69094915adb42dbd"
+      "original_headline": "The token bill comes due: Inside the industry scramble to manage AI\u2019s runaway costs",
+      "fingerprint": "44a60c0d94b65a70"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI is about to redesign ChatGPT as a selling tool for premium products",
+      "blurb": "The company plans its biggest ChatGPT overhaul since 2022, turning the chatbot into a gateway that funnels users toward higher-margin offerings like enterprise tools and API access. The move comes as OpenAI eyes a potential IPO.",
+      "why_it_matters": "ChatGPT stops being just a product and becomes the storefront for everything else OpenAI sells.",
+      "source_name": "FT \u2014 Technology",
+      "source_url": "https://www.ft.com/content/ca0f5f5e-fb9a-41a0-a2a9-0127e15b7db9",
+      "tier": 1,
+      "original_headline": "OpenAI plots biggest ChatGPT overhaul since launch",
+      "fingerprint": "79584b9ab0f96ffa"
     }
   ],
   "try_this_prompt": {
-    "title": "The confidence audit",
+    "title": "Try this prompt",
     "kicker": "",
-    "prompt": "I'm about to paste something I wrote that I'm weirdly proud of. Don't compliment it. Tell me which sentence I'm hiding behind, which claim has no evidence, and which paragraph exists only because I enjoyed writing it. Then show me the same idea in half the words.",
-    "tool_hint": "Before you send the deck, the doc, or the all-hands email you spent too long on."
+    "prompt": "(prompt generation failed \u2014 re-run the edition agent)",
+    "tool_hint": "Works in Claude, ChatGPT, or Gemini."
   },
-  "daily_question": "If you could teach a home robot one household task right now, what would it be?",
+  "daily_question": "If you had to explain your company's AI spend to a CFO in one sentence, what would you say?",
   "notes": [
     "mode: agent"
   ],
   "agent_trace": [
     {
-      "ts": 1780870222.185779,
+      "ts": 1780874727.4923124,
       "role": "system",
       "kind": "handoff",
       "name": "",
       "args": null,
-      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "result_summary": "ranked=20, enriched=16, gaps=[\"No consumer product launches with concrete 'try it today' hooks beyond ChatGPT dreaming and Cursor updates.\", 'Missing model drops\u2014no new frontier capability releases this cycle.', 'Light on surprising real-world AI applications outside expected verticals.', 'Absence of platform war escalations with shipped artifacts (no new API battles, no vendor lock-in moves).']",
       "tool_use_id": ""
     },
     {
-      "ts": 1780870241.6321905,
+      "ts": 1780874743.2731705,
       "role": "editor",
       "kind": "tool_call",
       "name": "pick",
       "args": {
-        "id": 28,
-        "persona": "build",
-        "reason": "Concrete security feature shipped by OpenAI that developers can use today. Prompt injection is a real pain point, and Lockdown Mode is a tangible solution. Shows OpenAI addressing enterprise security concerns with a specific tool."
-      },
-      "result_summary": "",
-      "tool_use_id": "toolu_01TjY3SMz8CLCYDz2XqTj64b"
-    },
-    {
-      "ts": 1780870241.632233,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "pick",
-      "args": null,
-      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI unveils Lockdown Mode to protect sensitive data from prompt injection attacks\", \"persona\": \"build\", \"pick_count\": 1}",
-      "tool_use_id": "toolu_01TjY3SMz8CLCYDz2XqTj64b"
-    },
-    {
-      "ts": 1780870241.6322734,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "pick",
-      "args": {
-        "id": 148,
+        "id": 30,
         "persona": "market",
-        "reason": "Massive $1B/month deal between Google and SpaceX - concrete market move with huge numbers. Shows the scale of AI compute demand and SpaceX's new revenue stream ahead of IPO. WSJ tier-1 source."
+        "reason": "Massive $920M/month deal between Google and SpaceX shows unprecedented scale of AI compute demand. Concrete numbers, surprise factor (SpaceX as compute provider), and validates the infrastructure gold rush. Screenshot-worthy scale."
       },
       "result_summary": "",
-      "tool_use_id": "toolu_01YQM9rpibWVrNRZuLzqPnP4"
+      "tool_use_id": "toolu_01G5hZQ8HCopTZbVrxzY3A7i"
     },
     {
-      "ts": 1780870241.6323125,
+      "ts": 1780874743.2732177,
       "role": "editor",
       "kind": "tool_result",
       "name": "pick",
       "args": null,
-      "result_summary": "{\"ok\": true, \"picked\": \"Google to Pay SpaceX Nearly $1 Billion a Month in Cloud-Computing Deal\", \"persona\": \"market\", \"pick_count\": 2}",
-      "tool_use_id": "toolu_01YQM9rpibWVrNRZuLzqPnP4"
+      "result_summary": "{\"ok\": true, \"picked\": \"Google will pay SpaceX $920M per month for compute\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01G5hZQ8HCopTZbVrxzY3A7i"
     },
     {
-      "ts": 1780870241.63233,
+      "ts": 1780874743.2732499,
       "role": "editor",
       "kind": "tool_call",
       "name": "pick",
       "args": {
         "id": 11,
         "persona": "build",
-        "reason": "Shipped improvement to Cursor's Design Mode - developers can try this today. Multi-select elements, voice descriptions for UI changes. Concrete capability upgrade to a tool Solvd engineers likely use."
+        "reason": "Shipped features developers can use today: custom stores, auto-review, nested subagents in Cursor SDK. Concrete capabilities that expand what engineers can build with AI coding tools. Try-it-today appeal."
       },
       "result_summary": "",
-      "tool_use_id": "toolu_01DkPiW6WS1Ska2MVR1Tuuqs"
+      "tool_use_id": "toolu_01GuzHGqoDWy8r1ZEBFP4pX1"
     },
     {
-      "ts": 1780870241.6323698,
+      "ts": 1780874743.273314,
       "role": "editor",
       "kind": "tool_result",
       "name": "pick",
       "args": null,
-      "result_summary": "{\"ok\": true, \"picked\": \"Design Mode Improvements\", \"persona\": \"build\", \"pick_count\": 3}",
-      "tool_use_id": "toolu_01DkPiW6WS1Ska2MVR1Tuuqs"
+      "result_summary": "{\"ok\": true, \"picked\": \"Custom stores, custom tools, and auto-review for the Cursor SDK\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01GuzHGqoDWy8r1ZEBFP4pX1"
     },
     {
-      "ts": 1780870241.6323879,
+      "ts": 1780874743.2733333,
       "role": "editor",
       "kind": "tool_call",
       "name": "pick",
       "args": {
-        "id": 18,
-        "persona": "everyday",
-        "reason": "Apple's new Siri relaunch - consumer-facing AI that affects billions of users. Apple playing catch-up in AI is a compelling narrative, and Siri improvements are something everyone can relate to and try."
-      },
-      "result_summary": "",
-      "tool_use_id": "toolu_01JTTBMwNUrXsi7J6UgLo4qB"
-    },
-    {
-      "ts": 1780870241.632442,
-      "role": "editor",
-      "kind": "tool_result",
-      "name": "pick",
-      "args": null,
-      "result_summary": "{\"ok\": true, \"picked\": \"Here comes new Siri again\", \"persona\": \"everyday\", \"pick_count\": 4}",
-      "tool_use_id": "toolu_01JTTBMwNUrXsi7J6UgLo4qB"
-    },
-    {
-      "ts": 1780870241.6324625,
-      "role": "editor",
-      "kind": "tool_call",
-      "name": "pick",
-      "args": {
-        "id": 117,
+        "id": 32,
         "persona": "industry",
-        "reason": "China's unique approach to robot training via human labor data collection - surprising, concrete methodology story. Shows a different scaling strategy (localized data harvesting vs. research-heavy US approach). Makes AI feel tangible and reveals competitive dynamics."
+        "reason": "Industry inflection point: companies shifting from 'go fast' to 'we need guardrails' on AI spending. Real pain point with direct quote showing the conversation shift. Timely as bills come due on aggressive AI adoption."
       },
       "result_summary": "",
-      "tool_use_id": "toolu_01PN3rCeZVEdtRytKnPevHiZ"
+      "tool_use_id": "toolu_01WNRW1fZATAxDv8Pi2q8up3"
     },
     {
-      "ts": 1780870241.6325178,
+      "ts": 1780874743.273382,
       "role": "editor",
       "kind": "tool_result",
       "name": "pick",
       "args": null,
-      "result_summary": "{\"ok\": true, \"picked\": \"China is training a robot future \\u2014 one folded shirt at a time Localized, low-cost data harvested in homes and factories gives China a scaling edge over the research-heavy and outsourced U.S. approach.\", \"persona\": \"industry\", \"pick_count\": 5}",
-      "tool_use_id": "toolu_01PN3rCeZVEdtRytKnPevHiZ"
+      "result_summary": "{\"ok\": true, \"picked\": \"The token bill comes due: Inside the industry scramble to manage AI\\u2019s runaway costs\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01WNRW1fZATAxDv8Pi2q8up3"
     },
     {
-      "ts": 1780870248.735246,
+      "ts": 1780874743.2734046,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 155,
+        "persona": "market",
+        "reason": "OpenAI's biggest ChatGPT overhaul since launch - recasting the product as route to higher-margin offerings pre-IPO. Strategic transformation of the most visible AI product. Shows maturation from demo to business platform."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017ar5RFX11khQ2Kn2km3ycA"
+    },
+    {
+      "ts": 1780874743.2734373,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI plots biggest ChatGPT overhaul since launch\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_017ar5RFX11khQ2Kn2km3ycA"
+    },
+    {
+      "ts": 1780874747.3388178,
       "role": "editor",
       "kind": "tool_call",
       "name": "ship_edition",
       "args": {},
       "result_summary": "",
-      "tool_use_id": "toolu_01HqAkA6b4pVzTbEE749cnUF"
+      "tool_use_id": "toolu_01StDimPeHsBrWD9v6fSJWwj"
     },
     {
-      "ts": 1780870248.7355046,
+      "ts": 1780874747.3390286,
       "role": "editor",
       "kind": "finalize",
       "name": "",
       "args": null,
-      "result_summary": "shipped 5 stories",
+      "result_summary": "shipped 4 stories",
       "tool_use_id": ""
     },
     {
-      "ts": 1780870248.7355251,
+      "ts": 1780874747.3390486,
       "role": "editor",
       "kind": "tool_result",
       "name": "ship_edition",
       "args": null,
-      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI unveils Lockdown Mode to protect sensitive data from prompt injection attacks\", \"pick_2\": \"Google to Pay SpaceX Nearly $1 Billion a Month in Cloud-Computing Deal\", \"pick_3\": \"Design Mode Improvements\", \"pick_4\": \"Here comes new Siri again\", \"pick_5\": \"China is training a robot future \\u2014 one folded shirt at a time Localized, low-cost data harvested in homes and factories gives China a scaling edge over the research-heavy and outsourced U.S. approach.\"}}",
-      "tool_use_id": "toolu_01HqAkA6b4pVzTbEE749cnUF"
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Google will pay SpaceX $920M per month for compute\", \"pick_2\": \"Custom stores, custom tools, and auto-review for the Cursor SDK\", \"pick_3\": \"The token bill comes due: Inside the industry scramble to manage AI\\u2019s runaway costs\", \"pick_4\": \"OpenAI plots biggest ChatGPT overhaul since launch\"}}",
+      "tool_use_id": "toolu_01StDimPeHsBrWD9v6fSJWwj"
     }
   ],
-  "issue_num": 10
+  "issue_num": 11
 }
