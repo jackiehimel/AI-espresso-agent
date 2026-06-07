@@ -29,7 +29,9 @@ BRACKET_PLACEHOLDER_RE = re.compile(r"\[[^\]]+\]")
 INPUT_CUE_RE = re.compile(
     r"\b("
     r"below|what i wrote|what i'm about to|i'm about to|my messy|"
-    r"i have \d+ seconds|in \d+[–-]\d+ sentences|in \d+ sentences"
+    r"i have \d+ seconds|in \d+[–-]\d+ sentences|in \d+ sentences|"
+    r"read this|look at|here'?s|take this|paste|the following|"
+    r"what follows|this draft|my draft|my notes|what i just"
     r")\b",
     re.I,
 )

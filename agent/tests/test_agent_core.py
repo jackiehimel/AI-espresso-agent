@@ -127,65 +127,43 @@ class SearchAllowlistTests(unittest.TestCase):
 class Tier1ShipGateTests(unittest.TestCase):
 
     def test_blocks_ship_when_no_tier1(self):
-        _, rules = ea.load_sources()
         state = el.AgentState(
             today=__import__("datetime").date(2026, 5, 17),
-            needed_slots=["business", "beginner", "engineer", "cross"],
-            shortlist=[],
-            candidates_by_id={},
+            candidates=[],
             archive_headlines=[],
             picks={
-                "business": {"id": 1, "headline": "x", "url": "u", "tier": 2},
-                "beginner": {"id": 2, "headline": "y", "url": "u", "tier": 2},
-                "engineer": {"id": 3, "headline": "z", "url": "u", "tier": 2},
-                "cross": {"id": 4, "headline": "q", "url": "u", "tier": 2},
+                "pick_1": {"id": 1, "headline": "x", "url": "u", "tier": 2, "body": "a" * 150},
+                "pick_2": {"id": 2, "headline": "y", "url": "u", "tier": 2, "body": "a" * 150},
+                "pick_3": {"id": 3, "headline": "z", "url": "u", "tier": 2, "body": "a" * 150},
             },
-            last_critic_verdict={"verdict": "approve", "reason": "ok"},
         )
-        gate = el.validate_ship_gates(state, rules)
+        gate = el._validate_ship(state)
         self.assertFalse(gate["ok"])
 
     def test_allows_ship_with_one_tier1(self):
-        _, rules = ea.load_sources()
         state = el.AgentState(
             today=__import__("datetime").date(2026, 5, 17),
-            needed_slots=["business", "beginner", "engineer", "cross"],
-            shortlist=[],
-            candidates_by_id={},
+            candidates=[],
             archive_headlines=[],
             picks={
-                "business": {
+                "pick_1": {
                     "id": 1,
                     "headline": "Anthropic and BlackRock partner on AI for asset management",
-                    "url": "u",
-                    "tier": 1,
-                    "body": "Verified excerpt " * 20,
+                    "url": "u", "tier": 1, "body": "Verified excerpt " * 20,
                 },
-                "beginner": {
+                "pick_2": {
                     "id": 2,
                     "headline": "ChatGPT can now look at your bank account",
-                    "url": "u",
-                    "tier": 2,
-                    "body": "Verified excerpt " * 20,
+                    "url": "u", "tier": 2, "body": "Verified excerpt " * 20,
                 },
-                "engineer": {
+                "pick_3": {
                     "id": 3,
                     "headline": "OpenAI brings its Codex coding app to mobile",
-                    "url": "u",
-                    "tier": 2,
-                    "body": "Verified excerpt " * 20,
-                },
-                "cross": {
-                    "id": 4,
-                    "headline": "CFTC runs ML models to flag suspicious bets on Polymarket",
-                    "url": "u",
-                    "tier": 2,
-                    "body": "Verified excerpt " * 20,
+                    "url": "u", "tier": 2, "body": "Verified excerpt " * 20,
                 },
             },
-            last_critic_verdict={"verdict": "approve", "reason": "ok"},
         )
-        gate = el.validate_ship_gates(state, rules)
+        gate = el._validate_ship(state)
         self.assertTrue(gate["ok"])
 
 

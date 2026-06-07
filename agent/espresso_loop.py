@@ -1,15 +1,15 @@
 """
-AI Espresso — agentic editor (Scout bootstrap → native-tool Editor).
+AI Espresso — Hybrid Discovery Agent.
 
-Scout runs once to shortlist candidates. The Editor then drives selection
-via Anthropic native tool_use (pick, search_news, self_critique, etc.).
-Python dispatches tools and enforces ship gates; the model decides when
-to loop, search, critique, and call ship_edition.
+Pipeline:
+  1. Rank ALL candidate headlines+blurbs in one LLM call (no lossy funnel)
+  2. Pre-fetch article bodies for the top 20 candidates
+  3. Agentic Editor loop: pick 3-6 stories using tools (pick, search_news,
+     read_candidate, ship_edition). Deterministic validation gates only.
+  4. Fallback: if budget exhausted with 3+ picks, force-ship.
 
-On hard budget exhaustion with an approved slate, the caller salvages picks.
-Genuine failure (no recoverable slate) raises AgenticSelectFailed. The caller
-may fall back to rank_and_select only when ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1
-(local dev emergency — never set in CI / daily-edition.yml).
+No LLM Critic. No finalization contract. No forced convergence.
+The Editor's judgment is final; deterministic gates catch structural issues.
 """
 
 from __future__ import annotations
@@ -28,7 +28,6 @@ from urllib.parse import urlparse
 
 import httpx
 
-from card_config import needed_slots_for_rules
 from constitution import constitution_prompt_block
 from freshness import infer_date_from_text, infer_date_from_url
 
@@ -36,483 +35,233 @@ _CONSTITUTION_PROMPT = constitution_prompt_block()
 
 
 # ───────────────────────────────────────────────────────────────────────
-# Trace event log (everything the agent does is recorded)
+# Trace
 # ───────────────────────────────────────────────────────────────────────
 
 @dataclass
 class TraceEvent:
     ts: float
-    role: str          # scout | editor | critic | system
-    kind: str          # think | tool_call | tool_result | handoff | finalize | error
-    name: str = ""     # tool name if kind == tool_call
+    role: str
+    kind: str
+    name: str = ""
     args: dict | None = None
     result_summary: str = ""
-    thinking: str = ""
     tool_use_id: str = ""
 
 
 # ───────────────────────────────────────────────────────────────────────
-# System prompts — shared rubric + role-specific tails
+# Editorial rubric (shared by ranker + editor)
 # ───────────────────────────────────────────────────────────────────────
 
 _EDITORIAL_RUBRIC = """\
 AUDIENCE — any Solvd employee (engineer, consultant, sales, designer,
-intern). We are not writing for "non-technical readers only." Different
-roles react to different stories; both a 'wow really?' architecture move
-and a practical try-it-today feature count.
+intern). Both a 'wow really?' architecture move and a practical
+try-it-today feature count.
 
 NORTH STAR — get people excited about AI. Every story should leave the
 reader thinking "I want to try that" or "I didn't know AI could do that."
-Reject anything that makes AI feel scary, sad, or like homework. Do not
-ship stories whose primary angle is AI failure, glitch, or ruin.
 
-THE EDITORIAL TEST — apply to every candidate/pick:
+THE EDITORIAL TEST:
   Would any Solvd employee screenshot this and forward it because AI feels
   cool, useful, or surprising in a GOOD way? If no → reject / downweight.
 
 SUBJECT-LINE TEST:
-  Would they open this among 50 newsletters without knowing the brand?
-  If the only hook is "AI is changing X" or a bare vendor press-release
-  title → reject. Need a concrete noun + verb: what shipped, scaled, or
-  became possible.
+  Would they open this among 50 newsletters? Need a concrete noun + verb:
+  what shipped, scaled, or became possible.
 
-SHOW, DON'T TELL — the story must support a headline that SHOWS the news
-(concrete subject + action), not one that TELLS the reader what to think:
-  Good:
-    "Meta's smart glasses just became a real wearable computer"
-    "ChatGPT can now look at your bank account"
-    "Claude Code can now run itself while your laptop is closed"
-    "OpenAI just shipped a coding agent straight to your phone"
-    "Cerebras stock jumps 89% on debut as AI chip maker goes public"
-    "CFTC runs ML models to flag suspicious bets on Polymarket"
-    "Anthropic just entered Elon Musk's entire colossus cluster"
-    "OpenAI's models can think while they talk"
-    "Anthropic and BlackRock partner on AI for asset management"
-    "YouTube now lets anyone flag AI deepfakes of themselves"
-  Bad (even from a prestigious outlet):
-    "PwC expands strategic Claude deployment across client pipeline"
-    "HBR: 3 practices teams can use to adopt AI"
-    "AI is reshaping how companies hire"
-    "Deepfake scandal rocks [celebrity]" / fear-only deepfake panic
-  Why the bad examples fail: press releases, think pieces, or fear hooks —
-  words like "strategic", "deployment", "reshaping", "practices" — and they
-  don't make anyone curious.
+SHOW, DON'T TELL — headline must SHOW the news (concrete subject + action).
+  Good: "ChatGPT can now look at your bank account"
+  Bad: "PwC expands strategic Claude deployment"
 
-FRAMING TEST — AI is the subject doing things in the world:
-  Accept capabilities, launches, partnerships, market moves, and even AI
-  making mistakes when framing is neutral or curious. Reject AI-as-villain
-  (ruining, destroying, threatening, harming). Reject AI-as-incidental:
-  enforcement where AI is just the tool, stock moves where AI is only the
-  sector angle, routing glitches, robots trapped in traffic.
-  The test: is AI the subject of the headline doing something interesting?
-
-LAB PARTNERSHIPS & MARKET MOVES — valid WITH a recognizable hook:
-  Lab partnerships, infrastructure deals, pricing/access announcements, and
-  market moves from frontier players (Anthropic, OpenAI, DeepMind, Meta,
-  xAI, Mistral, Cohere) are "what the hell is happening" news when they
-  pass the 'wow really?' test — not because of category alone.
-  Bare product launches, generic pricing news, consultancy partnerships, and
-  "Anthropic raised Series E" with no surprise still fail.
-  "Anthropic got access to Musk's 220K GPUs" passes. Press-release titles
-  from Tier 1 are OK if the body has a real hook you can name in one phrase.
-
-WORKFORCE SOCIOLOGY & HBR — reject:
-  • HBR / Sloan / McKinsey-style think pieces ("3 habits for AI teams")
-  • Labor-market macro without a product hook (generational hiring, workforce
-    trends, "AI is reshaping how companies hire")
-  • 'X firms are now using AI' survey filler
-
-DEEPFAKE — distinguish scandal from product:
-  • REJECT / downweight: deepfake scandal panics (celebrity impersonation crime,
-    political deepfake outrage, "deepfakes are destroying trust") — fear framing
-  • ACCEPT: deepfake-detection or likeness-protection product features (e.g.
-    YouTube opens likeness detection to all creators) — AI capability as subject,
-    try-it or scale hook
-
-OUTLETS BY RELIABILITY (prefer higher tier when equally exciting):
-  Tier 1 — labs, launch desks (Verge AI, TechCrunch AI, 404, Platformer,
-  Information AI, HN, Ars, 9to5Mac, Wired, Engadget, Mashable, Rest of World,
-  Product Hunt AI), major desks (NYT/WSJ/FT/Bloomberg/CNBC/BBC tech — often
-  paywalled RSS), filtered arXiv cs.AI / Hugging Face.
-  Tier 2 — high-signal analysis (Latent Space, Stratechery, Import AI, etc.).
-  Fine for one slot, not a full dry edition.
-  Tier 3 — aggregators (TLDR AI, Rundown): discover only; never ship an
-  aggregator summary when Tier 1 primary exists for the same launch.
-  Tier 4 — rotating verticals: at most one cross-industry story per week.
-
-EDITORIAL DNA — mix biased toward fun and useful:
-  • Cool capability / practical win: tools to try today, 'wait AI can do THAT?',
-    surprising real-world use, productivity wins, AI in unexpected fields.
-  • At most ONE 'state of the world' story for substance (big partnership,
-    regulation shift, product war) when it still passes the editorial test.
-  • THIRD-CARD FALLBACK LANE (quality-only, never filler): if hard-news options
-    are redundant or thin, the third slot may be a "cool and new" AI story
-    with a concrete capability/tool/workflow unlock people can try this week.
-    It still needs a clear hook, verified body text, and AI as the subject.
-    Reject generic "AI tools roundups" or marketing fluff.
-
-NEWS-HOOK REQUIREMENT — beyond "vendor launched a thing":
-  Acceptable hooks: competitive/market move, scale/scarcity, capability
-  surprise, try-this-week, power-move from a recognizable figure.
-  "Cohere launches Compass" is an ad; "Cohere's search model beats GPT-5.5
-  on enterprise RAG" is news. If you cannot name the hook in one phrase → reject.
-
-HARD EXCLUSIONS — never pick / score below 10:
-  • True crime, predators, child safety, abuse, vigilantism, sting ops
-  • AI doomer / existential risk / extinction / superalignment
-  • AI incidental to a darker hook (crime/drama is the story)
-  • Self-harm, eating-disorder, suicide-related AI chatbot content
+HARD EXCLUSIONS (never pick):
+  • True crime, predators, child safety, abuse
+  • AI doomer / existential risk / extinction
+  • Self-harm / suicide content involving AI
   • Mass surveillance / privacy horror as primary angle
-  • Pure geopolitics / tariffs where AI chips are just a prop
+  • Pure geopolitics where AI chips are just a prop
 
-DOWNWEIGHT — unless the angle is genuinely valuable:
-  • 'AI hallucination ruined this output' / lawyer caught using ChatGPT
-  • Pure layoffs / 'AI is coming for your job' framing
-  • Deepfake scandals (not detection-product launches — see above)
-
-REJECT OUTRIGHT (below 20 for Scout):
+DOWNWEIGHT:
+  • 'AI hallucination ruined X' cautionary tales
+  • Pure layoffs / 'AI coming for your job' framing
+  • Deepfake scandals (not detection-product launches)
+  • HBR / McKinsey think pieces
   • Bare vendor launches with no news hook
-  • Procurement / generic enterprise rollout news
-  • Raw funding rounds with no product angle
-  • Enterprise spinouts / new AI consulting arms / JV announcements
-  • National free-access pilots with no new capability
-  • Job-displacement scare without a positive try-it hook
 
-PRIORITIZE (80+ for Scout): Rundown/Verge-style — shipped features, model
-drops, mobile agents, billing backlash, memory across sessions, wearables
-with dev APIs, finance tools you can connect today, coding-agent updates.
+PRIORITIZE (80+):
+  • Shipped features people can try this week
+  • Model drops with concrete capability hooks
+  • Developer-facing changes with backlash or stakes
+  • Platform wars with specific shipped artifacts
+  • Surprising real-world AI applications
 
-CROSS-EDITION UNIQUENESS — same topic / vendor+product / launch as the
-last 30 days → reject. No repeats even with a reframed angle. Use
-check_archive when unsure.
+CROSS-EDITION UNIQUENESS — same topic/vendor+product as last 30 days → reject.
 """
 
-_SCOUT_ROLE = """\
-You are the Scout for AI Espresso. Survey the candidate pool, identify the
-strongest 12-15 stories, and flag coverage gaps. You do NOT make final picks.
-"""
+_RANKER_SYSTEM = (
+    "You rank AI news candidates for AI Espresso, a daily internal brief "
+    "at Solvd (~3,000 people). Score each candidate 0-100 on excitement, "
+    "newsworthiness, and reader appeal. Return the top 20.\n\n"
+    + _EDITORIAL_RUBRIC
+    + _CONSTITUTION_PROMPT + "\n"
+)
 
-_SCOUT_TAIL = """\
-SCORING — apply the rubric above with numeric scores:
-  below 20 = reject outright; below 40 = downweight; 80+ = prioritize.
-
-PERSONA SPREAD — tag each story for the Editor's slot routing (readers
-never see labels):
-  - "business"  — leadership / consulting / strategy
-  - "beginner"  — fun or useful for any Solvd employee (not engineers-only)
-  - "engineer"  — technically meaty
-  - "cross"     — non-IT industry doing something interesting with AI
-
-Flag GAPS — if the pool is heavy on AI-failure stories, sociology, or
-missing fun/useful angles, note it so the Editor can search_news.
-"""
-
-_EDITOR_ROLE = """\
-You are the Editor for AI Espresso. Decide today's edition by calling tools
-until you are ready to ship_edition. Persona slots (business, beginner,
-engineer, cross) are internal routing only.
-"""
-
-_EDITOR_TAIL = """\
-WORKING MEMORY — use update_memory for pool_quality, coverage_gaps, and
-decisions. Read the working_memory block each turn.
-
-DEFAULT STRATEGY:
-  1. Review the Scout shortlist. Try shortlist picks before searching.
-  2. read_candidate FIRST for every candidate you might pick. Only pick with
-     a real article body (not fetch failed). Never pick from headline alone.
-  3. pick one story per needed slot (usually 4). Each pick must pass the rubric.
-  4. self_critique when you have a full slate.
-  5. If revise → unpick flagged slots, search_news or read_candidate, re-pick.
-  6. When self_critique approves → ship_edition.
-
-WEAK POOL DAYS — ship 3 stories ONLY if you:
-  • set pool_quality in working_memory to mention "weak"
-  • call note_weak_pool with reason and which slot you skip
-  • pick exactly 3 stories (not zero after note_weak_pool)
-  • self_critique → ship_edition when approved
-If you unpick everything to reset, re-pick immediately in the same pass.
-
-WHEN TO USE search_news (max 2 per edition):
-  • Scout gaps + shortlist feels dry/academic after first picks
-  • After self_critique revise when pool lacks fun/useful angles
-  • To fill the third slot with a cool/new capability drop when hard-news
-    candidates are repetitive
-  • If working_memory.aggregator_signals is non-empty, use the extra search
-    call to chase a primary-source confirmation before discarding the lead
-  • Do NOT search before trying the shortlist first
-
-RULES:
-  • Vendor cap: at most 2 stories per vendor (pick tool enforces).
-  • Tier 1 minimum: at least one Tier 1 source (ship_edition enforces).
-  • Mix vibes — not all model launches or all cautionary AI-failure stories.
-  • At most one legal-primary story, and only if the legal outcome has a
-    concrete near-term consequence for AI access/governance/market structure.
-  • ship_edition fails without self_critique approve (no shortcuts).
-
-Use tools in any order that makes editorial sense. You control the loop.
-"""
-
-_CRITIC_ROLE = """\
-You are the Critic for AI Espresso. The Editor has handed you picks.
-Approve or send back with specific feedback. Judge the STORY, not raw
-feed titles — rewrite fixes formatting; the topic must survive the rubric.
-"""
-
-_CRITIC_TAIL = """\
-ROLE-SPECIFIC CHECKS:
-  • Engineer slot: if the only headline path needs unexplained ML jargon
-    ("diffusion model in N steps"), REVISE for plain-English capability.
-  • Source mix: at least one Tier 1 primary. Flag if two+ picks are Tier 3
-    summaries when Tier 1 coverage of the same launch exists.
-  • Lawsuit / trial / founder feud as PRIMARY angle → REVISE unless the
-    legal outcome materially changes AI product access, governance, or market
-    structure (e.g., injunction, enforceable ruling, ownership/control shift,
-    or damages with near-term product consequence).
-
-HARD REJECT — send back if ANY pick matches hard exclusions above, repeats
-a topic from Recent editions (last 30d), or uses AI-as-villain / incidental
-framing.
-
-REVISE if:
-  • Two+ stories from the same vendor ONLY when both are weak/redundant
-    (same product line). Two OpenAI picks OK if distinct (Codex mobile vs
-    ChatGPT finance).
-  • Academic paper needs topic explained vs launch/product/event story.
-  • All picks share the same vibe (all launches, all drama, all research).
-  • The third slot is only "newsy enough" but not actually interesting. On thin
-    days, require a cool/new capability or workflow unlock instead of filler.
-  • verified: false — Editor must read_candidate or swap. Paywalled Tier-1
-    with body_source rss_summary OK if verified is true.
-  • Workforce sociology, hiring demographics, generational labor trends, or
-    consultancy think pieces — even from Tier 1.
-  • Legal coverage is mostly courtroom drama/opinion with no concrete
-    consequence for AI products, distribution, or governance.
-  • More than one legal-primary story appears in the slate.
-  • Weak-pool waiver is NOT permission for filler, unverified picks, or
-    "best of a bad sociology pool." Revise with search_news before mediocrity.
-
-APPROVE if:
-  • Any Solvd employee would be more curious about AI, not less.
-  • Three different vendors (or 2 + non-vendor story).
-  • Majority fun, useful, or 'wow really?' — market rivalry counts as positive.
-  • If hard-news is thin, the third card is still high-signal: a new
-    capability/tool/workflow drop with direct user utility.
-  • One legal-primary story is acceptable only when it has a concrete,
-    near-term AI consequence (access, governance, ownership, enforceable ruling).
-  • Every story passes subject-line + show-don't-tell; you can name each hook.
-  • Slate could be rewritten as Rundown/Verge-style headlines without stretching.
-
-The deterministic ship gate enforces the constitution in code. Approve
-plausibly on-vibe slates; REVISE only clear violations. Obvious failures
-(Waymo glitch, AI slop cautionary) → REVISE.
-
-RESPONSE FORMAT:
-  {"verdict": "approve" OR "revise",
-   "reason": "<short explanation>",
-   "issues": ["<slot>: <what to fix>", ...]}
-"""
-
-SCOUT_SYSTEM = _SCOUT_ROLE + _EDITORIAL_RUBRIC + _SCOUT_TAIL + _CONSTITUTION_PROMPT + "\n"
-EDITOR_SYSTEM = _EDITOR_ROLE + _EDITORIAL_RUBRIC + _EDITOR_TAIL + _CONSTITUTION_PROMPT + "\n"
-CRITIC_SYSTEM = _CRITIC_ROLE + _EDITORIAL_RUBRIC + _CRITIC_TAIL + _CONSTITUTION_PROMPT + "\n"
+_EDITOR_SYSTEM = (
+    "You are the Editor for AI Espresso. You have pre-ranked candidates "
+    "with article bodies. Select 3-6 stories for today's edition using "
+    "the tools provided. Call ship_edition when ready.\n\n"
+    "STRATEGY:\n"
+    "  1. Review the ranked candidates (they already have bodies).\n"
+    "  2. Pick the best 3-6 stories. Prefer variety in vendor and topic.\n"
+    "  3. If the pool feels thin, use search_news to find alternatives.\n"
+    "  4. Call ship_edition. Deterministic gates will validate.\n"
+    "  5. If ship fails, fix the issue and try again.\n\n"
+    "RULES:\n"
+    "  • At least 1 tier-1 source.\n"
+    "  • At most 2 stories from the same vendor.\n"
+    "  • All picks must have verified article bodies.\n"
+    "  • Minimum 3 stories, target 4-5.\n"
+    "  • Assign a persona tag to each pick: market, everyday, build, or industry.\n"
+    "    These are rendering labels, not constraints on selection.\n\n"
+    + _EDITORIAL_RUBRIC
+    + _CONSTITUTION_PROMPT + "\n"
+)
 
 
 # ───────────────────────────────────────────────────────────────────────
-# LLM call wrapper — delegates to espresso_agent.call_llm_json so the
-# whole agent goes through a single Anthropic-SDK code path.
+# LLM wrapper
 # ───────────────────────────────────────────────────────────────────────
 
-def llm_json(system: str, prompt: str, schema: dict, max_tokens: int = 4000) -> Any:
-    """One-shot structured output via Claude.
-
-    Builds a fresh Anthropic client per call. We could cache the client at
-    module scope, but call volume here is tiny (one Editor turn at a time)
-    and per-call construction keeps test isolation clean.
-    """
+def _llm_json(system: str, prompt: str, schema: dict, max_tokens: int = 4000) -> Any:
     from espresso_agent import call_llm_json, USE_ANTHROPIC
     if not USE_ANTHROPIC:
-        raise RuntimeError(
-            "ANTHROPIC_API_KEY is not set. The Editor loop requires Anthropic "
-            "credentials — add it to your .env or repo secrets."
-        )
+        raise RuntimeError("ANTHROPIC_API_KEY is not set.")
     from anthropic import Anthropic
-    client = Anthropic()
-    return call_llm_json(client, system, prompt, schema, max_tokens=max_tokens)
+    return call_llm_json(Anthropic(), system, prompt, schema, max_tokens=max_tokens)
 
 
 # ───────────────────────────────────────────────────────────────────────
-# Tool implementations (the Editor's hand)
+# Step 1: Rank all headlines + blurbs in one call
 # ───────────────────────────────────────────────────────────────────────
 
-def _default_working_memory() -> dict:
-    return {
-        "pool_quality": "",
-        "coverage_gaps": [],
-        "aggregator_signals": [],
-        "critique_history": [],
-        "loop_telemetry": [],
-        "forced_convergence": {
-            "active": False,
-            "revise_streak": 0,
-            "no_improvement_revise_streak": 0,
-            "last_signature": "",
-            "last_issue_classes": [],
+def rank_headlines(
+    candidates_payload: list[dict],
+    archive_headlines: list[str],
+    today: dt.date,
+) -> dict:
+    prompt = (
+        f"Today is {today.isoformat()}.\n\n"
+        f"Candidate pool ({len(candidates_payload)} stories):\n"
+        f"{json.dumps(candidates_payload, indent=1)}\n\n"
+        f"Already covered (last 30 days):\n"
+        + "\n".join(f"- {h}" for h in archive_headlines[:20] or ["(none)"])
+        + "\n\nScore each 0-100. Return the top 20 ranked by excitement, "
+        "with persona tag (market/everyday/build/industry) and 1-line reason."
+    )
+    schema = {
+        "type": "object",
+        "properties": {
+            "ranked": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "integer"},
+                        "score": {"type": "integer"},
+                        "persona": {"type": "string"},
+                        "reason": {"type": "string"},
+                    },
+                    "required": ["id", "score", "persona"],
+                },
+            },
+            "gaps": {"type": "array", "items": {"type": "string"}},
         },
-        "do_not_repick": {},
-        "finalization_contract": {
-            "active": False,
-            "phase": "off",
-            "targeted_swaps_used": 0,
-        },
-        "editor_notes": "",
-        "decisions": [],
+        "required": ["ranked"],
     }
+    return _llm_json(_RANKER_SYSTEM, prompt, schema, max_tokens=8000)
 
+
+# ───────────────────────────────────────────────────────────────────────
+# Step 2: Pre-fetch bodies (parallel HTTP, no LLM cost)
+# ───────────────────────────────────────────────────────────────────────
+
+def prefetch_bodies(ranked_entries: list[dict], cand_by_id: dict) -> list[dict]:
+    from espresso_agent import fetch_url
+    from bs4 import BeautifulSoup
+    from editorial import MIN_VERIFIED_BODY_CHARS, MIN_RSS_SUMMARY_CHARS
+
+    enriched = []
+    for entry in ranked_entries[:20]:
+        cid = entry["id"]
+        c = cand_by_id.get(cid)
+        if c is None:
+            continue
+
+        url = getattr(c, "url", "") or entry.get("url", "")
+        paywall = getattr(c, "paywall", False)
+        prestige = paywall
+
+        body = ""
+        body_source = ""
+        html = fetch_url(url, use_cache=True, prestige=prestige) if url else None
+        if html:
+            soup = BeautifulSoup(html, "html.parser")
+            for tag in soup(["script", "style", "nav", "header", "footer", "aside"]):
+                tag.decompose()
+            text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True)).strip()
+            if len(text) >= MIN_VERIFIED_BODY_CHARS:
+                body = text[:2500]
+                body_source = "article"
+
+        rss_summary = (getattr(c, "blurb", "") or "").strip()
+        if not body and paywall and len(rss_summary) >= MIN_RSS_SUMMARY_CHARS:
+            body = rss_summary[:2500]
+            body_source = "rss_summary"
+
+        row = dict(entry)
+        row["headline"] = getattr(c, "headline", entry.get("headline", ""))
+        row["source"] = getattr(c, "source_name", entry.get("source", ""))
+        row["url"] = url
+        row["tier"] = getattr(c, "tier", entry.get("tier", 2))
+        row["blurb"] = rss_summary
+        row["paywall"] = paywall
+        row["vertical"] = getattr(c, "vertical", None)
+        row["published_date"] = getattr(c, "published_date", None)
+        row["body"] = body
+        row["body_source"] = body_source
+
+        if body:
+            enriched.append(row)
+            print(f"    body ok ({len(body)} chars): {row['headline'][:60]}", file=sys.stderr)
+        else:
+            print(f"    body fail: {row['headline'][:60]}", file=sys.stderr)
+
+    print(f"  [prefetch] {len(enriched)}/{len(ranked_entries[:20])} bodies fetched", file=sys.stderr)
+    return enriched
+
+
+# ───────────────────────────────────────────────────────────────────────
+# Step 3: Agentic Editor loop
+# ───────────────────────────────────────────────────────────────────────
 
 @dataclass
 class AgentState:
-    """Mutable state the Editor manipulates through tools."""
     today: dt.date
-    needed_slots: list[str]
-    shortlist: list[dict]              # [{id, headline, source, tier, url, vertical, persona}]
-    candidates_by_id: dict[int, Any]   # id -> Candidate
+    candidates: list[dict]
     archive_headlines: list[str]
+    picks: dict[str, dict] = field(default_factory=dict)
     vendor_counts: dict[str, int] = field(default_factory=dict)
-    picks: dict[str, dict] = field(default_factory=dict)  # slot -> shortlist entry
-    extra_candidates: list[dict] = field(default_factory=list)  # added via search_news
-    next_id: int = 10_000              # ids for search-added candidates
-    last_critic_verdict: dict | None = None
-    working_memory: dict = field(default_factory=_default_working_memory)
+    extra_candidates: list[dict] = field(default_factory=list)
+    next_id: int = 10_000
     tool_calls: int = 0
-    soft_budget: int = 25
-    hard_budget: int = 40
+    hard_budget: int = 20
     shipped: bool = False
     trace: list[TraceEvent] = field(default_factory=list)
     search_calls_used: int = 0
-    pick_turn_by_slot: dict[str, int] = field(default_factory=dict)
-    archive_checked_after_pick: bool = False
 
 
-def _current_slate_signature(state: AgentState) -> str:
-    rows = []
-    for slot in sorted(state.picks.keys()):
-        pick = state.picks.get(slot, {})
-        rows.append(f"{slot}:{pick.get('id', '?')}")
-    return "|".join(rows)
-
-
-def _issue_classes(verdict: dict) -> list[str]:
-    blob = " ".join(
-        [str(verdict.get("reason") or "")]
-        + [str(x) for x in (verdict.get("issues") or [])]
-    ).lower()
-    classes: list[str] = []
-    if any(k in blob for k in ["duplicate", "repeat", "same-day", "same event", "same vendor"]):
-        classes.append("duplication_or_vendor")
-    if any(k in blob for k in ["vendor", "concentration", "same-vendor"]):
-        classes.append("vendor_mix")
-    if any(k in blob for k in ["archive", "30d", "cross-edition", "uniqueness"]):
-        classes.append("cross_edition_uniqueness")
-    if any(k in blob for k in ["hook", "subject-line", "jargon", "concrete capability"]):
-        classes.append("quality_hook")
-    return classes
-
-
-def _record_critique_telemetry(state: AgentState, verdict: dict) -> None:
-    forced = state.working_memory.setdefault("forced_convergence", {
-        "active": False,
-        "revise_streak": 0,
-        "no_improvement_revise_streak": 0,
-        "last_signature": "",
-        "last_issue_classes": [],
-    })
-    signature = _current_slate_signature(state)
-    classes = _issue_classes(verdict)
-    verdict_name = (verdict.get("verdict") or "").lower()
-
-    if verdict_name == "revise":
-        forced["revise_streak"] = int(forced.get("revise_streak", 0)) + 1
-        if forced.get("last_signature") == signature:
-            forced["no_improvement_revise_streak"] = int(
-                forced.get("no_improvement_revise_streak", 0)
-            ) + 1
-        else:
-            forced["no_improvement_revise_streak"] = 0
-        forced["last_signature"] = signature
-        forced["last_issue_classes"] = classes
-        forced["active"] = bool(
-            int(forced.get("revise_streak", 0)) >= 3
-            or int(forced.get("no_improvement_revise_streak", 0)) >= 2
-        )
-    elif verdict_name == "approve":
-        forced["active"] = False
-        forced["revise_streak"] = 0
-        forced["no_improvement_revise_streak"] = 0
-        forced["last_signature"] = signature
-        forced["last_issue_classes"] = []
-
-    loop = state.working_memory.setdefault("loop_telemetry", [])
-    loop.append({
-        "verdict": verdict_name,
-        "signature": signature,
-        "issue_classes": classes,
-        "remaining_budget": max(state.hard_budget - state.tool_calls, 0),
-    })
-    state.working_memory["loop_telemetry"] = loop[-12:]
-
-
-def _stall_reason_summary(state: AgentState) -> str:
-    forced = state.working_memory.get("forced_convergence") or {}
-    if forced.get("active"):
-        classes = forced.get("last_issue_classes") or []
-        classes_str = ",".join(classes) if classes else "unknown"
-        return (
-            "revise_loop_no_improvement "
-            f"(revise_streak={forced.get('revise_streak', 0)}, "
-            f"no_improve={forced.get('no_improvement_revise_streak', 0)}, "
-            f"issue_classes={classes_str})"
-        )
-    verdict = (state.last_critic_verdict or {}).get("verdict")
-    if verdict == "revise":
-        return "critic_revise_without_recovery"
-    if len(state.picks) < _min_picks_required(state):
-        return "incomplete_slate"
-    return "unknown_stall"
-
-
-def _needs_finalization_recovery(state: AgentState, min_picks: int) -> bool:
-    if len(state.picks) < min_picks:
-        return False
-    if state.tool_calls >= state.hard_budget:
-        return True
-    verdict = (state.last_critic_verdict or {}).get("verdict")
-    if verdict != "revise":
-        return False
-    forced = state.working_memory.get("forced_convergence") or {}
-    if forced.get("active"):
-        return True
-    return any(
-        ev.kind == "error" and ev.result_summary == "model ended turn without tool_use"
-        for ev in state.trace[-4:]
-    )
-
-
-def _infer_candidate_date(entry: dict) -> dt.date | None:
-    raw = (entry.get("published_date") or "").strip()
-    if raw:
-        try:
-            return dt.date.fromisoformat(raw[:10])
-        except ValueError:
-            pass
-    url_date = infer_date_from_url(entry.get("url") or "")
-    if url_date is not None:
-        return url_date
-    text = " ".join(
-        str(entry.get(k, "") or "")
-        for k in ("body", "blurb", "snippet", "headline")
-    )
-    return infer_date_from_text(text)
+MIN_PICKS = 3
+MAX_PICKS = 6
+MAX_SEARCH_CALLS = 3
 
 
 def _detect_vendor(headline: str, url: str, vendor_patterns) -> str | None:
@@ -524,32 +273,76 @@ def _detect_vendor(headline: str, url: str, vendor_patterns) -> str | None:
     return None
 
 
-# read_candidate — fetch article body so editor can judge depth, not just
-#   headline + blurb. previously returned shortlist row unchanged (no-op).
-# behavior:
-#   - cache hit on disk: instant return
-#   - cache miss: GET with normal user-agent, falls back to browser headers
-#     on 401/403 (same retry path fetch_url already uses)
-#   - body trimmed + tag-stripped to ~2500 chars to keep editor prompt small
-#   - paywalled sources: article URL often 403; fall back to RSS summary on candidate
-#   - fetch failure with no RSS text returns body: null so editor can route
-def tool_read_candidate(state: AgentState, args: dict) -> dict:
-    cid = int(args.get("id", -1))
-    found = next((c for c in state.shortlist + state.extra_candidates if c["id"] == cid), None)
+def _tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
+    cid = args.get("id")
+    reason = args.get("reason", "")
+    persona = args.get("persona", "market")
+
+    if cid is None:
+        return {"error": "missing id"}
+    if len(state.picks) >= MAX_PICKS:
+        return {"error": f"already have {MAX_PICKS} picks; call ship_edition"}
+
+    found = next((c for c in state.candidates + state.extra_candidates if c.get("id") == int(cid)), None)
     if not found:
         return {"error": f"no candidate with id={cid}"}
 
-    # already enriched on a prior turn — return cached body
+    for slot, existing in state.picks.items():
+        if int(existing.get("id", -1)) == int(cid):
+            return {"error": "already picked this candidate"}
+
+    body = (found.get("body") or "").strip()
+    if len(body) < 80:
+        return {"error": "no verified article body; call read_candidate first or pick another"}
+
+    nv = _detect_vendor(found.get("headline", ""), found.get("url", ""), vendor_patterns)
+    if nv and state.vendor_counts.get(nv, 0) >= 2:
+        return {"error": f"vendor cap: {nv} already has 2 stories"}
+
+    slot = f"pick_{len(state.picks) + 1}"
+    found = dict(found)
+    found["pick_reason"] = reason
+    found["persona"] = persona
+    state.picks[slot] = found
+    if nv:
+        state.vendor_counts[nv] = state.vendor_counts.get(nv, 0) + 1
+
+    return {
+        "ok": True,
+        "picked": found.get("headline", ""),
+        "persona": persona,
+        "pick_count": len(state.picks),
+    }
+
+
+def _tool_unpick(state: AgentState, args: dict, vendor_patterns) -> dict:
+    cid = args.get("id")
+    if cid is None:
+        return {"error": "missing id"}
+    for slot, pick in list(state.picks.items()):
+        if int(pick.get("id", -1)) == int(cid):
+            state.picks.pop(slot)
+            nv = _detect_vendor(pick.get("headline", ""), pick.get("url", ""), vendor_patterns)
+            if nv and state.vendor_counts.get(nv, 0) > 0:
+                state.vendor_counts[nv] -= 1
+            return {"ok": True, "removed": pick.get("headline", "")}
+    return {"error": f"no pick with id={cid}"}
+
+
+def _tool_read_candidate(state: AgentState, args: dict) -> dict:
+    cid = int(args.get("id", -1))
+    found = next((c for c in state.candidates + state.extra_candidates if c.get("id") == cid), None)
+    if not found:
+        return {"error": f"no candidate with id={cid}"}
     if found.get("body"):
         return {"candidate": found, "cached": True}
 
-    from editorial import MIN_RSS_SUMMARY_CHARS, MIN_VERIFIED_BODY_CHARS
     from espresso_agent import fetch_url
+    from editorial import MIN_VERIFIED_BODY_CHARS, MIN_RSS_SUMMARY_CHARS
 
     url = found.get("url", "")
     paywall = bool(found.get("paywall"))
-    prestige = paywall or bool(found.get("prestige"))
-    html = fetch_url(url, use_cache=True, prestige=prestige) if url else None
+    html = fetch_url(url, use_cache=True, prestige=paywall) if url else None
 
     body = ""
     body_source = ""
@@ -568,124 +361,40 @@ def tool_read_candidate(state: AgentState, args: dict) -> dict:
         body = rss_summary[:2500]
         body_source = "rss_summary"
 
-    if not body:
-        note = "fetch failed"
-        if paywall and rss_summary:
-            note = f"fetch failed; rss summary too short ({len(rss_summary)} chars)"
-        elif paywall:
-            note = "fetch failed; no rss summary on candidate"
-        return {"candidate": found, "body": None, "note": note}
-
-    found = dict(found)
-    found["body"] = body
-    found["body_source"] = body_source
-    # write back into shortlist/extra so pick() sees verified text
-    for pool in (state.shortlist, state.extra_candidates):
-        for i, c in enumerate(pool):
-            if c.get("id") == cid:
-                pool[i] = found
-                break
-    return {
-        "candidate": found,
-        "body_chars": len(body),
-        "body_source": body_source,
-    }
+    if body:
+        found["body"] = body
+        found["body_source"] = body_source
+        for pool in (state.candidates, state.extra_candidates):
+            for i, c in enumerate(pool):
+                if c.get("id") == cid:
+                    pool[i] = found
+                    break
+    return {"candidate": found, "body_chars": len(body), "body_source": body_source or "none"}
 
 
-# search_news — web search escape hatch when shortlist + archive gap
-# isn't covered by daily fetch. results filtered through allow-list so
-# editor cannot accept SEO listicles (kleap.co, etc).
-# limit: 2 calls per edition.
-# Backends: pplx CLI (Python 3.12+) or Perplexity Sonar API (PERPLEXITY_API_KEY).
+def _tool_search_news(state: AgentState, args: dict) -> dict:
+    query = (args.get("query") or "").strip()
+    if not query:
+        return {"error": "missing query"}
+    if state.search_calls_used >= MAX_SEARCH_CALLS:
+        return {"error": f"search limit reached (max {MAX_SEARCH_CALLS})"}
 
+    from espresso_agent import search_allowed_domains, is_search_domain_allowed
 
-def _domain_from_url(url: str) -> str:
-    netloc = urlparse(url).netloc or ""
-    return netloc.removeprefix("www.")
+    allowed = search_allowed_domains()
+    hits, err = _perplexity_search(query)
+    if hits is None:
+        state.search_calls_used += 1
+        return {"error": f"search failed: {err}"}
 
-
-def _pplx_cli_hits(query: str) -> tuple[list[dict] | None, str | None]:
-    import shutil
-
-    if not shutil.which("pplx"):
-        return None, None
-    try:
-        p = subprocess.run(
-            ["pplx", "search", "web", query],
-            capture_output=True, text=True, timeout=45,
-        )
-        if p.returncode != 0:
-            err = (p.stderr or p.stdout or "").strip()
-            return None, err[-200:] if err else "pplx search failed"
-        for line in p.stdout.splitlines():
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                obj = json.loads(line)
-                if isinstance(obj, dict) and "hits" in obj:
-                    return obj.get("hits") or [], None
-            except json.JSONDecodeError:
-                continue
-        return None, "no hits from pplx"
-    except subprocess.TimeoutExpired:
-        return None, "search timed out"
-
-
-def _perplexity_api_hits(query: str) -> tuple[list[dict] | None, str | None]:
-    """Ranked web results via Perplexity Search API (not Sonar chat completions)."""
-    from load_env import strip_wrapping_quotes
-
-    api_key = strip_wrapping_quotes(
-        os.environ.get("PERPLEXITY_API_KEY") or os.environ.get("PPLX_API_KEY") or ""
-    )
-    if not api_key:
-        return None, None
-    try:
-        api_key.encode("ascii")
-    except UnicodeEncodeError:
-        return None, "Perplexity API key contains non-ASCII characters — re-copy from Perplexity dashboard into .env without smart quotes"
-    headers = {"Authorization": f"Bearer {api_key}"}
-    try:
-        resp = httpx.post(
-            "https://api.perplexity.ai/search",
-            headers=headers,
-            json={"query": query, "max_results": 12},
-            timeout=45,
-        )
-        resp.raise_for_status()
-        data = resp.json()
-    except httpx.HTTPError as exc:
-        return None, f"Perplexity Search API: {exc}"
-    hits = []
-    for row in data.get("results") or []:
-        url = (row.get("url") or "").strip()
-        title = (row.get("title") or "").strip()
-        if not url or not title:
-            continue
-        hits.append({
-            "title": title,
-            "url": url,
-            "snippet": (row.get("snippet") or "")[:200],
-            "domain": _domain_from_url(url),
-        })
-    if not hits:
-        return None, "no hits from Perplexity Search API"
-    return hits, None
-
-
-def _apply_search_hits(state: AgentState, hits: list[dict], allowed: list[str]) -> dict:
-    from espresso_agent import is_search_domain_allowed
-
+    state.search_calls_used += 1
     new_entries = []
-    rejected = []
-    for hit in hits[:12]:
+    for hit in hits[:8]:
         url = hit.get("url", "")
         title = (hit.get("title") or "").strip()
         if not title or not url:
             continue
         if not is_search_domain_allowed(url, allowed):
-            rejected.append(hit.get("domain") or url)
             continue
         url_date = infer_date_from_url(url)
         entry = {
@@ -695,664 +404,132 @@ def _apply_search_hits(state: AgentState, hits: list[dict], allowed: list[str]) 
             "source": hit.get("domain", "web"),
             "tier": 2,
             "vertical": None,
-            "persona": "unknown",
             "via_search": True,
-            "snippet": (hit.get("snippet") or "")[:200],
+            "blurb": (hit.get("snippet") or "")[:200],
             "published_date": url_date.isoformat() if url_date else None,
         }
         state.next_id += 1
         state.extra_candidates.append(entry)
         new_entries.append(entry)
-        if len(new_entries) >= 6:
+        if len(new_entries) >= 5:
             break
-    return {
-        "added": len(new_entries),
-        "entries": new_entries,
-        "rejected_domains": rejected[:5],
-    }
+    return {"added": len(new_entries), "entries": new_entries}
 
 
-_SEARCH_AUTH_FAILURE_MARKERS = (
-    "non-ASCII",
-    "401",
-    "403",
-    "Unauthorized",
-    "Forbidden",
-    "API key",
-    "PERPLEXITY_API_KEY",
-    "pplx CLI not on PATH",
-    "credentials",
-)
-
-
-def _is_search_auth_failure(err_text: str) -> bool:
-    low = err_text.lower()
-    return any(m.lower() in low for m in _SEARCH_AUTH_FAILURE_MARKERS)
-
-
-def tool_search_news(state: AgentState, args: dict) -> dict:
-    query = (args.get("query") or "").strip()
-    if not query:
-        return {"error": "missing query"}
-    limit = _search_call_limit(state)
-    if _search_calls_used(state) >= limit:
-        return {"error": f"search_news limit reached (max {limit} per edition)"}
-
-    import shutil
-    from espresso_agent import search_allowed_domains
-
-    allowed = search_allowed_domains()
-    hits, err = _pplx_cli_hits(query)
-    if hits is None:
-        api_hits, api_err = _perplexity_api_hits(query)
-        if api_hits is not None:
-            hits = api_hits
-        else:
-            parts = []
-            if err:
-                parts.append(f"pplx: {err}")
-            elif not shutil.which("pplx"):
-                parts.append("pplx CLI not on PATH")
-            if api_err:
-                parts.append(api_err)
-            elif not (os.environ.get("PERPLEXITY_API_KEY") or os.environ.get("PPLX_API_KEY")):
-                parts.append("set PERPLEXITY_API_KEY (or install pplx-cli on Python 3.12+)")
-            msg = "search failed — " + "; ".join(parts)
-            if _is_search_auth_failure(msg):
-                return {"error": msg, "auth_failure": True}
-            state.search_calls_used += 1
-            return {"error": msg}
-    state.search_calls_used += 1
-    return _apply_search_hits(state, hits, allowed)
-
-
-def tool_check_archive(state: AgentState, args: dict) -> dict:
-    state.archive_checked_after_pick = True
-    headline = (args.get("headline") or "").lower()
-    if not headline:
-        return {"error": "missing headline"}
-    # Token overlap fuzzy match
-    h_tokens = set(re.findall(r"[a-z0-9]+", headline))
-    matches = []
-    for old in state.archive_headlines:
-        o_tokens = set(re.findall(r"[a-z0-9]+", old.lower()))
-        if not o_tokens:
-            continue
-        overlap = len(h_tokens & o_tokens) / max(len(h_tokens | o_tokens), 1)
-        if overlap >= 0.45:
-            matches.append({"archived_headline": old, "overlap": round(overlap, 2)})
-    return {"matches": matches, "is_duplicate": bool(matches)}
-
-
-def tool_pick(state: AgentState, args: dict, vendor_patterns, rules: dict | None = None) -> dict:
-    slot = args.get("slot")
-    cid = args.get("id")
-    reason = args.get("reason", "")
-    if slot not in state.needed_slots:
-        return {"error": f"invalid slot {slot!r}; needed: {state.needed_slots}"}
-    if cid is None:
-        return {"error": "missing id"}
-    do_not_repick = state.working_memory.setdefault("do_not_repick", {})
-    blocked_ids = set(do_not_repick.get(slot, []))
-    if int(cid) in blocked_ids:
-        return {
-            "error": (
-                "do-not-repick guard: this candidate was just unpicked after a revise verdict. "
-                "Choose a different candidate for this slot."
-            ),
-            "candidate_id": int(cid),
-        }
-    found = next((c for c in state.shortlist + state.extra_candidates if c["id"] == int(cid)), None)
-    if not found:
-        return {"error": f"no candidate with id={cid}"}
-    source_name = (found.get("source") or "").strip().lower()
-    if slot == "business" and "hacker news" in source_name:
-        return {
-            "error": (
-                "business slot requires a primary source; Hacker News-linked stories are not allowed here"
-            ),
-            "candidate_id": int(cid),
-        }
-    for existing_slot, existing_pick in state.picks.items():
-        if existing_slot == slot:
-            continue
-        same_id = int(existing_pick.get("id", -1)) == int(found["id"])
-        same_url = (existing_pick.get("url") or "").strip().lower() == (
-            found.get("url") or ""
-        ).strip().lower()
-        same_headline = (existing_pick.get("headline") or "").strip().lower() == (
-            found.get("headline") or ""
-        ).strip().lower()
-        if same_id or same_url or same_headline:
-            return {
-                "error": (
-                    "duplicate story across slots is not allowed; pick a distinct "
-                    "candidate for this slot"
-                ),
-                "conflict_slot": existing_slot,
-            }
-    from editorial import validate_pick_has_body
-
-    pick_issues = validate_pick_has_body(found)
-    if pick_issues:
-        return {"error": "; ".join(pick_issues), "candidate_id": cid}
-    cfg = rules or {}
-    if bool(found.get("paywall")) and not bool(cfg.get("allow_paywalled_stories", False)):
-        return {
-            "error": "paywalled story blocked by policy; choose a non-paywalled source",
-            "candidate_id": cid,
-        }
-    max_age_days = int(cfg.get("max_story_age_days", 4))
-    published = _infer_candidate_date(found)
-    if published is not None:
-        age = (state.today - published).days
-        if age > max_age_days:
-            return {
-                "error": (
-                    f"stale story: {age} days old exceeds max_story_age_days={max_age_days}. "
-                    "Pick a fresher candidate."
-                ),
-                "candidate_id": cid,
-                "published_date": published.isoformat(),
-            }
-    # Bookkeeping: if slot was previously picked, decrement old vendor
-    if slot in state.picks:
-        old = state.picks[slot]
-        ov = _detect_vendor(old["headline"], old["url"], vendor_patterns)
-        if ov and state.vendor_counts.get(ov, 0) > 0:
-            state.vendor_counts[ov] -= 1
-    vendor_cap = int(cfg.get("vendor_cap", 2))
-    nv = _detect_vendor(found["headline"], found["url"], vendor_patterns)
-    if nv and state.vendor_counts.get(nv, 0) >= vendor_cap:
-        return {
-            "error": (
-                f"vendor cap exceeded — {nv} already has {vendor_cap} stories. "
-                "Pick a different vendor."
-            )
-        }
-    found = dict(found)
-    found["pick_reason"] = reason
-    state.picks[slot] = found
-    state.pick_turn_by_slot[slot] = state.tool_calls
-    state.archive_checked_after_pick = False
-    contract = state.working_memory.setdefault("finalization_contract", {})
-    if contract.get("active") and contract.get("phase") == "await_targeted_swap":
-        min_picks = _min_picks_required(state)
-        if len(state.picks) >= min_picks:
-            used = int(contract.get("targeted_swaps_used", 0))
-            contract["targeted_swaps_used"] = used + 1
-            contract["phase"] = "await_recritique"
-            state.working_memory["finalization_contract"] = contract
-    if nv:
-        state.vendor_counts[nv] = state.vendor_counts.get(nv, 0) + 1
-    return {
-        "ok": True,
-        "slot": slot,
-        "picked": found,
-        "reason": reason,
-        "current_picks": {s: p["headline"] for s, p in state.picks.items()},
-        "vendor_counts": dict(state.vendor_counts),
-    }
-
-
-def tool_unpick(state: AgentState, args: dict, vendor_patterns) -> dict:
-    slot = args.get("slot")
-    if slot not in state.picks:
-        return {"error": f"nothing picked for slot {slot!r}"}
-    pick_turn = state.pick_turn_by_slot.get(slot)
-    if (
-        pick_turn is not None
-        and pick_turn == state.tool_calls - 1
-        and not state.archive_checked_after_pick
-    ):
-        return {
-            "error": (
-                "you just picked this slot; commit to it and call self_critique, "
-                "or read_candidate / search_news for new information before unpicking. "
-                "Don't pick-then-unpick without new signal."
-            ),
-        }
-    old = state.picks.pop(slot)
-    if (state.last_critic_verdict or {}).get("verdict") == "revise":
-        do_not_repick = state.working_memory.setdefault("do_not_repick", {})
-        slot_block = set(do_not_repick.get(slot, []))
-        slot_block.add(int(old.get("id", -1)))
-        do_not_repick[slot] = sorted(x for x in slot_block if x >= 0)
-        state.working_memory["do_not_repick"] = do_not_repick
-    ov = _detect_vendor(old["headline"], old["url"], vendor_patterns)
-    if ov and state.vendor_counts.get(ov, 0) > 0:
-        state.vendor_counts[ov] -= 1
-    state.pick_turn_by_slot.pop(slot, None)
-    return {"ok": True, "unpicked": old}
-
-
-def _search_calls_used(state: AgentState) -> int:
-    return state.search_calls_used
-
-
-def _search_call_limit(state: AgentState) -> int:
-    # Weak pools need extra discovery room; aggregator signal gaps get one bonus search.
-    base = 4 if _weak_pool_waiver(state) else 3
-    has_aggregator_signal = bool(state.working_memory.get("aggregator_signals"))
-    return base + 1 if has_aggregator_signal else base
-
-
-_AGGREGATOR_SIGNAL_PATTERNS: dict[str, re.Pattern[str]] = {
-    "cursor_composer": re.compile(r"\bcursor\b|\bcomposer\b", re.IGNORECASE),
-    "odyssey_world_models": re.compile(r"\bodyssey\b|\bstarchild\b|\bagora\b", re.IGNORECASE),
-    "chatgpt_finance": re.compile(
-        r"chatgpt.*bank|personal finance|connect(?:ing)? (?:a )?bank account",
-        re.IGNORECASE,
-    ),
-    "terminal_agents_learning": re.compile(
-        r"terminal agents?|learn from (?:their )?failed commands?",
-        re.IGNORECASE,
-    ),
-    "musk_openai_lawsuit": re.compile(
-        r"musk.*lawsuit.*openai|lawsuit.*openai.*musk",
-        re.IGNORECASE,
-    ),
-}
-
-
-def _uncovered_aggregator_signals(candidates: list) -> list[str]:
-    """Return high-signal aggregator themes not present in primary-source candidates."""
-    agg_text = "\n".join(
-        f"{c.headline}\n{getattr(c, 'blurb', '')}\n{c.url}"
-        for c in candidates
-        if getattr(c, "aggregator", False)
+def _perplexity_search(query: str) -> tuple[list[dict] | None, str | None]:
+    from load_env import strip_wrapping_quotes
+    api_key = strip_wrapping_quotes(
+        os.environ.get("PERPLEXITY_API_KEY") or os.environ.get("PPLX_API_KEY") or ""
     )
-    primary_text = "\n".join(
-        f"{c.headline}\n{getattr(c, 'blurb', '')}\n{c.url}"
-        for c in candidates
-        if not getattr(c, "aggregator", False)
-    )
-    if not agg_text:
-        return []
+    if not api_key:
+        return None, "PERPLEXITY_API_KEY not set"
+    try:
+        api_key.encode("ascii")
+    except UnicodeEncodeError:
+        return None, "API key contains non-ASCII"
 
-    uncovered: list[str] = []
-    for label, pattern in _AGGREGATOR_SIGNAL_PATTERNS.items():
-        if pattern.search(agg_text) and not pattern.search(primary_text):
-            uncovered.append(label)
-    return uncovered
-
-
-_LEGAL_OUTCOME_RE = re.compile(
-    r"\b(jury|verdict|ruling|injunction|dismiss(?:ed|al)?|appeal|lawsuit|court|trial|settle(?:ment|d)?)\b",
-    re.IGNORECASE,
-)
-_LEGAL_CONSEQUENCE_RE = re.compile(
-    r"\b(governance|control|ownership|access|distribution|damages|enforce|partnership|market|product|platform|nonprofit|for-profit|restructur(?:e|ing)|board|charter|public benefit)\b",
-    re.IGNORECASE,
-)
-_LEGAL_AI_ENTITY_RE = re.compile(
-    r"\b(openai|anthropic|google|deepmind|meta|microsoft|xai|mistral|cohere|cursor|sam altman|elon musk)\b",
-    re.IGNORECASE,
-)
-
-
-def _is_high_impact_legal_candidate(candidate: Any) -> bool:
-    text = " ".join(
-        [
-            str(getattr(candidate, "headline", "") or ""),
-            str(getattr(candidate, "blurb", "") or ""),
-            str(getattr(candidate, "url", "") or ""),
-        ]
-    )
-    return bool(
-        _LEGAL_OUTCOME_RE.search(text)
-        and _LEGAL_AI_ENTITY_RE.search(text)
-        and _LEGAL_CONSEQUENCE_RE.search(text)
-    )
-
-
-def _inject_high_impact_legal_candidate(
-    capped: list,
-    fresh: list,
-    per_source: dict[str, int],
-    max_total: int = 60,
-    max_per_source: int = 4,
-) -> None:
-    """Ensure one high-impact legal candidate reaches Scout when present."""
-    if any(_is_high_impact_legal_candidate(c) for c in capped):
-        return
-    legal = next((c for c in fresh if _is_high_impact_legal_candidate(c)), None)
-    if legal is None:
-        return
-
-    legal_source = getattr(legal, "source_name", "")
-    if len(capped) < max_total and per_source.get(legal_source, 0) < max_per_source:
-        capped.append(legal)
-        per_source[legal_source] = per_source.get(legal_source, 0) + 1
-        return
-
-    for i in range(len(capped) - 1, -1, -1):
-        victim = capped[i]
-        victim_source = getattr(victim, "source_name", "")
-        if _is_high_impact_legal_candidate(victim):
-            continue
-        if victim_source == legal_source and per_source.get(legal_source, 0) >= max_per_source:
-            continue
-        capped[i] = legal
-        if victim_source:
-            per_source[victim_source] = max(0, per_source.get(victim_source, 1) - 1)
-        per_source[legal_source] = per_source.get(legal_source, 0) + 1
-        return
-
-
-def _weak_pool_waiver(state: AgentState) -> bool:
-    pool = (state.working_memory.get("pool_quality") or "").lower()
-    notes = (state.working_memory.get("editor_notes") or "").strip()
-    return "weak" in pool and bool(notes)
-
-
-def _min_picks_required(state: AgentState) -> int:
-    required = len(state.needed_slots)
-    if _weak_pool_waiver(state) and required >= 4:
-        return required - 1
-    return required
-
-
-def _tier1_counts(state: AgentState, need_t1: int) -> tuple[int, bool]:
-    have = sum(1 for p in state.picks.values() if int(p.get("tier", 99)) == 1)
-    return have, have >= need_t1
-
-
-def _compress_shortlist_brief(state: AgentState) -> str:
-    lines = []
-    for c in state.shortlist[:15]:
-        lines.append(
-            f"id={c['id']} score={c.get('score', '?')} "
-            f"[{c.get('persona', '?')}] {c['headline']} ({c['source']}, t{c.get('tier', '?')})"
+    try:
+        resp = httpx.post(
+            "https://api.perplexity.ai/search",
+            headers={"Authorization": f"Bearer {api_key}"},
+            json={"query": query, "max_results": 12},
+            timeout=45,
         )
-    for c in state.extra_candidates[:8]:
-        lines.append(f"id={c['id']} [search] {c['headline']} ({c['source']})")
-    return "\n".join(lines) if lines else "(empty)"
+        resp.raise_for_status()
+        data = resp.json()
+    except httpx.HTTPError as exc:
+        return None, f"Perplexity API: {exc}"
+
+    hits = []
+    for row in data.get("results") or []:
+        url = (row.get("url") or "").strip()
+        title = (row.get("title") or "").strip()
+        if not url or not title:
+            continue
+        domain = urlparse(url).netloc.removeprefix("www.")
+        hits.append({"title": title, "url": url, "snippet": (row.get("snippet") or "")[:200], "domain": domain})
+    return hits or None, "no results" if not hits else None
 
 
-def validate_ship_gates(state: AgentState, rules: dict) -> dict:
-    """Deterministic ship_edition checks. Returns {ok, errors, warnings}."""
-    need_t1 = rules.get("tier1_minimum", 1)
-    max_non_load_bearing_cards = int(rules.get("max_non_load_bearing_cards", 1))
-    min_picks = _min_picks_required(state)
-    have_t1, tier1_ok = _tier1_counts(state, need_t1)
-    critic_ok = (state.last_critic_verdict or {}).get("verdict") == "approve"
-    pick_count = len(state.picks)
-    picks_ok = pick_count >= min_picks
-    missing = [s for s in state.needed_slots if s not in state.picks]
-
+def _validate_ship(state: AgentState) -> dict:
     errors = []
-    allowed_missing = max(len(state.needed_slots) - min_picks, 0)
-    if not picks_ok:
-        errors.append(
-            f"need {min_picks} pick(s), have {pick_count}; missing slots: {missing}"
-        )
-    elif len(missing) > allowed_missing:
-        errors.append(f"unfilled required slots: {missing}")
-    if not tier1_ok:
-        errors.append(f"need {need_t1} tier-1 pick(s), have {have_t1}")
-    if not critic_ok:
-        verdict = (state.last_critic_verdict or {}).get("verdict", "none")
-        errors.append(
-            f"self_critique must approve before ship (last verdict: {verdict})"
-        )
-    from editorial import validate_pick_has_body
+    if len(state.picks) < MIN_PICKS:
+        errors.append(f"need {MIN_PICKS}+ picks, have {len(state.picks)}")
+
+    have_t1 = sum(1 for p in state.picks.values() if int(p.get("tier", 99)) == 1)
+    if have_t1 < 1:
+        errors.append(f"need 1+ tier-1 pick, have {have_t1}")
 
     for slot, pick in state.picks.items():
-        for issue in validate_pick_has_body(pick):
-            errors.append(f"[{slot}] {issue}")
+        body = (pick.get("body") or "").strip()
+        if len(body) < 80:
+            errors.append(f"[{slot}] no verified body")
 
     from constitution import constitution_violations
-
-    non_load_bearing_slots: list[str] = []
+    non_load_bearing = 0
     for slot, pick in state.picks.items():
         for reason in constitution_violations(
-            pick.get("headline", ""),
-            pick.get("blurb"),
-            source_name=pick.get("source"),
+            pick.get("headline", ""), pick.get("blurb"), source_name=pick.get("source"),
         ):
             if reason.startswith("AI is not load-bearing"):
-                non_load_bearing_slots.append(slot)
+                non_load_bearing += 1
                 continue
             errors.append(f"[{slot}] constitution: {reason}")
 
-    if len(non_load_bearing_slots) > max_non_load_bearing_cards:
-        errors.append(
-            "constitution: too many non-load-bearing stories "
-            f"({len(non_load_bearing_slots)} > {max_non_load_bearing_cards})"
-        )
+    if non_load_bearing > 1:
+        errors.append(f"too many non-load-bearing stories ({non_load_bearing} > 1)")
 
-    return {"ok": not errors, "errors": errors, "tier1_count": have_t1, "pick_count": pick_count}
+    return {"ok": not errors, "errors": errors, "pick_count": len(state.picks)}
 
 
-def tool_update_memory(state: AgentState, args: dict) -> dict:
-    key = (args.get("key") or "").strip()
-    value = args.get("value")
-    if not key:
-        return {"error": "missing key"}
-    allowed = {"pool_quality", "coverage_gaps", "editor_notes", "decisions"}
-    if key not in allowed:
-        return {"error": f"invalid key {key!r}; allowed: {sorted(allowed)}"}
-    if key == "decisions" and isinstance(value, str):
-        state.working_memory.setdefault("decisions", []).append(value)
-    elif key == "coverage_gaps" and isinstance(value, list):
-        state.working_memory["coverage_gaps"] = value
-    else:
-        state.working_memory[key] = value
-    return {"ok": True, "working_memory": state.working_memory}
-
-
-def tool_note_weak_pool(state: AgentState, args: dict) -> dict:
-    reason = (args.get("reason") or "").strip()
-    adjustments = (args.get("adjustments") or "").strip()
-    if not reason:
-        return {"error": "missing reason"}
-    note = reason
-    if adjustments:
-        note = f"{reason} Adjustments: {adjustments}"
-    state.working_memory["editor_notes"] = note
-    if "weak" not in (state.working_memory.get("pool_quality") or "").lower():
-        state.working_memory["pool_quality"] = (
-            (state.working_memory.get("pool_quality") or "").strip() + " weak pool"
-        ).strip()
-    min_picks = _min_picks_required(state)
-    result: dict = {"ok": True, "editor_notes": note}
-    if len(state.picks) < min_picks:
-        # Room to pick + critique + ship after documenting a thin day.
-        state.hard_budget = min(state.hard_budget + 12, 56)
-        result["budget_extended_to"] = state.hard_budget
-        result["required_next"] = [
-            f"pick {min_picks} stories into slots",
-            "self_critique",
-            "ship_edition",
-        ]
-        result["reminder"] = (
-            f"Slate has {len(state.picks)} pick(s); need {min_picks} before shipping. "
-            "Do not spend remaining budget on unpick/read loops."
-        )
-    return result
-
-
-def tool_self_critique(state: AgentState, args: dict) -> dict:
-    from editorial import MIN_VERIFIED_BODY_CHARS, candidate_has_verified_body
-
-    min_picks = _min_picks_required(state)
-    if len(state.picks) < min_picks:
-        return {
-            "error": f"need {min_picks} pick(s) before self_critique; have {len(state.picks)}",
-            "missing_slots": [s for s in state.needed_slots if s not in state.picks],
-        }
-    unverified = [
-        f"{slot}: no verified article body (read_candidate before pick)"
-        for slot, p in state.picks.items()
-        if not candidate_has_verified_body(p)
-    ]
-    if unverified:
-        verdict = {
-            "verdict": "revise",
-            "reason": "One or more picks lack fetched article text; cannot approve unverified stories.",
-            "issues": unverified,
-        }
-        state.last_critic_verdict = verdict
-        _record_critique_telemetry(state, verdict)
-        return verdict
-
-    picks_payload = []
-    for s, p in state.picks.items():
-        body = (p.get("body") or "").strip()
-        picks_payload.append({
-            "slot": s,
-            "headline": p["headline"],
-            "source": p["source"],
-            "url": p["url"],
-            "tier": p["tier"],
-            "body_chars": len(body),
-            "body_source": p.get("body_source") or ("article" if body else "none"),
-            "verified": candidate_has_verified_body(p),
-            "paywall": bool(p.get("paywall")),
-            "editor_reason": (p.get("pick_reason") or "")[:300],
-            "body_excerpt": body[:400] + ("…" if len(body) > 400 else ""),
-        })
-    pool_brief = _compress_shortlist_brief(state)
-    edition_mode = f"Standard 4-story edition: {len(state.picks)} picks."
-    prompt = (
-        f"Today is {state.today.isoformat()}. {edition_mode}\n\n"
-        f"The Editor picked:\n\n"
-        f"{json.dumps(picks_payload, indent=2)}\n\n"
-        f"Other shortlist options:\n{pool_brief}\n\n"
-        f"Working memory: {json.dumps(state.working_memory, indent=2)}\n\n"
-        f"Recent editions (last 30d):\n"
-        + "\n".join(f"- {h}" for h in (state.archive_headlines[:10] or ["(none)"]))
-        + "\n\nReturn verdict, reason, and issues array (empty if approve)."
-    )
-    schema = {
-        "type": "object",
-        "properties": {
-            "verdict": {"type": "string"},
-            "reason": {"type": "string"},
-            "issues": {"type": "array", "items": {"type": "string"}},
-        },
-        "required": ["verdict", "reason"],
-    }
-    try:
-        verdict = llm_json(CRITIC_SYSTEM, prompt, schema, max_tokens=6000)
-    except Exception as e:
-        return {
-            "error": f"self_critique LLM failed: {e}",
-            "hint": "fix picks or retry self_critique",
-        }
-    state.last_critic_verdict = verdict
-    _record_critique_telemetry(state, verdict)
-    history = state.working_memory.setdefault("critique_history", [])
-    history.append({
-        "verdict": verdict.get("verdict"),
-        "reason": (verdict.get("reason") or "")[:200],
-    })
-    state.working_memory["critique_history"] = history[-5:]
-    contract = state.working_memory.setdefault("finalization_contract", {})
-    if contract.get("active"):
-        if (verdict.get("verdict") or "").lower() == "approve":
-            contract["phase"] = "await_ship"
-        else:
-            contract["phase"] = "await_targeted_swap"
-            contract["targeted_swaps_used"] = 0
-        state.working_memory["finalization_contract"] = contract
-    forced = state.working_memory.get("forced_convergence") or {}
-    if forced.get("active") and (verdict.get("verdict") or "").lower() == "revise":
-        contract = state.working_memory.setdefault("finalization_contract", {})
-        contract["active"] = True
-        contract["phase"] = "await_targeted_swap"
-        contract["targeted_swaps_used"] = 0
-        state.working_memory["finalization_contract"] = contract
-    state.trace.append(TraceEvent(
-        ts=time.time(), role="critic", kind="handoff",
-        result_summary=f"{verdict.get('verdict')}: {verdict.get('reason', '')[:120]}",
-    ))
-    return verdict
-
-
-def tool_ship_edition(state: AgentState, args: dict, rules: dict) -> dict:
-    gate = validate_ship_gates(state, rules)
+def _tool_ship(state: AgentState, args: dict) -> dict:
+    gate = _validate_ship(state)
     if not gate["ok"]:
-        min_picks = _min_picks_required(state)
-        if (state.last_critic_verdict or {}).get("verdict") == "approve":
-            state.last_critic_verdict = None
-            state.trace.append(TraceEvent(
-                ts=time.time(), role="system", kind="constitution_gate_overrule",
-                result_summary="ship_edition blocked: " + "; ".join(gate["errors"][:3]),
-            ))
         return {"shipped": False, "errors": gate["errors"]}
     state.shipped = True
     state.trace.append(TraceEvent(
         ts=time.time(), role="editor", kind="finalize",
-        result_summary=(
-            f"shipped {gate['pick_count']} picks; "
-            f"tier1={gate['tier1_count']}; critic=approve"
-        ),
+        result_summary=f"shipped {gate['pick_count']} stories",
     ))
     return {"shipped": True, "picks": {s: p["headline"] for s, p in state.picks.items()}}
 
 
-# ───────────────────────────────────────────────────────────────────────
-# Scout — produces the shortlist
-# ───────────────────────────────────────────────────────────────────────
-
-def run_scout(
-    today: dt.date,
-    candidates_payload: list[dict],
-    archive_headlines: list[str],
-) -> dict:
-    """Returns: {shortlist: [{id, headline, ..., score, persona, why}], gaps: [str]}"""
-    prompt = (
-        f"Today is {today.isoformat()}.\n\n"
-        f"Candidate pool ({len(candidates_payload)} items):\n"
-        f"{json.dumps(candidates_payload, indent=2)}\n\n"
-        f"Already covered (last 30 days):\n"
-        + "\n".join(f"- {h}" for h in archive_headlines[:20] or ["(none)"])
-        + "\n\nReturn the strongest 12-15 stories ranked, with persona tag "
-        "and 1-line `why`. Then list 0-3 GAPS — kinds of stories the pool "
-        "is missing today (e.g. \"no consumer/lifestyle angle\", \"all model releases, no human outcomes\")."
-    )
-    schema = {
-        "type": "object",
-        "properties": {
-            "shortlist": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "id": {"type": "integer"},
-                        "score": {"type": "integer"},
-                        "persona": {"type": "string"},
-                        "why": {"type": "string"},
-                    },
-                    "required": ["id", "score", "persona"],
-                },
-            },
-            "gaps": {"type": "array", "items": {"type": "string"}},
-        },
-        "required": ["shortlist"],
-    }
-    return llm_json(SCOUT_SYSTEM, prompt, schema, max_tokens=12000)
-
-
-# ───────────────────────────────────────────────────────────────────────
-# Native tool schemas + dispatch
-# ───────────────────────────────────────────────────────────────────────
-
 EDITOR_TOOLS: list[dict] = [
     {
-        "name": "read_candidate",
-        "description": "Fetch article body for a shortlist candidate id.",
+        "name": "pick",
+        "description": "Select a candidate for the edition.",
         "input_schema": {
             "type": "object",
-            "properties": {"id": {"type": "integer", "description": "Candidate id"}},
+            "properties": {
+                "id": {"type": "integer", "description": "Candidate id"},
+                "reason": {"type": "string", "description": "Why this story"},
+                "persona": {"type": "string", "enum": ["market", "everyday", "build", "industry"],
+                            "description": "Rendering label"},
+            },
+            "required": ["id", "reason", "persona"],
+        },
+    },
+    {
+        "name": "unpick",
+        "description": "Remove a previously picked candidate by id.",
+        "input_schema": {
+            "type": "object",
+            "properties": {"id": {"type": "integer"}},
+            "required": ["id"],
+        },
+    },
+    {
+        "name": "read_candidate",
+        "description": "Fetch article body for a candidate not in the pre-fetched set.",
+        "input_schema": {
+            "type": "object",
+            "properties": {"id": {"type": "integer"}},
             "required": ["id"],
         },
     },
     {
         "name": "search_news",
-        "description": "Web search beyond the daily fetch (bounded calls per edition).",
+        "description": "Web search for stories not in the candidate pool (max 3 per edition).",
         "input_schema": {
             "type": "object",
             "properties": {"query": {"type": "string"}},
@@ -1360,199 +537,63 @@ EDITOR_TOOLS: list[dict] = [
         },
     },
     {
-        "name": "check_archive",
-        "description": "Fuzzy-check headline against last 30 days of editions.",
-        "input_schema": {
-            "type": "object",
-            "properties": {"headline": {"type": "string"}},
-            "required": ["headline"],
-        },
-    },
-    {
-        "name": "pick",
-        "description": "Assign a candidate to a slot.",
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "slot": {"type": "string", "enum": ["business", "beginner", "engineer", "cross"]},
-                "id": {"type": "integer"},
-                "reason": {"type": "string"},
-            },
-            "required": ["slot", "id", "reason"],
-        },
-    },
-    {
-        "name": "unpick",
-        "description": "Remove the pick from a slot.",
-        "input_schema": {
-            "type": "object",
-            "properties": {"slot": {"type": "string"}},
-            "required": ["slot"],
-        },
-    },
-    {
-        "name": "update_memory",
-        "description": "Update working memory (pool_quality, coverage_gaps, editor_notes, decisions).",
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "key": {
-                    "type": "string",
-                    "enum": ["pool_quality", "coverage_gaps", "editor_notes", "decisions"],
-                },
-                "value": {},
-            },
-            "required": ["key", "value"],
-        },
-    },
-    {
-        "name": "note_weak_pool",
-        "description": "Document weak-pool constraints and request a focused completion path.",
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "reason": {"type": "string"},
-                "adjustments": {"type": "string"},
-            },
-            "required": ["reason"],
-        },
-    },
-    {
-        "name": "self_critique",
-        "description": "Review current picks against the editorial rubric.",
-        "input_schema": {"type": "object", "properties": {}},
-    },
-    {
         "name": "ship_edition",
-        "description": "Finalize and end the loop after self_critique approves.",
+        "description": "Finalize the edition. Requires 3+ picks with verified bodies.",
         "input_schema": {"type": "object", "properties": {}},
     },
 ]
 
 
-def dispatch_tool(
-    name: str,
-    tool_input: dict,
-    state: AgentState,
-    vendor_patterns,
-    rules: dict,
-) -> dict:
-    contract = state.working_memory.get("finalization_contract") or {}
-    if contract.get("active"):
-        phase = contract.get("phase", "off")
-        min_picks = _min_picks_required(state)
-        slate_complete = len(state.picks) >= min_picks
-        if len(state.picks) >= min_picks and name in {"read_candidate", "search_news", "check_archive"}:
-            return {
-                "error": (
-                    "finalization contract active: exploration is frozen until "
-                    "self_critique/ship flow completes."
-                ),
-            }
-        if phase == "await_critique" and name != "self_critique":
-            return {"error": "finalization contract: call self_critique first"}
-        if phase == "await_ship" and name != "ship_edition":
-            return {"error": "finalization contract: critic approved; call ship_edition"}
-        if phase == "await_targeted_swap":
-            if not slate_complete:
-                if name == "ship_edition":
-                    return {
-                        "error": (
-                            "finalization contract: complete the required slate before "
-                            "self_critique/ship"
-                        ),
-                    }
-            elif name not in {"pick", "unpick"}:
-                return {"error": "finalization contract: apply one targeted swap before re-critique"}
-            if slate_complete and name == "pick" and int(contract.get("targeted_swaps_used", 0)) >= 1:
-                return {"error": "finalization contract: targeted swap already used; call self_critique"}
-        if phase == "await_recritique" and slate_complete and name != "self_critique":
-            return {"error": "finalization contract: call self_critique after targeted swap"}
-
-    if (
-        (state.last_critic_verdict or {}).get("verdict") == "approve"
-        and not state.shipped
-        and name != "ship_edition"
-    ):
-        return {
-            "error": "critic approved — call ship_edition now; other tools are locked",
-        }
-
-    if name == "read_candidate":
-        return tool_read_candidate(state, tool_input)
-    if name == "search_news":
-        return tool_search_news(state, tool_input)
-    if name == "check_archive":
-        return tool_check_archive(state, tool_input)
+def _dispatch_tool(name: str, args: dict, state: AgentState, vendor_patterns) -> dict:
     if name == "pick":
-        return tool_pick(state, tool_input, vendor_patterns, rules)
+        return _tool_pick(state, args, vendor_patterns)
     if name == "unpick":
-        return tool_unpick(state, tool_input, vendor_patterns)
-    if name == "update_memory":
-        return tool_update_memory(state, tool_input)
-    if name == "note_weak_pool":
-        return tool_note_weak_pool(state, tool_input)
-    if name == "self_critique":
-        return tool_self_critique(state, tool_input)
+        return _tool_unpick(state, args, vendor_patterns)
+    if name == "read_candidate":
+        return _tool_read_candidate(state, args)
+    if name == "search_news":
+        return _tool_search_news(state, args)
     if name == "ship_edition":
-        return tool_ship_edition(state, tool_input, rules)
+        return _tool_ship(state, args)
     return {"error": f"unknown tool {name!r}"}
 
 
-def _budget_warning(state: AgentState) -> str | None:
-    if state.tool_calls >= state.soft_budget:
-        return (
-            f"soft budget warning: {state.tool_calls}/{state.hard_budget} tool calls used"
+def _build_editor_brief(state: AgentState, gaps: list[str]) -> str:
+    lines = []
+    for c in state.candidates[:20]:
+        body_preview = (c.get("body") or "")[:200]
+        lines.append(
+            f"id={c['id']} score={c.get('score', '?')} [{c.get('persona', '?')}] "
+            f"{c['headline']} ({c.get('source', '?')}, t{c.get('tier', '?')})\n"
+            f"  blurb: {(c.get('blurb') or '')[:120]}\n"
+            f"  body: {body_preview}{'...' if len(body_preview) >= 200 else ''}"
         )
-    return None
+    candidates_block = "\n".join(lines) if lines else "(empty)"
 
-
-def _build_initial_brief(state: AgentState, gaps: list[str]) -> str:
-    if gaps and not state.working_memory.get("coverage_gaps"):
-        state.working_memory["coverage_gaps"] = gaps
-    critic_line = ""
-    if state.last_critic_verdict:
-        critic_line = f"\nLast self_critique: {json.dumps(state.last_critic_verdict)}\n"
     return (
         f"Today is {state.today.isoformat()}.\n"
-        f"Needed slots: {state.needed_slots}\n"
-        f"Scout coverage gaps: {gaps or '(none)'}\n\n"
-        f"SHORTLIST:\n{_compress_shortlist_brief(state)}\n\n"
-        f"Working memory: {json.dumps(state.working_memory, indent=2)}\n"
-        f"Current picks: {json.dumps({s: p['headline'] for s, p in state.picks.items()})}\n"
-        f"Vendor counts: {json.dumps(state.vendor_counts)}\n"
-        f"{critic_line}\n"
-        "Select today's edition using tools. Call ship_edition when ready."
+        f"Coverage gaps from ranking: {gaps or '(none)'}\n\n"
+        f"CANDIDATES (pre-ranked, bodies pre-fetched):\n{candidates_block}\n\n"
+        f"Archive (last 30d): {', '.join(state.archive_headlines[:10]) or '(none)'}\n\n"
+        "Select 3-6 stories using tools. Call ship_edition when ready."
     )
 
 
-def _anthropic_client():
+def _run_editor_loop(state: AgentState, vendor_patterns) -> bool:
     from espresso_agent import USE_ANTHROPIC, CLAUDE_MODEL
     if not USE_ANTHROPIC:
-        raise RuntimeError(
-            "ANTHROPIC_API_KEY is not set. The Editor loop requires Anthropic credentials."
-        )
+        raise RuntimeError("ANTHROPIC_API_KEY not set")
     from anthropic import Anthropic
-    return Anthropic(), CLAUDE_MODEL
 
+    client = Anthropic()
+    model = CLAUDE_MODEL
+    messages: list[dict] = [{"role": "user", "content": _build_editor_brief(state, [])}]
 
-def _run_tool_agent_loop(
-    client,
-    model: str,
-    messages: list[dict],
-    state: AgentState,
-    vendor_patterns,
-    rules: dict,
-) -> bool:
-    """One native tool_use loop until ship or hard budget."""
     while state.tool_calls < state.hard_budget and not state.shipped:
         try:
             resp = client.messages.create(
-                model=model,
-                max_tokens=8000,
-                system=EDITOR_SYSTEM,
-                messages=messages,
-                tools=EDITOR_TOOLS,
+                model=model, max_tokens=4000, system=_EDITOR_SYSTEM,
+                messages=messages, tools=EDITOR_TOOLS,
             )
         except Exception as e:
             state.trace.append(TraceEvent(
@@ -1564,6 +605,8 @@ def _run_tool_agent_loop(
         messages.append({"role": "assistant", "content": resp.content})
         tool_blocks = [b for b in resp.content if getattr(b, "type", None) == "tool_use"]
         if not tool_blocks:
+            if len(state.picks) >= MIN_PICKS:
+                return _tool_ship(state, {}).get("shipped", False)
             state.trace.append(TraceEvent(
                 ts=time.time(), role="editor", kind="error",
                 result_summary="model ended turn without tool_use",
@@ -1579,112 +622,42 @@ def _run_tool_agent_loop(
                 ts=time.time(), role="editor", kind="tool_call",
                 name=name, args=tool_input, tool_use_id=block.id,
             ))
-            result = dispatch_tool(name, tool_input, state, vendor_patterns, rules)
-            warn = _budget_warning(state)
-            if warn:
-                result = {**result, "budget_warning": warn}
-            result_str = json.dumps(result)[:800]
+            result = _dispatch_tool(name, tool_input, state, vendor_patterns)
+            result_str = json.dumps(result)[:600]
             state.trace.append(TraceEvent(
                 ts=time.time(), role="editor", kind="tool_result",
                 name=name, result_summary=result_str, tool_use_id=block.id,
             ))
-            print(
-                f"  [agent turn {state.tool_calls}] {name}({tool_input}) → {result_str[:120]}",
-                file=sys.stderr,
-            )
+            print(f"  [editor {state.tool_calls}] {name}({tool_input}) → {result_str[:120]}", file=sys.stderr)
             tool_results.append({
                 "type": "tool_result",
                 "tool_use_id": block.id,
                 "content": result_str,
             })
-
         messages.append({"role": "user", "content": tool_results})
+
     return state.shipped
 
 
-def run_tool_agent(state: AgentState, vendor_patterns, rules: dict, gaps: list[str]) -> bool:
-    """Native tool_use loop. Returns True when ship_edition succeeds."""
-    client, model = _anthropic_client()
-    messages: list[dict] = [{"role": "user", "content": _build_initial_brief(state, gaps)}]
+# ───────────────────────────────────────────────────────────────────────
+# Perplexity discovery (parallel to RSS fetch)
+# ───────────────────────────────────────────────────────────────────────
 
-    shipped = _run_tool_agent_loop(client, model, messages, state, vendor_patterns, rules)
-
-    # Weak-pool recovery: note_weak_pool with an empty slate then budget exhaustion
-    # (seen in production runs) — grant one short lap to pick + ship.
-    min_picks = _min_picks_required(state)
-    if (
-        not shipped
-        and _weak_pool_waiver(state)
-        and len(state.picks) < min_picks
-        and any(t.name == "note_weak_pool" for t in state.trace if t.kind == "tool_call")
-    ):
-        extra = 10
-        state.hard_budget = state.tool_calls + extra
-        state.trace.append(TraceEvent(
-            ts=time.time(), role="system", kind="handoff",
-            result_summary=(
-                f"weak-pool recovery lap (+{extra} tool calls, budget now {state.hard_budget})"
-            ),
-        ))
-        messages.append({
-            "role": "user",
-            "content": (
-                "Recovery lap: weak-pool edition is documented but the slate is incomplete. "
-                f"Pick exactly {min_picks} stories with pick(), then self_critique, then "
-                "ship_edition. Do not unpick unless swapping a story. No more read_candidate "
-                "unless required for one pick."
-            ),
-        })
-        shipped = _run_tool_agent_loop(client, model, messages, state, vendor_patterns, rules)
-
-    # Finalization recovery: if the slate is complete and the loop stalls
-    # before a successful self_critique -> ship_edition cycle, grant one short lap.
-    if (
-        not shipped
-        and _needs_finalization_recovery(state, min_picks)
-    ):
-        extra = 6
-        state.hard_budget = state.tool_calls + extra
-        state.trace.append(TraceEvent(
-            ts=time.time(), role="system", kind="handoff",
-            result_summary=(
-                f"stalled finalization recovery lap (+{extra} tool calls, budget now {state.hard_budget})"
-            ),
-        ))
-        state.working_memory["finalization_contract"] = {
-            "active": True,
-            "phase": "await_critique",
-            "targeted_swaps_used": 0,
-        }
-        messages.append({
-            "role": "user",
-            "content": (
-                "Finalization lap: slate is complete and candidate exploration is frozen. "
-                "Call self_critique once. If approved, call ship_edition immediately. "
-                "If revise, do one issue-targeted swap, then self_critique again."
-            ),
-        })
-        shipped = _run_tool_agent_loop(client, model, messages, state, vendor_patterns, rules)
-
-    if state.tool_calls >= state.hard_budget and not shipped:
-        state.trace.append(TraceEvent(
-            ts=time.time(), role="system", kind="error",
-            result_summary=(
-                f"hard tool budget exhausted ({state.tool_calls}); "
-                f"stall={_stall_reason_summary(state)}"
-            ),
-        ))
-    return shipped
+def discover_via_search(today: dt.date) -> list[dict]:
+    query = f"biggest AI news stories {today.isoformat()} artificial intelligence launches features"
+    hits, err = _perplexity_search(query)
+    if hits is None:
+        print(f"  [discovery] Perplexity search failed: {err}", file=sys.stderr)
+        return []
+    print(f"  [discovery] Perplexity returned {len(hits)} results", file=sys.stderr)
+    return hits
 
 
 # ───────────────────────────────────────────────────────────────────────
 # Public entry point
 # ───────────────────────────────────────────────────────────────────────
 
-
 class AgenticSelectFailed(Exception):
-    """No recoverable agent slate; caller should persist trace and fail CI."""
-
     def __init__(self, message: str, trace: list[dict], meta: dict):
         super().__init__(message)
         self.trace = trace
@@ -1692,223 +665,147 @@ class AgenticSelectFailed(Exception):
 
 
 def write_agent_failure_artifact(today: dt.date, trace: list[dict], meta: dict) -> Path:
-    """Persist trace when agent cannot produce a constitution-valid edition."""
     from espresso_agent import EDITIONS_DIR
-
     out = EDITIONS_DIR / f"{today.isoformat()}.failed.json"
-    payload = {
-        "date": today.isoformat(),
-        "mode": "failed",
-        "meta": meta,
-        "agent_trace": trace,
-    }
-    out.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    out.write_text(json.dumps({"date": today.isoformat(), "mode": "failed", "meta": meta, "agent_trace": trace}, indent=2))
     return out
 
 
-def _resolve_picks_to_candidates(
-    state: AgentState,
-    needed_slots: list[str],
-    cand_by_id: dict[int, Any],
-) -> list:
-    from espresso_agent import Candidate
-
-    selected = []
-    for slot in needed_slots:
-        if slot not in state.picks:
-            continue
-        entry = state.picks[slot]
-        cid = entry["id"]
-        if cid in cand_by_id:
-            cand = cand_by_id[cid]
-        else:
-            cand = Candidate(
-                headline=entry["headline"],
-                url=entry["url"],
-                source_name=entry["source"],
-                tier=entry["tier"],
-                published_date=entry.get("published_date"),
-            )
-        cand._agent_slot = slot  # type: ignore[attr-defined]
-        selected.append(cand)
-    return selected
-
-
-def _try_salvage_approved_slate(
-    state: AgentState,
-    rules: dict,
-) -> str | None:
-    """Return salvage_reason if critic-approved picks pass all ship gates."""
-    min_picks = _min_picks_required(state)
-    if (state.last_critic_verdict or {}).get("verdict") != "approve":
-        return None
-    if len(state.picks) < min_picks:
-        return None
-    gate = validate_ship_gates(state, rules)
-    if not gate["ok"]:
-        return None
-    if state.shipped:
-        return None
-    if state.tool_calls >= state.hard_budget:
-        return "critic_approved_budget_exhausted"
-    return "critic_approved_ship_not_called"
-
-
 def agentic_select(
-    candidates: list,             # list[Candidate] from espresso_agent
+    candidates: list,
     archive_fps: set[str],
     rules: dict,
     today: dt.date,
     vendor_patterns,
     archive_headlines: list[str],
 ) -> tuple[list, list[dict], dict]:
-    """Run Scout bootstrap → native-tool Editor.
-
-    Returns (selected_candidates, trace_dicts, meta). On failure raises;
-    caller should fall back to deterministic. meta has editor_notes and
-    working_memory for edition.notes / observability.
-    """
-    uncovered_agg_signals = _uncovered_aggregator_signals(candidates)
-
-    # First-pass dedupe (same as deterministic)
+    # Dedupe
     fresh = []
     seen_fps = set(archive_fps)
     for c in candidates:
-        if c.fingerprint in seen_fps:
-            continue
-        if c.aggregator:
+        if c.fingerprint in seen_fps or c.aggregator:
             continue
         seen_fps.add(c.fingerprint)
         fresh.append(c)
-    fresh.sort(key=lambda c: (c.tier, c.source_name))
 
-    # Cap pool: at most 4 per source, 60 total
-    per_source = {}
-    capped = []
-    for c in fresh:
-        n = per_source.get(c.source_name, 0)
-        if n >= 4:
-            continue
-        per_source[c.source_name] = n + 1
-        capped.append(c)
-        if len(capped) >= 60:
-            break
-    _inject_high_impact_legal_candidate(capped, fresh, per_source, max_total=60, max_per_source=4)
-
-    # Slot rules
-    needed_slots = needed_slots_for_rules(today, rules)
-
-    # Build candidate dicts for the agent (with ids)
+    # Build candidate payload — ALL candidates, no per-source cap
     candidates_payload = []
-    cand_by_id = {}
-    for i, c in enumerate(capped):
+    cand_by_id: dict[int, Any] = {}
+    for i, c in enumerate(fresh):
         cand_by_id[i] = c
         candidates_payload.append({
             "id": i,
             "headline": c.headline,
+            "blurb": (c.blurb or "")[:200],
             "source": c.source_name,
             "tier": c.tier,
             "url": c.url,
             "vertical": c.vertical,
-            "published_date": getattr(c, "published_date", None),
         })
 
-    # SCOUT
-    print(f"  [scout] surveying {len(candidates_payload)} candidates...", file=sys.stderr)
-    scout_result = run_scout(today, candidates_payload, archive_headlines)
-    shortlist_ranking = scout_result.get("shortlist", [])
-    gaps = scout_result.get("gaps", [])
-    # Hydrate shortlist with full info
-    shortlist = []
-    for entry in shortlist_ranking:
-        cid = entry.get("id")
-        if cid is None or cid not in cand_by_id:
+    # Perplexity discovery — merge additional candidates
+    from espresso_agent import (
+        Candidate, fingerprint_of, search_allowed_domains, is_search_domain_allowed,
+    )
+    allowed_domains = search_allowed_domains()
+    discovery_hits = discover_via_search(today)
+    for hit in discovery_hits:
+        url = hit.get("url", "")
+        title = (hit.get("title") or "").strip()
+        if not title or not url or not is_search_domain_allowed(url, allowed_domains):
             continue
-        c = cand_by_id[cid]
-        shortlist.append({
-            "id": cid,
-            "headline": c.headline,
-            "source": c.source_name,
-            "tier": c.tier,
-            "url": c.url,
-            "vertical": c.vertical,
-            "blurb": c.blurb,
-            "paywall": c.paywall,
-            "published_date": getattr(c, "published_date", None),
-            "score": entry.get("score", 0),
-            "persona": entry.get("persona", "unknown"),
-            "why": entry.get("why", ""),
+        fp = fingerprint_of(title, url)
+        if fp in seen_fps:
+            continue
+        seen_fps.add(fp)
+        new_id = len(candidates_payload)
+        cand_by_id[new_id] = Candidate(
+            headline=title, url=url, source_name=hit.get("domain", "web"),
+            tier=2, blurb=(hit.get("snippet") or "")[:200],
+        )
+        candidates_payload.append({
+            "id": new_id,
+            "headline": title,
+            "blurb": (hit.get("snippet") or "")[:200],
+            "source": hit.get("domain", "web"),
+            "tier": 2,
+            "url": url,
+            "vertical": None,
         })
-    shortlist.sort(key=lambda x: -x.get("score", 0))
-    print(f"  [scout] shortlist of {len(shortlist)}, gaps: {gaps}", file=sys.stderr)
 
+    print(f"  [ranking] {len(candidates_payload)} candidates (incl. {len(discovery_hits)} from search)", file=sys.stderr)
+
+    # Step 1: Rank all headlines + blurbs
+    ranking_result = rank_headlines(candidates_payload, archive_headlines, today)
+    ranked = ranking_result.get("ranked", [])
+    gaps = ranking_result.get("gaps", [])
+    print(f"  [ranking] top 20 returned, gaps: {gaps}", file=sys.stderr)
+
+    # Step 2: Pre-fetch bodies for top 20
+    print("  [prefetch] fetching bodies for top 20...", file=sys.stderr)
+    enriched = prefetch_bodies(ranked, cand_by_id)
+
+    if len(enriched) < MIN_PICKS:
+        raise AgenticSelectFailed(
+            f"only {len(enriched)} candidates with bodies (need {MIN_PICKS})",
+            [], {"editor_notes": "pre-fetch collapse — too few bodies available"},
+        )
+
+    # Hydrate enriched entries with ranking metadata
+    for entry in enriched:
+        rank_info = next((r for r in ranked if r["id"] == entry["id"]), {})
+        entry["score"] = rank_info.get("score", 0)
+        entry["persona"] = rank_info.get("persona", "market")
+
+    # Step 3: Agentic Editor loop
     state = AgentState(
         today=today,
-        needed_slots=needed_slots,
-        shortlist=shortlist[:20],
-        candidates_by_id=cand_by_id,
+        candidates=enriched,
         archive_headlines=archive_headlines,
     )
-    state.working_memory["coverage_gaps"] = gaps or []
-    if uncovered_agg_signals:
-        state.working_memory["aggregator_signals"] = uncovered_agg_signals
-        state.trace.append(
-            TraceEvent(
-                ts=time.time(),
-                role="system",
-                kind="handoff",
-                result_summary=(
-                    "aggregator signal gap: "
-                    + ", ".join(uncovered_agg_signals)
-                    + " (extra search_news call enabled)"
-                ),
-            )
-        )
     state.trace.append(TraceEvent(
-        ts=time.time(), role="scout", kind="handoff",
-        result_summary=f"shortlist={len(shortlist)}, gaps={gaps}",
+        ts=time.time(), role="system", kind="handoff",
+        result_summary=f"ranked={len(ranked)}, enriched={len(enriched)}, gaps={gaps}",
     ))
 
-    ok = run_tool_agent(state, vendor_patterns, rules, gaps)
-    min_picks = _min_picks_required(state)
+    ok = _run_editor_loop(state, vendor_patterns)
+
+    # Fallback: if budget exhausted with enough picks, force-ship
+    if not ok and len(state.picks) >= MIN_PICKS:
+        gate = _validate_ship(state)
+        if gate["ok"]:
+            state.shipped = True
+            state.trace.append(TraceEvent(
+                ts=time.time(), role="system", kind="fallback_ship",
+                result_summary=f"budget exhausted, force-shipping {len(state.picks)} picks",
+            ))
+            ok = True
+
     trace_dicts = [asdict(ev) for ev in state.trace]
-
-    salvage_reason = _try_salvage_approved_slate(state, rules)
-    if salvage_reason:
-        state.trace.append(TraceEvent(
-            ts=time.time(), role="system", kind="salvage",
-            result_summary=salvage_reason,
-        ))
-        trace_dicts = [asdict(ev) for ev in state.trace]
-        selected = _resolve_picks_to_candidates(state, needed_slots, cand_by_id)
-        meta = {
-            "editor_notes": (state.working_memory.get("editor_notes") or "").strip(),
-            "working_memory": state.working_memory,
-            "shipped": False,
-            "salvaged": True,
-            "salvage_reason": salvage_reason,        }
-        return selected, trace_dicts, meta
-
-    if state.shipped and len(state.picks) >= min_picks:
-        selected = _resolve_picks_to_candidates(state, needed_slots, cand_by_id)
-        meta = {
-            "editor_notes": (state.working_memory.get("editor_notes") or "").strip(),
-            "working_memory": state.working_memory,
-            "shipped": True,
-            "salvaged": False,
-            "salvage_reason": None,        }
-        return selected, trace_dicts, meta
-
     meta = {
-        "editor_notes": (state.working_memory.get("editor_notes") or "").strip(),
-        "working_memory": state.working_memory,
+        "editor_notes": "",
+        "working_memory": {},
         "shipped": state.shipped,
-        "salvaged": False,
-        "salvage_reason": None,
+        "salvaged": not ok and state.shipped,
+        "salvage_reason": "budget_exhausted_force_ship" if not ok and state.shipped else None,
     }
+
+    if state.shipped:
+        selected = []
+        for slot, entry in state.picks.items():
+            cid = entry["id"]
+            if cid in cand_by_id:
+                cand = cand_by_id[cid]
+            else:
+                cand = Candidate(
+                    headline=entry["headline"], url=entry["url"],
+                    source_name=entry.get("source", ""), tier=entry.get("tier", 2),
+                )
+            cand._agent_slot = entry.get("persona", "market")
+            selected.append(cand)
+        return selected, trace_dicts, meta
+
     raise AgenticSelectFailed(
-        f"agent loop failed: shipped={ok}, picks={len(state.picks)}/{min_picks} "
-        f"after {state.tool_calls} tool calls",
-        trace_dicts,
-        meta,
+        f"agent loop failed: shipped={ok}, picks={len(state.picks)} after {state.tool_calls} tool calls",
+        trace_dicts, meta,
     )

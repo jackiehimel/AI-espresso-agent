@@ -932,7 +932,7 @@ def fetch_all_candidates(sources: list[Source], use_cache: bool = False) -> list
         html = fetch_url(s.url, use_cache=use_cache, prestige=s.prestige or s.paywall)
         if html is None:
             continue
-        cands = extract_candidates(html, s, max_n=6)
+        cands = extract_candidates(html, s, max_n=12)
         candidates.extend(cands)
         time.sleep(0.4)  # be polite
     print(f"  → {len(candidates)} total candidates", file=sys.stderr)

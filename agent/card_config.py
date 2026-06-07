@@ -6,6 +6,8 @@ from typing import Any
 
 
 STORY_CARD_COUNT = 4
+MIN_STORY_COUNT = 3
+MAX_STORY_COUNT = 6
 
 
 def needed_slots_for_rules(today: Any, rules: dict) -> list[str]:

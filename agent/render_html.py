@@ -30,9 +30,7 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
-from card_config import STORY_CARD_COUNT
-
-MIN_STORY_CARD_COUNT = 3
+from card_config import MAX_STORY_COUNT, MIN_STORY_COUNT, STORY_CARD_COUNT
 from editorial import slot_label
 
 
@@ -732,12 +730,12 @@ def render_edition(
     """
     data = json.loads(edition_json_path.read_text())
     stories = data.get("stories", [])
-    if len(stories) < MIN_STORY_CARD_COUNT:
+    if len(stories) < MIN_STORY_COUNT:
         raise ValueError(
-            f"Edition has {len(stories)} stories; need at least {MIN_STORY_CARD_COUNT}."
+            f"Edition has {len(stories)} stories; need at least {MIN_STORY_COUNT}."
         )
     prompt = data.get("try_this_prompt") or {}
-    story_limit = min(len(stories), STORY_CARD_COUNT)
+    story_limit = min(len(stories), MAX_STORY_COUNT)
 
     issue_num = resolve_issue_num(issue_num, data, edition_json_path, editions_dir)
     issue_padded = f"{issue_num:03d}"

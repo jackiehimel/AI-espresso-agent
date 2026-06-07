@@ -13,6 +13,8 @@ CI_OPTIONAL_FLAKY_FEEDS = {
     "The Information — AI",
     "Don't Worry About the Vase (Zvi Mowshowitz)",
     "FreightWaves — AI",
+    "Hugging Face — Daily Papers",
+    "Hugging Face Blog",
     "Microsoft AI Blog",
     "Rest of World",
     "Import AI (Jack Clark)",
