@@ -42,8 +42,9 @@ from bs4 import BeautifulSoup
 SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 587
 EMAIL_OUTER_MAX_WIDTH = 680
-EMAIL_CARD_MAX_WIDTH = 420
+EMAIL_CARD_MAX_WIDTH = 310
 EMAIL_IMAGE_SIZE = 160
+EMAIL_GRID_COLS = 2
 CATEGORY_COLORS = {
     "market": "#00955A",
     "everyday": "#D14A0E",
@@ -85,7 +86,7 @@ def _build_email_safe_html(html: str) -> str:
     dateline = container.select_one(".dateline")
     footer = container.select_one(".footer")
 
-    story_rows = []
+    story_cells = []
     for card in container.select(".story-cards .card"):
         img = card.select_one(".card-image")
         category = card.select_one(".category")
@@ -115,8 +116,8 @@ def _build_email_safe_html(html: str) -> str:
         source_name = _node_text(source_link)
         source_href = source_link.get("href", "#") if source_link else "#"
 
-        story_rows.append(
-            "<tr><td align=\"center\" style=\"padding:0 0 18px 0;\">"
+        story_cells.append(
+            f"<td align=\"center\" valign=\"top\" width=\"{100 // EMAIL_GRID_COLS}%\" style=\"padding:0 6px 18px 6px;\">"
             f"<table role=\"presentation\" width=\"{EMAIL_CARD_MAX_WIDTH}\" cellpadding=\"0\" cellspacing=\"0\" "
             f"style=\"width:100%;max-width:{EMAIL_CARD_MAX_WIDTH}px;background:#FFFFFF;border:1px solid #EFE5D6;border-radius:12px;\">"
             "<tr><td align=\"center\" style=\"padding:12px 12px 0 12px;\">"
@@ -124,16 +125,23 @@ def _build_email_safe_html(html: str) -> str:
             f"width=\"{EMAIL_IMAGE_SIZE}\" height=\"{EMAIL_IMAGE_SIZE}\" "
             f"style=\"display:block;width:{EMAIL_IMAGE_SIZE}px;height:{EMAIL_IMAGE_SIZE}px;border:0;outline:none;text-decoration:none;\">"
             "</td></tr>"
-            "<tr><td style=\"padding:12px 14px 14px 14px;\">"
-            f"<p style=\"margin:0 0 6px 0;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:{cat_color};\">{escape(category_text)}</p>"
-            f"<h2 style=\"margin:0 0 6px 0;font-size:15px;line-height:1.25;font-weight:700;color:#1A1108;\">"
+            "<tr><td style=\"padding:10px 12px 12px 12px;\">"
+            f"<p style=\"margin:0 0 4px 0;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:{cat_color};\">{escape(category_text)}</p>"
+            f"<h2 style=\"margin:0 0 4px 0;font-size:14px;line-height:1.25;font-weight:700;color:#1A1108;\">"
             f"<a href=\"{escape(headline_href, quote=True)}\" style=\"color:#1A1108;text-decoration:none;\">{escape(headline_text)}</a></h2>"
-            f"<p style=\"margin:0 0 8px 0;font-size:13px;line-height:1.4;font-style:italic;color:#1A1108;\">{kicker_html}</p>"
-            "<p style=\"margin:0;border-top:1px solid #F0E5D1;padding-top:8px;font-size:11px;color:#8B6F47;\">"
+            f"<p style=\"margin:0 0 6px 0;font-size:12px;line-height:1.35;font-style:italic;color:#1A1108;\">{kicker_html}</p>"
+            "<p style=\"margin:0;border-top:1px solid #F0E5D1;padding-top:6px;font-size:11px;color:#8B6F47;\">"
             f"<a href=\"{escape(source_href, quote=True)}\" style=\"color:#1A1108;text-decoration:none;font-weight:700;\">{escape(source_name)}</a>"
             f"{(' ' + escape(source_tail)) if source_tail else ''}</p>"
-            "</td></tr></table></td></tr>"
+            "</td></tr></table></td>"
         )
+
+    story_rows = []
+    for i in range(0, len(story_cells), EMAIL_GRID_COLS):
+        chunk = story_cells[i:i + EMAIL_GRID_COLS]
+        if len(chunk) < EMAIL_GRID_COLS:
+            chunk += [f"<td width=\"{100 // EMAIL_GRID_COLS}%\"></td>"] * (EMAIL_GRID_COLS - len(chunk))
+        story_rows.append("<tr>" + "".join(chunk) + "</tr>")
 
     prompt_row = ""
     prompt_card = container.select_one(".prompt-card")
@@ -142,10 +150,11 @@ def _build_email_safe_html(html: str) -> str:
         prompt_title = prompt_card.select_one(".prompt-title")
         prompt_hint = prompt_card.select_one(".prompt-tool-hint")
         prompt_code = prompt_card.select_one(".prompt-code")
+        prompt_max = EMAIL_OUTER_MAX_WIDTH - 32
         prompt_row = (
-            "<tr><td align=\"center\" style=\"padding:0 0 18px 0;\">"
-            f"<table role=\"presentation\" width=\"{EMAIL_CARD_MAX_WIDTH}\" cellpadding=\"0\" cellspacing=\"0\" "
-            f"style=\"width:100%;max-width:{EMAIL_CARD_MAX_WIDTH}px;background:#FFF8E8;border:1px dashed #C9A671;border-radius:12px;\">"
+            f"<tr><td align=\"center\" colspan=\"{EMAIL_GRID_COLS}\" style=\"padding:0 6px 18px 6px;\">"
+            f"<table role=\"presentation\" width=\"{prompt_max}\" cellpadding=\"0\" cellspacing=\"0\" "
+            f"style=\"width:100%;max-width:{prompt_max}px;background:#FFF8E8;border:1px dashed #C9A671;border-radius:12px;\">"
             "<tr><td style=\"padding:14px;\">"
             f"<p style=\"margin:0 0 12px 0;font-size:13px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:#B8340A;"
             f"background:#F2C9B8;padding:8px 12px;border-radius:6px;text-align:center;\">{escape(_node_text(prompt_tag))}</p>"
@@ -169,14 +178,14 @@ def _build_email_safe_html(html: str) -> str:
         "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#F4EFE6;\">"
         "<tr><td align=\"center\" style=\"padding:24px 16px;\">"
         f"<table role=\"presentation\" width=\"{EMAIL_OUTER_MAX_WIDTH}\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;max-width:{EMAIL_OUTER_MAX_WIDTH}px;\">"
-        "<tr><td style=\"text-align:center;padding:8px 16px 10px 16px;\">"
+        f"<tr><td colspan=\"{EMAIL_GRID_COLS}\" style=\"text-align:center;padding:8px 16px 10px 16px;\">"
         f"<h1 style=\"margin:0;font-size:44px;line-height:1;font-weight:800;color:#1A1108;\">{wordmark_html}</h1>"
         f"<p style=\"margin:6px 0 0 0;font-size:20px;font-weight:550;color:#5C4A3A;\">{escape(tagline_text)}</p>"
         f"<p style=\"margin:8px 0 0 0;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#8B6F47;\">{escape(dateline_text)}</p>"
         "</td></tr>"
         f"{''.join(story_rows)}"
         f"{prompt_row}"
-        "<tr><td style=\"text-align:center;padding:28px 16px 8px 16px;font-size:11px;color:#8B6F47;line-height:1.7;letter-spacing:0.04em;\">"
+        f"<tr><td colspan=\"{EMAIL_GRID_COLS}\" style=\"text-align:center;padding:28px 16px 8px 16px;font-size:11px;color:#8B6F47;line-height:1.7;letter-spacing:0.04em;\">"
         f"{footer_html}</td></tr>"
         "</table></td></tr></table></body></html>"
     )

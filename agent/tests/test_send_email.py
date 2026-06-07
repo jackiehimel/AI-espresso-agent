@@ -55,7 +55,7 @@ class EmailHtmlTests(unittest.TestCase):
         patched = _build_email_safe_html(html)
         self.assertIn('<table role="presentation"', patched)
         self.assertIn('max-width:680px', patched)
-        self.assertIn('max-width:420px', patched)
+        self.assertIn('max-width:310px', patched)
         self.assertIn("Try this prompt", patched)
         self.assertIn("color:#00955A", patched)
 
