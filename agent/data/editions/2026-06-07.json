@@ -1,0 +1,221 @@
+{
+  "date": "2026-06-07",
+  "generated_at": "2026-06-07T22:11:19.462649Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "ChatGPT now has a lockdown mode to stop prompt injection leaks",
+      "blurb": "OpenAI launched Lockdown Mode to protect sensitive data when ChatGPT gets tricked by hidden instructions in documents or websites. It won't stop all prompt injections, but it's designed to prevent your private data from leaking when an attack succeeds.",
+      "why_it_matters": "Prompt injection is still an unsolved problem, but now there's a guard rail for your data.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/06/openai-unveils-lockdown-mode-to-protect-sensitive-data-from-prompt-injection-attacks/",
+      "tier": 1,
+      "original_headline": "OpenAI unveils Lockdown Mode to protect sensitive data from prompt injection attacks",
+      "fingerprint": "3c3153e2949eab6d"
+    },
+    {
+      "slot": "market",
+      "headline": "Google is paying SpaceX nearly $1 billion a month for cloud computing",
+      "blurb": "SpaceX signed a deal with Google Cloud worth close to $1 billion per month, creating a major new revenue stream for the rocket company's AI infrastructure business as it prepares for an IPO. The agreement marks one of the largest cloud computing contracts in recent years.",
+      "why_it_matters": "SpaceX is now a serious player in enterprise AI infrastructure, not just rockets",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/google-to-pay-spacex-nearly-1-billion-a-month-in-cloud-computing-deal-788d8aaa?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Google to Pay SpaceX Nearly $1 Billion a Month in Cloud-Computing Deal",
+      "fingerprint": "cc4daf94d884d77f"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor's design mode now lets you sketch UI changes with your mouse",
+      "blurb": "Cursor's browser-based design mode now accepts clicks, drawn sketches, or voice commands to tell its AI agent how to modify your UI. You can literally draw on a webpage to show what you want changed, and the agent updates the code.",
+      "why_it_matters": "Natural input methods \u2014 sketches, clicks, voice \u2014 are replacing written prompts for UI work.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/design-mode-improvements",
+      "tier": 1,
+      "original_headline": "Design Mode Improvements",
+      "fingerprint": "fa7a4f79c1d26025"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Apple is about to relaunch Siri (again) at WWDC",
+      "blurb": "After years of falling behind in AI, Apple is set to unveil yet another Siri redesign at Monday's WWDC keynote. The Verge notes that playing catch-up might actually work in Apple's favor this time, as the company can learn from competitors' missteps before committing to a strategy.",
+      "why_it_matters": "Apple's slow-and-steady approach could mean a more polished AI assistant when it finally ships",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/944245/apple-wwdc-2026-ai-siri-gemini",
+      "tier": 1,
+      "original_headline": "Here comes new Siri again",
+      "fingerprint": "3e968baf693f9936"
+    },
+    {
+      "slot": "industry",
+      "headline": "China is training home robots by filming people fold laundry",
+      "blurb": "Chinese AI companies are collecting robotics training data directly in homes and small factories, recording ordinary people doing household tasks like folding clothes and washing dishes. The approach costs less and scales faster than the U.S. model of lab research and outsourced annotation, giving China an edge in teaching robots to handle real-world messiness.",
+      "why_it_matters": "Whoever collects the best mundane-task data first will likely dominate the home robotics market.",
+      "source_name": "Rest of World",
+      "source_url": "https://restofworld.org/2026/china-ai-robotics-training-data/",
+      "tier": 1,
+      "original_headline": "China is training a robot future \u2014 one folded shirt at a time Localized, low-cost data harvested in homes and factories gives China a scaling edge over the research-heavy and outsourced U.S. approach.",
+      "fingerprint": "69094915adb42dbd"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The confidence audit",
+    "kicker": "",
+    "prompt": "I'm about to paste something I wrote that I'm weirdly proud of. Don't compliment it. Tell me which sentence I'm hiding behind, which claim has no evidence, and which paragraph exists only because I enjoyed writing it. Then show me the same idea in half the words.",
+    "tool_hint": "Before you send the deck, the doc, or the all-hands email you spent too long on."
+  },
+  "daily_question": "If you could teach a home robot one household task right now, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1780870222.185779,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1780870241.6321905,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "build",
+        "reason": "Concrete security feature shipped by OpenAI that developers can use today. Prompt injection is a real pain point, and Lockdown Mode is a tangible solution. Shows OpenAI addressing enterprise security concerns with a specific tool."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TjY3SMz8CLCYDz2XqTj64b"
+    },
+    {
+      "ts": 1780870241.632233,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI unveils Lockdown Mode to protect sensitive data from prompt injection attacks\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01TjY3SMz8CLCYDz2XqTj64b"
+    },
+    {
+      "ts": 1780870241.6322734,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 148,
+        "persona": "market",
+        "reason": "Massive $1B/month deal between Google and SpaceX - concrete market move with huge numbers. Shows the scale of AI compute demand and SpaceX's new revenue stream ahead of IPO. WSJ tier-1 source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YQM9rpibWVrNRZuLzqPnP4"
+    },
+    {
+      "ts": 1780870241.6323125,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google to Pay SpaceX Nearly $1 Billion a Month in Cloud-Computing Deal\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01YQM9rpibWVrNRZuLzqPnP4"
+    },
+    {
+      "ts": 1780870241.63233,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "build",
+        "reason": "Shipped improvement to Cursor's Design Mode - developers can try this today. Multi-select elements, voice descriptions for UI changes. Concrete capability upgrade to a tool Solvd engineers likely use."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DkPiW6WS1Ska2MVR1Tuuqs"
+    },
+    {
+      "ts": 1780870241.6323698,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Design Mode Improvements\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01DkPiW6WS1Ska2MVR1Tuuqs"
+    },
+    {
+      "ts": 1780870241.6323879,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 18,
+        "persona": "everyday",
+        "reason": "Apple's new Siri relaunch - consumer-facing AI that affects billions of users. Apple playing catch-up in AI is a compelling narrative, and Siri improvements are something everyone can relate to and try."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JTTBMwNUrXsi7J6UgLo4qB"
+    },
+    {
+      "ts": 1780870241.632442,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Here comes new Siri again\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01JTTBMwNUrXsi7J6UgLo4qB"
+    },
+    {
+      "ts": 1780870241.6324625,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 117,
+        "persona": "industry",
+        "reason": "China's unique approach to robot training via human labor data collection - surprising, concrete methodology story. Shows a different scaling strategy (localized data harvesting vs. research-heavy US approach). Makes AI feel tangible and reveals competitive dynamics."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PN3rCeZVEdtRytKnPevHiZ"
+    },
+    {
+      "ts": 1780870241.6325178,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"China is training a robot future \\u2014 one folded shirt at a time Localized, low-cost data harvested in homes and factories gives China a scaling edge over the research-heavy and outsourced U.S. approach.\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01PN3rCeZVEdtRytKnPevHiZ"
+    },
+    {
+      "ts": 1780870248.735246,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01HqAkA6b4pVzTbEE749cnUF"
+    },
+    {
+      "ts": 1780870248.7355046,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1780870248.7355251,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI unveils Lockdown Mode to protect sensitive data from prompt injection attacks\", \"pick_2\": \"Google to Pay SpaceX Nearly $1 Billion a Month in Cloud-Computing Deal\", \"pick_3\": \"Design Mode Improvements\", \"pick_4\": \"Here comes new Siri again\", \"pick_5\": \"China is training a robot future \\u2014 one folded shirt at a time Localized, low-cost data harvested in homes and factories gives China a scaling edge over the research-heavy and outsourced U.S. approach.\"}}",
+      "tool_use_id": "toolu_01HqAkA6b4pVzTbEE749cnUF"
+    }
+  ],
+  "issue_num": 10
+}
