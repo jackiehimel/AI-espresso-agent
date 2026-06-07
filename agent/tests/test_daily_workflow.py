@@ -169,7 +169,6 @@ class DedupeGuardBehaviorTests(unittest.TestCase):
         github_output = self.tmp / "github_output"
         github_output.write_text("", encoding="utf-8")
         rendered = script.replace("${{ steps.date.outputs.value }}", date)
-        rendered = rendered.replace("${{ inputs.force_resend }}", "false")
         wrapped = f"set -e\nexport GITHUB_OUTPUT={github_output}\n{rendered}\n"
         subprocess.run(
             ["bash", "-c", wrapped],

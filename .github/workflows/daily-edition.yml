@@ -68,21 +68,15 @@ jobs:
         id: dedupe
         run: |
           DATE="${{ steps.date.outputs.value }}"
-          FORCE="${{ inputs.force_resend }}"
-          if [ "$FORCE" = "true" ]; then
-            echo "already_sent=false" >> "$GITHUB_OUTPUT"
-            echo "force_resend=true: bypassing duplicate-send guard for $DATE."
+          EDITION_JSON="agent/data/editions/${DATE}.json"
+          if git ls-files --error-unmatch "$EDITION_JSON" > /dev/null 2>&1; then
+            echo "already_sent=true" >> "$GITHUB_OUTPUT"
+            echo "Edition artifact already tracked for $DATE; skip regenerate + duplicate send."
+          elif [ -n "$(git log --grep="^Daily edition for $DATE$" -n 1 --pretty=format:%H)" ]; then
+            echo "already_sent=true" >> "$GITHUB_OUTPUT"
+            echo "Edition already recorded by commit for $DATE; skip regenerate + duplicate send."
           else
-            EDITION_JSON="agent/data/editions/${DATE}.json"
-            if git ls-files --error-unmatch "$EDITION_JSON" > /dev/null 2>&1; then
-              echo "already_sent=true" >> "$GITHUB_OUTPUT"
-              echo "Edition artifact already tracked for $DATE; skip regenerate + duplicate send."
-            elif [ -n "$(git log --grep="^Daily edition for $DATE$" -n 1 --pretty=format:%H)" ]; then
-              echo "already_sent=true" >> "$GITHUB_OUTPUT"
-              echo "Edition already recorded by commit for $DATE; skip regenerate + duplicate send."
-            else
-              echo "already_sent=false" >> "$GITHUB_OUTPUT"
-            fi
+            echo "already_sent=false" >> "$GITHUB_OUTPUT"
           fi
 
       # Production: agent tool_use loop only (no legacy rank_and_select fallback).
@@ -140,7 +134,7 @@ jobs:
             --variant "c"
 
       - name: Send edition email
-        if: ${{ inputs.skip_email != 'true' && steps.dedupe.outputs.already_sent != 'true' }}
+        if: ${{ inputs.skip_email != 'true' && (steps.dedupe.outputs.already_sent != 'true' || inputs.force_resend == 'true') }}
         working-directory: agent
         env:
           AI_ESPRESSO_FROM: ${{ secrets.AI_ESPRESSO_FROM }}
@@ -159,7 +153,7 @@ jobs:
           }
 
       - name: Duplicate send guard note
-        if: ${{ inputs.skip_email != 'true' && steps.dedupe.outputs.already_sent == 'true' }}
+        if: ${{ inputs.skip_email != 'true' && steps.dedupe.outputs.already_sent == 'true' && inputs.force_resend != 'true' }}
         run: |
           echo "Skipping email: edition for ${{ steps.date.outputs.value }} was already recorded in git history."
 
