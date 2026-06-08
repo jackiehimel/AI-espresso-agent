@@ -1,0 +1,221 @@
+{
+  "date": "2026-06-08",
+  "generated_at": "2026-06-08T17:52:36.359782Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Apple ships a new Siri that can actually hold a conversation",
+      "blurb": "Two years after promising a smarter assistant, Apple just launched what it calls an 'entirely new version of Siri' \u2014 one that's more conversational and more capable than the original. The update is part of a broader refresh to Apple Intelligence, the company's AI platform that debuted but never quite delivered on its early promises.",
+      "why_it_matters": "Apple's assistant might finally work the way people expected it to in 2023.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/942416/apple-siri-ai-update-wwdc",
+      "tier": 1,
+      "original_headline": "Apple announces Siri AI and its next generation of Apple Intelligence",
+      "fingerprint": "0e9780ce073e4da9"
+    },
+    {
+      "slot": "build",
+      "headline": "Xiaomi's open model now runs at 1,000 tokens per second",
+      "blurb": "Xiaomi's MiMo-v2.5-Pro-UltraSpeed is a 1-trillion-parameter model that generates text at 1,000 tokens per second\u2014fast enough to feel like instant conversation. The company used custom inference optimizations and their own hardware to hit speeds that typically require much smaller models.",
+      "why_it_matters": "Large models can now run at speeds that make real-time voice and interactive apps practical.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://mimo.xiaomi.com/blog/mimo-tilert-1000tps",
+      "tier": 1,
+      "original_headline": "MiMo-v2.5-Pro-UltraSpeed: 1T model with 1000 tokens per second",
+      "fingerprint": "e5e9d01007d152ca"
+    },
+    {
+      "slot": "build",
+      "headline": "Microsoft shut down 70 of its own repos after hackers pushed malware targeting AI coding agents",
+      "blurb": "Microsoft closed more than 70 GitHub repositories it owned after attackers compromised them to distribute credential-stealing malware. The malware specifically targeted developers using AI coding assistants like Claude and Gemini, attempting to harvest login credentials when the agents interacted with the poisoned repos.",
+      "why_it_matters": "Supply chain attacks now explicitly target AI agents, not just human developers.",
+      "source_name": "404 Media",
+      "source_url": "https://www.404media.co/microsoft-hacked-to-deliver-malware-to-claude-and-gemini-users/",
+      "tier": 1,
+      "original_headline": "Microsoft Hacked to Deliver Malware to Claude and Gemini Users",
+      "fingerprint": "caab8ca7decb24af"
+    },
+    {
+      "slot": "build",
+      "headline": "NotebookLM can now run Python code and cite its sources",
+      "blurb": "Google upgraded NotebookLM to Gemini 3.5, adding two new abilities: it can execute Python code to analyze data in your notes, and it now shows exactly which sources it used for each answer. The AI note-taking tool launched in 2023 and lets you chat with your uploaded documents.",
+      "why_it_matters": "NotebookLM went from a chat interface to an actual workspace that can crunch numbers and show its work.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/944325/google-notebooklm-ai-gemini-update",
+      "tier": 1,
+      "original_headline": "NotebookLM&#8217;s Gemini 3.5 upgrade adds a cloud computer and help finding sources",
+      "fingerprint": "18a658ef5c378bd5"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Amazon now lets you AI-generate a design and print it on a shirt",
+      "blurb": "The Amazon Shopping app added a feature that lets you tell Alexa what you want on a T-shirt, hoodie, or tumbler, and it generates the design. You can then order the custom merch directly in the app.",
+      "why_it_matters": "AI design tools are now built into where people already shop for everyday stuff.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/08/amazon-now-lets-you-design-custom-merch-using-ai/",
+      "tier": 1,
+      "original_headline": "Amazon now lets you design custom merch using AI",
+      "fingerprint": "06d1e87c595cd4ac"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation floor",
+    "kicker": "",
+    "prompt": "I'm about to negotiate something I'll describe below. Don't tell me tactics. Instead: tell me the worst outcome I should still accept and walk away satisfied, then tell me the one thing I'm probably undervaluing that the other side would give up easily.",
+    "tool_hint": "Before salary talks, vendor contracts, or any deal where you're guessing what's fair."
+  },
+  "daily_question": "If you could speed-run one AI capability from 'demo' to 'production-ready' this year, which would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1780941102.3258991,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1780941118.474077,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 5,
+        "persona": "everyday",
+        "reason": "Apple's Siri AI overhaul at WWDC is a major platform story\u2014two years after the initial Apple Intelligence promise, they're shipping a next-gen Siri. This is concrete, affects millions of users, and passes the screenshot test: \"Apple just announced the new Siri AI.\" Top-tier source, massive consumer impact."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LJNiheqpe9WwFcYGZ6KL8g"
+    },
+    {
+      "ts": 1780941118.4741268,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple announces Siri AI and its next generation of Apple Intelligence\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01LJNiheqpe9WwFcYGZ6KL8g"
+    },
+    {
+      "ts": 1780941118.4741714,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 42,
+        "persona": "build",
+        "reason": "Xiaomi's MiMo-v2.5-Pro hitting 1000 tokens/second on a 1T parameter model is a concrete technical achievement that developers will want to know about. The speed benchmark is specific and impressive\u2014this is the kind of capability jump that makes AI feel like it's accelerating. Different vendor from Apple, appeals to builder audience."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SskLEdtQF8yPvsLD6MrA16"
+    },
+    {
+      "ts": 1780941118.4742143,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"MiMo-v2.5-Pro-UltraSpeed: 1T model with 1000 tokens per second\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01SskLEdtQF8yPvsLD6MrA16"
+    },
+    {
+      "ts": 1780941118.4742362,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 25,
+        "persona": "build",
+        "reason": "Microsoft got hacked and malware was delivered through their GitHub repos to Claude/Gemini users\u2014this is a wild, concrete security story with high stakes. Microsoft shut down 70+ repos. This is surprising in a \"didn't know that could happen\" way and affects the developer ecosystem directly. Different angle (security) adds variety."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01F1HyUukTi1TX8PAbvu2Xyj"
+    },
+    {
+      "ts": 1780941118.4742725,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Microsoft Hacked to Deliver Malware to Claude and Gemini Users\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01F1HyUukTi1TX8PAbvu2Xyj"
+    },
+    {
+      "ts": 1780941118.4742908,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "build",
+        "reason": "NotebookLM now has a cloud computer and upgraded to Gemini 3.5\u2014concrete new capabilities people can try today. \"Cloud computer\" is an intriguing hook, and NotebookLM has become a beloved tool. This shows Google shipping real features, not just announcements. Adds Google to our vendor mix."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EDsjWY6Xx4mQeantT5GG2q"
+    },
+    {
+      "ts": 1780941118.4743354,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NotebookLM&#8217;s Gemini 3.5 upgrade adds a cloud computer and help finding sources\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01EDsjWY6Xx4mQeantT5GG2q"
+    },
+    {
+      "ts": 1780941118.4743645,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 16,
+        "persona": "everyday",
+        "reason": "Amazon lets you design custom merch with AI and print it on products\u2014this is a fun, concrete consumer feature that launched Monday. It's the kind of \"I want to try that\" story that makes AI feel accessible and creative. Different from the heavy platform/developer stories, adds consumer variety."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Qv1ezSAqWme4hUXBYcKEaA"
+    },
+    {
+      "ts": 1780941118.4744034,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon now lets you design custom merch using AI\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01Qv1ezSAqWme4hUXBYcKEaA"
+    },
+    {
+      "ts": 1780941125.9523141,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01MffJyDrUZmdbTWtfTxE1Zv"
+    },
+    {
+      "ts": 1780941125.9526086,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1780941125.9526281,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Apple announces Siri AI and its next generation of Apple Intelligence\", \"pick_2\": \"MiMo-v2.5-Pro-UltraSpeed: 1T model with 1000 tokens per second\", \"pick_3\": \"Microsoft Hacked to Deliver Malware to Claude and Gemini Users\", \"pick_4\": \"NotebookLM&#8217;s Gemini 3.5 upgrade adds a cloud computer and help finding sources\", \"pick_5\": \"Amazon now lets you design custom merch using AI\"}}",
+      "tool_use_id": "toolu_01MffJyDrUZmdbTWtfTxE1Zv"
+    }
+  ],
+  "issue_num": 13
+}
