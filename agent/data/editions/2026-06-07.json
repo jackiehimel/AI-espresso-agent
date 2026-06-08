@@ -49,10 +49,10 @@
     }
   ],
   "try_this_prompt": {
-    "title": "Try this prompt",
+    "title": "The scope knife",
     "kicker": "",
-    "prompt": "(prompt generation failed \u2014 re-run the edition agent)",
-    "tool_hint": "Works in Claude, ChatGPT, or Gemini."
+    "prompt": "I'll describe a feature or project below. Cut it in half \u2014 not by removing quality, but by finding the version that proves whether the idea works in a week instead of a quarter. Tell me what you kept, what you cut, and why the cut parts can wait.",
+    "tool_hint": "When everything feels equally important and nothing ships."
   },
   "daily_question": "If you had to explain your company's AI spend to a CFO in one sentence, what would you say?",
   "notes": [
