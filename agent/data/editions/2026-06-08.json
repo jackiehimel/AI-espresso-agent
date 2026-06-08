@@ -1,0 +1,279 @@
+{
+  "date": "2026-06-08",
+  "generated_at": "2026-06-08T12:35:28.133519Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "ChatGPT now has a Lockdown Mode that blocks prompt injection leaks",
+      "blurb": "OpenAI launched Lockdown Mode to stop attackers from tricking ChatGPT into spilling sensitive data through prompt injection. The feature won't prevent all attacks, but it's designed to keep your private information from leaking even when someone tries to hijack the conversation with hidden instructions.",
+      "why_it_matters": "Prompt injection is one of the biggest real-world risks in AI apps\u2014this is OpenAI's first serious defense.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/06/openai-unveils-lockdown-mode-to-protect-sensitive-data-from-prompt-injection-attacks/",
+      "tier": 1,
+      "original_headline": "OpenAI unveils Lockdown Mode to protect sensitive data from prompt injection attacks",
+      "fingerprint": "3c3153e2949eab6d"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor now lets you draw UI changes instead of describing them",
+      "blurb": "Design Mode in Cursor's browser lets you click elements, draw boxes, or use voice to show agents what UI changes you want. Instead of writing 'move that button left and make it blue,' you point and sketch.",
+      "why_it_matters": "Visual feedback is faster than text when tweaking interfaces\u2014especially for non-coders.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/design-mode-improvements",
+      "tier": 1,
+      "original_headline": "Design Mode Improvements",
+      "fingerprint": "fa7a4f79c1d26025"
+    },
+    {
+      "slot": "industry",
+      "headline": "Hackers tricked Instagram's AI support bot into handing over 20,000 accounts",
+      "blurb": "Attackers exploited Meta's AI-powered customer support system to hijack Instagram accounts, including those belonging to the White House, US Space Force, and security researchers. Meta confirmed around 20,000 accounts were compromised through the AI bot before the company patched the vulnerability.",
+      "why_it_matters": "AI support systems can become attack vectors when they have account-level permissions.",
+      "source_name": "9to5Mac \u2014 AI",
+      "source_url": "https://9to5mac.com/2026/06/08/hackers-tricked-instagram-ai-into-letting-them-take-over-high-profile-accounts-video/",
+      "tier": 1,
+      "original_headline": "Hackers tricked Instagram AI into letting them take over 20,000 accounts [U]",
+      "fingerprint": "df92f5240d5aab9e"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red-flag detector",
+    "kicker": "",
+    "prompt": "I'm interviewing candidates for a role. I'll describe the position and what I'm looking for below. Give me three questions that will expose misalignment fast \u2014 not softball culture-fit stuff, but questions where a bad answer means we're done. Then tell me the one green flag I'm probably not asking about.",
+    "tool_hint": "Before you waste three rounds on someone who looked great on paper."
+  },
+  "daily_question": "If you could lock down ONE AI feature you use daily\u2014like ChatGPT's new mode\u2014what would it protect you from?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1780922071.55717,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1780922085.8078048,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "build",
+        "reason": "Shipped security feature addressing real prompt injection vulnerabilities - developers can enable this today. Concrete capability improvement that makes AI agents safer to deploy with sensitive data."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DpQsGqVxd8gXH5pMs7cD7v"
+    },
+    {
+      "ts": 1780922085.8078525,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI unveils Lockdown Mode to protect sensitive data from prompt injection attacks\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01DpQsGqVxd8gXH5pMs7cD7v"
+    },
+    {
+      "ts": 1780922085.8078935,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 5,
+        "persona": "build",
+        "reason": "Multi-modal UI editing (click, draw, voice) shipped in Cursor browser. Concrete feature developers can try immediately - the \"I want to try that\" factor is high."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018YrVWU3UmNYGqyJuudjNZT"
+    },
+    {
+      "ts": 1780922085.807924,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Design Mode Improvements\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_018YrVWU3UmNYGqyJuudjNZT"
+    },
+    {
+      "ts": 1780922085.807934,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 125,
+        "persona": "market",
+        "reason": "$30B deal with $920M/month payments - massive infrastructure play showing scale of AI compute demand. SpaceX entering AI compute as a business is surprising and concrete."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TWVJyRGUNdXkufz4LaBvum"
+    },
+    {
+      "ts": 1780922085.8079581,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SpaceX Has $30 Billion Deal to Provide Google With A.I. Computing Power\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01TWVJyRGUNdXkufz4LaBvum"
+    },
+    {
+      "ts": 1780922085.8079736,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 162,
+        "persona": "everyday",
+        "reason": "Robotaxis you can actually sign up for in London this year - tangible AI deployment people can experience. Wayve's technology going commercial is a concrete milestone."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WN5EcoueDFa3y31xvMCu5C"
+    },
+    {
+      "ts": 1780922085.8080077,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Uber Opens London Waitlist for Wayve Robotaxis Ahead of Launch\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01WN5EcoueDFa3y31xvMCu5C"
+    },
+    {
+      "ts": 1780922085.8080192,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 104,
+        "persona": "industry",
+        "reason": "Surprising competitive advantage - China using localized human labor to collect robot training data at scale vs. US research-heavy approach. Concrete methodology difference with strategic implications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015jJhkywvF2hYfBw2GbfMaK"
+    },
+    {
+      "ts": 1780922085.8080673,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"China is training a robot future \\u2014 one folded shirt at a time Localized, low-cost data harvested in homes and factories gives China a scaling edge over the research-heavy and outsourced U.S. approach.\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_015jJhkywvF2hYfBw2GbfMaK"
+    },
+    {
+      "ts": 1780922090.9985168,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01EFNb7aSKfkXzMthGCti6GK"
+    },
+    {
+      "ts": 1780922090.9988325,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"too many non-load-bearing stories (3 > 1)\"]}",
+      "tool_use_id": "toolu_01EFNb7aSKfkXzMthGCti6GK"
+    },
+    {
+      "ts": 1780922101.8733027,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 104
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FAzDzkGxdNhNF9hbB5sYA3"
+    },
+    {
+      "ts": 1780922101.873366,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"China is training a robot future \\u2014 one folded shirt at a time Localized, low-cost data harvested in homes and factories gives China a scaling edge over the research-heavy and outsourced U.S. approach.\"}",
+      "tool_use_id": "toolu_01FAzDzkGxdNhNF9hbB5sYA3"
+    },
+    {
+      "ts": 1780922101.873399,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 125
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KVbD8XVhQK49nGSynkfWvz"
+    },
+    {
+      "ts": 1780922101.8734217,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"SpaceX Has $30 Billion Deal to Provide Google With A.I. Computing Power\"}",
+      "tool_use_id": "toolu_01KVbD8XVhQK49nGSynkfWvz"
+    },
+    {
+      "ts": 1780922105.5777395,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 54,
+        "persona": "industry",
+        "reason": "Hackers exploited Meta's AI support bot to take over 20,000 Instagram accounts - concrete demonstration of AI vulnerability in production systems. Shows real-world security implications of AI in customer service."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XDwnBSZBgM7UMYgHGp2ppW"
+    },
+    {
+      "ts": 1780922105.5778055,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Hackers tricked Instagram AI into letting them take over 20,000 accounts [U]\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01XDwnBSZBgM7UMYgHGp2ppW"
+    },
+    {
+      "ts": 1780922107.889966,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01U4dtGzM5r8VZ6UBbUpj7gy"
+    },
+    {
+      "ts": 1780922107.89014,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 3 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1780922107.8901603,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI unveils Lockdown Mode to protect sensitive data from prompt injection attacks\", \"pick_2\": \"Design Mode Improvements\", \"pick_4\": \"Hackers tricked Instagram AI into letting them take over 20,000 accounts [U]\"}}",
+      "tool_use_id": "toolu_01U4dtGzM5r8VZ6UBbUpj7gy"
+    }
+  ],
+  "issue_num": 12
+}
