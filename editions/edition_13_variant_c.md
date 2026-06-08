@@ -57,7 +57,7 @@ Google upgraded NotebookLM to Gemini 3.5, adding two new abilities: it can execu
 
 *NotebookLM went from a chat interface to an actual workspace that can crunch numbers and show its work.*
 
-[The Verge — AI](https://www.theverge.com/tech/944325/google-notebooklm-ai-gemini-update) · Jun 8
+[Google AI Blog](https://blog.google/innovation-and-ai/products/notebooklm/better-research-notebooklm/) · Jun 8
 
 ---
 
@@ -71,7 +71,7 @@ The Amazon Shopping app added a feature that lets you tell Alexa what you want o
 
 *AI design tools are now built into where people already shop for everyday stuff.*
 
-[TechCrunch — AI](https://techcrunch.com/2026/06/08/amazon-now-lets-you-design-custom-merch-using-ai/) · Jun 8
+[Amazon News](https://www.aboutamazon.com/news/retail/design-merch-with-ai-alexa-for-shopping) · Jun 8
 
 ---
 
