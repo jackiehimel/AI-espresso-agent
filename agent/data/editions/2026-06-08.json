@@ -41,10 +41,10 @@
       "headline": "NotebookLM can now run Python code and cite its sources",
       "blurb": "Google upgraded NotebookLM to Gemini 3.5, adding two new abilities: it can execute Python code to analyze data in your notes, and it now shows exactly which sources it used for each answer. The AI note-taking tool launched in 2023 and lets you chat with your uploaded documents.",
       "why_it_matters": "NotebookLM went from a chat interface to an actual workspace that can crunch numbers and show its work.",
-      "source_name": "The Verge \u2014 AI",
-      "source_url": "https://www.theverge.com/tech/944325/google-notebooklm-ai-gemini-update",
+      "source_name": "Google AI Blog",
+      "source_url": "https://blog.google/innovation-and-ai/products/notebooklm/better-research-notebooklm/",
       "tier": 1,
-      "original_headline": "NotebookLM&#8217;s Gemini 3.5 upgrade adds a cloud computer and help finding sources",
+      "original_headline": "Do your best research with NotebookLM",
       "fingerprint": "18a658ef5c378bd5"
     },
     {
@@ -52,10 +52,10 @@
       "headline": "Amazon now lets you AI-generate a design and print it on a shirt",
       "blurb": "The Amazon Shopping app added a feature that lets you tell Alexa what you want on a T-shirt, hoodie, or tumbler, and it generates the design. You can then order the custom merch directly in the app.",
       "why_it_matters": "AI design tools are now built into where people already shop for everyday stuff.",
-      "source_name": "TechCrunch \u2014 AI",
-      "source_url": "https://techcrunch.com/2026/06/08/amazon-now-lets-you-design-custom-merch-using-ai/",
+      "source_name": "Amazon News",
+      "source_url": "https://www.aboutamazon.com/news/retail/design-merch-with-ai-alexa-for-shopping",
       "tier": 1,
-      "original_headline": "Amazon now lets you design custom merch using AI",
+      "original_headline": "How to design custom merch with Alexa for Shopping",
       "fingerprint": "06d1e87c595cd4ac"
     }
   ],

@@ -94,6 +94,18 @@ PRIORITIZE (80+):
   • Platform wars with specific shipped artifacts
   • Surprising real-world AI applications
 
+SOURCE PREFERENCE — when two candidates cover the same launch, prefer
+the primary source. The primary is the company that shipped the thing.
+Examples:
+  Apple Newsroom > The Verge for Apple announcements
+  Google AI Blog / blog.google > TechCrunch for Google launches
+  Anthropic News > Wired for Anthropic releases
+  Amazon News (aboutamazon.com) > TechCrunch for Amazon features
+EXCEPTION — investigative reports (404 Media exposés, The Information
+scoops, Platformer columns, Stratechery analysis) ARE primary; keep the
+original source. Press coverage of an embargoed launch can also be
+primary if the company hasn't posted yet.
+
 CROSS-EDITION UNIQUENESS — same topic/vendor+product as last 30 days → reject.
 """
 

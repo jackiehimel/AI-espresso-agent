@@ -68,6 +68,30 @@ sources:
     kind: rss
     search_domain: microsoft.com
     enabled: true
+  - name: Apple Newsroom
+    tier: 1
+    url: https://www.apple.com/newsroom/rss-feed.rss
+    kind: rss
+    search_domain: apple.com
+    enabled: true
+  - name: Amazon News (About Amazon)
+    tier: 1
+    url: https://www.aboutamazon.com/news/rss
+    kind: rss
+    search_domain: aboutamazon.com
+    enabled: true
+  - name: NVIDIA Blog
+    tier: 1
+    url: https://blogs.nvidia.com/feed/
+    kind: rss
+    search_domain: nvidia.com
+    enabled: true
+  - name: Google — Innovation & AI
+    tier: 1
+    url: https://blog.google/innovation-and-ai/rss/
+    kind: rss
+    search_domain: blog.google
+    enabled: true
   - name: Cursor Blog (official)
     tier: 1
     url: https://cursor.com/atom.xml
