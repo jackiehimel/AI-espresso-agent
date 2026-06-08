@@ -167,40 +167,59 @@ def validate_edition_stories(stories: list[dict[str, Any]]) -> list[str]:
 
 PROMPT_TILE_STYLE_EXAMPLES = [
     {
-        "title": "The skeptical reviewer",
+        "title": "The second-opinion doctor",
         "prompt": (
-            "You're a skeptical staff engineer who's seen this movie before. "
-            "I'm about to describe an idea in 3–6 sentences. Don't encourage me. "
-            "Find the weakest assumption, the part that only works in a demo, and the question "
-            "I'm avoiding. End with one sentence I can actually ship this week anyway."
+            "I'm stuck between two options and I keep going in circles. I'll describe both below. "
+            "Don't ask clarifying questions. Pick one, commit to it like you'd bet your own money, "
+            "then tell me the one scenario where you'd switch to the other."
         ),
-        "tool_hint": "When you're excited about something and need friction, not validation.",
+        "tool_hint": "When analysis paralysis has eaten your whole afternoon.",
     },
     {
-        "title": "The elevator betrayal",
+        "title": "The five-year email",
         "prompt": (
-            "I have 90 seconds before a VP stops pretending to listen. Turn my messy explanation "
-            "below into: one hook sentence, three concrete nouns, and a closing line that sounds "
-            "like a decision already made — not a request for more meetings."
+            "Help me write a short email to myself five years from now. I'll describe what I'm "
+            "working on below. The email should include: what bet I'm making, what I'm sacrificing "
+            "to make it, and the one metric that will tell future-me whether it paid off."
         ),
-        "tool_hint": "Rehearse out loud before the real call.",
+        "tool_hint": "Forces clarity on what actually matters about the thing you're building.",
     },
     {
-        "title": "The meeting that shouldn't exist",
+        "title": "The lazy genius",
         "prompt": (
-            "Read what I'm about to send. If this could be a two-line Slack message, write those "
-            "two lines. If it actually needs a meeting, give me a 4-line agenda where the first "
-            "line is the decision we're making at the end."
+            "I have a tedious recurring task I'll describe below. Don't automate it — that's the "
+            "obvious answer. Instead give me: one way to eliminate it entirely, one way to do it "
+            "in a third of the time, and one argument for why it's secretly more valuable than I think."
         ),
-        "tool_hint": "Before you hit Send on the calendar invite.",
+        "tool_hint": "Before you spend a weekend automating a 10-minute chore.",
+    },
+    {
+        "title": "The pre-mortem",
+        "prompt": (
+            "I'll describe a project I'm about to start. Pretend it's six months from now and it "
+            "failed spectacularly. Write me the post-mortem: what went wrong, which warning sign "
+            "we ignored, and the one conversation we should have had this week instead."
+        ),
+        "tool_hint": "Run this before kickoff, not after the deadline.",
+    },
+    {
+        "title": "The difficult conversation script",
+        "prompt": (
+            "I need to have a hard conversation I'll describe below. Write me the opening two "
+            "sentences — direct, respectful, impossible to misread. Then give me the one question "
+            "I should ask right after so they talk more than I do."
+        ),
+        "tool_hint": "Rehearse the first 30 seconds. The rest follows.",
     },
 ]
 
 PROMPT_TILE_SYSTEM = (
     "You write the daily 'Try this prompt' for AI Espresso — Solvd's internal AI brief. "
-    "Readers already use Claude/ChatGPT. Give one copy-paste prompt block that does a sharp, "
-    "useful mental move in one sitting (friction, rehearsal, truth-check, tighten prose, kill a "
-    "useless meeting). Warm, slightly irreverent colleague voice — never corporate filler. "
+    "Readers already use Claude/ChatGPT daily. Give one copy-paste prompt that does a genuinely "
+    "useful mental move — decision-making, strategy, research, career thinking, code review, "
+    "learning, negotiation, writing, prioritization, hiring, creative problem-solving. "
+    "VARY THE CATEGORY EVERY DAY — never two writing/editing prompts in a row. "
+    "Warm, slightly irreverent colleague voice — never corporate filler. "
     "No profanity. No bracket placeholders like Paste [topic]. Respond with JSON only."
 )
 
@@ -211,30 +230,48 @@ Do NOT tie the prompt to today's news, a product launch, or a specific industry.
 Do NOT use bracket placeholders (no "Paste [X]", no "[topic]", no "[paste notes]").
 Do NOT use profanity or insult the reader.
 
+CRITICAL: Pick a DIFFERENT category than the recent prompts listed below.
+Categories to rotate through: decision-making, strategy, research, career thinking,
+code review, learning, negotiation, prioritization, hiring, creative problem-solving,
+writing/editing, meeting triage, time management, difficult conversations.
+DO NOT write another "paste my text and critique it" prompt — those are overrepresented.
+
 STYLE (match these examples — same voice, new idea each day):
 
-Example A — title: "The skeptical reviewer"
-prompt: You're a skeptical staff engineer who's seen this movie before. I'm about to describe an idea in 3–6 sentences. Don't encourage me. Find the weakest assumption, the part that only works in a demo, and the question I'm avoiding. End with one sentence I can actually ship this week anyway.
-tool_hint: When you're excited about something and need friction, not validation.
+Example A — title: "The second-opinion doctor"
+prompt: I'm stuck between two options and I keep going in circles. I'll describe both below. Don't ask clarifying questions. Pick one, commit to it like you'd bet your own money, then tell me the one scenario where you'd switch to the other.
+tool_hint: When analysis paralysis has eaten your whole afternoon.
 
-Example B — title: "The elevator betrayal"
-prompt: I have 90 seconds before a VP stops pretending to listen. Turn my messy explanation below into: one hook sentence, three concrete nouns, and a closing line that sounds like a decision already made — not a request for more meetings.
-tool_hint: Rehearse out loud before the real call.
+Example B — title: "The five-year email"
+prompt: Help me write a short email to myself five years from now. I'll describe what I'm working on below. The email should include: what bet I'm making, what I'm sacrificing to make it, and the one metric that will tell future-me whether it paid off.
+tool_hint: Forces clarity on what actually matters about the thing you're building.
 
-Example C — title: "The meeting that shouldn't exist"
-prompt: Read what I'm about to send. If this could be a two-line Slack message, write those two lines. If it actually needs a meeting, give me a 4-line agenda where the first line is the decision we're making at the end.
-tool_hint: Before you hit Send on the calendar invite.
+Example C — title: "The lazy genius"
+prompt: I have a tedious recurring task I'll describe below. Don't automate it — that's the obvious answer. Instead give me: one way to eliminate it entirely, one way to do it in a third of the time, and one argument for why it's secretly more valuable than I think.
+tool_hint: Before you spend a weekend automating a 10-minute chore.
+
+Example D — title: "The pre-mortem"
+prompt: I'll describe a project I'm about to start. Pretend it's six months from now and it failed spectacularly. Write me the post-mortem: what went wrong, which warning sign we ignored, and the one conversation we should have had this week instead.
+tool_hint: Run this before kickoff, not after the deadline.
+
+Example E — title: "The difficult conversation script"
+prompt: I need to have a hard conversation I'll describe below. Write me the opening two sentences — direct, respectful, impossible to misread. Then give me the one question I should ask right after so they talk more than I do.
+tool_hint: Rehearse the first 30 seconds. The rest follows.
 
 BAR — never ship:
 • "Explain … in plain English", generic pros/cons, "summarize this article"
 • "Return:" followed by a long bullet laundry list
 • Paste [anything] or any [square-bracket] input slot
 • Teaching what AI is or how to prompt in general
+• Another "paste my writing and find problems" prompt
+
+{recent_block}
 
 REQUIREMENTS:
 • title: starts with "The " — short memorable name (like the examples)
-• prompt: single copy-paste block; second person or natural "I … below / I'm about to …";
-  implies where the reader adds their text without [brackets]; about 30–55 words
+• prompt: single copy-paste block; uses second person or natural first person;
+  the reader should know where to add their own context without needing [brackets];
+  about 30–55 words
 • tool_hint: one line — when you'd actually use this (not which app to open)
 • kicker: always empty string ""
 

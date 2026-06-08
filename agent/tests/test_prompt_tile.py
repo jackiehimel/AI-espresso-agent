@@ -21,9 +21,9 @@ MAY_18_EXPLAINER = (
 
 class ValidatePromptTileTests(unittest.TestCase):
 
-    def test_skeptical_reviewer_passes(self):
+    def test_first_example_passes(self):
         tile = {
-            "title": "The skeptical reviewer",
+            "title": PROMPT_TILE_STYLE_EXAMPLES[0]["title"],
             "kicker": "",
             "prompt": PROMPT_TILE_STYLE_EXAMPLES[0]["prompt"],
             "tool_hint": PROMPT_TILE_STYLE_EXAMPLES[0]["tool_hint"],
@@ -64,19 +64,19 @@ class ValidatePromptTileTests(unittest.TestCase):
             msg=str(reasons),
         )
 
-    def test_missing_input_cue_fails(self):
+    def test_no_task_verb_fails(self):
         tile = {
             "title": "The something vague",
             "kicker": "",
             "prompt": (
-                "You are a helpful assistant and I want you to do something useful for my job "
-                "today without me giving you any specific context or materials to work from at "
-                "all right now please respond with generic advice."
+                "AI is changing the world and everyone should know about it because "
+                "it has many applications across industries and sectors that are growing "
+                "rapidly in adoption rates and market share over recent years."
             ),
-            "tool_hint": "When you need help with work today.",
+            "tool_hint": "When you need awareness of industry trends.",
         }
         reasons = pt.validate_prompt_tile(tile, recent=[])
-        self.assertTrue(any("input cue" in r for r in reasons))
+        self.assertTrue(any("task verb" in r for r in reasons))
 
     def test_profanity_fails(self):
         tile = {
@@ -93,6 +93,32 @@ class ValidatePromptTileTests(unittest.TestCase):
 
     def test_template_not_story_grounded(self):
         self.assertNotIn("{story_summaries}", PROMPT_TILE_TEMPLATE)
+
+
+class FallbackBankTests(unittest.TestCase):
+
+    def test_all_fallbacks_pass_validation(self):
+        for tile in pt.FALLBACK_BANK:
+            reasons = pt.validate_prompt_tile(tile, recent=[])
+            self.assertEqual(reasons, [], msg=f"{tile['title']}: {reasons}")
+
+    def test_fallback_bank_has_enough_entries(self):
+        self.assertGreaterEqual(len(pt.FALLBACK_BANK), 5)
+
+    def test_fallback_titles_are_unique(self):
+        titles = [t["title"] for t in pt.FALLBACK_BANK]
+        self.assertEqual(len(titles), len(set(titles)))
+
+    def test_pick_fallback_avoids_similar(self):
+        first = pt.FALLBACK_BANK[0]
+        norm = pt._normalize_prompt_for_compare(first["prompt"])
+        picked = pt._pick_fallback([norm])
+        self.assertNotEqual(picked["title"], first["title"])
+
+    def test_pick_fallback_never_returns_error_text(self):
+        picked = pt._pick_fallback([])
+        self.assertNotIn("failed", picked["prompt"])
+        self.assertNotIn("re-run", picked["prompt"])
 
 
 class RenderLayoutTests(unittest.TestCase):

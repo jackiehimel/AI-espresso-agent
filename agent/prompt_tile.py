@@ -3,10 +3,12 @@ prompt_tile.py — daily "Try this prompt" generation for AI Espresso.
 
 One LLM call per edition using PROMPT_TILE_TEMPLATE from editorial.py.
 Snack-size, voice-forward prompts — not tied to that day's stories.
+Falls back to a curated bank on LLM failure.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
@@ -26,15 +28,6 @@ PROMPT_SIMILARITY_LOOKBACK = 14
 PROMPT_SIMILARITY_THRESHOLD = 0.40
 
 BRACKET_PLACEHOLDER_RE = re.compile(r"\[[^\]]+\]")
-INPUT_CUE_RE = re.compile(
-    r"\b("
-    r"below|what i wrote|what i'm about to|i'm about to|my messy|"
-    r"i have \d+ seconds|in \d+[–-]\d+ sentences|in \d+ sentences|"
-    r"read this|look at|here'?s|take this|paste|the following|"
-    r"what follows|this draft|my draft|my notes|what i just"
-    r")\b",
-    re.I,
-)
 GENERIC_ARCHETYPE_RE = re.compile(
     r"explain .{0,40}plain english|pros and cons|eli5|paste \[|summarize (this|the) article",
     re.I,
@@ -47,10 +40,118 @@ PROFANITY_RE = re.compile(
 TASK_VERB_RE = re.compile(
     r"\b("
     r"review|draft|explain|compare|decide|rewrite|debug|help|turn|build|write|read|"
-    r"produce|flag|find|list|give|mark|tell|say|ship"
+    r"produce|flag|find|list|give|mark|tell|say|ship|pick|choose|imagine|pretend|"
+    r"walk|show|think|describe|act"
     r")\b",
     re.I,
 )
+
+# ── Curated fallback bank ─────────────────────────────────────────────
+# Used when LLM generation fails all retries. Each prompt is genuinely
+# useful, covers a distinct category, and matches the AI Espresso voice.
+
+FALLBACK_BANK: list[dict] = [
+    {
+        "title": "The second-opinion doctor",
+        "kicker": "",
+        "prompt": (
+            "I'm stuck between two options and I keep going in circles. I'll describe both "
+            "below. Don't ask clarifying questions. Pick one, commit to it like you'd bet your "
+            "own money, then tell me the one scenario where you'd switch to the other."
+        ),
+        "tool_hint": "When analysis paralysis has eaten your whole afternoon.",
+    },
+    {
+        "title": "The lazy genius",
+        "kicker": "",
+        "prompt": (
+            "I have a tedious recurring task I'll describe below. Don't automate it — that's the "
+            "obvious answer. Instead give me: one way to eliminate it entirely, one way to do it "
+            "in a third of the time, and one argument for why it's secretly more valuable than I think."
+        ),
+        "tool_hint": "Before you spend a weekend automating a 10-minute chore.",
+    },
+    {
+        "title": "The pre-mortem",
+        "kicker": "",
+        "prompt": (
+            "I'll describe a project I'm about to start. Pretend it's six months from now and it "
+            "failed spectacularly. Write me the post-mortem: what went wrong, which warning sign "
+            "we ignored, and the one conversation we should have had this week instead."
+        ),
+        "tool_hint": "Run this before kickoff, not after the deadline.",
+    },
+    {
+        "title": "The one-pager test",
+        "kicker": "",
+        "prompt": (
+            "I'll describe something complex I'm working on below. Explain it back to me in "
+            "exactly five sentences — no jargon, no hedge words, no 'it depends.' If you can't "
+            "do it in five, tell me which part is too fuzzy for me to actually ship."
+        ),
+        "tool_hint": "Forces you to find out if you understand your own project.",
+    },
+    {
+        "title": "The calendar audit",
+        "kicker": "",
+        "prompt": (
+            "Look at the meeting descriptions I'll paste below. For each one, tell me: is this a "
+            "decision, an update, or a ritual? Decisions get 25 minutes. Updates become a shared "
+            "doc. Rituals get a hard question: what breaks if we stop?"
+        ),
+        "tool_hint": "Reclaim five hours this week without anyone noticing.",
+    },
+    {
+        "title": "The hiring red flag detector",
+        "kicker": "",
+        "prompt": (
+            "I'll paste a job description below. Find the three things a strong candidate would "
+            "read and immediately close the tab. Then rewrite just those three parts so the "
+            "posting sounds like a team that actually knows what it wants."
+        ),
+        "tool_hint": "Before you wonder why your pipeline is empty.",
+    },
+    {
+        "title": "The difficult conversation script",
+        "kicker": "",
+        "prompt": (
+            "I need to have a hard conversation I'll describe below. Write me the opening two "
+            "sentences — direct, respectful, impossible to misread. Then give me the one question "
+            "I should ask right after so they talk more than I do."
+        ),
+        "tool_hint": "Rehearse the first 30 seconds. The rest follows.",
+    },
+    {
+        "title": "The scope knife",
+        "kicker": "",
+        "prompt": (
+            "I'll describe a feature or project below. Cut it in half — not by removing quality, "
+            "but by finding the version that proves whether the idea works in a week instead of "
+            "a quarter. Tell me what you kept, what you cut, and why the cut parts can wait."
+        ),
+        "tool_hint": "When everything feels equally important and nothing ships.",
+    },
+    {
+        "title": "The reverse interview",
+        "kicker": "",
+        "prompt": (
+            "I'll describe my current role and what I'm working on below. Write me five questions "
+            "I should be asking my manager but probably aren't — the ones that reveal whether this "
+            "job is going somewhere or just keeping me busy."
+        ),
+        "tool_hint": "Before your next 1:1 turns into another status update.",
+    },
+    {
+        "title": "The strategy smell test",
+        "kicker": "",
+        "prompt": (
+            "I'll paste a strategy or plan below. Find every sentence that sounds like a decision "
+            "but is actually a wish. Replace each one with the specific bet it's making and the "
+            "thing we'd have to stop doing to make that bet real."
+        ),
+        "tool_hint": "When the strategy deck is 40 slides and zero trade-offs.",
+    },
+]
 
 
 def recent_prompt_bodies(n: int = PROMPT_SIMILARITY_LOOKBACK) -> list[str]:
@@ -68,6 +169,23 @@ def recent_prompt_bodies(n: int = PROMPT_SIMILARITY_LOOKBACK) -> list[str]:
         except (json.JSONDecodeError, OSError):
             continue
     return bodies
+
+
+def recent_prompt_titles(n: int = 7) -> list[str]:
+    titles: list[str] = []
+    paths = sorted(EDITIONS_DIR.glob("*.json"), reverse=True)
+    for path in paths:
+        if len(titles) >= n:
+            break
+        try:
+            data = json.loads(path.read_text())
+            tile = data.get("try_this_prompt") or {}
+            title = (tile.get("title") or "").strip()
+            if title and title != "Try this prompt":
+                titles.append(title)
+        except (json.JSONDecodeError, OSError):
+            continue
+    return titles
 
 
 def _normalize_prompt_for_compare(text: str) -> str:
@@ -117,8 +235,6 @@ def validate_prompt_tile(tile: dict, recent: list[str] | None = None) -> list[st
         reasons.append(f"too long ({word_count} words; max {PROMPT_TILE_MAX_WORDS})")
     if BRACKET_PLACEHOLDER_RE.search(prompt):
         reasons.append("no [bracket] placeholders — use natural cues like below or I'm about to")
-    if not INPUT_CUE_RE.search(prompt):
-        reasons.append("missing natural input cue (e.g. below, I'm about to, what I wrote)")
     if GENERIC_ARCHETYPE_RE.search(prompt):
         reasons.append("generic beginner prompt (plain-English explainer, pros/cons, etc.)")
     if BULLET_LAUNDRY_RE.search(prompt):
@@ -179,6 +295,14 @@ def build_prompt_tile(client: Any, call_llm_json: Any, stories: list[Any]) -> di
         "required": ["title", "prompt", "tool_hint"],
     }
     recent = recent_prompt_bodies()
+    titles = recent_prompt_titles()
+    recent_block = ""
+    if titles:
+        recent_block = (
+            "RECENT TITLES (do NOT repeat these topics or titles):\n"
+            + "\n".join(f"• {t}" for t in titles)
+        )
+    template = PROMPT_TILE_TEMPLATE.replace("{recent_block}", recent_block)
     last_reasons: list[str] = []
 
     for attempt in range(3):
@@ -191,7 +315,7 @@ def build_prompt_tile(client: Any, call_llm_json: Any, stories: list[Any]) -> di
             raw = call_llm_json(
                 client,
                 PROMPT_TILE_SYSTEM,
-                PROMPT_TILE_TEMPLATE + correction,
+                template + correction,
                 schema,
                 max_tokens=2000,
             )
@@ -208,10 +332,20 @@ def build_prompt_tile(client: Any, call_llm_json: Any, stories: list[Any]) -> di
             print(f"  ! prompt tile attempt {attempt + 1}: {e}", file=sys.stderr)
             break
 
-    print("  ! prompt tile generation failed — using minimal fallback", file=sys.stderr)
-    return {
-        "title": "Try this prompt",
-        "kicker": "",
-        "prompt": "(prompt generation failed — re-run the edition agent)",
-        "tool_hint": "Works in Claude, ChatGPT, or Gemini.",
-    }
+    fallback = _pick_fallback(recent)
+    print(
+        f"  ! prompt tile LLM failed — using curated fallback: {fallback['title']}",
+        file=sys.stderr,
+    )
+    return fallback
+
+
+def _pick_fallback(recent: list[str]) -> dict:
+    """Pick a curated prompt that isn't too similar to recent editions."""
+    for tile in FALLBACK_BANK:
+        if not _too_similar(tile["prompt"], recent):
+            return dict(tile)
+    # All similar (unlikely with 10 in the bank) — deterministic rotation by day
+    import datetime as dt
+    idx = dt.date.today().timetuple().tm_yday % len(FALLBACK_BANK)
+    return dict(FALLBACK_BANK[idx])
