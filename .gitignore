@@ -20,3 +20,7 @@ README.internal.md
 ai-garage/
 docs/
 agent/.claude/
+
+# Local-only recipient list -- source of truth for AI_ESPRESSO_TO secret.
+# Edit locally and run ./agent/sync_recipients.sh to push to GitHub.
+agent/recipients.local.txt
