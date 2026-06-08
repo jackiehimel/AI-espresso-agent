@@ -18,6 +18,7 @@ CI_OPTIONAL_FLAKY_FEEDS = {
     "Microsoft AI Blog",
     "Rest of World",
     "Import AI (Jack Clark)",
+    "Stratechery (Ben Thompson)",
 }
 
 
