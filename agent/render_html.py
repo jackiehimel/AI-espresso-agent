@@ -334,6 +334,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .source a {{ color: #1A1108; text-decoration: none; font-weight: 700; }}
 
   .prompt-card {{
+    position: relative;
     background: linear-gradient(165deg, #FFF8E8 0%, #FFF4D6 55%, #F9E9C8 100%);
     border: 1px dashed #C9A671;
     border-radius: 12px;
@@ -353,7 +354,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     display: block;
     font-size: 13px; font-weight: 800; letter-spacing: 0.18em;
     color: #B8340A; text-transform: uppercase; margin: 0 0 12px 0;
-    background-color: #F2C9B8; padding: 8px 12px; border-radius: 6px;
+    background-color: #F2C9B8; padding: 8px 42px 8px 12px; border-radius: 6px;
     text-align: center;
   }}
   .prompt-title {{
@@ -365,13 +366,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     margin: 0 0 10px 0; line-height: 1.4;
   }}
   .prompt-code-wrap {{
-    position: relative;
     flex: 0 0 auto;
   }}
   .prompt-copy {{
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 18px;
+    right: 22px;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -400,7 +400,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }}
   .prompt-code {{
     background-color: #FFFFFF; border: 1px solid #E8DCC8; border-radius: 6px;
-    padding: 10px 36px 10px 12px;
+    padding: 10px 12px;
     font-family: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
     font-size: 11px; color: #1A1108; line-height: 1.5; white-space: pre-wrap;
   }}
@@ -552,12 +552,12 @@ STORY_CARD_TEMPLATE = """    <article class="card">
     </article>"""
 
 PROMPT_CARD_TEMPLATE = """    <article class="card prompt-card">
-{image_block}      <div class="card-body">
+{image_block}      <button type="button" class="prompt-copy" aria-label="Copy prompt to clipboard" title="Copy to clipboard">
+        {copy_icon}
+      </button>
+      <div class="card-body">
         <p class="prompt-tag">☕ Try this prompt</p>
 {prompt_title_block}{prompt_tool_hint_block}        <div class="prompt-code-wrap">
-          <button type="button" class="prompt-copy" aria-label="Copy prompt to clipboard" title="Copy to clipboard">
-            {copy_icon}
-          </button>
           <div class="prompt-code">{prompt_body}</div>
         </div>
       </div>

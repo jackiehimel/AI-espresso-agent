@@ -186,6 +186,13 @@ class RenderLayoutTests(unittest.TestCase):
             self.assertIn('class="dateline"', html)
             self.assertIn("border: 1px dashed #C9A671", html)
             self.assertIn("background: linear-gradient(165deg, #FFF8E8 0%, #FFF4D6 55%, #F9E9C8 100%)", html)
+            self.assertIn("position: relative;", html)
+            self.assertIn("padding: 8px 42px 8px 12px;", html)
+            self.assertNotIn("padding-top: 42px;", html)
+            self.assertLess(
+                html.index('class="prompt-copy"'),
+                html.index('<div class="card-body">', html.index('class="card prompt-card"')),
+            )
 
 
 if __name__ == "__main__":

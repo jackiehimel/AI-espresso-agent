@@ -16,6 +16,10 @@ INTERNAL.md
 README.internal.md
 .cursor/
 
+# Working artifacts
+.worktrees/
+debates/
+
 # Local-only working dirs (not part of the published repo)
 ai-garage/
 docs/

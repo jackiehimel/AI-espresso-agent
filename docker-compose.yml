@@ -1,0 +1,18 @@
+services:
+  espresso:
+    build: .
+    env_file: .env
+    volumes:
+      - ./agent/data:/app/agent/data
+      - ./editions:/app/editions
+
+  demo:
+    build:
+      context: .
+      dockerfile: Dockerfile.demo
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./agent/data:/app/agent/data
+      - ./editions:/app/editions
