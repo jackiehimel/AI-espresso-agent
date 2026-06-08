@@ -27,14 +27,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Repository name (lowercase)
+        id: repo
+        run: echo "name=${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
       - name: Build and push agent image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.sha }}
+            ghcr.io/${{ steps.repo.outputs.name }}:latest
+            ghcr.io/${{ steps.repo.outputs.name }}:${{ github.sha }}
 
       - name: Build and push demo image
         uses: docker/build-push-action@v6
@@ -43,5 +47,5 @@ jobs:
           file: Dockerfile.demo
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}-demo:latest
-            ghcr.io/${{ github.repository }}-demo:${{ github.sha }}
+            ghcr.io/${{ steps.repo.outputs.name }}-demo:latest
+            ghcr.io/${{ steps.repo.outputs.name }}-demo:${{ github.sha }}
