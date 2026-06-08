@@ -68,13 +68,13 @@ The company plans its biggest ChatGPT overhaul since 2022, turning the chatbot i
 
 **☕ Try this prompt**
 
-### Try this prompt
+### The scope knife
 
-*Works in Claude, ChatGPT, or Gemini.*
+*When everything feels equally important and nothing ships.*
 
 
 ```
-(prompt generation failed — re-run the edition agent)
+I'll describe a feature or project below. Cut it in half — not by removing quality, but by finding the version that proves whether the idea works in a week instead of a quarter. Tell me what you kept, what you cut, and why the cut parts can wait.
 ```
 
 ---
