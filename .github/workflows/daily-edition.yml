@@ -86,8 +86,10 @@ jobs:
       # Production: agent tool_use loop only (no legacy rank_and_select fallback).
       # Skipped when the edition for this date is already committed -- prevents
       # accidentally overwriting a shipped slate during a recovery re-run.
+      # test_recipient bypasses the skip so a fresh preview can be generated
+      # even when an edition for this date was already committed earlier.
       - name: Generate edition JSON (agent mode)
-        if: ${{ steps.dedupe.outputs.already_sent != 'true' }}
+        if: ${{ steps.dedupe.outputs.already_sent != 'true' || inputs.test_recipient != '' }}
         working-directory: agent
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
