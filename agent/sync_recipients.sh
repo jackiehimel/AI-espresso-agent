@@ -23,8 +23,8 @@ if [[ ! -f "$FILE" ]]; then
   exit 1
 fi
 
-# Strip comments + blank lines, then comma-join.
-LIST=$(grep -vE '^[[:space:]]*(#|$)' "$FILE" | tr -d '[:space:]' | tr '\n' ',' | sed 's/,$//')
+# Strip comments + blank lines, trim each address, then comma-join.
+LIST=$(grep -vE '^[[:space:]]*(#|$)' "$FILE" | awk '{$1=$1; print}' | tr '\n' ',' | sed 's/,$//')
 
 if [[ -z "$LIST" ]]; then
   echo "error: no non-comment lines in $FILE; refusing to set an empty list." >&2
