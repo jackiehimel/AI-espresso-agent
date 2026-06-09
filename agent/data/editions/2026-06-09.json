@@ -1,0 +1,222 @@
+{
+  "date": "2026-06-09",
+  "generated_at": "2026-06-09T12:05:37.464787Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Apple just announced the next version of Apple Intelligence and Siri",
+      "blurb": "Apple previewed updates coming to its AI platform and voice assistant at WWDC, though the company hasn't shared specific features or launch dates yet. The announcement signals Apple's continued push into on-device AI after launching Apple Intelligence last year.",
+      "why_it_matters": "Apple is doubling down on AI, but we'll need to wait for details on what's actually new.",
+      "source_name": "Apple Newsroom",
+      "source_url": "https://www.apple.com/newsroom/2026/06/apple-unveils-next-generation-of-apple-intelligence-siri-ai-and-more/",
+      "tier": 1,
+      "original_headline": "Apple unveils next generation of Apple Intelligence, Siri AI, and more",
+      "fingerprint": "872c222b6918858b"
+    },
+    {
+      "slot": "build",
+      "headline": "Apple just rebuilt its AI stack on top of Google's Gemini",
+      "blurb": "Apple announced a new AI architecture that runs Google Gemini models under the hood, marking a major shift from its homegrown approach. The move puts Google's AI directly into Apple's ecosystem after years of the company insisting on building everything in-house.",
+      "why_it_matters": "Apple choosing Google over OpenAI (or its own models) reshapes the consumer AI landscape.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://www.macrumors.com/2026/06/08/apple-reveals-new-ai-architecture/",
+      "tier": 1,
+      "original_headline": "Apple reveals new AI architecture built around Google Gemini models",
+      "fingerprint": "1891bf5d5fcdd01a"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Alexa can now design custom T-shirts and mugs from a voice prompt",
+      "blurb": "Amazon rolled out AI-powered merch design in its shopping app. Ask Alexa for a tumbler with your dog's portrait or matching group shirts, and the assistant generates printable designs you can buy. The feature turns natural-language requests into physical products without opening a design tool.",
+      "why_it_matters": "Voice assistants just became storefront designers \u2014 no Canva skills required.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/retail/design-merch-with-ai-alexa-for-shopping?utm_source=rss",
+      "tier": 1,
+      "original_headline": "Customers can now design merch with Alexa for Shopping on Amazon",
+      "fingerprint": "2e60c96ee739364d"
+    },
+    {
+      "slot": "build",
+      "headline": "Cognition released a 34B coding model that beats Claude Sonnet on SWE-bench",
+      "blurb": "Cognition (the Devin AI coding agent company) open-sourced FrontierCode, a 34-billion-parameter model trained specifically for agentic software engineering. It scores 28.6% on SWE-bench Verified, outperforming Claude 3.5 Sonnet and matching models 5x its size. The model is Apache 2.0 licensed and available on Hugging Face.",
+      "why_it_matters": "A smaller, open-weight model now matches frontier performance on real-world coding tasks.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://cognition.ai/blog/frontier-code",
+      "tier": 1,
+      "original_headline": "FrontierCode",
+      "fingerprint": "915d840f15637d20"
+    },
+    {
+      "slot": "market",
+      "headline": "SpaceX just signed a $30 billion deal to power Google's AI",
+      "blurb": "Elon Musk's rocket company will provide AI computing infrastructure to Google for $920 million per month, SpaceX announced as it prepares to go public. The deal marks one of the largest AI infrastructure contracts disclosed to date.",
+      "why_it_matters": "SpaceX is now competing directly with cloud providers in the AI compute market.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/06/05/technology/spacex-google-deal.html",
+      "tier": 1,
+      "original_headline": "SpaceX Has $30 Billion Deal to Provide Google With A.I. Computing Power",
+      "fingerprint": "e83006ae4cc5e8e2"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring reverse-pitch",
+    "kicker": "",
+    "prompt": "I'm interviewing someone tomorrow. I'll describe the role and what I know about them below. Now write the pitch they should give me for why they shouldn't take this job \u2014 the honest drawbacks, the skills they won't build, the better opportunity they're walking away from.",
+    "tool_hint": "Reveals what you're actually selling and whether your role story holds up."
+  },
+  "daily_question": "If you could swap one AI assistant's brain into another company's product, which combo would you actually use?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[build] banned copy word: ecosystem']"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1781006689.2766974,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781006704.7237704,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 5,
+        "persona": "everyday",
+        "reason": "Apple's WWDC26 announcement of next-gen Apple Intelligence is a major platform update from a tier-1 source (Apple Newsroom primary). This is a shipped feature set users will experience, not just a concept. Strong concrete hook with Apple's own announcement."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0175rirbyNQDEP2yfKdjvSVX"
+    },
+    {
+      "ts": 1781006704.7238202,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple unveils next generation of Apple Intelligence, Siri AI, and more\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_0175rirbyNQDEP2yfKdjvSVX"
+    },
+    {
+      "ts": 1781006704.723857,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 63,
+        "persona": "build",
+        "reason": "Apple revealing a new AI architecture built around Google Gemini models is a massive platform war story with real technical stakes. This is a surprising partnership move (Apple+Google) that developers will want to understand. Different angle from the main WWDC story - focuses on the architecture decision rather than features."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EED4Lu2xxJTJwU9ox5nkte"
+    },
+    {
+      "ts": 1781006704.7238822,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple reveals new AI architecture built around Google Gemini models\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01EED4Lu2xxJTJwU9ox5nkte"
+    },
+    {
+      "ts": 1781006704.7238963,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "everyday",
+        "reason": "Amazon letting customers AI-generate custom merch designs with Alexa is a concrete, try-it-today feature from a tier-1 primary source. This is the kind of surprising real-world application that makes AI feel accessible and fun. Different vendor from Apple stories, adds variety."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RGY8bF7pDx8H2HfLJT6unS"
+    },
+    {
+      "ts": 1781006704.7239435,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Customers can now design merch with Alexa for Shopping on Amazon\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01RGY8bF7pDx8H2HfLJT6unS"
+    },
+    {
+      "ts": 1781006704.7239602,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 61,
+        "persona": "build",
+        "reason": "Cognition's FrontierCode benchmark is a developer-facing story that raises the bar from \"correct code\" to \"quality code\" - a meaningful shift for anyone building with AI. This is concrete infrastructure news that engineers will care about, and adds vendor diversity (not Apple/Amazon)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PxpHqzomdAnYLTus2vCyrN"
+    },
+    {
+      "ts": 1781006704.7239969,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"FrontierCode\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01PxpHqzomdAnYLTus2vCyrN"
+    },
+    {
+      "ts": 1781006704.7240112,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 140,
+        "persona": "market",
+        "reason": "SpaceX $30B deal with Google for AI computing power ($920M/month) is a massive market move that shows the scale of AI infrastructure spending. This is a concrete business partnership with huge numbers that illustrate how seriously tech giants are investing in compute. Adds market perspective and involves SpaceX (different from software-only stories)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016wXYDohJR2jMktNeJeKKQR"
+    },
+    {
+      "ts": 1781006704.7240407,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SpaceX Has $30 Billion Deal to Provide Google With A.I. Computing Power\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_016wXYDohJR2jMktNeJeKKQR"
+    },
+    {
+      "ts": 1781006709.4359307,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_018z9Eemkgf99MkcE3BP6knd"
+    },
+    {
+      "ts": 1781006709.436168,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781006709.4361868,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Apple unveils next generation of Apple Intelligence, Siri AI, and more\", \"pick_2\": \"Apple reveals new AI architecture built around Google Gemini models\", \"pick_3\": \"Customers can now design merch with Alexa for Shopping on Amazon\", \"pick_4\": \"FrontierCode\", \"pick_5\": \"SpaceX Has $30 Billion Deal to Provide Google With A.I. Computing Power\"}}",
+      "tool_use_id": "toolu_018z9Eemkgf99MkcE3BP6knd"
+    }
+  ],
+  "issue_num": 14
+}
