@@ -29,6 +29,7 @@ from urllib.parse import urlparse
 import httpx
 
 from constitution import constitution_prompt_block
+from dedupe_gate import ArchiveIndex, exact_repeat_reason, semantic_repeats
 from freshness import infer_date_from_text, infer_date_from_url
 
 _CONSTITUTION_PROMPT = constitution_prompt_block()
@@ -260,6 +261,7 @@ class AgentState:
     today: dt.date
     candidates: list[dict]
     archive_headlines: list[str]
+    archive_index: ArchiveIndex | None = None
     picks: dict[str, dict] = field(default_factory=dict)
     vendor_counts: dict[str, int] = field(default_factory=dict)
     extra_candidates: list[dict] = field(default_factory=list)
@@ -306,6 +308,10 @@ def _tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
     body = (found.get("body") or "").strip()
     if len(body) < 80:
         return {"error": "no verified article body; call read_candidate first or pick another"}
+
+    repeat = exact_repeat_reason(found.get("headline", ""), found.get("url", ""), state.archive_index)
+    if repeat:
+        return {"error": f"{repeat}; pick different news"}
 
     nv = _detect_vendor(found.get("headline", ""), found.get("url", ""), vendor_patterns)
     if nv and state.vendor_counts.get(nv, 0) >= 2:
@@ -490,6 +496,36 @@ def _validate_ship(state: AgentState) -> dict:
 
     if non_load_bearing > 1:
         errors.append(f"too many non-load-bearing stories ({non_load_bearing} > 1)")
+
+    # Cross-edition dedupe rails (see dedupe_gate.py).
+    # Exact layers re-run here because search_news candidates bypass pool dedupe.
+    for slot, pick in state.picks.items():
+        repeat = exact_repeat_reason(
+            pick.get("headline", ""), pick.get("url", ""), state.archive_index,
+        )
+        if repeat:
+            errors.append(f"[{slot}] {repeat} — unpick and choose different news")
+
+    semantic_archive = (
+        state.archive_index.semantic_headlines
+        if state.archive_index is not None
+        else state.archive_headlines
+    )
+    if semantic_archive:
+        slot_by_headline = {
+            (p.get("headline") or "").strip(): slot for slot, p in state.picks.items()
+        }
+        hits = semantic_repeats(list(slot_by_headline), semantic_archive)
+        if hits is None:
+            print("  [dedupe] semantic ship gate skipped (unavailable)", file=sys.stderr)
+        else:
+            for hit in hits:
+                slot = slot_by_headline.get(hit["pick"], "?")
+                errors.append(
+                    f"[{slot}] covers the same story as a recent edition "
+                    f"(\"{hit['matched']}\", similarity {hit['similarity']}) — "
+                    f"unpick and choose different news"
+                )
 
     return {"ok": not errors, "errors": errors, "pick_count": len(state.picks)}
 
@@ -690,12 +726,15 @@ def agentic_select(
     today: dt.date,
     vendor_patterns,
     archive_headlines: list[str],
+    archive_index: ArchiveIndex | None = None,
 ) -> tuple[list, list[dict], dict]:
-    # Dedupe
+    # Dedupe: fingerprint + exact archive match (canonical URL / title)
     fresh = []
     seen_fps = set(archive_fps)
     for c in candidates:
         if c.fingerprint in seen_fps or c.aggregator:
+            continue
+        if exact_repeat_reason(c.headline, c.url, archive_index):
             continue
         seen_fps.add(c.fingerprint)
         fresh.append(c)
@@ -728,6 +767,8 @@ def agentic_select(
             continue
         fp = fingerprint_of(title, url)
         if fp in seen_fps:
+            continue
+        if exact_repeat_reason(title, url, archive_index):
             continue
         seen_fps.add(fp)
         new_id = len(candidates_payload)
@@ -774,6 +815,7 @@ def agentic_select(
         today=today,
         candidates=enriched,
         archive_headlines=archive_headlines,
+        archive_index=archive_index,
     )
     state.trace.append(TraceEvent(
         ts=time.time(), role="system", kind="handoff",

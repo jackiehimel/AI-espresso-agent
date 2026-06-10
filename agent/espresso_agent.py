@@ -49,6 +49,7 @@ import subprocess
 from bs4 import BeautifulSoup
 
 from card_config import needed_slots_for_rules
+from dedupe_gate import ArchiveIndex, build_archive_index, exact_repeat_reason
 from freshness import infer_date_from_url
 from prompt_tile import build_prompt_tile as _build_prompt_tile_llm
 
@@ -510,10 +511,14 @@ def _normalized_archive_record(rec: dict[str, Any]) -> dict[str, Any] | None:
         return None
     fingerprints = rec.get("fingerprints")
     headlines = rec.get("headlines")
+    urls = rec.get("urls")
+    original_headlines = rec.get("original_headlines")
     return {
         "date": date,
         "fingerprints": fingerprints if isinstance(fingerprints, list) else [],
         "headlines": headlines if isinstance(headlines, list) else [],
+        "urls": urls if isinstance(urls, list) else [],
+        "original_headlines": original_headlines if isinstance(original_headlines, list) else [],
     }
 
 
@@ -556,6 +561,8 @@ def append_archive(edition: Edition) -> None:
         "date": edition.date,
         "fingerprints": [s.fingerprint for s in edition.stories],
         "headlines": [s.headline for s in edition.stories],
+        "urls": [s.source_url for s in edition.stories],
+        "original_headlines": [s.original_headline for s in edition.stories],
     }
     rows = _load_archive_records_compacted()
     for idx, existing in enumerate(rows):
@@ -978,8 +985,9 @@ def rank_and_select(
     archive_fps: set[str],
     rules: dict,
     today: dt.date,
+    archive_index: ArchiveIndex | None = None,
 ) -> list[Story]:
-    # First-pass dedupe by fingerprint
+    # First-pass dedupe by fingerprint + exact archive match (URL / title)
     fresh: list[Candidate] = []
     seen_fps: set[str] = set(archive_fps)
     for c in candidates:
@@ -987,6 +995,8 @@ def rank_and_select(
             continue
         # Aggregators contribute as signal only — drop them from final selection
         if c.aggregator:
+            continue
+        if exact_repeat_reason(c.headline, c.url, archive_index):
             continue
         seen_fps.add(c.fingerprint)
         fresh.append(c)
@@ -1235,7 +1245,11 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
     candidates = fetch_all_candidates(sources, use_cache=use_cache)
     max_story_age_days = int(rules.get("max_story_age_days", 4))
     candidates = _filter_stale_candidates(candidates, date, max_story_age_days)
-    archive_fps = load_archive(days=rules.get("dedupe_window_days", 30))
+    dedupe_window_days = rules.get("dedupe_window_days", 30)
+    archive_fps = load_archive(days=dedupe_window_days)
+    archive_index = build_archive_index(
+        _load_archive_records_compacted(), date, days=dedupe_window_days,
+    )
     print(f"[espresso] {len(archive_fps)} archived fingerprints (dedupe window)", file=sys.stderr)
 
     client = Anthropic() if USE_ANTHROPIC else None
@@ -1263,6 +1277,7 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
                     today=date,
                     vendor_patterns=VENDOR_PATTERNS,
                     archive_headlines=archive_titles,
+                    archive_index=archive_index,
                 )
                 agent_used = True
                 if attempt > 1:
@@ -1296,7 +1311,7 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
             # Dev-only: see RANKING_SYSTEM deprecation block above.
             if os.environ.get("ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK") == "1":
                 print("[espresso] ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK=1 — rank_and_select", file=sys.stderr)
-                stories = rank_and_select(client, candidates, archive_fps, rules, date)
+                stories = rank_and_select(client, candidates, archive_fps, rules, date, archive_index=archive_index)
             elif last_error is not None:
                 raise last_error
             else:
@@ -1337,7 +1352,7 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
                 ))
             print(f"[espresso] AGENT MODE: selected {len(stories)} stories via {len(agent_trace)} trace events", file=sys.stderr)
     else:
-        stories = rank_and_select(client, candidates, archive_fps, rules, date)
+        stories = rank_and_select(client, candidates, archive_fps, rules, date, archive_index=archive_index)
     print(f"[espresso] selected {len(stories)} stories", file=sys.stderr)
 
     edition_notes: list[str] = []
