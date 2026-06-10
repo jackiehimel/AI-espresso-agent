@@ -121,6 +121,38 @@ class SemanticRepeatTests(unittest.TestCase):
             result = dg.semantic_repeats(["pick"], ["archived"])
         self.assertIsNone(result)
 
+    def test_embed_retries_once_on_transient_http_error(self):
+        import httpx
+        calls = {"n": 0}
+
+        def flaky(texts, key):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise httpx.HTTPError("503")
+            return [[1.0, 0.0] for _ in texts]
+
+        with (
+            mock.patch.dict(os.environ, {"GEMINI_API_KEY": "k"}, clear=False),
+            mock.patch.object(dg, "_embed_gemini", side_effect=flaky),
+            mock.patch.object(dg.time, "sleep"),
+            mock.patch.dict(dg._EMBED_CACHE, {}, clear=True),
+        ):
+            vectors = dg._embed(["headline a"])
+        self.assertEqual(calls["n"], 2)
+        self.assertEqual(vectors, [[1.0, 0.0]])
+
+    def test_embed_raises_after_second_http_error(self):
+        import httpx
+        with (
+            mock.patch.dict(os.environ, {"GEMINI_API_KEY": "k"}, clear=False),
+            mock.patch.object(dg, "_embed_gemini", side_effect=httpx.HTTPError("503")),
+            mock.patch.object(dg.time, "sleep"),
+            mock.patch.dict(dg._EMBED_CACHE, {}, clear=True),
+        ):
+            # Second failure propagates; semantic_repeats fails open on it.
+            with self.assertRaises(httpx.HTTPError):
+                dg._embed(["headline a"])
+
     def test_empty_inputs_return_clean(self):
         self.assertEqual(dg.semantic_repeats([], ["a"]), [])
         self.assertEqual(dg.semantic_repeats(["a"], []), [])

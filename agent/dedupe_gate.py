@@ -26,6 +26,7 @@ import math
 import os
 import re
 import sys
+import time
 from dataclasses import dataclass, field
 from urllib.parse import urlparse
 
@@ -176,9 +177,16 @@ def _embed(texts: list[str]) -> list[list[float]] | None:
     missing = [t for t in dict.fromkeys(texts) if t not in _EMBED_CACHE]
     if missing:
         if gemini_key:
-            vectors = _embed_gemini(missing, gemini_key)
+            embed = lambda: _embed_gemini(missing, gemini_key)  # noqa: E731
         else:
-            vectors = _embed_openai(missing, openai_key)
+            embed = lambda: _embed_openai(missing, openai_key)  # noqa: E731
+        try:
+            vectors = embed()
+        except httpx.HTTPError:
+            # One retry covers transient 429/503 blips; a second failure
+            # propagates to semantic_repeats, which fails open.
+            time.sleep(2)
+            vectors = embed()
         for text, vec in zip(missing, vectors):
             _EMBED_CACHE[text] = vec
     return [_EMBED_CACHE[t] for t in texts]
