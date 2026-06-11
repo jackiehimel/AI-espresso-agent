@@ -1,0 +1,221 @@
+{
+  "date": "2026-06-11",
+  "generated_at": "2026-06-11T12:25:31.916492Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Anthropic's Claude Fable 5 lands on AWS with Mythos-level performance",
+      "blurb": "Amazon Bedrock now offers Claude Fable 5, Anthropic's latest model that brings their top-tier Mythos capabilities to all customers. The model excels at coding, knowledge work, and vision tasks, available through both Bedrock and Claude Platform on AWS.",
+      "why_it_matters": "Anyone building on AWS can now access Anthropic's most capable model without waiting for enterprise access.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/aws/claude-fable-5-anthropic-available-amazon-bedrock?utm_source=rss",
+      "tier": 1,
+      "original_headline": "Claude Fable 5 from Anthropic now available on AWS",
+      "fingerprint": "9f82974cc323ae6f"
+    },
+    {
+      "slot": "build",
+      "headline": "Google just shipped a model that writes text 4x faster than GPT-style generation",
+      "blurb": "DeepMind released DiffusionGemma, a new approach that generates all tokens at once instead of one-by-one like ChatGPT. It's 4x faster than standard autoregressive models and matches quality on coding and reasoning tasks. The model is open-weight and runs on standard hardware.",
+      "why_it_matters": "Faster inference means cheaper API costs and snappier apps without buying new chips.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+      "tier": 1,
+      "original_headline": "DiffusionGemma: 4x faster text generation",
+      "fingerprint": "bf0f97f14d0a7b8a"
+    },
+    {
+      "slot": "market",
+      "headline": "Apple is now running its AI on NVIDIA chips in Google's cloud",
+      "blurb": "Apple's Private Cloud Compute \u2014 the system that handles complex Siri requests and other AI tasks too big for your iPhone \u2014 is expanding from Apple's own data centers to Google Cloud, running on NVIDIA GPUs with confidential computing. The setup lets Apple process sensitive user data on third-party infrastructure while keeping it encrypted even during computation.",
+      "why_it_matters": "Apple just admitted it needs Google's infrastructure to scale its AI ambitions.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/nvidia-confidential-computing-apple-private-cloud-compute/",
+      "tier": 1,
+      "original_headline": "NVIDIA Confidential Computing to Help Expand Apple\u2019s Private Cloud Compute",
+      "fingerprint": "87b24448eb26d780"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor's AI code reviewer just got 3x faster and finds 10% more bugs",
+      "blurb": "Cursor upgraded Bugbot to catch more issues before you push \u2014 it's now three times faster, 22% cheaper to run, and finds 10% more bugs per review. A new /review command lets you trigger a full code review on demand instead of waiting for the automated scan.",
+      "why_it_matters": "Faster feedback loops mean you catch bugs before they hit CI, not after.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/bugbot-updates-june-2026",
+      "tier": 1,
+      "original_headline": "Bugbot is now over 3x faster, 22% cheaper, and finds 10% more bugs",
+      "fingerprint": "8f551e91a0bd8a8d"
+    },
+    {
+      "slot": "build",
+      "headline": "Google's new Gemma 4 can see, hear, and code in one 12B model",
+      "blurb": "DeepMind released Gemma 4 12B, a single model that handles text, images, and audio without needing separate encoders for each format. It matches larger models on vision tasks while running on consumer hardware, and developers can fine-tune it for custom multimodal applications.",
+      "why_it_matters": "Multimodal AI that fits on a laptop means builders can ship apps that see and hear without cloud costs.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/introducing-gemma-4-12b-a-unified-encoder-free-multimodal-model/",
+      "tier": 1,
+      "original_headline": "Introducing Gemma 4 12B: a unified, encoder-free multimodal model",
+      "fingerprint": "b25b7d1aa887de68"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The research rabbit hole escape",
+    "kicker": "",
+    "prompt": "I've been researching a topic for longer than I planned. I'll describe what I'm trying to figure out below. Tell me: the one question my research should actually answer, three sources I should read and nothing else, and the decision I'm probably avoiding by reading more.",
+    "tool_hint": "When you've got 47 tabs open and still no clarity."
+  },
+  "daily_question": "If you could swap one AI model's speed for another's accuracy, which trade would you make?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1781180679.2255664,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781180698.3852503,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 23,
+        "persona": "build",
+        "reason": "Primary source tier-1 launch of Anthropic's 5th-gen model on AWS Bedrock - \"Mythos-level capabilities\" suggests major capability jump, available to try today, concrete platform integration"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017bLZpTkruwXy86XuzFgpiP"
+    },
+    {
+      "ts": 1781180698.3853023,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude Fable 5 from Anthropic now available on AWS\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_017bLZpTkruwXy86XuzFgpiP"
+    },
+    {
+      "ts": 1781180698.385344,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "build",
+        "reason": "Primary source from Google DeepMind announcing 4x faster text generation - shipped yesterday (Jun 10), concrete speed metric, experimental open model developers can try"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HhUdANCEyeoEDgwPDk2otB"
+    },
+    {
+      "ts": 1781180698.3853695,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"DiffusionGemma: 4x faster text generation\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01HhUdANCEyeoEDgwPDk2otB"
+    },
+    {
+      "ts": 1781180698.385379,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "market",
+        "reason": "NVIDIA confidential computing GPUs now powering Apple's Private Cloud Compute - significant infrastructure partnership with real technical hook (confidential inference), expansion of Apple Intelligence backend"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AfGzYv2b4Qw2tz2g4tBd2t"
+    },
+    {
+      "ts": 1781180698.385413,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Confidential Computing to Help Expand Apple\\u2019s Private Cloud Compute\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01AfGzYv2b4Qw2tz2g4tBd2t"
+    },
+    {
+      "ts": 1781180698.3854227,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "build",
+        "reason": "Cursor Bugbot shipped concrete improvements developers can use today - 3x faster (90s vs 5min), 22% cheaper, 10% more bugs found, plus new /review command. Real tool people actually use daily"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LhU9mvRw1kxoMbVQAVU5EW"
+    },
+    {
+      "ts": 1781180698.3854625,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Bugbot is now over 3x faster, 22% cheaper, and finds 10% more bugs\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01LhU9mvRw1kxoMbVQAVU5EW"
+    },
+    {
+      "ts": 1781180698.385474,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "build",
+        "reason": "Primary source from Google DeepMind - unified encoder-free multimodal model is architecturally interesting, 12B parameter size makes it accessible, high-performance claim worth showcasing"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012yK79ZHL9TGUyy4Lk8KAwc"
+    },
+    {
+      "ts": 1781180698.3854983,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Gemma 4 12B: a unified, encoder-free multimodal model\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_012yK79ZHL9TGUyy4Lk8KAwc"
+    },
+    {
+      "ts": 1781180704.271249,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_011HbzVY1zu4pbJi5WmAAiu5"
+    },
+    {
+      "ts": 1781180704.2715247,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781180704.2715476,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Claude Fable 5 from Anthropic now available on AWS\", \"pick_2\": \"DiffusionGemma: 4x faster text generation\", \"pick_3\": \"NVIDIA Confidential Computing to Help Expand Apple\\u2019s Private Cloud Compute\", \"pick_4\": \"Bugbot is now over 3x faster, 22% cheaper, and finds 10% more bugs\", \"pick_5\": \"Introducing Gemma 4 12B: a unified, encoder-free multimodal model\"}}",
+      "tool_use_id": "toolu_011HbzVY1zu4pbJi5WmAAiu5"
+    }
+  ],
+  "issue_num": 16
+}
