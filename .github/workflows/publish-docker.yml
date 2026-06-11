@@ -1,0 +1,51 @@
+name: Publish Docker images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "agent/**"
+      - "demo/**"
+      - "Dockerfile"
+      - "Dockerfile.demo"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Repository name (lowercase)
+        id: repo
+        run: echo "name=${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push agent image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ steps.repo.outputs.name }}:latest
+            ghcr.io/${{ steps.repo.outputs.name }}:${{ github.sha }}
+
+      - name: Build and push demo image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.demo
+          push: true
+          tags: |
+            ghcr.io/${{ steps.repo.outputs.name }}-demo:latest
+            ghcr.io/${{ steps.repo.outputs.name }}-demo:${{ github.sha }}

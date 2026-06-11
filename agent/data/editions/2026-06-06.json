@@ -1,0 +1,221 @@
+{
+  "date": "2026-06-06",
+  "generated_at": "2026-06-07T00:06:28.285132Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Google will pay SpaceX $920M per month for compute",
+      "blurb": "Google signed a deal to pay SpaceX $920 million monthly for computing resources, citing 'unexpected demand' for its recently launched AI products. The arrangement suggests Google's existing data center capacity can't keep up with how fast people are actually using its new AI tools.",
+      "why_it_matters": "When a hyperscaler rents compute at this scale, AI demand has outpaced even Google's infrastructure planning.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/05/google-will-pay-spacex-920m-per-month-for-compute/",
+      "tier": 1,
+      "original_headline": "Google will pay SpaceX $920M per month for compute",
+      "fingerprint": "44f131c689876b98"
+    },
+    {
+      "slot": "build",
+      "headline": "OpenAI built a GPT for drug discovery and genome analysis",
+      "blurb": "GPT-Rosalind now handles medicinal chemistry questions, analyzes genomic data, and suggests experimental workflows for life sciences labs. It's trained on biological reasoning tasks that standard models struggle with \u2014 protein interactions, compound design, sequencing output.",
+      "why_it_matters": "AI models are moving from general chat into specialized scientific work that requires domain expertise.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind",
+      "tier": 1,
+      "original_headline": "Introducing new capabilities to GPT-Rosalind",
+      "fingerprint": "0a46d089cf26eff4"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Hackers broke into thousands of Instagram accounts by tricking Meta's AI chatbot",
+      "blurb": "Meta confirmed that attackers exploited its AI assistant to bypass account security and hijack thousands of Instagram profiles. The AI chatbot was manipulated into helping hackers reset passwords or gain unauthorized access, turning Meta's own customer service tool into an attack vector.",
+      "why_it_matters": "AI assistants with account access can become security liabilities if they lack robust safeguards against social engineering.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://this.weekinsecurity.com/meta-confirms-thousands-of-instagram-accounts-were-hacked-by-abusing-its-ai-chatbot/",
+      "tier": 1,
+      "original_headline": "Meta confirms 1000s of Instagram accounts were hacked by abusing its AI chatbot",
+      "fingerprint": "c67c9f47ee9840fd"
+    },
+    {
+      "slot": "build",
+      "headline": "Wasmer built a Node.js edge runtime in weeks using Codex",
+      "blurb": "The WebAssembly company used OpenAI's Codex with GPT-5.5 to ship a full Node.js runtime for edge computing 10-20x faster than traditional development. What normally takes months of engineering work got done in weeks, handling the complexity of porting thousands of Node APIs to run at the edge.",
+      "why_it_matters": "AI coding tools are now fast enough to ship production infrastructure, not just prototypes.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/index/wasmer",
+      "tier": 1,
+      "original_headline": "How Wasmer used Codex to build a Node.js runtime for the edge",
+      "fingerprint": "7d22740687b86936"
+    },
+    {
+      "slot": "industry",
+      "headline": "TSMC can't make chips fast enough for AI customers",
+      "blurb": "The world's largest chipmaker says demand from AI companies has outpaced what it can supply, even with new U.S. factories coming online. CEO C.C. Wei told shareholders the company is maxed out on how much capacity it can add right now.",
+      "why_it_matters": "AI hardware bottlenecks aren't going away \u2014 chip supply is the constraint on model deployment.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/943066/tsmc-ai-demand-struggles",
+      "tier": 1,
+      "original_headline": "TSMC struggles to keep up with AI demand: &#8216;We can only support so much&#8217;",
+      "fingerprint": "6a13c575a7fca376"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The confidence tax",
+    "kicker": "",
+    "prompt": "I'm about to paste something I wrote that sounds confident. Your job: flag every sentence where I'm actually guessing, every claim that needs a source I don't have, and every place I'm hiding uncertainty behind jargon. Then show me how to rewrite one paragraph to sound just as sharp while being honest about what I don't know.",
+    "tool_hint": "Before you send the memo that makes promises you can't keep."
+  },
+  "daily_question": "If you could give one AI company unlimited compute for a month, which would you pick and what would you want them to build?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[industry] banned copy word: deployment']"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1780790744.334701,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=['No major consumer AI product launches (voice assistants, creative tools)', 'No breakthrough research from DeepMind, Mistral, or other labs', 'No new coding agent capabilities beyond Cursor updates', 'No robotics deployment stories with concrete numbers', 'No AI regulation enforcement actions or court rulings']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1780790757.03483,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "market",
+        "reason": "Massive concrete number ($920M/month) showing the scale of AI compute demand. Google paying SpaceX for compute is surprising and newsworthy - crosses space/AI in unexpected way. Clear market signal about infrastructure bottlenecks."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TGeHpTYhLGSvJKA921UCgp"
+    },
+    {
+      "ts": 1780790757.034971,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google will pay SpaceX $920M per month for compute\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01TGeHpTYhLGSvJKA921UCgp"
+    },
+    {
+      "ts": 1780790757.0350158,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 5,
+        "persona": "build",
+        "reason": "OpenAI shipped new capabilities to GPT-Rosalind for life sciences - concrete product update with enhanced biological reasoning and genomics. Shows AI moving into specialized scientific domains with real utility. Developers and scientists can try this."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017duoReWWMAaR8V7dsmpjay"
+    },
+    {
+      "ts": 1780790757.035052,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing new capabilities to GPT-Rosalind\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_017duoReWWMAaR8V7dsmpjay"
+    },
+    {
+      "ts": 1780790757.0350668,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 72,
+        "persona": "everyday",
+        "reason": "Meta's AI chatbot was exploited to hack thousands of Instagram accounts - this is a concrete security story showing real-world AI vulnerability impact. Not just theory, actual breach that happened. Shows the practical security implications people need to know about."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015wMNGR3UyLm9zb3rMYWF92"
+    },
+    {
+      "ts": 1780790757.035104,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta confirms 1000s of Instagram accounts were hacked by abusing its AI chatbot\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_015wMNGR3UyLm9zb3rMYWF92"
+    },
+    {
+      "ts": 1780790757.035119,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "build",
+        "reason": "Wasmer used Codex with GPT-5.5 to build a Node.js runtime 10-20x faster - concrete developer productivity win with measurable impact. Shows AI coding tools delivering real acceleration on infrastructure projects. Engineers will want to know how they did it."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015Gd1xawZsTm5szFyAHYVSn"
+    },
+    {
+      "ts": 1780790757.035151,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"How Wasmer used Codex to build a Node.js runtime for the edge\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_015Gd1xawZsTm5szFyAHYVSn"
+    },
+    {
+      "ts": 1780790757.0351639,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "industry",
+        "reason": "TSMC saying 'we can only support so much' is a rare admission from the world's biggest chipmaker about AI demand outpacing supply. Shows infrastructure constraints at the highest level. Market signal about the AI buildout hitting physical limits."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PamUkgcZxsacE2wqDrMmrq"
+    },
+    {
+      "ts": 1780790757.0352151,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"TSMC struggles to keep up with AI demand: &#8216;We can only support so much&#8217;\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01PamUkgcZxsacE2wqDrMmrq"
+    },
+    {
+      "ts": 1780790762.893908,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01R18DLjELcMJCRVJWS5hXF7"
+    },
+    {
+      "ts": 1780790762.8944588,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1780790762.894519,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Google will pay SpaceX $920M per month for compute\", \"pick_2\": \"Introducing new capabilities to GPT-Rosalind\", \"pick_3\": \"Meta confirms 1000s of Instagram accounts were hacked by abusing its AI chatbot\", \"pick_4\": \"How Wasmer used Codex to build a Node.js runtime for the edge\", \"pick_5\": \"TSMC struggles to keep up with AI demand: &#8216;We can only support so much&#8217;\"}}",
+      "tool_use_id": "toolu_01R18DLjELcMJCRVJWS5hXF7"
+    }
+  ]
+}

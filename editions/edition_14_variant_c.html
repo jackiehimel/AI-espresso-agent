@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Espresso · Edition 14 · Variant C</title>
+<!-- preheader (hidden, used by manifest sniffer) -->
+<span style="display:none">Apple just announced the next version of Apple Intelligence and Siri</span>
+<!-- sniffer-friendly meta tokens -->
+<meta name="ai-espresso-issue" content="NO.&nbsp;014">
+<meta name="ai-espresso-date" content="TUE&nbsp;&middot;&nbsp;JUN&nbsp;9&nbsp;&middot;&nbsp;2026">
+<meta name="ai-espresso-shots" content="6&nbsp;SHOTS">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 16px;
+    background-color: #F4EFE6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: #1A1108;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .masthead { text-align: center; padding: 8px 16px 10px 16px; }
+  .wordmark {
+    font-size: 44px; font-weight: 800; letter-spacing: -0.035em;
+    margin: 0; color: #1A1108; line-height: 1;
+  }
+  .wordmark .cup { font-weight: 400; margin-left: 4px; }
+  .dateline {
+    font-size: 11px; font-weight: 700; color: #8B6F47;
+    letter-spacing: 0.22em; text-transform: uppercase; margin: 8px 0 0 0;
+  }
+  .tagline {
+    font-size: 20px;
+    font-weight: 550;
+    color: #5C4A3A;
+    letter-spacing: 0.01em;
+    margin: 6px 0 0 0;
+  }
+
+  .edition-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .story-cards {
+    grid-column: 1 / span 4;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    align-items: stretch;
+  }
+  .story-cards .card {
+    height: 100%;
+  }
+  .story-cards .card-body {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .story-cards .kicker {
+    flex: 1 1 auto;
+  }
+  .story-cards .source {
+    margin-top: auto;
+  }
+  .edition-grid .prompt-card {
+    grid-column: 5;
+  }
+  .section-divider {
+    display: none;
+    text-align: center; color: #C9A671; font-size: 13px;
+    letter-spacing: 0.35em; margin: 10px 0; user-select: none;
+  }
+  .card {
+    background-color: #FFFFFF; border-radius: 12px; overflow: hidden;
+    border: none;
+    box-shadow: 0 1px 2px rgba(28,17,10,0.04), 0 4px 12px rgba(28,17,10,0.05);
+    display: flex; flex-direction: column;
+    height: auto;
+  }
+  .card-image {
+    width: 160px;
+    height: 160px;
+    max-width: calc(100% - 24px);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 12px auto 0 auto;
+    flex-shrink: 0;
+  }
+  .card-image--placeholder {
+    width: 160px;
+    height: 160px;
+    max-width: calc(100% - 24px);
+    aspect-ratio: 1 / 1;
+    display: block;
+    margin: 12px auto 0 auto;
+    background-color: #F5F0E8;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .card-body {
+    padding: 12px 14px 14px 14px;
+    display: flex; flex-direction: column; flex: 0 1 auto;
+    justify-content: flex-start;
+  }
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .category {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.18em;
+    text-transform: uppercase; margin: 0 0 6px 0;
+  }
+  .category.market { color: #00955A; }
+  .category.everyday { color: #D14A0E; }
+  .category.build { color: #C13B0E; }
+  .category.industry { color: #5C6B8A; }
+  .category.news { color: #8B6F47; }
+  .headline {
+    font-size: 15px; font-weight: 700; line-height: 1.25;
+    margin: 0 0 6px 0; color: #1A1108; letter-spacing: -0.01em;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .headline-link {
+    color: #1A1108;
+    text-decoration: none;
+  }
+  .headline-link:hover {
+    text-decoration: underline;
+  }
+  .kicker {
+    font-size: 13px; color: #1A1108; margin: 0 0 8px 0;
+    font-style: italic; font-weight: 500; line-height: 1.4;
+    flex: 0 0 auto;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .source {
+    font-size: 11px; color: #8B6F47; letter-spacing: 0.02em;
+    margin: 0; border-top: 1px solid #F0E5D1; padding-top: 8px;
+  }
+  .source a { color: #1A1108; text-decoration: none; font-weight: 700; }
+
+  .prompt-card {
+    position: relative;
+    background: linear-gradient(165deg, #FFF8E8 0%, #FFF4D6 55%, #F9E9C8 100%);
+    border: 1px dashed #C9A671;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(193, 59, 14, 0.08);
+    align-self: start;
+  }
+  .prompt-card .card-image,
+  .prompt-card .card-image--placeholder {
+    display: none;
+  }
+  .prompt-card .card-body {
+    display: flex; flex-direction: column;
+    justify-content: flex-start;
+    padding: 14px 14px 14px 14px;
+  }
+  .prompt-tag {
+    display: block;
+    font-size: 13px; font-weight: 800; letter-spacing: 0.18em;
+    color: #B8340A; text-transform: uppercase; margin: 0 0 12px 0;
+    background-color: #F2C9B8; padding: 8px 42px 8px 12px; border-radius: 6px;
+    text-align: center;
+  }
+  .prompt-title {
+    font-size: 14px; font-weight: 800; line-height: 1.25;
+    margin: 0 0 10px 0; color: #1A1108; letter-spacing: -0.01em;
+  }
+  .prompt-tool-hint {
+    font-size: 14px; font-style: italic; color: #5C4A3A;
+    margin: 0 0 10px 0; line-height: 1.4;
+  }
+  .prompt-code-wrap {
+    flex: 0 0 auto;
+  }
+  .prompt-copy {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid #E8DCC8;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    color: #6D4C41;
+    cursor: pointer;
+  }
+  .prompt-copy:hover {
+    color: #1A1108;
+    border-color: #C9A671;
+    background-color: #FFFDF8;
+  }
+  .prompt-copy:focus-visible {
+    outline: 2px solid #D14A0E;
+    outline-offset: 2px;
+  }
+  .prompt-copy--done {
+    color: #00955A;
+    border-color: #00955A;
+  }
+  .prompt-code {
+    background-color: #FFFFFF; border: 1px solid #E8DCC8; border-radius: 6px;
+    padding: 10px 12px;
+    font-family: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+    font-size: 11px; color: #1A1108; line-height: 1.5; white-space: pre-wrap;
+  }
+
+  .qotd {
+    margin: 28px auto 0 auto; max-width: 520px; text-align: center;
+  }
+  .qotd-label {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.22em;
+    color: #D14A0E; text-transform: uppercase; margin: 0 0 10px 0;
+  }
+  .qotd-question {
+    font-size: 15px; font-weight: 600; color: #1A1108; margin: 0 0 12px 0;
+    line-height: 1.4;
+  }
+  .qotd-form { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .qotd-input {
+    flex: 1 1 220px; max-width: 320px; padding: 10px 14px; border-radius: 10px;
+    border: 1px solid #E8DCC8; font-size: 13px; font-family: inherit;
+    background-color: #FFFFFF;
+  }
+  .qotd-submit {
+    padding: 10px 18px; border-radius: 10px; border: none;
+    background-color: #D14A0E; color: #FFFFFF; font-weight: 700;
+    font-size: 12px; cursor: pointer; letter-spacing: 0.04em;
+  }
+  .qotd-submit:disabled { opacity: 0.6; cursor: default; }
+  .qotd-done { font-size: 12px; color: #00955A; margin: 10px 0 0 0; display: none; }
+  .qotd-error { font-size: 12px; color: #B8340A; margin: 10px 0 0 0; display: none; }
+  .qotd-preview {
+    font-size: 12px; color: #8B6F47; margin: 0; line-height: 1.5;
+  }
+
+  .footer {
+    text-align: center; padding: 28px 16px 8px 16px;
+    font-size: 11px; color: #8B6F47; line-height: 1.7; letter-spacing: 0.04em;
+  }
+  .footer a { color: #8B6F47; text-decoration: underline; }
+
+  @media (max-width: 1279px) and (min-width: 960px) {
+    .edition-grid { grid-template-columns: 1fr; }
+    .story-cards {
+      grid-column: 1;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .edition-grid .prompt-card { grid-column: 1; }
+    .section-divider { display: block; grid-column: 1 / -1; }
+  }
+  @media (max-width: 959px) and (min-width: 768px) {
+    .edition-grid { grid-template-columns: 1fr; gap: 14px; }
+    .story-cards {
+      grid-column: 1;
+      grid-template-columns: 1fr;
+    }
+    .edition-grid .prompt-card { grid-column: 1; }
+    .section-divider { display: none; }
+  }
+  @media (max-width: 767px) {
+    .edition-grid { grid-template-columns: 1fr; gap: 14px; }
+    .story-cards {
+      grid-column: 1;
+      grid-template-columns: 1fr;
+    }
+    .edition-grid .prompt-card { grid-column: 1; }
+    .section-divider { display: none; }
+  }
+  @media (max-width: 520px) {
+    .wordmark { font-size: 36px; }
+    body { padding: 18px 12px; }
+    .card-body { padding: 16px 18px 18px 18px; }
+    .headline { font-size: 19px; }
+    .kicker { font-size: 14.5px; }
+    .prompt-code { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="masthead">
+    <h1 class="wordmark">ai espresso<span class="cup">&nbsp;☕</span></h1>
+    <p class="tagline">your morning cup of AI</p>
+    <p class="dateline">Tue &middot; Jun 9 &middot; 2026</p>
+  </header>
+
+  <section class="edition-grid">
+    <div class="story-cards">
+    <article class="card">
+      <a class="card-link" href="https://www.apple.com/newsroom/2026/06/apple-unveils-next-generation-of-apple-intelligence-siri-ai-and-more/">
+      <img class="card-image" src="edition_14/assets/variant_c_01.png" alt="Apple just announced the next version of Apple Intelligence and Siri">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://www.apple.com/newsroom/2026/06/apple-unveils-next-generation-of-apple-intelligence-siri-ai-and-more/">Apple just announced the next version of Apple Intelligence and Siri</a></h2>
+        <p class="kicker">Apple is doubling down on AI, but we&#x27;ll need to wait for details on what&#x27;s actually new.</p>
+        <p class="source"><a class="source-link" href="https://www.apple.com/newsroom/2026/06/apple-unveils-next-generation-of-apple-intelligence-siri-ai-and-more/">Apple Newsroom</a> · Jun 9</p>
+      </div>
+    </article>
+    <article class="card">
+      <a class="card-link" href="https://www.macrumors.com/2026/06/08/apple-reveals-new-ai-architecture/">
+      <img class="card-image" src="edition_14/assets/variant_c_02.png" alt="Apple just rebuilt its AI stack on top of Google&#x27;s Gemini">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://www.macrumors.com/2026/06/08/apple-reveals-new-ai-architecture/">Apple just rebuilt its AI stack on top of Google&#x27;s Gemini</a></h2>
+        <p class="kicker">Apple choosing Google over OpenAI (or its own models) reshapes the consumer AI landscape.</p>
+        <p class="source"><a class="source-link" href="https://www.macrumors.com/2026/06/08/apple-reveals-new-ai-architecture/">Hacker News (front page)</a> · Jun 9</p>
+      </div>
+    </article>
+    <article class="card">
+      <a class="card-link" href="https://www.aboutamazon.com/news/retail/design-merch-with-ai-alexa-for-shopping?utm_source=rss">
+      <img class="card-image" src="edition_14/assets/variant_c_03.png" alt="Alexa can now design custom T-shirts and mugs from a voice prompt">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://www.aboutamazon.com/news/retail/design-merch-with-ai-alexa-for-shopping?utm_source=rss">Alexa can now design custom T-shirts and mugs from a voice prompt</a></h2>
+        <p class="kicker">Voice assistants just became storefront designers — no Canva skills required.</p>
+        <p class="source"><a class="source-link" href="https://www.aboutamazon.com/news/retail/design-merch-with-ai-alexa-for-shopping?utm_source=rss">Amazon News (About Amazon)</a> · Jun 9</p>
+      </div>
+    </article>
+    <article class="card">
+      <a class="card-link" href="https://cognition.ai/blog/frontier-code">
+      <img class="card-image" src="edition_14/assets/variant_c_04.png" alt="Cognition released a 34B coding model that beats Claude Sonnet on SWE-bench">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://cognition.ai/blog/frontier-code">Cognition released a 34B coding model that beats Claude Sonnet on SWE-bench</a></h2>
+        <p class="kicker">A smaller, open-weight model now matches frontier performance on real-world coding tasks.</p>
+        <p class="source"><a class="source-link" href="https://cognition.ai/blog/frontier-code">Hacker News (front page)</a> · Jun 9</p>
+      </div>
+    </article>
+    <article class="card">
+      <a class="card-link" href="https://www.nytimes.com/2026/06/05/technology/spacex-google-deal.html">
+      <img class="card-image" src="edition_14/assets/variant_c_05.png" alt="SpaceX just signed a $30 billion deal to power Google&#x27;s AI">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://www.nytimes.com/2026/06/05/technology/spacex-google-deal.html">SpaceX just signed a $30 billion deal to power Google&#x27;s AI</a></h2>
+        <p class="kicker">SpaceX is now competing directly with cloud providers in the AI compute market.</p>
+        <p class="source"><a class="source-link" href="https://www.nytimes.com/2026/06/05/technology/spacex-google-deal.html">NYT — Technology</a> · Jun 9</p>
+      </div>
+    </article>
+    </div>
+    <article class="card prompt-card">
+      <div class="card-image card-image--placeholder" aria-hidden="true"></div>
+      <button type="button" class="prompt-copy" aria-label="Copy prompt to clipboard" title="Copy to clipboard">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+      </button>
+      <div class="card-body">
+        <p class="prompt-tag">☕ Try this prompt</p>
+        <h2 class="prompt-title">The hiring reverse-pitch</h2>
+        <p class="prompt-tool-hint">Reveals what you&#x27;re actually selling and whether your role story holds up.</p>
+        <div class="prompt-code-wrap">
+          <div class="prompt-code">I&#x27;m interviewing someone tomorrow. I&#x27;ll describe the role and what I know about them below. Now write the pitch they should give me for why they shouldn&#x27;t take this job — the honest drawbacks, the skills they won&#x27;t build, the better opportunity they&#x27;re walking away from.</div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="qotd" id="qotd">
+    <p class="qotd-label">Question of the day</p>
+    <p class="qotd-question">If you could swap one AI assistant&#x27;s brain into another company&#x27;s product, which combo would you actually use?</p>
+    <form class="qotd-form" id="qotd-form">
+      <input class="qotd-input" type="text" name="answer" maxlength="280"
+        placeholder="Your one-sentence take&hellip;" required aria-label="Your answer">
+      <button class="qotd-submit" type="submit">Submit</button>
+    </form>
+    <p class="qotd-done" id="qotd-done">Thanks — recorded.</p>
+    <p class="qotd-error" id="qotd-error"></p>
+  </section>
+
+  <footer class="footer">
+    brewed by ai espresso · <a href="mailto:jhimel@solvd.com?subject=AI%20Espresso%20issue%20report">spot something off?</a> · <a href="https://github.com/jackiehimel/AI-espresso-agent">repo</a>
+  </footer>
+
+</div>
+<script>
+(function () {
+  var form = document.getElementById("qotd-form");
+  var done = document.getElementById("qotd-done");
+  var err = document.getElementById("qotd-error");
+  if (!form) return;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var input = form.querySelector("input[name=answer]");
+    var btn = form.querySelector("button[type=submit]");
+    if (err) { err.style.display = "none"; err.textContent = ""; }
+    btn.disabled = true;
+    fetch("https://ai-garage-navy.vercel.app/api/daily-question", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ date: "2026-06-09", answer: (input && input.value) || "" })
+    }).then(function (res) {
+      if (!res.ok) throw new Error("request failed");
+      if (done) done.style.display = "block";
+      if (input) input.disabled = true;
+    }).catch(function () {
+      if (err) {
+        err.textContent = "Could not save your answer. Please try again later.";
+        err.style.display = "block";
+      }
+      btn.disabled = false;
+    });
+  });
+})();
+
+(function () {
+  var btn = document.querySelector(".prompt-copy");
+  var code = document.querySelector(".prompt-code");
+  if (!btn || !code) return;
+  function copyPrompt() {
+    var text = code.textContent || "";
+    function onSuccess() {
+      btn.classList.add("prompt-copy--done");
+      btn.setAttribute("aria-label", "Copied");
+      btn.setAttribute("title", "Copied");
+      setTimeout(function () {
+        btn.classList.remove("prompt-copy--done");
+        btn.setAttribute("aria-label", "Copy prompt to clipboard");
+        btn.setAttribute("title", "Copy to clipboard");
+      }, 2000);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onSuccess).catch(fallback);
+      return;
+    }
+    fallback();
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        if (document.execCommand("copy")) onSuccess();
+      } finally {
+        document.body.removeChild(ta);
+      }
+    }
+  }
+  btn.addEventListener("click", copyPrompt);
+})();
+</script>
+</body>
+</html>

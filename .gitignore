@@ -1,0 +1,30 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.env
+.env.local
+agent/data/.cache/
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+context/
+agent/data/editions/*.failed.json
+CHANGELOG.md
+INTERNAL.md
+README.internal.md
+.cursor/
+
+# Working artifacts
+.worktrees/
+debates/
+
+# Local-only working dirs (not part of the published repo)
+ai-garage/
+docs/
+agent/.claude/
+
+# Local-only recipient list -- source of truth for AI_ESPRESSO_TO secret.
+# Edit locally and run ./agent/sync_recipients.sh to push to GitHub.
+agent/recipients.local.txt

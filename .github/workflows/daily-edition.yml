@@ -1,0 +1,235 @@
+name: Daily AI Espresso edition
+
+# Runs every day at ~7:00 AM Eastern (GitHub cron uses UTC; drifts ±1h with DST).
+on:
+  schedule:
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Override edition date (YYYY-MM-DD). Defaults to today UTC."
+        required: false
+      skip_email:
+        description: "Set to 'true' to render but not send the email."
+        required: false
+        default: "false"
+      force_resend:
+        description: "Set to 'true' to bypass the duplicate-send guard and re-send."
+        required: false
+        default: "false"
+      test_recipient:
+        description: "Send ONLY to this single email address (preview-before-broadcast). Implies force_resend so consecutive test runs aren't blocked."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-edition-${{ github.ref }}-${{ inputs.date || 'today' }}
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install agent dependencies
+        working-directory: agent
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run unit tests
+        working-directory: agent
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Resolve edition date
+        id: date
+        run: |
+          if [ -n "${{ inputs.date }}" ]; then
+            echo "value=${{ inputs.date }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=$(TZ=America/New_York date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Decide up-front whether the edition is already committed for this date.
+      # When true, generation is skipped (no API spend, no risk of replacing the
+      # already-shipped slate); render runs idempotently to produce step outputs;
+      # the email step only fires when already_sent=false (no resend override).
+      - name: Check duplicate-send guard
+        id: dedupe
+        run: |
+          DATE="${{ steps.date.outputs.value }}"
+          EDITION_JSON="agent/data/editions/${DATE}.json"
+          if git ls-files --error-unmatch "$EDITION_JSON" > /dev/null 2>&1; then
+            echo "already_sent=true" >> "$GITHUB_OUTPUT"
+            echo "Edition artifact already tracked for $DATE; skip regenerate + duplicate send."
+          elif [ -n "$(git log --grep="^Daily edition for $DATE$" -n 1 --pretty=format:%H)" ]; then
+            echo "already_sent=true" >> "$GITHUB_OUTPUT"
+            echo "Edition already recorded by commit for $DATE; skip regenerate + duplicate send."
+          else
+            echo "already_sent=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Production: agent tool_use loop only (no legacy rank_and_select fallback).
+      # Skipped when the edition for this date is already committed -- prevents
+      # accidentally overwriting a shipped slate during a recovery re-run or a
+      # preview (test_recipient) of the existing slate. To regenerate when an
+      # edition is already committed: delete agent/data/editions/<date>.json
+      # in a separate commit before dispatching this workflow.
+      - name: Generate edition JSON (agent mode)
+        if: ${{ steps.dedupe.outputs.already_sent != 'true' }}
+        working-directory: agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          # Semantic cross-edition dedupe gate (dedupe_gate.py) embeds via Gemini.
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python -c "
+          import datetime as dt
+          import espresso_agent
+          d = dt.date.fromisoformat('${{ steps.date.outputs.value }}')
+          espresso_agent.run(d, dry_run=False, use_cache=False, mode='agent')
+          "
+
+      - name: Render HTML + Markdown + illustrations
+        id: render
+        working-directory: agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Ensure emailed HTML uses hosted QOTD form (not preview fallback copy).
+          AI_ESPRESSO_QOTD_API_URL: https://ai-garage-navy.vercel.app
+        run: |
+          export PATH="${GITHUB_WORKSPACE}/agent/bin:${PATH}"
+          set -euo pipefail
+          OUTPUT=$(python render_edition.py "${{ steps.date.outputs.value }}")
+          echo "$OUTPUT"
+          OUTPUT_JSON="$OUTPUT" python - <<'PY'
+          import json, os
+          data = json.loads(os.environ["OUTPUT_JSON"])
+          out = os.environ["GITHUB_OUTPUT"]
+          with open(out, "a", encoding="utf-8") as f:
+              f.write(f"issue_num={data['issue_num']}\n")
+              f.write(f"html_path={data['html_path']}\n")
+              f.write(f"md_path={data['md_path']}\n")
+          PY
+
+      - name: Write publish manifest for downstream consumers
+        working-directory: agent
+        run: |
+          set -euo pipefail
+          python write_publish_manifest.py \
+            --issue-num "${{ steps.render.outputs.issue_num }}" \
+            --edition-date "${{ steps.date.outputs.value }}" \
+            --html-path "${{ steps.render.outputs.html_path }}" \
+            --md-path "${{ steps.render.outputs.md_path }}" \
+            --source-repo "${{ github.repository }}" \
+            --source-ref "main" \
+            --variant "c"
+
+      - name: Send edition email
+        if: ${{ inputs.skip_email != 'true' && (steps.dedupe.outputs.already_sent != 'true' || inputs.force_resend == 'true' || inputs.test_recipient != '') }}
+        working-directory: agent
+        env:
+          AI_ESPRESSO_FROM: ${{ secrets.AI_ESPRESSO_FROM }}
+          # When test_recipient is set, send ONLY to that one address (preview).
+          # Otherwise use the configured distribution list secret.
+          AI_ESPRESSO_TO: ${{ inputs.test_recipient != '' && inputs.test_recipient || secrets.AI_ESPRESSO_TO }}
+          AI_ESPRESSO_FROM_NAME: "AI Espresso"
+          AI_ESPRESSO_EXPECTED_DATE: ${{ steps.date.outputs.value }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          # test_recipient implies force-resend so consecutive preview runs aren't blocked by the no-resend guard.
+          AI_ESPRESSO_FORCE_RESEND: ${{ (inputs.force_resend == 'true' || inputs.test_recipient != '') && '1' || '0' }}
+        run: |
+          HTML="${{ steps.render.outputs.html_path }}"
+          MD="${{ steps.render.outputs.md_path }}"
+          echo "Emailing edition ${{ steps.render.outputs.issue_num }}: $HTML"
+          python send_email.py "$HTML" "$MD" || {
+            echo "::warning::Email step failed but edition is committed"
+            exit 0
+          }
+
+      - name: Duplicate send guard note
+        if: ${{ inputs.skip_email != 'true' && steps.dedupe.outputs.already_sent == 'true' && inputs.force_resend != 'true' }}
+        run: |
+          echo "Skipping email: edition for ${{ steps.date.outputs.value }} was already recorded in git history."
+
+      - name: Commit + push if anything changed
+        run: |
+          git config user.name "Jackie Himel"
+          git config user.email "142959852+jackiehimel@users.noreply.github.com"
+          git add editions/ agent/data/editions/ agent/data/archive.jsonl agent/data/sent_editions.json
+          if git diff --cached --quiet; then
+            echo "No new files to commit."
+          else
+            git commit -m "Daily edition for ${{ steps.date.outputs.value }}"
+            git push
+          fi
+
+  notify-failure:
+    runs-on: ubuntu-latest
+    needs: generate
+    if: failure()
+    steps:
+      - name: Workflow failure summary
+        run: |
+          {
+            echo "## Daily edition workflow failed"
+            echo ""
+            echo "- **Workflow:** ${{ github.workflow }}"
+            echo "- **Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo ""
+            echo "Check the generate job logs for agent, render, or email errors."
+            echo ""
+            echo "_Optional Slack: set \`SLACK_WEBHOOK_URL\` to enable webhook alerts._"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Optional Slack failure notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -z "${SLACK_WEBHOOK_URL:-}" ]; then
+            echo "SLACK_WEBHOOK_URL not set; skipping Slack notification."
+            exit 0
+          fi
+
+          python - <<'PY' > payload.json
+          import json
+          import os
+
+          payload = {
+              "text": "Daily AI Espresso edition failed",
+              "blocks": [
+                  {
+                      "type": "section",
+                      "text": {"type": "mrkdwn", "text": "*Daily AI Espresso edition failed*"},
+                  },
+                  {
+                      "type": "section",
+                      "text": {"type": "mrkdwn", "text": f"Run: {os.environ['RUN_URL']}"},
+                  },
+              ],
+          }
+          print(json.dumps(payload))
+          PY
+
+          curl --fail --show-error --silent --max-time 10 --retry 2 \
+            -H "Content-Type: application/json" \
+            -d @payload.json \
+            "$SLACK_WEBHOOK_URL" || echo "::warning::Slack failure notification failed"

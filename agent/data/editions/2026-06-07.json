@@ -1,0 +1,188 @@
+{
+  "date": "2026-06-07",
+  "generated_at": "2026-06-07T23:26:07.804777Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Google will pay SpaceX $920M per month for compute",
+      "blurb": "Google signed a deal to pay SpaceX nearly a billion dollars monthly for computing power, citing unexpected demand for its new AI products. The arrangement suggests Google's existing data center capacity can't keep up with how fast people are adopting its AI tools.",
+      "why_it_matters": "AI demand is now so intense that even Google needs to rent compute from a rocket company.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/05/google-will-pay-spacex-920m-per-month-for-compute/",
+      "tier": 1,
+      "original_headline": "Google will pay SpaceX $920M per month for compute",
+      "fingerprint": "44f131c689876b98"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor SDK now lets you ship agents that review their own code",
+      "blurb": "Cursor's TypeScript and Python SDKs added auto-review (agents can critique their own output before committing), custom tools, nested subagents, and custom stores for state. You also get run correlation IDs for tracing multi-step workflows and lighter imports that speed up cold starts.",
+      "why_it_matters": "Auto-review means agents can catch their own mistakes before you do\u2014closer to self-correcting automation.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/sdk-updates-jun-2026",
+      "tier": 1,
+      "original_headline": "Custom stores, custom tools, and auto-review for the Cursor SDK",
+      "fingerprint": "8abff6074cc2bb6d"
+    },
+    {
+      "slot": "industry",
+      "headline": "Companies are panicking over AI bills they can't predict or control",
+      "blurb": "After months of 'move fast' AI deployments, enterprises are hitting surprise six-figure token bills with no way to forecast spend. Teams that encouraged experimentation now scramble for usage caps, model downgrades, and kill switches as CFOs demand answers no one has.",
+      "why_it_matters": "The gold rush phase is over \u2014 now comes the part where someone has to explain the bill.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/05/the-token-bill-comes-due-inside-the-industry-scramble-to-manage-ais-runaway-costs/",
+      "tier": 1,
+      "original_headline": "The token bill comes due: Inside the industry scramble to manage AI\u2019s runaway costs",
+      "fingerprint": "44a60c0d94b65a70"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI is about to redesign ChatGPT as a selling tool for premium products",
+      "blurb": "The company plans its biggest ChatGPT overhaul since 2022, turning the chatbot into a gateway that funnels users toward higher-margin offerings like enterprise tools and API access. The move comes as OpenAI eyes a potential IPO.",
+      "why_it_matters": "ChatGPT stops being just a product and becomes the storefront for everything else OpenAI sells.",
+      "source_name": "FT \u2014 Technology",
+      "source_url": "https://www.ft.com/content/ca0f5f5e-fb9a-41a0-a2a9-0127e15b7db9",
+      "tier": 1,
+      "original_headline": "OpenAI plots biggest ChatGPT overhaul since launch",
+      "fingerprint": "79584b9ab0f96ffa"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The scope knife",
+    "kicker": "",
+    "prompt": "I'll describe a feature or project below. Cut it in half \u2014 not by removing quality, but by finding the version that proves whether the idea works in a week instead of a quarter. Tell me what you kept, what you cut, and why the cut parts can wait.",
+    "tool_hint": "When everything feels equally important and nothing ships."
+  },
+  "daily_question": "If you had to explain your company's AI spend to a CFO in one sentence, what would you say?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1780874727.4923124,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[\"No consumer product launches with concrete 'try it today' hooks beyond ChatGPT dreaming and Cursor updates.\", 'Missing model drops\u2014no new frontier capability releases this cycle.', 'Light on surprising real-world AI applications outside expected verticals.', 'Absence of platform war escalations with shipped artifacts (no new API battles, no vendor lock-in moves).']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1780874743.2731705,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 30,
+        "persona": "market",
+        "reason": "Massive $920M/month deal between Google and SpaceX shows unprecedented scale of AI compute demand. Concrete numbers, surprise factor (SpaceX as compute provider), and validates the infrastructure gold rush. Screenshot-worthy scale."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01G5hZQ8HCopTZbVrxzY3A7i"
+    },
+    {
+      "ts": 1780874743.2732177,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google will pay SpaceX $920M per month for compute\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01G5hZQ8HCopTZbVrxzY3A7i"
+    },
+    {
+      "ts": 1780874743.2732499,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "build",
+        "reason": "Shipped features developers can use today: custom stores, auto-review, nested subagents in Cursor SDK. Concrete capabilities that expand what engineers can build with AI coding tools. Try-it-today appeal."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GuzHGqoDWy8r1ZEBFP4pX1"
+    },
+    {
+      "ts": 1780874743.273314,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Custom stores, custom tools, and auto-review for the Cursor SDK\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01GuzHGqoDWy8r1ZEBFP4pX1"
+    },
+    {
+      "ts": 1780874743.2733333,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "industry",
+        "reason": "Industry inflection point: companies shifting from 'go fast' to 'we need guardrails' on AI spending. Real pain point with direct quote showing the conversation shift. Timely as bills come due on aggressive AI adoption."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WNRW1fZATAxDv8Pi2q8up3"
+    },
+    {
+      "ts": 1780874743.273382,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"The token bill comes due: Inside the industry scramble to manage AI\\u2019s runaway costs\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01WNRW1fZATAxDv8Pi2q8up3"
+    },
+    {
+      "ts": 1780874743.2734046,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 155,
+        "persona": "market",
+        "reason": "OpenAI's biggest ChatGPT overhaul since launch - recasting the product as route to higher-margin offerings pre-IPO. Strategic transformation of the most visible AI product. Shows maturation from demo to business platform."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017ar5RFX11khQ2Kn2km3ycA"
+    },
+    {
+      "ts": 1780874743.2734373,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI plots biggest ChatGPT overhaul since launch\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_017ar5RFX11khQ2Kn2km3ycA"
+    },
+    {
+      "ts": 1780874747.3388178,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01StDimPeHsBrWD9v6fSJWwj"
+    },
+    {
+      "ts": 1780874747.3390286,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1780874747.3390486,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Google will pay SpaceX $920M per month for compute\", \"pick_2\": \"Custom stores, custom tools, and auto-review for the Cursor SDK\", \"pick_3\": \"The token bill comes due: Inside the industry scramble to manage AI\\u2019s runaway costs\", \"pick_4\": \"OpenAI plots biggest ChatGPT overhaul since launch\"}}",
+      "tool_use_id": "toolu_01StDimPeHsBrWD9v6fSJWwj"
+    }
+  ],
+  "issue_num": 11
+}

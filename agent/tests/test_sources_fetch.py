@@ -1,0 +1,82 @@
+"""Verify enabled sources in sources.yaml return fetchable content."""
+
+from __future__ import annotations
+
+import os
+import time
+import unittest
+
+import yaml
+
+from espresso_agent import extract_candidates, fetch_url, load_sources
+
+# Any feed can transiently 403/rate-limit the CI runner; tolerate a couple
+# per run so one flaky endpoint doesn't block CI or the daily edition.
+MAX_TRANSIENT_CI_FAILURES = 2
+
+CI_OPTIONAL_FLAKY_FEEDS = {
+    "The Information — AI",
+    "Don't Worry About the Vase (Zvi Mowshowitz)",
+    "FreightWaves — AI",
+    "Hugging Face — Daily Papers",
+    "Hugging Face Blog",
+    "Microsoft AI Blog",
+    "Rest of World",
+    "Import AI (Jack Clark)",
+    "Stratechery (Ben Thompson)",
+}
+
+
+@unittest.skipIf(
+    os.environ.get("ESPRESSO_SKIP_NETWORK_TESTS") == "1",
+    "set ESPRESSO_SKIP_NETWORK_TESTS=1 to skip",
+)
+class EnabledSourcesFetchTests(unittest.TestCase):
+    def test_ci_optional_flaky_feeds_cover_known_unstable_endpoints(self):
+        self.assertIn("Rest of World", CI_OPTIONAL_FLAKY_FEEDS)
+        self.assertIn("Import AI (Jack Clark)", CI_OPTIONAL_FLAKY_FEEDS)
+
+    def test_each_enabled_source_returns_html(self):
+        sources, _rules = load_sources()
+        enabled = [s for s in sources if s.enabled]
+        self.assertGreater(len(enabled), 10)
+        failures: list[str] = []
+        optional_failures: list[str] = []
+        running_on_ci = os.environ.get("GITHUB_ACTIONS") == "true"
+
+        def fetch_with_retry(s):
+            body = fetch_url(s.url, use_cache=False, prestige=s.prestige or s.paywall)
+            if body and len(body) >= 500:
+                return body
+            time.sleep(2)
+            return fetch_url(s.url, use_cache=False, prestige=s.prestige or s.paywall)
+
+        for s in enabled:
+            body = fetch_with_retry(s)
+            if not body or len(body) < 500:
+                msg = f"{s.name} ({s.url})"
+                if running_on_ci and s.name in CI_OPTIONAL_FLAKY_FEEDS:
+                    optional_failures.append(msg)
+                else:
+                    failures.append(msg)
+                continue
+            if s.kind == "rss" and not extract_candidates(body, s, max_n=1):
+                msg = f"{s.name} ({s.url}) — RSS returned no items"
+                if running_on_ci and s.name in CI_OPTIONAL_FLAKY_FEEDS:
+                    optional_failures.append(msg)
+                else:
+                    failures.append(msg)
+
+        if running_on_ci and 0 < len(failures) <= MAX_TRANSIENT_CI_FAILURES:
+            print(
+                f"tolerated {len(failures)} transient CI feed failure(s):\n"
+                + "\n".join(failures)
+            )
+            failures = []
+        if optional_failures:
+            print("optional CI feed failures:\n" + "\n".join(optional_failures))
+        self.assertFalse(failures, "fetch failed:\n" + "\n".join(failures))
+
+
+if __name__ == "__main__":
+    unittest.main()

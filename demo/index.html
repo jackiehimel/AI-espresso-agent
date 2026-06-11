@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Espresso</title>
+<style>
+  :root {
+    --cream: #F4EFE6;
+    --ink: #1A1108;
+    --brown: #8B6F47;
+    --warm: #5C4A3A;
+    --card-bg: #fff;
+    --border: #d4cfc7;
+    --green: #2d7d46;
+    --blue: #4a6fa5;
+    --blue-light: #eef3fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--cream); color: var(--ink); line-height: 1.5; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+  /* Hero */
+  .hero { text-align: center; margin-bottom: 2.5rem; }
+  .hero h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.03em; }
+  .hero p { color: var(--warm); font-size: 1.05rem; margin-top: 0.4rem; }
+
+  /* Pipeline */
+  .pipeline-section { margin-bottom: 2.5rem; }
+  .pipeline-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brown); margin-bottom: 1rem; }
+  .pipeline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .pipe-step { background: var(--card-bg); padding: 1.5rem 1rem; text-align: center; }
+  .pipe-step span { display: block; font-size: 1.5rem; margin-bottom: 0.4rem; }
+  .pipe-step strong { display: block; font-size: 0.85rem; margin-bottom: 0.15rem; }
+  .pipe-step .pipe-desc { font-size: 0.75rem; color: var(--warm); line-height: 1.4; }
+
+
+  /* Card */
+  .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+  .card-top { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border); }
+  .card-top .label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brown); }
+  .card-top .date { font-size: 0.85rem; color: var(--warm); }
+
+  /* Stories */
+  .story { padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border); }
+  .story:last-child { border-bottom: none; }
+  .story-row { display: flex; gap: 1.25rem; align-items: flex-start; }
+  .story-img { width: 100px; height: 100px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+  .story-text { flex: 1; }
+  .story h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .story h3 a { color: var(--ink); text-decoration: none; }
+  .story h3 a:hover { text-decoration: underline; }
+  .story .wim { font-size: 0.85rem; color: var(--warm); line-height: 1.4; }
+  .story .meta { font-size: 0.75rem; color: var(--brown); margin-top: 0.4rem; }
+
+  /* Before/after toggle */
+  .original { font-size: 0.75rem; color: #aaa; text-decoration: line-through; margin-bottom: 0.15rem; }
+
+  /* Prompt tile */
+  .prompt-tile { padding: 1.25rem 1.75rem; background: var(--cream); }
+  .prompt-tile .label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brown); margin-bottom: 0.3rem; }
+  .prompt-tile h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .prompt-tile .prompt-text { font-size: 0.9rem; color: var(--warm); font-style: italic; }
+
+  /* CTA */
+  .cta { text-align: center; }
+  .btn { display: inline-block; padding: 0.7rem 1.8rem; font-size: 0.95rem; font-weight: 600; border-radius: 8px; text-decoration: none; background: var(--ink); color: var(--cream); transition: background 0.15s; }
+  .btn:hover { background: #333; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border); margin-left: 0.5rem; }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  /* CTA */
+  .cta { display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 2.5rem; }
+
+  /* Run it */
+  .run-it { margin-top: 2rem; }
+  .install-box {
+    background: var(--ink); color: #e0ddd8; border-radius: 8px;
+    padding: 1rem 1.25rem; font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 0.85rem; overflow-x: auto; margin-top: 0.75rem;
+  }
+
+  @media (max-width: 600px) {
+    .story-img { width: 72px; height: 72px; }
+    .pipeline { gap: 1rem; }
+    .pipe-arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>AI Espresso ☕</h1>
+    <p>AI agent that writes and ships a daily news briefing.</p>
+  </div>
+
+  <div class="pipeline-section">
+    <div class="pipeline-label">How it works</div>
+    <div class="pipeline-grid">
+      <div class="pipe-step"><span>🔍</span><strong>Discover</strong><div class="pipe-desc">RSS + Perplexity search across 40+ sources</div></div>
+      <div class="pipe-step"><span>⚖️</span><strong>Rank &amp; Select</strong><div class="pipe-desc">Claude ranks all candidates, editor agent picks 3-6</div></div>
+      <div class="pipe-step"><span>✍️</span><strong>Rewrite</strong><div class="pipe-desc">Sharp headlines, concise blurbs, "why it matters"</div></div>
+      <div class="pipe-step"><span>🎨</span><strong>Illustrate &amp; Ship</strong><div class="pipe-desc">Gemini engravings, HTML render, email delivery</div></div>
+    </div>
+  </div>
+
+
+  <div class="cta">
+    <a href="#" id="tryBtn" class="btn">Try it out</a>
+    <a href="https://github.com/jackiehimel/ai-espresso-finalized" class="btn btn-ghost" target="_blank">View source</a>
+  </div>
+
+  <div id="result" style="display:none"></div>
+
+  <div class="run-it">
+    <div class="pipeline-label">Run it yourself</div>
+    <div class="install-box">
+      <code>docker run -e ANTHROPIC_API_KEY=your-key ghcr.io/jackiehimel/ai-espresso-agent</code>
+    </div>
+  </div>
+
+</div>
+
+<script>
+document.getElementById("tryBtn").addEventListener("click", async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("tryBtn");
+  const result = document.getElementById("result");
+  btn.textContent = "Running agent...";
+  btn.style.pointerEvents = "none";
+  result.style.display = "block";
+  result.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--warm);font-style:italic;">Rewriting stories...</div>';
+  result.scrollIntoView({behavior: "smooth"});
+
+  try {
+    const resp = await fetch("/api/try", {method: "POST"});
+    if (!resp.ok) throw new Error((await resp.json()).detail || "Failed");
+    const {stories} = await resp.json();
+
+    let html = '<div class="card">';
+    stories.forEach(s => {
+      html += `<div class="story">
+        <h3><a href="${esc(s.url)}" target="_blank">${esc(s.headline)}</a></h3>
+        <div class="wim">${esc(s.why_it_matters)}</div>
+        <div class="meta">${esc(s.source)}</div>
+      </div>`;
+    });
+    html += '</div>';
+    result.innerHTML = html;
+  } catch (err) {
+    result.innerHTML = '<div style="text-align:center;padding:2rem;color:#991b1b;">Something went wrong. Make sure ANTHROPIC_API_KEY is set.</div>';
+  } finally {
+    btn.textContent = "Try it out";
+    btn.style.pointerEvents = "";
+  }
+});
+
+function esc(s) { const d = document.createElement("div"); d.textContent = s || ""; return d.innerHTML; }
+</script>
+</body>
+</html>

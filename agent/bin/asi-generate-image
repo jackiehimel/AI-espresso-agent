@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+"""
+asi-generate-image — JSON CLI for AI Espresso illustrations.
+
+Contract (one argv: JSON string):
+  {
+    "prompt": "...",
+    "filename": "/abs/path/no/extension",
+    "aspect_ratio": "16:9" | "1:1",
+    "model": "nano_banana_2"
+  }
+
+Writes {filename}.png and exits 0 on success.
+
+Backends (first available):
+  1. GEMINI_API_KEY / GOOGLE_API_KEY → Nano Banana via Gemini API
+     - Default: gemini-3.1-flash-image-preview (Nano Banana 2)
+     - Optional: GEMINI_IMAGE_MODEL=gemini-3-pro-image-preview (Nano Banana Pro)
+  2. OPENAI_API_KEY → gpt-image-1 (fallback only; stricter moderation)
+
+Set ESPRESSO_IMAGE_BACKEND=openai to force OpenAI even when Gemini is configured.
+"""
+from __future__ import annotations
+
+import base64
+import json
+import os
+import sys
+from pathlib import Path
+
+
+def _configure_stdio_utf8() -> None:
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if callable(reconfigure):
+            reconfigure(encoding="utf-8", errors="replace")
+
+
+def _normalize_prompt(prompt: str) -> str:
+    for src, dst in (
+        ("\u2018", "'"), ("\u2019", "'"),
+        ("\u201c", '"'), ("\u201d", '"'),
+        ("\u2014", " - "), ("\u2013", "-"),
+        ("\u2026", "..."),
+    ):
+        prompt = prompt.replace(src, dst)
+    return prompt
+
+
+def _size_openai(aspect_ratio: str) -> str:
+    return "1536x1024" if aspect_ratio == "16:9" else "1024x1024"
+
+
+def _size_gemini(aspect_ratio: str) -> str:
+    return "16:9" if aspect_ratio == "16:9" else "1:1"
+
+
+def _generate_gemini(prompt: str, out_path: Path, aspect_ratio: str) -> None:
+    from google import genai
+    from google.genai import types
+
+    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not api_key:
+        raise RuntimeError("GEMINI_API_KEY not set")
+    client = genai.Client(api_key=api_key)
+    # Nano Banana 2 — https://ai.google.dev/gemini-api/docs/image-generation
+    model = os.environ.get(
+        "GEMINI_IMAGE_MODEL",
+        "gemini-3.1-flash-image-preview",
+    )
+    response = client.models.generate_content(
+        model=model,
+        contents=[prompt[:8000]],
+        config=types.GenerateContentConfig(
+            response_modalities=["IMAGE"],
+            image_config=types.ImageConfig(
+                aspect_ratio=_size_gemini(aspect_ratio),
+                image_size="1K",
+            ),
+        ),
+    )
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    for part in response.parts:
+        inline = part.inline_data
+        if inline is None:
+            continue
+        raw = inline.data
+        if raw is None:
+            continue
+        if isinstance(raw, str):
+            raw = base64.b64decode(raw)
+        out_path.write_bytes(raw)
+        return
+    raise RuntimeError("Gemini returned no image part")
+
+
+def _generate_openai(prompt: str, out_path: Path, aspect_ratio: str) -> None:
+    from openai import OpenAI
+
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY not set")
+    client = OpenAI(api_key=api_key)
+    model = os.environ.get("OPENAI_IMAGE_MODEL", "gpt-image-1")
+    kwargs: dict = {
+        "model": model,
+        "prompt": prompt[:4000],
+        "size": _size_openai(aspect_ratio),
+        "n": 1,
+    }
+    # gpt-image-1 supports quality; ignored on older models
+    if model.startswith("gpt-image"):
+        kwargs["quality"] = os.environ.get("OPENAI_IMAGE_QUALITY", "high")
+    resp = client.images.generate(**kwargs)
+    item = resp.data[0]
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    if getattr(item, "b64_json", None):
+        out_path.write_bytes(base64.b64decode(item.b64_json))
+        return
+    if getattr(item, "url", None):
+        import httpx
+
+        r = httpx.get(item.url, timeout=120)
+        r.raise_for_status()
+        out_path.write_bytes(r.content)
+        return
+    raise RuntimeError("OpenAI returned no image data")
+
+
+# Gemini image models can take 2–4 minutes per image on first request.
+CLI_TIMEOUT_SEC = int(os.environ.get("ESPRESSO_IMAGE_TIMEOUT_SEC", "300"))
+
+
+def main() -> int:
+    _configure_stdio_utf8()
+    if len(sys.argv) < 2:
+        print("usage: asi-generate-image '<json>'", file=sys.stderr)
+        return 2
+    req = json.loads(sys.argv[1])
+    prompt = _normalize_prompt((req.get("prompt") or "").strip())
+    if not prompt:
+        print("missing prompt", file=sys.stderr)
+        return 1
+    stem = Path(req["filename"])
+    aspect_ratio = req.get("aspect_ratio") or "16:9"
+    out_path = Path(str(stem) + ".png")
+
+    errors: list[str] = []
+    backend = (os.environ.get("ESPRESSO_IMAGE_BACKEND") or "").strip().lower()
+    gemini_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    openai_key = os.environ.get("OPENAI_API_KEY")
+
+    if backend != "openai" and gemini_key:
+        try:
+            _generate_gemini(prompt, out_path, aspect_ratio)
+            if out_path.stat().st_size > 10_000:
+                print("backend: gemini (nano banana)", file=sys.stderr)
+                return 0
+        except Exception as e:
+            msg = str(e).replace("\n", " ")[:500]
+            errors.append(f"gemini: {msg}")
+            print(f"  [gemini failed, trying openai] {msg}", file=sys.stderr)
+
+    if openai_key and backend in ("", "openai"):
+        try:
+            _generate_openai(prompt, out_path, aspect_ratio)
+            if out_path.stat().st_size > 10_000:
+                print("backend: openai (gpt-image-1)", file=sys.stderr)
+                return 0
+        except Exception as e:
+            errors.append(f"openai: {e}")
+
+    print("; ".join(errors) or "no image API keys configured", file=sys.stderr)
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
