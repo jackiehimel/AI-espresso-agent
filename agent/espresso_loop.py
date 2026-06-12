@@ -4,9 +4,9 @@ AI Espresso — Hybrid Discovery Agent.
 Pipeline:
   1. Rank ALL candidate headlines+blurbs in one LLM call (no lossy funnel)
   2. Pre-fetch article bodies for the top 20 candidates
-  3. Agentic Editor loop: pick 3-6 stories using tools (pick, search_news,
+  3. Agentic Editor loop: pick 4 or 6 stories using tools (pick, search_news,
      read_candidate, ship_edition). Deterministic validation gates only.
-  4. Fallback: if budget exhausted with 3+ picks, force-ship.
+  4. Fallback: if budget exhausted, trim to an even count and force-ship.
 
 No LLM Critic. No finalization contract. No forced convergence.
 The Editor's judgment is final; deterministic gates catch structural issues.
@@ -28,6 +28,7 @@ from urllib.parse import urlparse
 
 import httpx
 
+from card_config import ALLOWED_STORY_COUNTS, largest_allowed_even_count
 from constitution import constitution_prompt_block
 from dedupe_gate import ArchiveIndex, exact_repeat_reason, semantic_repeats
 from freshness import infer_date_from_text, infer_date_from_url
@@ -120,11 +121,12 @@ _RANKER_SYSTEM = (
 
 _EDITOR_SYSTEM = (
     "You are the Editor for AI Espresso. You have pre-ranked candidates "
-    "with article bodies. Select 3-6 stories for today's edition using "
-    "the tools provided. Call ship_edition when ready.\n\n"
+    "with article bodies. Select exactly 4 or 6 stories for today's edition "
+    "using the tools provided. Call ship_edition when ready.\n\n"
     "STRATEGY:\n"
     "  1. Review the ranked candidates (they already have bodies).\n"
-    "  2. Pick the best 3-6 stories. Prefer variety in vendor and topic.\n"
+    "  2. Pick 4 strong stories. Go to 6 only when the pool is genuinely "
+    "strong enough for two more that clear the bar. Never ship 5.\n"
     "  3. If the pool feels thin, use search_news to find alternatives.\n"
     "  4. Call ship_edition. Deterministic gates will validate.\n"
     "  5. If ship fails, fix the issue and try again.\n\n"
@@ -132,7 +134,7 @@ _EDITOR_SYSTEM = (
     "  • At least 1 tier-1 source.\n"
     "  • At most 2 stories from the same vendor.\n"
     "  • All picks must have verified article bodies.\n"
-    "  • Minimum 3 stories, target 4-5.\n"
+    "  • Ship exactly 4 or 6 stories (never 3 or 5). Prefer 4.\n"
     "  • Assign a persona tag to each pick: market, everyday, build, or industry.\n"
     "    These are rendering labels, not constraints on selection.\n\n"
     + _EDITORIAL_RUBRIC
@@ -347,6 +349,35 @@ def _tool_unpick(state: AgentState, args: dict, vendor_patterns) -> dict:
     return {"error": f"no pick with id={cid}"}
 
 
+def _trim_picks_to_even(state: AgentState, vendor_patterns) -> list[str]:
+    """Drop the weakest picks until the count is supported (6, 4, or a thin 3).
+
+    Deterministic ship backstop for the budget-exhausted path: an odd pick set is
+    trimmed to ``largest_allowed_even_count`` so an odd edition can never ship.
+    Non-tier-1, lowest-ranked picks are dropped first so the tier-1 rail
+    survives. Returns the headlines removed (empty if no trim was needed).
+    """
+    target = largest_allowed_even_count(len(state.picks))
+    if target >= len(state.picks):
+        return []
+    # Most expendable first: non-tier-1 before tier-1, then lowest editorial
+    # score (search_news picks default to 0).
+    ordered = sorted(
+        state.picks.items(),
+        key=lambda kv: (int(kv[1].get("tier", 99)) == 1, kv[1].get("score", 0)),
+    )
+    removed = []
+    for slot, pick in ordered[: len(state.picks) - target]:
+        state.picks.pop(slot, None)
+        removed.append(pick.get("headline", ""))
+        nv = _detect_vendor(
+            pick.get("headline", ""), pick.get("url", ""), vendor_patterns
+        )
+        if nv and state.vendor_counts.get(nv, 0) > 0:
+            state.vendor_counts[nv] -= 1
+    return removed
+
+
 def _tool_read_candidate(state: AgentState, args: dict) -> dict:
     cid = int(args.get("id", -1))
     found = next((c for c in state.candidates + state.extra_candidates if c.get("id") == cid), None)
@@ -469,10 +500,24 @@ def _perplexity_search(query: str) -> tuple[list[dict] | None, str | None]:
     return hits or None, "no results" if not hits else None
 
 
-def _validate_ship(state: AgentState) -> dict:
+def _validate_ship(state: AgentState, enforce_even: bool = True) -> dict:
     errors = []
-    if len(state.picks) < MIN_PICKS:
-        errors.append(f"need {MIN_PICKS}+ picks, have {len(state.picks)}")
+    n = len(state.picks)
+    if n < MIN_PICKS:
+        errors.append(f"need {MIN_PICKS}+ picks, have {n}")
+    elif enforce_even and n not in ALLOWED_STORY_COUNTS:
+        if n == 5:
+            errors.append(
+                "edition needs exactly 4 or 6 stories, have 5 — add a 6th "
+                "strong story or unpick the weakest down to 4"
+            )
+        elif n == 3:
+            errors.append(
+                "edition needs exactly 4 or 6 stories, have 3 — add a 4th "
+                "strong story"
+            )
+        else:
+            errors.append(f"edition needs exactly 4 or 6 stories, have {n}")
 
     have_t1 = sum(1 for p in state.picks.values() if int(p.get("tier", 99)) == 1)
     if have_t1 < 1:
@@ -586,7 +631,7 @@ EDITOR_TOOLS: list[dict] = [
     },
     {
         "name": "ship_edition",
-        "description": "Finalize the edition. Requires 3+ picks with verified bodies.",
+        "description": "Finalize the edition. Requires exactly 4 or 6 picks with verified bodies.",
         "input_schema": {"type": "object", "properties": {}},
     },
 ]
@@ -623,7 +668,7 @@ def _build_editor_brief(state: AgentState, gaps: list[str]) -> str:
         f"Coverage gaps from ranking: {gaps or '(none)'}\n\n"
         f"CANDIDATES (pre-ranked, bodies pre-fetched):\n{candidates_block}\n\n"
         f"Archive (last 30d): {', '.join(state.archive_headlines[:10]) or '(none)'}\n\n"
-        "Select 3-6 stories using tools. Call ship_edition when ready."
+        "Select exactly 4 or 6 stories using tools. Call ship_edition when ready."
     )
 
 
@@ -824,9 +869,19 @@ def agentic_select(
 
     ok = _run_editor_loop(state, vendor_patterns)
 
-    # Fallback: if budget exhausted with enough picks, force-ship
+    # Fallback: if budget exhausted, trim to an even count and force-ship.
+    # The even-count rail drives the agent; here we deterministically enforce it
+    # (and tolerate a thin 3 rather than failing daily delivery).
     if not ok and len(state.picks) >= MIN_PICKS:
-        gate = _validate_ship(state)
+        removed = _trim_picks_to_even(state, vendor_patterns)
+        if removed:
+            state.trace.append(TraceEvent(
+                ts=time.time(), role="system", kind="trim_to_even",
+                result_summary=(
+                    f"trimmed {len(removed)} weakest pick(s) to even count: {removed}"
+                ),
+            ))
+        gate = _validate_ship(state, enforce_even=False)
         if gate["ok"]:
             state.shipped = True
             state.trace.append(TraceEvent(
