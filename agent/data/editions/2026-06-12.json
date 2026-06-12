@@ -1,0 +1,221 @@
+{
+  "date": "2026-06-12",
+  "generated_at": "2026-06-12T12:10:12.918269Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Jeff Bezos's Prometheus raises $12B to build an AI that designs buildings and drugs",
+      "blurb": "The physical AI startup just closed a $12 billion round at a $41 billion valuation. Prometheus is building what it calls an 'artificial general engineer' \u2014 AI that can automate heavy engineering tasks like infrastructure design and drug development, not just write code or chat.",
+      "why_it_matters": "Physical-world engineering is one of the last major professional domains AI hasn't cracked at scale.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/11/jeff-bezoss-prometheus-raises-12b-to-build-an-artificial-general-engineer-for-the-physical-world/",
+      "tier": 1,
+      "original_headline": "Jeff Bezos\u2019s Prometheus raises $12B to build an \u2018artificial general engineer\u2019 for the physical world",
+      "fingerprint": "1b8ac6d1668e1b30"
+    },
+    {
+      "slot": "everyday",
+      "headline": "DoorDash's new chatbot lets you order food by describing what you want",
+      "blurb": "Ask DoorDash replaces the usual scroll-and-tap with a chat interface where you type 'something spicy under $20' or snap a photo of a dish you want. The AI searches restaurants, builds your cart, and handles checkout \u2014 no menu browsing required.",
+      "why_it_matters": "Search-by-description could become the default UI for any app with too many options to browse.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/11/doordashs-new-ai-chatbot-lets-you-order-with-prompts-and-photos/",
+      "tier": 1,
+      "original_headline": "DoorDash\u2019s new AI chatbot lets you order with prompts and photos",
+      "fingerprint": "56c07ab0451e368e"
+    },
+    {
+      "slot": "build",
+      "headline": "Google's new text model writes whole blocks at once instead of one word at a time",
+      "blurb": "DeepMind released DiffusionGemma, an experimental model that generates multiple words in parallel rather than sequentially. NVIDIA optimized it to run locally on RTX GPUs, targeting single-user workloads where low latency matters more than multi-user throughput.",
+      "why_it_matters": "Parallel generation could make local AI feel more responsive for individual developers and creators.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/rtx-ai-garage-local-gemma-diffusion/",
+      "tier": 1,
+      "original_headline": "NVIDIA Accelerates Google DeepMind\u2019s DiffusionGemma for Local AI",
+      "fingerprint": "e3d9689b452f866a"
+    },
+    {
+      "slot": "build",
+      "headline": "Coinbase just launched a tool that lets AI agents trade crypto for you",
+      "blurb": "Coinbase released a new API that gives AI agents the ability to execute trades and manage payments on behalf of users. The company is betting that autonomous agents will become the main way people handle financial transactions, starting with crypto trading and payments.",
+      "why_it_matters": "AI agents are moving from chatbots to things that can actually spend and move your money.",
+      "source_name": "CNBC \u2014 Technology",
+      "source_url": "https://www.cnbc.com/2026/06/11/coinbase-launches-tool-to-let-ai-agents-manage-trading-and-payments.html",
+      "tier": 1,
+      "original_headline": "Coinbase launches tool to let AI agents manage trading and payments",
+      "fingerprint": "fbbdd0a57c1a859f"
+    },
+    {
+      "slot": "industry",
+      "headline": "LG and NVIDIA are building an AI factory for robots and self-driving cars",
+      "blurb": "LG Group is partnering with NVIDIA to build what they're calling an 'AI factory' \u2014 accelerated computing infrastructure to train and deploy AI for robotics, autonomous vehicles, and GPU cloud services. The setup will let LG simulate, validate, and run AI applications across its hardware businesses.",
+      "why_it_matters": "Major manufacturers are now building dedicated AI infrastructure to ship physical products, not just software.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/nvidia-and-lg-group-ai-factory/",
+      "tier": 1,
+      "original_headline": "NVIDIA and LG Group Build an AI Factory to Advance Physical AI, Mobility and AI Infrastructure",
+      "fingerprint": "840c61ffac99812c"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The priority audit",
+    "kicker": "",
+    "prompt": "I'll list everything I think I need to do this week. For each item, tell me: is this urgent-important, just urgent, just important, or neither? Then show me what my week looks like if I only do the important things and let the rest resolve itself or fail visibly.",
+    "tool_hint": "When your to-do list is longer than your actual available hours."
+  },
+  "daily_question": "What's one thing you wish AI could design for you that doesn't exist yet?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1781266158.5542333,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=15, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781266170.6123736,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 48,
+        "persona": "market",
+        "reason": "Massive $12B raise for Bezos's physical AI startup valued at $41B - this is a huge market move with concrete ambition (AGI for physical world, engineering automation). Clear subject+action, passes screenshot test."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01UQXtRXEDNjn1ZqVqPGcAh1"
+    },
+    {
+      "ts": 1781266170.6124542,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Jeff Bezos\\u2019s Prometheus raises $12B to build an \\u2018artificial general engineer\\u2019 for the physical world\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01UQXtRXEDNjn1ZqVqPGcAh1"
+    },
+    {
+      "ts": 1781266170.6124942,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 53,
+        "persona": "everyday",
+        "reason": "DoorDash AI chatbot you can try today - order with photos and natural language prompts. Concrete, practical feature people can use this week. Strong \"I want to try that\" hook."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01F3HxwudrF8AbgZVVLLFNMR"
+    },
+    {
+      "ts": 1781266170.6125329,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"DoorDash\\u2019s new AI chatbot lets you order with prompts and photos\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01F3HxwudrF8AbgZVVLLFNMR"
+    },
+    {
+      "ts": 1781266170.6125422,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "build",
+        "reason": "Google DeepMind's DiffusionGemma for 4x faster text generation - developer-facing open model release with concrete speed benchmark. Different vendor from other picks, technical audience appeal."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0197abQx8f9WJwct8GarnvE6"
+    },
+    {
+      "ts": 1781266170.6125712,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Accelerates Google DeepMind\\u2019s DiffusionGemma for Local AI\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_0197abQx8f9WJwct8GarnvE6"
+    },
+    {
+      "ts": 1781266170.61258,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 212,
+        "persona": "build",
+        "reason": "Coinbase tool for AI agents to manage trading/payments - shipped product with surprising capability (\"AI can now handle your crypto\"). Platform/infrastructure play that's concrete and forward-looking."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YRv9ocUgkLyGybeEJodBsj"
+    },
+    {
+      "ts": 1781266170.612626,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Coinbase launches tool to let AI agents manage trading and payments\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01YRv9ocUgkLyGybeEJodBsj"
+    },
+    {
+      "ts": 1781266170.6126401,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "industry",
+        "reason": "NVIDIA-LG AI factory partnership for physical AI and mobility - major infrastructure deal with concrete business application. Different from Prometheus (partnership vs funding), adds vendor variety."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WAkGKtRG1uQPYxXKJa998d"
+    },
+    {
+      "ts": 1781266170.6126823,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA and LG Group Build an AI Factory to Advance Physical AI, Mobility and AI Infrastructure\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01WAkGKtRG1uQPYxXKJa998d"
+    },
+    {
+      "ts": 1781266184.5748432,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_018BBzrjc3AEov1xqd4egGYA"
+    },
+    {
+      "ts": 1781266185.236539,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781266185.2365751,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Jeff Bezos\\u2019s Prometheus raises $12B to build an \\u2018artificial general engineer\\u2019 for the physical world\", \"pick_2\": \"DoorDash\\u2019s new AI chatbot lets you order with prompts and photos\", \"pick_3\": \"NVIDIA Accelerates Google DeepMind\\u2019s DiffusionGemma for Local AI\", \"pick_4\": \"Coinbase launches tool to let AI agents manage trading and payments\", \"pick_5\": \"NVIDIA and LG Group Build an AI Factory to Advance Physical AI, Mobility and AI Infrastructure\"}}",
+      "tool_use_id": "toolu_018BBzrjc3AEov1xqd4egGYA"
+    }
+  ],
+  "issue_num": 17
+}
