@@ -233,6 +233,7 @@ class ShipGateWiringTests(unittest.TestCase):
             "pick_1": _pick(1, "Anthropic and BlackRock partner on AI for asset management"),
             "pick_2": _pick(2, "ChatGPT can now look at your bank account", tier=2),
             "pick_3": _pick(3, "OpenAI brings its Codex coding app to mobile", tier=2),
+            "pick_4": _pick(4, "Google ships a faster text generation model", tier=2),
         }
         with mock.patch.object(el, "semantic_repeats", return_value=None):
             gate = el._validate_ship(self._state(picks, archive_headlines=["whatever"]))
@@ -243,6 +244,7 @@ class ShipGateWiringTests(unittest.TestCase):
             "pick_1": _pick(1, "Anthropic and BlackRock partner on AI for asset management"),
             "pick_2": _pick(2, "ChatGPT can now look at your bank account", tier=2),
             "pick_3": _pick(3, "OpenAI brings its Codex coding app to mobile", tier=2),
+            "pick_4": _pick(4, "Google ships a faster text generation model", tier=2),
         }
         with mock.patch.object(el, "semantic_repeats", return_value=[]):
             gate = el._validate_ship(self._state(picks, archive_headlines=["old headline"]))
