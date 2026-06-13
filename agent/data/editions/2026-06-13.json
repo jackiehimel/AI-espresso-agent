@@ -1,0 +1,270 @@
+{
+  "date": "2026-06-13",
+  "generated_at": "2026-06-13T11:42:32.962663Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "US government orders Anthropic to suspend two of its AI models",
+      "blurb": "Anthropic announced it's suspending access to Fable 5 and Mythos 5 following a federal directive. The company hasn't disclosed what triggered the order or when access might resume. This marks the first known case of the US government forcing an AI lab to pull specific models from service.",
+      "why_it_matters": "First time we've seen the feds directly shut down commercial AI models",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/fable-mythos-access",
+      "tier": 1,
+      "original_headline": "Statement on the US government directive to suspend access to Fable 5 and Mythos 5",
+      "fingerprint": "62b3bb022c14844a"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Apple's new Siri can finally do more than set timers",
+      "blurb": "After fifteen years of being barely useful, Siri just got a major upgrade that actually works. The Verge's latest Vergecast digs into what changed and whether Apple's assistant can finally compete with ChatGPT and Alexa.",
+      "why_it_matters": "If Siri actually works now, your phone just became more useful than your laptop for daily tasks.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/podcast/949079/siri-ai-good-vergecast",
+      "tier": 1,
+      "original_headline": "Siri is good now??",
+      "fingerprint": "7572728f95e24bdb"
+    },
+    {
+      "slot": "industry",
+      "headline": "Judge cancels trial after discovering both sides used AI to write their briefs",
+      "blurb": "A federal judge in Florida canceled a trial and removed all attorneys from a case after learning lawyers on both sides submitted AI-generated legal arguments. The judge called it a breakdown of the adversarial system when 'two AIs argue against each other' instead of human lawyers doing actual legal work.",
+      "why_it_matters": "Courts are starting to punish lawyers who let AI do their jobs instead of using it as a tool",
+      "source_name": "404 Media",
+      "source_url": "https://www.404media.co/judge-learns-lawyers-on-both-sides-of-case-used-ai-cancels-trial-kicks-everyone-off-the-case/",
+      "tier": 1,
+      "original_headline": "Judge Learns Lawyers on Both Sides of Case Used AI, Cancels Trial, Kicks Everyone Off the Case",
+      "fingerprint": "c7ba7d285902d891"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA's new Blackwell chip runs 20x more AI agents per megawatt",
+      "blurb": "AgentPerf \u2014 the first industry benchmark for agentic AI infrastructure \u2014 just posted results showing NVIDIA's Blackwell Ultra NVL72 platform leading across workloads. The chip runs 20x more agents per megawatt than NVIDIA's previous generation, giving developers and enterprises a standard way to compare systems built for multi-agent tasks.",
+      "why_it_matters": "First real benchmark for comparing infrastructure built to run lots of agents at scale.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/nvidia-blackwell-agentperf-artificial-analysis/",
+      "tier": 1,
+      "original_headline": "NVIDIA Blackwell Leads on First Agentic AI Infrastructure Benchmark",
+      "fingerprint": "14201033dbc4b02a"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The skill gap map",
+    "kicker": "",
+    "prompt": "I want to get better at something I'll describe below. Don't give me a learning plan. Instead: tell me the one sub-skill experts have that beginners don't even know exists, the specific moment I'll notice I've acquired it, and one person I should watch to see it in action.",
+    "tool_hint": "When you're past the tutorials but still feel like a fraud."
+  },
+  "daily_question": "If you could force one AI company to open-source their model today, which would you pick and why?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1781350888.1319368,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781350908.3898525,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 2,
+        "persona": "market",
+        "reason": "Breaking news: US government orders Anthropic to suspend Fable 5 and Mythos 5 access. Primary source (Anthropic's own statement). Major platform/regulatory story with immediate impact. This is a significant market-shaking event - government intervention on a frontier AI model is unprecedented and newsworthy. Concrete action (suspension order) with real stakes."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NzpbzmyjGuBcxMJuRMW3z3"
+    },
+    {
+      "ts": 1781350908.389915,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Statement on the US government directive to suspend access to Fable 5 and Mythos 5\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01NzpbzmyjGuBcxMJuRMW3z3"
+    },
+    {
+      "ts": 1781350908.3899581,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "market",
+        "reason": "Jeff Bezos announces his AI startup Prometheus aims to build an 'artificial general engineer' - concrete, surprising ambition. Different vendor than Anthropic. Shows AI moving into physical manufacturing/engineering domains. The phrase 'artificial general engineer' is specific enough to pass the subject-line test and exciting enough to make people want to learn more."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01P6aMwrKL7dKtQdeJiXd3S5"
+    },
+    {
+      "ts": 1781350908.39003,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Jeff Bezos\\u2019 AI startup aims to build an \\u2018artificial general engineer\\u2019\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01P6aMwrKL7dKtQdeJiXd3S5"
+    },
+    {
+      "ts": 1781350908.3900504,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "everyday",
+        "reason": "Siri finally works well - highly relatable, everyday impact for millions of users. The headline 'Siri is good now??' captures genuine surprise. After a decade of being mediocre, this is a 'I want to try that' moment. Provides variety (Apple vs Anthropic/Bezos) and everyday utility angle vs market/platform stories."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019dmKw8dk3v5ZXi1JvFHsqv"
+    },
+    {
+      "ts": 1781350908.390107,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Siri is good now??\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_019dmKw8dk3v5ZXi1JvFHsqv"
+    },
+    {
+      "ts": 1781350908.3901286,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 62,
+        "persona": "industry",
+        "reason": "Judge cancels trial after discovering both sides used AI - 404 Media investigative piece (primary source for this type of reporting). Surprising real-world consequence of AI in professional settings. Concrete outcome (trial cancelled, lawyers kicked off). Different angle from other picks - shows AI's impact on legal system with actual stakes. Passes 'didn't know AI could do that' test in a cautionary-but-not-doom way."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AQTiaVojpC8wRiP7H4omue"
+    },
+    {
+      "ts": 1781350908.390185,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Judge Learns Lawyers on Both Sides of Case Used AI, Cancels Trial, Kicks Everyone Off the Case\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01AQTiaVojpC8wRiP7H4omue"
+    },
+    {
+      "ts": 1781350913.5451038,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 105,
+        "persona": "industry",
+        "reason": "Court rules Google liable for AI Overview false statements - significant legal precedent for AI-generated content. Concrete ruling with industry-wide implications. Different from the trial cancellation story (legal liability vs courtroom process). Wired tier-1 source. Establishes accountability framework that affects how companies deploy AI features. Important for anyone building or using AI systems."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01UxQwGCJfm5v18dqScqNUsD"
+    },
+    {
+      "ts": 1781350913.545165,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"A Court Has Ruled That Google Is Liable for False Statements Generated by AI Overviews\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01UxQwGCJfm5v18dqScqNUsD"
+    },
+    {
+      "ts": 1781350921.2186067,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_019o5zYJUgiqwq6jQNTSinjp"
+    },
+    {
+      "ts": 1781350921.9792871,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_2] covers the same story as a recent edition (\\\"Jeff Bezos\\u2019s Prometheus raises $12B to build an \\u2018artificial general engineer\\u2019 for the physical world\\\", similarity 0.825) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_019o5zYJUgiqwq6jQNTSinjp"
+    },
+    {
+      "ts": 1781350924.0544512,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 35
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YGykZhDKqUY3LdXANPrBKQ"
+    },
+    {
+      "ts": 1781350924.0545015,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Jeff Bezos\\u2019 AI startup aims to build an \\u2018artificial general engineer\\u2019\"}",
+      "tool_use_id": "toolu_01YGykZhDKqUY3LdXANPrBKQ"
+    },
+    {
+      "ts": 1781350930.131912,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "build",
+        "reason": "First agentic AI infrastructure benchmark (AgentPerf) launched with NVIDIA Blackwell leading. Concrete developer tool with measurable performance data. Different vendor (NVIDIA vs Anthropic/Apple/Google). Shows the shift to agentic AI with an actual benchmark developers can use. Primary source (NVIDIA blog). Provides 'build' persona variety to the mix."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014Ge7WzHUh5EPvpEENAMEyr"
+    },
+    {
+      "ts": 1781350930.131976,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Blackwell Leads on First Agentic AI Infrastructure Benchmark\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_014Ge7WzHUh5EPvpEENAMEyr"
+    },
+    {
+      "ts": 1781350931.6496077,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01NDk4ZkNuco9qgXqEDuhAMX"
+    },
+    {
+      "ts": 1781350931.956908,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781350931.9569442,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Statement on the US government directive to suspend access to Fable 5 and Mythos 5\", \"pick_3\": \"Siri is good now??\", \"pick_4\": \"Judge Learns Lawyers on Both Sides of Case Used AI, Cancels Trial, Kicks Everyone Off the Case\", \"pick_5\": \"NVIDIA Blackwell Leads on First Agentic AI Infrastructure Benchmark\"}}",
+      "tool_use_id": "toolu_01NDk4ZkNuco9qgXqEDuhAMX"
+    }
+  ],
+  "issue_num": 18
+}
