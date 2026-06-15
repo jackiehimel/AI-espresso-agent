@@ -167,6 +167,35 @@ class PickTests(unittest.TestCase):
         self.assertTrue(r.get("ok"), r)
 
 
+class SearchNewsFreshnessTests(unittest.TestCase):
+    """In-loop search_news must age-gate hits like the discovery prefetch so the
+    editor can't pick undated or stale (>max_age) web results (2026-06-15).
+    """
+
+    def _patch_search(self, hits):
+        orig = el._perplexity_search
+        el._perplexity_search = lambda query: (hits, None)
+        self.addCleanup(lambda: setattr(el, "_perplexity_search", orig))
+
+    def test_search_news_drops_undated_and_stale_hits(self):
+        self._patch_search([
+            {"title": "Fresh", "url": "https://www.theverge.com/2026/05/16/fresh",
+             "snippet": "x", "domain": "theverge.com"},
+            {"title": "Stale", "url": "https://www.theverge.com/2026/05/01/stale",
+             "snippet": "x", "domain": "theverge.com"},
+            {"title": "Undated", "url": "https://www.theverge.com/undated",
+             "snippet": "no date here", "domain": "theverge.com"},
+        ])
+        state = _state(today=dt.date(2026, 5, 17))  # max_age_days defaults to 3
+        r = el._tool_search_news(state, {"query": "ai"})
+        self.assertEqual(r["added"], 1)
+        self.assertEqual(r.get("dropped_stale"), 2)
+        self.assertEqual(len(state.extra_candidates), 1)
+        kept = state.extra_candidates[0]
+        self.assertEqual(kept["published_date"], "2026-05-16")
+        self.assertTrue(kept["via_search"])
+
+
 class UnpickTests(unittest.TestCase):
 
     def test_unpick_removes_pick(self):

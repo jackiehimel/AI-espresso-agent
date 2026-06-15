@@ -434,6 +434,7 @@ def _tool_search_news(state: AgentState, args: dict) -> dict:
 
     state.search_calls_used += 1
     new_entries = []
+    stale = 0
     for hit in hits[:8]:
         url = hit.get("url", "")
         title = (hit.get("title") or "").strip()
@@ -441,7 +442,13 @@ def _tool_search_news(state: AgentState, args: dict) -> dict:
             continue
         if not is_search_domain_allowed(url, allowed):
             continue
-        url_date = infer_date_from_url(url)
+        snippet = hit.get("snippet") or ""
+        # Web search has no curated date metadata; require a verifiable date and
+        # drop anything older than the freshness window (mirrors discovery prefetch).
+        pub = infer_date_from_url(url) or infer_date_from_text(snippet)
+        if pub is None or (state.today - pub).days > state.max_age_days:
+            stale += 1
+            continue
         entry = {
             "id": state.next_id,
             "headline": title,
@@ -450,15 +457,18 @@ def _tool_search_news(state: AgentState, args: dict) -> dict:
             "tier": 2,
             "vertical": None,
             "via_search": True,
-            "blurb": (hit.get("snippet") or "")[:200],
-            "published_date": url_date.isoformat() if url_date else None,
+            "blurb": snippet[:200],
+            "published_date": pub.isoformat(),
         }
         state.next_id += 1
         state.extra_candidates.append(entry)
         new_entries.append(entry)
         if len(new_entries) >= 5:
             break
-    return {"added": len(new_entries), "entries": new_entries}
+    result = {"added": len(new_entries), "entries": new_entries}
+    if stale:
+        result["dropped_stale"] = stale
+    return result
 
 
 def _perplexity_search(query: str) -> tuple[list[dict] | None, str | None]:
