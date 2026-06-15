@@ -253,6 +253,44 @@ class ShipGateTests(unittest.TestCase):
         r = el._tool_ship(state, {})
         self.assertTrue(r["shipped"])
 
+    def test_ship_rejects_stale_pick(self):
+        today = dt.date(2026, 5, 17)
+        stale = (today - dt.timedelta(days=5)).isoformat()
+        candidates = [
+            _candidate(0, "ChatGPT launches stale AI feature", body=_verified_body(),
+                       tier=1, source="OutletA", published_date=stale),
+            _candidate(1, "Claude agent ships fresh AI feature", body=_verified_body(),
+                       source="OutletB"),
+            _candidate(2, "Gemini releases new AI capability", body=_verified_body(),
+                       source="OutletC"),
+        ]
+        state = _state(candidates=candidates, today=today, max_age_days=3)
+        for i in range(3):
+            el._tool_pick(state, {"id": i, "reason": "test", "persona": "market"}, [])
+        r = el._tool_ship(state, {})
+        self.assertFalse(r["shipped"])
+        self.assertTrue(
+            any("too old" in e and "5 days" in e for e in r["errors"]),
+            r["errors"],
+        )
+
+    def test_ship_accepts_fresh_and_undated(self):
+        today = dt.date(2026, 5, 17)
+        fresh = (today - dt.timedelta(days=2)).isoformat()
+        candidates = [
+            _candidate(0, "ChatGPT launches AI feature today", body=_verified_body(),
+                       tier=1, source="OutletA", published_date=fresh),
+            _candidate(1, "Claude agent ships AI tool", body=_verified_body(),
+                       source="OutletB"),
+            _candidate(2, "Gemini releases new AI model", body=_verified_body(),
+                       source="OutletC"),
+        ]
+        state = _state(candidates=candidates, today=today, max_age_days=3)
+        for i in range(3):
+            el._tool_pick(state, {"id": i, "reason": "test", "persona": "market"}, [])
+        r = el._tool_ship(state, {})
+        self.assertTrue(r["shipped"], r.get("errors"))
+
 
 class SearchNewsTests(unittest.TestCase):
 

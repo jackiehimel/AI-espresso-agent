@@ -276,6 +276,7 @@ class AgentState:
     shipped: bool = False
     trace: list[TraceEvent] = field(default_factory=list)
     search_calls_used: int = 0
+    max_age_days: int = 3
 
 
 MIN_PICKS = 3
@@ -508,6 +509,20 @@ def _validate_ship(state: AgentState) -> dict:
         body = (pick.get("body") or "").strip()
         if len(body) < 80:
             errors.append(f"[{slot}] no verified body")
+
+    for slot, pick in state.picks.items():
+        raw = pick.get("published_date")
+        if not raw:
+            continue
+        try:
+            pub = dt.date.fromisoformat(raw)
+        except ValueError:
+            continue
+        age = (state.today - pub).days
+        if age > state.max_age_days:
+            errors.append(
+                f"[{slot}] story too old ({age} days, max {state.max_age_days})"
+            )
 
     from constitution import constitution_violations
     non_load_bearing = 0
@@ -786,6 +801,8 @@ def agentic_select(
     )
     allowed_domains = search_allowed_domains()
     discovery_hits = discover_via_search(today)
+    max_age = int(rules.get("max_story_age_days", 3))
+    discovery_stale = 0
     for hit in discovery_hits:
         url = hit.get("url", "")
         title = (hit.get("title") or "").strip()
@@ -796,21 +813,33 @@ def agentic_select(
             continue
         if exact_repeat_reason(title, url, archive_index):
             continue
+        snippet = hit.get("snippet") or ""
+        # Web search has no curated date metadata; require a date we can verify
+        # and drop anything older than the configured cap.
+        pub = infer_date_from_url(url) or infer_date_from_text(snippet)
+        if pub is None or (today - pub).days > max_age:
+            discovery_stale += 1
+            continue
         seen_fps.add(fp)
         new_id = len(candidates_payload)
         cand_by_id[new_id] = Candidate(
             headline=title, url=url, source_name=hit.get("domain", "web"),
-            tier=2, blurb=(hit.get("snippet") or "")[:200],
+            tier=2, blurb=snippet[:200], published_date=pub.isoformat(),
         )
         candidates_payload.append({
             "id": new_id,
             "headline": title,
-            "blurb": (hit.get("snippet") or "")[:200],
+            "blurb": snippet[:200],
             "source": hit.get("domain", "web"),
             "tier": 2,
             "url": url,
             "vertical": None,
         })
+    if discovery_stale:
+        print(
+            f"  [discovery] dropped {discovery_stale} stale/undated hit(s) (>{max_age} days)",
+            file=sys.stderr,
+        )
 
     print(f"  [ranking] {len(candidates_payload)} candidates (incl. {len(discovery_hits)} from search)", file=sys.stderr)
 
@@ -842,6 +871,7 @@ def agentic_select(
         candidates=enriched,
         archive_headlines=archive_headlines,
         archive_index=archive_index,
+        max_age_days=max_age,
     )
     state.trace.append(TraceEvent(
         ts=time.time(), role="system", kind="handoff",

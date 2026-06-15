@@ -398,7 +398,7 @@ rules:
   total_stories: 4            # 4 stories + 1 try-this-prompt tile = 5 across
   tier4_rotation_days: [1, 4] # Mon (1) and Thu (4) include a Tier 4 story
   dedupe_window_days: 30      # don't repeat a story or source-event within 30d
-  max_story_age_days: 4       # reject stale stories unless they are within 4 days
+  max_story_age_days: 3       # reject stale stories unless they are within 3 days
   vendor_cap: 2               # never include more than 2 stories from same company
   allow_paywalled_stories: false  # avoid stories users cannot open
   paywall_handling: headline_only   # never fabricate body for paywalled sources

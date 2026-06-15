@@ -1243,7 +1243,7 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
     print(f"[espresso] {date} — {len(sources)} enabled sources", file=sys.stderr)
 
     candidates = fetch_all_candidates(sources, use_cache=use_cache)
-    max_story_age_days = int(rules.get("max_story_age_days", 4))
+    max_story_age_days = int(rules.get("max_story_age_days", 3))
     candidates = _filter_stale_candidates(candidates, date, max_story_age_days)
     dedupe_window_days = rules.get("dedupe_window_days", 30)
     archive_fps = load_archive(days=dedupe_window_days)
