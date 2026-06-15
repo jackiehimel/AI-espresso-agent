@@ -440,6 +440,31 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }}
   .footer a {{ color: #8B6F47; text-decoration: underline; }}
 
+  /* Desktop layouts per story count so rows stay full (no dangling card).
+     n4 uses the base rules above. Even counts (4, 6) are the preferred targets. */
+  @media (min-width: 1280px) {{
+    .edition-grid--n3 {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
+    .edition-grid--n3 .story-cards {{
+      grid-column: 1 / span 3;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }}
+    .edition-grid--n3 .prompt-card {{ grid-column: 4; }}
+
+    .edition-grid--n5 {{ grid-template-columns: repeat(6, minmax(0, 1fr)); }}
+    .edition-grid--n5 .story-cards {{
+      grid-column: 1 / span 5;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }}
+    .edition-grid--n5 .prompt-card {{ grid-column: 6; }}
+
+    .edition-grid--n6 {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
+    .edition-grid--n6 .story-cards {{
+      grid-column: 1 / span 3;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }}
+    .edition-grid--n6 .prompt-card {{ grid-column: 4; grid-row: 1 / 3; }}
+  }}
+
   @media (max-width: 1279px) and (min-width: 960px) {{
     .edition-grid {{ grid-template-columns: 1fr; }}
     .story-cards {{
@@ -486,7 +511,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <p class="dateline">{dateline_html}</p>
   </header>
 
-  <section class="edition-grid">
+  <section class="edition-grid {grid_class}">
 {edition_cards}
   </section>
 
@@ -818,6 +843,7 @@ def render_edition(
         shots_label=shots_label,
         dateline_html=dates["dateline_html"],
         tagline_html=escape(EDITION_TAGLINE),
+        grid_class=f"edition-grid--n{story_limit}",
         edition_cards=edition_cards,
         qotd_section=qotd_section,
         qotd_script=qotd_script,

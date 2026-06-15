@@ -16,7 +16,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from card_config import STORY_CARD_COUNT
+from card_config import STORY_CARD_COUNT, MAX_STORY_COUNT
 
 
 def _normalize_prompt_for_cli(prompt: str) -> str:
@@ -614,14 +614,15 @@ def render_images(
     edition_data: dict[str, Any],
 ) -> dict[str, Any]:
     image_paths = render_result["image_paths"]
-    stories = edition_data.get("stories", [])[:STORY_CARD_COUNT]
+    story_count = min(len(edition_data.get("stories", [])), MAX_STORY_COUNT)
+    stories = edition_data.get("stories", [])[:story_count]
     prompt_card = edition_data.get("try_this_prompt") or {}
 
     client = _build_client()
     generated, missing, prompts = [], [], []
 
-    total_cards = STORY_CARD_COUNT + 1
-    for i, (story, path) in enumerate(zip(stories, image_paths[:STORY_CARD_COUNT]), start=0):
+    total_cards = story_count + 1
+    for i, (story, path) in enumerate(zip(stories, image_paths[:story_count]), start=0):
         no_ext = Path(str(path).removesuffix(".png"))
         print(f"  [{i + 1}/{total_cards}] {story.get('headline', '')[:60]}...", file=sys.stderr)
         profile = CARD_PROFILES[min(i, STORY_CARD_COUNT - 1)]
@@ -638,7 +639,7 @@ def render_images(
         (generated if ok else missing).append(str(path))
 
     if len(image_paths) >= total_cards:
-        path = image_paths[STORY_CARD_COUNT]
+        path = image_paths[story_count]
         no_ext = Path(str(path).removesuffix(".png"))
         print(f"  [{total_cards}/{total_cards}] prompt: {prompt_card.get('title', '')[:60]}...", file=sys.stderr)
         prompt = _prompt_for_card(prompt_card, client)

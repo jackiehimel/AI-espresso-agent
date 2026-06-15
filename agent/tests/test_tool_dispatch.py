@@ -90,6 +90,82 @@ class PickTests(unittest.TestCase):
         self.assertIn("error", r)
         self.assertEqual(len(state.picks), 6)
 
+    def test_pick_after_unpick_does_not_overwrite_existing_slot(self):
+        """Regression: 2026-06-14 edition shipped only 3 stories because pick
+        after unpick reused an in-use slot key and silently overwrote a sibling
+        pick. Slots must be monotonic across the lifetime of the state.
+        """
+        candidates = [
+            _candidate(i, f"Story {i}", body=_verified_body(), source=f"Outlet{i}")
+            for i in range(6)
+        ]
+        state = _state(candidates=candidates)
+        for i in range(4):
+            el._tool_pick(state, {"id": i, "reason": "fill", "persona": "market"}, [])
+        self.assertEqual(sorted(state.picks), ["pick_1", "pick_2", "pick_3", "pick_4"])
+
+        el._tool_unpick(state, {"id": 0}, [])
+        self.assertEqual(sorted(state.picks), ["pick_2", "pick_3", "pick_4"])
+
+        r1 = el._tool_pick(state, {"id": 4, "reason": "replacement A", "persona": "build"}, [])
+        self.assertTrue(r1.get("ok"))
+        self.assertEqual(r1["pick_count"], 4)
+        self.assertIn("pick_5", state.picks)
+        self.assertEqual(int(state.picks["pick_5"]["id"]), 4)
+        self.assertEqual(int(state.picks["pick_4"]["id"]), 3, "pick_4 must not be overwritten")
+
+        r2 = el._tool_pick(state, {"id": 5, "reason": "replacement B", "persona": "industry"}, [])
+        self.assertTrue(r2.get("ok"))
+        self.assertEqual(r2["pick_count"], 5)
+        self.assertIn("pick_6", state.picks)
+        self.assertEqual(int(state.picks["pick_6"]["id"]), 5)
+
+        ids = {int(p["id"]) for p in state.picks.values()}
+        self.assertEqual(ids, {1, 2, 3, 4, 5})
+
+    def test_source_cap_enforced(self):
+        """No more than SOURCE_CAP stories from the same outlet (2026-06-14
+        shipped 3 Wired stories — that must be rejected).
+        """
+        candidates = [
+            _candidate(i, f"AI story {i}", body=_verified_body(), source="Wired — AI")
+            for i in range(3)
+        ]
+        state = _state(candidates=candidates)
+        r1 = el._tool_pick(state, {"id": 0, "reason": "a", "persona": "industry"}, [])
+        r2 = el._tool_pick(state, {"id": 1, "reason": "b", "persona": "everyday"}, [])
+        r3 = el._tool_pick(state, {"id": 2, "reason": "c", "persona": "build"}, [])
+        self.assertTrue(r1.get("ok"))
+        self.assertTrue(r2.get("ok"))
+        self.assertIn("error", r3)
+        self.assertIn("source cap", r3["error"])
+        self.assertEqual(len(state.picks), 2)
+
+    def test_source_cap_treats_outlet_case_insensitively(self):
+        candidates = [
+            _candidate(0, "Story A", body=_verified_body(), source="TechCrunch"),
+            _candidate(1, "Story B", body=_verified_body(), source="techcrunch"),
+            _candidate(2, "Story C", body=_verified_body(), source="TECHCRUNCH"),
+        ]
+        state = _state(candidates=candidates)
+        el._tool_pick(state, {"id": 0, "reason": "a", "persona": "market"}, [])
+        el._tool_pick(state, {"id": 1, "reason": "b", "persona": "build"}, [])
+        r = el._tool_pick(state, {"id": 2, "reason": "c", "persona": "industry"}, [])
+        self.assertIn("error", r)
+        self.assertIn("source cap", r["error"])
+
+    def test_source_cap_unpick_frees_slot(self):
+        candidates = [
+            _candidate(i, f"Story {i}", body=_verified_body(), source="Bloomberg")
+            for i in range(3)
+        ]
+        state = _state(candidates=candidates)
+        el._tool_pick(state, {"id": 0, "reason": "a", "persona": "market"}, [])
+        el._tool_pick(state, {"id": 1, "reason": "b", "persona": "build"}, [])
+        el._tool_unpick(state, {"id": 0}, [])
+        r = el._tool_pick(state, {"id": 2, "reason": "c", "persona": "industry"}, [])
+        self.assertTrue(r.get("ok"), r)
+
 
 class UnpickTests(unittest.TestCase):
 
@@ -150,9 +226,10 @@ class ShipGateTests(unittest.TestCase):
 
     def test_ship_rejects_failure_framing(self):
         candidates = [
-            _candidate(0, "AI glitch ruins everything", body=_verified_body(), tier=1),
-            _candidate(1, "AI agent ships code", body=_verified_body()),
-            _candidate(2, "ChatGPT launches feature", body=_verified_body()),
+            _candidate(0, "AI glitch ruins everything", body=_verified_body(),
+                       tier=1, source="OutletA"),
+            _candidate(1, "AI agent ships code", body=_verified_body(), source="OutletB"),
+            _candidate(2, "ChatGPT launches feature", body=_verified_body(), source="OutletC"),
         ]
         state = _state(candidates=candidates)
         for i in range(3):
@@ -163,9 +240,12 @@ class ShipGateTests(unittest.TestCase):
 
     def test_ship_allows_one_non_load_bearing(self):
         candidates = [
-            _candidate(0, "Raspberry Pi profit forecast", body=_verified_body(), tier=1),
-            _candidate(1, "ChatGPT launches new AI feature", body=_verified_body()),
-            _candidate(2, "Claude agent ships code autonomously", body=_verified_body()),
+            _candidate(0, "Raspberry Pi profit forecast", body=_verified_body(),
+                       tier=1, source="OutletA"),
+            _candidate(1, "ChatGPT launches new AI feature", body=_verified_body(),
+                       source="OutletB"),
+            _candidate(2, "Claude agent ships code autonomously", body=_verified_body(),
+                       source="OutletC"),
         ]
         state = _state(candidates=candidates)
         for i in range(3):

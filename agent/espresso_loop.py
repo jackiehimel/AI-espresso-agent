@@ -130,9 +130,12 @@ _EDITOR_SYSTEM = (
     "  5. If ship fails, fix the issue and try again.\n\n"
     "RULES:\n"
     "  • At least 1 tier-1 source.\n"
-    "  • At most 2 stories from the same vendor.\n"
+    "  • At most 2 stories from the same vendor (Google/Apple/OpenAI/etc.).\n"
+    "  • At most 2 stories from the same outlet (e.g. Wired, Bloomberg, TechCrunch).\n"
     "  • All picks must have verified article bodies.\n"
-    "  • Minimum 3 stories, target 4-5.\n"
+    "  • Minimum 3 stories. Prefer an even count (4 or 6) so the card grid stays\n"
+    "    balanced — but never drop a strong story or pad with a weak one just to\n"
+    "    hit an even number. A great 5-story day beats a padded 6.\n"
     "  • Assign a persona tag to each pick: market, everyday, build, or industry.\n"
     "    These are rendering labels, not constraints on selection.\n\n"
     + _EDITORIAL_RUBRIC
@@ -264,6 +267,8 @@ class AgentState:
     archive_index: ArchiveIndex | None = None
     picks: dict[str, dict] = field(default_factory=dict)
     vendor_counts: dict[str, int] = field(default_factory=dict)
+    source_counts: dict[str, int] = field(default_factory=dict)
+    pick_seq: int = 0
     extra_candidates: list[dict] = field(default_factory=list)
     next_id: int = 10_000
     tool_calls: int = 0
@@ -276,6 +281,7 @@ class AgentState:
 MIN_PICKS = 3
 MAX_PICKS = 6
 MAX_SEARCH_CALLS = 3
+SOURCE_CAP = 2
 
 
 def _detect_vendor(headline: str, url: str, vendor_patterns) -> str | None:
@@ -285,6 +291,10 @@ def _detect_vendor(headline: str, url: str, vendor_patterns) -> str | None:
             if n in hay:
                 return vendor
     return None
+
+
+def _source_key(name: str) -> str:
+    return (name or "").strip().lower()
 
 
 def _tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
@@ -317,13 +327,26 @@ def _tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
     if nv and state.vendor_counts.get(nv, 0) >= 2:
         return {"error": f"vendor cap: {nv} already has 2 stories"}
 
-    slot = f"pick_{len(state.picks) + 1}"
+    src_name = found.get("source") or found.get("source_name") or ""
+    src_key = _source_key(src_name)
+    if src_key and state.source_counts.get(src_key, 0) >= SOURCE_CAP:
+        return {
+            "error": (
+                f"source cap: '{src_name}' already has {SOURCE_CAP} stories; "
+                "pick from a different outlet"
+            )
+        }
+
+    state.pick_seq += 1
+    slot = f"pick_{state.pick_seq}"
     found = dict(found)
     found["pick_reason"] = reason
     found["persona"] = persona
     state.picks[slot] = found
     if nv:
         state.vendor_counts[nv] = state.vendor_counts.get(nv, 0) + 1
+    if src_key:
+        state.source_counts[src_key] = state.source_counts.get(src_key, 0) + 1
 
     return {
         "ok": True,
@@ -343,6 +366,9 @@ def _tool_unpick(state: AgentState, args: dict, vendor_patterns) -> dict:
             nv = _detect_vendor(pick.get("headline", ""), pick.get("url", ""), vendor_patterns)
             if nv and state.vendor_counts.get(nv, 0) > 0:
                 state.vendor_counts[nv] -= 1
+            src_key = _source_key(pick.get("source") or pick.get("source_name") or "")
+            if src_key and state.source_counts.get(src_key, 0) > 0:
+                state.source_counts[src_key] -= 1
             return {"ok": True, "removed": pick.get("headline", "")}
     return {"error": f"no pick with id={cid}"}
 
