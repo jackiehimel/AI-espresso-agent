@@ -441,7 +441,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .footer a {{ color: #8B6F47; text-decoration: underline; }}
 
   /* Desktop layouts per story count so rows stay full (no dangling card).
-     n4 uses the base rules above. Even counts (4, 6) are the preferred targets. */
+     Editions ship 4 or 6 stories (enforced in the ship gate). n4 uses the base
+     rules above; n3 stays as a delivery-protecting fallback only. */
   @media (min-width: 1280px) {{
     .edition-grid--n3 {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
     .edition-grid--n3 .story-cards {{
@@ -449,13 +450,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }}
     .edition-grid--n3 .prompt-card {{ grid-column: 4; }}
-
-    .edition-grid--n5 {{ grid-template-columns: repeat(6, minmax(0, 1fr)); }}
-    .edition-grid--n5 .story-cards {{
-      grid-column: 1 / span 5;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }}
-    .edition-grid--n5 .prompt-card {{ grid-column: 6; }}
 
     .edition-grid--n6 {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
     .edition-grid--n6 .story-cards {{
