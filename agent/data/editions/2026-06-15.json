@@ -1,0 +1,248 @@
+{
+  "date": "2026-06-15",
+  "generated_at": "2026-06-15T13:09:19.333916Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Apple just shipped AI photo editing to a billion iPhones",
+      "blurb": "iOS 27 adds AI tools to reframe, extend, and clean up photos \u2014 less aggressive than Google's Pixel edits, but now in the hands of the world's most popular camera. The Verge tested them and found they mostly work as advertised, which means casual photo manipulation just went mainstream.",
+      "why_it_matters": "When Apple ships a feature to everyone, it becomes normal behavior overnight.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/949360/apple-ai-photo-edit-reframe-extend-clean-up-hands-on",
+      "tier": 1,
+      "original_headline": "Apple\u2019s new AI photo editing tools mostly work, for better and worse",
+      "fingerprint": "b2fde938d57e1293"
+    },
+    {
+      "slot": "build",
+      "headline": "NewCore raises $66M to give AI agents employee IDs and permissions",
+      "blurb": "As companies deploy AI agents that book meetings, write code, and access databases, NewCore is building identity management for bots\u2014think Okta, but for agents instead of people. The startup argues the next enterprise security challenge isn't managing human logins, it's controlling which agents can do what across your systems.",
+      "why_it_matters": "AI agents need the same access controls as employees, and existing tools weren't built for that.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/15/ai-agents-are-becoming-employees-newcore-emerges-with-66m-to-give-them-identities/",
+      "tier": 1,
+      "original_headline": "As AI agents become employees, NewCore emerges with $66M to give them identities",
+      "fingerprint": "e3a724962caa9631"
+    },
+    {
+      "slot": "build",
+      "headline": "A satellite just taught itself to spot objects from orbit",
+      "blurb": "In April, an Earth observation satellite identified a target on its own for the first time\u2014no ground control needed. The satellite processed imagery onboard using AI, decided what mattered, and acted autonomously. Previous satellites beam everything down for humans to sort through.",
+      "why_it_matters": "Satellites can now make decisions in space instead of waiting for instructions from Earth.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/15/a-satellite-just-learned-to-find-things-on-its-own-heres-what-that-means/",
+      "tier": 1,
+      "original_headline": "A satellite just learned to find things on its own \u2014 here\u2019s what that means",
+      "fingerprint": "bc354a958ca0bb7a"
+    },
+    {
+      "slot": "market",
+      "headline": "Salesforce is buying AI customer service startup Fin for $3.6 billion",
+      "blurb": "Salesforce agreed to acquire Fin, which builds AI-powered customer service agents, for $3.6 billion. The deal is part of Salesforce's push to expand its enterprise AI offerings and compete for companies looking to automate customer support with conversational agents.",
+      "why_it_matters": "Salesforce is betting billions that companies will pay for AI that talks to their customers",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-06-15/salesforce-to-buy-ai-customer-service-firm-fin-for-3-6-billion",
+      "tier": 1,
+      "original_headline": "Salesforce to Buy AI Customer Service Firm Fin for $3.6 Billion",
+      "fingerprint": "b06672a89880cb6e"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The strategy stress test",
+    "kicker": "",
+    "prompt": "I'll describe our strategy below. Now tell me: what has to stay true about the world for this to work? List three assumptions we're betting on. Then pick the one most likely to break in the next 18 months and tell me what we'd do if it did.",
+    "tool_hint": "Before you commit the roadmap or the budget."
+  },
+  "daily_question": "If you could give an AI agent one company permission tomorrow, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1781528893.9718566,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781528912.6173694,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "market",
+        "reason": "Jeff Bezos announcing an 'artificial general engineer' is a massive market story with a concrete, audacious goal. Amazon founder entering AGI race with specific capability target - gets people excited about what AI might build next. Primary source (The Verge tier-1), passes screenshot test."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0157dUVYze6NYnXKoESTLnLY"
+    },
+    {
+      "ts": 1781528912.6174428,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Jeff Bezos\\u2019 AI startup aims to build an \\u2018artificial general engineer\\u2019\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_0157dUVYze6NYnXKoESTLnLY"
+    },
+    {
+      "ts": 1781528912.6174796,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 9,
+        "persona": "everyday",
+        "reason": "Apple shipped AI photo editing tools that any iPhone user can try today. Concrete feature launch from world's most popular camera, tier-1 source. Practical 'try it this week' story that shows what's newly possible. Different vendor from Bezos pick."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014Ro3Jwjx4WXj7BYvXc7Zm1"
+    },
+    {
+      "ts": 1781528912.6175258,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple\\u2019s new AI photo editing tools mostly work, for better and worse\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_014Ro3Jwjx4WXj7BYvXc7Zm1"
+    },
+    {
+      "ts": 1781528912.6175377,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 14,
+        "persona": "build",
+        "reason": "$66M raise to solve a concrete emerging problem - giving AI agents enterprise identities as they become 'employees'. Developer-facing with clear stakes, shows AI agents moving from concept to operational reality. Different outlet (TechCrunch) and vendor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012GDr9ivdWqckjC6aok5SqD"
+    },
+    {
+      "ts": 1781528912.6176054,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"As AI agents become employees, NewCore emerges with $66M to give them identities\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_012GDr9ivdWqckjC6aok5SqD"
+    },
+    {
+      "ts": 1781528912.617623,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 15,
+        "persona": "build",
+        "reason": "First satellite to autonomously find targets on its own - surprising real-world AI application in space. Concrete capability milestone ('for the first time ever'), different domain from other picks. Makes AI feel cool and expansive beyond chatbots."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Frv3F3JQ1huc2uGyWqTqKg"
+    },
+    {
+      "ts": 1781528912.6176848,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"A satellite just learned to find things on its own \\u2014 here\\u2019s what that means\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Frv3F3JQ1huc2uGyWqTqKg"
+    },
+    {
+      "ts": 1781528918.7454686,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01BkXBzb4HxzwGt8x8EE68vV"
+    },
+    {
+      "ts": 1781528919.3239715,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"Jeff Bezos\\u2019s Prometheus raises $12B to build an \\u2018artificial general engineer\\u2019 for the physical world\\\", similarity 0.825) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01BkXBzb4HxzwGt8x8EE68vV"
+    },
+    {
+      "ts": 1781528922.0249913,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 13
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01C82YucYtYU2qG78nE5VbWA"
+    },
+    {
+      "ts": 1781528922.0250397,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Jeff Bezos\\u2019 AI startup aims to build an \\u2018artificial general engineer\\u2019\"}",
+      "tool_use_id": "toolu_01C82YucYtYU2qG78nE5VbWA"
+    },
+    {
+      "ts": 1781528928.8285134,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 142,
+        "persona": "market",
+        "reason": "Salesforce acquiring AI customer service firm Fin for $3.6B - massive M&A showing enterprise AI agents becoming valuable enough for multi-billion acquisitions. Concrete market move, different vendor from other picks, shows AI customer service becoming mission-critical."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Gok7QzbTvLfYzKyEeKg74t"
+    },
+    {
+      "ts": 1781528928.8285758,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Salesforce to Buy AI Customer Service Firm Fin for $3.6 Billion\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Gok7QzbTvLfYzKyEeKg74t"
+    },
+    {
+      "ts": 1781528930.766098,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Swk6ThjkrZZPx1H6JG9kVJ"
+    },
+    {
+      "ts": 1781528931.0172179,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781528931.0172455,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Apple\\u2019s new AI photo editing tools mostly work, for better and worse\", \"pick_3\": \"As AI agents become employees, NewCore emerges with $66M to give them identities\", \"pick_4\": \"A satellite just learned to find things on its own \\u2014 here\\u2019s what that means\", \"pick_5\": \"Salesforce to Buy AI Customer Service Firm Fin for $3.6 Billion\"}}",
+      "tool_use_id": "toolu_01Swk6ThjkrZZPx1H6JG9kVJ"
+    }
+  ],
+  "issue_num": 20
+}
