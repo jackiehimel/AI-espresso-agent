@@ -1,0 +1,336 @@
+{
+  "date": "2026-06-16",
+  "generated_at": "2026-06-16T12:41:19.469877Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "SpaceX is buying Cursor for $60 billion",
+      "blurb": "Days after its IPO, SpaceX announced it's acquiring the AI coding tool Cursor for $60 billion. The deal is Elon Musk's bet to win enterprise customers and compete directly with Anthropic and OpenAI in the AI market.",
+      "why_it_matters": "The biggest AI coding tool just became part of Musk's empire.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/950571/spacex-is-officially-buying-cursor-for-60-billion",
+      "tier": 1,
+      "original_headline": "SpaceX is officially buying Cursor for $60 billion",
+      "fingerprint": "3b646848581b07dc"
+    },
+    {
+      "slot": "market",
+      "headline": "Indian AI startup Sarvam hits $1B valuation with $234M from HCLTech",
+      "blurb": "Sarvam, a Bengaluru-based AI company, raised $234 million led by Indian IT giant HCLTech's $150 million investment. The round makes Sarvam India's newest AI unicorn, joining the handful of billion-dollar-valued AI companies emerging outside Silicon Valley.",
+      "why_it_matters": "India now has its own billion-dollar AI bet, signaling the global AI race extends beyond US and Chinese labs.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/15/sarvam-becomes-indias-newest-ai-unicorn-with-234-million-funding-round-led-by-hcltech/",
+      "tier": 1,
+      "original_headline": "Sarvam becomes India\u2019s newest AI unicorn with $234 million funding round led by HCLTech",
+      "fingerprint": "ce5e81d60740443b"
+    },
+    {
+      "slot": "build",
+      "headline": "Hackers stole 2FA codes from Copilot users through search hijacking",
+      "blurb": "A vulnerability called SearchLeak let attackers inject invisible text into Copilot results that tricked users into leaking their two-factor codes. The exploit worked by poisoning search results with hidden instructions that made Copilot ask users to share sensitive data \u2014 then send it to attacker-controlled servers.",
+      "why_it_matters": "LLMs can be weaponized through their own search features, turning helpful AI into a phishing vector.",
+      "source_name": "Ars Technica \u2014 AI",
+      "source_url": "https://arstechnica.com/security/2026/06/critical-copilot-vulnerability-allowed-hackers-to-seal-2fa-code-from-users/",
+      "tier": 1,
+      "original_headline": "Critical Copilot vulnerability allowed hackers to seal 2FA code from users",
+      "fingerprint": "695203a659fd350c"
+    },
+    {
+      "slot": "market",
+      "headline": "DeepSeek raises $7.4 billion, becomes China's most valuable AI startup",
+      "blurb": "China's DeepSeek closed a $7.4 billion funding round\u2014its first external raise\u2014to bankroll AI development. The company, which released competitive open models last year while claiming minimal compute costs, is now the country's highest-valued AI startup.",
+      "why_it_matters": "DeepSeek went from efficiency darling to needing Silicon Valley-scale capital overnight.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/ai/deepseek-becomes-chinas-most-valuable-ai-startup-after-over-7-4-billion-fundraise-78ef64c0?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "DeepSeek Becomes China\u2019s Most Valuable AI Startup After $7.4 Billion Fundraise",
+      "fingerprint": "8302364b7abbdedb"
+    },
+    {
+      "slot": "build",
+      "headline": "Arcade raises $60M to build guardrails for AI agents",
+      "blurb": "The startup helps companies control what their AI agents can actually do \u2014 like which APIs they can call, what data they can access, and which actions require human approval. As more businesses deploy agents that can take real actions, deciding what to let them do becomes a security problem.",
+      "why_it_matters": "Agent permissions are the new access control layer companies need to figure out now",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/cio-journal/arcade-dev-raises-60-million-to-secure-ai-agents-5d07eff4?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Arcade.dev Raises $60 Million to Secure AI Agents",
+      "fingerprint": "f3f9fb7e1d9f9706"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Qualcomm CEO: AI agents will replace apps on 40 new devices",
+      "blurb": "Qualcomm's CEO says the company is building 40 AI-powered devices where agents handle tasks instead of apps. He's especially bullish on smart glasses, which he thinks could become as big as smartphones.",
+      "why_it_matters": "The shift from apps to agents is moving from software into the hardware you'll actually buy.",
+      "source_name": "CNBC \u2014 Technology",
+      "source_url": "https://www.cnbc.com/2026/06/16/qualcomm-ceo-ai-devices-agents.html",
+      "tier": 1,
+      "original_headline": "Qualcomm CEO says AI agents will replace apps \u2014 as chip giant works on 40 new AI-powered devices",
+      "fingerprint": "078d27b25ac9b7ec"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation floor-finder",
+    "kicker": "",
+    "prompt": "I'm negotiating something I'll describe below. I need you to tell me: the absolute minimum I can accept without feeling cheated in six months, the one thing I should ask for that they'll probably say yes to, and the exact sentence I should use if they go silent.",
+    "tool_hint": "Before you say a number out loud or hit send on that counteroffer."
+  },
+  "daily_question": "If AI agents replace apps, what's the first app on your phone you'd actually trust an agent to handle?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1781613604.3149903,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=['Detailed coverage of Anthropic/White House negotiations and timeline', 'SpaceX IPO performance metrics beyond headline rally', 'Concrete use cases or demos from OpenAI Partner Network launches', \"Technical details on Facebook AI Mode's retrieval architecture\", \"India AI unicorn Sarvam's product roadmap and go-to-market\", 'Databricks agent capabilities vs Salesforce Agentforce comparison']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781613620.5105338,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "market",
+        "reason": "Massive $60B acquisition of Cursor by SpaceX days after IPO - concrete M&A that shows AI coding tools are now strategic assets worth more than most Fortune 500 companies. Screenshot-worthy number."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GM1gdv5TV7F5WQT8NpSFMF"
+    },
+    {
+      "ts": 1781613620.5106,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SpaceX is officially buying Cursor for $60 billion\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01GM1gdv5TV7F5WQT8NpSFMF"
+    },
+    {
+      "ts": 1781613620.510628,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 7,
+        "persona": "market",
+        "reason": "Major model launch story - Claude Mythos 5 debut with behind-the-scenes drama. New capability drop from tier-1 AI lab."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012qHjraeiARpxnnKvtzpEQm"
+    },
+    {
+      "ts": 1781613620.5106618,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Inside the fight over Claude Mythos 5\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_012qHjraeiARpxnnKvtzpEQm"
+    },
+    {
+      "ts": 1781613620.5106723,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "everyday",
+        "reason": "Facebook ships AI Mode search powered by public posts - concrete feature billions of users will see. Practical 'try it today' story with clear utility hook."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019wEKk7pMxFfZuigsCCsDUV"
+    },
+    {
+      "ts": 1781613620.5107214,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'The Verge \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_019wEKk7pMxFfZuigsCCsDUV"
+    },
+    {
+      "ts": 1781613620.5107453,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "market",
+        "reason": "India's Sarvam becomes unicorn with $234M round - shows AI investment spreading beyond US/China, concrete funding milestone with regional diversity."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PMaaanwcfKcjJsUx4g6BAJ"
+    },
+    {
+      "ts": 1781613620.5108151,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Sarvam becomes India\\u2019s newest AI unicorn with $234 million funding round led by HCLTech\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01PMaaanwcfKcjJsUx4g6BAJ"
+    },
+    {
+      "ts": 1781613625.5173242,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 43,
+        "persona": "build",
+        "reason": "Critical Copilot vulnerability that let hackers steal 2FA codes - concrete security issue developers need to know about, shows real stakes in LLM security. Ars Technica investigation."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01P3277vHBTv66puCwLLkg9e"
+    },
+    {
+      "ts": 1781613625.5173807,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Critical Copilot vulnerability allowed hackers to seal 2FA code from users\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01P3277vHBTv66puCwLLkg9e"
+    },
+    {
+      "ts": 1781613625.517407,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 121,
+        "persona": "market",
+        "reason": "DeepSeek raises $7.4B to become China's most valuable AI startup - massive funding round showing global AI race acceleration, concrete milestone from different region/vendor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EG1hfVnGGZUbK6DTxZg7eP"
+    },
+    {
+      "ts": 1781613625.517491,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"DeepSeek Becomes China\\u2019s Most Valuable AI Startup After $7.4 Billion Fundraise\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01EG1hfVnGGZUbK6DTxZg7eP"
+    },
+    {
+      "ts": 1781613629.2084982,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 122,
+        "persona": "build",
+        "reason": "Arcade.dev raises $60M to secure AI agents - addresses critical enterprise challenge of agent authorization/permissions. Shows security infrastructure becoming its own category as agents scale."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01UvpEEPhdBmmAwJDZzM33z1"
+    },
+    {
+      "ts": 1781613629.2085662,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Arcade.dev Raises $60 Million to Secure AI Agents\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01UvpEEPhdBmmAwJDZzM33z1"
+    },
+    {
+      "ts": 1781613635.6697142,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_015yBViYr4WjGKoW5pf4GibR"
+    },
+    {
+      "ts": 1781613636.6223276,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_2] covers the same story as a recent edition (\\\"Claude Fable 5 and Claude Mythos 5\\\", similarity 0.821) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_015yBViYr4WjGKoW5pf4GibR"
+    },
+    {
+      "ts": 1781613639.238557,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 7
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YX6KVAJmmyCvoYVYYcGR2T"
+    },
+    {
+      "ts": 1781613639.2385938,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Inside the fight over Claude Mythos 5\"}",
+      "tool_use_id": "toolu_01YX6KVAJmmyCvoYVYYcGR2T"
+    },
+    {
+      "ts": 1781613644.5517366,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 158,
+        "persona": "everyday",
+        "reason": "Qualcomm CEO says AI agents will replace apps as company works on 40 new AI devices - concrete vision statement backed by real product pipeline. Shows platform shift from apps to agents with hardware angle."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01S2KBMYzSjANu24F2ybpVxB"
+    },
+    {
+      "ts": 1781613644.5518084,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Qualcomm CEO says AI agents will replace apps \\u2014 as chip giant works on 40 new AI-powered devices\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01S2KBMYzSjANu24F2ybpVxB"
+    },
+    {
+      "ts": 1781613648.6115875,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01GHdBDqYqkyPGQX9Qz6o9LW"
+    },
+    {
+      "ts": 1781613648.873978,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781613648.873999,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"SpaceX is officially buying Cursor for $60 billion\", \"pick_3\": \"Sarvam becomes India\\u2019s newest AI unicorn with $234 million funding round led by HCLTech\", \"pick_4\": \"Critical Copilot vulnerability allowed hackers to seal 2FA code from users\", \"pick_5\": \"DeepSeek Becomes China\\u2019s Most Valuable AI Startup After $7.4 Billion Fundraise\", \"pick_6\": \"Arcade.dev Raises $60 Million to Secure AI Agents\", \"pick_7\": \"Qualcomm CEO says AI agents will replace apps \\u2014 as chip giant works on 40 new AI-powered devices\"}}",
+      "tool_use_id": "toolu_01GHdBDqYqkyPGQX9Qz6o9LW"
+    }
+  ],
+  "issue_num": 21
+}
