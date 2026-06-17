@@ -1,0 +1,276 @@
+{
+  "date": "2026-06-17",
+  "generated_at": "2026-06-17T12:29:58.846151Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "NVIDIA ships a framework to put AI agents in AR glasses",
+      "blurb": "NVIDIA XR AI, now in public beta, lets developers build multimodal AI agents that run on AR glasses and XR devices. Think: hands-free assistants that can see what you see, hear what you hear, and respond in real time through your headset.",
+      "why_it_matters": "AI agents are moving from your phone screen to your field of view.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/nvidia-xr-ai/",
+      "tier": 1,
+      "original_headline": "Hands Free, AIs Forward: NVIDIA XR AI Brings Agents to AR Glasses",
+      "fingerprint": "c5e399976185ec94"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Pinterest just launched a chatbot that shops for you",
+      "blurb": "The company's new experimental app, Ask Pinterest, lets you describe what you're looking for in plain language and get product recommendations through conversation. Instead of scrolling through boards, you chat with AI that pulls from Pinterest's catalog of shoppable items.",
+      "why_it_matters": "Shopping by chatting instead of searching could stick if the recommendations actually match what you want.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/17/pinterest-launches-an-experimental-ai-shopping-app-called-ask-pinterest/",
+      "tier": 1,
+      "original_headline": "Pinterest launches an experimental AI shopping app called \u2018Ask Pinterest\u2019",
+      "fingerprint": "504fdfc5c8add21a"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Android 17 brings Gemini AI into split-screen and live call transcripts",
+      "blurb": "Google's new Android update lets you run Gemini in split-screen mode while using other apps, and adds live call transcription that works entirely on-device. The Pixel Drop also brings Google's latest AI models to Pixel phones, including improved photo editing and smarter assistant responses.",
+      "why_it_matters": "AI assistants can finally multitask the way you actually work on a phone.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/16/android-17-launches-with-new-multitasking-tools-as-google-expands-gemini-features/",
+      "tier": 1,
+      "original_headline": "Android 17 launches with new multitasking tools as Google expands Gemini features",
+      "fingerprint": "27b37b59d4ffaa7d"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Uber is bringing driverless rides to Houston with Lucid and Nuro",
+      "blurb": "Uber will offer robotaxi rides in Houston using vehicles from Lucid and Nuro, competing directly with Waymo in the nation's fourth-largest city. The partnership puts three players into Houston's autonomous vehicle market as the race to scale driverless rides beyond San Francisco and Phoenix heats up.",
+      "why_it_matters": "The robotaxi market is expanding beyond its early West Coast testing grounds into major metros",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-06-17/uber-lucid-and-nuro-plan-robotaxis-in-houston-taking-on-waymo-in-no-4-us-city",
+      "tier": 1,
+      "original_headline": "Uber to Offer Robotaxis in Houston With Lucid and Nuro, Posing Challenge to Waymo",
+      "fingerprint": "ebbb97ddee7a6e70"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Facebook's new AI Mode trains on your public posts",
+      "blurb": "Meta is rolling out AI Mode in Facebook search, which generates answers using public posts from users across the platform. It appears alongside regular search filters like People and Marketplace, and is part of a broader AI features release that includes photo presets for swapping sports jerseys and other edits.",
+      "why_it_matters": "Your public Facebook posts are now training data for search results other users see.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/950264/meta-ai-mode-search-facebook",
+      "tier": 1,
+      "original_headline": "Facebook\u2019s new AI Mode search gets its info from public posts",
+      "fingerprint": "a074c22d1ae8eaa6"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA's Blackwell chips just set every AI training speed record",
+      "blurb": "NVIDIA's new Blackwell GPUs swept MLPerf Training 6.0, the industry benchmark for how fast hardware can train AI models. Blackwell systems completed training runs faster than any prior chip across every category tested, from small language models to massive multi-trillion-parameter workloads.",
+      "why_it_matters": "Faster training means teams can iterate on models in hours instead of days.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/blackwell-mlperf-training-6-0/",
+      "tier": 1,
+      "original_headline": "Fastest, Largest, Strongest: NVIDIA Blackwell Sweeps MLPerf Training 6.0",
+      "fingerprint": "037d04947b272646"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red-flag finder",
+    "kicker": "",
+    "prompt": "I'm interviewing candidates for a role I'll describe below. I've narrowed it to two finalists who both seem great on paper. For each one, tell me the single biggest risk I'm not seeing \u2014 the thing that won't show up until month three \u2014 and the one question I should've asked but probably didn't.",
+    "tool_hint": "Run this after interviews, before you make the offer."
+  },
+  "daily_question": "If you could put an AI agent in one piece of hardware you use daily, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1781699336.3237624,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=['No major consumer-facing AI product launches from Apple or Google this cycle (Android 17 is solid but iterative).', 'No breakthrough research papers or frontier-lab model releases outside GLM-5.2.', 'Anthropic/White House dispute (IDs 11, 13, 14, 80, 115, 127) is pure geopolitics\u2014downweighted per exclusion rules.', 'SpaceX IPO/market-cap stories (IDs 20, 23, 144, 149, 163) are not AI news; SpaceX/Cursor already covered.', 'Meta reorg drama (ID 81, 184) is internal HBR-style navel-gazing, not a shipped product.', 'Social media bans (IDs 114, 158, 159, 162) are policy, not AI capability news.', 'Deepfake/slop/hallucination cautionary tales (IDs 31, 33) downweighted per editorial guidelines.', 'Generic think pieces and surveys (IDs 15, 22, 35, 43, 78, 139) lack concrete hooks.', 'Layoffs and doom framing (ID 26) explicitly downweighted.', 'Product Hunt and GitHub changelog items are too niche for general Solvd audience.']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781699353.972827,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 4,
+        "persona": "build",
+        "reason": "NVIDIA XR AI public beta is a concrete developer framework launch for building multimodal AI agents in AR glasses. This is a shipped SDK that devs can use today, with a clear \"I want to try that\" hook. Primary source (NVIDIA Blog), tier-1, and brings together two hot trends: agents and AR."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RHKMSfkPg7wBuWYmsj8s5j"
+    },
+    {
+      "ts": 1781699353.9728978,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Hands Free, AIs Forward: NVIDIA XR AI Brings Agents to AR Glasses\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01RHKMSfkPg7wBuWYmsj8s5j"
+    },
+    {
+      "ts": 1781699353.972932,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 18,
+        "persona": "everyday",
+        "reason": "Pinterest's experimental AI shopping app 'Ask Pinterest' is a tangible consumer product people can try. It's a surprising application of conversational AI to visual discovery/shopping, with a concrete \"what shipped\" angle. Different vendor from NVIDIA, adds variety."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RnJjDgXdSruGqZ76EgstXY"
+    },
+    {
+      "ts": 1781699353.9729762,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Pinterest launches an experimental AI shopping app called \\u2018Ask Pinterest\\u2019\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01RnJjDgXdSruGqZ76EgstXY"
+    },
+    {
+      "ts": 1781699353.9729874,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 21,
+        "persona": "everyday",
+        "reason": "Android 17 with expanded Gemini features is a major platform release hitting millions of devices. Concrete multitasking tools and AI features people can use immediately. Google as primary source, major shipped feature set, high practical utility."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012p1dH7KEwgJ5snY6nQTz2W"
+    },
+    {
+      "ts": 1781699353.9730175,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Android 17 launches with new multitasking tools as Google expands Gemini features\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_012p1dH7KEwgJ5snY6nQTz2W"
+    },
+    {
+      "ts": 1781699353.9730263,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 151,
+        "persona": "everyday",
+        "reason": "Uber robotaxis in Houston with Lucid and Nuro is a tangible real-world deployment\u2014autonomous vehicles you can actually ride. Platform war angle (challenging Waymo), concrete city launch, surprising partnership trio. Passes the \"didn't know AI could do that there\" test."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01G3Eqym6hmeMxfGGM1oAzt6"
+    },
+    {
+      "ts": 1781699353.9730709,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Uber to Offer Robotaxis in Houston With Lucid and Nuro, Posing Challenge to Waymo\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01G3Eqym6hmeMxfGGM1oAzt6"
+    },
+    {
+      "ts": 1781699353.973086,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 2,
+        "persona": "industry",
+        "reason": "UK government partnering with DeepMind to accelerate housing planning with AI is a surprising real-world government application. Concrete prototype addressing a major infrastructure bottleneck. Shows AI tackling unsexy-but-important problems. DeepMind as primary source adds credibility."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01M1emtu1DnTvMDYTbTnbiwn"
+    },
+    {
+      "ts": 1781699353.9731197,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"vendor cap: google already has 2 stories\"}",
+      "tool_use_id": "toolu_01M1emtu1DnTvMDYTbTnbiwn"
+    },
+    {
+      "ts": 1781699353.9731367,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "everyday",
+        "reason": "Facebook's AI Mode search using public posts is a shipped feature with an interesting data angle\u2014your posts training their AI. Concrete new search mode, Meta adding variety to vendor mix, and has a \"wow, really?\" element about how social data feeds AI."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YAhM9y8Ug7g8tkXmX6MQ86"
+    },
+    {
+      "ts": 1781699353.9731796,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Facebook\\u2019s new AI Mode search gets its info from public posts\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01YAhM9y8Ug7g8tkXmX6MQ86"
+    },
+    {
+      "ts": 1781699359.5860922,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 7,
+        "persona": "build",
+        "reason": "NVIDIA Blackwell sweeping MLPerf Training 6.0 is a concrete benchmark victory showing shipped infrastructure performance. Appeals to technical audience who care about training speed, and complements the XR AI story by showing NVIDIA's full-stack play from chips to frameworks."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RxWfCMjtkY9Fx4bp6pSqPH"
+    },
+    {
+      "ts": 1781699359.5861607,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Fastest, Largest, Strongest: NVIDIA Blackwell Sweeps MLPerf Training 6.0\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01RxWfCMjtkY9Fx4bp6pSqPH"
+    },
+    {
+      "ts": 1781699368.1626663,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01GroiL5mD1nYpwrHEjkcBpH"
+    },
+    {
+      "ts": 1781699369.0366678,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781699369.0367115,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Hands Free, AIs Forward: NVIDIA XR AI Brings Agents to AR Glasses\", \"pick_2\": \"Pinterest launches an experimental AI shopping app called \\u2018Ask Pinterest\\u2019\", \"pick_3\": \"Android 17 launches with new multitasking tools as Google expands Gemini features\", \"pick_4\": \"Uber to Offer Robotaxis in Houston With Lucid and Nuro, Posing Challenge to Waymo\", \"pick_5\": \"Facebook\\u2019s new AI Mode search gets its info from public posts\", \"pick_6\": \"Fastest, Largest, Strongest: NVIDIA Blackwell Sweeps MLPerf Training 6.0\"}}",
+      "tool_use_id": "toolu_01GroiL5mD1nYpwrHEjkcBpH"
+    }
+  ],
+  "issue_num": 22
+}
