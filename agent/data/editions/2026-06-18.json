@@ -1,0 +1,336 @@
+{
+  "date": "2026-06-18",
+  "generated_at": "2026-06-18T12:14:58.334397Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Google's Gemini co-lead Noam Shazeer just jumped to OpenAI",
+      "blurb": "Noam Shazeer, Google's VP of engineering who co-led the Gemini model family, announced Wednesday he's leaving for OpenAI. Shazeer was one of the original Transformer authors and co-founded Character.AI before Google bought him back last year for $2.7 billion.",
+      "why_it_matters": "One of AI's most influential researchers is switching sides in the middle of the model race.",
+      "source_name": "CNBC \u2014 Technology",
+      "source_url": "https://www.cnbc.com/2026/06/18/google-gemini-co-lead-noam-shazeer-leaves-for-openai.html",
+      "tier": 1,
+      "original_headline": "Google Gemini co-lead Noam Shazeer leaves for OpenAI",
+      "fingerprint": "47ee788dbd133885"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google's medical AI now matches real doctors at managing chronic disease",
+      "blurb": "AMIE, Google's conversational health AI, performed as well as primary care physicians in managing complex conditions like diabetes and heart disease, according to research published in Nature. The AI handled tasks like adjusting medications, ordering tests, and creating treatment plans across simulated patient scenarios.",
+      "why_it_matters": "AI could soon handle routine care decisions, not just answer medical questions.",
+      "source_name": "Google AI Blog",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/google-research/amie-for-disease-management-in-nature/",
+      "tier": 1,
+      "original_headline": "New research shows how AMIE, our medical AI, could help manage health conditions.",
+      "fingerprint": "b32cde6535fbbdae"
+    },
+    {
+      "slot": "build",
+      "headline": "AWS just shipped two new tools to help companies run AI agents at scale",
+      "blurb": "AWS Continuum lets you coordinate multiple agents across workflows, while AWS Context gives agents access to your company's internal data and systems. Both are designed to move agents beyond one-off demos into production use across entire organizations.",
+      "why_it_matters": "Running agents in real companies requires orchestration and context\u2014AWS is packaging both.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/aws/aws-summit-nyc-2026-ai-agents?utm_source=rss",
+      "tier": 1,
+      "original_headline": "AWS Summit New York 2026: New ways to make AI agents more effective at work",
+      "fingerprint": "237c5116f355c537"
+    },
+    {
+      "slot": "build",
+      "headline": "ChatGPT now lets you schedule prompts to run automatically",
+      "blurb": "OpenAI added a 'Scheduled Tasks' hub where you can set ChatGPT prompts to run on a timer\u2014daily summaries, weekly reports, or any recurring prompt you'd normally remember to run manually. It's basically cron jobs for your AI assistant.",
+      "why_it_matters": "Turns ChatGPT from a chat tool into something that works in the background for you.",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2196844/chatgpt-now-has-a-hub-for-scheduled-tasks/",
+      "tier": 1,
+      "original_headline": "ChatGPT now has a hub for scheduled tasks",
+      "fingerprint": "0e4d889a2370a4ef"
+    },
+    {
+      "slot": "market",
+      "headline": "Amazon backs world-model startup Odyssey at $1.45B valuation",
+      "blurb": "Odyssey, which builds AI that learns how the physical world works instead of just predicting text, raised funding from Amazon and other backers at a $1.45 billion valuation. World models let AI simulate cause-and-effect in video, robotics, and environments \u2014 going beyond what language models can do.",
+      "why_it_matters": "Big tech is betting serious money that the next AI leap isn't more chatbots, but systems that understand physics.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/17/world-model-maker-odyssey-nabs-1-45b-valuation-backed-by-amazon-and-other-big-names/",
+      "tier": 1,
+      "original_headline": "World model maker Odyssey nabs $1.45B valuation backed by Amazon and other big names",
+      "fingerprint": "276de8b7334d5bc9"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google's new $100 speaker ditches 'Hey Google' for actual conversations",
+      "blurb": "Google Home Speaker replaces rigid voice commands with Gemini AI that handles natural conversation. Instead of memorizing exact phrases, you can talk to it like a person\u2014ask follow-ups, change your mind mid-sentence, or just ramble until it figures out what you want.",
+      "why_it_matters": "Smart speakers might finally work the way people actually talk.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/17/google-bets-on-gemini-to-reinvent-the-smart-home-speaker/",
+      "tier": 1,
+      "original_headline": "Google bets on Gemini to reinvent the smart home speaker",
+      "fingerprint": "32ac1b280b4e049b"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting cost calculator",
+    "kicker": "",
+    "prompt": "I'll describe a recurring meeting below \u2014 who attends, how long it runs, how often we do it. Estimate the annual salary cost of that meeting, then tell me: the one decision it needs to produce to justify that price tag, and what we should kill if it's not producing that decision.",
+    "tool_hint": "Before you send the next calendar hold."
+  },
+  "daily_question": "If you could schedule one AI prompt to run every morning, what would it do for you?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1781784775.9555175,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=15, gaps=['SpaceX IPO aftermath & Cursor acquisition fallout (already covered last 30 days)', 'Anthropic Mythos/Fable export control drama (geopolitics as primary angle, downweight per rubric)', 'Apple price increases due to RAM shortage (consultancy/HBR-style economic analysis, not a shipped product)', 'Social media age bans (regulatory, not AI capability news)', 'Intel-Apple chip deal (Trump announcement, no concrete shipped artifact yet)', 'xAI pollution lawsuit (legal drama, not AI capability)']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781784783.588655,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "read_candidate",
+      "args": {
+        "id": 60
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QSTRSpVwyNawNwZftKNTAj"
+    },
+    {
+      "ts": 1781784783.5886958,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "read_candidate",
+      "args": null,
+      "result_summary": "{\"candidate\": {\"id\": 60, \"score\": 83, \"persona\": \"build\", \"reason\": \"DeepSeek adds vision\\u2014the cheap Chinese frontier model that shook January now does multimodal, try it today.\", \"headline\": \"DeepSeek Introduces Vision\", \"source\": \"Hacker News (front page)\", \"url\": \"https://chat.deepseek.com/\", \"tier\": 1, \"blurb\": \"Article URL: https://chat.deepseek.com/ Comments URL: https://news.ycombinator.com/item?id=48581458 Points: 203 # Comments: 87\", \"paywall\": false, \"vertical\": null, \"published_date\": \"2026-06-18\", \"body\": \"JavaScript is disabled In order to continue, we need to verify that you'",
+      "tool_use_id": "toolu_01QSTRSpVwyNawNwZftKNTAj"
+    },
+    {
+      "ts": 1781784786.754021,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "search_news",
+      "args": {
+        "query": "DeepSeek vision multimodal June 2026"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Nfe7MQYbukeVxTZ2bqeBfE"
+    },
+    {
+      "ts": 1781784787.924772,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "search_news",
+      "args": null,
+      "result_summary": "{\"added\": 0, \"entries\": [], \"dropped_stale\": 2}",
+      "tool_use_id": "toolu_01Nfe7MQYbukeVxTZ2bqeBfE"
+    },
+    {
+      "ts": 1781784813.6542943,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 196,
+        "persona": "market",
+        "reason": "Noam Shazeer, Google Gemini co-lead and AI legend, jumps to OpenAI\u2014the biggest talent defection in the Google-OpenAI rivalry. Platform war with a name everyone knows."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01UA7M9HtB9ABEcBZ7mqS5Zg"
+    },
+    {
+      "ts": 1781784813.654353,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google Gemini co-lead Noam Shazeer leaves for OpenAI\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01UA7M9HtB9ABEcBZ7mqS5Zg"
+    },
+    {
+      "ts": 1781784813.6543818,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 5,
+        "persona": "everyday",
+        "reason": "Google's AMIE medical AI now manages chronic diseases, matching human doctors in Nature research\u2014moves from diagnosis to ongoing treatment. Concrete, surprising real-world capability."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Tu5dYLbNX39HANdL7worUn"
+    },
+    {
+      "ts": 1781784813.6544182,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"New research shows how AMIE, our medical AI, could help manage health conditions.\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01Tu5dYLbNX39HANdL7worUn"
+    },
+    {
+      "ts": 1781784813.6544302,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "build",
+        "reason": "AWS launches Continuum and Context at Summit\u2014new tools to make enterprise AI agents actually work. Developer-facing with concrete shipped artifacts."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WX7DUdbu3c5f6wopDjdmxq"
+    },
+    {
+      "ts": 1781784813.6544716,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AWS Summit New York 2026: New ways to make AI agents more effective at work\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01WX7DUdbu3c5f6wopDjdmxq"
+    },
+    {
+      "ts": 1781784813.6544893,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 114,
+        "persona": "build",
+        "reason": "ChatGPT adds a scheduled tasks hub\u2014automate your prompts on a timer. Practical try-it-today feature that changes daily workflow."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0188ayXfichCwsSapbdrxhMy"
+    },
+    {
+      "ts": 1781784813.6545403,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"ChatGPT now has a hub for scheduled tasks\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_0188ayXfichCwsSapbdrxhMy"
+    },
+    {
+      "ts": 1781784813.6545634,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 41,
+        "persona": "market",
+        "reason": "Odyssey hits $1.45B valuation with Amazon backing\u2014world models (the next wave beyond LLMs) get serious funding. Market move on emerging architecture."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FiSnvjsGEmFnDEJBkZqVhK"
+    },
+    {
+      "ts": 1781784813.654615,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"World model maker Odyssey nabs $1.45B valuation backed by Amazon and other big names\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01FiSnvjsGEmFnDEJBkZqVhK"
+    },
+    {
+      "ts": 1781784813.6546412,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 4,
+        "persona": "industry",
+        "reason": "UK government partners with DeepMind to speed housing approvals with AI\u2014tackling a major infrastructure bottleneck. Real-world government deployment at scale."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015bQFpevvJaJApVainWDsSP"
+    },
+    {
+      "ts": 1781784813.6546896,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Unlocking UK house-building with AI-accelerated planning\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_015bQFpevvJaJApVainWDsSP"
+    },
+    {
+      "ts": 1781784825.146183,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 4
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LugVjkW9cGWmdwsPiPprzy"
+    },
+    {
+      "ts": 1781784825.1462216,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Unlocking UK house-building with AI-accelerated planning\"}",
+      "tool_use_id": "toolu_01LugVjkW9cGWmdwsPiPprzy"
+    },
+    {
+      "ts": 1781784838.8932755,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 43,
+        "persona": "everyday",
+        "reason": "Google launches $99 Home Speaker with Gemini AI\u2014betting generative AI can reinvent the smart speaker category. Consumer product you can buy this week."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XFyoJJMvPWPrEVBu4avEFY"
+    },
+    {
+      "ts": 1781784838.893327,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google bets on Gemini to reinvent the smart home speaker\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01XFyoJJMvPWPrEVBu4avEFY"
+    },
+    {
+      "ts": 1781784847.1591182,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01561Aad2Ee5U9iDU9DPa8Ck"
+    },
+    {
+      "ts": 1781784849.439828,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781784849.4398584,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Google Gemini co-lead Noam Shazeer leaves for OpenAI\", \"pick_2\": \"New research shows how AMIE, our medical AI, could help manage health conditions.\", \"pick_3\": \"AWS Summit New York 2026: New ways to make AI agents more effective at work\", \"pick_4\": \"ChatGPT now has a hub for scheduled tasks\", \"pick_5\": \"World model maker Odyssey nabs $1.45B valuation backed by Amazon and other big names\", \"pick_7\": \"Google bets on Gemini to reinvent the smart home speaker\"}}",
+      "tool_use_id": "toolu_01561Aad2Ee5U9iDU9DPa8Ck"
+    }
+  ],
+  "issue_num": 23
+}
