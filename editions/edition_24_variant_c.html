@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Espresso · Edition 24 · Variant C</title>
+<!-- preheader (hidden, used by manifest sniffer) -->
+<span style="display:none">Midjourney just built a full-body ultrasound scanner</span>
+<!-- sniffer-friendly meta tokens -->
+<meta name="ai-espresso-issue" content="NO.&nbsp;024">
+<meta name="ai-espresso-date" content="FRI&nbsp;&middot;&nbsp;JUN&nbsp;19&nbsp;&middot;&nbsp;2026">
+<meta name="ai-espresso-shots" content="7&nbsp;SHOTS">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 16px;
+    background-color: #F4EFE6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: #1A1108;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .masthead { text-align: center; padding: 8px 16px 10px 16px; }
+  .wordmark {
+    font-size: 44px; font-weight: 800; letter-spacing: -0.035em;
+    margin: 0; color: #1A1108; line-height: 1;
+  }
+  .wordmark .cup { font-weight: 400; margin-left: 4px; }
+  .dateline {
+    font-size: 11px; font-weight: 700; color: #8B6F47;
+    letter-spacing: 0.22em; text-transform: uppercase; margin: 8px 0 0 0;
+  }
+  .tagline {
+    font-size: 20px;
+    font-weight: 550;
+    color: #5C4A3A;
+    letter-spacing: 0.01em;
+    margin: 6px 0 0 0;
+  }
+
+  .edition-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .story-cards {
+    grid-column: 1 / span 4;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    align-items: stretch;
+  }
+  .story-cards .card {
+    height: 100%;
+  }
+  .story-cards .card-body {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .story-cards .kicker {
+    flex: 1 1 auto;
+  }
+  .story-cards .source {
+    margin-top: auto;
+  }
+  .edition-grid .prompt-card {
+    grid-column: 5;
+  }
+  .section-divider {
+    display: none;
+    text-align: center; color: #C9A671; font-size: 13px;
+    letter-spacing: 0.35em; margin: 10px 0; user-select: none;
+  }
+  .card {
+    background-color: #FFFFFF; border-radius: 12px; overflow: hidden;
+    border: none;
+    box-shadow: 0 1px 2px rgba(28,17,10,0.04), 0 4px 12px rgba(28,17,10,0.05);
+    display: flex; flex-direction: column;
+    height: auto;
+  }
+  .card-image {
+    width: 160px;
+    height: 160px;
+    max-width: calc(100% - 24px);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 12px auto 0 auto;
+    flex-shrink: 0;
+  }
+  .card-image--placeholder {
+    width: 160px;
+    height: 160px;
+    max-width: calc(100% - 24px);
+    aspect-ratio: 1 / 1;
+    display: block;
+    margin: 12px auto 0 auto;
+    background-color: #F5F0E8;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .card-body {
+    padding: 12px 14px 14px 14px;
+    display: flex; flex-direction: column; flex: 0 1 auto;
+    justify-content: flex-start;
+  }
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .category {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.18em;
+    text-transform: uppercase; margin: 0 0 6px 0;
+  }
+  .category.market { color: #00955A; }
+  .category.everyday { color: #D14A0E; }
+  .category.build { color: #C13B0E; }
+  .category.industry { color: #5C6B8A; }
+  .category.news { color: #8B6F47; }
+  .headline {
+    font-size: 15px; font-weight: 700; line-height: 1.25;
+    margin: 0 0 6px 0; color: #1A1108; letter-spacing: -0.01em;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .headline-link {
+    color: #1A1108;
+    text-decoration: none;
+  }
+  .headline-link:hover {
+    text-decoration: underline;
+  }
+  .kicker {
+    font-size: 13px; color: #1A1108; margin: 0 0 8px 0;
+    font-style: italic; font-weight: 500; line-height: 1.4;
+    flex: 0 0 auto;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .source {
+    font-size: 11px; color: #8B6F47; letter-spacing: 0.02em;
+    margin: 0; border-top: 1px solid #F0E5D1; padding-top: 8px;
+  }
+  .source a { color: #1A1108; text-decoration: none; font-weight: 700; }
+
+  .prompt-card {
+    position: relative;
+    background: linear-gradient(165deg, #FFF8E8 0%, #FFF4D6 55%, #F9E9C8 100%);
+    border: 1px dashed #C9A671;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(193, 59, 14, 0.08);
+    align-self: start;
+  }
+  .prompt-card .card-image,
+  .prompt-card .card-image--placeholder {
+    display: none;
+  }
+  .prompt-card .card-body {
+    display: flex; flex-direction: column;
+    justify-content: flex-start;
+    padding: 14px 14px 14px 14px;
+  }
+  .prompt-tag {
+    display: block;
+    font-size: 13px; font-weight: 800; letter-spacing: 0.18em;
+    color: #B8340A; text-transform: uppercase; margin: 0 0 12px 0;
+    background-color: #F2C9B8; padding: 8px 42px 8px 12px; border-radius: 6px;
+    text-align: center;
+  }
+  .prompt-title {
+    font-size: 14px; font-weight: 800; line-height: 1.25;
+    margin: 0 0 10px 0; color: #1A1108; letter-spacing: -0.01em;
+  }
+  .prompt-tool-hint {
+    font-size: 14px; font-style: italic; color: #5C4A3A;
+    margin: 0 0 10px 0; line-height: 1.4;
+  }
+  .prompt-code-wrap {
+    flex: 0 0 auto;
+  }
+  .prompt-copy {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid #E8DCC8;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    color: #6D4C41;
+    cursor: pointer;
+  }
+  .prompt-copy:hover {
+    color: #1A1108;
+    border-color: #C9A671;
+    background-color: #FFFDF8;
+  }
+  .prompt-copy:focus-visible {
+    outline: 2px solid #D14A0E;
+    outline-offset: 2px;
+  }
+  .prompt-copy--done {
+    color: #00955A;
+    border-color: #00955A;
+  }
+  .prompt-code {
+    background-color: #FFFFFF; border: 1px solid #E8DCC8; border-radius: 6px;
+    padding: 10px 12px;
+    font-family: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+    font-size: 11px; color: #1A1108; line-height: 1.5; white-space: pre-wrap;
+  }
+
+  .qotd {
+    margin: 28px auto 0 auto; max-width: 520px; text-align: center;
+  }
+  .qotd-label {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.22em;
+    color: #D14A0E; text-transform: uppercase; margin: 0 0 10px 0;
+  }
+  .qotd-question {
+    font-size: 15px; font-weight: 600; color: #1A1108; margin: 0 0 12px 0;
+    line-height: 1.4;
+  }
+  .qotd-form { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .qotd-input {
+    flex: 1 1 220px; max-width: 320px; padding: 10px 14px; border-radius: 10px;
+    border: 1px solid #E8DCC8; font-size: 13px; font-family: inherit;
+    background-color: #FFFFFF;
+  }
+  .qotd-submit {
+    padding: 10px 18px; border-radius: 10px; border: none;
+    background-color: #D14A0E; color: #FFFFFF; font-weight: 700;
+    font-size: 12px; cursor: pointer; letter-spacing: 0.04em;
+  }
+  .qotd-submit:disabled { opacity: 0.6; cursor: default; }
+  .qotd-done { font-size: 12px; color: #00955A; margin: 10px 0 0 0; display: none; }
+  .qotd-error { font-size: 12px; color: #B8340A; margin: 10px 0 0 0; display: none; }
+  .qotd-preview {
+    font-size: 12px; color: #8B6F47; margin: 0; line-height: 1.5;
+  }
+
+  .footer {
+    text-align: center; padding: 28px 16px 8px 16px;
+    font-size: 11px; color: #8B6F47; line-height: 1.7; letter-spacing: 0.04em;
+  }
+  .footer a { color: #8B6F47; text-decoration: underline; }
+
+  /* Desktop layouts per story count so rows stay full (no dangling card).
+     n4 uses the base rules above. Even counts (4, 6) are the preferred targets. */
+  @media (min-width: 1280px) {
+    .edition-grid--n3 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .edition-grid--n3 .story-cards {
+      grid-column: 1 / span 3;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .edition-grid--n3 .prompt-card { grid-column: 4; }
+
+    .edition-grid--n5 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .edition-grid--n5 .story-cards {
+      grid-column: 1 / span 5;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .edition-grid--n5 .prompt-card { grid-column: 6; }
+
+    .edition-grid--n6 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .edition-grid--n6 .story-cards {
+      grid-column: 1 / span 3;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .edition-grid--n6 .prompt-card { grid-column: 4; grid-row: 1 / 3; }
+  }
+
+  @media (max-width: 1279px) and (min-width: 960px) {
+    .edition-grid { grid-template-columns: 1fr; }
+    .story-cards {
+      grid-column: 1;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .edition-grid .prompt-card { grid-column: 1; }
+    .section-divider { display: block; grid-column: 1 / -1; }
+  }
+  @media (max-width: 959px) and (min-width: 768px) {
+    .edition-grid { grid-template-columns: 1fr; gap: 14px; }
+    .story-cards {
+      grid-column: 1;
+      grid-template-columns: 1fr;
+    }
+    .edition-grid .prompt-card { grid-column: 1; }
+    .section-divider { display: none; }
+  }
+  @media (max-width: 767px) {
+    .edition-grid { grid-template-columns: 1fr; gap: 14px; }
+    .story-cards {
+      grid-column: 1;
+      grid-template-columns: 1fr;
+    }
+    .edition-grid .prompt-card { grid-column: 1; }
+    .section-divider { display: none; }
+  }
+  @media (max-width: 520px) {
+    .wordmark { font-size: 36px; }
+    body { padding: 18px 12px; }
+    .card-body { padding: 16px 18px 18px 18px; }
+    .headline { font-size: 19px; }
+    .kicker { font-size: 14.5px; }
+    .prompt-code { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="masthead">
+    <h1 class="wordmark">ai espresso<span class="cup">&nbsp;☕</span></h1>
+    <p class="tagline">your morning cup of AI</p>
+    <p class="dateline">Fri &middot; Jun 19 &middot; 2026</p>
+  </header>
+
+  <section class="edition-grid edition-grid--n6">
+    <div class="story-cards">
+    <article class="card">
+      <a class="card-link" href="https://www.theverge.com/ai-artificial-intelligence/952011/midjourney-medical-ai-ultrasound-scan">
+      <img class="card-image" src="edition_24/assets/variant_c_01.png" alt="Midjourney just built a full-body ultrasound scanner">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://www.theverge.com/ai-artificial-intelligence/952011/midjourney-medical-ai-ultrasound-scan">Midjourney just built a full-body ultrasound scanner</a></h2>
+        <p class="kicker">An AI art company is now making medical hardware — that&#x27;s a wildly unexpected move into healthcare.</p>
+        <p class="source"><a class="source-link" href="https://www.theverge.com/ai-artificial-intelligence/952011/midjourney-medical-ai-ultrasound-scan">The Verge — AI</a> · Jun 19</p>
+      </div>
+    </article>
+    <article class="card">
+      <a class="card-link" href="https://www.theverge.com/tech/952099/adobe-ai-assistants-photoshop-premiere-illustrator-beta-launch">
+      <img class="card-image" src="edition_24/assets/variant_c_02.png" alt="Adobe ships AI assistants into Photoshop, Premiere, and Illustrator">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://www.theverge.com/tech/952099/adobe-ai-assistants-photoshop-premiere-illustrator-beta-launch">Adobe ships AI assistants into Photoshop, Premiere, and Illustrator</a></h2>
+        <p class="kicker">In-app AI help could make pro tools less intimidating for new users and faster for veterans.</p>
+        <p class="source"><a class="source-link" href="https://www.theverge.com/tech/952099/adobe-ai-assistants-photoshop-premiere-illustrator-beta-launch">The Verge — AI</a> · Jun 19</p>
+      </div>
+    </article>
+    <article class="card">
+      <a class="card-link" href="https://cursor.com/changelog/06-18-26">
+      <img class="card-image" src="edition_24/assets/variant_c_03.png" alt="Cursor can now automate your code reviews and Slack replies">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://cursor.com/changelog/06-18-26">Cursor can now automate your code reviews and Slack replies</a></h2>
+        <p class="kicker">Code review and support work can now run itself while you sleep.</p>
+        <p class="source"><a class="source-link" href="https://cursor.com/changelog/06-18-26">Cursor Changelog (official)</a> · Jun 19</p>
+      </div>
+    </article>
+    <article class="card">
+      <a class="card-link" href="https://techcrunch.com/2026/06/18/amazon-hopes-to-challenge-nvidia-more-directly-by-selling-its-ai-chips/">
+      <img class="card-image" src="edition_24/assets/variant_c_04.png" alt="Amazon will now sell its AI chips to anyone with a data center">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://techcrunch.com/2026/06/18/amazon-hopes-to-challenge-nvidia-more-directly-by-selling-its-ai-chips/">Amazon will now sell its AI chips to anyone with a data center</a></h2>
+        <p class="kicker">Amazon just became a chipmaker you can buy from, not just rent compute through.</p>
+        <p class="source"><a class="source-link" href="https://techcrunch.com/2026/06/18/amazon-hopes-to-challenge-nvidia-more-directly-by-selling-its-ai-chips/">TechCrunch — AI</a> · Jun 19</p>
+      </div>
+    </article>
+    <article class="card">
+      <a class="card-link" href="https://techcrunch.com/2026/06/18/ai-data-centers-just-got-a-government-mandated-fast-lane-to-the-grid/">
+      <img class="card-image" src="edition_24/assets/variant_c_05.png" alt="FERC just gave AI data centers a fast lane to the power grid">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://techcrunch.com/2026/06/18/ai-data-centers-just-got-a-government-mandated-fast-lane-to-the-grid/">FERC just gave AI data centers a fast lane to the power grid</a></h2>
+        <p class="kicker">Faster hookups won&#x27;t help if the grid can&#x27;t generate enough power for AI&#x27;s appetite.</p>
+        <p class="source"><a class="source-link" href="https://techcrunch.com/2026/06/18/ai-data-centers-just-got-a-government-mandated-fast-lane-to-the-grid/">TechCrunch — AI</a> · Jun 19</p>
+      </div>
+    </article>
+    <article class="card">
+      <a class="card-link" href="https://deepmind.google/blog/unlocking-uk-house-building-with-ai-accelerated-planning/">
+      <img class="card-image" src="edition_24/assets/variant_c_06.png" alt="UK government is using Google AI to speed up housing approvals">
+      </a>
+      <div class="card-body">
+        <p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://deepmind.google/blog/unlocking-uk-house-building-with-ai-accelerated-planning/">UK government is using Google AI to speed up housing approvals</a></h2>
+        <p class="kicker">Governments are starting to deploy AI in actual bureaucratic workflows, not just pilots.</p>
+        <p class="source"><a class="source-link" href="https://deepmind.google/blog/unlocking-uk-house-building-with-ai-accelerated-planning/">Google DeepMind Blog</a> · Jun 19</p>
+      </div>
+    </article>
+    </div>
+    <article class="card prompt-card">
+      <img class="card-image" src="edition_24/assets/variant_c_07.png" alt="The learning roadmap">
+      <button type="button" class="prompt-copy" aria-label="Copy prompt to clipboard" title="Copy to clipboard">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+      </button>
+      <div class="card-body">
+        <p class="prompt-tag">☕ Try this prompt</p>
+        <h2 class="prompt-title">The learning roadmap</h2>
+        <p class="prompt-tool-hint">When you&#x27;re done watching tutorials and ready to actually get competent.</p>
+        <div class="prompt-code-wrap">
+          <div class="prompt-code">I want to get genuinely good at something I&#x27;ll describe below. I have about three months. Build me a learning plan with three phases: what to focus on in weeks 1-4, weeks 5-8, and weeks 9-12. Include one thing to build in each phase and one mistake beginners make that I should skip entirely.</div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="qotd" id="qotd">
+    <p class="qotd-label">Question of the day</p>
+    <p class="qotd-question">If you could give one AI tool direct access to one part of your workday, what would you connect and why?</p>
+    <form class="qotd-form" id="qotd-form">
+      <input class="qotd-input" type="text" name="answer" maxlength="280"
+        placeholder="Your one-sentence take&hellip;" required aria-label="Your answer">
+      <button class="qotd-submit" type="submit">Submit</button>
+    </form>
+    <p class="qotd-done" id="qotd-done">Thanks — recorded.</p>
+    <p class="qotd-error" id="qotd-error"></p>
+  </section>
+
+  <footer class="footer">
+    brewed by ai espresso · <a href="mailto:jhimel@solvd.com?subject=AI%20Espresso%20issue%20report">spot something off?</a> · <a href="https://github.com/jackiehimel/AI-espresso-agent">repo</a>
+  </footer>
+
+</div>
+<script>
+(function () {
+  var form = document.getElementById("qotd-form");
+  var done = document.getElementById("qotd-done");
+  var err = document.getElementById("qotd-error");
+  if (!form) return;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var input = form.querySelector("input[name=answer]");
+    var btn = form.querySelector("button[type=submit]");
+    if (err) { err.style.display = "none"; err.textContent = ""; }
+    btn.disabled = true;
+    fetch("https://ai-garage-navy.vercel.app/api/daily-question", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ date: "2026-06-19", answer: (input && input.value) || "" })
+    }).then(function (res) {
+      if (!res.ok) throw new Error("request failed");
+      if (done) done.style.display = "block";
+      if (input) input.disabled = true;
+    }).catch(function () {
+      if (err) {
+        err.textContent = "Could not save your answer. Please try again later.";
+        err.style.display = "block";
+      }
+      btn.disabled = false;
+    });
+  });
+})();
+
+(function () {
+  var btn = document.querySelector(".prompt-copy");
+  var code = document.querySelector(".prompt-code");
+  if (!btn || !code) return;
+  function copyPrompt() {
+    var text = code.textContent || "";
+    function onSuccess() {
+      btn.classList.add("prompt-copy--done");
+      btn.setAttribute("aria-label", "Copied");
+      btn.setAttribute("title", "Copied");
+      setTimeout(function () {
+        btn.classList.remove("prompt-copy--done");
+        btn.setAttribute("aria-label", "Copy prompt to clipboard");
+        btn.setAttribute("title", "Copy to clipboard");
+      }, 2000);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onSuccess).catch(fallback);
+      return;
+    }
+    fallback();
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        if (document.execCommand("copy")) onSuccess();
+      } finally {
+        document.body.removeChild(ta);
+      }
+    }
+  }
+  btn.addEventListener("click", copyPrompt);
+})();
+</script>
+</body>
+</html>

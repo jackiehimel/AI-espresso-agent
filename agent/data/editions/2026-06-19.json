@@ -1,0 +1,276 @@
+{
+  "date": "2026-06-19",
+  "generated_at": "2026-06-19T12:25:15.858218Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Midjourney just built a full-body ultrasound scanner",
+      "blurb": "The AI image generator company unveiled its first hardware product: a ring of ultrasound sensors that scans your entire body. CEO David Holz says they're opening a San Francisco spa to run the scanners, a sharp pivot from making AI cat pictures.",
+      "why_it_matters": "An AI art company is now making medical hardware \u2014 that's a wildly unexpected move into healthcare.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/952011/midjourney-medical-ai-ultrasound-scan",
+      "tier": 1,
+      "original_headline": "Midjourney goes from generating cat images to full-body ultrasound scans",
+      "fingerprint": "a2f363ea66760184"
+    },
+    {
+      "slot": "build",
+      "headline": "Adobe ships AI assistants into Photoshop, Premiere, and Illustrator",
+      "blurb": "Adobe's Creative Cloud apps now have built-in AI chatbots in public beta. Each assistant is custom-built for its app \u2014 the Photoshop one knows layers and masks, the Premiere one knows timelines and effects. They answer questions, suggest workflows, and walk you through features without leaving your project.",
+      "why_it_matters": "In-app AI help could make pro tools less intimidating for new users and faster for veterans.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/952099/adobe-ai-assistants-photoshop-premiere-illustrator-beta-launch",
+      "tier": 1,
+      "original_headline": "Photoshop and Premiere now have AI assistants",
+      "fingerprint": "d8baa62a077a5bd1"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor can now automate your code reviews and Slack replies",
+      "blurb": "Cursor just added always-on agents that watch GitHub PRs and Slack channels, then act on them automatically. The new /automate command lets you define tasks once\u2014like triaging issues or replying to messages\u2014and the agent runs them in the background. It also gained 'computer use' so it can click through UIs when needed.",
+      "why_it_matters": "Code review and support work can now run itself while you sleep.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/06-18-26",
+      "tier": 1,
+      "original_headline": "Improvements to Cursor Automations",
+      "fingerprint": "3092cd840e3f385c"
+    },
+    {
+      "slot": "market",
+      "headline": "Amazon will now sell its AI chips to anyone with a data center",
+      "blurb": "AWS is in talks to sell its custom AI chips \u2014 previously only available inside its own cloud \u2014 directly to other data centers. CEO Andy Jassy pegs the market at $50 billion, positioning Amazon as a rival to Nvidia's silicon monopoly.",
+      "why_it_matters": "Amazon just became a chipmaker you can buy from, not just rent compute through.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/18/amazon-hopes-to-challenge-nvidia-more-directly-by-selling-its-ai-chips/",
+      "tier": 1,
+      "original_headline": "Amazon hopes to challenge Nvidia more directly by selling its AI chips",
+      "fingerprint": "682f36035427a1dd"
+    },
+    {
+      "slot": "industry",
+      "headline": "FERC just gave AI data centers a fast lane to the power grid",
+      "blurb": "The Federal Energy Regulatory Commission ordered grid operators to prioritize data center connections, letting AI infrastructure jump the queue that typically takes years. But the rule doesn't solve the actual problem: there's not enough electricity being generated to power all these facilities.",
+      "why_it_matters": "Faster hookups won't help if the grid can't generate enough power for AI's appetite.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/18/ai-data-centers-just-got-a-government-mandated-fast-lane-to-the-grid/",
+      "tier": 1,
+      "original_headline": "AI data centers just got a government-mandated fast lane to the grid",
+      "fingerprint": "20d4c851c22f9479"
+    },
+    {
+      "slot": "industry",
+      "headline": "UK government is using Google AI to speed up housing approvals",
+      "blurb": "Google DeepMind built a prototype tool for UK planning officers to process housing applications faster. The AI analyzes planning documents and local policy to help caseworkers make decisions, aiming to cut delays in a system where applications can take months.",
+      "why_it_matters": "Governments are starting to deploy AI in actual bureaucratic workflows, not just pilots.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/unlocking-uk-house-building-with-ai-accelerated-planning/",
+      "tier": 1,
+      "original_headline": "Unlocking UK house-building with AI-accelerated planning",
+      "fingerprint": "7bd7c7e0d76f868b"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The learning roadmap",
+    "kicker": "",
+    "prompt": "I want to get genuinely good at something I'll describe below. I have about three months. Build me a learning plan with three phases: what to focus on in weeks 1-4, weeks 5-8, and weeks 9-12. Include one thing to build in each phase and one mistake beginners make that I should skip entirely.",
+    "tool_hint": "When you're done watching tutorials and ready to actually get competent."
+  },
+  "daily_question": "If you could give one AI tool direct access to one part of your workday, what would you connect and why?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1781871842.8626125,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=14, gaps=['No major model launches or capability expansions beyond OpenAI/xAI this cycle.', \"Light on consumer-facing 'try it today' features outside Adobe and Cursor.\", 'Missing breakout developer tool or API story beyond Cursor Automations.', 'No dramatic geopolitical AI move (Anthropic/Fable story already covered).', 'Sparse on AI-in-production wins or revenue milestones from enterprises.']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781871858.1739411,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 30,
+        "persona": "market",
+        "reason": "Midjourney's pivot from cat memes to medical ultrasounds is a wild, concrete surprise that shows AI expanding into physical hardware. The \"San Francisco spa\" detail makes it screenshot-worthy, and it's a massive capability leap that readers won't expect. Strong \"I didn't know AI could do that\" moment."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01MeBLHGtDoBNM6ZPm7YFP3L"
+    },
+    {
+      "ts": 1781871858.174012,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Midjourney goes from generating cat images to full-body ultrasound scans\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01MeBLHGtDoBNM6ZPm7YFP3L"
+    },
+    {
+      "ts": 1781871858.1740477,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "build",
+        "reason": "Adobe shipping AI assistants into Photoshop and Premiere is a shipped feature people can try immediately. This is concrete and actionable for our creative professionals and engineers who use these tools daily. The Verge is tier-1 and Adobe is a different vendor from Midjourney."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01ML4qW33udbKaRc5AF9vq41"
+    },
+    {
+      "ts": 1781871858.1741025,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Photoshop and Premiere now have AI assistants\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01ML4qW33udbKaRc5AF9vq41"
+    },
+    {
+      "ts": 1781871858.1741207,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 23,
+        "persona": "build",
+        "reason": "Cursor Automations improvements hit developers directly\u2014this is the primary source (Cursor's own changelog), and always-on agents that automate repetitive tasks is exactly what our engineering team wants to try. The /automate slash command is concrete and actionable."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PkygrMqC4iEC84L6uE9Sio"
+    },
+    {
+      "ts": 1781871858.1741989,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Improvements to Cursor Automations\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01PkygrMqC4iEC84L6uE9Sio"
+    },
+    {
+      "ts": 1781871858.1742237,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 41,
+        "persona": "market",
+        "reason": "Amazon selling its AI chips to compete with Nvidia is a platform war power-move with a $50B market opportunity mentioned. Different vendor (Amazon vs Midjourney/Adobe/Cursor), different topic (chips vs medical/creative/dev tools), and shows the infrastructure battle heating up."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016NapKYvvcbHbEeafcoePkU"
+    },
+    {
+      "ts": 1781871858.174279,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon hopes to challenge Nvidia more directly by selling its AI chips\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_016NapKYvvcbHbEeafcoePkU"
+    },
+    {
+      "ts": 1781871868.9663987,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 42,
+        "persona": "industry",
+        "reason": "FERC mandating fast-lane grid access for AI data centers is a policy power-move with real infrastructure stakes. Shows AI reshaping energy policy at the federal level\u2014surprising and concrete. Adds industry/policy angle to balance the product launches."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XtT8Ef9shebXSWwojVsozt"
+    },
+    {
+      "ts": 1781871868.966481,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AI data centers just got a government-mandated fast lane to the grid\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01XtT8Ef9shebXSWwojVsozt"
+    },
+    {
+      "ts": 1781871868.966528,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 39,
+        "persona": "market",
+        "reason": "OpenAI landing Noam Shazeer (Transformer co-inventor) plus former Trump admin talent ahead of IPO is a major talent war story. High-profile names, pre-IPO timing makes it urgent. However, checking archive\u2014wait, 'Google's Gemini co-lead Noam Shazeer just jumped to OpenAI' was covered in last 30d. Must reject due to cross-edition uniqueness."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013gfFqeRgrkHJ9UftkMERPV"
+    },
+    {
+      "ts": 1781871868.9665904,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'TechCrunch \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_013gfFqeRgrkHJ9UftkMERPV"
+    },
+    {
+      "ts": 1781871873.6205266,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 7,
+        "persona": "industry",
+        "reason": "Google DeepMind partnering with UK government to use AI for housing planning decisions is a surprising real-world application. Shows AI moving from chatbots into civic infrastructure\u2014concrete and unexpected use case that readers wouldn't anticipate."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01W2gMwco3jJJENDsnJsRCPC"
+    },
+    {
+      "ts": 1781871873.6205945,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Unlocking UK house-building with AI-accelerated planning\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01W2gMwco3jJJENDsnJsRCPC"
+    },
+    {
+      "ts": 1781871881.990059,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01FsQJdi69jmR25zsM6gGmLv"
+    },
+    {
+      "ts": 1781871884.1889179,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781871884.1889436,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Midjourney goes from generating cat images to full-body ultrasound scans\", \"pick_2\": \"Photoshop and Premiere now have AI assistants\", \"pick_3\": \"Improvements to Cursor Automations\", \"pick_4\": \"Amazon hopes to challenge Nvidia more directly by selling its AI chips\", \"pick_5\": \"AI data centers just got a government-mandated fast lane to the grid\", \"pick_6\": \"Unlocking UK house-building with AI-accelerated planning\"}}",
+      "tool_use_id": "toolu_01FsQJdi69jmR25zsM6gGmLv"
+    }
+  ],
+  "issue_num": 24
+}
