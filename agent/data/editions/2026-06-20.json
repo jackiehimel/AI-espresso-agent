@@ -1,0 +1,254 @@
+{
+  "date": "2026-06-20",
+  "generated_at": "2026-06-20T11:44:25.472768Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "industry",
+      "headline": "Nobel Prize-winning AI scientist John Jumper leaves DeepMind for Anthropic",
+      "blurb": "John Jumper, who won the 2024 Nobel Prize in chemistry for AlphaFold, is leaving Google DeepMind to join Anthropic. Jumper's protein-folding AI revolutionized biology research and has been used by millions of scientists worldwide.",
+      "why_it_matters": "Anthropic just landed one of the most decorated AI researchers in the world",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-06-19/nobel-winner-john-jumper-to-leave-google-deepmind-for-anthropic",
+      "tier": 1,
+      "original_headline": "Nobel Winner John Jumper to Leave Google DeepMind for Anthropic",
+      "fingerprint": "5d2f146f15222a25"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Adobe's Firefly can now remember your brand and reuse it across projects",
+      "blurb": "Adobe launched a redesigned Firefly studio in private beta that keeps context across sessions \u2014 meaning the AI remembers your fonts, colors, and style choices instead of starting from scratch each time. You can now edit and generate designs in one interface with assets that carry over between projects.",
+      "why_it_matters": "AI creative tools are moving from one-off generators to persistent workspaces that actually fit real workflows.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/952104/adobe-firefly-ai-agent-elements-projects-update",
+      "tier": 1,
+      "original_headline": "Adobe\u2019s redesigned AI studio remembers what your creations look like",
+      "fingerprint": "034990ce1b3df122"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Siri can finally hold a conversation and actually help",
+      "blurb": "Apple's revamped Siri uses AI to handle follow-up questions, understand context across apps, and give useful answers instead of just web links. It's now conversational enough to feel like talking to an assistant rather than shouting commands at your phone.",
+      "why_it_matters": "Voice assistants might finally work the way people always hoped they would.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/siri-ai-hands-on-iphone/",
+      "tier": 1,
+      "original_headline": "Siri AI Hands On: A Smart, Helpful Assistant",
+      "fingerprint": "d1ea47551a33a16d"
+    },
+    {
+      "slot": "build",
+      "headline": "AI startups ditch Nvidia to train physics models on Amazon's Trainium chips",
+      "blurb": "A wave of AI companies building models that simulate the physical world\u2014not just chatbots\u2014are choosing Amazon's custom Trainium chips over Nvidia GPUs for training. The startups say Trainium offers better price-performance for their specific workloads, especially for models that need to understand physics, chemistry, and 3D environments.",
+      "why_it_matters": "Custom chips are breaking Nvidia's lock on AI training for specialized use cases beyond language models.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/aws/why-ai-startups-choose-amazon-trainium-chips?utm_source=rss",
+      "tier": 1,
+      "original_headline": "The AI startups building beyond chatbots are choosing Amazon\u2019s custom chips. Here's why.",
+      "fingerprint": "de1536cc54fb0778"
+    },
+    {
+      "slot": "industry",
+      "headline": "UnitedHealth is spending $3 billion to have AI call doctors for patients",
+      "blurb": "The insurer is deploying AI to read medical charts aloud to nurses, analyze millions of customer calls for complaint patterns, and even phone doctors' offices to schedule appointments. The $3 billion push aims to cut costs and address mounting customer backlash over denials and service issues.",
+      "why_it_matters": "Health insurance automation is moving from back-office claims to direct patient interaction.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-06-19/unitedhealth-bets-3-billion-on-ai-to-cut-costs-tame-backlash",
+      "tier": 1,
+      "original_headline": "UnitedHealth\u2019s $3 Billion AI Push Has Bots Calling Doctors",
+      "fingerprint": "e34ab0f5004dbb8b"
+    },
+    {
+      "slot": "build",
+      "headline": "MIT-licensed GLM-5.2 hallucinates 3x less than GPT-5.5",
+      "blurb": "A new open-source model from Tsinghua University outperforms OpenAI's latest on factual accuracy benchmarks, with significantly fewer hallucinations across tested prompts. The MIT license means developers can use it commercially without restrictions.",
+      "why_it_matters": "You can now ship production AI features with better accuracy and full commercial rights than closed models.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://arrowtsx.dev/bigger-models/",
+      "tier": 1,
+      "original_headline": "GPT-5.5 hallucinates 3x more than MIT-licensed GLM-5.2",
+      "fingerprint": "10d7be2b142ae216"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The priority audit",
+    "kicker": "",
+    "prompt": "I'll list everything on my plate this week below. For each item, tell me: is this urgent because it actually matters, or urgent because I let it become urgent? Then rank them by regret potential \u2014 what will I wish I'd done first when I look back in three months?",
+    "tool_hint": "When your todo list is all red and nothing feels like the right next move."
+  },
+  "daily_question": "If you could make one AI tool remember your work style the way Adobe now remembers brands, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1781955792.7801895,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=15, gaps=['No major consumer product launches today beyond incremental updates', 'No big enterprise AI deployment announcements', 'No breakthrough research papers or model releases', 'No major funding rounds or M&A beyond Baseten rumors']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781955813.1331773,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 175,
+        "persona": "industry",
+        "reason": "Nobel Prize winner John Jumper leaving Google DeepMind for Anthropic is a major talent acquisition story that signals Anthropic's ambitions. While we covered Shazeer's move to OpenAI recently, a Nobel laureate is a higher-tier story. Bloomberg as tier-1 source covers the market significance well."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01N3FwbSNb7yLt2zJiUnhAH8"
+    },
+    {
+      "ts": 1781955813.1332386,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nobel Winner John Jumper to Leave Google DeepMind for Anthropic\", \"persona\": \"industry\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01N3FwbSNb7yLt2zJiUnhAH8"
+    },
+    {
+      "ts": 1781955813.1332688,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "everyday",
+        "reason": "Adobe's redesigned Firefly studio with memory capabilities is a practical shipped feature that creative professionals can use immediately. Shows AI assistants getting more contextually aware - concrete capability improvement people can try."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YYQu3PFsrgTgQZGEe4Ssaz"
+    },
+    {
+      "ts": 1781955813.1333175,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Adobe\\u2019s redesigned AI studio remembers what your creations look like\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01YYQu3PFsrgTgQZGEe4Ssaz"
+    },
+    {
+      "ts": 1781955813.1333294,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 92,
+        "persona": "everyday",
+        "reason": "Apple's new conversational Siri is a major platform update affecting millions of users. Hands-on review shows it's 'actually helpful' - this is the Siri reimagining people have wanted for years. Concrete shipped feature with broad impact."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0132Dx5MB3qqyc6GKbukUSoi"
+    },
+    {
+      "ts": 1781955813.1333842,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Siri AI Hands On: A Smart, Helpful Assistant\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_0132Dx5MB3qqyc6GKbukUSoi"
+    },
+    {
+      "ts": 1781955813.1334023,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 16,
+        "persona": "build",
+        "reason": "AI startups choosing Amazon's Trainium chips to train world models (beyond chatbots) is a significant infrastructure shift. Primary source from Amazon News, shows the next wave of AI development moving to custom silicon. Technical audience will find this fascinating."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011FcAKA9unbcby4zqHjzYRk"
+    },
+    {
+      "ts": 1781955813.1334682,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"The AI startups building beyond chatbots are choosing Amazon\\u2019s custom chips. Here's why.\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_011FcAKA9unbcby4zqHjzYRk"
+    },
+    {
+      "ts": 1781955824.385334,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 177,
+        "persona": "industry",
+        "reason": "UnitedHealth's $3B AI deployment with bots calling doctors and reading medical charts is a massive real-world enterprise AI implementation. Shows AI moving from experiments to core operations in a Fortune 10 company. Concrete use cases that are already shipped and running at scale."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HWrSy6rVfwwfet5dEZBYG4"
+    },
+    {
+      "ts": 1781955824.385407,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"UnitedHealth\\u2019s $3 Billion AI Push Has Bots Calling Doctors\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01HWrSy6rVfwwfet5dEZBYG4"
+    },
+    {
+      "ts": 1781955824.3854368,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 60,
+        "persona": "build",
+        "reason": "GPT-5.5 hallucinating 3x more than an MIT-licensed open model challenges the 'bigger is better' paradigm. This is a concrete performance comparison with surprising results that will spark conversation among technical readers. Shows the field questioning fundamental assumptions about model scaling."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0136sxRy3jba4xchoniMr5Tg"
+    },
+    {
+      "ts": 1781955824.3854733,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"GPT-5.5 hallucinates 3x more than MIT-licensed GLM-5.2\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_0136sxRy3jba4xchoniMr5Tg"
+    },
+    {
+      "ts": 1781955831.450496,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_014srWbqWDXqgGSo3H4SM8dq"
+    },
+    {
+      "ts": 1781955833.6703649,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1781955833.6703954,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Nobel Winner John Jumper to Leave Google DeepMind for Anthropic\", \"pick_2\": \"Adobe\\u2019s redesigned AI studio remembers what your creations look like\", \"pick_3\": \"Siri AI Hands On: A Smart, Helpful Assistant\", \"pick_4\": \"The AI startups building beyond chatbots are choosing Amazon\\u2019s custom chips. Here's why.\", \"pick_5\": \"UnitedHealth\\u2019s $3 Billion AI Push Has Bots Calling Doctors\", \"pick_6\": \"GPT-5.5 hallucinates 3x more than MIT-licensed GLM-5.2\"}}",
+      "tool_use_id": "toolu_014srWbqWDXqgGSo3H4SM8dq"
+    }
+  ],
+  "issue_num": 25
+}
