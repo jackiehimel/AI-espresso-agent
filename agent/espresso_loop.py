@@ -388,7 +388,7 @@ def _tool_unpick(state: AgentState, args: dict, vendor_patterns) -> dict:
 
 
 def _trim_picks_to_even(state: AgentState, vendor_patterns) -> list[str]:
-    """Drop the weakest picks until the count is supported (6, 4, or a thin 3).
+    """Drop the weakest picks until the count is supported (6 or 4).
 
     Deterministic ship backstop for the budget-exhausted path: an odd pick set is
     trimmed to ``largest_allowed_even_count`` so an odd edition can never ship.
@@ -549,12 +549,10 @@ def _perplexity_search(query: str) -> tuple[list[dict] | None, str | None]:
     return hits or None, "no results" if not hits else None
 
 
-def _validate_ship(state: AgentState, enforce_even: bool = True) -> dict:
+def _validate_ship(state: AgentState) -> dict:
     errors = []
     n = len(state.picks)
-    if n < MIN_PICKS:
-        errors.append(f"need {MIN_PICKS}+ picks, have {n}")
-    elif enforce_even and n not in ALLOWED_STORY_COUNTS:
+    if n not in ALLOWED_STORY_COUNTS:
         if n == 5:
             errors.append(
                 "edition needs exactly 4 or 6 stories, have 5 — add a 6th "
@@ -947,9 +945,8 @@ def agentic_select(
 
     ok = _run_editor_loop(state, vendor_patterns)
 
-    # Fallback: if budget exhausted, trim to an even count and force-ship.
-    # The even-count rail drives the agent; here we deterministically enforce it
-    # (and tolerate a thin 3 rather than failing daily delivery).
+    # Fallback: if budget exhausted, trim to an even count and force-ship only
+    # if the normal ship gate still passes. Odd counts must never ship.
     if not ok and len(state.picks) >= MIN_PICKS:
         removed = _trim_picks_to_even(state, vendor_patterns)
         if removed:
@@ -959,7 +956,7 @@ def agentic_select(
                     f"trimmed {len(removed)} weakest pick(s) to even count: {removed}"
                 ),
             ))
-        gate = _validate_ship(state, enforce_even=False)
+        gate = _validate_ship(state)
         if gate["ok"]:
             state.shipped = True
             state.trace.append(TraceEvent(

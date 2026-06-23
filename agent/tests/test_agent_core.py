@@ -208,12 +208,6 @@ class EvenCountShipGateTests(unittest.TestCase):
         self.assertFalse(gate["ok"])
         self.assertTrue(any("have 3" in e for e in gate["errors"]))
 
-    def test_three_allowed_on_force_path(self):
-        # Budget-exhausted backstop tolerates a thin 3 rather than failing delivery.
-        gate = el._validate_ship(self._state(3), enforce_even=False)
-        self.assertTrue(gate["ok"])
-
-
 class TrimToEvenTests(unittest.TestCase):
 
     def _state_with(self, picks):
@@ -252,10 +246,11 @@ class TrimToEvenTests(unittest.TestCase):
         self.assertEqual(el._trim_picks_to_even(state, []), [])
         self.assertEqual(len(state.picks), 6)
 
-    def test_three_is_left_untouched_for_degraded_ship(self):
+    def test_three_is_left_untouched_but_not_shippable(self):
         state = self._state_with({f"pick_{i}": _pick(i) for i in range(1, 4)})
         self.assertEqual(el._trim_picks_to_even(state, []), [])
         self.assertEqual(len(state.picks), 3)
+        self.assertFalse(el._validate_ship(state)["ok"])
 
 
 class RssSummaryTests(unittest.TestCase):

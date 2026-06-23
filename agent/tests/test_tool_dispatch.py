@@ -371,13 +371,13 @@ class RankHeadlinesTests(unittest.TestCase):
 
 class FallbackShipTests(unittest.TestCase):
 
-    def test_fallback_ships_with_3_picks_on_budget_exhaustion(self):
-        # The budget-exhausted backstop tolerates a thin 3 (enforce_even=False)
-        # rather than failing daily delivery.
+    def test_fallback_blocks_3_picks_on_budget_exhaustion(self):
         state = self._make_state_with_picks(3)
         state.tool_calls = state.hard_budget
-        gate = el._validate_ship(state, enforce_even=False)
-        self.assertTrue(gate["ok"])
+        self.assertEqual(el._trim_picks_to_even(state, []), [])
+        gate = el._validate_ship(state)
+        self.assertFalse(gate["ok"])
+        self.assertTrue(any("have 3" in e for e in gate["errors"]))
 
     def test_fallback_trims_odd_5_to_even_4(self):
         state = self._make_state_with_picks(5)
@@ -385,7 +385,7 @@ class FallbackShipTests(unittest.TestCase):
         removed = el._trim_picks_to_even(state, [])
         self.assertEqual(len(removed), 1)
         self.assertEqual(len(state.picks), 4)
-        self.assertTrue(el._validate_ship(state, enforce_even=False)["ok"])
+        self.assertTrue(el._validate_ship(state)["ok"])
 
     def _make_state_with_picks(self, n=3):
         candidates = [
