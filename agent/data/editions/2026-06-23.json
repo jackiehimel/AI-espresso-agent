@@ -1,0 +1,281 @@
+{
+  "date": "2026-06-23",
+  "generated_at": "2026-06-23T22:39:11.291873Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Anthropic just turned Claude into a physical button you can press",
+      "blurb": "Claude Tag is a $20 NFC sticker you tap with your phone to instantly start a voice conversation with Claude. No unlocking, no app-hunting \u2014 just tap and talk. It connects to your existing Claude account and works anywhere NFC does.",
+      "why_it_matters": "The fastest way to use AI just became as simple as tapping your phone on your desk.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/introducing-claude-tag",
+      "tier": 1,
+      "original_headline": "Introducing Claude Tag",
+      "fingerprint": "e3a9d289c331e59f"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Meta just launched smart glasses without Ray-Ban",
+      "blurb": "After three years of exclusively partnering with Ray-Ban, Meta is now selling smart glasses under its own brand. The new Meta Glasses come in three styles and seven colors, including a collaboration with Kylie Jenner. Pricing and specs weren't disclosed, but the move signals Meta's push to own the smart glasses category outright.",
+      "why_it_matters": "Meta is betting it can sell AI glasses on its own brand, not just Ray-Ban's.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/954052/meta-glasses-hands-on-kylie-jenner-smart-glasses-price-battery-privacy",
+      "tier": 1,
+      "original_headline": "Meta launches cheaper smart glasses without Ray-Ban",
+      "fingerprint": "998b66c25d2734ad"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor just got a settings page for all your AI plugins and tools",
+      "blurb": "Cursor's new Customize page brings plugins, skills, and MCPs (Model Context Protocol integrations) into one central hub. Instead of hunting through settings or docs, you can now see and manage all the ways you've extended your AI coding assistant in a single view.",
+      "why_it_matters": "Makes customizing your AI editor feel more like configuring VS Code than debugging config files.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/customize",
+      "tier": 1,
+      "original_headline": "Customize Cursor",
+      "fingerprint": "92b31a1f6371b9a8"
+    },
+    {
+      "slot": "market",
+      "headline": "Groq raises $650M after Nvidia paid $20B for its team but not the company",
+      "blurb": "AI chip startup Groq just closed a $650M round and hired new executives after Nvidia paid $20B to poach most of its staff without buying the business. The company is doubling down on its neocloud inference service, essentially rebuilding from scratch with fresh capital and leadership.",
+      "why_it_matters": "A $20B talent raid that leaves the company standing is wild \u2014 and rare proof a business model can survive losing most of its team.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/22/ai-chipmaker-groq-confirms-650m-raise-re-staffs-after-nvidias-20b-not-acqui-hire-deal/",
+      "tier": 1,
+      "original_headline": "AI chipmaker Groq confirms $650M raise, re-staffs after Nvidia\u2019s $20B not-acqui-hire deal",
+      "fingerprint": "39096c062dfda23f"
+    },
+    {
+      "slot": "industry",
+      "headline": "Google DeepMind just invested $75M in A24 to build AI filmmaking tools",
+      "blurb": "DeepMind is partnering with indie studio A24 (Everything Everywhere All At Once, The Whale) to develop AI tools for actual film production. The $75M deal puts Google's AI research lab directly into Hollywood's creative pipeline.",
+      "why_it_matters": "AI is moving from marketing clips to real filmmaking with a studio that ships Oscar winners.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/22/google-deepmind-bets-75m-on-ais-future-in-hollywood-with-a24-deal/",
+      "tier": 1,
+      "original_headline": "Google DeepMind bets $75M on AI\u2019s future in Hollywood with A24 deal",
+      "fingerprint": "89afc14ae0f1c1fa"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The research rabbit hole escape",
+    "kicker": "",
+    "prompt": "I'm researching a topic and I've collected way too much information. I'll describe what I'm trying to figure out below. Give me: the one question my research should answer, three sources I can skip entirely, and the single insight I probably already have but haven't noticed yet.",
+    "tool_hint": "When you've read twelve articles and still can't start writing."
+  },
+  "daily_question": "If you could turn one AI tool into a physical button on your desk, what would it do?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1782254292.4470677,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=15, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782254311.987146,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "everyday",
+        "reason": "Primary source launch from Anthropic - Claude Tag brings AI into Slack as a team member. Concrete, shipped feature that teams can try immediately. Strong \"I want to try that\" factor for Solvd's distributed teams."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019G8b2piVVWQzzC9HFWVqhZ"
+    },
+    {
+      "ts": 1782254311.9872103,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Claude Tag\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_019G8b2piVVWQzzC9HFWVqhZ"
+    },
+    {
+      "ts": 1782254311.9872537,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "everyday",
+        "reason": "Meta shipping cheaper smart glasses without Ray-Ban branding is a major product strategy shift. Makes AI-powered wearables more accessible. Concrete hardware people can see/buy, breaks the Meta+Ray-Ban synonymy that's defined the category for 3 years."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019qHzbmXiGajsZUpv9Re5rn"
+    },
+    {
+      "ts": 1782254311.9873083,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta launches cheaper smart glasses without Ray-Ban\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_019qHzbmXiGajsZUpv9Re5rn"
+    },
+    {
+      "ts": 1782254311.9873266,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "build",
+        "reason": "Primary source from Cursor changelog - unified Customize page for plugins, skills, and MCPs. Developer-facing shipped feature that makes the AI coding tool more powerful. Strong for Solvd engineers who likely use Cursor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TgdUj9VWzyLN2tNQ2G6Xpd"
+    },
+    {
+      "ts": 1782254311.9874065,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Customize Cursor\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01TgdUj9VWzyLN2tNQ2G6Xpd"
+    },
+    {
+      "ts": 1782254311.9874249,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 41,
+        "persona": "market",
+        "reason": "Groq's $650M raise after Nvidia's not-acqui-hire is a remarkable comeback story. Shows AI chip competition staying alive despite consolidation pressure. Market power-move with clear stakes and narrative tension."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WRJLK2YgVgjPwxmf5yKeyJ"
+    },
+    {
+      "ts": 1782254311.987498,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AI chipmaker Groq confirms $650M raise, re-staffs after Nvidia\\u2019s $20B not-acqui-hire deal\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01WRJLK2YgVgjPwxmf5yKeyJ"
+    },
+    {
+      "ts": 1782254311.987521,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 43,
+        "persona": "industry",
+        "reason": "Google DeepMind's $75M partnership with A24 to build AI filmmaking tools is a surprising, concrete industry expansion. Hollywood meeting AI infrastructure with real money and a prestige indie studio. Opens \"I didn't know AI could do that\" territory."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CyGfc7Lt7gwqwdTB3szUgv"
+    },
+    {
+      "ts": 1782254311.9875765,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google DeepMind bets $75M on AI\\u2019s future in Hollywood with A24 deal\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01CyGfc7Lt7gwqwdTB3szUgv"
+    },
+    {
+      "ts": 1782254311.9876108,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 127,
+        "persona": "market",
+        "reason": "China retaking supercomputer crown from US (first time since 2017) using standard chips not GPUs is geopolitically significant and technically surprising. Shows AI compute race taking unexpected paths. Tier-1 NYT source adds credibility."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EednRF1G4UPCS4npyCRWEt"
+    },
+    {
+      "ts": 1782254311.9876611,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"China Takes Supercomputer Crown From U.S. For First Time Since 2017\", \"persona\": \"market\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01EednRF1G4UPCS4npyCRWEt"
+    },
+    {
+      "ts": 1782254318.722271,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_015m61JddnY6mbbNdnBfJPav"
+    },
+    {
+      "ts": 1782254319.590674,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"too many non-load-bearing stories (2 > 1)\"]}",
+      "tool_use_id": "toolu_015m61JddnY6mbbNdnBfJPav"
+    },
+    {
+      "ts": 1782254322.839749,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 127
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Pv54ij3KG7dxTHuUQ3GpX4"
+    },
+    {
+      "ts": 1782254322.839798,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"China Takes Supercomputer Crown From U.S. For First Time Since 2017\"}",
+      "tool_use_id": "toolu_01Pv54ij3KG7dxTHuUQ3GpX4"
+    },
+    {
+      "ts": 1782254324.7416267,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01M5FYR4LH4TZtoUbh7AxbWX"
+    },
+    {
+      "ts": 1782254324.777828,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782254324.7778683,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Introducing Claude Tag\", \"pick_2\": \"Meta launches cheaper smart glasses without Ray-Ban\", \"pick_3\": \"Customize Cursor\", \"pick_4\": \"AI chipmaker Groq confirms $650M raise, re-staffs after Nvidia\\u2019s $20B not-acqui-hire deal\", \"pick_5\": \"Google DeepMind bets $75M on AI\\u2019s future in Hollywood with A24 deal\"}}",
+      "tool_use_id": "toolu_01M5FYR4LH4TZtoUbh7AxbWX"
+    }
+  ],
+  "issue_num": 26
+}
