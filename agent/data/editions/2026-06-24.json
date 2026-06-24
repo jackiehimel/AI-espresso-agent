@@ -1,0 +1,254 @@
+{
+  "date": "2026-06-24",
+  "generated_at": "2026-06-24T11:59:40.639507Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "SK Hynix plans $29 billion US listing to fund AI chip production",
+      "blurb": "The South Korean memory chipmaker filed to raise $29.4 billion in a US stock offering set to begin trading July 10. If completed at current exchange rates, it would rank among the five largest IPOs ever recorded. The company supplies high-bandwidth memory chips critical for AI accelerators.",
+      "why_it_matters": "Shows how much capital chipmakers need to keep pace with AI data center buildout.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/videos/2026-06-24/sk-hynix-seeks-to-raise-29-billion-in-us-listing-video",
+      "tier": 1,
+      "original_headline": "SK Hynix Seeks to Raise $29 Billion in US Listing to Meet AI Chip Demand",
+      "fingerprint": "1bee877b33ae249b"
+    },
+    {
+      "slot": "build",
+      "headline": "Claude can now read your entire Slack history to learn how your company works",
+      "blurb": "Anthropic launched Claude Tag for Slack\u2014an AI that watches conversations across channels to build a map of your org's workflows, jargon, and decision-making patterns. Unlike bots you summon, this one sits in channels learning context so it can answer questions about projects, processes, or who owns what without anyone teaching it first.",
+      "why_it_matters": "The real product isn't chat replies\u2014it's a model trained on your company's actual operating system.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/23/anthropics-claude-tag-is-learning-your-company-one-slack-message-at-a-time/",
+      "tier": 1,
+      "original_headline": "Anthropic\u2019s Claude Tag is learning your company, one Slack message at a time",
+      "fingerprint": "23b6354ca43fd5bc"
+    },
+    {
+      "slot": "market",
+      "headline": "China just built the world's fastest supercomputer without any GPUs",
+      "blurb": "A Shenzhen machine reclaimed the top spot on the global supercomputer rankings for the first time since 2017, running entirely on standard CPUs instead of the graphics chips that power most AI training today. The achievement comes as U.S. export controls have blocked China from buying advanced Nvidia hardware.",
+      "why_it_matters": "Shows China can compete in high-performance computing even when cut off from cutting-edge AI chips.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/06/23/technology/china-supercomputer-crown-us.html",
+      "tier": 1,
+      "original_headline": "China Takes Supercomputer Crown From U.S. For First Time Since 2017",
+      "fingerprint": "39d34d12a6b7e44c"
+    },
+    {
+      "slot": "build",
+      "headline": "OpenAI launches bug-hunting program to patch open-source vulnerabilities",
+      "blurb": "OpenAI unveiled a new initiative called 'Patch the Planet' that uses an upgraded GPT-5.5-Cyber model to find and fix security bugs in open-source software. The move directly challenges Anthropic's cybersecurity reputation as concerns grow about AI models' ability to exploit vulnerabilities.",
+      "why_it_matters": "AI companies are now competing to prove their models make software safer, not just riskier.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/openai-launches-full-scale-effort-to-patch-open-source-bugs-as-it-takes-on-anthropics-mythos/",
+      "tier": 1,
+      "original_headline": "OpenAI Launches Full-Scale Effort to Patch Open-Source Bugs as It Takes on Anthropic\u2019s Mythos",
+      "fingerprint": "88cb03c72a974d05"
+    },
+    {
+      "slot": "market",
+      "headline": "SpaceX is renting out its Colossus supercomputer for $150M a month",
+      "blurb": "Reflection AI, an open-source lab, just signed a three-year deal to use SpaceX's Colossus 2 data center in Memphis, starting July 1. The arrangement gives Reflection immediate access to Nvidia's latest GB300 chips\u2014$150 million per month through 2029.",
+      "why_it_matters": "SpaceX is now competing directly with hyperscalers as a compute landlord for frontier AI labs.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/22/spacex-inks-compute-deal-with-reflection-ai-an-open-source-ai-lab/",
+      "tier": 1,
+      "original_headline": "SpaceX inks compute deal with Reflection AI, an open source AI lab",
+      "fingerprint": "713dd88cf4418ff3"
+    },
+    {
+      "slot": "industry",
+      "headline": "Nvidia's new data center design ditches water cooling entirely",
+      "blurb": "Nvidia says its Rubin generation reference design uses liquid cooling that runs hotter than traditional systems, eliminating water consumption in AI data centers. The shift addresses mounting public concern over data centers' environmental footprint, though energy use remains a separate challenge.",
+      "why_it_matters": "Data centers won't need municipal water supplies if this design becomes standard.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/954139/nvidia-data-centers-rubin-liquid-cooling",
+      "tier": 1,
+      "original_headline": "Nvidia says its AI data center design runs hotter to use a lot less water",
+      "fingerprint": "688d8b832716e31b"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The delegation audition",
+    "kicker": "",
+    "prompt": "I'll describe a responsibility I'm still doing myself. Don't tell me to delegate it \u2014 I know that already. Instead: write the job description for the person who'd own it, estimate how long it would take them to be better at it than me, and name the one thing I'm not willing to let go of yet.",
+    "tool_hint": "When you're the bottleneck but convinced no one else can do it right."
+  },
+  "daily_question": "If you could rent one supercomputer for a month, what would you actually use it for?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1782302327.703668,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782302348.8152754,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 165,
+        "persona": "market",
+        "reason": "Major market move: SK Hynix raising $29B in landmark US listing to meet AI chip demand. Concrete capital deployment story with clear AI hook - the biggest AI infrastructure financing story today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01P8E9JajS236C43KZmPyZTR"
+    },
+    {
+      "ts": 1782302348.8153436,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SK Hynix Seeks to Raise $29 Billion in US Listing to Meet AI Chip Demand\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01P8E9JajS236C43KZmPyZTR"
+    },
+    {
+      "ts": 1782302348.815382,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "build",
+        "reason": "Anthropic shipped Claude Tag for Slack - an always-on AI teammate that learns from company Slack messages. Try-it-now feature with strategic implications for enterprise AI adoption."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01ErAYVc6c5EU2zf8wXzJGgn"
+    },
+    {
+      "ts": 1782302348.8154435,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic\\u2019s Claude Tag is learning your company, one Slack message at a time\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01ErAYVc6c5EU2zf8wXzJGgn"
+    },
+    {
+      "ts": 1782302348.8154612,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 128,
+        "persona": "market",
+        "reason": "China takes supercomputer crown from US for first time since 2017, using standard processors instead of GPUs. Major AI infrastructure story with geopolitical significance and technical innovation angle."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CHUwXA3J8nwtNRd7dh1Hid"
+    },
+    {
+      "ts": 1782302348.8155136,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"China Takes Supercomputer Crown From U.S. For First Time Since 2017\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01CHUwXA3J8nwtNRd7dh1Hid"
+    },
+    {
+      "ts": 1782302348.815535,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 91,
+        "persona": "build",
+        "reason": "OpenAI launched improved GPT-5.5-Cyber and full-scale effort to patch open-source bugs. Model capability advancement with concrete cybersecurity use case, competing with Anthropic's Mythos."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01M33vbWpZbMoy6ykcBYokBB"
+    },
+    {
+      "ts": 1782302348.8155935,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI Launches Full-Scale Effort to Patch Open-Source Bugs as It Takes on Anthropic\\u2019s Mythos\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01M33vbWpZbMoy6ykcBYokBB"
+    },
+    {
+      "ts": 1782302348.8156157,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 42,
+        "persona": "market",
+        "reason": "SpaceX inks $150M/month compute deal with Reflection AI through 2029. Major AI compute partnership demonstrating the scale of infrastructure investment for open source AI labs."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Rt4qHJhwVemMtyML9ajPfK"
+    },
+    {
+      "ts": 1782302348.8156672,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SpaceX inks compute deal with Reflection AI, an open source AI lab\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01Rt4qHJhwVemMtyML9ajPfK"
+    },
+    {
+      "ts": 1782302348.815688,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 30,
+        "persona": "industry",
+        "reason": "Nvidia's new AI data center design runs hotter to dramatically reduce water consumption. Addresses real infrastructure concern (water usage) with concrete technical solution - timely given public pushback on data centers."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DLjELJZbfv2NLtWPbykTbC"
+    },
+    {
+      "ts": 1782302348.8157368,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia says its AI data center design runs hotter to use a lot less water\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01DLjELJZbfv2NLtWPbykTbC"
+    },
+    {
+      "ts": 1782302350.667392,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01KaHHWtmm44xqynATmjTS4L"
+    },
+    {
+      "ts": 1782302351.4362164,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782302351.436243,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"SK Hynix Seeks to Raise $29 Billion in US Listing to Meet AI Chip Demand\", \"pick_2\": \"Anthropic\\u2019s Claude Tag is learning your company, one Slack message at a time\", \"pick_3\": \"China Takes Supercomputer Crown From U.S. For First Time Since 2017\", \"pick_4\": \"OpenAI Launches Full-Scale Effort to Patch Open-Source Bugs as It Takes on Anthropic\\u2019s Mythos\", \"pick_5\": \"SpaceX inks compute deal with Reflection AI, an open source AI lab\", \"pick_6\": \"Nvidia says its AI data center design runs hotter to use a lot less water\"}}",
+      "tool_use_id": "toolu_01KaHHWtmm44xqynATmjTS4L"
+    }
+  ],
+  "issue_num": 27
+}
