@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from send_email import (
     EMAIL_CARD_MIN_HEIGHT,
+    EMAIL_IMAGE_ROW_HEIGHT,
     _build_email_safe_html,
     _stabilize_inline_img_tags,
     send_edition_email,
@@ -108,6 +109,8 @@ class EmailHtmlTests(unittest.TestCase):
             "expected each card to carry both 'height:Npx' and 'min-height:Npx'",
         )
         self.assertEqual(patched.count(f"min-height:{h}px"), 2)
+        self.assertEqual(patched.count(f'height="{EMAIL_IMAGE_ROW_HEIGHT}"'), 2)
+        self.assertEqual(patched.count(f"height:{EMAIL_IMAGE_ROW_HEIGHT}px"), 2)
 
     def test_inline_cid_images_get_explicit_dimensions(self):
         html = '<img class="card-image" src="cid:abc123">'

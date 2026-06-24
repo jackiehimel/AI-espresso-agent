@@ -45,14 +45,11 @@ EMAIL_OUTER_MAX_WIDTH = 680
 EMAIL_CARD_MAX_WIDTH = 310
 EMAIL_IMAGE_SIZE = 160
 EMAIL_GRID_COLS = 2
-# Fixed card height so every cell renders identically in Outlook/Gmail/Apple Mail,
-# regardless of how many lines the headline or kicker wraps to. `height` as an HTML
-# attribute on <table> behaves as a *minimum* across all major clients (the table
-# grows if content needs more), so this value just sets the floor that equalizes
-# typical 2-3 line headlines paired with 1-4 line kickers. Percentage-based
-# `height:100%` does not resolve here because the ancestor chain has no definite
-# height for the percentage to anchor to.
-EMAIL_CARD_MIN_HEIGHT = 380
+# Fixed card height so every cell renders identically in Outlook/Gmail/Apple Mail.
+# Keep this only slightly above normal card content height; otherwise table
+# clients distribute the surplus into rows and create a large blank band.
+EMAIL_CARD_MIN_HEIGHT = 330
+EMAIL_IMAGE_ROW_HEIGHT = EMAIL_IMAGE_SIZE + 12
 CATEGORY_COLORS = {
     "market": "#00955A",
     "everyday": "#D14A0E",
@@ -129,7 +126,8 @@ def _build_email_safe_html(html: str) -> str:
             f"<table role=\"presentation\" width=\"{EMAIL_CARD_MAX_WIDTH}\" height=\"{EMAIL_CARD_MIN_HEIGHT}\" cellpadding=\"0\" cellspacing=\"0\" "
             f"style=\"width:100%;max-width:{EMAIL_CARD_MAX_WIDTH}px;height:{EMAIL_CARD_MIN_HEIGHT}px;min-height:{EMAIL_CARD_MIN_HEIGHT}px;"
             f"background:#FFFFFF;border:1px solid #EFE5D6;border-radius:12px;\">"
-            "<tr><td align=\"center\" valign=\"top\" style=\"padding:12px 12px 0 12px;\">"
+            f"<tr><td align=\"center\" valign=\"top\" height=\"{EMAIL_IMAGE_ROW_HEIGHT}\" "
+            f"style=\"height:{EMAIL_IMAGE_ROW_HEIGHT}px;padding:12px 12px 0 12px;\">"
             f"<img src=\"{escape(img_src, quote=True)}\" alt=\"{escape(img_alt, quote=True)}\" "
             f"width=\"{EMAIL_IMAGE_SIZE}\" height=\"{EMAIL_IMAGE_SIZE}\" "
             f"style=\"display:block;width:{EMAIL_IMAGE_SIZE}px;height:{EMAIL_IMAGE_SIZE}px;border:0;outline:none;text-decoration:none;\">"
