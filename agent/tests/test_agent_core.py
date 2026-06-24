@@ -161,10 +161,96 @@ class Tier1ShipGateTests(unittest.TestCase):
                     "headline": "OpenAI brings its Codex coding app to mobile",
                     "url": "u", "tier": 2, "body": "Verified excerpt " * 20,
                 },
+                "pick_4": {
+                    "id": 4,
+                    "headline": "Google ships a model that writes text four times faster",
+                    "url": "u", "tier": 2, "body": "Verified excerpt " * 20,
+                },
             },
         )
         gate = el._validate_ship(state)
         self.assertTrue(gate["ok"])
+
+
+def _pick(idx, tier=2, score=50, headline=None):
+    return {
+        "id": idx,
+        "headline": headline or f"AI story number {idx}",
+        "url": f"https://example.com/{idx}",
+        "tier": tier,
+        "score": score,
+        "body": "Verified excerpt " * 20,
+    }
+
+
+class EvenCountShipGateTests(unittest.TestCase):
+
+    def _state(self, n):
+        picks = {f"pick_{i}": _pick(i, tier=1 if i == 1 else 2) for i in range(1, n + 1)}
+        return el.AgentState(
+            today=__import__("datetime").date(2026, 5, 17),
+            candidates=[], archive_headlines=[], picks=picks,
+        )
+
+    def test_four_ships(self):
+        self.assertTrue(el._validate_ship(self._state(4))["ok"])
+
+    def test_six_ships(self):
+        self.assertTrue(el._validate_ship(self._state(6))["ok"])
+
+    def test_five_blocked_with_guidance(self):
+        gate = el._validate_ship(self._state(5))
+        self.assertFalse(gate["ok"])
+        self.assertTrue(any("have 5" in e for e in gate["errors"]))
+
+    def test_three_blocked_when_enforced(self):
+        gate = el._validate_ship(self._state(3))
+        self.assertFalse(gate["ok"])
+        self.assertTrue(any("have 3" in e for e in gate["errors"]))
+
+class TrimToEvenTests(unittest.TestCase):
+
+    def _state_with(self, picks):
+        return el.AgentState(
+            today=__import__("datetime").date(2026, 5, 17),
+            candidates=[], archive_headlines=[], picks=dict(picks),
+        )
+
+    def test_five_trims_to_four_dropping_lowest_score(self):
+        state = self._state_with({
+            "pick_1": _pick(1, tier=1, score=90),
+            "pick_2": _pick(2, score=80),
+            "pick_3": _pick(3, score=70),
+            "pick_4": _pick(4, score=60),
+            "pick_5": _pick(5, score=10),
+        })
+        removed = el._trim_picks_to_even(state, [])
+        self.assertEqual(len(state.picks), 4)
+        self.assertEqual(removed, ["AI story number 5"])
+
+    def test_trim_keeps_tier1_even_if_lowest_score(self):
+        state = self._state_with({
+            "pick_1": _pick(1, tier=1, score=5),
+            "pick_2": _pick(2, score=80),
+            "pick_3": _pick(3, score=70),
+            "pick_4": _pick(4, score=60),
+            "pick_5": _pick(5, score=50),
+        })
+        el._trim_picks_to_even(state, [])
+        self.assertEqual(len(state.picks), 4)
+        tiers = [int(p.get("tier", 99)) for p in state.picks.values()]
+        self.assertIn(1, tiers)
+
+    def test_six_is_left_untouched(self):
+        state = self._state_with({f"pick_{i}": _pick(i) for i in range(1, 7)})
+        self.assertEqual(el._trim_picks_to_even(state, []), [])
+        self.assertEqual(len(state.picks), 6)
+
+    def test_three_is_left_untouched_but_not_shippable(self):
+        state = self._state_with({f"pick_{i}": _pick(i) for i in range(1, 4)})
+        self.assertEqual(el._trim_picks_to_even(state, []), [])
+        self.assertEqual(len(state.picks), 3)
+        self.assertFalse(el._validate_ship(state)["ok"])
 
 
 class RssSummaryTests(unittest.TestCase):

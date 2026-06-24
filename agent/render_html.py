@@ -30,7 +30,7 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
-from card_config import MAX_STORY_COUNT, MIN_STORY_COUNT, STORY_CARD_COUNT
+from card_config import ALLOWED_STORY_COUNTS, MAX_STORY_COUNT, STORY_CARD_COUNT
 from editorial import slot_label
 
 
@@ -441,22 +441,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .footer a {{ color: #8B6F47; text-decoration: underline; }}
 
   /* Desktop layouts per story count so rows stay full (no dangling card).
-     n4 uses the base rules above. Even counts (4, 6) are the preferred targets. */
+     Editions ship 4 or 6 stories (enforced in the ship and render gates).
+     n4 uses the base rules above. */
   @media (min-width: 1280px) {{
-    .edition-grid--n3 {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
-    .edition-grid--n3 .story-cards {{
-      grid-column: 1 / span 3;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }}
-    .edition-grid--n3 .prompt-card {{ grid-column: 4; }}
-
-    .edition-grid--n5 {{ grid-template-columns: repeat(6, minmax(0, 1fr)); }}
-    .edition-grid--n5 .story-cards {{
-      grid-column: 1 / span 5;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }}
-    .edition-grid--n5 .prompt-card {{ grid-column: 6; }}
-
     .edition-grid--n6 {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
     .edition-grid--n6 .story-cards {{
       grid-column: 1 / span 3;
@@ -755,9 +742,9 @@ def render_edition(
     """
     data = json.loads(edition_json_path.read_text())
     stories = data.get("stories", [])
-    if len(stories) < MIN_STORY_COUNT:
+    if len(stories) not in ALLOWED_STORY_COUNTS:
         raise ValueError(
-            f"Edition has {len(stories)} stories; need at least {MIN_STORY_COUNT}."
+            f"Edition has {len(stories)} stories; need exactly 4 or 6."
         )
     prompt = data.get("try_this_prompt") or {}
     story_limit = min(len(stories), MAX_STORY_COUNT)

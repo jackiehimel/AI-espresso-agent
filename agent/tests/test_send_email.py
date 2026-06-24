@@ -11,6 +11,8 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from send_email import (
+    EMAIL_CARD_MIN_HEIGHT,
+    EMAIL_IMAGE_ROW_HEIGHT,
     _build_email_safe_html,
     _stabilize_inline_img_tags,
     send_edition_email,
@@ -58,6 +60,57 @@ class EmailHtmlTests(unittest.TestCase):
         self.assertIn('max-width:310px', patched)
         self.assertIn("Try this prompt", patched)
         self.assertIn("color:#00955A", patched)
+
+    def test_story_cards_equalize_height_within_row(self):
+        """Cards must render at equal heights even when kicker text wraps to
+        different line counts. We enforce this with a fixed pixel minimum
+        height (HTML attribute + CSS) on the inner card table because
+        percentage heights don't resolve reliably without a definite
+        height somewhere up the ancestor chain.
+        """
+        html = """
+<html><body><div class="container">
+  <header class="masthead"><h1 class="wordmark">ai espresso</h1>
+    <p class="tagline">tagline</p><p class="dateline">DATE</p></header>
+  <section class="edition-grid"><div class="story-cards">
+    <article class="card"><a class="card-link" href="https://a.example">
+      <img class="card-image" src="cid:img1" alt="a"></a>
+      <div class="card-body"><p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://a.example">Short A</a></h2>
+        <p class="kicker">Tiny.</p>
+        <p class="source"><a class="source-link" href="https://a.example">Src A</a> · today</p>
+      </div></article>
+    <article class="card"><a class="card-link" href="https://b.example">
+      <img class="card-image" src="cid:img2" alt="b"></a>
+      <div class="card-body"><p class="category news">NEWS</p>
+        <h2 class="headline"><a class="headline-link" href="https://b.example">Headline B</a></h2>
+        <p class="kicker">A much longer kicker that will wrap to multiple lines and
+        force this card to be taller than its sibling unless the inner card
+        table is pinned to a fixed minimum height.</p>
+        <p class="source"><a class="source-link" href="https://b.example">Src B</a> · today</p>
+      </div></article>
+  </div></section>
+  <footer class="footer">footer</footer>
+</div></body></html>
+"""
+        patched = _build_email_safe_html(html)
+        h = EMAIL_CARD_MIN_HEIGHT
+
+        # Every card table must carry the HTML height attribute (Outlook/Word engine).
+        self.assertEqual(
+            patched.count(f'height="{h}"'),
+            2,
+            f"expected height='{h}' on both inner card tables",
+        )
+        # Plus matching CSS height + min-height so modern clients honor the floor too.
+        self.assertEqual(
+            patched.count(f"height:{h}px"),
+            4,
+            "expected each card to carry both 'height:Npx' and 'min-height:Npx'",
+        )
+        self.assertEqual(patched.count(f"min-height:{h}px"), 2)
+        self.assertEqual(patched.count(f'height="{EMAIL_IMAGE_ROW_HEIGHT}"'), 2)
+        self.assertEqual(patched.count(f"height:{EMAIL_IMAGE_ROW_HEIGHT}px"), 2)
 
     def test_inline_cid_images_get_explicit_dimensions(self):
         html = '<img class="card-image" src="cid:abc123">'

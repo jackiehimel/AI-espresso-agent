@@ -139,10 +139,10 @@ class PublicHtmlPolishTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            with self.assertRaisesRegex(ValueError, "Edition has 2 stories; need at least 3\\."):
+            with self.assertRaisesRegex(ValueError, "Edition has 2 stories; need exactly 4 or 6\\."):
                 render_edition(edition, issue_num=77, editions_dir=out)
 
-    def test_render_accepts_three_story_edition(self):
+    def test_render_rejects_three_story_edition(self):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp)
             edition = out / "three-story.json"
@@ -188,10 +188,28 @@ class PublicHtmlPolishTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            result = render_edition(edition, issue_num=88, editions_dir=out)
-            self.assertEqual(result["issue_num"], 88)
-            html = Path(result["html_path"]).read_text(encoding="utf-8")
-            self.assertIn("4&nbsp;SHOTS", html)
+            with self.assertRaisesRegex(ValueError, "Edition has 3 stories; need exactly 4 or 6\\."):
+                render_edition(edition, issue_num=88, editions_dir=out)
+
+    def test_render_rejects_five_story_edition(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            edition = self._write_four_story_fixture(out)
+            data = json.loads(edition.read_text(encoding="utf-8"))
+            data["stories"].append(
+                {
+                    "slot": "industry",
+                    "headline": "Mistral launches a new model deployment tool",
+                    "blurb": "Teams can deploy faster with fewer steps.",
+                    "why_it_matters": "Model deployment becomes more practical.",
+                    "source_name": "Mistral News",
+                    "source_url": "https://example.com/e",
+                    "tier": 1,
+                }
+            )
+            edition.write_text(json.dumps(data), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Edition has 5 stories; need exactly 4 or 6\\."):
+                render_edition(edition, issue_num=89, editions_dir=out)
 
 
 class IssueNumberingTests(unittest.TestCase):

@@ -229,10 +229,16 @@ class ShipGateTests(unittest.TestCase):
             el._tool_pick(state, {"id": i, "reason": "test", "persona": "market"}, [])
         return state
 
-    def test_ship_succeeds_with_3_valid_picks(self):
-        state = self._make_state_with_picks(3)
+    def test_ship_succeeds_with_4_valid_picks(self):
+        state = self._make_state_with_picks(4)
         r = el._tool_ship(state, {})
         self.assertTrue(r["shipped"])
+
+    def test_ship_fails_with_odd_5_picks(self):
+        state = self._make_state_with_picks(5)
+        r = el._tool_ship(state, {})
+        self.assertFalse(r["shipped"])
+        self.assertTrue(any("4 or 6" in e for e in r["errors"]))
 
     def test_ship_fails_with_2_picks(self):
         state = self._make_state_with_picks(2)
@@ -275,9 +281,11 @@ class ShipGateTests(unittest.TestCase):
                        source="OutletB"),
             _candidate(2, "Claude agent ships code autonomously", body=_verified_body(),
                        source="OutletC"),
+            _candidate(3, "Gemini adds a new reasoning mode", body=_verified_body(),
+                       source="OutletD"),
         ]
         state = _state(candidates=candidates)
-        for i in range(3):
+        for i in range(4):
             el._tool_pick(state, {"id": i, "reason": "test", "persona": "market"}, [])
         r = el._tool_ship(state, {})
         self.assertTrue(r["shipped"])
@@ -313,9 +321,11 @@ class ShipGateTests(unittest.TestCase):
                        source="OutletB"),
             _candidate(2, "Gemini releases new AI model", body=_verified_body(),
                        source="OutletC"),
+            _candidate(3, "Llama gets a new function-calling API", body=_verified_body(),
+                       source="OutletD"),
         ]
         state = _state(candidates=candidates, today=today, max_age_days=3)
-        for i in range(3):
+        for i in range(4):
             el._tool_pick(state, {"id": i, "reason": "test", "persona": "market"}, [])
         r = el._tool_ship(state, {})
         self.assertTrue(r["shipped"], r.get("errors"))
@@ -361,11 +371,21 @@ class RankHeadlinesTests(unittest.TestCase):
 
 class FallbackShipTests(unittest.TestCase):
 
-    def test_fallback_ships_with_3_picks_on_budget_exhaustion(self):
+    def test_fallback_blocks_3_picks_on_budget_exhaustion(self):
         state = self._make_state_with_picks(3)
         state.tool_calls = state.hard_budget
+        self.assertEqual(el._trim_picks_to_even(state, []), [])
         gate = el._validate_ship(state)
-        self.assertTrue(gate["ok"])
+        self.assertFalse(gate["ok"])
+        self.assertTrue(any("have 3" in e for e in gate["errors"]))
+
+    def test_fallback_trims_odd_5_to_even_4(self):
+        state = self._make_state_with_picks(5)
+        state.tool_calls = state.hard_budget
+        removed = el._trim_picks_to_even(state, [])
+        self.assertEqual(len(removed), 1)
+        self.assertEqual(len(state.picks), 4)
+        self.assertTrue(el._validate_ship(state)["ok"])
 
     def _make_state_with_picks(self, n=3):
         candidates = [

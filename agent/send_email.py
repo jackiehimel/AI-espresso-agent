@@ -45,6 +45,11 @@ EMAIL_OUTER_MAX_WIDTH = 680
 EMAIL_CARD_MAX_WIDTH = 310
 EMAIL_IMAGE_SIZE = 160
 EMAIL_GRID_COLS = 2
+# Fixed card height so every cell renders identically in Outlook/Gmail/Apple Mail.
+# Keep this only slightly above normal card content height; otherwise table
+# clients distribute the surplus into rows and create a large blank band.
+EMAIL_CARD_MIN_HEIGHT = 330
+EMAIL_IMAGE_ROW_HEIGHT = EMAIL_IMAGE_SIZE + 12
 CATEGORY_COLORS = {
     "market": "#00955A",
     "everyday": "#D14A0E",
@@ -118,14 +123,16 @@ def _build_email_safe_html(html: str) -> str:
 
         story_cells.append(
             f"<td align=\"center\" valign=\"top\" width=\"{100 // EMAIL_GRID_COLS}%\" style=\"padding:0 6px 18px 6px;\">"
-            f"<table role=\"presentation\" width=\"{EMAIL_CARD_MAX_WIDTH}\" cellpadding=\"0\" cellspacing=\"0\" "
-            f"style=\"width:100%;max-width:{EMAIL_CARD_MAX_WIDTH}px;background:#FFFFFF;border:1px solid #EFE5D6;border-radius:12px;\">"
-            "<tr><td align=\"center\" style=\"padding:12px 12px 0 12px;\">"
+            f"<table role=\"presentation\" width=\"{EMAIL_CARD_MAX_WIDTH}\" height=\"{EMAIL_CARD_MIN_HEIGHT}\" cellpadding=\"0\" cellspacing=\"0\" "
+            f"style=\"width:100%;max-width:{EMAIL_CARD_MAX_WIDTH}px;height:{EMAIL_CARD_MIN_HEIGHT}px;min-height:{EMAIL_CARD_MIN_HEIGHT}px;"
+            f"background:#FFFFFF;border:1px solid #EFE5D6;border-radius:12px;\">"
+            f"<tr><td align=\"center\" valign=\"top\" height=\"{EMAIL_IMAGE_ROW_HEIGHT}\" "
+            f"style=\"height:{EMAIL_IMAGE_ROW_HEIGHT}px;padding:12px 12px 0 12px;\">"
             f"<img src=\"{escape(img_src, quote=True)}\" alt=\"{escape(img_alt, quote=True)}\" "
             f"width=\"{EMAIL_IMAGE_SIZE}\" height=\"{EMAIL_IMAGE_SIZE}\" "
             f"style=\"display:block;width:{EMAIL_IMAGE_SIZE}px;height:{EMAIL_IMAGE_SIZE}px;border:0;outline:none;text-decoration:none;\">"
             "</td></tr>"
-            "<tr><td style=\"padding:10px 12px 12px 12px;\">"
+            "<tr><td valign=\"top\" style=\"padding:10px 12px 12px 12px;vertical-align:top;\">"
             f"<p style=\"margin:0 0 4px 0;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:{cat_color};\">{escape(category_text)}</p>"
             f"<h2 style=\"margin:0 0 4px 0;font-size:14px;line-height:1.25;font-weight:700;color:#1A1108;\">"
             f"<a href=\"{escape(headline_href, quote=True)}\" style=\"color:#1A1108;text-decoration:none;\">{escape(headline_text)}</a></h2>"

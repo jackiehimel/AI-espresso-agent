@@ -4,9 +4,9 @@ AI Espresso — Hybrid Discovery Agent.
 Pipeline:
   1. Rank ALL candidate headlines+blurbs in one LLM call (no lossy funnel)
   2. Pre-fetch article bodies for the top 20 candidates
-  3. Agentic Editor loop: pick 3-6 stories using tools (pick, search_news,
+  3. Agentic Editor loop: pick 4 or 6 stories using tools (pick, search_news,
      read_candidate, ship_edition). Deterministic validation gates only.
-  4. Fallback: if budget exhausted with 3+ picks, force-ship.
+  4. Fallback: if budget exhausted, trim to an even count and force-ship.
 
 No LLM Critic. No finalization contract. No forced convergence.
 The Editor's judgment is final; deterministic gates catch structural issues.
@@ -28,6 +28,7 @@ from urllib.parse import urlparse
 
 import httpx
 
+from card_config import ALLOWED_STORY_COUNTS, largest_allowed_even_count
 from constitution import constitution_prompt_block
 from dedupe_gate import ArchiveIndex, exact_repeat_reason, semantic_repeats
 from freshness import infer_date_from_text, infer_date_from_url
@@ -59,8 +60,11 @@ AUDIENCE — any Solvd employee (engineer, consultant, sales, designer,
 intern). Both a 'wow really?' architecture move and a practical
 try-it-today feature count.
 
-NORTH STAR — get people excited about AI. Every story should leave the
+NORTH STAR — get people excited about AI. Most stories should leave the
 reader thinking "I want to try that" or "I didn't know AI could do that."
+But the edition must also reflect reality: when there is a defining AI story
+today — the one everyone in AI is talking about — it belongs in the edition
+even when it is news rather than a try-it-today feature.
 
 THE EDITORIAL TEST:
   Would any Solvd employee screenshot this and forward it because AI feels
@@ -79,7 +83,9 @@ HARD EXCLUSIONS (never pick):
   • AI doomer / existential risk / extinction
   • Self-harm / suicide content involving AI
   • Mass surveillance / privacy horror as primary angle
-  • Pure geopolitics where AI chips are just a prop
+  • Geopolitics/policy ONLY when AI is incidental (chips or companies as a
+    prop). A major AI lab, model, or product directly at the center of a
+    government, legal, or regulatory action is NOT excluded — that is news.
 
 DOWNWEIGHT:
   • 'AI hallucination ruined X' cautionary tales
@@ -89,6 +95,12 @@ DOWNWEIGHT:
   • Bare vendor launches with no news hook
 
 PRIORITIZE (80+):
+  • THE biggest AI story of the day is MANDATORY in slot 1 (the lead story).
+    When a major AI lab, model, or company is at the center of today's news —
+    a launch, a ban, a lawsuit, a major regulatory action, a major deal — that
+    story leads the edition, even if policy/regulatory/legal/business in form.
+    AI must be load-bearing — the story is ABOUT the AI, not AI as a footnote.
+    Do not bury today's defining story behind try-it-today features.
   • Shipped features people can try this week
   • Model drops with concrete capability hooks
   • Developer-facing changes with backlash or stakes
@@ -120,11 +132,12 @@ _RANKER_SYSTEM = (
 
 _EDITOR_SYSTEM = (
     "You are the Editor for AI Espresso. You have pre-ranked candidates "
-    "with article bodies. Select 3-6 stories for today's edition using "
-    "the tools provided. Call ship_edition when ready.\n\n"
+    "with article bodies. Select exactly 4 or 6 stories for today's edition "
+    "using the tools provided. Call ship_edition when ready.\n\n"
     "STRATEGY:\n"
     "  1. Review the ranked candidates (they already have bodies).\n"
-    "  2. Pick the best 3-6 stories. Prefer variety in vendor and topic.\n"
+    "  2. Pick 4 strong stories. Go to 6 only when the pool is genuinely\n"
+    "     strong enough for two more that clear the bar. Never ship 5.\n"
     "  3. If the pool feels thin, use search_news to find alternatives.\n"
     "  4. Call ship_edition. Deterministic gates will validate.\n"
     "  5. If ship fails, fix the issue and try again.\n\n"
@@ -133,9 +146,9 @@ _EDITOR_SYSTEM = (
     "  • At most 2 stories from the same vendor (Google/Apple/OpenAI/etc.).\n"
     "  • At most 2 stories from the same outlet (e.g. Wired, Bloomberg, TechCrunch).\n"
     "  • All picks must have verified article bodies.\n"
-    "  • Minimum 3 stories. Prefer an even count (4 or 6) so the card grid stays\n"
-    "    balanced — but never drop a strong story or pad with a weak one just to\n"
-    "    hit an even number. A great 5-story day beats a padded 6.\n"
+    "  • Ship exactly 4 or 6 stories (never 3 or 5). Prefer 4 unless the pool\n"
+    "    is strong enough for 6. If you find yourself at 5, either add a 6th\n"
+    "    strong story or unpick the weakest down to 4.\n"
     "  • Assign a persona tag to each pick: market, everyday, build, or industry.\n"
     "    These are rendering labels, not constraints on selection.\n\n"
     + _EDITORIAL_RUBRIC
@@ -374,6 +387,36 @@ def _tool_unpick(state: AgentState, args: dict, vendor_patterns) -> dict:
     return {"error": f"no pick with id={cid}"}
 
 
+def _trim_picks_to_even(state: AgentState, vendor_patterns) -> list[str]:
+    """Drop the weakest picks until the count is supported (6 or 4).
+
+    Deterministic ship backstop for the budget-exhausted path: an odd pick set is
+    trimmed to ``largest_allowed_even_count`` so an odd edition can never ship.
+    Non-tier-1, lowest-ranked picks are dropped first so the tier-1 rail
+    survives. Returns the headlines removed (empty if no trim was needed).
+    """
+    target = largest_allowed_even_count(len(state.picks))
+    if target >= len(state.picks):
+        return []
+    ordered = sorted(
+        state.picks.items(),
+        key=lambda kv: (int(kv[1].get("tier", 99)) == 1, kv[1].get("score", 0)),
+    )
+    removed = []
+    for slot, pick in ordered[: len(state.picks) - target]:
+        state.picks.pop(slot, None)
+        removed.append(pick.get("headline", ""))
+        nv = _detect_vendor(
+            pick.get("headline", ""), pick.get("url", ""), vendor_patterns
+        )
+        if nv and state.vendor_counts.get(nv, 0) > 0:
+            state.vendor_counts[nv] -= 1
+        src_key = _source_key(pick.get("source") or pick.get("source_name") or "")
+        if src_key and state.source_counts.get(src_key, 0) > 0:
+            state.source_counts[src_key] -= 1
+    return removed
+
+
 def _tool_read_candidate(state: AgentState, args: dict) -> dict:
     cid = int(args.get("id", -1))
     found = next((c for c in state.candidates + state.extra_candidates if c.get("id") == cid), None)
@@ -508,8 +551,20 @@ def _perplexity_search(query: str) -> tuple[list[dict] | None, str | None]:
 
 def _validate_ship(state: AgentState) -> dict:
     errors = []
-    if len(state.picks) < MIN_PICKS:
-        errors.append(f"need {MIN_PICKS}+ picks, have {len(state.picks)}")
+    n = len(state.picks)
+    if n not in ALLOWED_STORY_COUNTS:
+        if n == 5:
+            errors.append(
+                "edition needs exactly 4 or 6 stories, have 5 — add a 6th "
+                "strong story or unpick the weakest down to 4"
+            )
+        elif n == 3:
+            errors.append(
+                "edition needs exactly 4 or 6 stories, have 3 — add a 4th "
+                "strong story"
+            )
+        else:
+            errors.append(f"edition needs exactly 4 or 6 stories, have {n}")
 
     have_t1 = sum(1 for p in state.picks.values() if int(p.get("tier", 99)) == 1)
     if have_t1 < 1:
@@ -637,7 +692,7 @@ EDITOR_TOOLS: list[dict] = [
     },
     {
         "name": "ship_edition",
-        "description": "Finalize the edition. Requires 3+ picks with verified bodies.",
+        "description": "Finalize the edition. Requires exactly 4 or 6 picks with verified bodies.",
         "input_schema": {"type": "object", "properties": {}},
     },
 ]
@@ -674,7 +729,7 @@ def _build_editor_brief(state: AgentState, gaps: list[str]) -> str:
         f"Coverage gaps from ranking: {gaps or '(none)'}\n\n"
         f"CANDIDATES (pre-ranked, bodies pre-fetched):\n{candidates_block}\n\n"
         f"Archive (last 30d): {', '.join(state.archive_headlines[:10]) or '(none)'}\n\n"
-        "Select 3-6 stories using tools. Call ship_edition when ready."
+        "Select exactly 4 or 6 stories using tools. Call ship_edition when ready."
     )
 
 
@@ -890,8 +945,17 @@ def agentic_select(
 
     ok = _run_editor_loop(state, vendor_patterns)
 
-    # Fallback: if budget exhausted with enough picks, force-ship
+    # Fallback: if budget exhausted, trim to an even count and force-ship only
+    # if the normal ship gate still passes. Odd counts must never ship.
     if not ok and len(state.picks) >= MIN_PICKS:
+        removed = _trim_picks_to_even(state, vendor_patterns)
+        if removed:
+            state.trace.append(TraceEvent(
+                ts=time.time(), role="system", kind="trim_to_even",
+                result_summary=(
+                    f"trimmed {len(removed)} weakest pick(s) to even count: {removed}"
+                ),
+            ))
         gate = _validate_ship(state)
         if gate["ok"]:
             state.shipped = True
