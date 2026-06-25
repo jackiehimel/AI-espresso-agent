@@ -1,0 +1,254 @@
+{
+  "date": "2026-06-25",
+  "generated_at": "2026-06-25T12:07:37.355149Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Gemini can now click around your computer like Anthropic's Claude",
+      "blurb": "Google just shipped computer use to Gemini 3.5 Flash, letting the model control your mouse and keyboard to complete tasks across apps. It's rolling out in AI Studio and Vertex AI first, following Anthropic's Claude launch from last fall. The feature works by having Gemini take screenshots, decide what to click, and execute actions step by step.",
+      "why_it_matters": "The two leading frontier labs now both offer agents that can drive your desktop.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+      "tier": 1,
+      "original_headline": "Introducing computer use in Gemini 3.5 Flash",
+      "fingerprint": "484fc850d34abad6"
+    },
+    {
+      "slot": "market",
+      "headline": "Qualcomm buys AI chip startup Modular for $4 billion",
+      "blurb": "Qualcomm is acquiring Modular, a startup that makes software to run AI models across different chips. The nearly $4 billion deal is one of the biggest AI acquisitions yet and gives Qualcomm tools to compete with Nvidia's CUDA software, which has locked developers into Nvidia's hardware.",
+      "why_it_matters": "Chip makers are now paying billions for the software layer that connects AI models to hardware.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/qualcomm-buys-buzzy-chip-startup-modular-for-nearly-dollar4-billion/",
+      "tier": 1,
+      "original_headline": "Qualcomm Buys Buzzy Chip Startup Modular for Nearly $4 Billion",
+      "fingerprint": "2ed504e2124d1020"
+    },
+    {
+      "slot": "everyday",
+      "headline": "ChatGPT's free tier just got smarter at following conversations",
+      "blurb": "OpenAI upgraded the default free model to GPT-5.5, which better tracks what you've said across a thread. If you use ChatGPT without paying, responses should now feel more coherent when you're building on earlier messages.",
+      "why_it_matters": "The free tier finally catches up on context\u2014fewer times repeating yourself mid-conversation.",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2201255/openai-gpt-5-5-instant-chatgpt-upgrade/",
+      "tier": 1,
+      "original_headline": "OpenAI's free GPT-5.5 model makes ChatGPT better at understanding context",
+      "fingerprint": "a7bad005a4029d55"
+    },
+    {
+      "slot": "build",
+      "headline": "Figma just added AI motion graphics and shader tools to its canvas",
+      "blurb": "Figma announced design and coding updates at Config 2026, including AI-powered motion graphics and shader tools. The redesigned canvas now supports full-stack development, bringing design teams, AI agents, and development tools into one workspace to automate repetitive tasks.",
+      "why_it_matters": "Designers can now prototype animations and visual effects without leaving Figma.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/955831/figma-code-design-tools-config-2026-announcements",
+      "tier": 1,
+      "original_headline": "Figma now has AI motion graphics and shader tools",
+      "fingerprint": "a9862cebcce60c86"
+    },
+    {
+      "slot": "industry",
+      "headline": "Agility Robotics is going public at $2.5B \u2014 Amazon already uses its humanoid",
+      "blurb": "The company behind Digit, a two-legged warehouse robot that picks and moves boxes, is merging with a SPAC to go public. Amazon and other logistics companies already deploy Digit in facilities, where it handles repetitive tasks alongside human workers.",
+      "why_it_matters": "Humanoid robots are moving from demos to actual warehouse floors with serious money behind them.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/finance/agility-maker-of-humanlike-robots-to-go-public-in-2-5-billion-spac-deal-62c3cb32?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Agility, Maker of Humanlike Robots, to Go Public in $2.5 Billion SPAC Deal",
+      "fingerprint": "e3f0ad8f69d420c5"
+    },
+    {
+      "slot": "market",
+      "headline": "Google just lost two more top AI researchers to Anthropic",
+      "blurb": "Jonas Adler and Alexander Pritzel are the latest scientists to leave Google for Anthropic, joining a growing exodus that includes Noam Shazeer and John Jumper. Google's AI brain drain continues as competitors poach the talent that built its foundation.",
+      "why_it_matters": "The lab that wins top talent often ships the breakthroughs everyone else copies.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/24/ai-researchers-continue-to-leave-google-for-its-rivals/",
+      "tier": 1,
+      "original_headline": "AI researchers continue to leave Google for its rivals",
+      "fingerprint": "f5296a95347c26c3"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The strategy stress test",
+    "kicker": "",
+    "prompt": "I'll describe our current strategy below. Attack it like a competitor who wants us to fail. Tell me: the one assumption we're making that's probably wrong, the customer segment we're ignoring that will matter in 18 months, and the capability we lack but keep pretending we'll build later.",
+    "tool_hint": "Before you commit budget to a plan everyone's nodding along to."
+  },
+  "daily_question": "If you could give one AI tool the ability to physically click around your screen unsupervised, which would you trust\u2014and which would you never?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1782388601.410723,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=14, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782388620.8333297,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "build",
+        "reason": "Lead story: Google DeepMind ships computer use capability in Gemini 3.5 Flash - a major new AI capability from a tier-1 lab that developers can try immediately. This is the defining AI product launch of the day."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013dFGYr4W8yE7qk3sg24cZb"
+    },
+    {
+      "ts": 1782388620.8333988,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing computer use in Gemini 3.5 Flash\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_013dFGYr4W8yE7qk3sg24cZb"
+    },
+    {
+      "ts": 1782388620.8334398,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 111,
+        "persona": "market",
+        "reason": "Qualcomm acquiring Modular for nearly $4B is a major M&A story in AI infrastructure - one of the most promising chip software startups of the AI era heads for a multibillion-dollar exit."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TdcoMPrjozCjF2ThT4WPnN"
+    },
+    {
+      "ts": 1782388620.8334792,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Qualcomm Buys Buzzy Chip Startup Modular for Nearly $4 Billion\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01TdcoMPrjozCjF2ThT4WPnN"
+    },
+    {
+      "ts": 1782388620.83349,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 118,
+        "persona": "everyday",
+        "reason": "OpenAI's free GPT-5.5 Instant model upgrade makes ChatGPT better at understanding context - concrete improvement to the free model millions of people use daily."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WNvrYrHwwALwzvmB45GQ4o"
+    },
+    {
+      "ts": 1782388620.833521,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI's free GPT-5.5 model makes ChatGPT better at understanding context\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01WNvrYrHwwALwzvmB45GQ4o"
+    },
+    {
+      "ts": 1782388620.83353,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "build",
+        "reason": "Figma ships AI motion graphics and shader tools at Config - practical new features for designers and developers to try this week."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01R5tcdQfdu5Bt6NoYc14t35"
+    },
+    {
+      "ts": 1782388620.8335772,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Figma now has AI motion graphics and shader tools\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01R5tcdQfdu5Bt6NoYc14t35"
+    },
+    {
+      "ts": 1782388620.8335927,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 154,
+        "persona": "industry",
+        "reason": "Agility's humanoid robots going public in $2.5B SPAC deal - real-world deployment story with Amazon using Digit robots in warehouses, major market validation for humanoid robotics."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018FTonNAJss8H6R3DvmkwQp"
+    },
+    {
+      "ts": 1782388620.833653,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Agility, Maker of Humanlike Robots, to Go Public in $2.5 Billion SPAC Deal\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_018FTonNAJss8H6R3DvmkwQp"
+    },
+    {
+      "ts": 1782388620.8336675,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 44,
+        "persona": "market",
+        "reason": "Top AI researchers Jonas Adler and Alexander Pritzel leaving Google for Anthropic - continuing talent war story showing the competitive dynamics in AI labs."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0179wfmkDipT35F1Vd9wNGsd"
+    },
+    {
+      "ts": 1782388620.8336992,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AI researchers continue to leave Google for its rivals\", \"persona\": \"market\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_0179wfmkDipT35F1Vd9wNGsd"
+    },
+    {
+      "ts": 1782388623.1465514,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_0142LkizWe6mxSV2Dz3LYmFA"
+    },
+    {
+      "ts": 1782388623.9723287,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782388623.972377,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Introducing computer use in Gemini 3.5 Flash\", \"pick_2\": \"Qualcomm Buys Buzzy Chip Startup Modular for Nearly $4 Billion\", \"pick_3\": \"OpenAI's free GPT-5.5 model makes ChatGPT better at understanding context\", \"pick_4\": \"Figma now has AI motion graphics and shader tools\", \"pick_5\": \"Agility, Maker of Humanlike Robots, to Go Public in $2.5 Billion SPAC Deal\", \"pick_6\": \"AI researchers continue to leave Google for its rivals\"}}",
+      "tool_use_id": "toolu_0142LkizWe6mxSV2Dz3LYmFA"
+    }
+  ],
+  "issue_num": 28
+}
