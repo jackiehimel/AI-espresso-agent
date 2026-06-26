@@ -1,0 +1,298 @@
+{
+  "date": "2026-06-26",
+  "generated_at": "2026-06-26T11:56:45.757361Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "OpenAI delays GPT-5.6 release after White House security request",
+      "blurb": "The Trump administration asked OpenAI to slow down its next model launch over security concerns. CEO Sam Altman told employees the company will release GPT-5.6 in limited preview first, giving access to a small group before a wider rollout.",
+      "why_it_matters": "First time the US government has publicly intervened in an AI model release timeline.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/957372/openai-will-delay-gpt-5-6-after-trump-administration-request",
+      "tier": 1,
+      "original_headline": "OpenAI will delay GPT-5.6 after Trump administration request",
+      "fingerprint": "c81ffe08b9329123"
+    },
+    {
+      "slot": "market",
+      "headline": "Claude is stealing ChatGPT's paying customers",
+      "blurb": "People who pay for AI subscriptions are switching to Anthropic's Claude, even though ChatGPT still dominates the overall market. The shift shows paying users\u2014who actually use AI daily\u2014are picking Claude over OpenAI's offering.",
+      "why_it_matters": "The users willing to pay are the ones who matter most, and they're voting with their wallets.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/25/anthropics-claude-is-winning-over-paid-consumers-a-market-owned-by-chatgpt/",
+      "tier": 1,
+      "original_headline": "Anthropic\u2019s Claude is winning over paid consumers, a market owned by ChatGPT",
+      "fingerprint": "907cf8668333d40b"
+    },
+    {
+      "slot": "build",
+      "headline": "Apple adds Google Gemini as a third coding assistant in Xcode",
+      "blurb": "Xcode 26.6 now supports Google Gemini alongside existing AI coding assistants, giving developers another option for AI-powered code completion and suggestions directly in Apple's IDE. Developers can now choose between multiple AI models while building iOS and Mac apps.",
+      "why_it_matters": "Apple is opening up its development tools to competing AI models instead of locking developers into one assistant.",
+      "source_name": "9to5Mac \u2014 AI",
+      "source_url": "https://9to5mac.com/2026/06/25/apple-adds-google-gemini-coding-assistant-in-xcode-26-6-update/",
+      "tier": 1,
+      "original_headline": "Apple adds Google Gemini coding assistant in Xcode 26.6 update",
+      "fingerprint": "75f74a817fa89180"
+    },
+    {
+      "slot": "build",
+      "headline": "Patronus AI raises $50M to build simulated worlds where AI agents fail",
+      "blurb": "Patronus AI, founded by ex-Meta researchers, creates digital environments designed to break AI agents before they break in production. The startup is building test scenarios that expose how agents behave under edge cases, adversarial inputs, and real-world chaos\u2014essentially crash-test dummies for autonomous software.",
+      "why_it_matters": "As companies ship agents that book flights and manage money, knowing where they fail matters more than knowing where they work.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/25/patronus-ai-lands-50m-to-build-digital-worlds-that-stress-test-ai-agents/",
+      "tier": 1,
+      "original_headline": "Patronus AI lands $50M to build \u2018digital worlds\u2019 that stress-test AI agents",
+      "fingerprint": "24e46ac469afaa61"
+    },
+    {
+      "slot": "industry",
+      "headline": "AWS CEO says companies are moving AI past the pilot stage",
+      "blurb": "Matt Garman claims enterprises are shifting from AI experiments to production deployments that deliver measurable returns. The interview focuses on what's changed to make AI projects stick beyond proof-of-concept, though specific ROI examples aren't detailed in the available excerpt.",
+      "why_it_matters": "If true, it signals AI is crossing the gap from R&D budget to core business tool.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/aws/aws/aws-matt-garman-enterprise-ai-roi-interview-2026?utm_source=rss",
+      "tier": 1,
+      "original_headline": "AWS CEO Matt Garman on why enterprise AI is finally delivering real returns",
+      "fingerprint": "2f943a5ef8e2a591"
+    },
+    {
+      "slot": "build",
+      "headline": "Developer let 2,000 people try to jailbreak his AI assistant \u2014 here's what broke",
+      "blurb": "A developer built an AI assistant with access to his calendar, Gmail, and Slack, then invited the internet to hack it. The results: prompt injection worked repeatedly, users extracted system prompts easily, and guardrails failed against creative attacks. He's now sharing the attack patterns and what actually stopped them.",
+      "why_it_matters": "Real-world jailbreak data from a production AI tool with actual access to sensitive systems.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://www.fernandoi.cl/posts/hackmyclaw/",
+      "tier": 1,
+      "original_headline": "What happened after 2k people tried to hack my AI assistant",
+      "fingerprint": "1e14c256aa60c79c"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation floor-and-ceiling",
+    "kicker": "",
+    "prompt": "I'm about to negotiate something I'll describe below. Don't give me tactics or scripts. Instead: tell me the worst deal I can accept without feeling like I lost, then tell me the best deal I can realistically ask for without seeming delusional. Then tell me which number to say out loud first.",
+    "tool_hint": "Before you walk into salary talks, vendor pricing, or equity discussions."
+  },
+  "daily_question": "If you could stress-test one AI tool you use daily against 2,000 adversarial users, what would break first?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1782474936.313812,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782474957.1458683,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 22,
+        "persona": "market",
+        "reason": "THE defining AI story today - OpenAI, a major AI lab, at the center of a significant government action. Everyone in AI will be discussing this. When the Trump administration asks OpenAI to delay their next model release, that's mandatory slot 1 material - it's about the AI company and product, not AI as a footnote."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01V7ofKpmMu62F6e3Uzf6ivb"
+    },
+    {
+      "ts": 1782474957.1459343,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI will delay GPT-5.6 after Trump administration request\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01V7ofKpmMu62F6e3Uzf6ivb"
+    },
+    {
+      "ts": 1782474957.145975,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "market",
+        "reason": "Platform war with concrete data - Claude is actually winning paid subscribers from ChatGPT's dominant position. This is surprising and shows real market movement with specific metrics. Passes the screenshot test: \"wait, Claude is beating ChatGPT now?\""
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01T57wqqo9jygnAvtrFwf7QX"
+    },
+    {
+      "ts": 1782474957.1460278,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic\\u2019s Claude is winning over paid consumers, a market owned by ChatGPT\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01T57wqqo9jygnAvtrFwf7QX"
+    },
+    {
+      "ts": 1782474957.1460395,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 72,
+        "persona": "build",
+        "reason": "Shipped feature developers can try today - Apple just added Gemini as a third coding assistant option in Xcode. Concrete, actionable, and shows the AI coding wars heating up. Engineers will want to try this."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013mdbvHmqdnKV4nJMBZCebR"
+    },
+    {
+      "ts": 1782474957.1460826,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple adds Google Gemini coding assistant in Xcode 26.6 update\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_013mdbvHmqdnKV4nJMBZCebR"
+    },
+    {
+      "ts": 1782474957.1461,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "build",
+        "reason": "$50M raise for agent stress-testing with \"digital worlds\" - addresses the critical problem of how to test AI agents before deployment. Founded by Meta AI researchers, tackles a real pain point as agents go mainstream. The \"digital worlds\" angle is concrete and intriguing."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AYSimYqj11h2yDvfLDxSzE"
+    },
+    {
+      "ts": 1782474957.1461604,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Patronus AI lands $50M to build \\u2018digital worlds\\u2019 that stress-test AI agents\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01AYSimYqj11h2yDvfLDxSzE"
+    },
+    {
+      "ts": 1782474957.146177,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "industry",
+        "reason": "$2.3B valuation for training AI on video game data - surprising approach that sounds cool (\"I didn't know you could do that\"). Gaming as training ground for real-world agents is a fresh angle with serious backing and scale (millions of hours of gameplay)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01F2tmdDSbiGtRA9ffNLYmj8"
+    },
+    {
+      "ts": 1782474957.14622,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'TechCrunch \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_01F2tmdDSbiGtRA9ffNLYmj8"
+    },
+    {
+      "ts": 1782474957.146235,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "build",
+        "reason": "1,000x power reduction claim from Databricks' former AI chief with a shipped demo (Un-0 image generation). Power consumption is a huge AI infrastructure issue - if this approach works, it's transformative. The concrete demo (Un-0) makes it real, not vaporware."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YLaXhcWxuaRsNg2vXioDJS"
+    },
+    {
+      "ts": 1782474957.146272,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'TechCrunch \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_01YLaXhcWxuaRsNg2vXioDJS"
+    },
+    {
+      "ts": 1782474967.2675412,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "industry",
+        "reason": "AWS CEO explaining why enterprise AI is finally delivering ROI - primary source from Amazon News. This addresses the \"is AI actually working?\" question with concrete business outcomes from the biggest cloud provider. Relevant for consultants and engineers alike."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01U2yREA1uYZdhzvH2s7SPpR"
+    },
+    {
+      "ts": 1782474967.267612,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AWS CEO Matt Garman on why enterprise AI is finally delivering real returns\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01U2yREA1uYZdhzvH2s7SPpR"
+    },
+    {
+      "ts": 1782474967.2676475,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 56,
+        "persona": "build",
+        "reason": "Real-world security test with 2,000 people trying to hack an AI assistant - concrete, practical, and reveals what actually happens when you stress-test prompt injection defenses. The \"I want to try that\" factor is high, and it's educational about AI security in practice."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01J1WW5KGrxBUAXMCp3y4znJ"
+    },
+    {
+      "ts": 1782474967.2676861,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"What happened after 2k people tried to hack my AI assistant\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01J1WW5KGrxBUAXMCp3y4znJ"
+    },
+    {
+      "ts": 1782474974.917192,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_017gk7A4fn1aKvDJ2uFmtASX"
+    },
+    {
+      "ts": 1782474975.6878703,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782474975.68791,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI will delay GPT-5.6 after Trump administration request\", \"pick_2\": \"Anthropic\\u2019s Claude is winning over paid consumers, a market owned by ChatGPT\", \"pick_3\": \"Apple adds Google Gemini coding assistant in Xcode 26.6 update\", \"pick_4\": \"Patronus AI lands $50M to build \\u2018digital worlds\\u2019 that stress-test AI agents\", \"pick_5\": \"AWS CEO Matt Garman on why enterprise AI is finally delivering real returns\", \"pick_6\": \"What happened after 2k people tried to hack my AI assistant\"}}",
+      "tool_use_id": "toolu_017gk7A4fn1aKvDJ2uFmtASX"
+    }
+  ],
+  "issue_num": 29
+}
