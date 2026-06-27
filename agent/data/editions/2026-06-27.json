@@ -1,0 +1,400 @@
+{
+  "date": "2026-06-27",
+  "generated_at": "2026-06-27T11:36:59.777158Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Anthropic's Mythos 5 is back after two-week Trump admin standoff",
+      "blurb": "After two weeks of negotiations with the Trump administration, Anthropic can deploy Mythos 5 again \u2014 but only for select organizations, according to a government letter seen by The Verge. The public version, Fable 5, remains offline.",
+      "why_it_matters": "A frontier AI model can now be turned off by executive action, then switched back on for chosen customers only.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/958458/anthropic-mythos-5-is-back-trump-negotiations",
+      "tier": 1,
+      "original_headline": "Anthropic&#8217;s Mythos 5 is back",
+      "fingerprint": "6750a5921ec2aa63"
+    },
+    {
+      "slot": "build",
+      "headline": "DeepSeek open-sources the tricks that made its models 60\u201385% faster",
+      "blurb": "DeepSeek released DSpark, a paper and code showing how they sped up inference by 60\u201385% using speculative decoding and custom kernels. The techniques work across different model sizes and let you run bigger models on the same hardware without losing quality.",
+      "why_it_matters": "Open-source speed techniques mean cheaper, faster AI apps without vendor lock-in.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf",
+      "tier": 1,
+      "original_headline": "DeepSeek open-sources inference optimizations with 60\u201385% faster generation [pdf]",
+      "fingerprint": "8f3aba2e153fcf19"
+    },
+    {
+      "slot": "build",
+      "headline": "General Intuition raises $320M to train AI agents by watching video games",
+      "blurb": "The startup is feeding millions of hours of gameplay footage into AI models, betting that watching how humans play games \u2014 making split-second decisions, adapting to new scenarios \u2014 can teach agents something closer to real-world intuition. The $2.3B valuation suggests investors think game data might be the missing piece for agents that work outside controlled environments.",
+      "why_it_matters": "If it works, agents trained on gameplay could handle messy real-world tasks better than lab-trained models.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/25/general-intuitions-2-3b-bet-that-video-games-can-train-ai-agents-for-the-real-world/",
+      "tier": 1,
+      "original_headline": "General Intuition\u2019s $2.3B bet that video games can train AI agents for the real world",
+      "fingerprint": "1777524f7a3d50c0"
+    },
+    {
+      "slot": "market",
+      "headline": "Chinese startup Z.ai just undercut OpenAI on price and almost matched on performance",
+      "blurb": "Silicon Valley engineers are switching to Z.ai, a Chinese AI company whose models perform nearly as well as OpenAI and Anthropic but cost significantly less. The company is gaining traction among U.S. developers who prioritize budget over bleeding-edge capability.",
+      "why_it_matters": "Price competition is now forcing American AI labs to justify premium pricing or match Chinese rates.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/06/25/technology/zai-china-artificial-intelligence-models.html",
+      "tier": 1,
+      "original_headline": "Chinese A.I. Models Gain Ground on Anthropic and OpenAI",
+      "fingerprint": "addf5b106e00fbdc"
+    },
+    {
+      "slot": "build",
+      "headline": "Databricks' ex-AI chief built an image generator that uses 1,000x less power",
+      "blurb": "Un-0 is a new image-generation tool that replicates what conventional AI systems do but slashes energy consumption by three orders of magnitude. It's the first public demo of technology aimed at making AI inference radically cheaper and more efficient.",
+      "why_it_matters": "If this scales, AI could run on devices and in data centers at a fraction of today's cost and carbon footprint.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/25/databricks-former-ai-chief-thinks-he-can-cut-ais-power-bill-by-1000x/",
+      "tier": 1,
+      "original_headline": "Databricks\u2019 former AI chief thinks he can cut AI\u2019s power bill by 1,000x",
+      "fingerprint": "930f6eab201e9a79"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA and AWS just made it cheaper to run AI in production",
+      "blurb": "NVIDIA's latest AWS integration targets the hardest parts of production AI: low-latency inference, fast vector search, and GPU price-performance. The collaboration spans Amazon OpenSearch and EC2, giving enterprises more practical infrastructure that scales without adding operational overhead.",
+      "why_it_matters": "Production AI is still expensive and complex\u2014this targets both bottlenecks at once.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/nvidia-aws-ai-production-scale/",
+      "tier": 1,
+      "original_headline": "NVIDIA and AWS Collaborate to Bring AI to Production at Scale",
+      "fingerprint": "be416fcc427742dc"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red flag translator",
+    "kicker": "",
+    "prompt": "I just interviewed a candidate and something felt off, but I can't articulate it. Here's what they said and did during the conversation. Don't tell me to trust my gut. Instead: name the specific concern my gut is detecting, give me one follow-up question that would confirm or dismiss it, and tell me what good looks like on that dimension.",
+    "tool_hint": "When your instinct says no but you need words for the debrief."
+  },
+  "daily_question": "If compute suddenly got 10x cheaper tomorrow, what would you try building that feels impossible today?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1782560139.0666716,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[\"Today's defining story is the simultaneous, government-controlled releases of OpenAI's GPT-5.6 and partial restoration of Anthropic's Mythos\u2014a historic moment where the Trump administration is directly shaping frontier model access. This must lead the edition.\", \"The Jalape\u00f1o chip launch is a major platform power move\u2014OpenAI's first custom silicon is a direct shot at Nvidia and shows the company is vertically integrating hardware.\", \"China's AI model gains (Z.ai, DeepSeek) are real and accelerating\u2014cost-per-intelligence competition is shifting in favor of open-source challengers.\", 'The edition should reflect that today is about policy intervention in AI model releases\u2014this is not a typical launch day.']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782560154.846596,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "market",
+        "reason": "THE defining story today - OpenAI ships GPT-5.6 within 24 hours of regulatory drama. This is the biggest AI news of the day, concrete model launch with clear capability hook and regulatory backstory. Must lead."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FEPJuPshv5YCSMpcfZDd13"
+    },
+    {
+      "ts": 1782560154.846655,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI unveils GPT-5.6 amid US AI regulatory drama\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01FEPJuPshv5YCSMpcfZDd13"
+    },
+    {
+      "ts": 1782560154.8466895,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "market",
+        "reason": "Second part of today's biggest story - Anthropic's Mythos 5 release after two-week negotiation with Trump admin. Major model launch with government involvement, pairs perfectly with OpenAI story to show the regulatory landscape reshaping AI."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CadDNpp1xn1H25qurosBnb"
+    },
+    {
+      "ts": 1782560154.8467643,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic&#8217;s Mythos 5 is back\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01CadDNpp1xn1H25qurosBnb"
+    },
+    {
+      "ts": 1782560154.8467846,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 40,
+        "persona": "build",
+        "reason": "DeepSeek ships 60-85% faster inference optimizations as open source. Concrete technical advancement developers can use today, shows China competing on infrastructure not just models. Try-it-today appeal with real performance numbers."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015Br5sqfK5pB2fexPNCpvB3"
+    },
+    {
+      "ts": 1782560154.84688,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"DeepSeek open-sources inference optimizations with 60\\u201385% faster generation [pdf]\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_015Br5sqfK5pB2fexPNCpvB3"
+    },
+    {
+      "ts": 1782560154.8469038,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "build",
+        "reason": "$320M raise at $2.3B valuation for training AI agents on video games for real-world tasks. Surprising application with concrete training methodology, shows novel path to building capable agents. 'I didn't know AI could do that' factor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LC3LRvJ3DMaTT24eA3jRcK"
+    },
+    {
+      "ts": 1782560154.8469677,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"General Intuition\\u2019s $2.3B bet that video games can train AI agents for the real world\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01LC3LRvJ3DMaTT24eA3jRcK"
+    },
+    {
+      "ts": 1782560154.846986,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 58,
+        "persona": "build",
+        "reason": "OpenAI poaches Apple's Vision Pro and smart glasses chief. Signals OpenAI's hardware ambitions with concrete hire, talent war angle. Shows platform expansion beyond chat - hints at what OpenAI is building next."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SAYKVZzLjqJzW6NnoSe5gE"
+    },
+    {
+      "ts": 1782560154.8470225,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI poaches Apple Vision Pro and smart glasses chief\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01SAYKVZzLjqJzW6NnoSe5gE"
+    },
+    {
+      "ts": 1782560154.8470395,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 118,
+        "persona": "market",
+        "reason": "Chinese AI models (Z.ai) gaining ground on OpenAI/Anthropic with much cheaper pricing. Shows competitive pressure reshaping market, Silicon Valley engineers actually using it. Platform wars with price as weapon."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TtAmNkogyVoNeY6w3QNHwB"
+    },
+    {
+      "ts": 1782560154.8470702,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"vendor cap: openai already has 2 stories\"}",
+      "tool_use_id": "toolu_01TtAmNkogyVoNeY6w3QNHwB"
+    },
+    {
+      "ts": 1782560158.6009414,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 58
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GLxu1RaW2PexwRYGntuN78"
+    },
+    {
+      "ts": 1782560158.6009777,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI poaches Apple Vision Pro and smart glasses chief\"}",
+      "tool_use_id": "toolu_01GLxu1RaW2PexwRYGntuN78"
+    },
+    {
+      "ts": 1782560158.6010082,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 118,
+        "persona": "market",
+        "reason": "Chinese AI models (Z.ai) gaining ground on OpenAI/Anthropic with much cheaper pricing. Shows competitive pressure reshaping market, Silicon Valley engineers actually using it. Platform wars with price as weapon."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012ZEGeWZD2UCPwyqaQphJXn"
+    },
+    {
+      "ts": 1782560158.6010516,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Chinese A.I. Models Gain Ground on Anthropic and OpenAI\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_012ZEGeWZD2UCPwyqaQphJXn"
+    },
+    {
+      "ts": 1782560162.9989145,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "build",
+        "reason": "Databricks' former AI chief launches Un-0 claiming 1,000x power reduction for image generation. First concrete demo of the efficiency tech, addresses major AI infrastructure concern. Shows novel approach to energy problem with shipped artifact."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Go5TiwuWmYDJApTZyZb5Hq"
+    },
+    {
+      "ts": 1782560162.9989843,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Databricks\\u2019 former AI chief thinks he can cut AI\\u2019s power bill by 1,000x\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01Go5TiwuWmYDJApTZyZb5Hq"
+    },
+    {
+      "ts": 1782560171.3737812,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01X9N88Um2v24vx7dqHGG3CN"
+    },
+    {
+      "ts": 1782560172.1089914,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"OpenAI delays GPT-5.6 release after White House security request\\\", similarity 0.853) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01X9N88Um2v24vx7dqHGG3CN"
+    },
+    {
+      "ts": 1782560176.4884913,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 13
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012HhjfMA2sdSJvnHRNBMGJ3"
+    },
+    {
+      "ts": 1782560176.4885266,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI unveils GPT-5.6 amid US AI regulatory drama\"}",
+      "tool_use_id": "toolu_012HhjfMA2sdSJvnHRNBMGJ3"
+    },
+    {
+      "ts": 1782560176.488557,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 22,
+        "persona": "market",
+        "reason": "OpenAI poaches Uber India chief to lead its biggest market outside US. Major talent move signaling aggressive India expansion, concrete hire with market implications. Shows OpenAI's global growth strategy."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017t64gamxesHZ5abeyPnevq"
+    },
+    {
+      "ts": 1782560176.4886112,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'TechCrunch \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_017t64gamxesHZ5abeyPnevq"
+    },
+    {
+      "ts": 1782560181.8878345,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "build",
+        "reason": "NVIDIA and AWS collaborate on production AI at scale. Major partnership between two infrastructure leaders, concrete tools for low-latency inference and GPU optimization. Developer-facing with immediate utility."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013rshg3uh4iQ1k2GJMuc9L5"
+    },
+    {
+      "ts": 1782560181.8878925,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA and AWS Collaborate to Bring AI to Production at Scale\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_013rshg3uh4iQ1k2GJMuc9L5"
+    },
+    {
+      "ts": 1782560184.261465,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Ddn7UNdzvEWihM1FSogLuC"
+    },
+    {
+      "ts": 1782560184.508088,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782560184.5081174,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Anthropic&#8217;s Mythos 5 is back\", \"pick_3\": \"DeepSeek open-sources inference optimizations with 60\\u201385% faster generation [pdf]\", \"pick_4\": \"General Intuition\\u2019s $2.3B bet that video games can train AI agents for the real world\", \"pick_6\": \"Chinese A.I. Models Gain Ground on Anthropic and OpenAI\", \"pick_7\": \"Databricks\\u2019 former AI chief thinks he can cut AI\\u2019s power bill by 1,000x\", \"pick_8\": \"NVIDIA and AWS Collaborate to Bring AI to Production at Scale\"}}",
+      "tool_use_id": "toolu_01Ddn7UNdzvEWihM1FSogLuC"
+    }
+  ],
+  "issue_num": 30
+}
