@@ -1,0 +1,248 @@
+{
+  "date": "2026-06-28",
+  "generated_at": "2026-06-28T11:39:47.093769Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "U.S. lifts restrictions on Anthropic's Mythos AI model",
+      "blurb": "The Trump administration has removed government restrictions on Anthropic's Mythos model, ending a standoff over the cutting-edge AI system. The move allows Anthropic to deploy and commercialize the model without federal oversight that had been imposed on its capabilities.",
+      "why_it_matters": "Anthropic can now ship its most advanced model without government approval first.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/06/26/technology/anthropic-mythos-government-restrictions.html",
+      "tier": 1,
+      "original_headline": "U.S. Loosens Restrictions on Anthropic\u2019s Mythos A.I. Model",
+      "fingerprint": "c89d417a2eafec36"
+    },
+    {
+      "slot": "industry",
+      "headline": "Google capped Meta's Gemini access as AI demand outstrips supply",
+      "blurb": "Google limited how much of its Gemini model Meta could use, signaling that even tech giants are hitting capacity walls. Computing power for advanced AI is becoming the industry's scarcest resource as companies race to train and deploy larger models.",
+      "why_it_matters": "When Google rations AI to Meta, smaller players face even tighter squeezes on model access.",
+      "source_name": "FT \u2014 Technology",
+      "source_url": "https://www.ft.com/content/c5d52f72-71ef-40bc-bad3-61afdba8b378",
+      "tier": 1,
+      "original_headline": "Google caps Meta\u2019s Gemini use as AI demand strains capacity",
+      "fingerprint": "5c41d5e8fe2f0c43"
+    },
+    {
+      "slot": "build",
+      "headline": "Apple's Vision Pro VP just jumped to OpenAI's hardware team",
+      "blurb": "Paul Meade, the Apple VP who led Vision Pro, is leaving to join OpenAI's hardware division. It's a rare high-level defection from Apple's product org to a company building AI-first devices.",
+      "why_it_matters": "OpenAI is clearly staffing up to ship actual hardware, not just software demos.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/27/apple-vision-pro-exec-is-reportedly-leaving-for-openai/",
+      "tier": 1,
+      "original_headline": "Apple Vision Pro exec is reportedly leaving for OpenAI",
+      "fingerprint": "8eedcccc9527b3e1"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Meta relaunched Creator Studio as an AI app that tells you how to grow on Facebook",
+      "blurb": "Meta brought back its old Creator Studio page manager as a standalone app with AI baked in. The AI Creator Assistant is designed to help creators connect with audiences and get specific advice on growing their Facebook presence.",
+      "why_it_matters": "Meta is betting AI coaching can keep creators on Facebook instead of losing them to TikTok or YouTube.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/956668/meta-facebook-creator-studio-ai-app-relaunch",
+      "tier": 1,
+      "original_headline": "Facebook\u2019s Creator Studio has been revived as an AI companion app",
+      "fingerprint": "ca1b99d35117852b"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting cost calculator",
+    "kicker": "",
+    "prompt": "I'm about to schedule a recurring meeting. Tell me: if we cancelled it forever, what specific work would actually not get done? Then calculate the annual cost in salary hours. Finally, give me one alternative structure that keeps the good part and kills the rest.",
+    "tool_hint": "Before you send that calendar invite for 'weekly sync.'"
+  },
+  "daily_question": "If you could give one AI tool monopoly access to your work data, which would you trust most?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1782646734.6465065,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782646752.307678,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "market",
+        "reason": "THE defining AI story today - OpenAI unveils GPT-5.6 but can't release it due to Trump admin request. This is the biggest news in AI right now, combining a major model launch with unprecedented regulatory intervention. Everyone in AI is talking about this. Must lead the edition."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PXAbJ5VXbJbj15ZaQtN7e2"
+    },
+    {
+      "ts": 1782646752.3077438,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI unveils GPT-5.6 amid US AI regulatory drama\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01PXAbJ5VXbJbj15ZaQtN7e2"
+    },
+    {
+      "ts": 1782646752.307788,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 103,
+        "persona": "market",
+        "reason": "Breaking resolution to the Anthropic Mythos standoff - US loosens restrictions after two weeks. This completes the regulatory drama narrative and shows real movement. NYT is tier-1 source with authoritative framing of the de-escalation."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CRVoqVidtiLM2Bnjb14nKu"
+    },
+    {
+      "ts": 1782646752.3078394,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"U.S. Loosens Restrictions on Anthropic\\u2019s Mythos A.I. Model\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01CRVoqVidtiLM2Bnjb14nKu"
+    },
+    {
+      "ts": 1782646752.3078542,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 125,
+        "persona": "industry",
+        "reason": "Google caps Meta's Gemini use due to capacity constraints - this is a concrete, surprising market story showing AI demand has hit infrastructure limits. Major platform war development with real business impact. FT tier-1 scoop."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012WXg2SdRBMJT5ZRgaoaF6b"
+    },
+    {
+      "ts": 1782646752.3079047,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google caps Meta\\u2019s Gemini use as AI demand strains capacity\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_012WXg2SdRBMJT5ZRgaoaF6b"
+    },
+    {
+      "ts": 1782646752.3079188,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 16,
+        "persona": "build",
+        "reason": "Apple Vision Pro exec leaving for OpenAI - major talent poaching that signals OpenAI's ambitions beyond chat. Concrete executive move (Paul Meade, VP level) that readers will find surprising and makes you wonder what OpenAI is building."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01W4QjgcZB2cmA4xpyYbTqtv"
+    },
+    {
+      "ts": 1782646752.3079603,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple Vision Pro exec is reportedly leaving for OpenAI\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01W4QjgcZB2cmA4xpyYbTqtv"
+    },
+    {
+      "ts": 1782646758.7664266,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01VWcf5rhRK33qVWUS1zwZ1j"
+    },
+    {
+      "ts": 1782646759.5395277,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"OpenAI delays GPT-5.6 release after White House security request\\\", similarity 0.853) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01VWcf5rhRK33qVWUS1zwZ1j"
+    },
+    {
+      "ts": 1782646764.6371136,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 11
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DCYdBs8u8E6QdQFgcmUWSD"
+    },
+    {
+      "ts": 1782646764.637152,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI unveils GPT-5.6 amid US AI regulatory drama\"}",
+      "tool_use_id": "toolu_01DCYdBs8u8E6QdQFgcmUWSD"
+    },
+    {
+      "ts": 1782646764.6371803,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 14,
+        "persona": "everyday",
+        "reason": "Meta revives Facebook Creator Studio as an AI companion app - concrete product launch people can try. Surprising pivot that makes old tool relevant again through AI. Shows AI making existing products useful in new ways."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FYNbZXzLF2r1Dr22eMFpMv"
+    },
+    {
+      "ts": 1782646764.6372528,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Facebook\\u2019s Creator Studio has been revived as an AI companion app\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01FYNbZXzLF2r1Dr22eMFpMv"
+    },
+    {
+      "ts": 1782646765.8734114,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01KoS8MgYXDUKt5yARx9qwpn"
+    },
+    {
+      "ts": 1782646766.1507425,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782646766.1507802,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"U.S. Loosens Restrictions on Anthropic\\u2019s Mythos A.I. Model\", \"pick_3\": \"Google caps Meta\\u2019s Gemini use as AI demand strains capacity\", \"pick_4\": \"Apple Vision Pro exec is reportedly leaving for OpenAI\", \"pick_5\": \"Facebook\\u2019s Creator Studio has been revived as an AI companion app\"}}",
+      "tool_use_id": "toolu_01KoS8MgYXDUKt5yARx9qwpn"
+    }
+  ],
+  "issue_num": 31
+}
