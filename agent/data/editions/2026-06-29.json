@@ -1,0 +1,398 @@
+{
+  "date": "2026-06-29",
+  "generated_at": "2026-06-29T12:36:01.200251Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Meta's AI turns brain waves into text without surgery",
+      "blurb": "Meta built Brain2Qwerty, an AI system that reads brain activity through a cap with electrodes and types what someone is trying to say. Early tests show people can 'type' around 30 characters per minute just by thinking about moving their hands to type \u2014 no implant required.",
+      "why_it_matters": "First real alternative to Neuralink's invasive approach for people who can't speak or move.",
+      "source_name": "Meta AI Blog",
+      "source_url": "https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/",
+      "tier": 1,
+      "original_headline": "From Brain Waves to Words: Brain2Qwerty Offers a New Path to Communication Without Surgery",
+      "fingerprint": "a5a138b28f205032"
+    },
+    {
+      "slot": "build",
+      "headline": "OpenAI is building its own chip to run AI models",
+      "blurb": "OpenAI announced Jalape\u00f1o, a custom chip built with Broadcom designed to run inference\u2014the part where models actually answer your questions. It joins Google, Apple, and SpaceX in making hardware to reduce dependence on Nvidia, which has dominated AI chips for years.",
+      "why_it_matters": "Big AI companies are betting they can build cheaper, faster chips than buying off the shelf.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/podcast/openais-jalapeno-chip-is-big-techs-spiciest-move-away-from-nvidia/",
+      "tier": 1,
+      "original_headline": "OpenAI\u2019s Jalape\u00f1o chip is Big Tech\u2019s spiciest move away from Nvidia",
+      "fingerprint": "3c63a09c833bddcf"
+    },
+    {
+      "slot": "build",
+      "headline": "Google made Gemini Nano run twice as fast on Pixel phones",
+      "blurb": "Google Research found a way to make on-device AI generate text twice as fast by predicting multiple words at once instead of one at a time. The technique, called frozen Multi-Token Prediction, works without retraining the entire model \u2014 just adding a small prediction layer on top.",
+      "why_it_matters": "On-device models can now run faster without burning more battery or needing new hardware.",
+      "source_name": "Google Research Blog",
+      "source_url": "https://research.google/blog/accelerating-gemini-nano-models-on-pixel-with-frozen-multi-token-prediction/",
+      "tier": 1,
+      "original_headline": "Accelerating Gemini Nano models on Pixel with frozen Multi-Token Prediction",
+      "fingerprint": "cf249bbcdd0629d6"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Ex-Nvidia engineers built a robot that can actually do intern work",
+      "blurb": "Flexion Robotics trained a humanoid robot to handle real office tasks\u2014filing, organizing, basic computer work\u2014by having it learn from watching humans do the job first. The startup's approach skips complex programming and lets the robot pick up tasks the way a new hire would.",
+      "why_it_matters": "Physical AI that learns by observation could automate entry-level work faster than anyone expected.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/this-robot-is-going-to-replace-your-interns-flexion/",
+      "tier": 1,
+      "original_headline": "This Humanoid Robot Is a Terrifyingly Competent Office Intern",
+      "fingerprint": "391ffbfb4395f00e"
+    },
+    {
+      "slot": "market",
+      "headline": "Samsung and SK Hynix commit $880 billion to Korea's AI chip push",
+      "blurb": "South Korea announced a 10-year, $880 billion investment plan from Samsung, SK Hynix, and other companies to build chips and data centers. The government is calling the infrastructure spending essential to compete in the AI era.",
+      "why_it_matters": "Korea is betting nearly a trillion dollars that chip production and data centers will define AI leadership.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-06-28/samsung-sk-reportedly-to-invest-1-3-trillion-over-10-years",
+      "tier": 1,
+      "original_headline": "Samsung, SK to Spend $880 Billion to Drive Korea\u2019s AI Lead",
+      "fingerprint": "e411bd267415c4d6"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI just hired Uber's India chief to run its biggest market outside the US",
+      "blurb": "OpenAI brought on Uber India's former head to lead operations in India, which has become the company's largest market after the United States. The move is part of a broader push that includes new offices, partnerships, and aggressive hiring across the country.",
+      "why_it_matters": "India is now OpenAI's second-biggest market globally, and they're staffing up to match.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/26/openai-poaches-uber-india-chief-to-lead-its-biggest-market-outside-the-u-s/",
+      "tier": 1,
+      "original_headline": "OpenAI poaches Uber India chief to lead its biggest market outside the US",
+      "fingerprint": "6ed48293e5b3fb5c"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The skill decay detector",
+    "kicker": "",
+    "prompt": "I want to get better at something I'll describe below, but I'm not sure what actually needs work. Tell me: the one skill that's probably degraded without me noticing, the blind spot that comes from doing this on autopilot, and a 10-minute drill I can do this week to diagnose where I really stand.",
+    "tool_hint": "When you've been doing something long enough to forget what good looks like."
+  },
+  "daily_question": "If you could skip one step in your daily workflow by reading your mind, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1782736481.8510442,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=['No major model drops outside OpenAI/Anthropic/China today\u2014Google Gemini Nano optimization is niche.', 'No breakout developer tools or platform features beyond OpenAI/Anthropic policy stories.', \"Light on consumer-facing 'try it this week' moments\u2014most top stories are market/policy rather than hands-on.\"]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782736506.683712,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "market",
+        "reason": "Today's lead story: OpenAI ships GPT-5.6 under government restrictions. Major AI lab at center of regulatory action - this is the defining AI story everyone is talking about today. Shows concrete capability (new model) with real stakes (government oversight)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015vfsRf9DcQeycBhuU19wAZ"
+    },
+    {
+      "ts": 1782736506.683773,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI unveils GPT-5.6 amid US AI regulatory drama\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_015vfsRf9DcQeycBhuU19wAZ"
+    },
+    {
+      "ts": 1782736506.683803,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "market",
+        "reason": "Anthropic's Mythos saga continues - two weeks after government ultimatum, the mess is worsening. Major AI lab facing ongoing regulatory drama. Essential companion to the OpenAI story, showing the regulatory landscape affecting top AI companies."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WsUK4QLbLc68P4CgF8oHs5"
+    },
+    {
+      "ts": 1782736506.6838381,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic&#8217;s Mythos mess is only getting worse\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01WsUK4QLbLc68P4CgF8oHs5"
+    },
+    {
+      "ts": 1782736506.6838498,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 37,
+        "persona": "build",
+        "reason": "China's GLM 5.2 beats Claude in Semgrep's cybersecurity benchmarks - developer-facing with concrete technical claims. Shows surprising capability and gives builders something to try. Primary source (Semgrep's own blog) with HN validation."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WSw6FF9v5kprNqSEo97ZHb"
+    },
+    {
+      "ts": 1782736506.6838822,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"GLM 5.2 beats Claude in our benchmarks\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01WSw6FF9v5kprNqSEo97ZHb"
+    },
+    {
+      "ts": 1782736506.683892,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 3,
+        "persona": "everyday",
+        "reason": "Meta's Brain2Qwerty translates brain waves to text without surgery - surprisingly accessible BCI technology. Primary source (Meta AI Blog). Makes readers think \"I didn't know AI could do that\" with real-world impact for accessibility."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GZgLxAEjuMmBRrr1QfKdbL"
+    },
+    {
+      "ts": 1782736506.6839502,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"From Brain Waves to Words: Brain2Qwerty Offers a New Path to Communication Without Surgery\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01GZgLxAEjuMmBRrr1QfKdbL"
+    },
+    {
+      "ts": 1782736506.6839685,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "build",
+        "reason": "OpenAI's Jalape\u00f1o chip marks Big Tech's move away from Nvidia - platform wars with shipped artifact. Shows OpenAI expanding beyond software into hardware, significant strategic shift with industry implications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GsHcUcCrF6Pk8AyDUiBoV3"
+    },
+    {
+      "ts": 1782736506.6840432,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI\\u2019s Jalape\\u00f1o chip is Big Tech\\u2019s spiciest move away from Nvidia\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01GsHcUcCrF6Pk8AyDUiBoV3"
+    },
+    {
+      "ts": 1782736506.684067,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 167,
+        "persona": "build",
+        "reason": "Google accelerates Gemini Nano on Pixel with frozen Multi-Token Prediction - technical innovation shipping on real devices. Primary source (Google Research Blog), developer-facing optimization technique people can understand and appreciate."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TWH8wxi8MS1SNCdgH2Q4VU"
+    },
+    {
+      "ts": 1782736506.6841123,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Accelerating Gemini Nano models on Pixel with frozen Multi-Token Prediction\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01TWH8wxi8MS1SNCdgH2Q4VU"
+    },
+    {
+      "ts": 1782736508.7798707,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01XKQEcsYJUuP8uUEJP19p6N"
+    },
+    {
+      "ts": 1782736509.582368,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"OpenAI delays GPT-5.6 release after White House security request\\\", similarity 0.853) \\u2014 unpick and choose different news\", \"[pick_2] covers the same story as a recent edition (\\\"Anthropic&#8217;s Mythos 5 is back\\\", similarity 0.81) \\u2014 unpick and choose different news\", \"[pick_3] covers the same story as a recent edition (\\\"MIT-licensed GLM-5.2 hallucinates 3x less than GPT-5.5\\\", similarity 0.821) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01XKQEcsYJUuP8uUEJP19p6N"
+    },
+    {
+      "ts": 1782736512.4737282,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 12
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Cw6aMiKvvM2mfRiYafub6C"
+    },
+    {
+      "ts": 1782736512.4737656,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI unveils GPT-5.6 amid US AI regulatory drama\"}",
+      "tool_use_id": "toolu_01Cw6aMiKvvM2mfRiYafub6C"
+    },
+    {
+      "ts": 1782736512.473803,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 13
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HsdC7txskefHsR6MrDH5j4"
+    },
+    {
+      "ts": 1782736512.4738228,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Anthropic&#8217;s Mythos mess is only getting worse\"}",
+      "tool_use_id": "toolu_01HsdC7txskefHsR6MrDH5j4"
+    },
+    {
+      "ts": 1782736512.47383,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 37
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DXB3sHJZgBortGickAAvgZ"
+    },
+    {
+      "ts": 1782736512.4738443,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"GLM 5.2 beats Claude in our benchmarks\"}",
+      "tool_use_id": "toolu_01DXB3sHJZgBortGickAAvgZ"
+    },
+    {
+      "ts": 1782736523.9256678,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 63,
+        "persona": "everyday",
+        "reason": "Flexion Robotics' humanoid robot works as competent office intern - founded by ex-Nvidia engineers with clever training approach. Surprising real-world AI application that makes people think \"I didn't know AI could do that.\" Concrete capability demonstration."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KxRMxhTXiyphnJ6rQgtdqs"
+    },
+    {
+      "ts": 1782736523.9257302,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"This Humanoid Robot Is a Terrifyingly Competent Office Intern\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01KxRMxhTXiyphnJ6rQgtdqs"
+    },
+    {
+      "ts": 1782736523.9257593,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 131,
+        "persona": "market",
+        "reason": "Samsung and SK commit $880 billion to drive Korea's AI lead - massive investment announcement in chips and data centers. Major market move with concrete numbers, shows global AI infrastructure race heating up. Bloomberg tier-1 source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JAUV3GrDNWp4uGGsUPQttM"
+    },
+    {
+      "ts": 1782736523.9258022,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Samsung, SK to Spend $880 Billion to Drive Korea\\u2019s AI Lead\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01JAUV3GrDNWp4uGGsUPQttM"
+    },
+    {
+      "ts": 1782736523.925813,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 21,
+        "persona": "market",
+        "reason": "OpenAI poaches Uber India chief for its biggest market outside US - talent war with strategic geographic expansion angle. Shows OpenAI's international growth ambitions with concrete hire and market focus."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016yBur2HYDn8iceku6g1AVE"
+    },
+    {
+      "ts": 1782736523.9258378,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI poaches Uber India chief to lead its biggest market outside the US\", \"persona\": \"market\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_016yBur2HYDn8iceku6g1AVE"
+    },
+    {
+      "ts": 1782736530.6762438,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01FXhFMjrNJxZvtZhJCHbMBG"
+    },
+    {
+      "ts": 1782736530.9247642,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782736530.9248025,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_4\": \"From Brain Waves to Words: Brain2Qwerty Offers a New Path to Communication Without Surgery\", \"pick_5\": \"OpenAI\\u2019s Jalape\\u00f1o chip is Big Tech\\u2019s spiciest move away from Nvidia\", \"pick_6\": \"Accelerating Gemini Nano models on Pixel with frozen Multi-Token Prediction\", \"pick_7\": \"This Humanoid Robot Is a Terrifyingly Competent Office Intern\", \"pick_8\": \"Samsung, SK to Spend $880 Billion to Drive Korea\\u2019s AI Lead\", \"pick_9\": \"OpenAI poaches Uber India chief to lead its biggest market outside the US\"}}",
+      "tool_use_id": "toolu_01FXhFMjrNJxZvtZhJCHbMBG"
+    }
+  ],
+  "issue_num": 32
+}
