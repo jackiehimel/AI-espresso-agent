@@ -1,0 +1,248 @@
+{
+  "date": "2026-06-30",
+  "generated_at": "2026-06-30T11:56:18.685305Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Cursor just shipped a coding agent straight to your phone",
+      "blurb": "Cursor's new iOS app lets you launch and manage always-on coding agents from anywhere. Available now in public beta for all paid users \u2014 meaning you can start a refactor from your couch and check in while you're out.",
+      "why_it_matters": "Coding agents are no longer desk-bound \u2014 you can now kick them off and monitor from mobile.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/ios-mobile-app",
+      "tier": 1,
+      "original_headline": "Cursor Mobile App for iOS",
+      "fingerprint": "55f9e3dae0e5b0b5"
+    },
+    {
+      "slot": "build",
+      "headline": "Open-source coding agent trains itself by fixing its own mistakes",
+      "blurb": "Ornith-1.0 is a new open-source AI model that improves at writing code by learning from its failures. When it breaks something, it captures the error, figures out what went wrong, and uses that feedback to get better at the task\u2014without human annotation. The team released the model weights and training approach on GitHub.",
+      "why_it_matters": "Self-improving agents could get better at your codebase the more you use them.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://github.com/deepreinforce-ai/Ornith-1",
+      "tier": 1,
+      "original_headline": "Ornith-1.0: self-improving open-source models for agentic coding",
+      "fingerprint": "bd4135dacd8b190d"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google's Gemini can now make images from your personal data \u2014 for free",
+      "blurb": "Google opened its personalized AI image generator to all US users. Gemini can now pull from your connected Google apps \u2014 photos, docs, calendar \u2014 to create images that match your interests and history. Previously required a paid subscription.",
+      "why_it_matters": "Free AI that knows your context makes custom visuals way easier to generate",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/06/29/geminis-personalized-ai-image-generation-is-now-free-for-u-s-users/",
+      "tier": 1,
+      "original_headline": "Gemini\u2019s personalized AI image generation is now free for US users",
+      "fingerprint": "f59333b3dbd2badc"
+    },
+    {
+      "slot": "industry",
+      "headline": "Claude now runs on NVIDIA's newest Blackwell chips in Azure",
+      "blurb": "Anthropic's Claude models are now generally available in Microsoft Azure running on NVIDIA's GB300 Blackwell Ultra GPUs. Azure customers can now build agents on Claude using NVIDIA's latest hardware without leaving their existing cloud infrastructure.",
+      "why_it_matters": "Major enterprises can finally use frontier models on cutting-edge chips inside their existing Azure setup.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/",
+      "tier": 1,
+      "original_headline": "Claude Meets Blackwell Ultra: Anthropic\u2019s Models Now Run on NVIDIA GB300 in Azure",
+      "fingerprint": "9f8acbd3283a2c94"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The reverse roadmap",
+    "kicker": "",
+    "prompt": "I'll describe a goal I want to hit in 90 days. Work backwards from success and build me a timeline in reverse: what has to be true the day before I hit it, one week before, one month before, and right now. Then tell me which milestone is actually the long pole.",
+    "tool_hint": "When your plan feels like a list of hopes instead of a sequence of dependencies."
+  },
+  "daily_question": "What's the first thing you'd build if you could code on your phone as fast as on your laptop?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1782820513.4383798,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782820535.8294375,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 74,
+        "persona": "market",
+        "reason": "Lead story: Trump Administration grants Anthropic permission to release Mythos, its most advanced AI model, to select US organizations after weeks of negotiations. This is today's defining AI story - a major lab getting unprecedented government clearance for cutting-edge capability."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Cj691PBTm5PrYecn5NBGqP"
+    },
+    {
+      "ts": 1782820535.8294997,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Trump Administration Allows Anthropic to Release Mythos to Select US Organizations\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Cj691PBTm5PrYecn5NBGqP"
+    },
+    {
+      "ts": 1782820535.8295362,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "build",
+        "reason": "Cursor for iOS launches in public beta - developers can now launch and manage always-on coding agents from their phone. Strong try-it-today feature that extends the leading AI coding tool to mobile."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Sdqv5LLm8EnAJPgJFSjuVm"
+    },
+    {
+      "ts": 1782820535.8296025,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Cursor Mobile App for iOS\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01Sdqv5LLm8EnAJPgJFSjuVm"
+    },
+    {
+      "ts": 1782820535.829623,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 46,
+        "persona": "build",
+        "reason": "Ornith-1.0 releases as self-improving open-source models for agentic coding. Significant open-source development in the hot agentic coding space, provides alternative to proprietary tools."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RK7ZP4QRUuhTxfHekmsZiZ"
+    },
+    {
+      "ts": 1782820535.829704,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Ornith-1.0: self-improving open-source models for agentic coding\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01RK7ZP4QRUuhTxfHekmsZiZ"
+    },
+    {
+      "ts": 1782820535.829725,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 23,
+        "persona": "everyday",
+        "reason": "Google expands Gemini's personalized AI image generation to all free US users. Clear try-it-today feature that democratizes a previously paywalled capability - users can now create images of themselves."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017unNbysLMVk5QREvkQ4aym"
+    },
+    {
+      "ts": 1782820535.8297822,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Gemini\\u2019s personalized AI image generation is now free for US users\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_017unNbysLMVk5QREvkQ4aym"
+    },
+    {
+      "ts": 1782820542.4968643,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01FcrcRrccsM7KEuTuMGkC36"
+    },
+    {
+      "ts": 1782820544.5333836,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"U.S. Loosens Restrictions on Anthropic\\u2019s Mythos A.I. Model\\\", similarity 0.884) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01FcrcRrccsM7KEuTuMGkC36"
+    },
+    {
+      "ts": 1782820547.2315357,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 74
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AjhnNuKKYwXuQdK4KpvnJY"
+    },
+    {
+      "ts": 1782820547.231595,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Trump Administration Allows Anthropic to Release Mythos to Select US Organizations\"}",
+      "tool_use_id": "toolu_01AjhnNuKKYwXuQdK4KpvnJY"
+    },
+    {
+      "ts": 1782820554.5375206,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "industry",
+        "reason": "Claude models now run on NVIDIA's newest GB300 Blackwell Ultra chips in Microsoft Azure. Major infrastructure milestone showing cutting-edge AI models on cutting-edge hardware in production cloud environment."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017UUDVrGEc8F16cicFL4xXM"
+    },
+    {
+      "ts": 1782820554.5376055,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude Meets Blackwell Ultra: Anthropic\\u2019s Models Now Run on NVIDIA GB300 in Azure\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_017UUDVrGEc8F16cicFL4xXM"
+    },
+    {
+      "ts": 1782820556.4136064,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01FWLHTEyiCdTewbjn6fdAt2"
+    },
+    {
+      "ts": 1782820556.765949,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782820556.7659845,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Cursor Mobile App for iOS\", \"pick_3\": \"Ornith-1.0: self-improving open-source models for agentic coding\", \"pick_4\": \"Gemini\\u2019s personalized AI image generation is now free for US users\", \"pick_5\": \"Claude Meets Blackwell Ultra: Anthropic\\u2019s Models Now Run on NVIDIA GB300 in Azure\"}}",
+      "tool_use_id": "toolu_01FWLHTEyiCdTewbjn6fdAt2"
+    }
+  ],
+  "issue_num": 33
+}
