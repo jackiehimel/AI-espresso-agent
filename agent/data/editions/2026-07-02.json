@@ -1,0 +1,254 @@
+{
+  "date": "2026-07-02",
+  "generated_at": "2026-07-02T11:52:09.731725Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Anthropic ships Claude Sonnet 5, its fastest model yet",
+      "blurb": "Claude Sonnet 5 is now available across all Claude platforms. Anthropic says it's twice as fast as Claude 3.5 Sonnet while maintaining similar intelligence levels, making it better suited for high-volume tasks like customer support automation and rapid prototyping.",
+      "why_it_matters": "Speed without quality loss unlocks new use cases where response time matters more than peak reasoning.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/claude-sonnet-5",
+      "tier": 1,
+      "original_headline": "Introducing Claude Sonnet 5",
+      "fingerprint": "c3b9eb23924aca64"
+    },
+    {
+      "slot": "build",
+      "headline": "Anthropic ships Claude Science, a workbench that runs code and searches papers",
+      "blurb": "Claude Science combines coding, paper search, and data visualization in one interface built for researchers. It can write and execute Python, pull from academic databases, and generate charts \u2014 all in a single conversation. Rolling out now to Claude Pro and Team users.",
+      "why_it_matters": "Scientists can now prototype experiments and cite sources without switching tools.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/claude-science-ai-workbench",
+      "tier": 1,
+      "original_headline": "Claude Science, an AI workbench for scientists, is now available",
+      "fingerprint": "c568d3872d85925f"
+    },
+    {
+      "slot": "build",
+      "headline": "GitHub Copilot now runs Kimi K2.7, a Chinese reasoning model",
+      "blurb": "GitHub just added Moonshot AI's Kimi K2.7 Code to Copilot's model roster. It's a reasoning model from China that competes with o1 and Claude on long-context code tasks. Developers can now pick it alongside GPT-4o, Claude, and Gemini when they need deep code analysis or refactoring across large codebases.",
+      "why_it_matters": "First major Chinese reasoning model inside a mainstream Western dev tool",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://github.blog/changelog/2026-07-01-kimi-k2-7-is-now-available-in-github-copilot/",
+      "tier": 1,
+      "original_headline": "Kimi K2.7 Code is generally available in GitHub Copilot",
+      "fingerprint": "2d5c4a3e1b0c8d05"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google's Gemini Spark agent now runs 24/7 on your Mac",
+      "blurb": "Google just brought Gemini Spark \u2014 its always-on AI assistant \u2014 to macOS. The agent can now track what you're doing in real time and work across more apps on your Mac, handling tasks in the background even when you're not actively prompting it.",
+      "why_it_matters": "An AI agent that runs continuously on your computer is very different from one you open in a tab.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/01/gemini-spark-googles-agentic-assistant-is-now-available-on-mac/",
+      "tier": 1,
+      "original_headline": "Gemini Spark, Google\u2019s agentic assistant, is now available on Mac",
+      "fingerprint": "d13c18e22d7ac430"
+    },
+    {
+      "slot": "market",
+      "headline": "AWS is putting 1,000 engineers inside customer buildings to ship AI agents",
+      "blurb": "Amazon's new Forward Deployed Engineering org will embed engineers directly at customer sites to build and deploy agentic AI in days, not months. The $1 billion program targets enterprise customers who want agents live fast but lack the internal expertise to move at speed.",
+      "why_it_matters": "AWS is betting consultants beat dashboards when enterprises need agents running now, not next quarter.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/aws/aws-1-billion-forward-deployed-ai-engineers?utm_source=rss",
+      "tier": 1,
+      "original_headline": "AWS invests $1 billion to embed AI forward deployed engineers with customers",
+      "fingerprint": "73ea8bf827703512"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI offers to give the US government 5% of the company",
+      "blurb": "Sam Altman floated giving the Trump administration a 5 percent ownership stake in OpenAI, arguing it would give the public a financial interest in AI's success. The proposal aims to ease tensions with the government and address growing public skepticism about AI companies.",
+      "why_it_matters": "A major AI lab is treating government equity as a legitimacy strategy, not just a funding deal.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/960588/openai-government-5-percent-stake-trump",
+      "tier": 1,
+      "original_headline": "OpenAI floats giving Trump administration 5 percent cut of AI boom",
+      "fingerprint": "9b346266fb35c0dc"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The time-travel debugger",
+    "kicker": "",
+    "prompt": "I'll describe a decision I made in the past that didn't go how I expected. Walk backward from the outcome to the choice itself and show me: the assumption I was most confident about that turned out wrong, the information I had but discounted, and what question I should ask myself next time I'm in a similar spot.",
+    "tool_hint": "Turn regret into a reusable heuristic."
+  },
+  "daily_question": "If you could embed an AI agent in one part of your workday that currently has zero automation, where would you put it?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1782993069.8440988,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782993087.6291482,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "build",
+        "reason": "Lead story: Anthropic's Claude Sonnet 5 launch - most agentic Sonnet model yet with browser/tools capabilities. This is the defining AI story today from a major lab."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YL2uHejtM48sRgjs3ngDau"
+    },
+    {
+      "ts": 1782993087.6292114,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Claude Sonnet 5\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01YL2uHejtM48sRgjs3ngDau"
+    },
+    {
+      "ts": 1782993087.6292498,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "build",
+        "reason": "Anthropic's second major launch: Claude Science workbench for scientists. Concrete new product people can try, targets specific professional use case."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XoCmMJT7dgHebRMxv9w2cQ"
+    },
+    {
+      "ts": 1782993087.6293235,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude Science, an AI workbench for scientists, is now available\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01XoCmMJT7dgHebRMxv9w2cQ"
+    },
+    {
+      "ts": 1782993087.6293437,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 72,
+        "persona": "build",
+        "reason": "First open-weight model in GitHub Copilot - significant milestone for developers. Kimi K2.7 Code now generally available, expanding choice in coding tools."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01V7kDy7ajV1Vu47fhFXxj8z"
+    },
+    {
+      "ts": 1782993087.6293988,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Kimi K2.7 Code is generally available in GitHub Copilot\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01V7kDy7ajV1Vu47fhFXxj8z"
+    },
+    {
+      "ts": 1782993087.6294236,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 48,
+        "persona": "everyday",
+        "reason": "Google's Gemini Spark agentic assistant ships to Mac - 24/7 AI assistant with real-time tracking becomes cross-platform. Concrete capability users can try."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01MwWvLrQPnHmTtycHg2NF9E"
+    },
+    {
+      "ts": 1782993087.6294806,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Gemini Spark, Google\\u2019s agentic assistant, is now available on Mac\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01MwWvLrQPnHmTtycHg2NF9E"
+    },
+    {
+      "ts": 1782993087.6295,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 21,
+        "persona": "market",
+        "reason": "AWS $1B investment to embed thousands of AI engineers with customers - major market move showing enterprise AI deployment at scale."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01VV3ALvEMu6TQichfaANsh9"
+    },
+    {
+      "ts": 1782993087.6295516,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AWS invests $1 billion to embed AI forward deployed engineers with customers\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01VV3ALvEMu6TQichfaANsh9"
+    },
+    {
+      "ts": 1782993087.6295705,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "market",
+        "reason": "OpenAI floats 5% government stake - major AI company at center of significant policy/business negotiation with Trump administration. This is news with OpenAI as the subject."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01U7E1hvhmFvvP63TxCbUzmQ"
+    },
+    {
+      "ts": 1782993087.629612,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI floats giving Trump administration 5 percent cut of AI boom\", \"persona\": \"market\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01U7E1hvhmFvvP63TxCbUzmQ"
+    },
+    {
+      "ts": 1782993096.2825873,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01TYx3GnRw8bhqRAb2jEMsfy"
+    },
+    {
+      "ts": 1782993097.0111325,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1782993097.0111609,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Introducing Claude Sonnet 5\", \"pick_2\": \"Claude Science, an AI workbench for scientists, is now available\", \"pick_3\": \"Kimi K2.7 Code is generally available in GitHub Copilot\", \"pick_4\": \"Gemini Spark, Google\\u2019s agentic assistant, is now available on Mac\", \"pick_5\": \"AWS invests $1 billion to embed AI forward deployed engineers with customers\", \"pick_6\": \"OpenAI floats giving Trump administration 5 percent cut of AI boom\"}}",
+      "tool_use_id": "toolu_01TYx3GnRw8bhqRAb2jEMsfy"
+    }
+  ],
+  "issue_num": 34
+}
