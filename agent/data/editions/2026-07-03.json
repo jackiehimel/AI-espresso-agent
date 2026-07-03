@@ -1,0 +1,255 @@
+{
+  "date": "2026-07-03",
+  "generated_at": "2026-07-03T12:59:28.298665Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Anthropic brings Claude Fable 5 back online after Trump admin talks",
+      "blurb": "After weeks of negotiations with the Trump administration, Anthropic is restoring access to Claude Fable 5 starting Wednesday. The model will return globally on Claude platforms and through AWS, Google Cloud, and Microsoft.",
+      "why_it_matters": "A major AI model was offline for weeks due to government intervention \u2014 a new precedent for AI regulation.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/958964/anthropic-claude-fable-5-is-back",
+      "tier": 1,
+      "original_headline": "Anthropic&#8217;s long-sidelined Fable 5 is greenlit to return",
+      "fingerprint": "50b5923da41efd37"
+    },
+    {
+      "slot": "market",
+      "headline": "Microsoft is spinning out a $2.5B company to deploy AI for other businesses",
+      "blurb": "Microsoft is creating a separate company focused on implementing AI systems for enterprises, following similar moves by Amazon, OpenAI, and Anthropic. The new group gets $2.5 billion in initial funding and will handle the messy work of actually getting models into production at client companies.",
+      "why_it_matters": "Every major AI company now thinks the real money is in implementation, not just selling API access.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/02/microsoft-launches-its-own-ai-deployment-company-with-2-5-billion-commitment/",
+      "tier": 1,
+      "original_headline": "Microsoft launches its own AI deployment company with $2.5 billion commitment",
+      "fingerprint": "134e4e32cb5dfd14"
+    },
+    {
+      "slot": "build",
+      "headline": "SpaceX built a phone-sized AI device prototype",
+      "blurb": "SpaceX showed investors a 'handset-like' AI device before its IPO, signaling the company may be pushing beyond satellites into consumer hardware. Details are slim, but the prototype suggests SpaceX wants a bigger piece of wireless beyond just selling Starlink connectivity.",
+      "why_it_matters": "SpaceX could compete directly with phones instead of just providing the network underneath them.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/01/spacex-has-an-ai-device-prototype-and-it-sure-sounds-phone-ish/",
+      "tier": 1,
+      "original_headline": "SpaceX has an AI device prototype, and it sure sounds phone-ish",
+      "fingerprint": "8bdcf8d1d6886efe"
+    },
+    {
+      "slot": "industry",
+      "headline": "Companies are rate-limiting their own employees' AI use",
+      "blurb": "Internal docs from Amazon, Adobe, Atlassian, and Citi show companies capping how much AI their workers can actually use. The reason: costs are spiraling faster than budgets can handle, forcing the same firms that rolled out AI tools companywide to now throttle access.",
+      "why_it_matters": "The AI productivity dream hits a hard financial ceiling",
+      "source_name": "404 Media",
+      "source_url": "https://www.404media.co/companies-are-throttling-employees-ai-use-because-its-too-expensive/",
+      "tier": 1,
+      "original_headline": "Companies Are Throttling Employees\u2019 AI Use Because It\u2019s Too Expensive",
+      "fingerprint": "2eac8c3113303ae1"
+    },
+    {
+      "slot": "everyday",
+      "headline": "NotebookLM now turns your research notes into 60-second AI video clips",
+      "blurb": "Google's adding TikTok-style vertical videos to NotebookLM for Ultra and Pro subscribers. Upload your sources and the AI generates a minute-long clip summarizing what you fed it\u2014think research brief as a phone video instead of a text summary.",
+      "why_it_matters": "AI summaries are jumping from text to video format, betting people will actually watch their notes.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/959778/google-notebooklm-ai-clips",
+      "tier": 1,
+      "original_headline": "Google\u2019s NotebookLM can sum up your research in a TikTok-style clip",
+      "fingerprint": "191749c22863e5f7"
+    },
+    {
+      "slot": "build",
+      "headline": "Google just released two new Gemini models: one for your phone, one for the cloud",
+      "blurb": "Nano Banana 2 Lite runs entirely on-device for privacy-first tasks like text summarization and smart replies. Gemini Omni Flash is a cloud model optimized for speed and cost, handling text, images, audio, and video in a single API call. Both are available now through Google AI Studio and the Gemini API.",
+      "why_it_matters": "Developers can now choose between local processing for sensitive data or fast multimodal inference in the cloud.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+      "tier": 1,
+      "original_headline": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+      "fingerprint": "4384048b06f64e67"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The energy audit",
+    "kicker": "",
+    "prompt": "List my recurring meetings, projects, and responsibilities from the past two weeks. For each one, tell me whether it's giving me energy or draining it. Then show me what my calendar would look like if I protected 60% of my energy-giving work and cut the biggest energy vampire in half.",
+    "tool_hint": "When you're busy but burned out \u2014 and can't figure out why."
+  },
+  "daily_question": "If your company started rate-limiting your AI use tomorrow, which tool would you fight hardest to keep full access to?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[market] banned copy word: deployment']"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1783083499.3489246,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783083520.1517334,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 30,
+        "persona": "market",
+        "reason": "THE defining AI story today - Anthropic's Claude Fable 5 was sidelined by government and is now greenlit after Trump administration negotiations. This is the story everyone in AI will be talking about - a major AI lab's model directly at the center of regulatory action. Must lead."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Nf9uYyuiaKUCwfYyrytamf"
+    },
+    {
+      "ts": 1783083520.1517994,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic&#8217;s long-sidelined Fable 5 is greenlit to return\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Nf9uYyuiaKUCwfYyrytamf"
+    },
+    {
+      "ts": 1783083520.1518433,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 40,
+        "persona": "market",
+        "reason": "Microsoft launches its own AI deployment company with $2.5B commitment - concrete market move following Amazon/OpenAI/Anthropic pattern. Real dollars, shipped entity, platform wars angle."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01VYVLasaWwNCa82A8mtPmgk"
+    },
+    {
+      "ts": 1783083520.1518974,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Microsoft launches its own AI deployment company with $2.5 billion commitment\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01VYVLasaWwNCa82A8mtPmgk"
+    },
+    {
+      "ts": 1783083520.1519146,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 43,
+        "persona": "build",
+        "reason": "SpaceX showed investors a 'handset-like' AI device prototype - surprising new territory, concrete artifact shown to investors, SpaceX entering consumer AI hardware is unexpected and exciting."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FZ9BDGUCB6bAD3KWovgncR"
+    },
+    {
+      "ts": 1783083520.1519747,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SpaceX has an AI device prototype, and it sure sounds phone-ish\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01FZ9BDGUCB6bAD3KWovgncR"
+    },
+    {
+      "ts": 1783083520.1519942,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 48,
+        "persona": "industry",
+        "reason": "404 Media investigation reveals companies (Amazon, Adobe, Atlassian, Citi) are throttling employee AI use due to cost - real-world revelation with receipts showing what's actually happening with enterprise AI adoption."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016xrQzWQ5L13hLSEEvF4udU"
+    },
+    {
+      "ts": 1783083520.1520567,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Companies Are Throttling Employees\\u2019 AI Use Because It\\u2019s Too Expensive\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_016xrQzWQ5L13hLSEEvF4udU"
+    },
+    {
+      "ts": 1783083520.15208,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "everyday",
+        "reason": "Google NotebookLM now creates TikTok-style video summaries of your research - shipped feature rolling out today, surprising capability people can try immediately, concrete and useful."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011Hswka1dbDEwhX782MWKTE"
+    },
+    {
+      "ts": 1783083520.1521316,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google\\u2019s NotebookLM can sum up your research in a TikTok-style clip\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_011Hswka1dbDEwhX782MWKTE"
+    },
+    {
+      "ts": 1783083520.152153,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "build",
+        "reason": "Google ships Nano Banana 2 Lite and Gemini Omni Flash for developers - new models available to build with today from primary source (Google DeepMind Blog)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016SdRBN8M2EwCw8VRJbU3RU"
+    },
+    {
+      "ts": 1783083520.1521993,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Start building with Nano Banana 2 Lite and Gemini Omni Flash\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_016SdRBN8M2EwCw8VRJbU3RU"
+    },
+    {
+      "ts": 1783083526.999455,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Ng1HzYW9VhSf8Thcg6unxL"
+    },
+    {
+      "ts": 1783083529.3097522,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783083529.3097868,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Anthropic&#8217;s long-sidelined Fable 5 is greenlit to return\", \"pick_2\": \"Microsoft launches its own AI deployment company with $2.5 billion commitment\", \"pick_3\": \"SpaceX has an AI device prototype, and it sure sounds phone-ish\", \"pick_4\": \"Companies Are Throttling Employees\\u2019 AI Use Because It\\u2019s Too Expensive\", \"pick_5\": \"Google\\u2019s NotebookLM can sum up your research in a TikTok-style clip\", \"pick_6\": \"Start building with Nano Banana 2 Lite and Gemini Omni Flash\"}}",
+      "tool_use_id": "toolu_01Ng1HzYW9VhSf8Thcg6unxL"
+    }
+  ],
+  "issue_num": 35
+}
