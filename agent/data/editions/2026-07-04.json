@@ -1,0 +1,188 @@
+{
+  "date": "2026-07-04",
+  "generated_at": "2026-07-04T12:09:53.405414Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Hacker used Claude to break into the ticketing system for Lollapalooza, Bonnaroo, and hundreds more festivals",
+      "blurb": "A security researcher paired with Anthropic's Claude Opus 4.7 to find vulnerabilities in Front Gate, the ticketing platform used by nearly every major US music festival. He could issue himself any ticket he wanted. The researcher reported the flaw, which has since been patched.",
+      "why_it_matters": "AI coding assistants now help find security holes faster than companies can patch them.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/claude-helped-a-hacker-find-a-way-to-issue-tickets-to-almost-every-us-music-festival/",
+      "tier": 1,
+      "original_headline": "Claude Helped a Hacker Find a Way to Issue Tickets to Almost Every US Music Festival",
+      "fingerprint": "e0c4035293c3268c"
+    },
+    {
+      "slot": "market",
+      "headline": "Anthropic is talking to Samsung about building custom AI chips",
+      "blurb": "About a week after OpenAI announced its own custom chip deal with Broadcom, Anthropic is now in discussions with Samsung to develop specialized hardware for running its models. Both AI labs are moving beyond renting Nvidia GPUs toward controlling their own silicon.",
+      "why_it_matters": "The race to own the hardware stack is heating up fast.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/02/anthropic-is-discussing-a-new-custom-chip-with-samsung/",
+      "tier": 1,
+      "original_headline": "Anthropic is discussing a new custom chip with Samsung",
+      "fingerprint": "82ebbc2c888aa3bd"
+    },
+    {
+      "slot": "industry",
+      "headline": "Google DeepMind just partnered with A24 to study AI in filmmaking",
+      "blurb": "The indie studio behind Everything Everywhere All at Once is teaming up with DeepMind to explore how AI tools could fit into actual film production. They'll work together on research projects and give filmmakers early access to Google's AI models to see what works in real creative workflows.",
+      "why_it_matters": "First major AI lab partnering with a respected studio to test tools with actual filmmakers, not just demos.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/google-deepmind-and-a24-announce-first-of-its-kind-research-partnership/",
+      "tier": 1,
+      "original_headline": "Google DeepMind and A24 announce first-of-its-kind research partnership",
+      "fingerprint": "67379bbd524309ee"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Meta just launched an app that turns your text into playable games",
+      "blurb": "Meta quietly released Pocket, an experimental app that generates interactive mini games from text prompts. You type what you want\u2014'a maze where you're a cat chasing mice' or 'Flappy Bird but underwater'\u2014and the AI builds a playable game you can share. It's live now as a standalone app.",
+      "why_it_matters": "Game creation just became as easy as texting\u2014no code, no design skills required.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/02/meta-quietly-launches-vibe-coded-gaming-app-pocket/",
+      "tier": 1,
+      "original_headline": "Meta quietly launches vibe-coded gaming app Pocket",
+      "fingerprint": "1509ce7c9ec7f56b"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The assumption audit",
+    "kicker": "",
+    "prompt": "I'm making a strategic decision I'll describe below. List every assumption I'm making that has to be true for this to work. Then pick the two most dangerous ones and tell me the cheapest possible test I could run this week to validate or kill each assumption.",
+    "tool_hint": "Before you commit budget, political capital, or six months to a plan built on hope."
+  },
+  "daily_question": "If you could instantly turn any idea into a working prototype with AI, what would you build first?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1783166946.8129554,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=['No major model drop today\u2014Sonnet 5 and Fable 5 already covered yesterday.', 'Lots of geopolitics and policy (Trump admin, Congress stock buys, tax havens)\u2014AI incidental rather than load-bearing.', 'Heavy on editorials, glossaries, and behind-the-scenes process stories\u2014not actionable news.', 'Several stories are press coverage of already-announced launches (Fable back on Bedrock, Gemini updates recap).', 'Many candidates are non-AI (PlayStation discs, Tesla crash charges, T-Mobile VMware migration, Apple Home ownership).', 'Some candidates are vendor PR without news hooks (Amazon state investments, NVIDIA GeForce NOW games, Prime Video July lineup).']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783166965.4198954,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 79,
+        "persona": "build",
+        "reason": "Concrete, surprising demonstration of Claude's capabilities helping a researcher find major security vulnerability in Front Gate ticketing system used by US music festivals. Shows real-world AI capability in security research - both impressive and attention-grabbing."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01M6RnTbTiTZVqQ9VKnMq5Wh"
+    },
+    {
+      "ts": 1783166965.4199831,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude Helped a Hacker Find a Way to Issue Tickets to Almost Every US Music Festival\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01M6RnTbTiTZVqQ9VKnMq5Wh"
+    },
+    {
+      "ts": 1783166965.4200146,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 23,
+        "persona": "market",
+        "reason": "Anthropic discussing custom chip with Samsung is a significant strategic move, especially timely coming week after OpenAI's chip announcement. Shows the AI chip race heating up among major labs."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WQdoEjxTCCYgFxeiU1sA9V"
+    },
+    {
+      "ts": 1783166965.4200506,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic is discussing a new custom chip with Samsung\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01WQdoEjxTCCYgFxeiU1sA9V"
+    },
+    {
+      "ts": 1783166965.4200628,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "industry",
+        "reason": "First-of-its-kind research partnership between Google DeepMind and A24 (prestigious film studio) - unique collision of AI research and creative industry. Primary source from DeepMind, signals new direction for AI in filmmaking."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014nY2fEnt2ED66r1CqyVUmG"
+    },
+    {
+      "ts": 1783166965.4200978,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google DeepMind and A24 announce first-of-its-kind research partnership\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_014nY2fEnt2ED66r1CqyVUmG"
+    },
+    {
+      "ts": 1783166965.420109,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 22,
+        "persona": "everyday",
+        "reason": "Meta quietly launched Pocket, an AI app for generating and sharing interactive mini-games. Concrete new product people can try today, shows practical application of generative AI for gaming in accessible way."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XJE5amcysXH7ub5q7BaoVT"
+    },
+    {
+      "ts": 1783166965.4201686,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta quietly launches vibe-coded gaming app Pocket\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01XJE5amcysXH7ub5q7BaoVT"
+    },
+    {
+      "ts": 1783166970.8830936,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_0159HwdDkdonUJHbt7jroP8u"
+    },
+    {
+      "ts": 1783166973.1908622,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783166973.1908903,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Claude Helped a Hacker Find a Way to Issue Tickets to Almost Every US Music Festival\", \"pick_2\": \"Anthropic is discussing a new custom chip with Samsung\", \"pick_3\": \"Google DeepMind and A24 announce first-of-its-kind research partnership\", \"pick_4\": \"Meta quietly launches vibe-coded gaming app Pocket\"}}",
+      "tool_use_id": "toolu_0159HwdDkdonUJHbt7jroP8u"
+    }
+  ],
+  "issue_num": 36
+}
