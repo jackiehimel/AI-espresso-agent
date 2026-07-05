@@ -1,0 +1,188 @@
+{
+  "date": "2026-07-05",
+  "generated_at": "2026-07-05T12:19:28.808475Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Anthropic built an AI workbench that turns messy lab data into figures",
+      "blurb": "Claude Science combines scattered datasets and tools into one environment where researchers can generate visuals and run experiments. Anthropic is betting scientists spend too much time wrangling data instead of doing science, and that Claude can handle the grunt work of turning raw results into publication-ready figures.",
+      "why_it_matters": "If it works, grad students might actually finish their PhDs on time.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/961311/anthropic-claude-science-ai-drug-development",
+      "tier": 1,
+      "original_headline": "Anthropic wants to develop its own drugs",
+      "fingerprint": "55412b92bde394a6"
+    },
+    {
+      "slot": "market",
+      "headline": "NVIDIA is building giant AI server farms with outside money",
+      "blurb": "NVIDIA announced it's partnering with investors to build what it calls \"AI factories\" \u2014 massive GPU clusters designed to run AI models 24/7 for companies that need compute at scale but don't want to buy their own hardware. The setup targets startups and enterprises moving from model training to running production inference.",
+      "why_it_matters": "NVIDIA now competes with its own cloud customers by renting GPUs directly to AI companies.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/nvidia-unlocks-ai-compute-at-scale-capital-partners-to-power-ai-infrastructure-buildout/",
+      "tier": 1,
+      "original_headline": "NVIDIA Unlocks AI Compute at Scale, Inviting Partners to Power the AI Infrastructure Buildout",
+      "fingerprint": "ae9045118fcff8da"
+    },
+    {
+      "slot": "industry",
+      "headline": "Google DeepMind's first union negotiations hit a wall",
+      "blurb": "Employees at Google DeepMind met with executives Wednesday to discuss unionization, but say leadership refused to engage meaningfully with their demands. Workers expressed frustration with what they described as stonewalling tactics during the initial bargaining session.",
+      "why_it_matters": "AI labs are facing labor organizing for the first time as researchers demand more say in how their work gets used.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/google-deepmind-unionization-talks-are-off-to-a-rocky-start/",
+      "tier": 1,
+      "original_headline": "Google DeepMind Unionization Talks Are Off to a Rocky Start",
+      "fingerprint": "134d84ae9f20b5fc"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Meta just started charging a subscription for features already on your smart glasses",
+      "blurb": "If you own Ray-Ban Meta glasses, some AI features now require a monthly subscription for \"expanded access\" \u2014 even though the hardware runs on-device. Meta's calling it a tier for advanced capabilities, but you already paid for the glasses.",
+      "why_it_matters": "Hardware you own is becoming a gateway to recurring fees, not a one-time purchase.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/why-meta-is-charging-a-subscription-for-on-device-smart-glasses-features/",
+      "tier": 1,
+      "original_headline": "Meta Is Charging a Subscription for Smart Glasses Features. Welcome to the New Era of Consumer Tech",
+      "fingerprint": "407bee6615e6a033"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation floor-finder",
+    "kicker": "",
+    "prompt": "I'm about to negotiate something and I'll describe the situation below. Don't tell me tactics. Instead: tell me the number or term I should never go below, explain why that's the floor, and give me one sentence I can say out loud when someone pushes past it.",
+    "tool_hint": "Before salary talks, vendor contracts, or any deal where you might cave."
+  },
+  "daily_question": "If you could charge a subscription for one feature you already built, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1783253916.819869,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=['Lack of consumer-facing AI product launches today', 'No major model releases or capability announcements', 'Few concrete try-it-today features shipped']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783253936.5254273,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "build",
+        "reason": "Anthropic announcing Claude Science workbench and stating intent to develop its own drugs is a major strategic pivot - AI lab moving from tools to direct drug development. Concrete announcement from \"The Briefing: AI for Science\" event. Primary source coverage from The Verge. This is today's biggest AI story - a major lab making a bold vertical integration move into pharma."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016PBfDQxR4XRDBFmjvG4fUe"
+    },
+    {
+      "ts": 1783253936.525489,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic wants to develop its own drugs\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_016PBfDQxR4XRDBFmjvG4fUe"
+    },
+    {
+      "ts": 1783253936.5255237,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "market",
+        "reason": "NVIDIA introducing revenue-sharing model for AI cloud providers is a major shift in how AI infrastructure gets funded. Concrete business model change from the dominant GPU provider. Primary source from NVIDIA Blog. Affects how the entire AI stack gets built and financed."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01M34M5pWvYCzKaC1r2CpMAC"
+    },
+    {
+      "ts": 1783253936.5255685,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Unlocks AI Compute at Scale, Inviting Partners to Power the AI Infrastructure Buildout\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01M34M5pWvYCzKaC1r2CpMAC"
+    },
+    {
+      "ts": 1783253936.5255804,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 60,
+        "persona": "industry",
+        "reason": "First major union negotiation at a leading AI lab hitting rocky ground is significant industry news. Google DeepMind employees voicing frustrations with executives during Wednesday talks. Primary coverage from Wired. This is the labor/power dynamic story in AI right now."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HZvuhLpPsMpcVeSE11QeeM"
+    },
+    {
+      "ts": 1783253936.525613,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google DeepMind Unionization Talks Are Off to a Rocky Start\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01HZvuhLpPsMpcVeSE11QeeM"
+    },
+    {
+      "ts": 1783253936.525632,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 62,
+        "persona": "everyday",
+        "reason": "Meta launching subscription model for Ray-Ban smart glasses AI features marks a clear shift in consumer AI monetization. Concrete product change people will encounter. \"You bought the hardware, now subscribe for features\" is the new consumer tech reality. Affects everyday users immediately."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01G76icjTbCyNMxAA4cu77bt"
+    },
+    {
+      "ts": 1783253936.5256925,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta Is Charging a Subscription for Smart Glasses Features. Welcome to the New Era of Consumer Tech\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01G76icjTbCyNMxAA4cu77bt"
+    },
+    {
+      "ts": 1783253946.5063772,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Q2gsD5HPmNdNtXtinEkMja"
+    },
+    {
+      "ts": 1783253947.1971173,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783253947.1971483,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Anthropic wants to develop its own drugs\", \"pick_2\": \"NVIDIA Unlocks AI Compute at Scale, Inviting Partners to Power the AI Infrastructure Buildout\", \"pick_3\": \"Google DeepMind Unionization Talks Are Off to a Rocky Start\", \"pick_4\": \"Meta Is Charging a Subscription for Smart Glasses Features. Welcome to the New Era of Consumer Tech\"}}",
+      "tool_use_id": "toolu_01Q2gsD5HPmNdNtXtinEkMja"
+    }
+  ],
+  "issue_num": 37
+}
