@@ -1,0 +1,308 @@
+{
+  "date": "2026-07-06",
+  "generated_at": "2026-07-06T14:29:42.642257Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "industry",
+      "headline": "Amazon is shutting down new sign-ups for Mechanical Turk",
+      "blurb": "Amazon will no longer accept new customers for Mechanical Turk, the platform that powered early AI training by paying humans to label data. Existing customers can still use it, but the move signals the end of an era for a service that helped bootstrap machine learning before synthetic data and better models made human labeling less critical.",
+      "why_it_matters": "The platform that trained a generation of AI models is being quietly retired.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/05/amazon-will-stop-accepting-new-customers-for-mechanical-turk/",
+      "tier": 1,
+      "original_headline": "Amazon will stop accepting new customers for Mechanical Turk",
+      "fingerprint": "039fd1d55d2be8ec"
+    },
+    {
+      "slot": "market",
+      "headline": "Anthropic just signed a $19 billion lease to build its own AI campus",
+      "blurb": "Claude's maker is partnering with TeraWulf to build a dedicated AI infrastructure campus in Kentucky. The 20-year lease could generate $19 billion in revenue for the mining-turned-AI-hosting company, marking one of the largest private AI infrastructure deals on record.",
+      "why_it_matters": "The biggest AI labs are now signing decade-long leases for their own data centers like Fortune 500s lease office towers.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/finance/investing/terawulf-signs-19-billion-lease-with-anthropic-for-ai-infrastructure-campus-ef26be27?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "TeraWulf Signs $19 Billion Lease With Anthropic for AI-Infrastructure Campus",
+      "fingerprint": "a9ff0ca5bdbfcad0"
+    },
+    {
+      "slot": "market",
+      "headline": "Chinese AI video startup Kling just raised $2.8 billion",
+      "blurb": "Kuaishou Technology is spinning off Kling, its AI video generator, which secured $2.8 billion from investors. The company plans to list the unit separately as competition heats up in text-to-video models.",
+      "why_it_matters": "One of China's top AI video tools is becoming its own company with serious backing.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/kling-raises-2-billion-amid-planned-spinoff-from-kuaishou-8fcd1571?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Kling Raises $2.8 Billion Amid Planned Spinoff From Kuaishou",
+      "fingerprint": "bea43366747c12ee"
+    },
+    {
+      "slot": "industry",
+      "headline": "Alibaba bans employees from using Claude Code",
+      "blurb": "Alibaba has classified Claude Code as high-risk software and barred employees from using it, according to TechCrunch. The ban comes as companies grapple with security concerns around AI coding assistants that can access and modify codebases.",
+      "why_it_matters": "Big tech firms are drawing hard lines on which AI tools employees can use with proprietary code.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/04/alibaba-reportedly-bans-employees-from-using-claude-code/",
+      "tier": 1,
+      "original_headline": "Alibaba reportedly bans employees from using Claude Code",
+      "fingerprint": "5fdd54e817e2a60b"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red flag translator",
+    "kicker": "",
+    "prompt": "I just interviewed a candidate and something feels off, but I can't articulate it. I'll describe what they said and how they said it. Don't tell me to trust my gut. Instead: name the specific behavior I noticed, explain what it predicts about their first 90 days, and give me one question to ask in the next round that will confirm or disprove it.",
+    "tool_hint": "When your instinct is screaming but your rubric says hire."
+  },
+  "daily_question": "If you had to explain to a non-technical friend why a company would ban its own employees from using an AI coding tool, what would you say?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1783348120.7148395,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783348138.164565,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "industry",
+        "reason": "Amazon shutting down Mechanical Turk to new customers is historically significant - MTurk was the original human-in-the-loop system that powered early AI. This marks a symbolic moment in AI's evolution from human-augmented to fully automated systems. Strong \"end of an era\" angle that will resonate with technical audience."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014HhTbf34h1Vjk7pofs51ej"
+    },
+    {
+      "ts": 1783348138.1646516,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon will stop accepting new customers for Mechanical Turk\", \"persona\": \"industry\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_014HhTbf34h1Vjk7pofs51ej"
+    },
+    {
+      "ts": 1783348138.1646967,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 89,
+        "persona": "market",
+        "reason": "$19 billion infrastructure deal between TeraWulf and Anthropic for AI campus in Kentucky. Massive scale, concrete numbers, shows the infrastructure build-out behind frontier AI. Anthropic is a tier-1 source and this is a major market move."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FitonsDmotYpd6cEGmebxa"
+    },
+    {
+      "ts": 1783348138.1647735,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"TeraWulf Signs $19 Billion Lease With Anthropic for AI-Infrastructure Campus\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01FitonsDmotYpd6cEGmebxa"
+    },
+    {
+      "ts": 1783348138.1647928,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 92,
+        "persona": "market",
+        "reason": "Kling AI video generator raises $2.8 billion and plans spinoff from Kuaishou. Massive funding round for a tool people can actually use (AI video generation). Shows the market's bet on generative video as a category. Concrete capability hook."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01MeaZ2oVd9UsbPJBwJf8M45"
+    },
+    {
+      "ts": 1783348138.164858,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Kling Raises $2.8 Billion Amid Planned Spinoff From Kuaishou\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01MeaZ2oVd9UsbPJBwJf8M45"
+    },
+    {
+      "ts": 1783348138.164871,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 116,
+        "persona": "build",
+        "reason": "Reddit using AI to fight AI-generated marketing spam is a compelling \"AI vs AI\" story that speaks to a real problem developers and platforms face. Shows practical application of AI for content moderation with immediate relevance to anyone building platforms."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QnH9NWxv6QyuH6W9Jxhcwv"
+    },
+    {
+      "ts": 1783348138.1649277,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Reddit Is Cracking Down on AI Marketing Slop With Its Own AI\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01QnH9NWxv6QyuH6W9Jxhcwv"
+    },
+    {
+      "ts": 1783348140.1848886,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_019riG2WXZHVhK7PpM6vUbU3"
+    },
+    {
+      "ts": 1783348140.9171064,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_4] constitution: AI failure is the primary story frame, not the AI news hook\"]}",
+      "tool_use_id": "toolu_019riG2WXZHVhK7PpM6vUbU3"
+    },
+    {
+      "ts": 1783348145.999344,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 116
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PCVccF6SxzJxvu58W6oC17"
+    },
+    {
+      "ts": 1783348145.999413,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Reddit Is Cracking Down on AI Marketing Slop With Its Own AI\"}",
+      "tool_use_id": "toolu_01PCVccF6SxzJxvu58W6oC17"
+    },
+    {
+      "ts": 1783348145.9994433,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 105,
+        "persona": "market",
+        "reason": "Broadcom and Apple extending partnership through 2031 with new custom AI chips. Major infrastructure play showing Apple's long-term commitment to custom silicon for AI workloads. Concrete multi-year commitment from two tier-1 companies."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019ZZYHFiqEnkvaCkHXBDhTK"
+    },
+    {
+      "ts": 1783348145.9995093,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Broadcom, Apple Extend Tie-Up to 2031 With New Custom Chips\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_019ZZYHFiqEnkvaCkHXBDhTK"
+    },
+    {
+      "ts": 1783348147.6976569,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Xh8xnYafQGjVdAFsJnG5FA"
+    },
+    {
+      "ts": 1783348148.022634,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"too many non-load-bearing stories (2 > 1)\"]}",
+      "tool_use_id": "toolu_01Xh8xnYafQGjVdAFsJnG5FA"
+    },
+    {
+      "ts": 1783348154.3593106,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 105
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TpG8qBuC1zyzh8Y6Sc85Ph"
+    },
+    {
+      "ts": 1783348154.359363,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Broadcom, Apple Extend Tie-Up to 2031 With New Custom Chips\"}",
+      "tool_use_id": "toolu_01TpG8qBuC1zyzh8Y6Sc85Ph"
+    },
+    {
+      "ts": 1783348154.3594084,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 9,
+        "persona": "industry",
+        "reason": "Alibaba banning Claude Code as high-risk software is a concrete developer-facing story about enterprise AI adoption friction. Shows the tension between tool utility and corporate security policies - very relevant to developers and IT decision makers."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FDjAtN7swPQgHjWTahdpLa"
+    },
+    {
+      "ts": 1783348154.3594792,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Alibaba reportedly bans employees from using Claude Code\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01FDjAtN7swPQgHjWTahdpLa"
+    },
+    {
+      "ts": 1783348155.9367077,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01SyoyM2jQAdATyRRfWm2sFX"
+    },
+    {
+      "ts": 1783348156.1860979,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783348156.186136,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Amazon will stop accepting new customers for Mechanical Turk\", \"pick_2\": \"TeraWulf Signs $19 Billion Lease With Anthropic for AI-Infrastructure Campus\", \"pick_3\": \"Kling Raises $2.8 Billion Amid Planned Spinoff From Kuaishou\", \"pick_6\": \"Alibaba reportedly bans employees from using Claude Code\"}}",
+      "tool_use_id": "toolu_01SyoyM2jQAdATyRRfWm2sFX"
+    }
+  ],
+  "issue_num": 38
+}
