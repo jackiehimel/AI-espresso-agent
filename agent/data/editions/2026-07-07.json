@@ -1,0 +1,188 @@
+{
+  "date": "2026-07-07",
+  "generated_at": "2026-07-07T13:24:24.554665Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "industry",
+      "headline": "Alberta's government is using Claude to hunt for security holes",
+      "blurb": "The Government of Alberta deployed Claude across its systems to identify and patch cybersecurity vulnerabilities. It's one of the first large-scale government uses of an AI assistant for active security scanning and remediation work.",
+      "why_it_matters": "Shows AI moving from enterprise pilots to critical infrastructure defense",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/alberta-government-claude-cybersecurity",
+      "tier": 1,
+      "original_headline": "Government of Alberta uses Claude to find and fix cybersecurity vulnerabilities across government systems",
+      "fingerprint": "8293ab3fa2fb9c9e"
+    },
+    {
+      "slot": "everyday",
+      "headline": "You can now adjust how fast Siri talks and how much personality it has",
+      "blurb": "iOS 27 beta lets you customize Siri's speaking pace and expressivity\u2014making the assistant sound more natural or neutral depending on your preference. It's part of Apple's rebuild of Siri around generative AI, which aims to make interactions feel less robotic and more personal.",
+      "why_it_matters": "Apple is finally letting you shape how Siri sounds, not just what it says.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/06/you-can-now-customize-siris-pace-and-expressivity-in-the-latest-ios-27-beta/",
+      "tier": 1,
+      "original_headline": "You can now customize Siri\u2019s pace and expressivity in the latest iOS 27 beta",
+      "fingerprint": "1adfdce2cdabcf4c"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA and Hugging Face just made training robots way cheaper",
+      "blurb": "The two companies are pooling robot foundation models, datasets, and simulation tools into LeRobot, Hugging Face's open robotics platform. Developers can now train and test robot behaviors without buying expensive hardware first\u2014using NVIDIA's Isaac sim and pre-trained models that already understand how physical objects work.",
+      "why_it_matters": "Robotics development just got the same open-source boost that made LLMs explode.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/hugging-face-lerobot-models-frameworks-open-robotics/",
+      "tier": 1,
+      "original_headline": "NVIDIA and Hugging Face Bring New Models and Frameworks to LeRobot for the Open Robotics Community",
+      "fingerprint": "a0b7d7e962006521"
+    },
+    {
+      "slot": "market",
+      "headline": "DeepSeek is reportedly building its own AI chips",
+      "blurb": "The Chinese startup that shocked the industry by training frontier models for a fraction of typical costs is now developing custom AI chips, according to Reuters. If successful, DeepSeek could control its entire stack \u2014 from silicon to software \u2014 potentially widening its cost advantage even further.",
+      "why_it_matters": "Cheap models plus cheap chips could reshape who can afford to compete in AI",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2209378/deepseek-reportedly-developing-ai-chips/",
+      "tier": 1,
+      "original_headline": "Reuters: DeepSeek is developing its own AI chips",
+      "fingerprint": "620c033b8e451b79"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting subtraction",
+    "kicker": "",
+    "prompt": "I have a weekly meeting I'll describe below. Don't tell me how to make it better \u2014 assume it's already well-run. Instead: tell me what would break if we cancelled it for a month, what we'd lose nothing by moving to async, and which two people actually need to be there.",
+    "tool_hint": "Before you accept that calendar invite for the next six months."
+  },
+  "daily_question": "If you could force one AI company to open-source their model tomorrow, which one and why?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1783430616.3261092,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783430633.068082,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "industry",
+        "reason": "Government of Alberta deploying Claude for cybersecurity vulnerability detection - concrete real-world enterprise adoption with security stakes, Anthropic primary source"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019yz3sGc6aHJ7jxbptpK1XW"
+    },
+    {
+      "ts": 1783430633.068144,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Government of Alberta uses Claude to find and fix cybersecurity vulnerabilities across government systems\", \"persona\": \"industry\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_019yz3sGc6aHJ7jxbptpK1XW"
+    },
+    {
+      "ts": 1783430633.0681803,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 14,
+        "persona": "everyday",
+        "reason": "iOS 27 beta lets users customize Siri's pace and expressivity - tangible try-it-today feature that makes AI assistant feel more personal"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01ARWHiQTZCfu6WvJGprpGG6"
+    },
+    {
+      "ts": 1783430633.0682259,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"You can now customize Siri\\u2019s pace and expressivity in the latest iOS 27 beta\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01ARWHiQTZCfu6WvJGprpGG6"
+    },
+    {
+      "ts": 1783430633.0682375,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "build",
+        "reason": "NVIDIA and Hugging Face shipping new models and frameworks to LeRobot - opens robotics AI development to broader community, concrete developer tools"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WqJRJCF4GRhvvSqSuZ8wT6"
+    },
+    {
+      "ts": 1783430633.0683186,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA and Hugging Face Bring New Models and Frameworks to LeRobot for the Open Robotics Community\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01WqJRJCF4GRhvvSqSuZ8wT6"
+    },
+    {
+      "ts": 1783430633.0683427,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 65,
+        "persona": "market",
+        "reason": "DeepSeek developing its own AI chips - major competitive move from the Chinese AI efficiency leader, extends the cost narrative into hardware"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01T32YmPASAoz94Wtn2qce5j"
+    },
+    {
+      "ts": 1783430633.0684013,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Reuters: DeepSeek is developing its own AI chips\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01T32YmPASAoz94Wtn2qce5j"
+    },
+    {
+      "ts": 1783430638.9330482,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01C9AMPrwUvhTUpYECAWYYFo"
+    },
+    {
+      "ts": 1783430639.7019858,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783430639.7020187,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Government of Alberta uses Claude to find and fix cybersecurity vulnerabilities across government systems\", \"pick_2\": \"You can now customize Siri\\u2019s pace and expressivity in the latest iOS 27 beta\", \"pick_3\": \"NVIDIA and Hugging Face Bring New Models and Frameworks to LeRobot for the Open Robotics Community\", \"pick_4\": \"Reuters: DeepSeek is developing its own AI chips\"}}",
+      "tool_use_id": "toolu_01C9AMPrwUvhTUpYECAWYYFo"
+    }
+  ],
+  "issue_num": 39
+}
