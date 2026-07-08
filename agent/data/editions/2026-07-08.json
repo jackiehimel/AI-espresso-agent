@@ -1,0 +1,188 @@
+{
+  "date": "2026-07-08",
+  "generated_at": "2026-07-08T12:23:50.757319Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "OpenAI will release GPT-5.6 to the public on July 9",
+      "blurb": "OpenAI's next model \u2014 GPT-5.6, with variants called Sol, Terra, and Luna \u2014 goes live Thursday. The company received regulatory approval to make it widely available, though details on capabilities and pricing haven't been announced yet.",
+      "why_it_matters": "First public GPT-5 release marks OpenAI's next major model generation",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2210308/openai-rolls-out-gpt5-6-july-9/",
+      "tier": 1,
+      "original_headline": "OpenAI gets permission to roll out GPT-5.6 to the public on July 9",
+      "fingerprint": "e4b64fd0154c8fe1"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Meta just open-sourced an AI that generates images and video faster than anything else",
+      "blurb": "Meta released Muse Image and Muse Video, new models that create images in 0.3 seconds and videos in under 2 seconds\u2014up to 10x faster than competitors. Both use a technique called Masked Generative Transformers that predicts multiple parts of an image at once instead of building pixel-by-pixel. Code and model weights are public.",
+      "why_it_matters": "Speed like this makes real-time creative tools and interactive AI apps actually practical.",
+      "source_name": "Meta AI Blog",
+      "source_url": "https://ai.meta.com/blog/introducing-muse-image-muse-video-msl/",
+      "tier": 1,
+      "original_headline": "Introducing Muse Image and Muse Video",
+      "fingerprint": "61692d6317e8ee6e"
+    },
+    {
+      "slot": "build",
+      "headline": "Google's Gemini API now lets agents run tasks in the background",
+      "blurb": "Google expanded its managed agents feature to handle long-running tasks without keeping a connection open. Agents can now execute background jobs, connect to remote MCP servers, and maintain state across sessions\u2014so you can kick off a complex workflow and check back later instead of babysitting the process.",
+      "why_it_matters": "Agents that can work asynchronously are suddenly viable for production workloads, not just demos.",
+      "source_name": "Google AI Blog",
+      "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/",
+      "tier": 1,
+      "original_headline": "Expanding Managed Agents in Gemini API: background tasks, remote MCP and more",
+      "fingerprint": "80d9d884ba00bb06"
+    },
+    {
+      "slot": "market",
+      "headline": "SambaNova raises $1B at $11B valuation, five months after last round",
+      "blurb": "AI chip maker SambaNova closed a $1 billion Series F at an $11 billion valuation\u2014just months after Intel reportedly tried to buy the company for $1.6 billion. The rapid valuation jump reflects surging demand for AI infrastructure as companies race to build and deploy models at scale.",
+      "why_it_matters": "The AI infrastructure gold rush is creating billion-dollar winners faster than any tech cycle in history.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/08/sambanova-draws-1b-at-11b-valuation-in-series-f-first-close/",
+      "tier": 1,
+      "original_headline": "AI chip maker SambaNova raises $1B at $11B valuation, 5 months after last mega round",
+      "fingerprint": "b294955f0c3e5101"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The learning ladder",
+    "kicker": "",
+    "prompt": "I want to learn a skill I'll describe below. I have about three months of scattered time. Build me a three-rung ladder: the first thing I should learn that makes the second thing possible, the second thing that makes the advanced stuff click, and the one project that proves I actually learned it.",
+    "tool_hint": "When you're tired of tutorials that teach everything except what to learn first."
+  },
+  "daily_question": "If you could give one AI model unlimited background runtime to solve something for you this week, what would you set it loose on?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1783513386.3968015,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783513400.0736082,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 85,
+        "persona": "everyday",
+        "reason": "THE story of the day - OpenAI's GPT-5.6 (Sol, Terra, Luna) getting government approval for public rollout July 9. Major model launch that required regulatory clearance is exactly the defining news that must lead the edition."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018AKgzThy2FDFKxdVyUE8BK"
+    },
+    {
+      "ts": 1783513400.0736833,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI gets permission to roll out GPT-5.6 to the public on July 9\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_018AKgzThy2FDFKxdVyUE8BK"
+    },
+    {
+      "ts": 1783513400.0737283,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 3,
+        "persona": "everyday",
+        "reason": "Meta shipping Muse Image and Muse Video - major new generative models from a tier-1 source. Primary source (Meta AI Blog), concrete capability launch people can try."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Q5wqyr2TtCBPczq9vAuEeF"
+    },
+    {
+      "ts": 1783513400.0737774,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Muse Image and Muse Video\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01Q5wqyr2TtCBPczq9vAuEeF"
+    },
+    {
+      "ts": 1783513400.073793,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 2,
+        "persona": "build",
+        "reason": "Google shipping background tasks and remote MCP for Managed Agents - concrete developer features launching from primary source. Strong 'build' persona story with immediate utility."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019Ap9GPXu2nwvzioQ6M7URE"
+    },
+    {
+      "ts": 1783513400.07384,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Expanding Managed Agents in Gemini API: background tasks, remote MCP and more\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_019Ap9GPXu2nwvzioQ6M7URE"
+    },
+    {
+      "ts": 1783513400.0738547,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "market",
+        "reason": "SambaNova raises $1B at $11B valuation just 5 months after last round - significant AI chip market story showing momentum in NVIDIA alternatives. Strong market validation."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Qjvxjhv6DrHg9PCqR4Z1bF"
+    },
+    {
+      "ts": 1783513400.073911,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AI chip maker SambaNova raises $1B at $11B valuation, 5 months after last mega round\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Qjvxjhv6DrHg9PCqR4Z1bF"
+    },
+    {
+      "ts": 1783513406.8693993,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01UdgffTcYDTrJ2nztWQgUFJ"
+    },
+    {
+      "ts": 1783513407.6219153,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783513407.6219554,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI gets permission to roll out GPT-5.6 to the public on July 9\", \"pick_2\": \"Introducing Muse Image and Muse Video\", \"pick_3\": \"Expanding Managed Agents in Gemini API: background tasks, remote MCP and more\", \"pick_4\": \"AI chip maker SambaNova raises $1B at $11B valuation, 5 months after last mega round\"}}",
+      "tool_use_id": "toolu_01UdgffTcYDTrJ2nztWQgUFJ"
+    }
+  ],
+  "issue_num": 40
+}
