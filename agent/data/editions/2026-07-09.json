@@ -1,0 +1,188 @@
+{
+  "date": "2026-07-09",
+  "generated_at": "2026-07-09T13:52:57.209553Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "ChatGPT's new voice mode learned when to stop talking",
+      "blurb": "OpenAI released GPT-Live-1, a voice model that interrupts less and waits through your pauses instead of jumping in. The company says it feels more like talking to a person than the current voice mode, which tends to cut you off mid-thought.",
+      "why_it_matters": "Voice AI that knows when you're pausing versus done makes it actually usable for thinking out loud.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/962856/chatgpt-upgraded-voice-mode-gpt-live",
+      "tier": 1,
+      "original_headline": "ChatGPT\u2019s upgraded voice mode is better at shutting up",
+      "fingerprint": "b2344045a530534d"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Meta's new AI can put your Instagram friends into generated photos",
+      "blurb": "Meta just launched Muse Image, its first model from the new Superintelligence Labs division. It now powers AI image generation across Meta AI, Instagram, and WhatsApp, with Facebook and Messenger coming soon. The standout feature: you can reference other Instagram users and the AI will incorporate them into generated images.",
+      "why_it_matters": "AI image generation just got social \u2014 your friends are now creative assets.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/962485/meta-muse-image-ai-model-instagram",
+      "tier": 1,
+      "original_headline": "Meta\u2019s new Muse Image model can pull other Instagram users into AI photos",
+      "fingerprint": "2bdbb57a297396c1"
+    },
+    {
+      "slot": "market",
+      "headline": "xAI ships Grok 4.5, calling it a cheaper rival to Claude Opus",
+      "blurb": "Elon Musk's xAI released Grok 4.5 on Wednesday, positioning it as a more affordable alternative to top-tier models like Anthropic's Claude Opus. The company claims the new version delivers comparable performance at lower cost, though independent benchmarks haven't yet confirmed those claims.",
+      "why_it_matters": "Another frontier model enters the ring, potentially pressuring pricing across the industry",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/08/spacexai-releases-grok-4-5-which-elon-describes-as-an-opus-class-model/",
+      "tier": 1,
+      "original_headline": "SpaceXAI releases Grok 4.5, which Elon describes as an \u2018Opus-class model\u2019",
+      "fingerprint": "e32138018eeb5ac6"
+    },
+    {
+      "slot": "build",
+      "headline": "Ollama just raised $65M to help devs run AI models locally",
+      "blurb": "The open-source tool that lets you run LLMs on your own machine\u2014no cloud required\u2014now has 9 million users and 176,000 GitHub stars. Benchmark led the round. Ollama makes it dead simple to download and run models like Llama or Mistral locally, which is why nearly 17,000 developers have forked it.",
+      "why_it_matters": "Local AI is going mainstream\u2014developers want models they can run and customize without API calls.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/09/popular-open-source-ai-developer-tool-ollama-raises-65m-grows-to-nearly-9m-users/",
+      "tier": 1,
+      "original_headline": "Popular open source AI developer tool Ollama raises $65M, grows to nearly 9M users",
+      "fingerprint": "b18b9bf68541b705"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The strategy stress test",
+    "kicker": "",
+    "prompt": "I'll describe our current strategy below. Assume our top competitor just hired someone brilliant who sees exactly what we're doing. Write their internal memo explaining how they'd make our approach irrelevant in 18 months \u2014 then tell me which part of that memo worries you most.",
+    "tool_hint": "Before you commit the next quarter to a plan that only works if nobody notices."
+  },
+  "daily_question": "Which AI feature released this year felt most like crossing a line?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1783605126.7246828,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783605146.3809123,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "everyday",
+        "reason": "OpenAI shipped a major overhaul to ChatGPT voice mode with a new model that makes conversations more natural - the \"better at shutting up\" hook is concrete and relatable. This is a feature millions of users can try immediately."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GRwhaX98yMwyRdQ4Jcuw79"
+    },
+    {
+      "ts": 1783605146.3809776,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"ChatGPT\\u2019s upgraded voice mode is better at shutting up\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01GRwhaX98yMwyRdQ4Jcuw79"
+    },
+    {
+      "ts": 1783605146.3810148,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "everyday",
+        "reason": "Meta's Superintelligence Labs division debuts its first model - Muse Image can pull other Instagram users into AI photos, which is a novel social feature. Clear try-it-today appeal for Instagram's massive user base."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018H1iA3WyTVPrReJBLSvgSk"
+    },
+    {
+      "ts": 1783605146.3810494,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta\\u2019s new Muse Image model can pull other Instagram users into AI photos\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_018H1iA3WyTVPrReJBLSvgSk"
+    },
+    {
+      "ts": 1783605146.3810654,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 37,
+        "persona": "market",
+        "reason": "SpaceXAI released Grok 4.5, positioned by Elon as an 'Opus-class model' - major model drop with clear competitive positioning. Cheaper and more efficient alternative to top-tier models is newsworthy for the AI market."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01D7uroo6vZ3ancjxDm3sQbi"
+    },
+    {
+      "ts": 1783605146.38111,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SpaceXAI releases Grok 4.5, which Elon describes as an \\u2018Opus-class model\\u2019\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01D7uroo6vZ3ancjxDm3sQbi"
+    },
+    {
+      "ts": 1783605146.3811183,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "build",
+        "reason": "Ollama raised $65M and hit 9M users - this open source developer tool has 176K GitHub stars and helps developers easily run AI models locally. Strong traction metrics validate this as a key tool in the AI developer ecosystem."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016zazhQtFw6jUrvHWF7hXrX"
+    },
+    {
+      "ts": 1783605146.3811553,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Popular open source AI developer tool Ollama raises $65M, grows to nearly 9M users\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_016zazhQtFw6jUrvHWF7hXrX"
+    },
+    {
+      "ts": 1783605153.9502153,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_016exrkqPSjQgWrMp2EjeHjW"
+    },
+    {
+      "ts": 1783605154.7646506,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783605154.7646804,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"ChatGPT\\u2019s upgraded voice mode is better at shutting up\", \"pick_2\": \"Meta\\u2019s new Muse Image model can pull other Instagram users into AI photos\", \"pick_3\": \"SpaceXAI releases Grok 4.5, which Elon describes as an \\u2018Opus-class model\\u2019\", \"pick_4\": \"Popular open source AI developer tool Ollama raises $65M, grows to nearly 9M users\"}}",
+      "tool_use_id": "toolu_016exrkqPSjQgWrMp2EjeHjW"
+    }
+  ],
+  "issue_num": 41
+}
