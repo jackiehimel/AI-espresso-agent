@@ -1,0 +1,314 @@
+{
+  "date": "2026-07-10",
+  "generated_at": "2026-07-10T13:15:28.572305Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Meta just released Muse Spark, a new multimodal AI model",
+      "blurb": "Meta launched Muse Spark 1.1, a multimodal model that handles text, images, and structured data. It's available through Meta's Model API alongside Llama models, giving developers another option for building AI features into their apps.",
+      "why_it_matters": "Meta is expanding beyond Llama into specialized multimodal models for production use.",
+      "source_name": "Meta AI Blog",
+      "source_url": "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/",
+      "tier": 1,
+      "original_headline": "Introducing Muse Spark 1.1",
+      "fingerprint": "dcc5f9e7e5baefbb"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Claude can now show you how you actually use it",
+      "blurb": "Anthropic added a reflection feature that surfaces patterns in your Claude conversations \u2014 what you ask about most, how your usage shifts over time, and which tasks you return to. It's like Spotify Wrapped for your AI assistant, but useful year-round.",
+      "why_it_matters": "Makes it easier to spot which workflows are actually sticking versus which ones you thought would.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/reflect-with-claude",
+      "tier": 1,
+      "original_headline": "Introducing a way to reflect on how you use Claude",
+      "fingerprint": "c1d648db59c06c7b"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google just launched satellites that spot wildfires from space with AI",
+      "blurb": "Three new FireSat satellites are now in orbit, using Google AI to detect early-stage wildfires and alert fire agencies. The satellites expand a network designed to catch fires before they spread\u2014scanning from space and flagging hotspots in real time.",
+      "why_it_matters": "Early detection from orbit could help firefighters stop fires hours or days sooner.",
+      "source_name": "Google \u2014 Innovation & AI",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/google-research/firesat-satellites/",
+      "tier": 1,
+      "original_headline": "Three new satellites join the fight against wildfires.",
+      "fingerprint": "dd78a7d1f0043f1c"
+    },
+    {
+      "slot": "industry",
+      "headline": "New York Times accuses OpenAI of hiding evidence in copyright lawsuit",
+      "blurb": "The Times and other news publishers filed a motion for sanctions claiming OpenAI concealed tools and datasets that could prove ChatGPT was trained on and reproduces their copyrighted articles. The publishers say OpenAI had the technical means to identify which journalism ended up in ChatGPT outputs but refused to share it during discovery.",
+      "why_it_matters": "If proven, this could strengthen publishers' claims and set a precedent for AI transparency in copyright cases.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/09/new-york-times-says-openai-hid-evidence-in-chatgpt-copyright-trial/",
+      "tier": 1,
+      "original_headline": "New York Times says OpenAI hid evidence in ChatGPT copyright trial",
+      "fingerprint": "7c4f4656c6bee68b"
+    },
+    {
+      "slot": "build",
+      "headline": "A startup just raised $100M by letting its own AI agent pitch investors",
+      "blurb": "Lyzr, which builds enterprise AI agents, turned its fundraising process over to its own product. The agent handled investor pitches, negotiations, and due diligence for the entire $100 million round\u2014making the case that AI agents can close deals, not just answer support tickets.",
+      "why_it_matters": "First real proof that AI agents can handle high-stakes business processes autonomously",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/09/an-ai-agent-startup-just-let-its-agent-run-its-100-million-fundraise/",
+      "tier": 1,
+      "original_headline": "An AI agent startup just let its agent run its $100M fundraise",
+      "fingerprint": "3400cfad468f23b0"
+    },
+    {
+      "slot": "industry",
+      "headline": "Patreon just blocked AI crawlers from scraping creators' work",
+      "blurb": "Patreon teamed up with Cloudflare to stop AI companies from scraping posts, videos, and art that creators publish on the platform. CEO Jack Conte said crawlers can 'stay the fuck off Patreon' unless they offer creators credit, compensation, and consent.",
+      "why_it_matters": "First major creator platform to actively block AI training scrapes by default",
+      "source_name": "404 Media",
+      "source_url": "https://www.404media.co/patreon-cloudflare-partnership-ai-crawlers/",
+      "tier": 1,
+      "original_headline": "Patreon Blocks Crawlers From Stealing Creators' Work for AI Training",
+      "fingerprint": "b8e24e9c99706aaa"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The priority collision detector",
+    "kicker": "",
+    "prompt": "I'll list everything I've committed to doing this week. For each item, tell me which other item it's secretly stealing time from, then rank my list by what will still matter in six months. Be ruthless \u2014 assume I can only finish half of what's here.",
+    "tool_hint": "When your to-do list looks reasonable on paper but feels impossible in practice."
+  },
+  "daily_question": "If you could block one AI company from training on your work, which would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1783689245.2640157,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783689263.442212,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 37,
+        "persona": "market",
+        "reason": "THE defining AI story today: OpenAI ships GPT-5.6 after regulatory drama AND announces ChatGPT Work. Major model release + new product. This is what everyone in AI is talking about today - mandatory lead story."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Raotm3t5qddWbXMtuY9EEj"
+    },
+    {
+      "ts": 1783689263.4422827,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI rolls out GPT-5.6 after government greenlight \\u2014 and announces \\u2018ChatGPT Work\\u2019\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Raotm3t5qddWbXMtuY9EEj"
+    },
+    {
+      "ts": 1783689263.442319,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 15,
+        "persona": "build",
+        "reason": "Meta ships Muse Spark 1.1 - new model with concrete capabilities. Primary source (Meta AI Blog), strong try-it angle for developers and creators."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EBcnV8uLLLxCgsUcgi6F7B"
+    },
+    {
+      "ts": 1783689263.4423635,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Muse Spark 1.1\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01EBcnV8uLLLxCgsUcgi6F7B"
+    },
+    {
+      "ts": 1783689263.4423742,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "everyday",
+        "reason": "Anthropic launches reflection feature for Claude - helps users understand and refine how they use the AI. Primary source, practical feature people can try this week."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WWXWXT1b4msHX1jNes7WAb"
+    },
+    {
+      "ts": 1783689263.442408,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing a way to reflect on how you use Claude\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01WWXWXT1b4msHX1jNes7WAb"
+    },
+    {
+      "ts": 1783689263.4424176,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "everyday",
+        "reason": "Google AI-powered FireSat satellites launch to detect wildfires early - surprising real-world application with concrete impact. Shows AI capability beyond chatbots, helps save lives and property."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DTn6cp4tZivGLVRuBPo2ys"
+    },
+    {
+      "ts": 1783689263.4424694,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Three new satellites join the fight against wildfires.\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01DTn6cp4tZivGLVRuBPo2ys"
+    },
+    {
+      "ts": 1783689271.6283455,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_012L27Wg1dQXuTUktLtT5A7M"
+    },
+    {
+      "ts": 1783689272.3145056,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"OpenAI gets permission to roll out GPT-5.6 to the public on July 9\\\", similarity 0.821) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_012L27Wg1dQXuTUktLtT5A7M"
+    },
+    {
+      "ts": 1783689274.7143826,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 37
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012DS3vc1ZJ4vJVpsbhAe6YP"
+    },
+    {
+      "ts": 1783689274.7144227,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI rolls out GPT-5.6 after government greenlight \\u2014 and announces \\u2018ChatGPT Work\\u2019\"}",
+      "tool_use_id": "toolu_012DS3vc1ZJ4vJVpsbhAe6YP"
+    },
+    {
+      "ts": 1783689280.945516,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 50,
+        "persona": "industry",
+        "reason": "Major escalation in OpenAI copyright trial - NYT alleges evidence hiding. High-stakes legal battle that affects the entire AI industry's relationship with content creators and copyright."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01VPWVh8RJcdmqsYjmQbGXbg"
+    },
+    {
+      "ts": 1783689280.9455764,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"New York Times says OpenAI hid evidence in ChatGPT copyright trial\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01VPWVh8RJcdmqsYjmQbGXbg"
+    },
+    {
+      "ts": 1783689288.0500867,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 45,
+        "persona": "build",
+        "reason": "AI agent startup Lyzr used its own AI agent to raise $100M - concrete proof of capability and a 'didn't know AI could do that' moment. Shows agents handling real business tasks."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AmMwoeWRWbWHfWCqSBKz4R"
+    },
+    {
+      "ts": 1783689288.0501566,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"An AI agent startup just let its agent run its $100M fundraise\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01AmMwoeWRWbWHfWCqSBKz4R"
+    },
+    {
+      "ts": 1783689293.7419415,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 54,
+        "persona": "industry",
+        "reason": "Patreon blocks AI crawlers from training on creator work - concrete platform action on creator consent and compensation. Shows the AI training debate moving from talk to action."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017BjWMqZ2mzsbcLZ19FmCbK"
+    },
+    {
+      "ts": 1783689293.7420094,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Patreon Blocks Crawlers From Stealing Creators' Work for AI Training\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_017BjWMqZ2mzsbcLZ19FmCbK"
+    },
+    {
+      "ts": 1783689299.2686818,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_013eGVK4Ej6HZoCvRGcUFZAj"
+    },
+    {
+      "ts": 1783689299.6470468,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783689299.6470933,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Introducing Muse Spark 1.1\", \"pick_3\": \"Introducing a way to reflect on how you use Claude\", \"pick_4\": \"Three new satellites join the fight against wildfires.\", \"pick_5\": \"New York Times says OpenAI hid evidence in ChatGPT copyright trial\", \"pick_6\": \"An AI agent startup just let its agent run its $100M fundraise\", \"pick_7\": \"Patreon Blocks Crawlers From Stealing Creators' Work for AI Training\"}}",
+      "tool_use_id": "toolu_013eGVK4Ej6HZoCvRGcUFZAj"
+    }
+  ],
+  "issue_num": 42
+}
