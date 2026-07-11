@@ -1,0 +1,248 @@
+{
+  "date": "2026-07-11",
+  "generated_at": "2026-07-11T11:55:46.982405Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Apple sues OpenAI for allegedly stealing hardware secrets",
+      "blurb": "Apple filed a lawsuit claiming OpenAI employees who previously worked at Apple stole trade secrets to help the AI company's hardware ambitions. The suit also names Jony Ive's hardware startup IO Products, suggesting the case may involve OpenAI's rumored collaboration with Ive on an AI device.",
+      "why_it_matters": "OpenAI's push into hardware just got a lot more complicated.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/964350/apple-openai-lawsuit-trade-secrets",
+      "tier": 1,
+      "original_headline": "Apple sues OpenAI for allegedly stealing hardware secrets",
+      "fingerprint": "479980e3f9b2a266"
+    },
+    {
+      "slot": "industry",
+      "headline": "SK Hynix raises $26.5B in biggest foreign IPO ever \u2014 now US wants fabs",
+      "blurb": "The Korean chipmaker behind Nvidia's HBM memory just pulled off the largest foreign IPO in US history. Almost immediately, Washington started pressing SK Hynix and Samsung to build American factories for the high-bandwidth memory that powers AI training chips.",
+      "why_it_matters": "The AI chip supply chain is becoming a geopolitical bargaining chip in real time.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/10/sk-hynix-raises-26-5b-in-the-biggest-foreign-ipo-in-us-history-is-urged-to-build-new-us-fabs/",
+      "tier": 1,
+      "original_headline": "SK Hynix raises $26.5B in the biggest foreign IPO in US history, is urged to build new US fabs",
+      "fingerprint": "475cd395a8fea1b6"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA's Nemotron 3 Ultra beats every open model on LangChain's agent benchmark",
+      "blurb": "NVIDIA's newest open model just topped LangChain's Deep Agents test\u2014finishing more tasks faster and more accurately than any other open alternative, at a tenth the cost of GPT-4 class models. LangChain tuned the harness specifically for Nemotron, which now handles complex multi-step agent workflows at higher throughput than competitors.",
+      "why_it_matters": "Open models can now match closed-model agent performance at a fraction of the price.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/nemotron-langchain-agents-open-stack/",
+      "tier": 1,
+      "original_headline": "NVIDIA Nemotron Achieves Benchmark-Leading Performance With LangChain Deep Agents Harness",
+      "fingerprint": "2eb3ba5d8b05094b"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor just added side chats so agents don't clog your main thread",
+      "blurb": "Cursor now lets you spin up side chats that run in parallel with your main conversation, search through old agent transcripts, and pick projects or repos faster. The idea: keep exploratory or tangential AI conversations separate so they don't pollute the flow you're actually shipping.",
+      "why_it_matters": "Context management matters more as agents get longer-lived and handle multiple tasks at once.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/side-chat",
+      "tier": 1,
+      "original_headline": "Side Chats and Conversation Search",
+      "fingerprint": "d60805cf5866d8a5"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The delegation audition",
+    "kicker": "",
+    "prompt": "I'll describe a task I'm still doing myself. Don't tell me to delegate it \u2014 I know that already. Instead: tell me the exact two-sentence brief I'd give someone else, the one mistake they'll probably make, and how I'd know in week one whether they can own it long-term.",
+    "tool_hint": "Before you hand off something you've been white-knuckling for months."
+  },
+  "daily_question": "If you could steal one capability from a closed model and open-source it tomorrow, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1783770868.694505,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=15, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783770899.1139379,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 26,
+        "persona": "market",
+        "reason": "THE defining AI story today - Apple suing OpenAI for allegedly stealing hardware secrets. Major AI lab at the center of major legal action from tech giant. This is the story everyone in AI will be talking about today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011ZY6jMQRGKzBmUbRk615rv"
+    },
+    {
+      "ts": 1783770899.114,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple sues OpenAI for allegedly stealing hardware secrets\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_011ZY6jMQRGKzBmUbRk615rv"
+    },
+    {
+      "ts": 1783770899.1140375,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "market",
+        "reason": "Major model drop (GPT-5.6) after regulatory drama, plus new 'ChatGPT Work' product launch. Concrete shipped feature with real stakes and newsworthy government greenlight angle."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DxjMReLULqUCFi2qrmGTe6"
+    },
+    {
+      "ts": 1783770899.114078,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI rolls out GPT-5.6 after government greenlight \\u2014 and announces \\u2018ChatGPT Work\\u2019\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01DxjMReLULqUCFi2qrmGTe6"
+    },
+    {
+      "ts": 1783770899.1140897,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 38,
+        "persona": "industry",
+        "reason": "Biggest foreign IPO in US history ($26.5B) directly driven by AI chip boom. Major market moment showing AI's massive economic impact, plus concrete ask for US fab expansion."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WDzHtLRmcsSpuveWZLK5hk"
+    },
+    {
+      "ts": 1783770899.1141484,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SK Hynix raises $26.5B in the biggest foreign IPO in US history, is urged to build new US fabs\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01WDzHtLRmcsSpuveWZLK5hk"
+    },
+    {
+      "ts": 1783770899.114167,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 23,
+        "persona": "build",
+        "reason": "NVIDIA Nemotron 3 Ultra achieving benchmark-leading performance at lower cost than top closed models. Developer-facing capability improvement with concrete performance hook."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RLpk9zmgcLHhFmbLwwvJ9Z"
+    },
+    {
+      "ts": 1783770899.114229,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Nemotron Achieves Benchmark-Leading Performance With LangChain Deep Agents Harness\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01RLpk9zmgcLHhFmbLwwvJ9Z"
+    },
+    {
+      "ts": 1783770905.4377987,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_019qDMX76S5SHbhKQ76jgTeb"
+    },
+    {
+      "ts": 1783770906.163427,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_2] covers the same story as a recent edition (\\\"OpenAI gets permission to roll out GPT-5.6 to the public on July 9\\\", similarity 0.821) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_019qDMX76S5SHbhKQ76jgTeb"
+    },
+    {
+      "ts": 1783770908.347443,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 34
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0118v9dmreHrDvXgYytwFpF4"
+    },
+    {
+      "ts": 1783770908.3474803,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI rolls out GPT-5.6 after government greenlight \\u2014 and announces \\u2018ChatGPT Work\\u2019\"}",
+      "tool_use_id": "toolu_0118v9dmreHrDvXgYytwFpF4"
+    },
+    {
+      "ts": 1783770920.9066334,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "build",
+        "reason": "Shipped developer features in Cursor - side chats and conversation search that help engineers stay in flow. Concrete try-it-today utility for the Solvd engineering audience."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TrrZC3x3oB6vvuuRcP2WbL"
+    },
+    {
+      "ts": 1783770920.9066954,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Side Chats and Conversation Search\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01TrrZC3x3oB6vvuuRcP2WbL"
+    },
+    {
+      "ts": 1783770924.7283888,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Ja4jPkPGNB5bbz3n4h6ViA"
+    },
+    {
+      "ts": 1783770924.947195,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783770924.947221,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Apple sues OpenAI for allegedly stealing hardware secrets\", \"pick_3\": \"SK Hynix raises $26.5B in the biggest foreign IPO in US history, is urged to build new US fabs\", \"pick_4\": \"NVIDIA Nemotron Achieves Benchmark-Leading Performance With LangChain Deep Agents Harness\", \"pick_5\": \"Side Chats and Conversation Search\"}}",
+      "tool_use_id": "toolu_01Ja4jPkPGNB5bbz3n4h6ViA"
+    }
+  ],
+  "issue_num": 43
+}
