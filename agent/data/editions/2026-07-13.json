@@ -1,0 +1,254 @@
+{
+  "date": "2026-07-13",
+  "generated_at": "2026-07-13T13:28:38.036581Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "OpenAI's head of safety is leaving the company",
+      "blurb": "Johannes Heidecke is stepping down as OpenAI's head of safety systems just as the company merges its research and safety teams. The move continues a pattern of safety-focused leaders departing OpenAI over the past year, including co-founder Ilya Sutskever and researchers who left to start rival labs focused on AI safety.",
+      "why_it_matters": "Another senior safety voice exits as OpenAI races to ship products faster",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/openai-head-of-safety-leaving/",
+      "tier": 1,
+      "original_headline": "OpenAI\u2019s Head of Safety Is Leaving the Company",
+      "fingerprint": "577f7e23ce3919f7"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Meta kills Instagram feature that let anyone make AI deepfakes of you",
+      "blurb": "Meta pulled its new AI image tool after backlash erupted over letting users generate AI images of any public Instagram account just by tagging them. The feature went live this week with no opt-out for account owners, meaning anyone could feed your photos into Meta's image generator without permission.",
+      "why_it_matters": "Even Meta decided this crossed a line\u2014consent still matters for training data.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/964416/meta-instagram-ai-muse-image-deepfakes",
+      "tier": 1,
+      "original_headline": "Meta turns off the Instagram feature that let users make AI deepfakes of public accounts",
+      "fingerprint": "8d5cdda2bbd6ced3"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Waze now lets you report hazards by talking to Gemini",
+      "blurb": "Google integrated Gemini into Waze so you can report road issues conversationally instead of tapping through menus while driving. Just say what you see\u2014\"there's a pothole in the left lane\"\u2014and Gemini will file it. The update also brings natural-language navigation like \"avoid highways\" without hunting for settings.",
+      "why_it_matters": "Voice UI that understands context makes safety features actually usable while driving.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/transportation/964132/waze-gemini-ai-voice-commands-less-chatty",
+      "tier": 1,
+      "original_headline": "Waze is getting a bunch of new AI-powered features",
+      "fingerprint": "fd65686d97ceec7c"
+    },
+    {
+      "slot": "industry",
+      "headline": "DoorDash, Siemens, and Airbnb are switching to Chinese AI models",
+      "blurb": "Major companies are adopting models from DeepSeek and Alibaba to cut AI costs and reduce dependence on OpenAI and Anthropic. DoorDash uses DeepSeek for customer service routing, while Siemens and Airbnb are testing Chinese models for various internal tasks. The shift comes as US model prices remain high despite recent cuts.",
+      "why_it_matters": "Chinese AI models are now cheap and good enough to poach enterprise customers from OpenAI.",
+      "source_name": "FT \u2014 Technology",
+      "source_url": "https://www.ft.com/content/9c8ff45b-7c20-4c2e-93c9-c52339ffdcee",
+      "tier": 1,
+      "original_headline": "Companies turn to Chinese AI models to cut costs",
+      "fingerprint": "aff48f00093c0f23"
+    },
+    {
+      "slot": "market",
+      "headline": "Intel puts $5.7 billion into its Ireland plant to chase AI chip leaders",
+      "blurb": "Intel is spending \u20ac5 billion to expand its Irish manufacturing facility as it tries to catch up in AI chip production. The move signals Intel's push to reclaim manufacturing leadership after falling behind rivals like TSMC and Nvidia in the race to produce cutting-edge AI processors.",
+      "why_it_matters": "Intel is betting billions it can still compete in AI hardware after years of losing ground.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-13/intel-invests-5-billion-in-irish-hub-to-keep-up-in-ai-chip-race",
+      "tier": 1,
+      "original_headline": "Intel Invests \u20ac5 Billion in Irish Hub to Keep Up in AI Chip Race",
+      "fingerprint": "7dd486e8c88cd047"
+    },
+    {
+      "slot": "industry",
+      "headline": "Meta commits $50 billion to a single Louisiana data center for AI",
+      "blurb": "Meta announced its Hyperion data center in Louisiana will cost over $50 billion and consume 5 gigawatts of power\u2014enough to run a small city. The facility, enabled by state tax incentives, represents one of the largest single infrastructure investments in AI computing.",
+      "why_it_matters": "Big Tech is betting billions on physical infrastructure to keep pace with AI demand.",
+      "source_name": "CNBC \u2014 Technology",
+      "source_url": "https://www.cnbc.com/2026/07/13/meta-louisiana-data-center-investment-reaches-50-billion-amid-ai-push.html",
+      "tier": 1,
+      "original_headline": "Meta's Louisiana data center investment to reach $50 billion, aided by generous tax incentives",
+      "fingerprint": "e13664198d4b5dcc"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The research rabbit hole escape",
+    "kicker": "",
+    "prompt": "I'm researching a topic and I've collected way too much information. I'll describe what I'm trying to figure out below. Give me: the one question that actually matters, three sources that would answer it, and permission to ignore everything else I've bookmarked.",
+    "tool_hint": "When you have 47 tabs open and forgot what you were looking for."
+  },
+  "daily_question": "If you had to bet: which company's AI safety team will matter most in 5 years?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1783949257.0701134,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783949272.6437402,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 57,
+        "persona": "market",
+        "reason": "OpenAI's head of safety leaving amid restructuring - significant leadership change at a tier-1 AI lab during ongoing safety debates. Load-bearing AI story about the company at the center of AI development."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Vu99jLWzLF3qrGH58p2U1Y"
+    },
+    {
+      "ts": 1783949272.6438007,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI\\u2019s Head of Safety Is Leaving the Company\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Vu99jLWzLF3qrGH58p2U1Y"
+    },
+    {
+      "ts": 1783949272.6438377,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 7,
+        "persona": "everyday",
+        "reason": "Meta reverses Instagram AI deepfake feature after backlash - concrete shipped feature that was pulled. Shows AI platform responding to user concerns. Tier-1 source (The Verge), clear action."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PyDyLrTdrT2MmDKMdoCf97"
+    },
+    {
+      "ts": 1783949272.6438718,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta turns off the Instagram feature that let users make AI deepfakes of public accounts\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01PyDyLrTdrT2MmDKMdoCf97"
+    },
+    {
+      "ts": 1783949272.643882,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 3,
+        "persona": "everyday",
+        "reason": "Waze integrating Gemini AI with conversational features users can try - concrete Google product update with try-it-today appeal. Tier-1 source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NcDqU18P79TPdUAQ8Ff9y7"
+    },
+    {
+      "ts": 1783949272.6439202,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Waze is getting a bunch of new AI-powered features\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01NcDqU18P79TPdUAQ8Ff9y7"
+    },
+    {
+      "ts": 1783949272.6439285,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 113,
+        "persona": "industry",
+        "reason": "Major companies (DoorDash, Siemens, Airbnb) adopting Chinese AI models to cut costs - significant market shift with named brands making concrete moves. FT tier-1 reporting on business strategy."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01W65fSHXeFpxL7HKXs6BDVE"
+    },
+    {
+      "ts": 1783949272.6439695,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Companies turn to Chinese AI models to cut costs\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01W65fSHXeFpxL7HKXs6BDVE"
+    },
+    {
+      "ts": 1783949281.2240574,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 119,
+        "persona": "market",
+        "reason": "Intel investing \u20ac5B to expand Irish manufacturing for AI chip race - major capital deployment showing infrastructure build-out for AI. Concrete market move by tier-1 chipmaker."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0135N2Tom4Dg9DZodd57xZ7H"
+    },
+    {
+      "ts": 1783949281.2241247,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Intel Invests \\u20ac5 Billion in Irish Hub to Keep Up in AI Chip Race\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_0135N2Tom4Dg9DZodd57xZ7H"
+    },
+    {
+      "ts": 1783949281.2241585,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 138,
+        "persona": "industry",
+        "reason": "Meta's $50B Louisiana data center investment for 5GW AI supercluster - massive infrastructure commitment showing scale of AI buildout. Concrete facility with specifics."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SBpT2LSAktKLh5Ur2nZddU"
+    },
+    {
+      "ts": 1783949281.224197,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta's Louisiana data center investment to reach $50 billion, aided by generous tax incentives\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01SBpT2LSAktKLh5Ur2nZddU"
+    },
+    {
+      "ts": 1783949286.3752842,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01VRxhYbkeK3fNCF5PfKp47N"
+    },
+    {
+      "ts": 1783949287.1534588,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1783949287.1535017,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI\\u2019s Head of Safety Is Leaving the Company\", \"pick_2\": \"Meta turns off the Instagram feature that let users make AI deepfakes of public accounts\", \"pick_3\": \"Waze is getting a bunch of new AI-powered features\", \"pick_4\": \"Companies turn to Chinese AI models to cut costs\", \"pick_5\": \"Intel Invests \\u20ac5 Billion in Irish Hub to Keep Up in AI Chip Race\", \"pick_6\": \"Meta's Louisiana data center investment to reach $50 billion, aided by generous tax incentives\"}}",
+      "tool_use_id": "toolu_01VRxhYbkeK3fNCF5PfKp47N"
+    }
+  ],
+  "issue_num": 44
+}
