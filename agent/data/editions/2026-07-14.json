@@ -1,0 +1,336 @@
+{
+  "date": "2026-07-14",
+  "generated_at": "2026-07-14T12:16:34.003867Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "industry",
+      "headline": "New York just banned new hyperscale data centers for a year",
+      "blurb": "Governor Kathy Hochul signed the country's first statewide data center moratorium, blocking environmental permits for new hyperscale facilities. A separate bill that could restrict even more developments is still waiting for her signature.",
+      "why_it_matters": "AI infrastructure buildout just hit its first state-level roadblock in the US.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/policy/965110/new-york-ai-data-center-moratorium",
+      "tier": 1,
+      "original_headline": "New York becomes the first state to enact a data center moratorium",
+      "fingerprint": "5d9ad19133e8b244"
+    },
+    {
+      "slot": "market",
+      "headline": "IBM shares plunge after customers shift spend to chips and servers",
+      "blurb": "IBM reported second-quarter sales below expectations, with CEO acknowledging 'we faltered' as customers redirected budgets toward chips and server infrastructure instead of IBM's traditional software and services offerings.",
+      "why_it_matters": "Hardware is eating software budgets as companies race to build AI infrastructure.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-14/ibm-says-second-quarter-sales-missed-as-customers-pulled-back",
+      "tier": 1,
+      "original_headline": "IBM Shares Plunge After Sales Miss, CEO Says \u2018We Faltered\u2019",
+      "fingerprint": "a6a0ee1129dd8ffa"
+    },
+    {
+      "slot": "build",
+      "headline": "Nous Research raising $75M at $1.5B for its Hermes coding agent",
+      "blurb": "The startup behind Hermes \u2014 an AI coding agent that competes with Cursor and GitHub Copilot \u2014 is raising at least $75 million led by Robot Ventures, with Union Square Ventures joining. Nous started as an open-source model shop and pivoted to building developer tools.",
+      "why_it_matters": "Another sign that investors are betting big on AI coding tools becoming billion-dollar businesses.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/13/hermes-agent-maker-nous-research-in-talks-for-new-funding-at-1-5b-valuation/",
+      "tier": 1,
+      "original_headline": "Hermes agent maker Nous Research in talks for new funding at $1.5B valuation",
+      "fingerprint": "be374858d2ea6026"
+    },
+    {
+      "slot": "build",
+      "headline": "PixVerse raises $439M to build AI that generates video worlds you can explore",
+      "blurb": "The video-generation startup just closed a massive round at a $2B+ valuation to expand what it calls its 'world model' \u2014 AI that doesn't just generate clips but creates explorable, interactive video environments. The funding will help PixVerse ship the tech to more markets.",
+      "why_it_matters": "Video AI is shifting from making clips to making explorable spaces you can move through.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/13/video-generation-startup-pixverse-raises-439m-valuation-soars-past-2b/",
+      "tier": 1,
+      "original_headline": "Video-generation startup PixVerse raises $439M, valuation soars past $2B",
+      "fingerprint": "516bd8191cc63692"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Apple's new Siri can now control everything on your iPhone",
+      "blurb": "Apple rebuilt Siri from the ground up in iOS 27. Instead of just answering questions, it now hooks into every app and setting on your phone \u2014 you can ask it to adjust settings, navigate apps, or pull data from anywhere. The public beta is live now.",
+      "why_it_matters": "Siri went from a voice assistant to the main way you use your iPhone.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/siri-ai-is-now-apple-everything-tool/",
+      "tier": 1,
+      "original_headline": "Siri AI Is Becoming Apple\u2019s Everything Tool",
+      "fingerprint": "7008a5f2e9d0429a"
+    },
+    {
+      "slot": "industry",
+      "headline": "DeepMind's CEO calls for a global AI safety body that can halt dangerous models",
+      "blurb": "Demis Hassabis wants an international watchdog with authority to stop frontier AI development if models become too risky. In a blog post, the Google DeepMind chief argues the US should lead the effort and set global standards, given its position in AI development.",
+      "why_it_matters": "A DeepMind leader is publicly backing regulatory power over the models his own company builds.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/965270/google-deepmind-demis-hassabis-global-ai-watchdog",
+      "tier": 1,
+      "original_headline": "Google\u2019s Demis Hassabis says it\u2019s time for a global AI watchdog \u2014 led by the US",
+      "fingerprint": "583cac7bf1eae957"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation floor-finder",
+    "kicker": "",
+    "prompt": "I'm negotiating something and I'll describe it below. Don't give me tactics or scripts. Instead: tell me the number or term where I should walk away without hesitation, the psychological reason I'll be tempted to go lower, and the one thing I should ask for if they meet my number.",
+    "tool_hint": "Before you counter-offer and accidentally negotiate against yourself."
+  },
+  "daily_question": "If you could force one AI lab to pause for six months, which one and why?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1784031329.2975945,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784031345.6288934,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "market",
+        "reason": "Lead story: Apple suing OpenAI over alleged hardware theft and aggressive poaching. Major AI lab at center of legal battle with tech giant - this is the defining AI story today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011NX6H1HRSXhxMg8ZxmvU77"
+    },
+    {
+      "ts": 1784031345.6289544,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"The 6 wildest claims in Apple&#8217;s lawsuit against OpenAI\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_011NX6H1HRSXhxMg8ZxmvU77"
+    },
+    {
+      "ts": 1784031345.6289918,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "industry",
+        "reason": "First state in the US to impose data center moratorium - direct regulatory action on AI infrastructure. Historic policy move with AI at the center."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Fubs8JuVx7BM69p5ZDnky2"
+    },
+    {
+      "ts": 1784031345.629035,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"New York becomes the first state to enact a data center moratorium\", \"persona\": \"industry\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01Fubs8JuVx7BM69p5ZDnky2"
+    },
+    {
+      "ts": 1784031345.6290455,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 129,
+        "persona": "market",
+        "reason": "IBM shares plunge 23% as customers shift spending to cheaper AI infrastructure. Major market signal about enterprise AI economics and spending patterns."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NL9LL53my6zbUdVYCUcPZF"
+    },
+    {
+      "ts": 1784031345.6291177,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"IBM Shares Plunge After Sales Miss, CEO Says \\u2018We Faltered\\u2019\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01NL9LL53my6zbUdVYCUcPZF"
+    },
+    {
+      "ts": 1784031345.6291432,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 7,
+        "persona": "everyday",
+        "reason": "iOS 27 public beta launched today with transformed Siri AI - people can try it now. Concrete shipped feature changing daily iPhone usage."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DEnLr2i9tbw7xyhR87cncn"
+    },
+    {
+      "ts": 1784031345.629205,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'The Verge \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_01DEnLr2i9tbw7xyhR87cncn"
+    },
+    {
+      "ts": 1784031345.6292338,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 15,
+        "persona": "build",
+        "reason": "Hermes agent maker Nous Research raising at $1.5B valuation. Shows agent infrastructure market momentum with concrete product traction."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SKot17Q77VQRxh8XiMmoUV"
+    },
+    {
+      "ts": 1784031345.6292963,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Hermes agent maker Nous Research in talks for new funding at $1.5B valuation\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01SKot17Q77VQRxh8XiMmoUV"
+    },
+    {
+      "ts": 1784031345.6293175,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 14,
+        "persona": "build",
+        "reason": "PixVerse raises $439M at $2B+ valuation for video generation. Major funding for generative video - shows where AI capability investment is flowing."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LAjuhPLtRVgqfsKZwJvqvy"
+    },
+    {
+      "ts": 1784031345.6293685,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Video-generation startup PixVerse raises $439M, valuation soars past $2B\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01LAjuhPLtRVgqfsKZwJvqvy"
+    },
+    {
+      "ts": 1784031349.44154,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 70,
+        "persona": "everyday",
+        "reason": "iOS 27 public beta launched today with transformed Siri AI - people can try it now. Concrete shipped feature becoming the backbone of iPhone UX."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017kULQTMQRBtkKpC9D5fDkR"
+    },
+    {
+      "ts": 1784031349.4416075,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Siri AI Is Becoming Apple\\u2019s Everything Tool\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_017kULQTMQRBtkKpC9D5fDkR"
+    },
+    {
+      "ts": 1784031354.56167,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01NN4uP3uBL2kdnLZE372ymw"
+    },
+    {
+      "ts": 1784031355.3528104,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"Apple sues OpenAI for allegedly stealing hardware secrets\\\", similarity 0.808) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01NN4uP3uBL2kdnLZE372ymw"
+    },
+    {
+      "ts": 1784031359.8830137,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 8
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01UqM77aKhrsZvKHbFZFSE6P"
+    },
+    {
+      "ts": 1784031359.8830504,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"The 6 wildest claims in Apple&#8217;s lawsuit against OpenAI\"}",
+      "tool_use_id": "toolu_01UqM77aKhrsZvKHbFZFSE6P"
+    },
+    {
+      "ts": 1784031359.883077,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 5,
+        "persona": "industry",
+        "reason": "Google DeepMind CEO calls for US-led global AI watchdog with power to halt dangerous models. Major AI lab leader making policy proposal - shows industry positioning on governance."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HPxoonPYaCVB3xiErhis6L"
+    },
+    {
+      "ts": 1784031359.8831534,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google\\u2019s Demis Hassabis says it\\u2019s time for a global AI watchdog \\u2014 led by the US\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01HPxoonPYaCVB3xiErhis6L"
+    },
+    {
+      "ts": 1784031361.9850233,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01QYSYAudgzj41Myn3iKX4yb"
+    },
+    {
+      "ts": 1784031362.2623968,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784031362.2624397,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"New York becomes the first state to enact a data center moratorium\", \"pick_3\": \"IBM Shares Plunge After Sales Miss, CEO Says \\u2018We Faltered\\u2019\", \"pick_4\": \"Hermes agent maker Nous Research in talks for new funding at $1.5B valuation\", \"pick_5\": \"Video-generation startup PixVerse raises $439M, valuation soars past $2B\", \"pick_6\": \"Siri AI Is Becoming Apple\\u2019s Everything Tool\", \"pick_7\": \"Google\\u2019s Demis Hassabis says it\\u2019s time for a global AI watchdog \\u2014 led by the US\"}}",
+      "tool_use_id": "toolu_01QYSYAudgzj41Myn3iKX4yb"
+    }
+  ],
+  "issue_num": 45
+}
