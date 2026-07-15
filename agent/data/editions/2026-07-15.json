@@ -1,0 +1,210 @@
+{
+  "date": "2026-07-15",
+  "generated_at": "2026-07-15T12:18:40.680343Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "OpenAI is building a ChatGPT smart speaker with a camera",
+      "blurb": "Bloomberg reports OpenAI's first hardware device will be a screenless smart speaker that talks with ChatGPT and uses a camera plus sensors to understand your environment. No release date yet, but it could arrive this year\u2014just days after Apple sued OpenAI over alleged trade secret theft.",
+      "why_it_matters": "ChatGPT could become something you talk to in your kitchen, not just your browser.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/965670/openai-chatgpt-ai-smart-speaker-hardware-device",
+      "tier": 1,
+      "original_headline": "OpenAI may announce a ChatGPT smart speaker this year",
+      "fingerprint": "518df67b03d088cc"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Spotify Premium now lets you chat with an AI to find music and podcasts",
+      "blurb": "Spotify is testing a chatbot feature called 'Talk to Spotify' that lets Premium subscribers type requests to discover and play music, audiobooks, and podcasts. The AI appears in the Home and Now Playing screens on mobile, turning search into conversation.",
+      "why_it_matters": "Voice and chat interfaces are replacing menus in consumer apps \u2014 even for browsing music.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/entertainment/965358/spotify-ai-chatbot-interface-music-audiobooks-podcasts",
+      "tier": 1,
+      "original_headline": "Spotify is now an AI chatbot, too",
+      "fingerprint": "c7bb9e63615d9603"
+    },
+    {
+      "slot": "market",
+      "headline": "IBM lost $69 billion in market value in a single day",
+      "blurb": "Shares plunged 25% after the company warned that AI spending is eating into budgets companies once used for traditional software and services\u2014the kind IBM has sold for decades. Customers are choosing cloud AI tools over IBM's legacy products.",
+      "why_it_matters": "AI isn't just creating winners\u2014it's reshaping who loses as enterprise budgets shift.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/ai/ibm-stock-profit-warning-earnings-software-8652c06e?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "IBM Loses $69 Billion of Market Value in One Day in Latest AI-Fueled Selloff",
+      "fingerprint": "97e7b2e976b81ba1"
+    },
+    {
+      "slot": "market",
+      "headline": "Apple can finally ship Apple Intelligence to China",
+      "blurb": "Apple reached an agreement with Beijing to bring Siri and other AI features to Chinese iPhones by partnering with local AI companies. Chinese law requires foreign tech companies to use domestic AI models, which blocked Apple Intelligence's rollout there since last year's iOS 27 beta launch.",
+      "why_it_matters": "China is Apple's third-largest market\u2014this deal unlocks AI features for hundreds of millions of iPhones.",
+      "source_name": "9to5Mac \u2014 AI",
+      "source_url": "https://9to5mac.com/2026/07/15/apple-reaches-agreement-with-chinese-government-on-apple-intelligence-rollout/",
+      "tier": 1,
+      "original_headline": "Apple reaches agreement with Chinese government on Apple Intelligence rollout",
+      "fingerprint": "b64f3a3dacbeb579"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red-flag translator",
+    "kicker": "",
+    "prompt": "I just finished interviewing a candidate. I'll describe what they said and how they answered below. Don't tell me whether to hire them \u2014 I need to decide that. Instead, surface the one thing I'm probably downplaying because I liked them, and the one strength I'm probably overlooking because I didn't.",
+    "tool_hint": "Right after the interview, before you talk yourself into or out of someone."
+  },
+  "daily_question": "If your phone had a camera that could see what you're doing all day, what's the one thing you'd want it to help with?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1784117866.3329072,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784117883.6777985,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 16,
+        "persona": "everyday",
+        "reason": "Lead story: OpenAI's first hardware product - ChatGPT smart speaker announcement is today's biggest AI news. Major product expansion from tier-1 AI lab into consumer hardware category competing with Alexa/Google Home."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HHpmU5CNdHwP4E5z6mM3yx"
+    },
+    {
+      "ts": 1784117883.6778598,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI may announce a ChatGPT smart speaker this year\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01HHpmU5CNdHwP4E5z6mM3yx"
+    },
+    {
+      "ts": 1784117883.677897,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "everyday",
+        "reason": "Spotify launches AI chatbot for Premium subscribers - concrete shipped feature users can try today for music/audiobook discovery. Clear try-it-today hook."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013SkqBo45t7tSZ4MTGW7yKP"
+    },
+    {
+      "ts": 1784117883.6779382,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Spotify is now an AI chatbot, too\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_013SkqBo45t7tSZ4MTGW7yKP"
+    },
+    {
+      "ts": 1784117883.6779497,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "build",
+        "reason": "SpaceXAI's Grok Build was uploading entire user codebases to Google Cloud - critical developer privacy story with real stakes. Important security issue for AI coding tools."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Mmfq4aBvpmbQCeGUTU9yyB"
+    },
+    {
+      "ts": 1784117883.6780052,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'The Verge \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_01Mmfq4aBvpmbQCeGUTU9yyB"
+    },
+    {
+      "ts": 1784117883.6780221,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 129,
+        "persona": "market",
+        "reason": "IBM loses $69 billion in one day as AI spending crowds out traditional IT budgets - massive market story showing concrete business impact of AI transformation. 25% single-day drop is dramatic."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016AgNpcsSS2oGQZS9nbnRHd"
+    },
+    {
+      "ts": 1784117883.6781034,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"IBM Loses $69 Billion of Market Value in One Day in Latest AI-Fueled Selloff\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_016AgNpcsSS2oGQZS9nbnRHd"
+    },
+    {
+      "ts": 1784117888.1749,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 60,
+        "persona": "market",
+        "reason": "Apple reaches agreement with Chinese government on Apple Intelligence rollout - major regulatory/market story about Apple's AI entering China. Significant geopolitical and business development."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DN4Wst37aAMf1SpNsbZiyF"
+    },
+    {
+      "ts": 1784117888.1749656,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple reaches agreement with Chinese government on Apple Intelligence rollout\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01DN4Wst37aAMf1SpNsbZiyF"
+    },
+    {
+      "ts": 1784117894.5957346,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01JpXpWyu8apMdR5o2JZdPs6"
+    },
+    {
+      "ts": 1784117895.3703055,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784117895.3703363,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI may announce a ChatGPT smart speaker this year\", \"pick_2\": \"Spotify is now an AI chatbot, too\", \"pick_3\": \"IBM Loses $69 Billion of Market Value in One Day in Latest AI-Fueled Selloff\", \"pick_4\": \"Apple reaches agreement with Chinese government on Apple Intelligence rollout\"}}",
+      "tool_use_id": "toolu_01JpXpWyu8apMdR5o2JZdPs6"
+    }
+  ],
+  "issue_num": 46
+}
