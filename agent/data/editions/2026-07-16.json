@@ -1,0 +1,248 @@
+{
+  "date": "2026-07-16",
+  "generated_at": "2026-07-16T12:22:41.000084Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "EU forces Google to open Android and Search data to rival AI assistants",
+      "blurb": "Europe's antitrust regulators ordered Google to give competing AI assistants and search engines deeper access to Android's core features and Google Search data. The ruling aims to break Google's control over mobile and search platforms, potentially letting rivals like ChatGPT or Perplexity tap into user data and system hooks Google has kept to itself.",
+      "why_it_matters": "Could reshape how AI assistants compete on the world's dominant mobile OS.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/policy/966438/eu-google-android-ai-interoperability-search-data-dma",
+      "tier": 1,
+      "original_headline": "Google ordered to open Android and Search to rivals in Europe",
+      "fingerprint": "fa5ce69f668554f6"
+    },
+    {
+      "slot": "build",
+      "headline": "Thinking Machines just open-sourced its first AI model after 18 months in stealth",
+      "blurb": "The startup released Inkling, an open model designed to challenge the idea that one giant AI can handle everything. After spending a year and a half building custom AI infrastructure away from the spotlight, this is their first public release\u2014and a bet that specialized models beat general-purpose ones for real work.",
+      "why_it_matters": "More proof the industry is splitting between massive general models and task-specific alternatives.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/15/thinking-machines-amps-up-its-bet-against-one-size-fits-all-ai-with-its-first-open-model-inkling/",
+      "tier": 1,
+      "original_headline": "Thinking Machines amps up its bet against one-size-fits-all AI with its first open model, Inkling",
+      "fingerprint": "0f8cce34c7d1854c"
+    },
+    {
+      "slot": "industry",
+      "headline": "Japan is buying 27,500 Nvidia chips to build a national robotics AI",
+      "blurb": "Japan plans to purchase Nvidia's next-generation Rubin chips to create its own foundational AI model specifically designed for robots. The 27,500-chip order represents a sovereign AI push focused on robotics rather than general-purpose models.",
+      "why_it_matters": "Countries are now building national AI infrastructure for specific industries, not just chatbots.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-16/japan-to-buy-nvidia-rubin-chips-to-build-sovereign-ai-for-robots",
+      "tier": 1,
+      "original_headline": "Japan to Buy Nvidia Rubin Chips to Build an AI for Robots",
+      "fingerprint": "251b6e4a2f04d4c9"
+    },
+    {
+      "slot": "industry",
+      "headline": "Nvidia ships two new modules to run AI agents on robots and edge devices",
+      "blurb": "The T3000 and T2000 modules are compact computers built on Nvidia's Thor architecture, designed to run foundation models directly on robots and edge machines without cloud connectivity. They're aimed at manufacturers moving from prototypes to mass production of autonomous systems that need to process AI locally.",
+      "why_it_matters": "Foundation models are moving from the cloud to devices that operate in the physical world.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/jetson-thor-robotics-edge-ai-agent/",
+      "tier": 1,
+      "original_headline": "NVIDIA Introduces New Jetson Thor Computers to Advance Mainstream Robotics and Edge AI",
+      "fingerprint": "92fd9338da5fce3a"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting cost calculator",
+    "kicker": "",
+    "prompt": "I'm about to schedule a recurring meeting. Tell me the annual cost in person-hours if it runs for a year, then show me three cheaper ways to get the same outcome. Finally, write the one-sentence purpose statement this meeting would need to justify its existence.",
+    "tool_hint": "Before you send that calendar invite to twelve people."
+  },
+  "daily_question": "If you could plug one AI assistant into one piece of hardware you use daily, what would you pair?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1784204508.649675,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784204525.5627363,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 23,
+        "persona": "market",
+        "reason": "THE defining AI story today - EU forces Google to open Android and Search to rival AI assistants. Major regulatory action directly targeting AI dominance that everyone will be discussing. This is load-bearing AI news with massive platform implications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016YscizDnucLW4FHNZ79RbZ"
+    },
+    {
+      "ts": 1784204525.5628011,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google ordered to open Android and Search to rivals in Europe\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_016YscizDnucLW4FHNZ79RbZ"
+    },
+    {
+      "ts": 1784204525.5628388,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 40,
+        "persona": "market",
+        "reason": "Apple Intelligence launches in China with Alibaba's Qwen AI - major product launch in a crucial market with a concrete partnership. Readers will want to know Apple can finally ship AI features in China and how the Alibaba deal makes it happen."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015nXoHJ15zD1E5eHo8xABAK"
+    },
+    {
+      "ts": 1784204525.5629027,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple Intelligence approved for launch in China with Alibaba\\u2019s Qwen AI\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_015nXoHJ15zD1E5eHo8xABAK"
+    },
+    {
+      "ts": 1784204525.5629203,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 36,
+        "persona": "build",
+        "reason": "Thinking Machines releases Inkling, their first open model, as a bet against one-size-fits-all AI. New model drop with a clear architectural thesis - developers and engineers will want to know about a differentiated approach to AI infrastructure."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NeNSk9Cdcp6X81AVTHP122"
+    },
+    {
+      "ts": 1784204525.5629852,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Thinking Machines amps up its bet against one-size-fits-all AI with its first open model, Inkling\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01NeNSk9Cdcp6X81AVTHP122"
+    },
+    {
+      "ts": 1784204525.5630035,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 168,
+        "persona": "industry",
+        "reason": "Japan buying 27,500 Nvidia Rubin chips to build a homegrown AI model for robots - massive, concrete government investment with a specific use case. The scale (27.5k next-gen chips) and focus (robotics AI) make this tangible and exciting."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01VotqpjxtXFVjL5mUz8UKMB"
+    },
+    {
+      "ts": 1784204525.5630586,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Japan to Buy Nvidia Rubin Chips to Build an AI for Robots\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01VotqpjxtXFVjL5mUz8UKMB"
+    },
+    {
+      "ts": 1784204528.235171,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Q3D5gMUw4b552xCtnNBZKp"
+    },
+    {
+      "ts": 1784204529.1422966,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_2] covers the same story as a recent edition (\\\"Apple can finally ship Apple Intelligence to China\\\", similarity 0.843) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01Q3D5gMUw4b552xCtnNBZKp"
+    },
+    {
+      "ts": 1784204533.8279803,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 40
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01BQGmNBoXjibjqoq9EE1zKA"
+    },
+    {
+      "ts": 1784204533.8280249,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Apple Intelligence approved for launch in China with Alibaba\\u2019s Qwen AI\"}",
+      "tool_use_id": "toolu_01BQGmNBoXjibjqoq9EE1zKA"
+    },
+    {
+      "ts": 1784204533.8280523,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 19,
+        "persona": "industry",
+        "reason": "NVIDIA launches Jetson Thor computers for mainstream robotics and edge AI - primary source announcement of new hardware platform moving robots from labs to mass-market deployment. Concrete product launch with real-world applications readers can understand."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LLeus8HZqixFxmXkrnaHj9"
+    },
+    {
+      "ts": 1784204533.8280993,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Introduces New Jetson Thor Computers to Advance Mainstream Robotics and Edge AI\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01LLeus8HZqixFxmXkrnaHj9"
+    },
+    {
+      "ts": 1784204536.5689523,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_015PcxMtKg5rL5me1u2EVJSU"
+    },
+    {
+      "ts": 1784204536.9493124,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784204536.9493494,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Google ordered to open Android and Search to rivals in Europe\", \"pick_3\": \"Thinking Machines amps up its bet against one-size-fits-all AI with its first open model, Inkling\", \"pick_4\": \"Japan to Buy Nvidia Rubin Chips to Build an AI for Robots\", \"pick_5\": \"NVIDIA Introduces New Jetson Thor Computers to Advance Mainstream Robotics and Edge AI\"}}",
+      "tool_use_id": "toolu_015PcxMtKg5rL5me1u2EVJSU"
+    }
+  ],
+  "issue_num": 47
+}
