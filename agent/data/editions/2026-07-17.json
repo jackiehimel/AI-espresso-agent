@@ -1,0 +1,291 @@
+{
+  "date": "2026-07-17",
+  "generated_at": "2026-07-17T12:12:39.605560Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "China's Kimi K3 just became the cheapest frontier AI model",
+      "blurb": "Moonshot AI's new Kimi K3 model matches GPT-4o and Claude 3.5 Sonnet on key benchmarks while costing a fraction of the price\u2014roughly $0.14 per million input tokens versus $2.50-$3 for Western alternatives. The model also handles 128K context windows and can process images, making it a serious budget option for developers willing to work with a Chinese provider.",
+      "why_it_matters": "Frontier performance at one-tenth the API cost changes the economics of AI deployment",
+      "source_name": "Platformer (Casey Newton)",
+      "source_url": "https://www.platformer.news/kimi-k3-launch-moonshot-ai-china/",
+      "tier": 1,
+      "original_headline": "China has a new top model",
+      "fingerprint": "b0ffc5b1dcf46e9f"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Claude can now pull your passwords from 1Password",
+      "blurb": "1Password's new browser integration lets you authorize Claude to grab your login credentials and use them to complete tasks like booking flights or managing accounts. You approve access per-task instead of manually copying passwords into the chatbot.",
+      "why_it_matters": "AI agents just got closer to actually handling your errands instead of just drafting the emails.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/966442/1password-anthropic-claude-browser-integration",
+      "tier": 1,
+      "original_headline": "Claude can now use your 1Password credentials for you",
+      "fingerprint": "a9755902c1e9486d"
+    },
+    {
+      "slot": "build",
+      "headline": "Google Vids now lets you generate and star in videos with AI avatars",
+      "blurb": "Google Vids added two features: Gemini Omni generates full videos from text prompts (script, visuals, voiceover), and Personal Avatars let you create a digital version of yourself that speaks your script without recording each time. Both ship to Workspace users starting this week.",
+      "why_it_matters": "You can now ship explainer videos or training content without filming or hiring talent.",
+      "source_name": "Google AI Blog",
+      "source_url": "https://blog.google/products-and-platforms/products/workspace/gemini-omni-personal-avatars/",
+      "tier": 1,
+      "original_headline": "Create, edit and star in videos with two Google Vids updates",
+      "fingerprint": "17e28347b5ef4418"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Roblox now lets you build a game from a single text prompt",
+      "blurb": "Roblox just added a 'Build' feature to its mobile app that generates playable games from a text description. Type what you want, and the AI creates a basic game you can jump into and customize.",
+      "why_it_matters": "Game creation just went from scripting to typing\u2014no code, no desktop required.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/16/roblox-launches-an-ai-powered-game-creation-feature-in-its-mobile-app/",
+      "tier": 1,
+      "original_headline": "Roblox launches an AI-powered game-creation feature in its mobile app",
+      "fingerprint": "a7499add4d0dde42"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The skill gap translator",
+    "kicker": "",
+    "prompt": "I want to learn something new and I'll describe it below. Don't give me a course list. Instead: tell me the three sub-skills that actually matter, which one I should ignore completely, and the smallest project that would force me to learn all three at once.",
+    "tool_hint": "When you're tired of bookmarking tutorials you'll never finish."
+  },
+  "daily_question": "If AI tools keep getting cheaper and more accessible, what skill are you doubling down on to stay valuable?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[market] banned copy word: deployment']"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1784290292.3359904,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784290312.6488302,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 52,
+        "persona": "market",
+        "reason": "THE defining AI story today - China's Kimi K3 model launch rivals OpenAI/Anthropic, with actual market impact (Bloomberg notes stock rout). Major model drop that everyone in AI is talking about. Platformer analysis is primary/tier-1."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XVtwtuiRyqFPwqohqJokDT"
+    },
+    {
+      "ts": 1784290312.6489084,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"China has a new top model\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01XVtwtuiRyqFPwqohqJokDT"
+    },
+    {
+      "ts": 1784290312.6489496,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "everyday",
+        "reason": "Shipped feature people can try immediately - Claude can now access 1Password credentials. Concrete capability that makes AI agents more practical. Strong 'I want to try that' factor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0146PFr4YXC3quUtaFeAFMKi"
+    },
+    {
+      "ts": 1784290312.6489828,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude can now use your 1Password credentials for you\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_0146PFr4YXC3quUtaFeAFMKi"
+    },
+    {
+      "ts": 1784290312.6489925,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "build",
+        "reason": "Google Vids personal avatars - ship yourself as an AI video avatar. Primary source (Google AI Blog) over TechCrunch coverage. Concrete new capability with clear use case."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QuY6oUqUKDthZ8nzeN2uan"
+    },
+    {
+      "ts": 1784290312.6490257,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Create, edit and star in videos with two Google Vids updates\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01QuY6oUqUKDthZ8nzeN2uan"
+    },
+    {
+      "ts": 1784290312.6490335,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 36,
+        "persona": "everyday",
+        "reason": "Roblox mobile AI game creation from text prompts - democratizing game dev for millions of users. Shipped feature with strong 'didn't know AI could do that' appeal."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013aJgAog3BRMq3opEhM9KKw"
+    },
+    {
+      "ts": 1784290312.6490834,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Roblox launches an AI-powered game-creation feature in its mobile app\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_013aJgAog3BRMq3opEhM9KKw"
+    },
+    {
+      "ts": 1784290312.6490943,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 103,
+        "persona": "build",
+        "reason": "Thinking Machines Lab's first model drop - 975B parameter open source model with video/audio understanding. New player shipping concrete artifacts, developer-focused."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01U5F5oxi1ZRPEP7xC3dwhZA"
+    },
+    {
+      "ts": 1784290312.649128,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Thinking Machines Lab Drops Its First Model\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01U5F5oxi1ZRPEP7xC3dwhZA"
+    },
+    {
+      "ts": 1784290312.6491427,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 38,
+        "persona": "build",
+        "reason": "DoorDash CLI tool - order food from the command line. Fun, surprising developer tool that shows AI agents moving into everyday commerce. Strong screenshot/forward appeal."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TXq4yyFTkWVgq7v2kbWE2U"
+    },
+    {
+      "ts": 1784290312.6491778,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Yes, you can now order DoorDash from the command line\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01TXq4yyFTkWVgq7v2kbWE2U"
+    },
+    {
+      "ts": 1784290319.4795132,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01HtfmbrH16WLs3Y6ayGktSo"
+    },
+    {
+      "ts": 1784290320.1205888,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_5] covers the same story as a recent edition (\\\"Thinking Machines just open-sourced its first AI model after 18 months in stealth\\\", similarity 0.845) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01HtfmbrH16WLs3Y6ayGktSo"
+    },
+    {
+      "ts": 1784290324.1801078,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 103
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Lt6DdUpjS3vJm34ureoJtp"
+    },
+    {
+      "ts": 1784290324.1801596,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Thinking Machines Lab Drops Its First Model\"}",
+      "tool_use_id": "toolu_01Lt6DdUpjS3vJm34ureoJtp"
+    },
+    {
+      "ts": 1784290333.7838523,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 38
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018FRdozgk4Pv7BxA4TF5h6C"
+    },
+    {
+      "ts": 1784290333.7839065,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Yes, you can now order DoorDash from the command line\"}",
+      "tool_use_id": "toolu_018FRdozgk4Pv7BxA4TF5h6C"
+    },
+    {
+      "ts": 1784290336.3417819,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01WXHjJJVvSe6xqyVxbvT5Vj"
+    },
+    {
+      "ts": 1784290336.3642125,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784290336.3642557,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"China has a new top model\", \"pick_2\": \"Claude can now use your 1Password credentials for you\", \"pick_3\": \"Create, edit and star in videos with two Google Vids updates\", \"pick_4\": \"Roblox launches an AI-powered game-creation feature in its mobile app\"}}",
+      "tool_use_id": "toolu_01WXHjJJVvSe6xqyVxbvT5Vj"
+    }
+  ],
+  "issue_num": 48
+}
