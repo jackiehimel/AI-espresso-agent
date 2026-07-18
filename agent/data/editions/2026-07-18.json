@@ -1,0 +1,356 @@
+{
+  "date": "2026-07-18",
+  "generated_at": "2026-07-18T11:55:52.953632Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Chinese startup Moonshot claims its new AI model matches GPT-4 and Claude",
+      "blurb": "Moonshot AI released a model it says performs as well as top-tier systems from OpenAI and Anthropic. The announcement spooked markets and signals China's AI labs are catching up to U.S. rivals despite export restrictions on advanced chips.",
+      "why_it_matters": "The gap between Chinese and American frontier models may be shrinking faster than expected.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-17/china-s-powerful-new-moonshot-ai-model-closes-gap-with-us-rivals",
+      "tier": 1,
+      "original_headline": "China\u2019s Moonshot Unveils AI Model, Fueling Tech Rout",
+      "fingerprint": "41c6e95891eec4c3"
+    },
+    {
+      "slot": "market",
+      "headline": "Meta is negotiating to rent Anthropic $10 billion worth of GPU clusters",
+      "blurb": "Meta is in talks to lease computing infrastructure to Anthropic in what could become a $10 billion deal. The arrangement would let Anthropic run Claude on Meta's data centers while creating a new revenue stream for Meta's massive AI hardware investments.",
+      "why_it_matters": "Big Tech's GPU hoards are becoming a product you can rent, not just an internal advantage.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/07/17/technology/meta-anthropic-ai-computing-power.html",
+      "tier": 1,
+      "original_headline": "Meta in Talks to Lease Computing Power to Anthropic in Potential $10 Billion Deal",
+      "fingerprint": "6dd93240621c61fa"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA's new AI chip cuts the cost of training agents by half",
+      "blurb": "NVIDIA's Vera Rubin chip is built specifically for post-training\u2014the phase where AI agents learn from feedback and real-world tasks. The company says extreme hardware-software co-design delivers the lowest cost per token for this workload, which matters more as companies shift from pre-training foundation models to fine-tuning agents that can actually do things.",
+      "why_it_matters": "Training agents costs less, so more companies can build custom AI that acts instead of just answering questions.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/nvidia-vera-rubin-post-training-intelligence-per-dollar/",
+      "tier": 1,
+      "original_headline": "NVIDIA Vera Rubin Maximizes Intelligence per Dollar for Post-Training Workloads \u2014 a Key Metric for Agentic AI",
+      "fingerprint": "5569bac1b1afe4be"
+    },
+    {
+      "slot": "industry",
+      "headline": "White House is now deciding who gets access to frontier AI models",
+      "blurb": "The Trump administration is stepping in to control access to the most advanced AI systems from OpenAI, Anthropic, and others, according to sources familiar with the matter. The move shifts power over frontier model distribution from the companies that build them to federal officials.",
+      "why_it_matters": "Government control over AI access could reshape who builds with cutting-edge models and how fast AI capabilities spread.",
+      "source_name": "CNBC \u2014 Technology",
+      "source_url": "https://www.cnbc.com/2026/07/17/white-house-ai-access-anthropic-openai.html",
+      "tier": 1,
+      "original_headline": "The White House is dictating access to frontier AI models, shifting power from tech giants, sources say",
+      "fingerprint": "dd78f62a19b9e140"
+    },
+    {
+      "slot": "industry",
+      "headline": "SpaceX is negotiating a multi-billion-dollar AI data center deal with the Pentagon",
+      "blurb": "Elon Musk's SpaceX is in talks to supply billions of dollars' worth of computing infrastructure to power the Pentagon's AI initiatives. The arrangement would make SpaceX a major provider of data-center capacity for defense AI workloads.",
+      "why_it_matters": "The company best known for rockets is now competing to run military AI compute at scale.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/ai/spacex-in-talks-to-provide-computing-power-for-pentagons-ai-push-15e752e4?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "SpaceX in Talks to Provide Computing Power for Pentagon\u2019s AI Push",
+      "fingerprint": "348d42c176854df3"
+    },
+    {
+      "slot": "everyday",
+      "headline": "TikTok is testing a tool that lets creators flag AI copies of themselves",
+      "blurb": "TikTok is piloting an opt-in feature with some US creators that scans videos for AI-generated likenesses and lets people report deepfakes of themselves to the company. YouTube has been working on similar tech, but TikTok's version is now live in limited testing.",
+      "why_it_matters": "Creators can finally push back when AI clones their face or voice without permission.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/967486/tiktok-ai-likeness-detection-tool",
+      "tier": 1,
+      "original_headline": "TikTok is testing an AI likeness detection tool",
+      "fingerprint": "58f14560ea24184d"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The strategy stress test",
+    "kicker": "",
+    "prompt": "I'll describe our current strategy below. Attack it like a competitor who wants to destroy us. Tell me: the one assumption we're making that's probably wrong, the move we're most vulnerable to, and the pivot we should have ready if things shift in the next six months.",
+    "tool_hint": "Before you commit the next quarter's budget to a plan that hasn't been properly challenged."
+  },
+  "daily_question": "If you could rent someone else's AI infrastructure for a day, what would you train?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1784375675.1210477,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=['No major model capability launches today (inference speed, context window, modality)', 'No open-source developer tool launches with viral adoption potential', 'No AI application surprising users in unexpected domains (design, music, healthcare)']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784375694.5740929,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 162,
+        "persona": "market",
+        "reason": "Lead story: Chinese AI lab Moonshot claims parity with OpenAI/Anthropic - this is the biggest AI model news today, showing China catching up to US frontier models. Major geopolitical and technical significance."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KwD9uY6SE33wTBCWidzRNY"
+    },
+    {
+      "ts": 1784375694.5741813,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"China\\u2019s Moonshot Unveils AI Model, Fueling Tech Rout\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01KwD9uY6SE33wTBCWidzRNY"
+    },
+    {
+      "ts": 1784375694.5742128,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 123,
+        "persona": "market",
+        "reason": "Massive $10B Meta-Anthropic compute deal demonstrates the scarcity and value of AI infrastructure. Creates entirely new business model (Meta as compute lessor). Major market story from tier-1 source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LM9GNjuV4j92w7hqMzg5Zh"
+    },
+    {
+      "ts": 1784375694.5742707,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta in Talks to Lease Computing Power to Anthropic in Potential $10 Billion Deal\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01LM9GNjuV4j92w7hqMzg5Zh"
+    },
+    {
+      "ts": 1784375694.5742958,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 18,
+        "persona": "market",
+        "reason": "Apple suing OpenAI is a defining AI platform war story - two of the biggest players in direct legal conflict. The Verge analysis provides strategic context on Apple's competitive thinking."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WH1pKDvctvnb6wnEQFXdBd"
+    },
+    {
+      "ts": 1784375694.574351,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple\\u2019s plot to crush OpenAI\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01WH1pKDvctvnb6wnEQFXdBd"
+    },
+    {
+      "ts": 1784375694.5743687,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "build",
+        "reason": "Nvidia Vera Rubin targets post-training/agentic AI workloads with 'intelligence per dollar' optimization - concrete technical shift as industry moves from pre-training to inference/agents. Primary source from Nvidia."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01VrEhHTQkQzsruoNC9J6VjF"
+    },
+    {
+      "ts": 1784375694.5744317,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Vera Rubin Maximizes Intelligence per Dollar for Post-Training Workloads \\u2014 a Key Metric for Agentic AI\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01VrEhHTQkQzsruoNC9J6VjF"
+    },
+    {
+      "ts": 1784375694.5744524,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 94,
+        "persona": "build",
+        "reason": "Thinking Machines drops 975B-parameter open source multimodal model (Inkling) - massive open release with video/audio understanding. Shows open source scaling up to compete with closed models."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Cg9WLXks6Yk5igLEZJhJ58"
+    },
+    {
+      "ts": 1784375694.574499,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Thinking Machines Lab Drops Its First Model\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01Cg9WLXks6Yk5igLEZJhJ58"
+    },
+    {
+      "ts": 1784375694.574516,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 177,
+        "persona": "industry",
+        "reason": "White House controlling access to frontier AI models is a major regulatory shift - government directly dictating who can use cutting-edge AI. Power shift from tech companies to federal control, major policy story where AI is load-bearing."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011z5HHc1LzXPQ4Ak6kdZCJ2"
+    },
+    {
+      "ts": 1784375694.574564,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"The White House is dictating access to frontier AI models, shifting power from tech giants, sources say\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_011z5HHc1LzXPQ4Ak6kdZCJ2"
+    },
+    {
+      "ts": 1784375702.5187385,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_014PhGAdvs1X7upmALqrGMpc"
+    },
+    {
+      "ts": 1784375703.1033578,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_3] covers the same story as a recent edition (\\\"Apple sues OpenAI for allegedly stealing hardware secrets\\\", similarity 0.811) \\u2014 unpick and choose different news\", \"[pick_5] covers the same story as a recent edition (\\\"Thinking Machines just open-sourced its first AI model after 18 months in stealth\\\", similarity 0.845) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_014PhGAdvs1X7upmALqrGMpc"
+    },
+    {
+      "ts": 1784375705.9332943,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 18
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0176K7cUP13e7DEacBWVHtPT"
+    },
+    {
+      "ts": 1784375705.9333367,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Apple\\u2019s plot to crush OpenAI\"}",
+      "tool_use_id": "toolu_0176K7cUP13e7DEacBWVHtPT"
+    },
+    {
+      "ts": 1784375705.9333687,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 94
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SdkMWv5e5c8yEvRsXPLpuJ"
+    },
+    {
+      "ts": 1784375705.9334004,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Thinking Machines Lab Drops Its First Model\"}",
+      "tool_use_id": "toolu_01SdkMWv5e5c8yEvRsXPLpuJ"
+    },
+    {
+      "ts": 1784375715.9682083,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 137,
+        "persona": "industry",
+        "reason": "SpaceX providing billions in AI computing capacity to Pentagon - major defense/AI infrastructure story showing how critical compute has become. Musk's company becoming key government AI supplier."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01K9YihyRGuuQgpqYKxrBrjX"
+    },
+    {
+      "ts": 1784375715.9683115,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SpaceX in Talks to Provide Computing Power for Pentagon\\u2019s AI Push\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01K9YihyRGuuQgpqYKxrBrjX"
+    },
+    {
+      "ts": 1784375715.9683402,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "everyday",
+        "reason": "TikTok testing opt-in AI likeness detection tool - practical creator protection feature users can try. Concrete shipped capability addressing real creator concerns about AI deepfakes."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01BkxUgNHguK4QKgxfx1SEcp"
+    },
+    {
+      "ts": 1784375715.9683783,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"TikTok is testing an AI likeness detection tool\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01BkxUgNHguK4QKgxfx1SEcp"
+    },
+    {
+      "ts": 1784375723.6707113,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01QqSLUmg7e5SCUfQHRTE8yj"
+    },
+    {
+      "ts": 1784375723.9493685,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784375723.9494052,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"China\\u2019s Moonshot Unveils AI Model, Fueling Tech Rout\", \"pick_2\": \"Meta in Talks to Lease Computing Power to Anthropic in Potential $10 Billion Deal\", \"pick_4\": \"NVIDIA Vera Rubin Maximizes Intelligence per Dollar for Post-Training Workloads \\u2014 a Key Metric for Agentic AI\", \"pick_6\": \"The White House is dictating access to frontier AI models, shifting power from tech giants, sources say\", \"pick_7\": \"SpaceX in Talks to Provide Computing Power for Pentagon\\u2019s AI Push\", \"pick_8\": \"TikTok is testing an AI likeness detection tool\"}}",
+      "tool_use_id": "toolu_01QqSLUmg7e5SCUfQHRTE8yj"
+    }
+  ],
+  "issue_num": 49
+}
