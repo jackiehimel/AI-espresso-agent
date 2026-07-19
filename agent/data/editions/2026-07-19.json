@@ -1,0 +1,308 @@
+{
+  "date": "2026-07-19",
+  "generated_at": "2026-07-19T12:02:25.347657Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Alibaba's Qwen3.8 Max claims to rival top AI models",
+      "blurb": "Alibaba released a preview of Qwen3.8 Max, positioning it as competitive with frontier models and second only to Anthropic's Fable 5. The model enters an increasingly crowded field of companies claiming near-parity with leading AI systems.",
+      "why_it_matters": "China's top tech companies are closing the gap with Western AI labs faster than expected.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-19/alibaba-s-qwen-unveils-preview-of-flagship-ai-model",
+      "tier": 1,
+      "original_headline": "Alibaba\u2019s Qwen Unveils Preview of Flagship AI Model",
+      "fingerprint": "ad22ea98784854ee"
+    },
+    {
+      "slot": "build",
+      "headline": "Claude Code just switched from Node to Bun (written in Rust)",
+      "blurb": "Anthropic quietly moved Claude Code's runtime from Node.js to Bun, a JavaScript runtime built in Rust that's known for faster startup and execution. The change means Claude Code agents now spin up quicker and run more efficiently when they're writing and testing code for you.",
+      "why_it_matters": "Faster runtimes mean agents can iterate on code in less time \u2014 and waste fewer tokens waiting.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://simonwillison.net/2026/Jul/19/claude-code-in-bun-in-rust/",
+      "tier": 1,
+      "original_headline": "Claude Code uses Bun written in Rust now",
+      "fingerprint": "33e9b32babdeb917"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor's Slack bot now works across repos and shares its plan first",
+      "blurb": "Cursor in Slack got three upgrades: it tells you what it's about to do before starting, works in codebases with multiple repos, and can follow conversations across different channels and threads. No more guessing what the bot will change or switching contexts manually.",
+      "why_it_matters": "Less friction between where you talk about code and where you actually write it.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/slack-improvements",
+      "tier": 1,
+      "original_headline": "Improvements to Cursor in Slack",
+      "fingerprint": "861f2f652c822007"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google renames NotebookLM to Gemini Notebook",
+      "blurb": "Google's AI note-taking app is getting a rebrand. NotebookLM is now called Gemini Notebook, though it'll stay a standalone app even as Google weaves it tighter into Gemini and Search. The tool first launched as Project Tailwind in May 2023.",
+      "why_it_matters": "Another Google product gets absorbed into the Gemini brand umbrella.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/966112/google-gemini-notebook-notebooklm",
+      "tier": 1,
+      "original_headline": "Google is renaming NotebookLM to Gemini Notebook",
+      "fingerprint": "5ed674db2fbca4de"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The priorities lie detector",
+    "kicker": "",
+    "prompt": "I'll tell you my top three priorities for this quarter. For each one, tell me what I'd have to stop doing this week to prove I actually mean it. Then rank them by which one I'm most likely lying to myself about.",
+    "tool_hint": "When your to-do list and your stated priorities haven't met in months."
+  },
+  "daily_question": "If you could swap one tool in your stack for its faster competitor today, which would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1784462468.4493148,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784462492.187235,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "market",
+        "reason": "THE defining AI story today - Apple suing OpenAI is a major legal action between two tier-1 AI companies. This is load-bearing AI news that everyone in the industry will be talking about. Must lead the edition."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LbfTazLHMGFykWThKGgYSi"
+    },
+    {
+      "ts": 1784462492.187299,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple\\u2019s plot to crush OpenAI\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01LbfTazLHMGFykWThKGgYSi"
+    },
+    {
+      "ts": 1784462492.1873362,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 139,
+        "persona": "build",
+        "reason": "Major model launch from Alibaba - Qwen3.8 Max described as comparable to frontier models and second only to Anthropic's Fable 5. Concrete capability hook with competitive positioning. Strong tier-1 source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XuAwVizbwVr68cd7QuGx5p"
+    },
+    {
+      "ts": 1784462492.1873817,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Alibaba\\u2019s Qwen Unveils Preview of Flagship AI Model\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01XuAwVizbwVr68cd7QuGx5p"
+    },
+    {
+      "ts": 1784462492.1873953,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 36,
+        "persona": "build",
+        "reason": "Developer-facing change to shipped product (Claude Code). Concrete technical evolution (Bun runtime written in Rust) that build-focused readers will find interesting. HN front page validates developer interest."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0148i8kBqQRLs9ofSs1r6x73"
+    },
+    {
+      "ts": 1784462492.1874692,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude Code uses Bun written in Rust now\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_0148i8kBqQRLs9ofSs1r6x73"
+    },
+    {
+      "ts": 1784462492.187509,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "build",
+        "reason": "Shipped improvements to Cursor in Slack - concrete new capabilities (shares plan before starting, multi-repo support, cross-channel work). Developer tool people can use today. Official changelog from tier-1 source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01BVmT56AknD8GHs2vFzfGGc"
+    },
+    {
+      "ts": 1784462492.187569,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Improvements to Cursor in Slack\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01BVmT56AknD8GHs2vFzfGGc"
+    },
+    {
+      "ts": 1784462497.2678826,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01JiAPnBVtK3yemLPUxHuQWR"
+    },
+    {
+      "ts": 1784462498.3174706,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"Apple sues OpenAI for allegedly stealing hardware secrets\\\", similarity 0.811) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01JiAPnBVtK3yemLPUxHuQWR"
+    },
+    {
+      "ts": 1784462502.0574293,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 11
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01VHjbZqN7ZEWiBPz9nf47XP"
+    },
+    {
+      "ts": 1784462502.0574665,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Apple\\u2019s plot to crush OpenAI\"}",
+      "tool_use_id": "toolu_01VHjbZqN7ZEWiBPz9nf47XP"
+    },
+    {
+      "ts": 1784462508.5847104,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 91,
+        "persona": "market",
+        "reason": "Major market story - Meta considering multibillion-dollar data center deal with Anthropic opens completely new business for Meta. Significant strategic move involving two major AI players. Strong 'wow' factor for the business side."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01H77ESDcLpQmXg7zMe3dNax"
+    },
+    {
+      "ts": 1784462508.584769,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta is reportedly considering a multibillion-dollar data center deal with Anthropic\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01H77ESDcLpQmXg7zMe3dNax"
+    },
+    {
+      "ts": 1784462510.1343434,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_014jecE8aZ1MZ9bZKbYuFvJV"
+    },
+    {
+      "ts": 1784462510.4199653,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_5] covers the same story as a recent edition (\\\"Meta in Talks to Lease Computing Power to Anthropic in Potential $10 Billion Deal\\\", similarity 0.889) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_014jecE8aZ1MZ9bZKbYuFvJV"
+    },
+    {
+      "ts": 1784462512.2701468,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 91
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HZL1Dfyz3C7DYoGGiYiNAx"
+    },
+    {
+      "ts": 1784462512.2701862,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Meta is reportedly considering a multibillion-dollar data center deal with Anthropic\"}",
+      "tool_use_id": "toolu_01HZL1Dfyz3C7DYoGGiYiNAx"
+    },
+    {
+      "ts": 1784462516.0985749,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "everyday",
+        "reason": "Google consolidating NotebookLM into the Gemini brand - signals Google's strategic product direction and affects a popular AI note-taking tool that people actually use. The rebrand comes with the product becoming more integrated into the Gemini ecosystem."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01BVdPZVntzb6phwunevvNad"
+    },
+    {
+      "ts": 1784462516.0986302,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google is renaming NotebookLM to Gemini Notebook\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01BVdPZVntzb6phwunevvNad"
+    },
+    {
+      "ts": 1784462520.191113,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01WZvkGdT6tCEcodLPCW7QVU"
+    },
+    {
+      "ts": 1784462520.4663386,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784462520.466365,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Alibaba\\u2019s Qwen Unveils Preview of Flagship AI Model\", \"pick_3\": \"Claude Code uses Bun written in Rust now\", \"pick_4\": \"Improvements to Cursor in Slack\", \"pick_6\": \"Google is renaming NotebookLM to Gemini Notebook\"}}",
+      "tool_use_id": "toolu_01WZvkGdT6tCEcodLPCW7QVU"
+    }
+  ],
+  "issue_num": 50
+}
