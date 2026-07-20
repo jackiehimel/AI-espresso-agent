@@ -1,0 +1,350 @@
+{
+  "date": "2026-07-20",
+  "generated_at": "2026-07-20T13:10:05.100071Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Two Chinese AI labs just shipped models that rival GPT-4o and Claude at a fraction of the cost",
+      "blurb": "Moonshot and Alibaba both released new models this week claiming performance on par with OpenAI's and Anthropic's flagship products\u2014but cheaper to run. Moonshot's Kimi k3 and Alibaba's Qwen are both open-source, adding pressure to the idea that the U.S. still holds a meaningful lead at the AI frontier.",
+      "why_it_matters": "The gap between Chinese and American frontier models is closing faster than expected.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/967781/chinese-ai-models-open-source-moonshot-kimi-k3-alibaba-qwen",
+      "tier": 1,
+      "original_headline": "China delivers a one-two punch to America\u2019s AI dominance",
+      "fingerprint": "5894ca980054791a"
+    },
+    {
+      "slot": "build",
+      "headline": "Xiaomi just open-sourced the model behind its humanoid robot",
+      "blurb": "Xiaomi released Robotics-1, a 7B-parameter vision-language-action model that powers its CyberOne humanoid robot. The model processes camera feeds and generates robot actions in real time. Code, weights, and training data are all public\u2014anyone can now build on the same foundation Xiaomi uses for its physical robots.",
+      "why_it_matters": "A consumer electronics giant just made state-of-the-art robotics AI free to use and modify.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://robotics.xiaomi.com/xiaomi-robotics-1.html",
+      "tier": 1,
+      "original_headline": "Xiaomi-Robotics-1",
+      "fingerprint": "da17da7ac2471d29"
+    },
+    {
+      "slot": "industry",
+      "headline": "Bristol Myers Squibb is building a second massive AI cluster for drug discovery",
+      "blurb": "The pharma giant already runs one of the largest AI systems in life sciences and is now deploying a second NVIDIA DGX SuperPOD\u2014this one built on the new Vera Rubin platform. BMS internally calls it the \"SuperDuperPOD\" and says the first cluster already delivered serious results in drug development.",
+      "why_it_matters": "Big Pharma is betting billions that AI can find drugs faster than traditional methods.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/bristol-myers-squibb-building-life-science-industrys-most-advanced-ai-factory-on-nvidia-vera-rubin/",
+      "tier": 1,
+      "original_headline": "Bristol Myers Squibb Building Life Science Industry\u2019s Most Advanced AI Factory on NVIDIA Vera Rubin",
+      "fingerprint": "8ccd19702afec047"
+    },
+    {
+      "slot": "market",
+      "headline": "Databricks hits $188B valuation as companies bet big on open-weight AI",
+      "blurb": "The data platform company, once known mainly for analytics, has repositioned itself as an AI infrastructure player. Its new valuation comes as it publishes research showing open-weight models can cut coding costs compared to proprietary alternatives like GPT-4.",
+      "why_it_matters": "Open-weight models are now competing on cost at enterprise scale, not just on principle.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/17/databricks-hits-188b-valuation-extending-its-run-as-ais-favorite-second-act/",
+      "tier": 1,
+      "original_headline": "Databricks hits $188B valuation, extending its run as AI\u2019s favorite second act",
+      "fingerprint": "d6d328f148e263a1"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The competitor playbook",
+    "kicker": "",
+    "prompt": "I'm going to describe my product or project below. Pretend you're my smartest competitor who just learned everything about what I'm building. Write their internal strategy memo: the obvious move they'd copy, the weakness they'd exploit, and the one thing they'd do differently that would actually win.",
+    "tool_hint": "Before you lock in your roadmap, see it through hostile eyes."
+  },
+  "daily_question": "If you could run one of today's open-weight models on your laptop for free, what would you actually use it for?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1784552939.016977,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784552958.3723352,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 2,
+        "persona": "market",
+        "reason": "THE defining story: China's Moonshot and Alibaba both dropped competitive AI models on the same day, directly challenging US dominance. Covers both launches comprehensively. This is what everyone in AI is talking about today - must lead."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HFAmZ6j1SnLM6qLLmYWCpF"
+    },
+    {
+      "ts": 1784552958.3724115,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"China delivers a one-two punch to America\\u2019s AI dominance\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01HFAmZ6j1SnLM6qLLmYWCpF"
+    },
+    {
+      "ts": 1784552958.372448,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "build",
+        "reason": "Xiaomi announces robotics foundation model with breakthrough 'embodiment-free pre-training' approach - solving the data barrier for robot policies. Primary source, developer-relevant architecture move."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LyHiT5dbHMsTMsF4h7pKta"
+    },
+    {
+      "ts": 1784552958.3724852,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Xiaomi-Robotics-1\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01LyHiT5dbHMsTMsF4h7pKta"
+    },
+    {
+      "ts": 1784552958.3724968,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "industry",
+        "reason": "Bristol Myers Squibb building 'most advanced AI factory' in life sciences on NVIDIA's new Vera Rubin platform - major enterprise deployment showing AI scaling in pharma."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GzX3ksybpuJkGja2WQsQT2"
+    },
+    {
+      "ts": 1784552958.3725564,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Bristol Myers Squibb Building Life Science Industry\\u2019s Most Advanced AI Factory on NVIDIA Vera Rubin\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01GzX3ksybpuJkGja2WQsQT2"
+    },
+    {
+      "ts": 1784552958.372574,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 109,
+        "persona": "industry",
+        "reason": "Anduril launches Thunder autonomous helicopter strike drone - concrete autonomous systems product shipping as militaries scale AI arsenals."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012pqA1AbEmKdrATkRVWy25R"
+    },
+    {
+      "ts": 1784552958.3726249,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anduril launches helicopter strike drone\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_012pqA1AbEmKdrATkRVWy25R"
+    },
+    {
+      "ts": 1784552958.3726428,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 62,
+        "persona": "everyday",
+        "reason": "San Francisco orders Apple and Google to remove AI nudify apps - regulatory action with real stakes, showing authorities cracking down on harmful AI applications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Y7PWHNXsqSUgbwwx1MNHAx"
+    },
+    {
+      "ts": 1784552958.372689,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"San Francisco Demands Apple and Google Delete AI \\u2018Nudify\\u2019 Apps From App Stores\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01Y7PWHNXsqSUgbwwx1MNHAx"
+    },
+    {
+      "ts": 1784552958.3727067,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 136,
+        "persona": "build",
+        "reason": "Bezos backs CuspAI partnering with Nvidia to discover new chipmaking materials using AI - applying models to solve physical-world chip manufacturing challenges."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018SBrzU1Rf4ZpPrrRWctdQd"
+    },
+    {
+      "ts": 1784552958.3727472,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Bezos backs CuspAI as startup teams up with Nvidia to hunt for chipmaking materials\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_018SBrzU1Rf4ZpPrrRWctdQd"
+    },
+    {
+      "ts": 1784552960.69754,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01TUoyv4pRpR3YM7AEfuM8sr"
+    },
+    {
+      "ts": 1784552961.3838315,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"too many non-load-bearing stories (2 > 1)\"]}",
+      "tool_use_id": "toolu_01TUoyv4pRpR3YM7AEfuM8sr"
+    },
+    {
+      "ts": 1784552971.4764156,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 62
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0194f5yDGvRWvbyk9TnVYnaM"
+    },
+    {
+      "ts": 1784552971.4764616,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"San Francisco Demands Apple and Google Delete AI \\u2018Nudify\\u2019 Apps From App Stores\"}",
+      "tool_use_id": "toolu_0194f5yDGvRWvbyk9TnVYnaM"
+    },
+    {
+      "ts": 1784552971.4764884,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 14,
+        "persona": "market",
+        "reason": "Databricks hits $188B valuation as AI company - massive market validation showing open-weight AI economics driving enterprise value."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YVdwCucGJ9XkMY2ytaPWpQ"
+    },
+    {
+      "ts": 1784552971.4765437,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Databricks hits $188B valuation, extending its run as AI\\u2019s favorite second act\", \"persona\": \"market\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01YVdwCucGJ9XkMY2ytaPWpQ"
+    },
+    {
+      "ts": 1784552976.0555272,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_019Gz1YT4NDpeMNRVRQxASKA"
+    },
+    {
+      "ts": 1784552976.3077052,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"too many non-load-bearing stories (2 > 1)\"]}",
+      "tool_use_id": "toolu_019Gz1YT4NDpeMNRVRQxASKA"
+    },
+    {
+      "ts": 1784552981.1353743,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 109
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01A2wTidxg7ZEQAz7QWrgQFx"
+    },
+    {
+      "ts": 1784552981.1354191,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Anduril launches helicopter strike drone\"}",
+      "tool_use_id": "toolu_01A2wTidxg7ZEQAz7QWrgQFx"
+    },
+    {
+      "ts": 1784552981.1354444,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 136
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PGqFo2hjXpgpgfXwfqjynk"
+    },
+    {
+      "ts": 1784552981.1354685,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Bezos backs CuspAI as startup teams up with Nvidia to hunt for chipmaking materials\"}",
+      "tool_use_id": "toolu_01PGqFo2hjXpgpgfXwfqjynk"
+    },
+    {
+      "ts": 1784552982.6624727,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Gj4wY44Fve1h24wn8x9zAB"
+    },
+    {
+      "ts": 1784552982.6933331,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784552982.6933715,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"China delivers a one-two punch to America\\u2019s AI dominance\", \"pick_2\": \"Xiaomi-Robotics-1\", \"pick_3\": \"Bristol Myers Squibb Building Life Science Industry\\u2019s Most Advanced AI Factory on NVIDIA Vera Rubin\", \"pick_7\": \"Databricks hits $188B valuation, extending its run as AI\\u2019s favorite second act\"}}",
+      "tool_use_id": "toolu_01Gj4wY44Fve1h24wn8x9zAB"
+    }
+  ],
+  "issue_num": 51
+}
