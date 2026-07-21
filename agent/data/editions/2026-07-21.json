@@ -1,0 +1,188 @@
+{
+  "date": "2026-07-21",
+  "generated_at": "2026-07-21T12:26:21.982808Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Anthropic's $1.5B copyright settlement just got approved",
+      "blurb": "A federal judge approved Anthropic's settlement with publishers and authors who sued over AI training data. The deal sets a precedent for how much using copyrighted content without permission might cost, but it doesn't answer whether training on copyrighted work is legal in the first place.",
+      "why_it_matters": "Every AI company training on web data now has a price tag to reference",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/20/anthropics-landmark-1-5b-copyright-settlement-is-approved/",
+      "tier": 1,
+      "original_headline": "Anthropic\u2019s landmark $1.5B copyright settlement is approved",
+      "fingerprint": "edf75e35df89e560"
+    },
+    {
+      "slot": "market",
+      "headline": "AMD just sold Microsoft its first full AI rack system",
+      "blurb": "AMD launched Helios, a complete rack-scale AI system that competes directly with Nvidia's DGX boxes. Microsoft is the first announced buyer, joining Meta, OpenAI, and Oracle as customers buying AMD's full hardware stack instead of just chips.",
+      "why_it_matters": "AMD is moving from selling GPUs to selling turnkey AI infrastructure\u2014competing where Nvidia makes the most margin.",
+      "source_name": "CNBC \u2014 Technology",
+      "source_url": "https://www.cnbc.com/2026/07/20/amd-helios-microsoft-ai-nvidia.html",
+      "tier": 1,
+      "original_headline": "AMD launches Helios, its first rack AI system to rival Nvidia, adding Microsoft as newest buyer",
+      "fingerprint": "e2c02de5db2df154"
+    },
+    {
+      "slot": "industry",
+      "headline": "Samsung just launched a robotics division with a humanoid bot",
+      "blurb": "Samsung created a new robotics unit called RX, and its first product appears to be a humanoid robot. The move puts Samsung in direct competition with Tesla, Boston Dynamics, and Figure as tech giants race to build general-purpose robots that can work in homes and factories.",
+      "why_it_matters": "Another tech giant is betting billions that humanoid robots will be the next computing platform.",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2219517/samsung-establishes-its-own-robotics-division/",
+      "tier": 1,
+      "original_headline": "Samsung establishes a robotics division",
+      "fingerprint": "08297e3be7fd6e82"
+    },
+    {
+      "slot": "build",
+      "headline": "AI is now finding counterexamples faster than human mathematicians",
+      "blurb": "Mathematicians are running into a new problem: AI systems are beating them to counterexamples that disprove conjectures. The Xena Project reports that automated theorem provers are now routinely discovering edge cases and contradictions before human researchers can work through the proofs manually.",
+      "why_it_matters": "Math research is becoming a race between human intuition and machine search speed",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://xenaproject.wordpress.com/2026/07/20/human-mathematicians-are-being-outcounterexampled/",
+      "tier": 1,
+      "original_headline": "Human mathematicians are being outcounterexampled",
+      "fingerprint": "ee004911a9091d90"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The procrastination debugger",
+    "kicker": "",
+    "prompt": "I've been avoiding something for weeks and I'll describe it below. Don't tell me to break it into steps or use a timer. Instead: diagnose the real reason I'm stalling, tell me what fear or assumption is driving it, and give me the smallest possible action that would prove that assumption wrong today.",
+    "tool_hint": "When you know what to do but keep finding reasons not to start."
+  },
+  "daily_question": "If you could hand one real-world problem to an AI that's better at counterexamples than humans, what would you pick?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1784636730.9682367,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784636749.583613,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "market",
+        "reason": "THE defining AI story today - Anthropic's landmark $1.5B copyright settlement receives final court approval. Major AI lab at the center of legal/business news that shapes the entire industry's approach to training data. This is mandatory slot 1."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014eM7ZprW4o3XLJafnLSc9w"
+    },
+    {
+      "ts": 1784636749.583685,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic\\u2019s landmark $1.5B copyright settlement is approved\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_014eM7ZprW4o3XLJafnLSc9w"
+    },
+    {
+      "ts": 1784636749.5837212,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 144,
+        "persona": "market",
+        "reason": "AMD ships Helios, its first rack AI system to rival Nvidia, with Microsoft as a major new customer. Concrete hardware launch in the platform wars with a big-name customer win. Shows the AI infrastructure battle heating up."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Y4nRFX4jvPPoDA53D9xcXo"
+    },
+    {
+      "ts": 1784636749.5837615,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AMD launches Helios, its first rack AI system to rival Nvidia, adding Microsoft as newest buyer\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01Y4nRFX4jvPPoDA53D9xcXo"
+    },
+    {
+      "ts": 1784636749.5837722,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 66,
+        "persona": "industry",
+        "reason": "Samsung establishes new robotics division RX led by ex-Hyundai executive, with humanoid robot as first product. Major tech company making a serious bet on AI-powered robotics. Concrete organizational move with product roadmap."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KysVA1wrDQ8KC7bo5PF9rq"
+    },
+    {
+      "ts": 1784636749.5838096,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Samsung establishes a robotics division\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01KysVA1wrDQ8KC7bo5PF9rq"
+    },
+    {
+      "ts": 1784636749.583819,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "build",
+        "reason": "AI systems are now outcounterexampling human mathematicians - finding counterexamples to mathematical conjectures faster than humans can. Surprising, concrete capability that shows AI doing something genuinely impressive in a specialized domain. The 'wow really?' factor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GoEdNApLWbThNgesToKcoM"
+    },
+    {
+      "ts": 1784636749.5838754,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Human mathematicians are being outcounterexampled\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01GoEdNApLWbThNgesToKcoM"
+    },
+    {
+      "ts": 1784636755.3224392,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Fkcg7qmz6NkuEJ6JzYSQN1"
+    },
+    {
+      "ts": 1784636756.1844606,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1784636756.1845024,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Anthropic\\u2019s landmark $1.5B copyright settlement is approved\", \"pick_2\": \"AMD launches Helios, its first rack AI system to rival Nvidia, adding Microsoft as newest buyer\", \"pick_3\": \"Samsung establishes a robotics division\", \"pick_4\": \"Human mathematicians are being outcounterexampled\"}}",
+      "tool_use_id": "toolu_01Fkcg7qmz6NkuEJ6JzYSQN1"
+    }
+  ],
+  "issue_num": 52
+}
