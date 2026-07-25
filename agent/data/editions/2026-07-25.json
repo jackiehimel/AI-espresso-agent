@@ -1,0 +1,188 @@
+{
+  "date": "2026-07-25",
+  "generated_at": "2026-07-25T19:42:59.774947Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Anthropic ships Claude Opus 5, its new flagship model",
+      "blurb": "Anthropic released Claude Opus 5, the next generation of its top-tier model. The company says it outperforms the previous flagship across coding, math, and complex reasoning tasks, with improved speed and longer context handling.",
+      "why_it_matters": "The bar for what counts as state-of-the-art just moved again.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/claude-opus-5",
+      "tier": 1,
+      "original_headline": "Introducing Claude Opus 5",
+      "fingerprint": "9a9a8b5db10f9334"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Claude's voice mode now works with its smartest models",
+      "blurb": "Anthropic's voice mode previously only ran on Haiku, its fastest but least capable model. Now you can talk to Claude's more powerful Opus and Sonnet models, and the feature works inside Gmail, Slack, and Canva.",
+      "why_it_matters": "Voice conversations just got smarter \u2014 you can now speak to Claude's best reasoning models, not just the quick one.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/970065/anthropic-voice-mode-claude-opus-sonnet-haiku-ai",
+      "tier": 1,
+      "original_headline": "Claude\u2019s voice mode is now available for Opus and Sonnet",
+      "fingerprint": "84316b0c9f098c61"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Meta AI can now check your calendar and write daily briefings",
+      "blurb": "Meta is adding productivity features to its chatbot to compete with ChatGPT and Claude. The update lets Meta AI access your calendar to help plan events, generate daily briefings, and do research you can guide in real time.",
+      "why_it_matters": "Meta's free chatbot is becoming an actual productivity tool instead of just a search engine.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/970570/meta-ai-chatbot-productivity-update",
+      "tier": 1,
+      "original_headline": "Meta is making its AI chatbot more like an assistant",
+      "fingerprint": "ae5171f5a4836fd4"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor now picks the best AI model for every coding task",
+      "blurb": "Cursor's new Router system automatically chooses which AI model to use for each coding request in Auto mode. Instead of you deciding between Claude, GPT-4, or other models, Cursor analyzes your task and routes it to whichever model is most likely to solve it well.",
+      "why_it_matters": "You get better code suggestions without learning which model works best for what.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/router",
+      "tier": 1,
+      "original_headline": "Cursor Router",
+      "fingerprint": "59f5ba0ec732df14"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation reversal",
+    "kicker": "",
+    "prompt": "I'm preparing for a negotiation I'll describe below. Don't coach me on tactics. Instead, play the other side: tell me the strongest argument they have that I'm probably underestimating, the concession they want most, and the one thing I could offer that costs me little but matters to them.",
+    "tool_hint": "Before you walk into the room thinking you've got all the angles."
+  },
+  "daily_question": "What's one thing you'd trust the newest AI models to do that you wouldn't have a month ago?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1785008534.0192802,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=14, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785008552.8354573,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "market",
+        "reason": "THE defining AI story today - Anthropic (tier-1 lab) ships Claude Opus 5, a major model release with capabilities approaching Fable 5. Primary source (Anthropic News). This is the story everyone in AI is talking about today and must lead the edition."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CtD6yQDb4CHupTuYWuDiFS"
+    },
+    {
+      "ts": 1785008552.8355277,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Claude Opus 5\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01CtD6yQDb4CHupTuYWuDiFS"
+    },
+    {
+      "ts": 1785008552.835568,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "everyday",
+        "reason": "Shipped feature people can try today - Claude voice mode now works with Opus and Sonnet, not just Haiku. Concrete capability expansion that makes the advanced models conversational. Passes the 'I want to try that' test."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011LkEpZUaQrGAHSagvH7nEA"
+    },
+    {
+      "ts": 1785008552.8356118,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude\\u2019s voice mode is now available for Opus and Sonnet\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_011LkEpZUaQrGAHSagvH7nEA"
+    },
+    {
+      "ts": 1785008552.8356326,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "everyday",
+        "reason": "Meta upgrading its AI chatbot with new productivity features to compete with ChatGPT and Gemini. Practical features people can use, platform war with shipped artifacts. Accessible to any Solvd employee."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LdE2FHGU8P92J8H5nKSFCi"
+    },
+    {
+      "ts": 1785008552.8356829,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta is making its AI chatbot more like an assistant\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01LdE2FHGU8P92J8H5nKSFCi"
+    },
+    {
+      "ts": 1785008552.835699,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "build",
+        "reason": "Cursor ships intelligent model router for Auto mode - analyzes requests and routes to the right model. Developer-facing with concrete capability improvement. Primary source (Cursor Changelog), engineers will want to try this."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01475w6GgVRga3xYKz7rx61J"
+    },
+    {
+      "ts": 1785008552.8357563,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Cursor Router\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01475w6GgVRga3xYKz7rx61J"
+    },
+    {
+      "ts": 1785008559.0886402,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Q349W3TKtoTiYiBy7vMbwG"
+    },
+    {
+      "ts": 1785008559.668208,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785008559.668246,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Introducing Claude Opus 5\", \"pick_2\": \"Claude\\u2019s voice mode is now available for Opus and Sonnet\", \"pick_3\": \"Meta is making its AI chatbot more like an assistant\", \"pick_4\": \"Cursor Router\"}}",
+      "tool_use_id": "toolu_01Q349W3TKtoTiYiBy7vMbwG"
+    }
+  ],
+  "issue_num": 53
+}
