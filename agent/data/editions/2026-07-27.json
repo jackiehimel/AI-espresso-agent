@@ -1,0 +1,188 @@
+{
+  "date": "2026-07-27",
+  "generated_at": "2026-07-27T13:41:52.567684Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Nvidia backs Ilya Sutskever's new AI lab with compute credits",
+      "blurb": "The chip giant is providing cloud computing resources to Safe Superintelligence, the AI safety startup founded by OpenAI's former chief scientist. The partnership gives Nvidia another marquee customer as hyperscalers like Microsoft and Meta build their own AI infrastructure.",
+      "why_it_matters": "Nvidia is courting high-profile AI labs to stay essential as Big Tech moves toward self-sufficiency in chips.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/ai/nvidia-bets-on-ilya-sutskevers-new-ai-lab-to-expand-compute-reach-f95596e8?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Nvidia Bets on Ilya Sutskever\u2019s New AI Lab to Expand Compute Reach",
+      "fingerprint": "d6f42b294bdb54f5"
+    },
+    {
+      "slot": "industry",
+      "headline": "Nvidia is closing $750B in AI deals that may be inflating its own demand",
+      "blurb": "Nvidia is working on AI infrastructure deals worth over $750 billion\u2014investments that critics say artificially boost demand for Nvidia's own chips. The concern: if Nvidia-backed companies are buying Nvidia hardware with Nvidia's money, the sales numbers may not reflect real market demand.",
+      "why_it_matters": "If AI demand is circular\u2014funded by the same companies selling the hardware\u2014the bubble risks are higher than they appear.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-27/nvidia-s-750-billion-deals-revive-fear-of-ai-circular-financing",
+      "tier": 1,
+      "original_headline": "Nvidia\u2019s $750 Billion Deals Revive Fear of AI Circular Financing",
+      "fingerprint": "0e5f86ac89c8927b"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Midjourney just bought the astrology app Co-Star",
+      "blurb": "The AI image generator announced it acquired Co-Star, a free app that delivers personalized daily horoscopes. Midjourney has expanded from generating AI cat pictures to full-body ultrasound scans, and now it's adding astrology readings to its portfolio.",
+      "why_it_matters": "An AI company known for images is betting on personality-driven content beyond visuals.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/970894/midjourney-co-star-acquisition",
+      "tier": 1,
+      "original_headline": "Midjourney bought the astrology app Co-Star",
+      "fingerprint": "951f2b83fca1f8a8"
+    },
+    {
+      "slot": "build",
+      "headline": "Enigma raises $70M to make robot control as simple as a volume knob",
+      "blurb": "The startup just closed a massive seed round led by Index Ventures and Ribbit Capital to build interfaces that let anyone control robots without coding or complex menus. Think physical dials and sliders instead of software dashboards.",
+      "why_it_matters": "If robots become as easy to operate as appliances, they can finally leave the factory floor.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/07/27/enigma-raises-70m-to-make-controlling-a-robot-as-easy-as-adjusting-the-volume/",
+      "tier": 1,
+      "original_headline": "Enigma raises $70M to make controlling a robot as easy as adjusting the volume",
+      "fingerprint": "a315baf780610f64"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting you shouldn't attend",
+    "kicker": "",
+    "prompt": "I'll describe a meeting on my calendar below. Don't tell me how to make it better. Instead: tell me the exact outcome I need from it, who could get that outcome without me there, and the two-sentence message I should send declining while keeping everyone happy.",
+    "tool_hint": "Before you spend an hour in a room wondering why you're there."
+  },
+  "daily_question": "If you could get unlimited compute for one week to train anything, what would you build?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1785159661.7733471,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=13, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785159682.1972156,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 114,
+        "persona": "market",
+        "reason": "Nvidia partnering with Ilya Sutskever's new lab is a major market story - the former OpenAI chief scientist starting fresh with backing from the chip giant. This is the kind of talent+power combination that reshapes the AI landscape."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FWCNgQ6Pg4hrYfVeyEZs1y"
+    },
+    {
+      "ts": 1785159682.197334,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia Bets on Ilya Sutskever\\u2019s New AI Lab to Expand Compute Reach\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01FWCNgQ6Pg4hrYfVeyEZs1y"
+    },
+    {
+      "ts": 1785159682.1973753,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 145,
+        "persona": "industry",
+        "reason": "$750 billion in AI infrastructure deals is staggering scale - shows the magnitude of capital flowing into AI compute. The circular financing angle adds intrigue about sustainability of the boom."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LLKC9K3DEi6vx9wGMFqYuv"
+    },
+    {
+      "ts": 1785159682.1974185,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia\\u2019s $750 Billion Deals Revive Fear of AI Circular Financing\", \"persona\": \"industry\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01LLKC9K3DEi6vx9wGMFqYuv"
+    },
+    {
+      "ts": 1785159682.1974301,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "everyday",
+        "reason": "Midjourney buying an astrology app is delightfully weird - from AI cat images to ultrasounds to horoscopes. Unexpected move that makes AI feel unpredictable and interesting."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01BAHfBtyjsGA4KA86x7udeu"
+    },
+    {
+      "ts": 1785159682.1974816,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Midjourney bought the astrology app Co-Star\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01BAHfBtyjsGA4KA86x7udeu"
+    },
+    {
+      "ts": 1785159682.1974993,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "build",
+        "reason": "$70M seed for robot control interface that makes it 'as easy as adjusting volume' - massive bet on making robotics accessible. Concrete interface innovation people can visualize trying."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017R4amAVfD12KKMsCsEQGVw"
+    },
+    {
+      "ts": 1785159682.1975636,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Enigma raises $70M to make controlling a robot as easy as adjusting the volume\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_017R4amAVfD12KKMsCsEQGVw"
+    },
+    {
+      "ts": 1785159687.3265965,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01VK421jTzREWYVZxs2D2J8X"
+    },
+    {
+      "ts": 1785159688.0793092,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785159688.0793493,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Nvidia Bets on Ilya Sutskever\\u2019s New AI Lab to Expand Compute Reach\", \"pick_2\": \"Nvidia\\u2019s $750 Billion Deals Revive Fear of AI Circular Financing\", \"pick_3\": \"Midjourney bought the astrology app Co-Star\", \"pick_4\": \"Enigma raises $70M to make controlling a robot as easy as adjusting the volume\"}}",
+      "tool_use_id": "toolu_01VK421jTzREWYVZxs2D2J8X"
+    }
+  ],
+  "issue_num": 55
+}
