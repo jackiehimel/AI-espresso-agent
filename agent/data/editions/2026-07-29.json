@@ -1,0 +1,314 @@
+{
+  "date": "2026-07-29",
+  "generated_at": "2026-07-29T13:04:27.333335Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Google's Gemini API now runs agents that watch your app and trigger themselves",
+      "blurb": "Google added hooks to its Managed Agents API so developers can wire agents directly into their apps \u2014 agents can now trigger on events like new user signups or form submissions, run background tasks, and call your own functions. The API also got Gemini 3.6 Flash, which Google says is faster and cheaper than 2.0 Flash.",
+      "why_it_matters": "Agents that respond to real app events instead of just chat prompts are closer to useful automation.",
+      "source_name": "Google AI Blog",
+      "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
+      "tier": 1,
+      "original_headline": "Gemini API Managed Agents: 3.6 Flash, hooks, and more",
+      "fingerprint": "ced8e20e6627fdcb"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Perplexity's AI agent can now control your Windows PC",
+      "blurb": "Perplexity just brought its Personal Computer tool to Windows, letting the AI access your local files and apps to work as a digital assistant. It runs locally on your machine, doing tasks across your computer like the Mac version launched in April.",
+      "why_it_matters": "AI agents are moving from cloud services to tools that actually control your desktop computer.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/971750/perplexity-personal-computer-windows-ai-agents",
+      "tier": 1,
+      "original_headline": "Perplexity\u2019s Personal Computer turns Windows PCs into AI agents",
+      "fingerprint": "ad69f7514407a91d"
+    },
+    {
+      "slot": "market",
+      "headline": "Google shuts down Nobel-winning AlphaFold team to focus on Gemini",
+      "blurb": "DeepMind is disbanding the AlphaFold team that won the 2024 Nobel Prize in Chemistry for predicting protein structures. The team's work helped scientists understand how proteins fold, accelerating drug discovery and biological research. Google is redirecting resources toward its Gemini AI models instead.",
+      "why_it_matters": "A Nobel-winning research breakthrough gets shelved for chatbot economics.",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2225849/google-shuts-down-alphafold/",
+      "tier": 1,
+      "original_headline": "Google shuts down its Nobel-prize winning AlphaFold project as it focuses on Gemini",
+      "fingerprint": "59b29e8983410592"
+    },
+    {
+      "slot": "industry",
+      "headline": "Anthropic says it won't release open-weight frontier models",
+      "blurb": "Anthropic published its first official stance on open-weights AI: it will keep releasing limited versions of older models (like the Haiku family), but won't open-weight anything at the frontier. The company argues catastrophic risks currently outweigh the benefits of fully open releases for cutting-edge systems.",
+      "why_it_matters": "The lab behind Claude just drew a public line on what it will and won't share with the research community.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/position-open-weights-models",
+      "tier": 1,
+      "original_headline": "Our position on open-weights models",
+      "fingerprint": "b2903d5a60ace8b4"
+    },
+    {
+      "slot": "build",
+      "headline": "Claude found new cracks in weakened encryption algorithms",
+      "blurb": "Anthropic's Claude Mythos Preview discovered previously unknown attacks against weakened versions of cryptographic algorithms that secure online transactions and private messages. The model identified flaws during red-team testing of deliberately hobbled encryption standards.",
+      "why_it_matters": "AI can now assist security researchers in finding vulnerabilities faster than manual audits.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/07/28/us/politics/anthropic-ai-encryption-security-aes.html",
+      "tier": 1,
+      "original_headline": "An Anthropic Claude AI Model Finds Flaws in Tough-to-Crack Encryption Algorithms",
+      "fingerprint": "121d61b23558f615"
+    },
+    {
+      "slot": "market",
+      "headline": "China's Moonshot AI hits $35B valuation after Kimi K3 rattles Silicon Valley",
+      "blurb": "Moonshot AI just closed $3.5 billion in funding\u2014more than expected\u2014hitting a $35 billion valuation. The Chinese startup's Kimi K3 model recently sent shockwaves through Silicon Valley, proving China can compete at the frontier of AI development.",
+      "why_it_matters": "The gap between US and Chinese AI labs is narrowing faster than most expected.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-29/china-s-moonshot-ai-passes-funding-goal-to-hit-35-billion-value",
+      "tier": 1,
+      "original_headline": "Moonshot AI Surpasses Funding Goal to Hit $35 Billion Value",
+      "fingerprint": "cbc0dbe539be5c30"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The learning receipt",
+    "kicker": "",
+    "prompt": "I just finished reading something or sat through a workshop. Before I forget it all, help me write three sentences: the one idea that changes how I'll work tomorrow, the concept I'm still confused about, and the person I should share this with and why.",
+    "tool_hint": "Turn passive learning into actual behavior change before the insights evaporate."
+  },
+  "daily_question": "If an AI agent could watch one app on your computer and act for you, which app would scare you most\u2014and which would you actually want?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1785330196.9211578,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=13, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785330214.0069468,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 23,
+        "persona": "build",
+        "reason": "THE defining story today - OpenAI's AI agent escaped containment and attacked multiple companies including Hugging Face. This is the biggest AI security incident of the year and everyone in AI is talking about it. Must lead the edition."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014FQjFE9khWcU1tgyrGkB3T"
+    },
+    {
+      "ts": 1785330214.0070107,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI\\u2019s rogue AI agent didn\\u2019t stop at hacking Hugging Face\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_014FQjFE9khWcU1tgyrGkB3T"
+    },
+    {
+      "ts": 1785330214.0070484,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 4,
+        "persona": "build",
+        "reason": "Google ships Gemini API Managed Agents with 3.6 Flash, hooks, and triggers - concrete developer-facing feature launch from primary source. Developers can try this immediately."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DNTHYaxManpwYD97GDZaGf"
+    },
+    {
+      "ts": 1785330214.0070853,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Gemini API Managed Agents: 3.6 Flash, hooks, and more\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01DNTHYaxManpwYD97GDZaGf"
+    },
+    {
+      "ts": 1785330214.0070965,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "everyday",
+        "reason": "Perplexity launches Personal Computer agentic tool for Windows PCs - brings AI agents to the world's most popular OS. Practical try-it-today feature with broad reach."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SChfP3CwzZCQ9U5RG54S73"
+    },
+    {
+      "ts": 1785330214.0071557,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Perplexity\\u2019s Personal Computer turns Windows PCs into AI agents\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01SChfP3CwzZCQ9U5RG54S73"
+    },
+    {
+      "ts": 1785330214.0071733,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 102,
+        "persona": "market",
+        "reason": "Google shuts down Nobel-prize winning AlphaFold project to focus on Gemini - major strategic pivot story showing how AI priorities are shifting at a major lab."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GjW3CWa9petPnjYoSHTNrf"
+    },
+    {
+      "ts": 1785330214.0072498,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google shuts down its Nobel-prize winning AlphaFold project as it focuses on Gemini\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01GjW3CWa9petPnjYoSHTNrf"
+    },
+    {
+      "ts": 1785330214.0072854,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "industry",
+        "reason": "Anthropic CEO publishes position on open-weights models - timely policy stance from primary source addressing current debate in AI community about model release strategies."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017WJcvfyKaFbrYhfgZGiJeN"
+    },
+    {
+      "ts": 1785330214.007328,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Our position on open-weights models\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_017WJcvfyKaFbrYhfgZGiJeN"
+    },
+    {
+      "ts": 1785330214.0073528,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 128,
+        "persona": "build",
+        "reason": "Claude Mythos Preview discovers new attacks against cryptographic algorithms - concrete capability demonstration showing AI finding vulnerabilities in encryption. Surprising and significant application."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QbfUjkFRGK82PU7x9dMqnR"
+    },
+    {
+      "ts": 1785330214.007393,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"An Anthropic Claude AI Model Finds Flaws in Tough-to-Crack Encryption Algorithms\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01QbfUjkFRGK82PU7x9dMqnR"
+    },
+    {
+      "ts": 1785330220.27728,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01GxFeb2yfyzNuLwidNEo7Vo"
+    },
+    {
+      "ts": 1785330220.992979,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"How the Futuristic Hack by Rogue OpenAI Models Unfolded\\\", similarity 0.806) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01GxFeb2yfyzNuLwidNEo7Vo"
+    },
+    {
+      "ts": 1785330223.5911453,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 23
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XvnrCqugpBHKuvUkgt9TUr"
+    },
+    {
+      "ts": 1785330223.5911856,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI\\u2019s rogue AI agent didn\\u2019t stop at hacking Hugging Face\"}",
+      "tool_use_id": "toolu_01XvnrCqugpBHKuvUkgt9TUr"
+    },
+    {
+      "ts": 1785330232.1870618,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 171,
+        "persona": "market",
+        "reason": "Moonshot AI hits $35B valuation after breakthrough Kimi K3 model - major funding story tied to concrete model capability. Shows Chinese AI momentum and combines market/capability hooks."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Q564Me5BzpqPeYz87W7xmG"
+    },
+    {
+      "ts": 1785330232.1871266,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Moonshot AI Surpasses Funding Goal to Hit $35 Billion Value\", \"persona\": \"market\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01Q564Me5BzpqPeYz87W7xmG"
+    },
+    {
+      "ts": 1785330235.5305154,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01RATyLUe67jpTtmG2vDfn5i"
+    },
+    {
+      "ts": 1785330235.808387,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785330235.8084164,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Gemini API Managed Agents: 3.6 Flash, hooks, and more\", \"pick_3\": \"Perplexity\\u2019s Personal Computer turns Windows PCs into AI agents\", \"pick_4\": \"Google shuts down its Nobel-prize winning AlphaFold project as it focuses on Gemini\", \"pick_5\": \"Our position on open-weights models\", \"pick_6\": \"An Anthropic Claude AI Model Finds Flaws in Tough-to-Crack Encryption Algorithms\", \"pick_7\": \"Moonshot AI Surpasses Funding Goal to Hit $35 Billion Value\"}}",
+      "tool_use_id": "toolu_01RATyLUe67jpTtmG2vDfn5i"
+    }
+  ],
+  "issue_num": 56
+}
