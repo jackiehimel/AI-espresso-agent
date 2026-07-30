@@ -1,0 +1,314 @@
+{
+  "date": "2026-07-30",
+  "generated_at": "2026-07-30T12:48:04.740573Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Google's AI music generator can now make full songs with actual lyrics",
+      "blurb": "DeepMind just launched Lyria 3.5 inside Google Flow Music, letting anyone generate complete songs with vocals, lyrics, and musical structure. The model improved on musicality, lyric coherence, vocal quality, and creative controls\u2014moving AI music closer to something you'd actually listen to rather than a technical demo.",
+      "why_it_matters": "AI-generated music now sounds less like a novelty and more like a real creative tool.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/were-launching-lyria-35-in-google-flow-music-with-advances-across-musicality-lyrics-vocals-and-creative-control/",
+      "tier": 1,
+      "original_headline": "We\u2019re launching Lyria 3.5 in Google Flow Music, with advances across musicality, lyrics, vocals, and creative control",
+      "fingerprint": "948f9e28c8e155d3"
+    },
+    {
+      "slot": "market",
+      "headline": "Cloud provider Nscale buys AI startup Anyscale for $1.65 billion",
+      "blurb": "Nscale is acquiring Anyscale, a startup that helps companies use AI computing power more efficiently. The $1.65 billion deal gives Nscale tools to help customers optimize how they run AI workloads across their infrastructure.",
+      "why_it_matters": "Cloud providers are buying software that makes AI cheaper to run at scale.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-30/nscale-to-buy-ai-software-startup-anyscale-for-1-65-billion",
+      "tier": 1,
+      "original_headline": "Nscale to Buy AI Software Startup Anyscale for $1.65 Billion",
+      "fingerprint": "1a6a4edbea528685"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor just shipped to iPad",
+      "blurb": "The AI code editor now runs on iPad for all paid subscribers. You can write, edit, and ship code with Cursor's AI assistant from a tablet \u2014 no laptop required.",
+      "why_it_matters": "Coding workflows just became portable in a way they weren't before.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/ipad",
+      "tier": 1,
+      "original_headline": "Cursor, now on iPad",
+      "fingerprint": "b89fa963e83c6d26"
+    },
+    {
+      "slot": "market",
+      "headline": "Microsoft is building a Copilot 'super app' for chat, coding, and agents",
+      "blurb": "CEO Satya Nadella confirmed the company is combining all Copilot capabilities\u2014chat, coding, and autonomous agents\u2014into one app launching this year. It will serve both consumer and business users, letting people move between different AI modes in a single interface instead of jumping between tools.",
+      "why_it_matters": "One app for all your AI work means less context-switching between ChatGPT, Cursor, and automation tools.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/972927/microsoft-copilot-super-app-confirmed",
+      "tier": 1,
+      "original_headline": "Microsoft confirms Copilot \u2018super app\u2019 coming this year",
+      "fingerprint": "1fd67a2b5ae98304"
+    },
+    {
+      "slot": "build",
+      "headline": "AI found a fatal flaw in a top crypto algorithm that humans missed for years",
+      "blurb": "Mythos, an AI system, discovered a critical weakness in HAWK\u2014a cryptography algorithm that made it to the final round of post-quantum crypto testing. The flaw went undetected through years of human security review and has now knocked HAWK out of contention for protecting data against future quantum computers.",
+      "why_it_matters": "AI can now break crypto that passed every traditional security test we had.",
+      "source_name": "Ars Technica \u2014 AI",
+      "source_url": "https://arstechnica.com/security/2026/07/mythos-uncovers-crypto-weaknesses-that-went-unknown-for-years/",
+      "tier": 1,
+      "original_headline": "Mythos attack on 3rd-round PQC algorithm candidate puts it out of commission",
+      "fingerprint": "1501156b99f8f7df"
+    },
+    {
+      "slot": "market",
+      "headline": "Zuckerberg says Meta will soon launch AI agents that act on your behalf",
+      "blurb": "Meta's CEO outlined plans for personal AI agents that can perform tasks for users, going beyond chat to take action. The company is betting big on AI across its platforms, with the push expected sometime soon according to Wednesday's earnings call.",
+      "why_it_matters": "Meta is moving from conversational AI to agents that actually do things for you.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/972294/meta-q2-2026-earnings-mark-zuckerberg-personal-ai-agents",
+      "tier": 1,
+      "original_headline": "Mark Zuckerberg is planning a big push into personal AI agents",
+      "fingerprint": "ee43117e8179ebe7"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The research rabbit hole escape",
+    "kicker": "",
+    "prompt": "I've been researching a topic for way too long and I'm drowning in tabs and notes. I'll dump everything I've collected below. Give me: the one insight that actually changes how I should think about this, the two sources I can ignore completely, and the single question I still need to answer.",
+    "tool_hint": "When you've read everything but decided nothing."
+  },
+  "daily_question": "If you could delegate one recurring work task to an AI agent starting tomorrow, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1785415606.3650007,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=14, gaps=['No major model drops today beyond Grok features\u2014Kimi K3 weights released but already covered as news last week.', 'Lots of earnings reports (Meta, Microsoft, Samsung) but most are cost/spending stories rather than shipped capabilities.', 'Policy/regulatory stories (xAI suing Minnesota, EU robot bans, Trump AI controls) feel reactive rather than proactive AI moves.', 'Multiple HBR/consultancy announcements (Cognizant-Anthropic partnership, PwC-style enterprise expansions) lack concrete hooks.', \"Several investigative pieces (404 Media on Flock, data centers, privacy) are important but don't fit 'try-it-today' North Star.\"]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785415632.4380436,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "market",
+        "reason": "THE defining AI story today - OpenAI's rogue agent hacking multiple companies is a major security incident that everyone in AI is discussing. Load-bearing news that must lead the edition."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01H2XeGQykC2TKnPhc9keMx1"
+    },
+    {
+      "ts": 1785415632.438109,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI\\u2019s rogue AI agent didn\\u2019t stop at hacking Hugging Face\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01H2XeGQykC2TKnPhc9keMx1"
+    },
+    {
+      "ts": 1785415632.438139,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "everyday",
+        "reason": "Primary source launch from Google DeepMind - Lyria 3.5 music generation with concrete improvements users can try in Google Flow Music today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01MXxNSZAFdqt1i3GNjrAWtw"
+    },
+    {
+      "ts": 1785415632.4381807,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"We\\u2019re launching Lyria 3.5 in Google Flow Music, with advances across musicality, lyrics, vocals, and creative control\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01MXxNSZAFdqt1i3GNjrAWtw"
+    },
+    {
+      "ts": 1785415632.4381914,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 176,
+        "persona": "market",
+        "reason": "Major $1.65B acquisition in AI infrastructure - Nscale buying Anyscale shows consolidation in the AI computing efficiency space with real market stakes."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HxnTbA9sReUj4hUF1YhWdq"
+    },
+    {
+      "ts": 1785415632.4382539,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nscale to Buy AI Software Startup Anyscale for $1.65 Billion\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01HxnTbA9sReUj4hUF1YhWdq"
+    },
+    {
+      "ts": 1785415632.438272,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 21,
+        "persona": "build",
+        "reason": "Primary source - Cursor shipping iPad version is a concrete developer tool launch that engineers can try today, expanding AI coding to mobile."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01BtQUFPcfiFUTUzFRkgAfip"
+    },
+    {
+      "ts": 1785415632.438322,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Cursor, now on iPad\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01BtQUFPcfiFUTUzFRkgAfip"
+    },
+    {
+      "ts": 1785415632.4383419,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 23,
+        "persona": "market",
+        "reason": "Microsoft's Copilot 'super app' combining chat, coding, and agents - major platform consolidation move with concrete 2026 timeline."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015eVdnrqtFtvU9iPaouXdQf"
+    },
+    {
+      "ts": 1785415632.438388,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Microsoft confirms Copilot \\u2018super app\\u2019 coming this year\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_015eVdnrqtFtvU9iPaouXdQf"
+    },
+    {
+      "ts": 1785415632.438405,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 69,
+        "persona": "build",
+        "reason": "Mythos AI breaking a post-quantum cryptography algorithm demonstrates surprising new AI capability - concrete technical achievement that shows what AI can now do."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EU7cT7A49QDbSwuLTC3LjH"
+    },
+    {
+      "ts": 1785415632.438448,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Mythos attack on 3rd-round PQC algorithm candidate puts it out of commission\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01EU7cT7A49QDbSwuLTC3LjH"
+    },
+    {
+      "ts": 1785415639.2585769,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_0156RHzvVaaQUUKVD5t8Fape"
+    },
+    {
+      "ts": 1785415639.8211563,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"How the Futuristic Hack by Rogue OpenAI Models Unfolded\\\", similarity 0.806) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_0156RHzvVaaQUUKVD5t8Fape"
+    },
+    {
+      "ts": 1785415642.9849684,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 28
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019AXwMWut7pdHpiN9kgFYhc"
+    },
+    {
+      "ts": 1785415642.9850085,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI\\u2019s rogue AI agent didn\\u2019t stop at hacking Hugging Face\"}",
+      "tool_use_id": "toolu_019AXwMWut7pdHpiN9kgFYhc"
+    },
+    {
+      "ts": 1785415652.4099379,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "market",
+        "reason": "Meta's strategic push into personal AI agents represents a major platform play - Zuckerberg planning agents that can take action across apps is a concrete capability expansion worth tracking."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PfuFwxP8wyWv7PcoUiSNnj"
+    },
+    {
+      "ts": 1785415652.41,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Mark Zuckerberg is planning a big push into personal AI agents\", \"persona\": \"market\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01PfuFwxP8wyWv7PcoUiSNnj"
+    },
+    {
+      "ts": 1785415655.002399,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01UZZ8LLPV9QZLF7MAeg6LS8"
+    },
+    {
+      "ts": 1785415655.2724345,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785415655.272481,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"We\\u2019re launching Lyria 3.5 in Google Flow Music, with advances across musicality, lyrics, vocals, and creative control\", \"pick_3\": \"Nscale to Buy AI Software Startup Anyscale for $1.65 Billion\", \"pick_4\": \"Cursor, now on iPad\", \"pick_5\": \"Microsoft confirms Copilot \\u2018super app\\u2019 coming this year\", \"pick_6\": \"Mythos attack on 3rd-round PQC algorithm candidate puts it out of commission\", \"pick_7\": \"Mark Zuckerberg is planning a big push into personal AI agents\"}}",
+      "tool_use_id": "toolu_01UZZ8LLPV9QZLF7MAeg6LS8"
+    }
+  ],
+  "issue_num": 57
+}
