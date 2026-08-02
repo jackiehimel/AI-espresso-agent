@@ -1,0 +1,249 @@
+{
+  "date": "2026-08-02",
+  "generated_at": "2026-08-02T12:05:45.601763Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Anthropic tested Claude on three real hacks to see what it could do",
+      "blurb": "Anthropic ran Claude through three actual cybersecurity incidents \u2014 a leaked API key, a compromised server, and a supply chain attack \u2014 to see if the model could investigate and respond like a security analyst. Claude handled basic triage but struggled with multi-step reasoning and deciding when to escalate. The company is publishing the eval framework so other teams can test their own models.",
+      "why_it_matters": "First public benchmark using real incidents instead of synthetic CTF-style challenges.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals",
+      "tier": 1,
+      "original_headline": "Investigating three real-world incidents in our cybersecurity evaluations",
+      "fingerprint": "4434ed13c47eac4c"
+    },
+    {
+      "slot": "build",
+      "headline": "Google's new Gemini model can watch a room and tell robots what to do",
+      "blurb": "Gemini Robotics ER 2 watches video feeds, figures out what needs doing, and coordinates multiple robots to handle tasks together. It can reason about real-world scenes and decide which robot should do what\u2014like directing one bot to clean while another fetches supplies.",
+      "why_it_matters": "Robots can now understand context from video and work together without pre-programmed choreography.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/gemini-robotics-er-2-powering-robotics-with-video-understanding-task-orchestration-and-multi-robot-collaboration/",
+      "tier": 1,
+      "original_headline": "Gemini Robotics ER 2: powering robotics with video understanding, task orchestration, and multi-robot collaboration",
+      "fingerprint": "157b531671008148"
+    },
+    {
+      "slot": "market",
+      "headline": "Apple is planning to charge power users for more AI",
+      "blurb": "Tim Cook told investors Apple will offer 'upgrade possibilities on iCloud Plus' to let people use Apple Intelligence and the new Siri beyond whatever free limits exist. No pricing or timing yet, but Cook said he expects people will 'want to use it a lot.'",
+      "why_it_matters": "Apple just confirmed it's building a paid tier for AI \u2014 following OpenAI and Anthropic's playbook.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/973552/apple-ceo-tim-cook-icloud-plus-ai",
+      "tier": 1,
+      "original_headline": "Tim Cook hints at iCloud Plus tier for AI power users",
+      "fingerprint": "4f71466a8d49b8c1"
+    },
+    {
+      "slot": "market",
+      "headline": "Amazon's custom chip business just hit $25 billion a year",
+      "blurb": "Amazon Web Services now pulls in over $25 billion annually from its custom-designed chips\u2014Graviton for general computing and Trainium/Inferentia for AI workloads. That makes AWS one of the world's largest chip companies by revenue in just a decade, competing directly with Nvidia and Intel by offering cheaper, faster cloud instances to customers who train and run models.",
+      "why_it_matters": "Cloud providers are now chip giants, which reshapes who controls AI infrastructure costs and performance.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/aws/amazon-ai-chips-business-history?utm_source=rss",
+      "tier": 1,
+      "original_headline": "How Amazon became one of the world\u2019s top chip companies in a decade",
+      "fingerprint": "ffa0d72cc4b307bc"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The strategy stress test",
+    "kicker": "",
+    "prompt": "I'll describe our current strategy below. Your job: find the assumption we're treating as fact. Then tell me what would have to be true for that assumption to break, and sketch the backup plan we'd need if it does. Be specific about timing.",
+    "tool_hint": "Before you commit the budget and six months of roadmap to a single theory."
+  },
+  "daily_question": "If you could give an AI agent access to one thing in your work setup right now, what would it be?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[market] banned copy word: playbook']"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1785672285.3733091,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=12, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785672306.3750503,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "build",
+        "reason": "THE defining AI story today - Anthropic's Claude accidentally hacked three real companies during safety testing. This is what everyone in AI is talking about. It's shocking, concrete, and shows both AI capability advancement and real-world stakes. Primary source from Anthropic themselves."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TkQRXynqexWporbN1dQLRj"
+    },
+    {
+      "ts": 1785672306.3751774,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Investigating three real-world incidents in our cybersecurity evaluations\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01TkQRXynqexWporbN1dQLRj"
+    },
+    {
+      "ts": 1785672306.3752313,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "build",
+        "reason": "Major model drop from Google DeepMind - Gemini Robotics ER 2 represents a step change in robot capabilities with video understanding, task orchestration, and multi-robot collaboration. Concrete \"I didn't know AI could do that\" moment that shows where robotics is heading."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PFbFMJqK11NqfKNKZc9cNV"
+    },
+    {
+      "ts": 1785672306.3752706,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Gemini Robotics ER 2: powering robotics with video understanding, task orchestration, and multi-robot collaboration\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01PFbFMJqK11NqfKNKZc9cNV"
+    },
+    {
+      "ts": 1785672306.3752835,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "market",
+        "reason": "Tim Cook revealing Apple's AI monetization strategy in earnings call - hints at paid iCloud Plus tier for AI power users. Market-moving news about how Apple will handle AI usage limits and premium tiers. Concrete business model development."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Mhx9EEcUmZhi2bkRiLW95j"
+    },
+    {
+      "ts": 1785672306.3753588,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Tim Cook hints at iCloud Plus tier for AI power users\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Mhx9EEcUmZhi2bkRiLW95j"
+    },
+    {
+      "ts": 1785672306.3753765,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "everyday",
+        "reason": "LinkedIn shipped a feature people can use today - a 'seems like AI slop' reporting button. Practical, surprising, and addresses a real problem users face. Perfect \"show don't tell\" - they built and launched something concrete to combat AI spam."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XLiHRDpZT98K3S6FmLVKnF"
+    },
+    {
+      "ts": 1785672306.375445,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"LinkedIn actually adds a \\u2018seems like AI slop\\u2019 button\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01XLiHRDpZT98K3S6FmLVKnF"
+    },
+    {
+      "ts": 1785672313.7350042,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01JQa3WJKLKYnbWGLeKqxRHN"
+    },
+    {
+      "ts": 1785672314.2235801,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_4] constitution: AI failure is the primary story frame, not the AI news hook\"]}",
+      "tool_use_id": "toolu_01JQa3WJKLKYnbWGLeKqxRHN"
+    },
+    {
+      "ts": 1785672319.3901837,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 29
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LHhTg1GR25wUyW7Wvab2ZF"
+    },
+    {
+      "ts": 1785672319.3902326,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"LinkedIn actually adds a \\u2018seems like AI slop\\u2019 button\"}",
+      "tool_use_id": "toolu_01LHhTg1GR25wUyW7Wvab2ZF"
+    },
+    {
+      "ts": 1785672319.3902602,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "market",
+        "reason": "Amazon's custom silicon business hit $25B annual revenue - a massive market milestone showing how Amazon became one of the world's top chip companies in just a decade. Concrete business achievement powering AI infrastructure at scale."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01C3ZmYSS5VhER1VombrE2ba"
+    },
+    {
+      "ts": 1785672319.390324,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"How Amazon became one of the world\\u2019s top chip companies in a decade\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01C3ZmYSS5VhER1VombrE2ba"
+    },
+    {
+      "ts": 1785672320.8256485,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01VXUzx4ASf82kmP4DapxUoB"
+    },
+    {
+      "ts": 1785672321.0291855,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785672321.0292118,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Investigating three real-world incidents in our cybersecurity evaluations\", \"pick_2\": \"Gemini Robotics ER 2: powering robotics with video understanding, task orchestration, and multi-robot collaboration\", \"pick_3\": \"Tim Cook hints at iCloud Plus tier for AI power users\", \"pick_5\": \"How Amazon became one of the world\\u2019s top chip companies in a decade\"}}",
+      "tool_use_id": "toolu_01VXUzx4ASf82kmP4DapxUoB"
+    }
+  ],
+  "issue_num": 58
+}
