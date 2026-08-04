@@ -1,0 +1,188 @@
+{
+  "date": "2026-08-04",
+  "generated_at": "2026-08-04T13:05:08.755339Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Google's Gemini can now browse Chrome for you while logged in",
+      "blurb": "Gemini Spark can open Chrome, navigate sites using your saved passwords and logged-in accounts, and handle repetitive web tasks on your behalf. Google's AI assistant essentially acts as a browser automation tool that can complete errands across multiple sites without you clicking through each step.",
+      "why_it_matters": "AI agents are moving from chat windows into actually doing things in your real browser.",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2229209/gemini-spark-now-has-chrome-web-browsing-capabliities/",
+      "tier": 1,
+      "original_headline": "Gemini Spark now has Chrome web-browsing capabilities",
+      "fingerprint": "9d6cde3dc5a6d77c"
+    },
+    {
+      "slot": "market",
+      "headline": "Anthropic just signed a $10 billion cloud deal with a startup that's months old",
+      "blurb": "Anthropic locked in $10 billion of computing capacity from a brand-new infrastructure startup to handle surging demand for Claude. The deal shows how fast AI companies are burning through compute\u2014and how willing they are to bet on unproven providers to get it.",
+      "why_it_matters": "Even top AI labs can't get enough chips from the usual suspects anymore.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-08-04/anthropic-inks-10-billion-computing-deal-with-new-cloud-startup",
+      "tier": 1,
+      "original_headline": "Anthropic Inks $10 Billion Computing Deal With New Cloud Startup",
+      "fingerprint": "a13c8947b1aecac6"
+    },
+    {
+      "slot": "market",
+      "headline": "Alibaba releases its biggest AI model yet, claims it rivals GPT-4 and Claude",
+      "blurb": "Chinese tech giant Alibaba released Qwen3.8-Max, which it calls its most capable AI model to date. The company claims performance comparable to frontier systems from OpenAI and Anthropic, as well as domestic competitors like Moonshot AI's Kimi K3.",
+      "why_it_matters": "China's largest AI labs are now claiming parity with US frontier models.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/974342/alibaba-qwen-max-open-weight-ai",
+      "tier": 1,
+      "original_headline": "China&#8217;s Alibaba takes another swipe at America\u2019s AI supremacy",
+      "fingerprint": "49d0b41b110bbb19"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor can now edit your Google Docs and Sheets directly",
+      "blurb": "The AI code editor just added plugins that let it read and write across Google Workspace \u2014 Docs, Sheets, Drive, Gmail. You can now ask Cursor to draft a doc, update a spreadsheet, or pull info from your files without leaving the editor.",
+      "why_it_matters": "AI coding tools are now desktop agents that control your actual work apps.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/google-workspace-plugins",
+      "tier": 1,
+      "original_headline": "Google Workspace Plugins",
+      "fingerprint": "971f82322396a2b9"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The upside-down org chart",
+    "kicker": "",
+    "prompt": "I'll describe my team's current structure and responsibilities below. Redesign it as if everyone reported to the person they depend on most to do their job well \u2014 not their formal manager. Show me the new chart, then tell me which relationship we're currently getting wrong.",
+    "tool_hint": "When collaboration feels harder than it should and you can't figure out why."
+  },
+  "daily_question": "If an AI agent had full access to your browser right now, what's the first thing you'd want it to do for you?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1785848662.0652716,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785848682.9500117,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 90,
+        "persona": "everyday",
+        "reason": "Lead story - Google shipped a concrete feature anyone can try: Gemini Spark can now browse Chrome using your logged-in accounts and passwords to handle web errands. This is the 'I want to try that' moment - AI that acts on your behalf in the browser."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RgkjiKMHCcH7XJvyButpP7"
+    },
+    {
+      "ts": 1785848682.9502802,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Gemini Spark now has Chrome web-browsing capabilities\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01RgkjiKMHCcH7XJvyButpP7"
+    },
+    {
+      "ts": 1785848682.9503257,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 140,
+        "persona": "market",
+        "reason": "$10 billion computing deal between Anthropic and new cloud startup - massive infrastructure commitment showing the scale of AI compute wars. Bloomberg tier-1 reporting on a major market move."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018xwjDu6DsMNd8DEscm4tSr"
+    },
+    {
+      "ts": 1785848682.9503767,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic Inks $10 Billion Computing Deal With New Cloud Startup\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_018xwjDu6DsMNd8DEscm4tSr"
+    },
+    {
+      "ts": 1785848682.9503942,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "market",
+        "reason": "Alibaba claims its largest and most capable AI model to date, taking on US AI supremacy. Platform wars with concrete capability claims - the global AI race is heating up."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JWab8rydM3YmaV6r8uVdkW"
+    },
+    {
+      "ts": 1785848682.9504676,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"China&#8217;s Alibaba takes another swipe at America\\u2019s AI supremacy\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01JWab8rydM3YmaV6r8uVdkW"
+    },
+    {
+      "ts": 1785848682.9504914,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 9,
+        "persona": "build",
+        "reason": "Cursor coding agents can now read, write, and act across Google Workspace (Gmail, Drive, Calendar, Docs). Developer-facing shipped feature with concrete utility - AI agents crossing into productivity workflows."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NCm9wLEFMbFkgahN8zo3R9"
+    },
+    {
+      "ts": 1785848682.9505403,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google Workspace Plugins\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01NCm9wLEFMbFkgahN8zo3R9"
+    },
+    {
+      "ts": 1785848687.5497813,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01ULjPc6JoSYoYP2prx3QU3K"
+    },
+    {
+      "ts": 1785848688.08246,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1785848688.0824902,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Gemini Spark now has Chrome web-browsing capabilities\", \"pick_2\": \"Anthropic Inks $10 Billion Computing Deal With New Cloud Startup\", \"pick_3\": \"China&#8217;s Alibaba takes another swipe at America\\u2019s AI supremacy\", \"pick_4\": \"Google Workspace Plugins\"}}",
+      "tool_use_id": "toolu_01ULjPc6JoSYoYP2prx3QU3K"
+    }
+  ],
+  "issue_num": 59
+}
