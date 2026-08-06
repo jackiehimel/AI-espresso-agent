@@ -908,24 +908,46 @@ def call_llm_json(
         "\n\nReturn ONLY a JSON object matching this schema (no prose, no "
         "markdown fences):\n" + json.dumps(schema)
     )
-    resp = client.messages.create(
-        model=CLAUDE_MODEL,
-        max_tokens=max_tokens,
-        system=system + schema_hint,
-        messages=[{"role": "user", "content": prompt}],
+    # The model occasionally emits unescaped double quotes inside string
+    # values (killed the 2026-07-23/28/31 runs); one re-ask with the parse
+    # error recovers cheaply instead of losing the whole edition.
+    attempts = 2
+    ask = prompt
+    text = ""
+    last_err: json.JSONDecodeError | None = None
+    for attempt in range(1, attempts + 1):
+        resp = client.messages.create(
+            model=CLAUDE_MODEL,
+            max_tokens=max_tokens,
+            system=system + schema_hint,
+            messages=[{"role": "user", "content": ask}],
+        )
+        text = resp.content[0].text.strip()
+        # Strip ```json ... ``` if the model wrapped it anyway.
+        if text.startswith("```"):
+            text = re.sub(r"^```[a-z]*\n?", "", text)
+            text = re.sub(r"\n?```$", "", text)
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError as e:
+            last_err = e
+            # Save the bad output for postmortem.
+            if os.environ.get("ESPRESSO_DEBUG"):
+                (DATA_DIR / ".cache" / f"bad_llm_{int(time.time()*1000)}.txt").write_text(text)
+            if attempt < attempts:
+                print(f"  [llm-json] invalid JSON ({e}); re-asking", file=sys.stderr)
+                ask = (
+                    f"{prompt}\n\nYour previous response was not valid JSON.\n"
+                    f"Parse error: {e}\n"
+                    f"Previous response:\n{text[:3000]}\n\n"
+                    "Return the same content as ONE valid JSON object. Escape "
+                    "any double quotes inside string values with a backslash. "
+                    "No prose, no fences."
+                )
+    raise RuntimeError(
+        f"LLM returned non-JSON after {attempts} attempts: {last_err}\n"
+        f"First 400 chars: {text[:400]}"
     )
-    text = resp.content[0].text.strip()
-    # Strip ```json ... ``` if the model wrapped it anyway.
-    if text.startswith("```"):
-        text = re.sub(r"^```[a-z]*\n?", "", text)
-        text = re.sub(r"\n?```$", "", text)
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError as e:
-        # Save the bad output for postmortem before raising.
-        if os.environ.get("ESPRESSO_DEBUG"):
-            (DATA_DIR / ".cache" / f"bad_llm_{int(time.time()*1000)}.txt").write_text(text)
-        raise RuntimeError(f"LLM returned non-JSON: {e}\nFirst 400 chars: {text[:400]}")
 
 
 # ───────────────────────────────────────────────────────────────────────

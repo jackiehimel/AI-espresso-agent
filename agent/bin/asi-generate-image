@@ -12,21 +12,49 @@ Contract (one argv: JSON string):
 
 Writes {filename}.png and exits 0 on success.
 
-Backends (first available):
-  1. GEMINI_API_KEY / GOOGLE_API_KEY → Nano Banana via Gemini API
-     - Default: gemini-3.1-flash-image-preview (Nano Banana 2)
-     - Optional: GEMINI_IMAGE_MODEL=gemini-3-pro-image-preview (Nano Banana Pro)
-  2. OPENAI_API_KEY → gpt-image-1 (fallback only; stricter moderation)
+Backend: Gemini image models only, with a two-model chain:
+  1. GEMINI_IMAGE_MODEL (default gemini-3.1-flash-image-preview, Nano Banana 2)
+  2. GEMINI_IMAGE_FALLBACK_MODEL (default gemini-2.5-flash-image, stable tier —
+     separate capacity pool, so peak-hour 503s on the preview model don't sink a run)
 
-Set ESPRESSO_IMAGE_BACKEND=openai to force OpenAI even when Gemini is configured.
+Each model gets up to 3 attempts with exponential backoff on transient errors
+(503/UNAVAILABLE, timeouts, rate limits, empty responses). Auth/config errors
+fail fast.
 """
 from __future__ import annotations
 
 import base64
 import json
 import os
+import random
 import sys
+import time
 from pathlib import Path
+
+MIN_IMAGE_BYTES = 10_000
+RETRY_ATTEMPTS = 3
+RETRY_BASE_DELAY_SEC = 4.0
+
+# Substrings (lowercased) of errors worth retrying. Everything else — bad key,
+# invalid argument, permission denied — fails fast so misconfig is loud.
+_RETRYABLE_MARKERS = (
+    "503", "unavailable", "overloaded", "high demand",
+    "timeout", "timed out", "deadline",
+    "429", "resource_exhausted", "rate limit",
+    "500", "internal",
+    "no image part", "image too small",
+)
+
+# Deny-list checked first: Gemini reports depleted prepay credits as 429
+# RESOURCE_EXHAUSTED, but no amount of retrying fixes a billing problem.
+_NON_RETRYABLE_MARKERS = ("credit", "prepay", "billing", "api key")
+
+
+def _is_retryable(exc: Exception) -> bool:
+    msg = str(exc).lower()
+    if any(m in msg for m in _NON_RETRYABLE_MARKERS):
+        return False
+    return any(m in msg for m in _RETRYABLE_MARKERS)
 
 
 def _configure_stdio_utf8() -> None:
@@ -38,24 +66,42 @@ def _configure_stdio_utf8() -> None:
 
 def _normalize_prompt(prompt: str) -> str:
     for src, dst in (
-        ("\u2018", "'"), ("\u2019", "'"),
-        ("\u201c", '"'), ("\u201d", '"'),
-        ("\u2014", " - "), ("\u2013", "-"),
-        ("\u2026", "..."),
+        ("‘", "'"), ("’", "'"),
+        ("“", '"'), ("”", '"'),
+        ("—", " - "), ("–", "-"),
+        ("…", "..."),
     ):
         prompt = prompt.replace(src, dst)
     return prompt
-
-
-def _size_openai(aspect_ratio: str) -> str:
-    return "1536x1024" if aspect_ratio == "16:9" else "1024x1024"
 
 
 def _size_gemini(aspect_ratio: str) -> str:
     return "16:9" if aspect_ratio == "16:9" else "1:1"
 
 
-def _generate_gemini(prompt: str, out_path: Path, aspect_ratio: str) -> None:
+def _default_models() -> tuple[str, str]:
+    primary = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-3.1-flash-image-preview")
+    stable = os.environ.get("GEMINI_IMAGE_FALLBACK_MODEL", "gemini-2.5-flash-image")
+    return primary, stable
+
+
+def _extract_image_bytes(response) -> bytes:
+    # response.parts is None when Gemini returns no candidates (safety block,
+    # empty response) — killed the 2026-07-25 run; treat as retryable.
+    for part in (response.parts or []):
+        inline = part.inline_data
+        if inline is None:
+            continue
+        raw = inline.data
+        if raw is None:
+            continue
+        if isinstance(raw, str):
+            raw = base64.b64decode(raw)
+        return raw
+    raise RuntimeError("Gemini returned no image part")
+
+
+def _generate_gemini(prompt: str, out_path: Path, aspect_ratio: str, model: str | None = None) -> None:
     from google import genai
     from google.genai import types
 
@@ -63,11 +109,7 @@ def _generate_gemini(prompt: str, out_path: Path, aspect_ratio: str) -> None:
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY not set")
     client = genai.Client(api_key=api_key)
-    # Nano Banana 2 — https://ai.google.dev/gemini-api/docs/image-generation
-    model = os.environ.get(
-        "GEMINI_IMAGE_MODEL",
-        "gemini-3.1-flash-image-preview",
-    )
+    model = model or _default_models()[0]
     response = client.models.generate_content(
         model=model,
         contents=[prompt[:8000]],
@@ -79,56 +121,68 @@ def _generate_gemini(prompt: str, out_path: Path, aspect_ratio: str) -> None:
             ),
         ),
     )
+    raw = _extract_image_bytes(response)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    for part in response.parts:
-        inline = part.inline_data
-        if inline is None:
-            continue
-        raw = inline.data
-        if raw is None:
-            continue
-        if isinstance(raw, str):
-            raw = base64.b64decode(raw)
-        out_path.write_bytes(raw)
-        return
-    raise RuntimeError("Gemini returned no image part")
+    out_path.write_bytes(raw)
 
 
-def _generate_openai(prompt: str, out_path: Path, aspect_ratio: str) -> None:
-    from openai import OpenAI
-
-    api_key = os.environ.get("OPENAI_API_KEY")
-    if not api_key:
-        raise RuntimeError("OPENAI_API_KEY not set")
-    client = OpenAI(api_key=api_key)
-    model = os.environ.get("OPENAI_IMAGE_MODEL", "gpt-image-1")
-    kwargs: dict = {
-        "model": model,
-        "prompt": prompt[:4000],
-        "size": _size_openai(aspect_ratio),
-        "n": 1,
-    }
-    # gpt-image-1 supports quality; ignored on older models
-    if model.startswith("gpt-image"):
-        kwargs["quality"] = os.environ.get("OPENAI_IMAGE_QUALITY", "high")
-    resp = client.images.generate(**kwargs)
-    item = resp.data[0]
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    if getattr(item, "b64_json", None):
-        out_path.write_bytes(base64.b64decode(item.b64_json))
-        return
-    if getattr(item, "url", None):
-        import httpx
-
-        r = httpx.get(item.url, timeout=120)
-        r.raise_for_status()
-        out_path.write_bytes(r.content)
-        return
-    raise RuntimeError("OpenAI returned no image data")
+def _generate_with_retries(
+    prompt: str,
+    out_path: Path,
+    aspect_ratio: str,
+    model: str,
+    *,
+    attempts: int = RETRY_ATTEMPTS,
+    base_delay: float = RETRY_BASE_DELAY_SEC,
+    sleep_fn=time.sleep,
+    generate_fn=None,
+) -> None:
+    gen = generate_fn or _generate_gemini
+    for attempt in range(1, attempts + 1):
+        try:
+            gen(prompt, out_path, aspect_ratio, model)
+            if out_path.is_file() and out_path.stat().st_size > MIN_IMAGE_BYTES:
+                return
+            raise RuntimeError("image too small")
+        except Exception as e:
+            if attempt == attempts or not _is_retryable(e):
+                raise
+            delay = base_delay * (2 ** (attempt - 1)) * (1.0 + random.random() * 0.5)
+            print(
+                f"  [retry {attempt}/{attempts - 1}] {model}: "
+                f"{str(e)[:200]}; retrying in {delay:.0f}s",
+                file=sys.stderr,
+            )
+            sleep_fn(delay)
 
 
-# Gemini image models can take 2–4 minutes per image on first request.
-CLI_TIMEOUT_SEC = int(os.environ.get("ESPRESSO_IMAGE_TIMEOUT_SEC", "300"))
+def _run_chain(
+    prompt: str,
+    out_path: Path,
+    aspect_ratio: str,
+    *,
+    models: tuple[str, str] | None = None,
+    **retry_kwargs,
+) -> tuple[bool, str, list[str]]:
+    """Try primary model (with retries), then the stable fallback model.
+
+    Returns (ok, model_used, errors).
+    """
+    primary, stable = models or _default_models()
+    chain = [primary]
+    if stable and stable != primary:
+        chain.append(stable)
+    errors: list[str] = []
+    for i, model in enumerate(chain):
+        try:
+            _generate_with_retries(prompt, out_path, aspect_ratio, model, **retry_kwargs)
+            return True, model, errors
+        except Exception as e:
+            msg = str(e).replace("\n", " ")[:500]
+            errors.append(f"{model}: {msg}")
+            if i + 1 < len(chain):
+                print(f"  [{model} failed, trying {chain[i + 1]}] {msg}", file=sys.stderr)
+    return False, "", errors
 
 
 def main() -> int:
@@ -145,32 +199,23 @@ def main() -> int:
     aspect_ratio = req.get("aspect_ratio") or "16:9"
     out_path = Path(str(stem) + ".png")
 
-    errors: list[str] = []
-    backend = (os.environ.get("ESPRESSO_IMAGE_BACKEND") or "").strip().lower()
-    gemini_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-    openai_key = os.environ.get("OPENAI_API_KEY")
+    if not (os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")):
+        print("GEMINI_API_KEY not set", file=sys.stderr)
+        return 1
 
-    if backend != "openai" and gemini_key:
-        try:
-            _generate_gemini(prompt, out_path, aspect_ratio)
-            if out_path.stat().st_size > 10_000:
-                print("backend: gemini (nano banana)", file=sys.stderr)
-                return 0
-        except Exception as e:
-            msg = str(e).replace("\n", " ")[:500]
-            errors.append(f"gemini: {msg}")
-            print(f"  [gemini failed, trying openai] {msg}", file=sys.stderr)
-
-    if openai_key and backend in ("", "openai"):
-        try:
-            _generate_openai(prompt, out_path, aspect_ratio)
-            if out_path.stat().st_size > 10_000:
-                print("backend: openai (gpt-image-1)", file=sys.stderr)
-                return 0
-        except Exception as e:
-            errors.append(f"openai: {e}")
-
-    print("; ".join(errors) or "no image API keys configured", file=sys.stderr)
+    ok, model_used, errors = _run_chain(prompt, out_path, aspect_ratio)
+    if ok:
+        print(f"backend: gemini [{model_used}]", file=sys.stderr)
+        if model_used != _default_models()[0]:
+            # Surfaces as a GitHub Actions annotation so a struggling primary
+            # model is visible the same day, not after a month of silence.
+            print(
+                f"::warning::illustration fell back to {model_used} "
+                f"({'; '.join(errors)[:200]})",
+                file=sys.stderr,
+            )
+        return 0
+    print("; ".join(errors) or "image generation failed", file=sys.stderr)
     return 1
 
 

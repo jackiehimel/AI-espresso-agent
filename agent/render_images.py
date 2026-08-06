@@ -450,14 +450,18 @@ def _run_gemini_inprocess(prompt: str, out_path: Path, aspect_ratio: str) -> boo
     if not (os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")):
         return False
     try:
+        import importlib.machinery
         import importlib.util
 
         cli_path = Path(__file__).resolve().parent / "bin" / "asi-generate-image"
-        spec = importlib.util.spec_from_file_location("asi_generate_image", cli_path)
-        if spec is None or spec.loader is None:
+        # spec_from_file_location returns None for extension-less files;
+        # an explicit SourceFileLoader is required.
+        loader = importlib.machinery.SourceFileLoader("asi_generate_image", str(cli_path))
+        spec = importlib.util.spec_from_loader("asi_generate_image", loader)
+        if spec is None:
             return False
         mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
+        loader.exec_module(mod)
         mod._generate_gemini(prompt, out_path, aspect_ratio)
         return out_path.exists() and out_path.stat().st_size > 10_000
     except Exception as e:
@@ -518,8 +522,12 @@ def _run_image_cli(prompt: str, filename_no_ext: Path, aspect_ratio: str) -> boo
             timeout=300,
             env=env,
         )
+        # Full stderr, success or not — the old 300-char truncation hid the
+        # real fallback error for a month; retry/backend/::warning:: lines
+        # must reach the workflow log.
+        if result.stderr and result.stderr.strip():
+            print(result.stderr.rstrip(), file=sys.stderr)
         if result.returncode != 0:
-            print(f"  [error] {result.stderr[:300]}", file=sys.stderr)
             if _restore_prior_if_available():
                 print("  [keep] preserving previous illustration after generation error", file=sys.stderr)
                 return True
