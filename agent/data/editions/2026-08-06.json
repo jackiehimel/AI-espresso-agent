@@ -1,0 +1,210 @@
+{
+  "date": "2026-08-06",
+  "generated_at": "2026-08-06T12:59:49.645726Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Jeff Dean is leaving Google to start an AI science startup",
+      "blurb": "The legendary Google AI executive who helped build TensorFlow and Google Brain is departing along with other top researchers to launch a new company focused on using AI to accelerate scientific discovery. The team hasn't disclosed funding details or what specific scientific problems they'll tackle first.",
+      "why_it_matters": "One of Google's most important AI architects just became a competitor",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/05/jeff-dean-and-other-top-ai-researchers-are-leaving-google-to-launch-their-own-startup/",
+      "tier": 1,
+      "original_headline": "Jeff Dean and other top AI researchers are leaving Google to launch their own startup",
+      "fingerprint": "da66f6ad548f0311"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google Maps can now order your food and book your hotel",
+      "blurb": "Google Maps added AI features that let you complete transactions directly in the app\u2014order takeout, book hotels, make reservations\u2014without jumping to other apps or websites. The update turns Maps from a navigation tool into an assistant that can act on your behalf.",
+      "why_it_matters": "Google is betting you'll let one app handle errands you used to split across five.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/06/google-maps-adds-agentic-features-including-food-ordering-and-hotel-bookings/",
+      "tier": 1,
+      "original_headline": "Google Maps adds agentic features, including food ordering and hotel bookings",
+      "fingerprint": "f5815d4c3554dc8c"
+    },
+    {
+      "slot": "industry",
+      "headline": "NVIDIA just shipped a reasoning model built for self-driving cars",
+      "blurb": "Alpamayo 2 Super is designed to handle the rare, complex driving situations that break conventional object detection\u2014like figuring out why a cyclist is swerving or what to do when construction cones appear mid-lane. It's now available for commercial use in robotaxis and autonomous vehicles.",
+      "why_it_matters": "Self-driving still fails on edge cases; this targets exactly that gap with situational reasoning.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/alpamayo-2-super-open-model-now-available/",
+      "tier": 1,
+      "original_headline": "NVIDIA Alpamayo 2 Super, the Frontier Open Model for Robotaxis and Autonomous Vehicles, Now Available for Commercial Use",
+      "fingerprint": "49af315c993e6a5e"
+    },
+    {
+      "slot": "build",
+      "headline": "Meta just open-sourced two new coding models that run locally",
+      "blurb": "Muse Code handles everyday programming tasks, while Muse Spark 1.2 is a tiny model designed to run on your laptop or phone without a GPU. Both are Apache 2.0 licensed. Meta says Spark beats other small models on coding benchmarks while using a fraction of the parameters.",
+      "why_it_matters": "You can now run a decent coding assistant entirely offline on consumer hardware.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2",
+      "tier": 1,
+      "original_headline": "Muse Code and Muse Spark 1.2",
+      "fingerprint": "b7ca49ead3bc4f44"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The distraction audit",
+    "kicker": "",
+    "prompt": "List my last seven work days hour by hour \u2014 just the big blocks, not every email. Don't summarize it. Instead: flag every hour that moved nothing forward, tell me which interrupt I should've ignored, and name the one thing I'm pretending is urgent that isn't.",
+    "tool_hint": "When you're busy all week but can't point to what actually shipped."
+  },
+  "daily_question": "If you could run one AI model locally on your laptop with zero cloud dependency, which would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1786021142.7164378,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786021156.8215652,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "market",
+        "reason": "THE biggest AI story today - Jeff Dean, one of the most legendary figures in AI/ML, is leaving Google with other top researchers to launch a startup. This is seismic news in the AI world that everyone will be talking about. Clear subject + action, highly concrete."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DR5mfsJ8dUBRV5d9yTuYLn"
+    },
+    {
+      "ts": 1786021156.8216348,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Jeff Dean and other top AI researchers are leaving Google to launch their own startup\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01DR5mfsJ8dUBRV5d9yTuYLn"
+    },
+    {
+      "ts": 1786021156.8216777,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 30,
+        "persona": "everyday",
+        "reason": "Google Maps becoming an agentic AI assistant that can order food and book hotels - this is a tangible, try-it-soon feature that transforms a tool everyone uses daily. Concrete capability people can understand and get excited about."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014W2WDannK7eoTv22a4Fy45"
+    },
+    {
+      "ts": 1786021156.82171,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google Maps adds agentic features, including food ordering and hotel bookings\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_014W2WDannK7eoTv22a4Fy45"
+    },
+    {
+      "ts": 1786021156.8217204,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "build",
+        "reason": "Meta shipping Muse Code, an AI agent for handling complex codebases - this is a shipped developer tool that engineers at Solvd will want to try. Concrete product launch with clear utility for our technical audience."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KxLEXYQ3Ddh9VHUUXrQaLA"
+    },
+    {
+      "ts": 1786021156.8217509,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'TechCrunch \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_01KxLEXYQ3Ddh9VHUUXrQaLA"
+    },
+    {
+      "ts": 1786021156.82176,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "industry",
+        "reason": "NVIDIA launching Alpamayo 2 Super for commercial use in robotaxis/autonomous vehicles - this is a frontier model going live for real-world deployment. Concrete capability advancement in a high-stakes domain, from a tier-1 source (NVIDIA's own blog)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QvGxCtcRdy1rLFd2GkFQgH"
+    },
+    {
+      "ts": 1786021156.8218079,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Alpamayo 2 Super, the Frontier Open Model for Robotaxis and Autonomous Vehicles, Now Available for Commercial Use\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01QvGxCtcRdy1rLFd2GkFQgH"
+    },
+    {
+      "ts": 1786021161.5259743,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 64,
+        "persona": "build",
+        "reason": "Meta's Muse Code launch from the primary source (Meta AI Research blog via HN) - a terminal coding agent powered by their new Muse Spark 1.2 model. Shipped tool developers can try, avoids the TechCrunch outlet cap."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KyxZ4oeqoG2YDBRmu8WenE"
+    },
+    {
+      "ts": 1786021161.5260618,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Muse Code and Muse Spark 1.2\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01KyxZ4oeqoG2YDBRmu8WenE"
+    },
+    {
+      "ts": 1786021167.1305134,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_013stUdpbL18nQb4wLnBDFid"
+    },
+    {
+      "ts": 1786021167.7566252,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786021167.7566576,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Jeff Dean and other top AI researchers are leaving Google to launch their own startup\", \"pick_2\": \"Google Maps adds agentic features, including food ordering and hotel bookings\", \"pick_3\": \"NVIDIA Alpamayo 2 Super, the Frontier Open Model for Robotaxis and Autonomous Vehicles, Now Available for Commercial Use\", \"pick_4\": \"Muse Code and Muse Spark 1.2\"}}",
+      "tool_use_id": "toolu_013stUdpbL18nQb4wLnBDFid"
+    }
+  ],
+  "issue_num": 60
+}
