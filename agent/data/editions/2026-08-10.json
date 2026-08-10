@@ -1,0 +1,188 @@
+{
+  "date": "2026-08-10",
+  "generated_at": "2026-08-10T11:50:01.819759Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Meta just open-sourced its most powerful AI model",
+      "blurb": "Meta released Muse Glimmer as a free download that anyone can modify and run. The move puts cutting-edge AI capabilities in the hands of developers without the usual API fees or usage restrictions, though it's certain to reignite the debate over whether the most powerful models should be freely available.",
+      "why_it_matters": "Open-weight releases let engineers experiment without corporate gatekeepers or per-token costs.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/08/10/technology/meta-ai-open-source.html",
+      "tier": 1,
+      "original_headline": "Meta Unveils \u2018Open Source\u2019 Version of Its Most Powerful A.I. Model",
+      "fingerprint": "406f8c89a33103ac"
+    },
+    {
+      "slot": "build",
+      "headline": "Claude Code will now run itself without asking permission",
+      "blurb": "Anthropic is flipping auto mode on by default in Claude Code, meaning the AI coding agent will execute commands, run tests, and iterate on fixes without stopping for human approval each time. You'll still see what it's doing, but it won't wait for a green light.",
+      "why_it_matters": "Coding agents just got faster but also harder to stop mid-task.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/09/anthropic-is-turning-claude-codes-auto-mode-on-by-default/",
+      "tier": 1,
+      "original_headline": "Anthropic is turning Claude Code\u2019s auto mode on by default",
+      "fingerprint": "1585a0950492ce64"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Ford's AI assistant can now check your fuel and tire pressure",
+      "blurb": "Ford is adding an AI assistant to its mobile app that answers questions about your car \u2014 like how much gas you need for a road trip or whether your truck can tow a boat. It can also check real-time stats like fuel levels and tire pressure directly from the app.",
+      "why_it_matters": "Car data is moving from the dashboard to conversational AI in your pocket.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/transportation/976748/ford-ai-assistant-mobile-app",
+      "tier": 1,
+      "original_headline": "Ford\u2019s new AI assistant can check your fuel levels and tire pressure",
+      "fingerprint": "6b4f2a42040b3443"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI just bought a presentation startup and folded it into ChatGPT",
+      "blurb": "OpenAI acquired NextSlide, a presentation tool startup, and brought its team into ChatGPT development. The move signals OpenAI is pushing deeper into productivity software beyond chat, potentially building native slide-creation features into ChatGPT itself.",
+      "why_it_matters": "ChatGPT may soon generate and edit slides natively, not just suggest text for decks.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/08/openai-acquires-presentation-startup-nextslide/",
+      "tier": 1,
+      "original_headline": "OpenAI acquires presentation startup NextSlide",
+      "fingerprint": "b0397fbe83dd20c8"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The skill inventory",
+    "kicker": "",
+    "prompt": "I'll describe my current role and day-to-day work below. Tell me: three skills I'm building without realizing it, two skills atrophying because I never use them anymore, and the one skill I should start learning now that won't matter for two years but will be critical after that.",
+    "tool_hint": "Run this every six months to see if you're growing or just busy."
+  },
+  "daily_question": "If AI can now run code, check your tire pressure, and build slides \u2014 what's the first thing you'd want it to do without asking you?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1786362552.200881,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=['Major regulatory/policy story if one breaks (rare today)', 'Killer consumer demo/product drop (closest: Grok Imagine 2.0, Ford AI assistant)', 'Surprise acquisition or massive funding round (NextSlide acq-hire is small-scale)']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786362568.9929886,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 100,
+        "persona": "build",
+        "reason": "Meta releases Muse Glimmer, their most powerful model, as open source - major model drop that developers can download and modify today. This is the biggest AI story of the weekend from a tier-1 company."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019woJzzs22D3jQtJzcFs8tF"
+    },
+    {
+      "ts": 1786362568.9930634,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta Unveils \\u2018Open Source\\u2019 Version of Its Most Powerful A.I. Model\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_019woJzzs22D3jQtJzcFs8tF"
+    },
+    {
+      "ts": 1786362568.9930944,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "build",
+        "reason": "Anthropic turning Claude Code auto mode on by default - practical developer feature that changes how engineers use AI for coding. Tier-1 source, concrete shipped change."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PHiVVmGfQ7gmjH8ZqzBs7t"
+    },
+    {
+      "ts": 1786362568.9931252,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic is turning Claude Code\\u2019s auto mode on by default\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01PHiVVmGfQ7gmjH8ZqzBs7t"
+    },
+    {
+      "ts": 1786362568.9931335,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "everyday",
+        "reason": "Ford rolls out AI assistant that checks fuel levels and tire pressure - surprising real-world application that shows AI moving into cars in practical ways. Concrete feature people can visualize using."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013BMwKDJtzmdeypwHm9iBsT"
+    },
+    {
+      "ts": 1786362568.9931753,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Ford\\u2019s new AI assistant can check your fuel levels and tire pressure\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_013BMwKDJtzmdeypwHm9iBsT"
+    },
+    {
+      "ts": 1786362568.9931874,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "market",
+        "reason": "OpenAI acquires NextSlide presentation startup - signals ChatGPT getting native presentation creation. Tier-1 company making a strategic move with clear product implications users will see soon."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RD5jmRcfeSnThR9x766Wp1"
+    },
+    {
+      "ts": 1786362568.9932232,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI acquires presentation startup NextSlide\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01RD5jmRcfeSnThR9x766Wp1"
+    },
+    {
+      "ts": 1786362575.666985,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Q7ymLTYD7Zia4WidCKXZfr"
+    },
+    {
+      "ts": 1786362576.1510413,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786362576.1510794,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Meta Unveils \\u2018Open Source\\u2019 Version of Its Most Powerful A.I. Model\", \"pick_2\": \"Anthropic is turning Claude Code\\u2019s auto mode on by default\", \"pick_3\": \"Ford\\u2019s new AI assistant can check your fuel levels and tire pressure\", \"pick_4\": \"OpenAI acquires presentation startup NextSlide\"}}",
+      "tool_use_id": "toolu_01Q7ymLTYD7Zia4WidCKXZfr"
+    }
+  ],
+  "issue_num": 64
+}
