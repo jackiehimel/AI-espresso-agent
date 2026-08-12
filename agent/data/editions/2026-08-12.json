@@ -1,0 +1,298 @@
+{
+  "date": "2026-08-12",
+  "generated_at": "2026-08-12T11:49:33.532513Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "ChatGPT and Gemini both just crossed 1 billion monthly users",
+      "blurb": "Google CEO Sundar Pichai announced Gemini hit a billion monthly users, making it Google's fastest-growing product ever. OpenAI's ChatGPT reached the same milestone around the same time. Both apps went from zero to a billion users in roughly two years\u2014faster than any consumer product in history.",
+      "why_it_matters": "AI chatbots are now as mainstream as search engines and social networks.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/978113/chatgpt-gemini-1-billion-users",
+      "tier": 1,
+      "original_headline": "ChatGPT and Gemini both just passed 1 billion users",
+      "fingerprint": "2690f09c99598dca"
+    },
+    {
+      "slot": "market",
+      "headline": "xAI co-founder's 2-month-old startup just raised $1.1 billion",
+      "blurb": "River AI, founded by Igor Babuschkin who helped start xAI, closed a $1.1 billion Series A led by General Catalyst after just two months. The company is building personal AI agents, though details on what makes their approach different remain sparse.",
+      "why_it_matters": "VCs are writing billion-dollar checks for agent startups based on founder pedigree alone",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/11/general-catalyst-leads-1-1b-round-into-2-month-old-river-ai/",
+      "tier": 1,
+      "original_headline": "General Catalyst leads $1.1B round into 2-month-old River AI",
+      "fingerprint": "387b22677dfacd76"
+    },
+    {
+      "slot": "market",
+      "headline": "AI coding startup Lovable raises $400M at $13.3B valuation",
+      "blurb": "Swedish startup Lovable just closed a $400 million round at a $13.3 billion valuation, putting it in the same funding league as Anthropic and positioning it to compete directly with established AI coding tools. The company builds AI agents that write production code.",
+      "why_it_matters": "A coding-focused startup hitting unicorn status this fast signals investors expect AI coding to be a massive standalone category.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-08-12/ai-coding-startup-lovable-raises-400-million-at-13-3-billion-valuation",
+      "tier": 1,
+      "original_headline": "AI Coding Startup Lovable Raises $400 Million at $13.3 Billion Valuation",
+      "fingerprint": "d686d4d002094c52"
+    },
+    {
+      "slot": "build",
+      "headline": "Claude will now invisibly watermark every AI-generated text and image",
+      "blurb": "Anthropic is embedding machine-readable watermarks in Claude's text outputs and cryptographically signed metadata in images to comply with EU transparency rules. The markers are invisible to humans but detectable by software\u2014meaning every Claude response and generated file will carry proof of its AI origin.",
+      "why_it_matters": "First major model to watermark text at scale, setting a precedent other labs may follow.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/977823/anthropic-claude-ai-watermarks-c2pa-text-images",
+      "tier": 1,
+      "original_headline": "Claude will apply invisible watermarks to AI text and images",
+      "fingerprint": "27b93de61b2260f9"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA's new open model runs AI agents cheaper and longer",
+      "blurb": "Nemotron 3.5 Lightning is built specifically for long-running agents that need to stay active without burning through compute. NVIDIA also released NeMo Switchyard, a router that picks the cheapest capable model for each task\u2014so your agent can use a small model for simple calls and switch to bigger ones only when needed.",
+      "why_it_matters": "Agentic workflows get expensive fast; this makes them viable at scale.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/nemotron-lightning-switchyard-rtx-dgx/",
+      "tier": 1,
+      "original_headline": "NVIDIA Nemotron 3.5 Lightning and NeMo Switchyard Deliver Faster, Smarter, More Efficient Agentic AI",
+      "fingerprint": "d5a08445c050c84d"
+    },
+    {
+      "slot": "everyday",
+      "headline": "ChatGPT finally gets a native Linux desktop app",
+      "blurb": "OpenAI just released a dedicated ChatGPT desktop app for Linux, closing the gap after launching Mac and Windows versions earlier. Linux users can now access ChatGPT directly from their desktop without needing a browser tab open.",
+      "why_it_matters": "Linux developers no longer need workarounds to use ChatGPT as a desktop tool.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/11/openai-launches-chatgpt-desktop-app-for-linux/",
+      "tier": 1,
+      "original_headline": "OpenAI launches ChatGPT desktop app for Linux",
+      "fingerprint": "bbcfe18c5893ca0a"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The research rabbit hole escape",
+    "kicker": "",
+    "prompt": "I've been researching a topic for too long and I'm drowning in tabs. I'll describe what I'm trying to figure out below. Give me: the one question that actually matters, three sources I should read and nothing else, and the decision I can make with 80% confidence right now.",
+    "tool_hint": "When you've read twelve articles and still haven't shipped."
+  },
+  "daily_question": "If you could only use ONE AI tool for the next month, which would you keep and what would you miss most?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1786535304.9121354,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786535326.8591988,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "market",
+        "reason": "THE defining AI story today - both ChatGPT and Gemini crossing 1 billion users simultaneously is a massive milestone that shows AI's mainstream adoption. This is what everyone in AI will be talking about. Clear market significance with concrete numbers."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LwHjna82GdyVbm4Ko4Xmsj"
+    },
+    {
+      "ts": 1786535326.8592653,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"ChatGPT and Gemini both just passed 1 billion users\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01LwHjna82GdyVbm4Ko4Xmsj"
+    },
+    {
+      "ts": 1786535326.8593051,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "market",
+        "reason": "$1.1B raise for a 2-month-old startup founded by xAI co-founder Igor Babuschkin is extraordinary. Shows massive confidence in personal agents vision. Concrete funding news with clear wow factor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012bVhi7mmvCiS4Pt9A66QrY"
+    },
+    {
+      "ts": 1786535326.8593583,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"General Catalyst leads $1.1B round into 2-month-old River AI\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_012bVhi7mmvCiS4Pt9A66QrY"
+    },
+    {
+      "ts": 1786535326.8593712,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 163,
+        "persona": "market",
+        "reason": "AI coding startup Lovable raising $400M at $13.3B valuation shows the explosive growth in AI developer tools. Competes with Anthropic and major players. Strong market validation of AI coding future."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01D44Vk9pdCYuC7GDNkeWzGu"
+    },
+    {
+      "ts": 1786535326.8594193,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AI Coding Startup Lovable Raises $400 Million at $13.3 Billion Valuation\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01D44Vk9pdCYuC7GDNkeWzGu"
+    },
+    {
+      "ts": 1786535326.859434,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "build",
+        "reason": "Claude adding invisible watermarks to AI text and images is a concrete shipped feature addressing AI provenance and authenticity. Practical solution developers and users can benefit from immediately."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CdCh63kWj4LDKEGWVJGkNo"
+    },
+    {
+      "ts": 1786535326.859491,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude will apply invisible watermarks to AI text and images\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01CdCh63kWj4LDKEGWVJGkNo"
+    },
+    {
+      "ts": 1786535326.8594992,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "build",
+        "reason": "Major Zoom security vulnerability discovered using fewer than 20 AI prompts demonstrates AI's practical security research capabilities. 'Zoomsday' is memorable, shows AI's dual-use power, and affects millions of users."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01BjPCFiy6zNxqF35hHoYzUL"
+    },
+    {
+      "ts": 1786535326.8595436,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'The Verge \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_01BjPCFiy6zNxqF35hHoYzUL"
+    },
+    {
+      "ts": 1786535326.8595543,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 26,
+        "persona": "everyday",
+        "reason": "Spotify labeling AI artists and removing them from recommendations is a concrete consumer-facing policy that affects how people experience music. Clear action on AI-generated content with immediate user impact."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QL45oVwXjx8gPf5Qoz4emB"
+    },
+    {
+      "ts": 1786535326.8595886,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'The Verge \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_01QL45oVwXjx8gPf5Qoz4emB"
+    },
+    {
+      "ts": 1786535333.4823053,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 18,
+        "persona": "build",
+        "reason": "NVIDIA Nemotron 3.5 Lightning and NeMo Switchyard for agentic AI - concrete shipped tools for developers building autonomous agents. Shows the shift from chatbots to agents with practical infrastructure."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PPccHdefNbgTDeG31sqpiZ"
+    },
+    {
+      "ts": 1786535333.4823775,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Nemotron 3.5 Lightning and NeMo Switchyard Deliver Faster, Smarter, More Efficient Agentic AI\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01PPccHdefNbgTDeG31sqpiZ"
+    },
+    {
+      "ts": 1786535333.482417,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "everyday",
+        "reason": "OpenAI launching ChatGPT desktop app for Linux closes a major platform gap. Linux developers and users can now access ChatGPT natively - concrete shipped feature people can use today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NTD85H2UUGY7T5WXQhcBG4"
+    },
+    {
+      "ts": 1786535333.4824498,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI launches ChatGPT desktop app for Linux\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01NTD85H2UUGY7T5WXQhcBG4"
+    },
+    {
+      "ts": 1786535342.1941986,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Q99z5sD65n4SWBzr6S4MtD"
+    },
+    {
+      "ts": 1786535342.7621882,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786535342.7622392,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"ChatGPT and Gemini both just passed 1 billion users\", \"pick_2\": \"General Catalyst leads $1.1B round into 2-month-old River AI\", \"pick_3\": \"AI Coding Startup Lovable Raises $400 Million at $13.3 Billion Valuation\", \"pick_4\": \"Claude will apply invisible watermarks to AI text and images\", \"pick_5\": \"NVIDIA Nemotron 3.5 Lightning and NeMo Switchyard Deliver Faster, Smarter, More Efficient Agentic AI\", \"pick_6\": \"OpenAI launches ChatGPT desktop app for Linux\"}}",
+      "tool_use_id": "toolu_01Q99z5sD65n4SWBzr6S4MtD"
+    }
+  ],
+  "issue_num": 66
+}
