@@ -1,0 +1,254 @@
+{
+  "date": "2026-08-14",
+  "generated_at": "2026-08-14T11:46:10.848237Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Google just shipped Gemini 3.7 Flash with 2M token context",
+      "blurb": "DeepMind released Gemini 3.7 Flash, a faster model that can process up to 2 million tokens of context \u2014 enough for entire codebases, long documents, or hours of video. It's available now in AI Studio and the Gemini API, with better speed and lower cost than the previous Flash model.",
+      "why_it_matters": "You can now feed an entire codebase or documentation set into a single prompt without chunking.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/introducing-gemini-3-7-flash/",
+      "tier": 1,
+      "original_headline": "Introducing Gemini 3.7 Flash",
+      "fingerprint": "2d69a11b9a3ff182"
+    },
+    {
+      "slot": "build",
+      "headline": "xAI just shipped agents that run 24/7 on their own computers",
+      "blurb": "Grok Bot gives you a team of AI agents that each get their own computer environment. They can work inside actual tools and apps the way a person would, and they keep running around the clock even when you're offline.",
+      "why_it_matters": "First major AI lab to ship persistent agents with dedicated compute that work like remote employees.",
+      "source_name": "xAI Blog",
+      "source_url": "https://x.ai/news/introducing-grok-bot",
+      "tier": 1,
+      "original_headline": "Introducing Grok Bot",
+      "fingerprint": "916e2a356bfafdaf"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google's AI now translates sign language straight to text on your phone",
+      "blurb": "DeepMind released SL2T, a model that converts American Sign Language to text in real time using your phone's camera. It's rolling out in beta for Android and iOS, letting Deaf and hard-of-hearing users text, search, and communicate without typing. The model runs on-device, so it works offline and keeps signing private.",
+      "why_it_matters": "First mainstream sign language AI that actually ships to consumers, not just a research demo.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/putting-sign-language-ai-into-users-hands/",
+      "tier": 1,
+      "original_headline": "Putting sign language AI into users\u2019 hands",
+      "fingerprint": "afd9cf48ed498600"
+    },
+    {
+      "slot": "build",
+      "headline": "Suno just added MIDI and turned into a real music editor",
+      "blurb": "Suno's Studio 2.0 now supports MIDI files, custom audio effects, and a chatbot that tweaks your tracks on command. You can import MIDI, apply reverb or distortion with natural language, and edit AI-generated music like you would in a DAW. It's no longer just a prompt-to-song generator.",
+      "why_it_matters": "AI music tools are crossing into serious production software territory.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/979345/suno-studio-2-0-midi-chatbot-custom-effects",
+      "tier": 1,
+      "original_headline": "Suno is trying to look more like a real music production tool",
+      "fingerprint": "c2a826d4493bb4f0"
+    },
+    {
+      "slot": "market",
+      "headline": "Databricks raises $5B at $190B valuation after investors begged to pile in",
+      "blurb": "The data and AI platform wanted $1 billion. Investors wanted to write checks for $15 billion. Databricks CEO Ali Ghodsi settled on $5 billion because, as he told TechCrunch, running AI infrastructure is expensive and the demand was there. The round values the company at $190 billion.",
+      "why_it_matters": "Enterprise AI companies can now raise whatever they want \u2014 the money is chasing them.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/13/databricks-wanted-to-raise-1b-investors-wanted-15b-it-settled-on-5b-at-a-190b-valuation/",
+      "tier": 1,
+      "original_headline": "Databricks wanted to raise $1B, investors wanted $15B. It settled on $5B at a $190B valuation.",
+      "fingerprint": "5b55b54c3f0ec900"
+    },
+    {
+      "slot": "build",
+      "headline": "Apple built a custom AI model for China with Alibaba's help",
+      "blurb": "Apple trained a China-specific large language model in partnership with Alibaba, according to Reuters. The collaboration marks a rare cross-border AI partnership as U.S.-China tech tensions escalate, and suggests Apple is creating region-specific AI infrastructure rather than deploying a single global model.",
+      "why_it_matters": "Apple is localizing AI by geography, not just language \u2014 a strategy that could reshape how global tech companies build for regulated markets.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/980160/apple-intelligence-china-custom-ai-model-alibaba",
+      "tier": 1,
+      "original_headline": "Apple trained its own AI model for China with help from Alibaba",
+      "fingerprint": "f3cad56f08b13a03"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The strategy stress test",
+    "kicker": "",
+    "prompt": "I'll describe our current strategy below. Your job: play the smart competitor who just raised serious money and is coming after us. Tell me the three moves you'd make to exploit our weaknesses, then flip it and tell me the one thing we're doing that you'd actually be worried about.",
+    "tool_hint": "When your roadmap needs an adversarial review before you commit the quarter."
+  },
+  "daily_question": "If you had a personal AI agent running 24/7 on its own computer, what's the first thing you'd have it do?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1786707911.336296,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=15, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786707933.0488262,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 7,
+        "persona": "build",
+        "reason": "Lead story: Google DeepMind's latest workhorse model focused on coding and agents - highest-ranked model release from a tier-1 source that developers will want to try immediately"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NeRnFJzGGApsNVFZncoCTh"
+    },
+    {
+      "ts": 1786707933.0490003,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Gemini 3.7 Flash\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01NeRnFJzGGApsNVFZncoCTh"
+    },
+    {
+      "ts": 1786707933.0490527,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "build",
+        "reason": "Grok Bot introduces always-on agents with their own computer - concrete new product that shows where agent technology is heading, very try-it-today appeal"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0123GEWaVQaS5YuTeaauVeMU"
+    },
+    {
+      "ts": 1786707933.049097,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Grok Bot\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_0123GEWaVQaS5YuTeaauVeMU"
+    },
+    {
+      "ts": 1786707933.049109,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "everyday",
+        "reason": "Breakthrough sign-language-to-text model making AI accessible to Deaf and hard of hearing users - surprising real-world application with immediate human impact"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Xi7Sgm5Ub7nxUtVrJh3ut4"
+    },
+    {
+      "ts": 1786707933.0491786,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Putting sign language AI into users\\u2019 hands\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Xi7Sgm5Ub7nxUtVrJh3ut4"
+    },
+    {
+      "ts": 1786707933.0491958,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "build",
+        "reason": "Suno Studio 2.0 transforms AI music generation into a real production tool - shows AI moving from toy to professional-grade DAW, very concrete capability upgrade"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Kos71wkKkkfTJWVGffy9QV"
+    },
+    {
+      "ts": 1786707933.0492523,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Suno is trying to look more like a real music production tool\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Kos71wkKkkfTJWVGffy9QV"
+    },
+    {
+      "ts": 1786707933.0492728,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 36,
+        "persona": "market",
+        "reason": "Databricks raises $5B at $190B valuation after investor frenzy - massive market signal about AI infrastructure demand, shows the scale of enterprise AI investment"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JyQPzGVANst3oZTa4WKsvg"
+    },
+    {
+      "ts": 1786707933.0493228,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Databricks wanted to raise $1B, investors wanted $15B. It settled on $5B at a $190B valuation.\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01JyQPzGVANst3oZTa4WKsvg"
+    },
+    {
+      "ts": 1786707933.0493412,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 25,
+        "persona": "build",
+        "reason": "Apple trained custom AI model for China with Alibaba - rare cross-border partnership showing how major platforms are adapting AI strategy regionally, significant platform news"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RHUTqPxNjiTJ8YsYQjRpad"
+    },
+    {
+      "ts": 1786707933.049384,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple trained its own AI model for China with help from Alibaba\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01RHUTqPxNjiTJ8YsYQjRpad"
+    },
+    {
+      "ts": 1786707939.7635138,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01WCHz5FphMPotZH67WW7y14"
+    },
+    {
+      "ts": 1786707940.514894,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786707940.5149283,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Introducing Gemini 3.7 Flash\", \"pick_2\": \"Introducing Grok Bot\", \"pick_3\": \"Putting sign language AI into users\\u2019 hands\", \"pick_4\": \"Suno is trying to look more like a real music production tool\", \"pick_5\": \"Databricks wanted to raise $1B, investors wanted $15B. It settled on $5B at a $190B valuation.\", \"pick_6\": \"Apple trained its own AI model for China with help from Alibaba\"}}",
+      "tool_use_id": "toolu_01WCHz5FphMPotZH67WW7y14"
+    }
+  ],
+  "issue_num": 67
+}
