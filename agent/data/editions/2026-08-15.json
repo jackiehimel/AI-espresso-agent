@@ -1,0 +1,249 @@
+{
+  "date": "2026-08-15",
+  "generated_at": "2026-08-15T11:23:19.003787Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Grok 4.6 can now run agents that keep going for hours",
+      "blurb": "xAI's latest model is built for agents that tackle multi-step tasks over long sessions\u2014think coding projects that span hours, not minutes. It also handles more complex visual and interactive work than Grok 4.5.",
+      "why_it_matters": "Agents that don't quit after one API call get closer to actually finishing real work.",
+      "source_name": "xAI Blog",
+      "source_url": "https://x.ai/news/grok-4-6",
+      "tier": 1,
+      "original_headline": "Introducing Grok 4.6",
+      "fingerprint": "29cd41fbb4abf20a"
+    },
+    {
+      "slot": "market",
+      "headline": "IBM will train 30,000 consultants to deploy OpenAI in client companies",
+      "blurb": "IBM is certifying tens of thousands of its consultants on OpenAI's models and tools, then sending them into Fortune 500s to build custom AI systems. It's the biggest consulting play yet to turn ChatGPT's tech into something companies can actually run inside their own operations.",
+      "why_it_matters": "Enterprise AI is shifting from proof-of-concept to mass deployment through consulting armies.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/13/ibm-partners-with-openai-to-bolster-enterprise-ai-push/",
+      "tier": 1,
+      "original_headline": "IBM partners with OpenAI to bolster enterprise AI push",
+      "fingerprint": "5e590e1300711574"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google Sheets now lets you turn spreadsheets into visual reports",
+      "blurb": "Google just added a canvas mode to Sheets that lets you build dashboards, timelines, and formatted reports directly on top of your spreadsheet data \u2014 no need to copy-paste into Slides or Docs. You can drop in charts, tables, images, and text blocks that pull live data from your tabs.",
+      "why_it_matters": "Spreadsheets can finally be the presentation, not just the data behind it.",
+      "source_name": "Google AI Blog",
+      "source_url": "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/",
+      "tier": 1,
+      "original_headline": "Bring your spreadsheet data to life with Sheets canvas",
+      "fingerprint": "c705614df12fc287"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor agents now boot 3x faster by pre-installing dependencies",
+      "blurb": "Cloud agents in Cursor now start with repos already cloned and dependencies installed. Instead of waiting for npm/pip/yarn to run before every session, the build step happens once \u2014 then agents spin up in seconds with everything ready.",
+      "why_it_matters": "Less waiting for agent sessions means more flow state during development.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/08-13-26",
+      "tier": 1,
+      "original_headline": "Cloud Agents Start 3x Faster with Builds",
+      "fingerprint": "2e54f752915a2b76"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The priority stack rank",
+    "kicker": "",
+    "prompt": "I have too many things competing for my attention this week. I'll list them below. Rank them harshest-first: which one gets cut entirely, which one gets done badly on purpose, which one I do properly, and which one I should've done last month. Then tell me what saying yes to everything is actually costing me.",
+    "tool_hint": "When your to-do list is a wish list and something has to give."
+  },
+  "daily_question": "If you could have one AI agent run unattended for 8 hours tonight, what would you have it do?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[market] banned copy word: deployment']"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1786792940.2084057,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786792959.5199664,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "build",
+        "reason": "Major technical feature launch from Anthropic - text watermarking for AI detection is a concrete, shipped capability that addresses a real problem. Primary source (Anthropic News), tier-1."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TscC87251t2qKYH2z1nm7X"
+    },
+    {
+      "ts": 1786792959.5200377,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"How Claude\\u2019s text watermark works\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01TscC87251t2qKYH2z1nm7X"
+    },
+    {
+      "ts": 1786792959.5200765,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "build",
+        "reason": "Significant model drop with concrete new capabilities - long-running agents and visual work. Primary source (xAI Blog), tier-1. Try-it-today hook."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RVKjiXTWLtaYvdgz3Vzk9r"
+    },
+    {
+      "ts": 1786792959.5201159,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Grok 4.6\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01RVKjiXTWLtaYvdgz3Vzk9r"
+    },
+    {
+      "ts": 1786792959.5201273,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "market",
+        "reason": "Major enterprise partnership with real scale - IBM training tens of thousands of consultants on OpenAI tech. Significant market move with concrete numbers."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Af48tpjRzjeVqtzJhBX6r2"
+    },
+    {
+      "ts": 1786792959.520164,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"IBM partners with OpenAI to bolster enterprise AI push\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Af48tpjRzjeVqtzJhBX6r2"
+    },
+    {
+      "ts": 1786792959.5201905,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "everyday",
+        "reason": "Shipped feature people can try today - build mini-apps with Gemini in Google Sheets. Concrete, practical use case that makes AI feel accessible and useful."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Qdow44gwVduhXdjq7tHRKV"
+    },
+    {
+      "ts": 1786792959.5202558,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Bring your spreadsheet data to life with Sheets canvas\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Qdow44gwVduhXdjq7tHRKV"
+    },
+    {
+      "ts": 1786792964.7935953,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Jhzpv8cJPpcjp9jVqD1uKK"
+    },
+    {
+      "ts": 1786792965.3789089,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"Claude will now invisibly watermark every AI-generated text and image\\\", similarity 0.812) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01Jhzpv8cJPpcjp9jVqD1uKK"
+    },
+    {
+      "ts": 1786792967.3650115,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 0
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CQeQqSDNRqqgGyVP8z4iTy"
+    },
+    {
+      "ts": 1786792967.3650522,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"How Claude\\u2019s text watermark works\"}",
+      "tool_use_id": "toolu_01CQeQqSDNRqqgGyVP8z4iTy"
+    },
+    {
+      "ts": 1786792974.3913543,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 18,
+        "persona": "build",
+        "reason": "Shipped developer feature with concrete 3x performance improvement. Cloud agents starting faster is a practical improvement developers can use today. Primary source (Cursor official)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DJ9fSouaeZQYVKMsUyCmbk"
+    },
+    {
+      "ts": 1786792974.3914218,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Cloud Agents Start 3x Faster with Builds\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01DJ9fSouaeZQYVKMsUyCmbk"
+    },
+    {
+      "ts": 1786792977.056322,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_011KUyxoq8xgKHmmLu33Unur"
+    },
+    {
+      "ts": 1786792977.3056426,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786792977.305685,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Introducing Grok 4.6\", \"pick_3\": \"IBM partners with OpenAI to bolster enterprise AI push\", \"pick_4\": \"Bring your spreadsheet data to life with Sheets canvas\", \"pick_5\": \"Cloud Agents Start 3x Faster with Builds\"}}",
+      "tool_use_id": "toolu_011KUyxoq8xgKHmmLu33Unur"
+    }
+  ],
+  "issue_num": 68
+}
