@@ -1,0 +1,290 @@
+{
+  "date": "2026-08-16",
+  "generated_at": "2026-08-16T11:23:01.442284Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "SpaceX just bought Cursor, the AI coding editor",
+      "blurb": "The acquisition is now official. Cursor, one of the fastest-growing AI coding tools, is now part of SpaceX. No financial terms were disclosed, but the move signals SpaceX's push to bring AI tooling in-house as it scales Starship production and satellite operations.",
+      "why_it_matters": "A rocket company now owns one of the hottest dev tools in Silicon Valley.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/15/spacex-officially-closes-its-cursor-acquisition/",
+      "tier": 1,
+      "original_headline": "SpaceX officially closes its Cursor acquisition",
+      "fingerprint": "ea94b0664b50d346"
+    },
+    {
+      "slot": "everyday",
+      "headline": "ChatGPT can now edit your Google Drive files without leaving the chat",
+      "blurb": "Paid ChatGPT users can now open, read, and edit Google Drive documents directly inside ChatGPT conversations. Files can be added to your ChatGPT Library and modified on the fly\u2014no tab-switching required.",
+      "why_it_matters": "Your AI assistant just became your document editor too.",
+      "source_name": "9to5Mac \u2014 AI",
+      "source_url": "https://9to5mac.com/2026/08/14/chatgpt-subscribers-can-now-open-and-edit-google-drive-files-from-inside-the-chat/",
+      "tier": 1,
+      "original_headline": "ChatGPT subscribers can now open and edit Google Drive files from inside the chat",
+      "fingerprint": "b4700ee881a69c0d"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google lets you hide the AI sparkle on Gemini images and videos",
+      "blurb": "Google added a toggle to remove the visible watermark from AI-generated images, videos, and music in Gemini and its Flow video tool. The sparkle icon that appears in the bottom corner can now be turned off through a 'Media watermark' setting.",
+      "why_it_matters": "AI-generated content just got harder to spot at a glance.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/980416/google-gemini-ai-watermarks-removal",
+      "tier": 1,
+      "original_headline": "You can now turn off Google Gemini&#8217;s visible watermarks",
+      "fingerprint": "a6a71e502d8e6e67"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Microsoft is merging its consumer and work Copilot apps into one",
+      "blurb": "Microsoft is combining its separate consumer Copilot and Microsoft 365 Copilot apps into a single unified app that handles both personal and work accounts. The new app keeps the 'Microsoft Copilot' name but gets a refreshed icon, and Microsoft is calling it a step toward a 'super app' experience.",
+      "why_it_matters": "One less app to juggle if you use Copilot for both personal tasks and work.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/979466/microsoft-copilot-365-app-unified-experience",
+      "tier": 1,
+      "original_headline": "Microsoft is combining its Copilot apps ahead of a \u2018super app\u2019",
+      "fingerprint": "7b758be08449fbde"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation flip",
+    "kicker": "",
+    "prompt": "I'm about to negotiate something I'll describe below. Don't tell me what to ask for \u2014 I already know. Instead: write the opening line from their perspective that would make me say yes instantly, then explain what that reveals about leverage I'm not using.",
+    "tool_hint": "When you've prepped your talking points but haven't thought like the other side."
+  },
+  "daily_question": "If you could merge two AI tools into one, which would you pick and what would it do?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1786879322.470776,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786879339.6082659,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "market",
+        "reason": "The defining AI story today - SpaceX officially closes $60B Cursor acquisition. Major market-moving news that reshapes the AI coding landscape. This is what everyone in AI is talking about today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GdeqoQ1etbj834dmGrko6V"
+    },
+    {
+      "ts": 1786879339.608329,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SpaceX officially closes its Cursor acquisition\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01GdeqoQ1etbj834dmGrko6V"
+    },
+    {
+      "ts": 1786879339.608368,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "build",
+        "reason": "Anthropic ships text watermarking in Claude - significant technical innovation addressing AI provenance. Primary source, tier-1, developer-relevant feature that people will want to understand and test."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NwjH5mQjLbYe5vwPud6gCn"
+    },
+    {
+      "ts": 1786879339.6083963,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"How Claude\\u2019s text watermark works\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01NwjH5mQjLbYe5vwPud6gCn"
+    },
+    {
+      "ts": 1786879339.6084027,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 4,
+        "persona": "build",
+        "reason": "Grok 4.6 now available in GitHub Copilot - concrete developer-facing launch from xAI (primary source). Developers can try this today, directly competitive with other coding models."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018bwZTopU54HGRRFxv7cbot"
+    },
+    {
+      "ts": 1786879339.608439,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Grok 4.6 in GitHub Copilot\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_018bwZTopU54HGRRFxv7cbot"
+    },
+    {
+      "ts": 1786879339.6084454,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 60,
+        "persona": "everyday",
+        "reason": "ChatGPT can now open and edit Google Drive files directly in chat - practical everyday feature that subscribers can use immediately. Clear utility hook, makes AI feel more integrated into daily workflows."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XYDw4YV63tom9XBHLwt4hF"
+    },
+    {
+      "ts": 1786879339.6084716,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"ChatGPT subscribers can now open and edit Google Drive files from inside the chat\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01XYDw4YV63tom9XBHLwt4hF"
+    },
+    {
+      "ts": 1786879345.7514915,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_016b7AVCNHdBS6W6TsSp9B6H"
+    },
+    {
+      "ts": 1786879346.42352,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_2] covers the same story as a recent edition (\\\"Claude will now invisibly watermark every AI-generated text and image\\\", similarity 0.812) \\u2014 unpick and choose different news\", \"[pick_3] covers the same story as a recent edition (\\\"Introducing Grok 4.6\\\", similarity 0.847) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_016b7AVCNHdBS6W6TsSp9B6H"
+    },
+    {
+      "ts": 1786879349.3161695,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 0
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01T6rbBVhzRAb4NN4ETnnngt"
+    },
+    {
+      "ts": 1786879349.3162007,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"How Claude\\u2019s text watermark works\"}",
+      "tool_use_id": "toolu_01T6rbBVhzRAb4NN4ETnnngt"
+    },
+    {
+      "ts": 1786879349.3162253,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 4
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0198NcdQjtG3yxVQtNY2otbo"
+    },
+    {
+      "ts": 1786879349.316242,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Grok 4.6 in GitHub Copilot\"}",
+      "tool_use_id": "toolu_0198NcdQjtG3yxVQtNY2otbo"
+    },
+    {
+      "ts": 1786879357.23952,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "everyday",
+        "reason": "Google Gemini now lets users toggle off visible watermarks - practical user control feature people can use today. Shows platform responding to user needs for flexibility."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DB6C3C51VZU3huiGyzNVKk"
+    },
+    {
+      "ts": 1786879357.2395763,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"You can now turn off Google Gemini&#8217;s visible watermarks\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01DB6C3C51VZU3huiGyzNVKk"
+    },
+    {
+      "ts": 1786879357.2396004,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "everyday",
+        "reason": "Microsoft consolidating Copilot apps into a 'super app' - significant platform move affecting millions of users. Concrete product strategy shift people will experience."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EeFczQBQk5ATrwTWZ435bk"
+    },
+    {
+      "ts": 1786879357.239632,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Microsoft is combining its Copilot apps ahead of a \\u2018super app\\u2019\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01EeFczQBQk5ATrwTWZ435bk"
+    },
+    {
+      "ts": 1786879362.0740535,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Xh7YLZsztbXz4jPxdXcBVD"
+    },
+    {
+      "ts": 1786879362.3126009,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1786879362.3126254,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"SpaceX officially closes its Cursor acquisition\", \"pick_4\": \"ChatGPT subscribers can now open and edit Google Drive files from inside the chat\", \"pick_5\": \"You can now turn off Google Gemini&#8217;s visible watermarks\", \"pick_6\": \"Microsoft is combining its Copilot apps ahead of a \\u2018super app\\u2019\"}}",
+      "tool_use_id": "toolu_01Xh7YLZsztbXz4jPxdXcBVD"
+    }
+  ],
+  "issue_num": 69
+}
