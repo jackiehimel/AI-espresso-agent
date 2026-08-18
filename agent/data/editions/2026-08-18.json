@@ -1,0 +1,336 @@
+{
+  "date": "2026-08-18",
+  "generated_at": "2026-08-18T11:28:35.172984Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Stripe is buying OpenRouter for $7B to become the Stripe of AI",
+      "blurb": "Stripe is acquiring OpenRouter, a startup that routes API calls to different AI models and handles billing, for over $7 billion. OpenRouter's CEO had described it as 'Stripe for AI' \u2014 now it actually will be Stripe, letting developers switch between models from OpenAI, Anthropic, and others with one integration.",
+      "why_it_matters": "Payment infrastructure companies are now buying AI infrastructure companies at unicorn-exit scale.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/16/stripe-will-reportedly-acquire-ai-gateway-startup-openrouter-for-7b/",
+      "tier": 1,
+      "original_headline": "Stripe will reportedly acquire AI gateway startup OpenRouter for $7B+",
+      "fingerprint": "e85276dee848b9eb"
+    },
+    {
+      "slot": "market",
+      "headline": "Anthropic hit $65B in annualized revenue, up $18B in two months",
+      "blurb": "The Claude maker added $18 billion in annualized revenue in just two months, reaching $65 billion total. That's faster growth than OpenAI saw during its ChatGPT surge, driven largely by enterprise adoption and API usage across Fortune 500 companies.",
+      "why_it_matters": "The fastest revenue acceleration in AI history suggests enterprise budgets have moved from pilot to production.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/17/anthropics-annualized-revenue-surges-to-65b/",
+      "tier": 1,
+      "original_headline": "Anthropic\u2019s annualized revenue surges to $65B",
+      "fingerprint": "68d05136fad30912"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor can now host your code in the cloud",
+      "blurb": "Cursor just launched Origin, its own code hosting service. You can now store repositories directly in Cursor instead of syncing through GitHub or GitLab. The feature is in early access and positions Cursor as more than an editor \u2014 it's becoming a full development platform.",
+      "why_it_matters": "Cursor is moving from AI-powered editor to end-to-end platform, competing directly with GitHub.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/origin-code-hosting",
+      "tier": 1,
+      "original_headline": "Origin Code Hosting",
+      "fingerprint": "3bed6252dc5bc482"
+    },
+    {
+      "slot": "industry",
+      "headline": "Reporters tracked rare books to an Amazon facility that scans and destroys them for AI",
+      "blurb": "404 Media planted a tracking device in a shipment of rare books being sold in bulk. It ended at an Amazon facility where the company scans physical books to train AI models, then destroys them. The investigation reveals how tech companies source training data from the used book market.",
+      "why_it_matters": "AI companies are quietly buying up physical books at scale to build datasets most people never see.",
+      "source_name": "404 Media",
+      "source_url": "https://www.404media.co/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-training-facility/",
+      "tier": 1,
+      "original_headline": "We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility",
+      "fingerprint": "d3a66237fbcf5923"
+    },
+    {
+      "slot": "industry",
+      "headline": "Nvidia is backing a $500 billion data center in Ohio for OpenAI",
+      "blurb": "Nvidia will invest up to $105 billion in what could become the world's largest data center, which OpenAI will lease to train future AI models. The facility's total cost could reach $500 billion, signaling the scale of infrastructure needed for next-generation AI.",
+      "why_it_matters": "The chip maker is now financing the compute infrastructure its biggest customer needs to keep scaling.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/08/17/technology/nvidia-ohio-data-center-openai.html",
+      "tier": 1,
+      "original_headline": "Nvidia to Back Ohio Data Center With as Much as $105 Billion",
+      "fingerprint": "f77f03f5ddbf3c01"
+    },
+    {
+      "slot": "everyday",
+      "headline": "ChatGPT's Mac app now watches everything you do on your computer",
+      "blurb": "A new feature called Computer History records your clicks, keystrokes, and half-finished tasks to build a timeline ChatGPT can reference. It suggests automations based on how you work and can pick up where you left off. Your activity becomes training data the AI uses to understand your workflow.",
+      "why_it_matters": "ChatGPT is moving from chat window to always-on assistant that learns from watching you work.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
+      "tier": 1,
+      "original_headline": "ChatGPT\u2019s Computer History tracks your clicks and keystrokes",
+      "fingerprint": "83456ef9f1d61eef"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red flag finder",
+    "kicker": "",
+    "prompt": "I'm interviewing someone tomorrow. I'll paste the role description and their resume below. Don't tell me if they're qualified \u2014 I can read. Instead, give me the three questions that will reveal whether they'll actually thrive here, and the one answer pattern that should make me pause.",
+    "tool_hint": "The night before an interview when your questions still feel too safe."
+  },
+  "daily_question": "If an AI tool could watch everything you do on your computer, what's the one thing you'd turn it off for?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1787052437.5440078,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1787052458.999104,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "market",
+        "reason": "Lead story: $7B+ acquisition of OpenRouter by Stripe is the biggest AI business deal today. Concrete M&A with specific valuation, tier-1 source. Shows AI infrastructure becoming mission-critical."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019F5GD3UbqkY7YMikqnKD4Z"
+    },
+    {
+      "ts": 1787052458.9991772,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Stripe will reportedly acquire AI gateway startup OpenRouter for $7B+\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_019F5GD3UbqkY7YMikqnKD4Z"
+    },
+    {
+      "ts": 1787052458.999213,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 21,
+        "persona": "market",
+        "reason": "Anthropic's revenue surge to $65B annualized (+$18B in 2 months) is a massive growth story showing AI model makers reaching unprecedented scale. Concrete numbers, tier-1 source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01R8vQ4fN76iUBjrQTwH1vjX"
+    },
+    {
+      "ts": 1787052458.9992473,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic\\u2019s annualized revenue surges to $65B\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01R8vQ4fN76iUBjrQTwH1vjX"
+    },
+    {
+      "ts": 1787052458.999256,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 25,
+        "persona": "industry",
+        "reason": "Nvidia's $1.5B investment in SoftBank data center developer guaranteeing chips for OpenAI project shows major infrastructure partnerships reshaping AI compute. Concrete deal with specific investment amount."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CoAHWdGRGd75j47ZG2bWQ8"
+    },
+    {
+      "ts": 1787052458.9992857,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'TechCrunch \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_01CoAHWdGRGd75j47ZG2bWQ8"
+    },
+    {
+      "ts": 1787052458.9992983,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "build",
+        "reason": "Grok 4.6 now available in GitHub Copilot is a shippable feature developers can try today. Primary source (xAI Blog), shows platform integration and model competition in action."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01St7UFBnTJjqFZp6pS7YbqY"
+    },
+    {
+      "ts": 1787052458.999334,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Grok 4.6 in GitHub Copilot\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01St7UFBnTJjqFZp6pS7YbqY"
+    },
+    {
+      "ts": 1787052458.9993436,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "build",
+        "reason": "Cursor Origin Code Hosting is a major new feature from the hottest AI coding tool. Primary source, developers can try it today. Shows AI tools expanding beyond editing to full infrastructure."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Punj5PvQkPg34ifBT5cL8f"
+    },
+    {
+      "ts": 1787052458.999375,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Origin Code Hosting\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Punj5PvQkPg34ifBT5cL8f"
+    },
+    {
+      "ts": 1787052458.9993877,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "industry",
+        "reason": "404 Media investigation tracking rare books to Amazon AI training facility is surprising investigative journalism revealing how AI companies source training data. Shows AI in action in unexpected way."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Aq4YePwm8ZUjQED6vnFbHK"
+    },
+    {
+      "ts": 1787052458.9994202,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01Aq4YePwm8ZUjQED6vnFbHK"
+    },
+    {
+      "ts": 1787052463.939838,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 94,
+        "persona": "industry",
+        "reason": "Nvidia backing Ohio data center up to $105B (part of potential $500B project for OpenAI) shows unprecedented AI infrastructure investment. Tier-1 source (NYT), massive scale numbers that make this concrete and real."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WG6pdLU3x8Fs9NdFufWMeW"
+    },
+    {
+      "ts": 1787052463.9399197,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia to Back Ohio Data Center With as Much as $105 Billion\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01WG6pdLU3x8Fs9NdFufWMeW"
+    },
+    {
+      "ts": 1787052470.432335,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01GatpsCFd6D6EaiBXu7KtiY"
+    },
+    {
+      "ts": 1787052471.0833833,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_3] covers the same story as a recent edition (\\\"Introducing Grok 4.6\\\", similarity 0.847) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01GatpsCFd6D6EaiBXu7KtiY"
+    },
+    {
+      "ts": 1787052474.9089086,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 6
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JKErZVmdorMLqfAgwJ4MiV"
+    },
+    {
+      "ts": 1787052474.9089499,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Grok 4.6 in GitHub Copilot\"}",
+      "tool_use_id": "toolu_01JKErZVmdorMLqfAgwJ4MiV"
+    },
+    {
+      "ts": 1787052481.8057175,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 18,
+        "persona": "everyday",
+        "reason": "ChatGPT's new Computer History feature on macOS tracks clicks and keystrokes, turning user actions into training data. Concrete new capability users will encounter, raises important questions about AI observability."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013jPi6AJd8cdrw8QtbGHMWJ"
+    },
+    {
+      "ts": 1787052481.8057756,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"ChatGPT\\u2019s Computer History tracks your clicks and keystrokes\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_013jPi6AJd8cdrw8QtbGHMWJ"
+    },
+    {
+      "ts": 1787052484.3289254,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_016nsik5DS5WFay2v6wPNbMe"
+    },
+    {
+      "ts": 1787052484.7506611,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1787052484.7507062,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Stripe will reportedly acquire AI gateway startup OpenRouter for $7B+\", \"pick_2\": \"Anthropic\\u2019s annualized revenue surges to $65B\", \"pick_4\": \"Origin Code Hosting\", \"pick_5\": \"We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility\", \"pick_6\": \"Nvidia to Back Ohio Data Center With as Much as $105 Billion\", \"pick_7\": \"ChatGPT\\u2019s Computer History tracks your clicks and keystrokes\"}}",
+      "tool_use_id": "toolu_016nsik5DS5WFay2v6wPNbMe"
+    }
+  ],
+  "issue_num": 70
+}
