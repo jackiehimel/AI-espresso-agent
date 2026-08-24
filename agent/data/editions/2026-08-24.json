@@ -1,0 +1,255 @@
+{
+  "date": "2026-08-24",
+  "generated_at": "2026-08-24T11:31:52.122470Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Nvidia is spending $6 billion to build a US rival to DeepSeek",
+      "blurb": "Nvidia signed a deal with startup Poolside to create an open AI ecosystem in the US that can compete with Chinese models like DeepSeek and American giants like OpenAI. The partnership aims to produce powerful AI models that run on Nvidia chips and aren't controlled by a handful of hyperscalers.",
+      "why_it_matters": "Nvidia is hedging against a world where its biggest customers also become its competitors.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/ai/nvidia-is-spending-6-billion-to-build-a-powerful-u-s-alternative-to-chinese-ai-c51c38cc?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Nvidia Is Spending $6 Billion to Build a Powerful U.S. Alternative to Chinese AI",
+      "fingerprint": "a4252f5d3bdf3713"
+    },
+    {
+      "slot": "build",
+      "headline": "Alibaba's Qwen model reverse-engineered real code in 30 minutes",
+      "blurb": "A developer gave Qwen 3.8 27B\u2014Alibaba's open-source model\u2014an actual reverse-engineering task that normally takes hours of manual work. The model analyzed unfamiliar code, figured out what it did, and delivered working results in half an hour. It ran locally, no API calls required.",
+      "why_it_matters": "Open-source models can now handle real engineering grunt work on your laptop.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://www.xda-developers.com/qwen-3-8-27b-reverse-engineering-job-frontier-model/",
+      "tier": 1,
+      "original_headline": "I gave Qwen 3.8 27B a reverse-engineering job and it finished in 30 minutes",
+      "fingerprint": "7abe2b8bfeaa602a"
+    },
+    {
+      "slot": "build",
+      "headline": "This AI agent can now replicate research papers better than Claude or ChatGPT",
+      "blurb": "Inherent, a British AI lab founded by DeepMind alumni, released Faraday\u2014an AI agent that reads scientific papers and reproduces the experiments. In benchmarks, it outperformed both Anthropic's and OpenAI's agents at replicating published research, which could accelerate how quickly new discoveries get validated and built upon.",
+      "why_it_matters": "An AI that can independently reproduce experiments could speed up science verification and discovery",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research/",
+      "tier": 1,
+      "original_headline": "Inherent, founded by DeepMind alumni, says its AI \u2018teammate\u2019 just outperformed Anthropic and OpenAI at replicating research",
+      "fingerprint": "aa339cbaf92669b8"
+    },
+    {
+      "slot": "everyday",
+      "headline": "DeepMind is building AI agents that play EVE Online and StarCraft II",
+      "blurb": "Google DeepMind is partnering with game studios to test AI agents in live multiplayer games. The agents learn to play complex strategy games like EVE Online and StarCraft II alongside humans, building on 15 years of research that started with simple Atari games. Early prototypes are already running in real game environments.",
+      "why_it_matters": "Gaming is where AI learns to handle messy, unpredictable environments with real stakes.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/from-atari-to-eve-online-building-on-15-years-of-ai-research-in-games/",
+      "tier": 1,
+      "original_headline": "From Atari to EVE Online: Building on 15 Years of AI Research in Games",
+      "fingerprint": "f8c1a33b0e9dfa07"
+    },
+    {
+      "slot": "market",
+      "headline": "Anthropic eyes $100B IPO that could value it at $2 trillion",
+      "blurb": "The Claude maker is preparing what would be one of the largest public offerings in tech history, with bankers pitching a valuation that would surpass SpaceX. The five-year-old company has told potential investors it plans to raise $100 billion when it goes public.",
+      "why_it_matters": "If successful, it would make Anthropic more valuable than any AI company except possibly OpenAI or Google.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/08/21/technology/anthropic-ipo-100-billion.html",
+      "tier": 1,
+      "original_headline": "Anthropic Could Aim to Raise $100 Billion in Blockbuster I.P.O.",
+      "fingerprint": "cfc79876e693d789"
+    },
+    {
+      "slot": "industry",
+      "headline": "Xiaomi built its own phone chip to run AI on-device",
+      "blurb": "The Chinese phone maker just launched its own mobile processor for flagship devices, breaking years of dependence on Qualcomm and MediaTek. The chip is designed to handle AI tasks locally on the phone instead of sending data to the cloud.",
+      "why_it_matters": "Another major phone maker is betting its future on custom silicon for on-device AI.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-08-24/xiaomi-develops-its-own-ai-mobile-chip-in-challenge-to-qualcomm",
+      "tier": 1,
+      "original_headline": "Xiaomi Develops Its Own AI Mobile Chip in Challenge to Qualcomm",
+      "fingerprint": "249346380d4c9455"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The energy audit",
+    "kicker": "",
+    "prompt": "List five things I did at work this week. For each one, tell me: did it give me energy or drain it? Then show me what pattern emerges and what one thing I should protect, delegate, or kill in the next two weeks.",
+    "tool_hint": "When you're busy but can't remember the last time you felt momentum."
+  },
+  "daily_question": "If you could run one AI model entirely on your phone with zero latency, what would you use it for?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[market] banned copy word: ecosystem']"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1787571042.1108756,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=['No major consumer AI product launches today', 'Limited developer tool updates beyond Grok/Vertex', 'No breakthrough open-source model releases']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1787571060.269137,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 106,
+        "persona": "market",
+        "reason": "Nvidia's $6B partnership with Poolside to build US AI ecosystem is a major market-defining story - concrete spending, clear strategic move against both Chinese AI and US giants. WSJ tier-1 source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01BhM9EQPxcLEdUg2uoFtMQd"
+    },
+    {
+      "ts": 1787571060.2692397,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia Is Spending $6 Billion to Build a Powerful U.S. Alternative to Chinese AI\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01BhM9EQPxcLEdUg2uoFtMQd"
+    },
+    {
+      "ts": 1787571060.2692738,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "build",
+        "reason": "Concrete capability demonstration - Qwen 3.8 27B completing frontier-level reverse-engineering in 30 minutes shows practical developer use case. Real-world test, try-it-today appeal."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011scLQR6mXwFFx9vMkNKLAr"
+    },
+    {
+      "ts": 1787571060.2693183,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"I gave Qwen 3.8 27B a reverse-engineering job and it finished in 30 minutes\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_011scLQR6mXwFFx9vMkNKLAr"
+    },
+    {
+      "ts": 1787571060.2693307,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "build",
+        "reason": "DeepMind alumni's Faraday AI agent beats Anthropic and OpenAI at replicating research - concrete benchmark win, scientific capability breakthrough. TechCrunch tier-1 source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QZPzJ4NWXkEbSEjXrrmByw"
+    },
+    {
+      "ts": 1787571060.2693737,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Inherent, founded by DeepMind alumni, says its AI \\u2018teammate\\u2019 just outperformed Anthropic and OpenAI at replicating research\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01QZPzJ4NWXkEbSEjXrrmByw"
+    },
+    {
+      "ts": 1787571060.2693834,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "everyday",
+        "reason": "Google DeepMind's 15-year AI in games research with real studio partnerships (EVE Online mentioned) - concrete applications, primary source from DeepMind blog, everyday gaming hook."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01J87Vmf9b8ZyXvCP2B2P4hD"
+    },
+    {
+      "ts": 1787571060.269421,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"From Atari to EVE Online: Building on 15 Years of AI Research in Games\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01J87Vmf9b8ZyXvCP2B2P4hD"
+    },
+    {
+      "ts": 1787571070.1628377,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 92,
+        "persona": "market",
+        "reason": "Anthropic targeting $100B IPO at $2T valuation exceeding SpaceX - this is a defining market moment for AI, unprecedented scale. NYT tier-1 source on major financial news."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01ApxmeX5X8zSZtkog2qtrTV"
+    },
+    {
+      "ts": 1787571070.1629095,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic Could Aim to Raise $100 Billion in Blockbuster I.P.O.\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01ApxmeX5X8zSZtkog2qtrTV"
+    },
+    {
+      "ts": 1787571070.1629827,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 132,
+        "persona": "industry",
+        "reason": "Xiaomi launching its own AI mobile chip to challenge Qualcomm/MediaTek - major hardware shift, vertical integration play in AI silicon. Bloomberg tier-1 source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019Wve5ZJFYRXtqQyxrshpop"
+    },
+    {
+      "ts": 1787571070.1630373,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Xiaomi Develops Its Own AI Mobile Chip in Challenge to Qualcomm\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_019Wve5ZJFYRXtqQyxrshpop"
+    },
+    {
+      "ts": 1787571082.059972,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01XDCy6FHBQ6KsQrD9JC2EA3"
+    },
+    {
+      "ts": 1787571082.6424234,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1787571082.6424649,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Nvidia Is Spending $6 Billion to Build a Powerful U.S. Alternative to Chinese AI\", \"pick_2\": \"I gave Qwen 3.8 27B a reverse-engineering job and it finished in 30 minutes\", \"pick_3\": \"Inherent, founded by DeepMind alumni, says its AI \\u2018teammate\\u2019 just outperformed Anthropic and OpenAI at replicating research\", \"pick_4\": \"From Atari to EVE Online: Building on 15 Years of AI Research in Games\", \"pick_5\": \"Anthropic Could Aim to Raise $100 Billion in Blockbuster I.P.O.\", \"pick_6\": \"Xiaomi Develops Its Own AI Mobile Chip in Challenge to Qualcomm\"}}",
+      "tool_use_id": "toolu_01XDCy6FHBQ6KsQrD9JC2EA3"
+    }
+  ],
+  "issue_num": 72
+}
