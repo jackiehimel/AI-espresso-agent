@@ -1,0 +1,188 @@
+{
+  "date": "2026-08-26",
+  "generated_at": "2026-08-26T11:33:01.980403Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Apple ships M6 with 40% faster neural engine and M5 Ultra for local AI workloads",
+      "blurb": "The M6 chip brings a neural engine 40% faster than M5, while the new M5 Ultra doubles down on on-device AI with unified memory up to 512GB. Both chips target developers running local LLMs, training models, and building AI apps without cloud dependencies.",
+      "why_it_matters": "Local AI just got a lot more practical for developers who want to prototype and deploy without API costs.",
+      "source_name": "Apple Newsroom",
+      "source_url": "https://www.apple.com/newsroom/2026/08/apple-introduces-m6-and-m5-ultra-for-a-big-leap-in-performance-and-ai-compute/",
+      "tier": 1,
+      "original_headline": "Apple introduces M6 and M5 Ultra for a big leap in performance and AI compute",
+      "fingerprint": "0a86a3f902c428e6"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Claude can now remember what you said in chat when it writes code",
+      "blurb": "Anthropic just connected Claude's memory across chat and its Cowork coding feature. Tell Claude about your project once in conversation, and it'll remember those details when you switch to writing code \u2014 no more re-explaining your tech stack or preferences every session.",
+      "why_it_matters": "You can finally brief an AI agent once instead of resetting context every time you switch tasks.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/25/claude-cowork-finally-remembers-what-you-told-the-app-in-chat/",
+      "tier": 1,
+      "original_headline": "Claude Cowork finally remembers what you told the app in chat",
+      "fingerprint": "237a77927696306a"
+    },
+    {
+      "slot": "build",
+      "headline": "Keenable built a search index so AI agents can browse the web",
+      "blurb": "The startup raised $26 million to create a dedicated web index for AI agents \u2014 not humans. Instead of showing blue links, it structures web data so agents can actually navigate sites, fill forms, and complete tasks across the internet without breaking.",
+      "why_it_matters": "Agents need search engines built for code, not eyeballs \u2014 this is infrastructure for the agentic web.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/25/accel-backed-keenable-is-indexing-the-web-for-ai-agents/",
+      "tier": 1,
+      "original_headline": "Accel-backed Keenable is indexing the web for AI agents",
+      "fingerprint": "f3751d2ba336beff"
+    },
+    {
+      "slot": "everyday",
+      "headline": "ChatGPT's task scheduler is now free for everyone",
+      "blurb": "OpenAI opened its task scheduling feature to free users, letting you set up recurring prompts like daily summaries or weekly reports. Paid users get trigger-based automation \u2014 ChatGPT can now watch your Gmail, Slack, or GitHub and run prompts when specific things happen.",
+      "why_it_matters": "ChatGPT just became a lightweight automation tool you don't need to pay for.",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2244194/free-accounts-can-now-access-chatgpts-upgraded-task-scheduling-tool/",
+      "tier": 1,
+      "original_headline": "Free accounts can now access ChatGPT's upgraded task scheduling tool",
+      "fingerprint": "7699f626f6d48d20"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The code smell interpreter",
+    "kicker": "",
+    "prompt": "I'll paste a function or code snippet below. Don't refactor it. Instead, tell me: what design decision led to this shape, what problem it's secretly trying to solve that isn't in the comments, and what will break first when requirements change.",
+    "tool_hint": "For understanding legacy code instead of just rewriting it."
+  },
+  "daily_question": "What's one AI feature you'd actually pay for that's still buried behind a paywall?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1787743928.1086125,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1787743952.818584,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 10,
+        "persona": "build",
+        "reason": "Major Apple silicon launch with M6 and M5 Ultra chips focused on AI compute - primary source, tier-1, massive hardware news that everyone in AI/tech will be talking about today"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Jtf7HyWxpio4K82CVatVqT"
+    },
+    {
+      "ts": 1787743952.8186896,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple introduces M6 and M5 Ultra for a big leap in performance and AI compute\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Jtf7HyWxpio4K82CVatVqT"
+    },
+    {
+      "ts": 1787743952.818723,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 25,
+        "persona": "everyday",
+        "reason": "Anthropic ships shared memory across Claude chat and Cowork - practical try-it-today feature that solves real user pain point of repeatedly briefing the AI"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01J5qHPBALBkSZejbTcRHwBo"
+    },
+    {
+      "ts": 1787743952.8187644,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude Cowork finally remembers what you told the app in chat\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01J5qHPBALBkSZejbTcRHwBo"
+    },
+    {
+      "ts": 1787743952.8187752,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "build",
+        "reason": "Keenable exits stealth with $26M seed to build web search index specifically for AI agents - developer-focused infrastructure play in hot agent space"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01F7j5PLgZKxEcwzt4q6iAkF"
+    },
+    {
+      "ts": 1787743952.8188126,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Accel-backed Keenable is indexing the web for AI agents\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01F7j5PLgZKxEcwzt4q6iAkF"
+    },
+    {
+      "ts": 1787743952.818828,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 85,
+        "persona": "everyday",
+        "reason": "ChatGPT opens upgraded task scheduling to free users and adds Gmail/Slack/GitHub triggers for paid - concrete shipped feature people can try this week"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DqUNMuKXvVuM5L8wfbdVws"
+    },
+    {
+      "ts": 1787743952.8188813,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Free accounts can now access ChatGPT's upgraded task scheduling tool\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01DqUNMuKXvVuM5L8wfbdVws"
+    },
+    {
+      "ts": 1787743957.5369327,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01QNTSrjojnkLm8a9wo4vrdW"
+    },
+    {
+      "ts": 1787743958.1353195,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1787743958.1353488,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Apple introduces M6 and M5 Ultra for a big leap in performance and AI compute\", \"pick_2\": \"Claude Cowork finally remembers what you told the app in chat\", \"pick_3\": \"Accel-backed Keenable is indexing the web for AI agents\", \"pick_4\": \"Free accounts can now access ChatGPT's upgraded task scheduling tool\"}}",
+      "tool_use_id": "toolu_01QNTSrjojnkLm8a9wo4vrdW"
+    }
+  ],
+  "issue_num": 74
+}
