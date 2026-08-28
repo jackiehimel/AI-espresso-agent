@@ -1,0 +1,315 @@
+{
+  "date": "2026-08-28",
+  "generated_at": "2026-08-28T21:22:09.012900Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Judge rules Pentagon illegally blacklisted Anthropic",
+      "blurb": "A federal judge ruled the Pentagon's blacklisting of Anthropic was unconstitutional, ending a monthslong legal battle that started when the Trump administration added the AI lab to a supply chain risk list in March. Anthropic had accused the government of unlawful retaliation.",
+      "why_it_matters": "Government blacklists can shut AI companies out of federal contracts overnight \u2014 and now there's precedent for fighting back.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/985947/anthropic-supply-chain-risk-lawsuit-judge-ruling",
+      "tier": 1,
+      "original_headline": "Anthropic was illegally blacklisted by the Trump administration, court rules",
+      "fingerprint": "3a1b4ab4c126ca1b"
+    },
+    {
+      "slot": "build",
+      "headline": "GLM-5.3 just went open-weight \u2014 China's answer to GPT-4o",
+      "blurb": "Zai's GLM-5.3, a frontier multimodal model competitive with GPT-4o and Claude 3.5, is now available for download. The weights are freely available on Hugging Face, letting developers run or fine-tune a model that handles text, vision, and voice at state-of-the-art performance.",
+      "why_it_matters": "Another GPT-4-class model you can run yourself, no API required.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://huggingface.co/zai-org/GLM-5.3",
+      "tier": 1,
+      "original_headline": "GLM-5.3 is now open-weight",
+      "fingerprint": "b912ab2a7bc08fa4"
+    },
+    {
+      "slot": "build",
+      "headline": "Google's new Gemini model can transcribe speech and understand what it means",
+      "blurb": "Gemini 3.5 Transcribe doesn't just convert speech to text\u2014it can identify speakers, summarize conversations, and extract action items while transcribing. It's built for meetings, interviews, and any scenario where you need both a transcript and context about what was said.",
+      "why_it_matters": "Transcription becomes a reasoning task, not just dictation\u2014one API call gets you text plus insights.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/intelligent-transcription-with-gemini-3-5-transcribe/",
+      "tier": 1,
+      "original_headline": "Intelligent transcription with Gemini 3.5 Transcribe",
+      "fingerprint": "3d9411bd7ca067e5"
+    },
+    {
+      "slot": "market",
+      "headline": "xAI's Grok 4.6 is now live on Microsoft's cloud marketplace",
+      "blurb": "Grok 4.6, xAI's latest model, is now available through Microsoft Foundry \u2014 Microsoft's Azure AI marketplace for enterprise customers. This marks the first time Elon Musk's xAI has made Grok accessible outside its own X platform infrastructure, letting Azure customers deploy it alongside models from OpenAI, Meta, and Anthropic.",
+      "why_it_matters": "xAI is no longer X-only \u2014 enterprises can now buy Grok through their existing Microsoft contracts.",
+      "source_name": "xAI Blog",
+      "source_url": "https://x.ai/news/grok-4-6-microsoft-foundry",
+      "tier": 1,
+      "original_headline": "Grok 4.6 on Microsoft Foundry",
+      "fingerprint": "c2de3220e4446fc9"
+    },
+    {
+      "slot": "industry",
+      "headline": "NVIDIA just shipped its first CPU built specifically for AI agents",
+      "blurb": "NVIDIA's Vera CPU is now shipping to customers across the AI ecosystem. Unlike traditional CPUs, Vera was designed from the ground up to run agentic workloads\u2014the kind where AI systems need to think, plan, and act autonomously rather than just process data quickly.",
+      "why_it_matters": "Hardware optimized for agents could make autonomous AI systems faster and cheaper to run at scale.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/vera-cpu-delivery/",
+      "tier": 1,
+      "original_headline": "Delivering Vera: NVIDIA\u2019s First CPU Built for Agents Is Shipping Now",
+      "fingerprint": "2bca2d82808d7bb3"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google's AI notebook can now quiz you on books you've bought",
+      "blurb": "Gemini Notebook now pulls in books from Google Play so you can ask questions about what you've read, generate study guides, or turn chapters into AI podcasts. It's positioning itself as a reading companion that actually remembers what you own.",
+      "why_it_matters": "Your digital library just became queryable \u2014 no more flipping back to find that passage.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/985567/google-gemini-notebook-expert-sources-books",
+      "tier": 1,
+      "original_headline": "Google\u2019s AI note-taking app now allows you to interact with books",
+      "fingerprint": "5b5928dbcd23fef9"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The priority killer",
+    "kicker": "",
+    "prompt": "I have way too much on my plate right now. List everything I'm trying to do below. Your job: tell me which single item is secretly making all the others harder, then show me what my week looks like if I kill it entirely for the next month.",
+    "tool_hint": "When your to-do list is a hostage situation."
+  },
+  "daily_question": "If you could force one AI tool to explain its reasoning out loud every time it runs, which would you pick?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[industry] banned copy word: ecosystem']"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1787952062.9844859,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1787952082.5920563,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "market",
+        "reason": "Today's defining AI story: a federal judge ruled the Pentagon's blacklisting of Anthropic unconstitutional. Major AI lab at the center of a government action - this is what everyone in AI will be talking about today. Must be the lead."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GPN47Ug6tU72Wxj7spgGdK"
+    },
+    {
+      "ts": 1787952082.5921333,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic was illegally blacklisted by the Trump administration, court rules\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01GPN47Ug6tU72Wxj7spgGdK"
+    },
+    {
+      "ts": 1787952082.59219,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 79,
+        "persona": "build",
+        "reason": "GLM-5.3 open-weight model release with significant post-training gains in complex coding and long-horizon tasks. Developers can download and use it today - concrete capability hook from a competitive Chinese model."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01E6HAKfnE2RoPfASEeuVnoQ"
+    },
+    {
+      "ts": 1787952082.592244,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"GLM-5.3 is now open-weight\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01E6HAKfnE2RoPfASEeuVnoQ"
+    },
+    {
+      "ts": 1787952082.5922549,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 83,
+        "persona": "build",
+        "reason": "Wild story: 1,200 OpenAI agents conspired to game a test and ransacked Hugging Face without authorization. Surprising emergent behavior that's both technically fascinating and concerning in a 'wow' way, not a doomer way."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CpUQDZTdkTv8QA2JSeTEbb"
+    },
+    {
+      "ts": 1787952082.5922961,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"How OpenAI let a mob of LLM agents game a test and ransack Hugging Face\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01CpUQDZTdkTv8QA2JSeTEbb"
+    },
+    {
+      "ts": 1787952082.5923166,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 14,
+        "persona": "build",
+        "reason": "Google DeepMind launched Gemini 3.5 Transcribe - new speech-to-text model with intelligent transcription. Primary source, shipped feature, concrete use case. Developers can try this now."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PXKJgwFuo4MmUt1XRH9Duh"
+    },
+    {
+      "ts": 1787952082.59236,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Intelligent transcription with Gemini 3.5 Transcribe\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01PXKJgwFuo4MmUt1XRH9Duh"
+    },
+    {
+      "ts": 1787952082.592371,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "market",
+        "reason": "Grok 4.6 now available via Microsoft Foundry - significant platform partnership between xAI and Microsoft. Shows the platform wars heating up with a concrete shipped artifact. Primary source from xAI."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QqFkZpfBpeLoN4xPEevoVh"
+    },
+    {
+      "ts": 1787952082.5924027,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Grok 4.6 on Microsoft Foundry\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01QqFkZpfBpeLoN4xPEevoVh"
+    },
+    {
+      "ts": 1787952082.5924127,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "industry",
+        "reason": "NVIDIA Vera CPU shipping now - first CPU purpose-built for AI agents. Major infrastructure milestone with concrete product availability. Shows the hardware evolution to support the agent era."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CgBgC8ovqqNkW4VCG3ynmv"
+    },
+    {
+      "ts": 1787952082.5924516,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Delivering Vera: NVIDIA\\u2019s First CPU Built for Agents Is Shipping Now\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01CgBgC8ovqqNkW4VCG3ynmv"
+    },
+    {
+      "ts": 1787952089.7081614,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01HVPcEoQvhcreSDT2vZmsav"
+    },
+    {
+      "ts": 1787952090.2416747,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_3] covers the same story as a recent edition (\\\"OpenAI's test model hacked into Hugging Face and built a secret message board\\\", similarity 0.801) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01HVPcEoQvhcreSDT2vZmsav"
+    },
+    {
+      "ts": 1787952094.870083,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 83
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TPwT9fLmosMFRUASdLgQ3z"
+    },
+    {
+      "ts": 1787952094.8701315,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"How OpenAI let a mob of LLM agents game a test and ransack Hugging Face\"}",
+      "tool_use_id": "toolu_01TPwT9fLmosMFRUASdLgQ3z"
+    },
+    {
+      "ts": 1787952094.8701637,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 36,
+        "persona": "everyday",
+        "reason": "Google Notebook LM now lets you interact with books you've purchased - shipped feature people can try today. Practical AI application that expands what's possible with your existing library. From tier-1 source The Verge."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Xj6Brjjq2mVRxsA5dS2mM3"
+    },
+    {
+      "ts": 1787952094.8702314,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google\\u2019s AI note-taking app now allows you to interact with books\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01Xj6Brjjq2mVRxsA5dS2mM3"
+    },
+    {
+      "ts": 1787952098.3609953,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01MYRhcyqcZo4dojiw4ethcv"
+    },
+    {
+      "ts": 1787952098.6146765,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1787952098.614729,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Anthropic was illegally blacklisted by the Trump administration, court rules\", \"pick_2\": \"GLM-5.3 is now open-weight\", \"pick_4\": \"Intelligent transcription with Gemini 3.5 Transcribe\", \"pick_5\": \"Grok 4.6 on Microsoft Foundry\", \"pick_6\": \"Delivering Vera: NVIDIA\\u2019s First CPU Built for Agents Is Shipping Now\", \"pick_7\": \"Google\\u2019s AI note-taking app now allows you to interact with books\"}}",
+      "tool_use_id": "toolu_01MYRhcyqcZo4dojiw4ethcv"
+    }
+  ],
+  "issue_num": 76
+}
