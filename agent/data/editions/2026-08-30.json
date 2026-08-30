@@ -1,0 +1,188 @@
+{
+  "date": "2026-08-30",
+  "generated_at": "2026-08-30T15:13:32.409068Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "OpenAI is cutting off Cursor after SpaceX bought it for $60B",
+      "blurb": "OpenAI will stop letting Cursor access its models on Nov. 12, weeks after Elon Musk's SpaceX acquired the AI coding tool for $60 billion. OpenAI cited concerns about the acquisition but didn't specify what those concerns are.",
+      "why_it_matters": "The split shows how quickly AI partnerships can unravel when competitors change hands.",
+      "source_name": "CNBC \u2014 Technology",
+      "source_url": "https://www.cnbc.com/2026/08/29/openai-cursor-spacex-model-access.html",
+      "tier": 1,
+      "original_headline": "OpenAI to end model access to Cursor after acquisition by Elon Musk's SpaceX",
+      "fingerprint": "75e2ac786524874a"
+    },
+    {
+      "slot": "market",
+      "headline": "Nvidia's profit doubles to $60 billion as AI spending keeps surging",
+      "blurb": "Nvidia reported quarterly revenue of $96.22 billion \u2014 more than double last year \u2014 driven by continued demand for AI chips from cloud providers and enterprises. The profit beat Wall Street expectations as data center buildouts show no signs of slowing.",
+      "why_it_matters": "The AI infrastructure boom isn't slowing down yet, and Nvidia remains the main beneficiary.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/08/26/technology/nvidia-profit-ai-doubles-earnings.html",
+      "tier": 1,
+      "original_headline": "Nvidia\u2019s Profit Doubles to $59.69 Billion Thanks to A.I. Spending",
+      "fingerprint": "8443326c134dd29a"
+    },
+    {
+      "slot": "build",
+      "headline": "Photoshop is getting an AI-only interface you can toggle on",
+      "blurb": "Adobe's rolling out a beta view that puts all of Photoshop's AI tools\u2014prompt-based editing, background removal, image extension\u2014in one dedicated toolbar. It's optional, so you can flip between the classic interface and the AI-focused one depending on what you're building.",
+      "why_it_matters": "Photoshop is splitting into two modes: traditional and AI-first",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/985491/adobe-photoshop-ai-assisted-editor-markup",
+      "tier": 1,
+      "original_headline": "Adobe is adding more AI to Photoshop",
+      "fingerprint": "5426a23af7b49247"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google Search can now book your entire trip in AI Mode",
+      "blurb": "Google added three features to AI Mode in Search: you can now get full itineraries with restaurant and activity recommendations, compare flight and hotel options side-by-side with live pricing, and book directly without leaving the results page. It's rolling out in the US first, with hotels bookable through Google's travel partners.",
+      "why_it_matters": "Search is becoming the actual booking agent, not just the research tool.",
+      "source_name": "Google AI Blog",
+      "source_url": "https://blog.google/products-and-platforms/products/search/book-travel-ai-mode/",
+      "tier": 1,
+      "original_headline": "3 new ways to plan and book travel in Search",
+      "fingerprint": "195c1063a50ebcc1"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation floor",
+    "kicker": "",
+    "prompt": "I'm about to negotiate something I'll describe below. Don't give me tactics or scripts. Instead: tell me the worst deal I should still accept, the number where I should walk away completely, and the one thing I'm probably overvaluing that the other side doesn't care about.",
+    "tool_hint": "Before any salary, vendor, or partnership conversation where you might say yes to something you'll regret."
+  },
+  "daily_question": "If you had $60 billion to spend on ONE AI tool or company, what would you buy and why?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1788102764.473938,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1788102780.4060373,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 170,
+        "persona": "market",
+        "reason": "Lead story - SpaceX acquired Cursor for $60B and OpenAI is cutting off model access in response. This is THE biggest AI story today: a major platform war move involving OpenAI, Musk's SpaceX, and a widely-used AI coding tool. Concrete action (model cutoff Nov 12) with high stakes for developers."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NQZ6UkCgLVYbPHNvSidYsL"
+    },
+    {
+      "ts": 1788102780.4061067,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI to end model access to Cursor after acquisition by Elon Musk's SpaceX\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01NQZ6UkCgLVYbPHNvSidYsL"
+    },
+    {
+      "ts": 1788102780.4061468,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 124,
+        "persona": "market",
+        "reason": "Nvidia earnings doubled to $59.69B with revenue topping $96B - massive market story showing AI spending growth. Tier-1 source (NYT), concrete numbers, proves AI infrastructure boom is real."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01G7xj6p9N3u5tdb6JoB6s9T"
+    },
+    {
+      "ts": 1788102780.4062157,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia\\u2019s Profit Doubles to $59.69 Billion Thanks to A.I. Spending\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01G7xj6p9N3u5tdb6JoB6s9T"
+    },
+    {
+      "ts": 1788102780.406235,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "build",
+        "reason": "Adobe shipping new AI-heavy Photoshop update with dedicated AI interface - concrete shipped feature that designers/creatives can use now. Shows how AI tools are evolving in production software."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QJDnJ2v5hMs4eNP2U2kvtd"
+    },
+    {
+      "ts": 1788102780.4063015,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Adobe is adding more AI to Photoshop\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01QJDnJ2v5hMs4eNP2U2kvtd"
+    },
+    {
+      "ts": 1788102780.406325,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "everyday",
+        "reason": "Google AI Mode in Search adds 3 new travel planning features - primary source (Google AI Blog), try-it-today utility that anyone can use. Practical AI application for everyday tasks."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0183gMCTQAUYDTdYanU7d9c8"
+    },
+    {
+      "ts": 1788102780.4063773,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"3 new ways to plan and book travel in Search\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_0183gMCTQAUYDTdYanU7d9c8"
+    },
+    {
+      "ts": 1788102787.6173275,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01FqhPBoLL8fqtV7xHZwVyAU"
+    },
+    {
+      "ts": 1788102788.0776496,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1788102788.0776775,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI to end model access to Cursor after acquisition by Elon Musk's SpaceX\", \"pick_2\": \"Nvidia\\u2019s Profit Doubles to $59.69 Billion Thanks to A.I. Spending\", \"pick_3\": \"Adobe is adding more AI to Photoshop\", \"pick_4\": \"3 new ways to plan and book travel in Search\"}}",
+      "tool_use_id": "toolu_01FqhPBoLL8fqtV7xHZwVyAU"
+    }
+  ],
+  "issue_num": 77
+}
