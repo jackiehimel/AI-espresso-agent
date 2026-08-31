@@ -1,0 +1,248 @@
+{
+  "date": "2026-08-31",
+  "generated_at": "2026-08-31T17:58:22.869796Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Nvidia drops $3.5 billion on MediaTek to pull more chip partners into its orbit",
+      "blurb": "Nvidia is investing $3.5 billion in Taiwan's MediaTek, aiming to expand the number of chipmakers designing hardware that works with its data center infrastructure. The deal deepens ties with a company that already makes processors for phones, cars, and smart home devices\u2014potentially bringing Nvidia's AI reach beyond the server rack.",
+      "why_it_matters": "Nvidia is locking in partners to keep competitors from building rival AI chip ecosystems",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/videos/2026-08-31/nvidia-makes-3-5-billion-bet-on-mediatek-video",
+      "tier": 1,
+      "original_headline": "Nvidia Makes $3.5 Billion Bet on MediaTek",
+      "fingerprint": "8feb4c5f3f5565df"
+    },
+    {
+      "slot": "industry",
+      "headline": "ChatGPT now falls under EU's strictest tech regulations",
+      "blurb": "The EU just classified ChatGPT as a Very Large Online Search Engine under the Digital Services Act, meaning OpenAI must now actively mitigate risks around minors, user mental health, and illegal content. The rules apply the same accountability framework used for Google and Bing to AI chat.",
+      "why_it_matters": "First major AI chatbot to get the same regulatory treatment as traditional search engines.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/986682/openai-chatgpt-eu-dsa",
+      "tier": 1,
+      "original_headline": "ChatGPT to face tougher regulation in the EU",
+      "fingerprint": "c7a1f9d35b66e455"
+    },
+    {
+      "slot": "build",
+      "headline": "This AI startup searches video like Google searches text\u2014and just hit $250M valuation",
+      "blurb": "Clipto, a three-year-old company, lets you search inside massive video libraries by asking questions in plain English. It hit $15 million in revenue and profitability before raising its latest $15 million round at a $250 million valuation.",
+      "why_it_matters": "Video search has been unsolved for years\u2014if this works at scale, every industry sitting on footage gold mines can finally use it.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/31/three-year-old-ai-media-search-startup-clipto-hits-a-250m-valuation/",
+      "tier": 1,
+      "original_headline": "Clipto uses AI to search terabytes of video and is now valued at $250M",
+      "fingerprint": "b32a8f5f6da31839"
+    },
+    {
+      "slot": "market",
+      "headline": "Sony and Warner are suing Anthropic for copyright infringement",
+      "blurb": "Sony Music Publishing and Warner Chappell filed suit in California federal court claiming Claude reproduced tens of thousands of copyrighted song lyrics without permission. They're seeking up to $150,000 per work plus $25,000 each time copyright information was removed.",
+      "why_it_matters": "First major music publisher lawsuit against a frontier AI lab over training data",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/986438/sony-music-warner-chappell-anthropic-lawsuit-copyright",
+      "tier": 1,
+      "original_headline": "Sony Music Publishing and Warner Chappell are suing Anthropic",
+      "fingerprint": "4df8cbbca22cce86"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red flag translator",
+    "kicker": "",
+    "prompt": "I just interviewed a candidate and something felt off, but I can't articulate it yet. I'll describe what they said and how they said it below. Tell me: what legitimate concern might be hiding under my gut feeling, what evidence would confirm or dismiss it, and one question I should have asked but didn't.",
+    "tool_hint": "When your spidey-sense tingles but you need words for the debrief."
+  },
+  "daily_question": "If you had to pick one company to regulate first\u2014AI labs, chip makers, or Big Tech platforms\u2014which would you choose and why?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1788199050.4722426,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=['No major model releases or capability drops today \u2014 most model news is rehash of prior launches', \"Missing: practical try-it-today features beyond Circleback's free tier\", 'Apple iPhone 18/AirPods 5/Watch rumors are pre-announcement noise, not shipped products', 'Data center backlash stories (Trump, EPA, ICE robot dogs) are policy/politics, not AI product news', 'Meta settlement is social media regulation, not an AI story', 'Hugging Face papers and blog posts are research, not shipped capabilities users can access']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1788199066.750287,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 147,
+        "persona": "market",
+        "reason": "Major AI chip partnership - Nvidia investing $3.5B in MediaTek shows strategic positioning against Big Tech's custom chip efforts. Concrete market move with clear AI stakes. Bloomberg is tier-1 and primary source for this financial news."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01VA3Bta74M1h4p6G7FUqYMq"
+    },
+    {
+      "ts": 1788199066.7503664,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia Makes $3.5 Billion Bet on MediaTek\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01VA3Bta74M1h4p6G7FUqYMq"
+    },
+    {
+      "ts": 1788199066.7503974,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 10,
+        "persona": "industry",
+        "reason": "Major regulatory development - ChatGPT facing stricter EU oversight on risks to minors and mental health. This is a defining story about how AI products are being held accountable. Direct impact on the industry's most visible product."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012KG1jqMpbEmsgFYGAdAGQd"
+    },
+    {
+      "ts": 1788199066.750426,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"ChatGPT to face tougher regulation in the EU\", \"persona\": \"industry\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_012KG1jqMpbEmsgFYGAdAGQd"
+    },
+    {
+      "ts": 1788199066.7504349,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 79,
+        "persona": "market",
+        "reason": "Federal judge blocks Pentagon's attempt to blacklist Anthropic as national security risk. Major legal/regulatory win for a leading AI lab with significant industry implications. Wired tier-1 coverage of a consequential ruling."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Do9JpySiTwxGArzwsWwKuw"
+    },
+    {
+      "ts": 1788199066.7504842,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"A Judge Has Blocked the Pentagon\\u2019s Attempt to Blacklist Anthropic\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Do9JpySiTwxGArzwsWwKuw"
+    },
+    {
+      "ts": 1788199066.7504945,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 16,
+        "persona": "build",
+        "reason": "AI video search tool Clipto hits $250M valuation and profitability - concrete capability (search terabytes of video) that people can understand and use. Shows AI making previously impossible tasks practical."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01F8PpTp3WQ8WknkPnSS4n8y"
+    },
+    {
+      "ts": 1788199066.7505426,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Clipto uses AI to search terabytes of video and is now valued at $250M\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01F8PpTp3WQ8WknkPnSS4n8y"
+    },
+    {
+      "ts": 1788199074.1911232,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_018HstJQEJ7WcY9trbJCfk2Z"
+    },
+    {
+      "ts": 1788199074.8080566,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_3] covers the same story as a recent edition (\\\"Judge rules Pentagon illegally blacklisted Anthropic\\\", similarity 0.95) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_018HstJQEJ7WcY9trbJCfk2Z"
+    },
+    {
+      "ts": 1788199079.3364406,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 79
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YNHDmZJzS1cNYxURqK6wrk"
+    },
+    {
+      "ts": 1788199079.336486,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"A Judge Has Blocked the Pentagon\\u2019s Attempt to Blacklist Anthropic\"}",
+      "tool_use_id": "toolu_01YNHDmZJzS1cNYxURqK6wrk"
+    },
+    {
+      "ts": 1788199079.3365157,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "market",
+        "reason": "Sony Music and Warner Chappell sue Anthropic over copyright - major music publishers taking legal action against a leading AI lab. Significant industry conflict with real stakes for how AI models are trained."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017qA4yFn77td884dfW1niD9"
+    },
+    {
+      "ts": 1788199079.3365552,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Sony Music Publishing and Warner Chappell are suing Anthropic\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_017qA4yFn77td884dfW1niD9"
+    },
+    {
+      "ts": 1788199080.5317955,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01NzjNV5XP6sLvBG9dakdk2N"
+    },
+    {
+      "ts": 1788199080.7830558,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1788199080.7830892,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Nvidia Makes $3.5 Billion Bet on MediaTek\", \"pick_2\": \"ChatGPT to face tougher regulation in the EU\", \"pick_4\": \"Clipto uses AI to search terabytes of video and is now valued at $250M\", \"pick_5\": \"Sony Music Publishing and Warner Chappell are suing Anthropic\"}}",
+      "tool_use_id": "toolu_01NzjNV5XP6sLvBG9dakdk2N"
+    }
+  ],
+  "issue_num": 78
+}
