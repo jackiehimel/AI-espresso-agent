@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-01",
+  "generated_at": "2026-09-01T15:26:13.251926Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Anthropic signs $35 billion cloud deal with Nvidia backing",
+      "blurb": "Nvidia is supplying chips to a Texas data center and holding the lease for Anthropic's cloud infrastructure. The deal shows Nvidia using its balance sheet to lock in a major AI customer while securing long-term chip demand for its hardware.",
+      "why_it_matters": "Nvidia is now both supplier and landlord to the companies building frontier AI models.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/ai/anthropic-signs-35-billion-cloud-deal-backed-by-nvidia-f12622f1?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Anthropic Signs $35 Billion Cloud Deal Backed by Nvidia",
+      "fingerprint": "b2d733f0b52dd1eb"
+    },
+    {
+      "slot": "build",
+      "headline": "The Pentagon just put ChatGPT and Grok on its central AI portal",
+      "blurb": "OpenAI's ChatGPT and SpaceXAI's Grok are now available on the Pentagon's central portal for AI tools, joining Google's Gemini. Defense personnel can now access multiple commercial AI models through a single government gateway instead of using public versions.",
+      "why_it_matters": "The military is treating AI chat tools like standard-issue software, not experimental tech.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/08/31/the-pentagon-now-has-its-own-version-of-chatgpt-and-grok/",
+      "tier": 1,
+      "original_headline": "The Pentagon now has its own version of ChatGPT and Grok",
+      "fingerprint": "c06f49ed2a56ba05"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Waymo robotaxis are coming to Denver, San Diego, and Tampa",
+      "blurb": "Alphabet's Waymo just announced it's launching driverless rides in three new cities. The expansion brings the robotaxi service beyond its current markets in San Francisco, Phoenix, Los Angeles, and Austin.",
+      "why_it_matters": "Autonomous rides are becoming available to millions more Americans this year.",
+      "source_name": "Mashable \u2014 AI",
+      "source_url": "https://mashable.com/tech/waymo-san-diego-denver-tampa",
+      "tier": 1,
+      "original_headline": "Waymo is launching its robotaxi in Denver, San Diego, and Tampa",
+      "fingerprint": "ff0fd3c8c5741aca"
+    },
+    {
+      "slot": "build",
+      "headline": "Perplexity now routes sensitive queries to your local AI model",
+      "blurb": "Perplexity's new Hybrid Compute feature automatically detects when you're asking something private and runs it on your device instead of their cloud. You can manually toggle it too, and it works with any model you've got running locally through Ollama or LM Studio.",
+      "why_it_matters": "You can finally use a powerful search AI without sending every personal question to the cloud.",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2248548/perplexitys-hybrid-compute-splits-sensitive-tasks-between-cloud-and-local-ai/",
+      "tier": 1,
+      "original_headline": "Perplexity's Hybrid Compute splits sensitive tasks between cloud and local AI",
+      "fingerprint": "aac77a5c1923cce4"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting escape hatch",
+    "kicker": "",
+    "prompt": "I have a recurring meeting that might not need to exist anymore. Describe the meeting below \u2014 who attends, what we cover, how long it runs. Tell me: the one async artifact that could replace it, the specific trigger that should\u53ec \u53ec \u53ecconvene us live instead, and which person would secretly be relieved if it disappeared.",
+    "tool_hint": "Before you auto-renew that weekly for another quarter."
+  },
+  "daily_question": "What's one thing you'd never trust AI to decide for you\u2014even if it was 99% accurate?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1788276330.8491035,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1788276344.7617226,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 115,
+        "persona": "market",
+        "reason": "Lead story: $35 billion cloud deal between Anthropic and Nvidia is the biggest AI business story today. Massive scale, concrete deployment, involves tier-1 players."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01E2yVkz2AUX8EsVVERd4df6"
+    },
+    {
+      "ts": 1788276344.7618349,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic Signs $35 Billion Cloud Deal Backed by Nvidia\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01E2yVkz2AUX8EsVVERd4df6"
+    },
+    {
+      "ts": 1788276344.761873,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "build",
+        "reason": "Pentagon deploying ChatGPT and Grok versions - significant institutional adoption story showing AI moving into defense/government at scale."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WxyYNcQgopwquQhAoQ3Zj1"
+    },
+    {
+      "ts": 1788276344.7619092,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"The Pentagon now has its own version of ChatGPT and Grok\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01WxyYNcQgopwquQhAoQ3Zj1"
+    },
+    {
+      "ts": 1788276344.761921,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 61,
+        "persona": "everyday",
+        "reason": "Waymo expanding to Denver, San Diego, Tampa - concrete consumer-facing deployment people can try. Real-world AI application shipping now."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TQoFgEjq3XC9KfYFQDK3tM"
+    },
+    {
+      "ts": 1788276344.7619684,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Waymo is launching its robotaxi in Denver, San Diego, and Tampa\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01TQoFgEjq3XC9KfYFQDK3tM"
+    },
+    {
+      "ts": 1788276344.7619853,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 75,
+        "persona": "build",
+        "reason": "Perplexity's Hybrid Compute feature - innovative privacy-focused approach splitting tasks between cloud and local AI. Shipping feature developers and users can try."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0156Zsj6VZNLVpCjSNCBTdCQ"
+    },
+    {
+      "ts": 1788276344.7620478,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Perplexity's Hybrid Compute splits sensitive tasks between cloud and local AI\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_0156Zsj6VZNLVpCjSNCBTdCQ"
+    },
+    {
+      "ts": 1788276351.0772994,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_017pE39EXAW3z1meBbRWyGSc"
+    },
+    {
+      "ts": 1788276351.6801686,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1788276351.6802049,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Anthropic Signs $35 Billion Cloud Deal Backed by Nvidia\", \"pick_2\": \"The Pentagon now has its own version of ChatGPT and Grok\", \"pick_3\": \"Waymo is launching its robotaxi in Denver, San Diego, and Tampa\", \"pick_4\": \"Perplexity's Hybrid Compute splits sensitive tasks between cloud and local AI\"}}",
+      "tool_use_id": "toolu_017pE39EXAW3z1meBbRWyGSc"
+    }
+  ],
+  "issue_num": 79
+}
