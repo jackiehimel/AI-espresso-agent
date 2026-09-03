@@ -1,0 +1,312 @@
+{
+  "date": "2026-09-03",
+  "generated_at": "2026-09-03T14:56:45.202355Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Google just shipped Gemini 3.8 Flash and a cybersecurity-specific variant",
+      "blurb": "DeepMind released Gemini 3.8 Flash, a new lightweight model, alongside 3.8 Flash Cyber\u2014a version trained specifically for security tasks. Flash Cyber is designed to handle threat detection, vulnerability analysis, and security code review faster than general models.",
+      "why_it_matters": "Security teams can now use a model built for their workflow instead of prompt-engineering a general LLM",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
+      "tier": 1,
+      "original_headline": "Introducing Gemini 3.8 Flash and 3.8 Flash Cyber",
+      "fingerprint": "a198fc55bb54e04c"
+    },
+    {
+      "slot": "build",
+      "headline": "Anthropic cuts Claude's agentic coding costs by up to 45 percent",
+      "blurb": "Anthropic's new Claude Fable 5.1 and Mythos 5.1 models cost 25 percent less for typical tasks and up to 45 percent less for complex agent work compared to the previous generation. The update also loosens safeguards and adjusts data retention policies based on customer feedback.",
+      "why_it_matters": "Running AI agents in production just got cheaper, which makes longer autonomous workflows financially viable.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/987830/anthropic-claude-fable-mythos-5-1",
+      "tier": 1,
+      "original_headline": "Anthropic launches Claude Fable 5.1 and says it&#8217;s up to 45 percent cheaper for agentic work",
+      "fingerprint": "539ad85056a5b45d"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor can now run on your own servers",
+      "blurb": "Cursor now supports self-hosted machines, meaning you can keep all code execution and tooling inside your own network instead of Cursor's cloud. This matters for teams with strict data residency rules or proprietary codebases that can't leave internal infrastructure.",
+      "why_it_matters": "You can finally use Cursor's AI coding tools without sending code to external servers.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/self-hosted-machines",
+      "tier": 1,
+      "original_headline": "Self-hosted machines",
+      "fingerprint": "73fa0546da5c14a2"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Uber just launched self-driving cars in London with British AI startup Wayve",
+      "blurb": "Uber and Wayve are running robotaxis on London's narrow, winding streets \u2014 a harder test than LA or San Francisco. Wayve's AI learned to drive by training on UK roads instead of being programmed with endless rules, making it easier to deploy in new cities with different layouts.",
+      "why_it_matters": "Self-driving cars are finally leaving American grid cities for Europe's medieval street networks.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-09-02/uber-wayve-launch-robotaxi-service-in-london-to-compete-with-waymo",
+      "tier": 1,
+      "original_headline": "Uber, Wayve Launch Robotaxi Service in London to Compete With Waymo",
+      "fingerprint": "8ac6c0fa0b0d83dd"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The research rabbit hole blocker",
+    "kicker": "",
+    "prompt": "I'm researching a topic I'll describe below. I have two hours. Give me: the three highest-signal sources I should read first, the one question that will tell me if I need to go deeper, and the expensive misconception most people walk away with.",
+    "tool_hint": "When you need to get smart fast without disappearing into Wikipedia for a week."
+  },
+  "daily_question": "If you could run one AI tool entirely on your own infrastructure today, which would it be and why?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1788447325.210868,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1788447352.2238004,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "market",
+        "reason": "THE defining AI story today: NVIDIA's $12.9B acquisition of Hugging Face is a seismic shift in the AI infrastructure landscape. Hugging Face is the GitHub of AI - this consolidates NVIDIA's position as the AI platform leader. Everyone in AI will be talking about this."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SZd66rAhRFTktUsSkUHvtW"
+    },
+    {
+      "ts": 1788447352.2238705,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA to Acquire Hugging Face\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01SZd66rAhRFTktUsSkUHvtW"
+    },
+    {
+      "ts": 1788447352.2239063,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 11,
+        "persona": "build",
+        "reason": "Google ships two new Gemini models including a specialized cybersecurity variant (3.8 Flash Cyber). Major model drop from tier-1 lab with concrete capability hooks developers can use immediately. Primary source from Google DeepMind."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HJ82XMx7aSzUGpUTqzSum4"
+    },
+    {
+      "ts": 1788447352.223942,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Gemini 3.8 Flash and 3.8 Flash Cyber\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01HJ82XMx7aSzUGpUTqzSum4"
+    },
+    {
+      "ts": 1788447352.2239542,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 30,
+        "persona": "everyday",
+        "reason": "Amazon's AI assistant now detects fake Amazon emails - practical consumer feature people can try today that solves a real pain point (phishing scams). Concrete capability that makes AI feel useful and protective."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011h8DowWJCfpKkDqPZvftPp"
+    },
+    {
+      "ts": 1788447352.2240493,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon\\u2019s AI assistant can now spot fake emails from the company\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_011h8DowWJCfpKkDqPZvftPp"
+    },
+    {
+      "ts": 1788447352.224074,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 37,
+        "persona": "build",
+        "reason": "Anthropic launches Claude Fable 5.1 with up to 45% cost reduction for agentic workflows. Major model update from tier-1 lab addressing real customer pain points around pricing and data retention. Developers will want to try this."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018qmkubQbNZ6MhMjEZQd7Ax"
+    },
+    {
+      "ts": 1788447352.2241297,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic launches Claude Fable 5.1 and says it&#8217;s up to 45 percent cheaper for agentic work\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_018qmkubQbNZ6MhMjEZQd7Ax"
+    },
+    {
+      "ts": 1788447352.224145,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "market",
+        "reason": "OpenAI's most powerful model yet (Astra) faces safety concerns ahead of imminent release. Major AI lab story with stakes - researchers publicly worried about safety protocols. This is news-worthy tension around a significant launch."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016LcJ4oyqBppFyQWPw6on44"
+    },
+    {
+      "ts": 1788447352.2241797,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'The Verge \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_016LcJ4oyqBppFyQWPw6on44"
+    },
+    {
+      "ts": 1788447352.224192,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "build",
+        "reason": "Cursor ships self-hosted machines feature letting developers keep tool execution entirely in their own network. Addresses enterprise security concerns while maintaining AI coding capabilities - concrete feature developers can deploy today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01L6C9dQbV4zghoBmPeex1JL"
+    },
+    {
+      "ts": 1788447352.224229,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Self-hosted machines\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01L6C9dQbV4zghoBmPeex1JL"
+    },
+    {
+      "ts": 1788447361.4179738,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 176,
+        "persona": "everyday",
+        "reason": "Uber and Wayve launch robotaxi service in London - first autonomous taxi service in a major European city with challenging centuries-old road layouts. Real-world AI deployment people can actually use, expanding beyond US markets."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Dw66G9N9PNT6ycEnbqMdcB"
+    },
+    {
+      "ts": 1788447361.4180596,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Uber, Wayve Launch Robotaxi Service in London to Compete With Waymo\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01Dw66G9N9PNT6ycEnbqMdcB"
+    },
+    {
+      "ts": 1788447367.9109354,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_013KrkABkiH5c4HN9LkSyQ9E"
+    },
+    {
+      "ts": 1788447368.6113808,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"Nvidia closes in on Hugging Face acquisition\\\", similarity 0.883) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_013KrkABkiH5c4HN9LkSyQ9E"
+    },
+    {
+      "ts": 1788447370.9967546,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 24
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HkbQ2yDFAvGncJVhsr2JTf"
+    },
+    {
+      "ts": 1788447370.9968064,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"NVIDIA to Acquire Hugging Face\"}",
+      "tool_use_id": "toolu_01HkbQ2yDFAvGncJVhsr2JTf"
+    },
+    {
+      "ts": 1788447377.904032,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 30
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LRicWMGY5T8S4Fov9YZwm3"
+    },
+    {
+      "ts": 1788447377.9040842,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Amazon\\u2019s AI assistant can now spot fake emails from the company\"}",
+      "tool_use_id": "toolu_01LRicWMGY5T8S4Fov9YZwm3"
+    },
+    {
+      "ts": 1788447383.9693289,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01T3K3TSQW43wuU7Xs7JX7zH"
+    },
+    {
+      "ts": 1788447383.995451,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1788447383.995475,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Introducing Gemini 3.8 Flash and 3.8 Flash Cyber\", \"pick_4\": \"Anthropic launches Claude Fable 5.1 and says it&#8217;s up to 45 percent cheaper for agentic work\", \"pick_5\": \"Self-hosted machines\", \"pick_6\": \"Uber, Wayve Launch Robotaxi Service in London to Compete With Waymo\"}}",
+      "tool_use_id": "toolu_01T3K3TSQW43wuU7Xs7JX7zH"
+    }
+  ],
+  "issue_num": 80
+}
