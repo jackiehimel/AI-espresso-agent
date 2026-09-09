@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-09",
+  "generated_at": "2026-09-09T15:04:06.288632Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Meta launches Muse, a personal AI assistant for everyone",
+      "blurb": "Meta is rolling out Muse, a new personal assistant aimed at bringing AI to mainstream users. The product is part of a multi-billion-dollar strategy to strengthen Meta's position in the AI race after falling behind competitors.",
+      "why_it_matters": "Meta is pivoting its AI strategy to focus on consumer accessibility rather than just developer tools.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/991216/meta-bets-on-ai-agent-muse-to-catch-up-in-ai-race",
+      "tier": 1,
+      "original_headline": "Meta bets on AI agent Muse to catch up in AI race",
+      "fingerprint": "7d01efdbe021caab"
+    },
+    {
+      "slot": "build",
+      "headline": "Google just mapped every possible DNA mutation in the human genome",
+      "blurb": "DeepMind's AlphaGenome Atlas predicts how every single-letter DNA change affects the body \u2014 a reference map researchers can use to understand genetic diseases and design treatments without running thousands of lab experiments first.",
+      "why_it_matters": "Turns the entire human genome into queryable data instead of a research bottleneck.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/991180/google-launches-alpha-genome-atlas",
+      "tier": 1,
+      "original_headline": "Google\u2019s Atlas of the human genome could pave the way for new treatments",
+      "fingerprint": "4d7c1889d1cd2b5b"
+    },
+    {
+      "slot": "market",
+      "headline": "Cognition just hit a $48B valuation \u2014 higher than Cursor before SpaceX bought it",
+      "blurb": "Cognition, the startup behind Devin (the AI coding agent), raised money at a $48 billion valuation \u2014 a higher multiple than Cursor commanded before its SpaceX acquisition. The deal signals investors still see room for multiple winners in AI coding tools, not just one dominant player.",
+      "why_it_matters": "The coding-tool market is heating up fast, and VCs are betting big on several horses at once.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/08/cognition-hits-48b-valuation-signaling-investors-believe-ai-coding-is-far-from-a-winner-take-all-market/",
+      "tier": 1,
+      "original_headline": "Cognition hits $48B valuation, signaling investors believe AI coding is far from a winner-take-all market",
+      "fingerprint": "bb859a51aae24600"
+    },
+    {
+      "slot": "build",
+      "headline": "Suno just replaced its entire AI music model with one trained on licensed tracks",
+      "blurb": "As copyright lawsuits stack up, Suno shipped v6\u2014a new AI music generator trained exclusively on licensed music, abandoning the training data behind every previous version. The company's facing legal action from major labels over how it trained earlier models.",
+      "why_it_matters": "Building AI on unlicensed data is becoming legally untenable, even for products already in market.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/09/suno-replaces-its-ai-models-with-a-new-one-trained-on-licensed-music-as-copyright-suits-pile-up/",
+      "tier": 1,
+      "original_headline": "Suno replaces its AI models with a new one trained on licensed music as copyright suits pile up",
+      "fingerprint": "60ea7869746ad282"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation ceiling-finder",
+    "kicker": "",
+    "prompt": "I'm negotiating something I'll describe below. Assume the other side has already decided their absolute maximum \u2014 the number they'll go to if pushed hard enough. Tell me what that number probably is, why they set it there, and the exact phrase that will get them to say it out loud.",
+    "tool_hint": "Before you accept their 'final offer' or make your counteroffer."
+  },
+  "daily_question": "If you could train an AI on one dataset nobody else has access to, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1788966195.7813404,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=15, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1788966209.2853494,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "everyday",
+        "reason": "Meta's new AI assistant Muse is a major consumer product launch from a tier-1 company trying to compete in the personal AI space. Concrete, shipped product people can try. Strong 'I want to try that' appeal."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017KnFiArRi11GnJ4LtxtC8W"
+    },
+    {
+      "ts": 1788966209.2854187,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta bets on AI agent Muse to catch up in AI race\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_017KnFiArRi11GnJ4LtxtC8W"
+    },
+    {
+      "ts": 1788966209.285455,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 26,
+        "persona": "build",
+        "reason": "Google DeepMind launching an AI genomics tool is a significant scientific application with real-world treatment implications. Shows AI doing something surprising and important beyond chatbots. Different outlet from Meta story."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011EsEMApNCJJMnvZkjXthTz"
+    },
+    {
+      "ts": 1788966209.285495,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google\\u2019s Atlas of the human genome could pave the way for new treatments\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_011EsEMApNCJJMnvZkjXthTz"
+    },
+    {
+      "ts": 1788966209.285507,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 36,
+        "persona": "market",
+        "reason": "Cognition hitting $48B valuation is a major market signal about AI coding competition. Shows the AI coding space is heating up with multiple players. TechCrunch source, tier-1."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AKWkipzov9FfkfakCWUwmk"
+    },
+    {
+      "ts": 1788966209.2855492,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Cognition hits $48B valuation, signaling investors believe AI coding is far from a winner-take-all market\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01AKWkipzov9FfkfakCWUwmk"
+    },
+    {
+      "ts": 1788966209.2855642,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "build",
+        "reason": "Suno launching v6 trained on licensed music is a notable pivot addressing copyright lawsuits - shows how legal pressure is reshaping AI music. Concrete product change people can try. Second TechCrunch but different vendor from Cognition."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Rqxg8KV3YrpdMKwjMUpXSv"
+    },
+    {
+      "ts": 1788966209.2856224,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Suno replaces its AI models with a new one trained on licensed music as copyright suits pile up\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Rqxg8KV3YrpdMKwjMUpXSv"
+    },
+    {
+      "ts": 1788966214.048643,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_012nYYYVbPUEh61TM9pvWpxV"
+    },
+    {
+      "ts": 1788966214.92993,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1788966214.9299707,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Meta bets on AI agent Muse to catch up in AI race\", \"pick_2\": \"Google\\u2019s Atlas of the human genome could pave the way for new treatments\", \"pick_3\": \"Cognition hits $48B valuation, signaling investors believe AI coding is far from a winner-take-all market\", \"pick_4\": \"Suno replaces its AI models with a new one trained on licensed music as copyright suits pile up\"}}",
+      "tool_use_id": "toolu_012nYYYVbPUEh61TM9pvWpxV"
+    }
+  ],
+  "issue_num": 85
+}
