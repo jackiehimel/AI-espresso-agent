@@ -1,0 +1,332 @@
+{
+  "date": "2026-09-10",
+  "generated_at": "2026-09-10T14:56:46.294564Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Apple just launched a $2,000 foldable iPhone",
+      "blurb": "The iPhone Duo marks Apple's first foldable phone, priced at $1,999. Announced at the company's September event alongside AI features and other devices, it enters a market Samsung and others have occupied for years.",
+      "why_it_matters": "Apple's finally playing catch-up in foldables \u2014 at flagship pricing",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/09/09/technology/apple-iphone-duo-foldable-phone.html",
+      "tier": 1,
+      "original_headline": "Apple Unveils the iPhone Duo, a Foldable Phone That Costs $1,999",
+      "fingerprint": "c51e8170722154e1"
+    },
+    {
+      "slot": "build",
+      "headline": "AWS is giving 132 universities free access to its AI coding assistant",
+      "blurb": "Students at 132 schools across 18 countries get a full year of Kiro free \u2014 Amazon's AI pair programmer that writes, debugs, and explains code inside VS Code and JetBrains. AWS wants graduates who've already logged hours with an agent before their first job.",
+      "why_it_matters": "Free tier wars are moving upstream to capture students before they pick a default tool.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/aws/amazon-expands-free-kiro-access-students-universities?utm_source=rss",
+      "tier": 1,
+      "original_headline": "Millions of students can now get access to a free year of Kiro from AWS",
+      "fingerprint": "4c9cc91545f0db84"
+    },
+    {
+      "slot": "industry",
+      "headline": "Google's AI can now pinpoint methane leaks from orbit",
+      "blurb": "Google and NASA's Jet Propulsion Lab built a deep learning model that processes satellite imagery from EMIT to detect and measure methane emissions anywhere on Earth. The tool can spot leaks from oil wells, landfills, and agriculture that ground sensors miss\u2014turning orbital data into a global emissions map.",
+      "why_it_matters": "Methane traps 80x more heat than CO2 short-term, and most leaks go undetected without satellites.",
+      "source_name": "Google \u2014 Innovation & AI",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/google-research/mapping-global-methane-emissions-from-space/",
+      "tier": 1,
+      "original_headline": "A new deep learning model maps global methane emissions from space.",
+      "fingerprint": "38558a4295b6a619"
+    },
+    {
+      "slot": "market",
+      "headline": "DeepSeek just made AI 100x cheaper with new model priced at pennies",
+      "blurb": "DeepSeek released a new AI model charging a fraction of a cent per million tokens\u2014far below what OpenAI, Anthropic, and other rivals charge. The pricing puts pressure on competitors who've been racing to cut costs while maintaining performance.",
+      "why_it_matters": "AI inference just became cheap enough to run at scale in consumer apps without burning cash",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-09-10/deepseek-s-new-low-cost-model-deals-a-fresh-blow-to-openai-z-ai",
+      "tier": 1,
+      "original_headline": "DeepSeek\u2019s New Low-Cost Model Deals a Fresh Blow to OpenAI, Z.ai",
+      "fingerprint": "2fe9202926a3f20b"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red-flag translator",
+    "kicker": "",
+    "prompt": "I'm reviewing a candidate who looks good on paper but something feels off. I'll describe what I noticed in the interview and their background. Tell me: if this person joins, what will break first, what will I be coaching them on in month three, and the one question I should have asked but didn't.",
+    "tool_hint": "Before you convince yourself that gut feeling doesn't matter."
+  },
+  "daily_question": "If AI coding assistants are about to be free everywhere, what's the one skill you'd double down on learning right now?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1789052142.040228,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=14, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789052159.3997273,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 142,
+        "persona": "everyday",
+        "reason": "Today's defining story - Apple's annual September event unveiling the iPhone Duo foldable with AI demonstrations. This is the biggest AI hardware story of the day, from a tier-1 source (NYT covering Apple's primary event). Concrete, shippable product that will dominate conversation."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QP12tfSM9dgVj8Z4gerYVg"
+    },
+    {
+      "ts": 1789052159.3998084,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple Unveils the iPhone Duo, a Foldable Phone That Costs $1,999\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01QP12tfSM9dgVj8Z4gerYVg"
+    },
+    {
+      "ts": 1789052159.399845,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 37,
+        "persona": "market",
+        "reason": "Major industry shift - Suno's v6 is its first AI music model made WITH record industry support, marking a huge pivot from the litigation battles. This is a genuine market power-move that changes the AI music landscape. Try-it-today angle with clear business implications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01UEPED1JBz63QYZRRD1aP2a"
+    },
+    {
+      "ts": 1789052159.3998883,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Suno releases its first AI music model made with record industry help\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01UEPED1JBz63QYZRRD1aP2a"
+    },
+    {
+      "ts": 1789052159.3999007,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "build",
+        "reason": "Massive try-it-today program - AWS giving millions of students at 132 universities free year-long access to Kiro AI agent. Concrete, accessible, developer-facing with clear 'I want to try that' appeal. Primary source (Amazon News)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Qvw6NrpqsKYpQ4xubcTMto"
+    },
+    {
+      "ts": 1789052159.399948,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Millions of students can now get access to a free year of Kiro from AWS\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Qvw6NrpqsKYpQ4xubcTMto"
+    },
+    {
+      "ts": 1789052159.399966,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "industry",
+        "reason": "Surprising real-world AI application - Google and NASA using deep learning to map global methane emissions from space. Concrete capability demonstration with environmental impact stakes. Primary source (Google blog), tier-1."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01A8kQBGzqm1SuY479YfbbKt"
+    },
+    {
+      "ts": 1789052159.4000218,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"A new deep learning model maps global methane emissions from space.\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01A8kQBGzqm1SuY479YfbbKt"
+    },
+    {
+      "ts": 1789052165.765905,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01437GkcNGGH3VuJ8Qctp1NU"
+    },
+    {
+      "ts": 1789052166.4297214,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_2] covers the same story as a recent edition (\\\"Suno just replaced its entire AI music model with one trained on licensed tracks\\\", similarity 0.863) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01437GkcNGGH3VuJ8Qctp1NU"
+    },
+    {
+      "ts": 1789052170.6730251,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 37
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01L5yZjVgyCfxjPLPWgaRcs1"
+    },
+    {
+      "ts": 1789052170.6730757,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Suno releases its first AI music model made with record industry help\"}",
+      "tool_use_id": "toolu_01L5yZjVgyCfxjPLPWgaRcs1"
+    },
+    {
+      "ts": 1789052170.673103,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "everyday",
+        "reason": "Concrete shipped feature - Prime Video's new AI lip-sync technology on 'Maxton Hall' using visual dubbing. Try-it-today feature viewers can experience, demonstrates AI making entertainment more accessible globally. Primary source (Amazon News)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01MBCbz5nvAJSieMGY7x1dbd"
+    },
+    {
+      "ts": 1789052170.6731734,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Prime Video introduces new lip-sync technology on \\u2018Maxton Hall\\u2019\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01MBCbz5nvAJSieMGY7x1dbd"
+    },
+    {
+      "ts": 1789052175.5182295,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 27
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017dTJu17xB74Qd8nvNNs9WQ"
+    },
+    {
+      "ts": 1789052175.5182877,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Prime Video introduces new lip-sync technology on \\u2018Maxton Hall\\u2019\"}",
+      "tool_use_id": "toolu_017dTJu17xB74Qd8nvNNs9WQ"
+    },
+    {
+      "ts": 1789052175.518316,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 203,
+        "persona": "market",
+        "reason": "Major market partnership - Amazon opening its sprawling webstore to OpenAI's ChatGPT advertisers. This is a significant strategic move showing Amazon's pivot on external AI platforms, with clear business implications for OpenAI's ad business."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018YWQxyYBSSrV3viZ9moJt1"
+    },
+    {
+      "ts": 1789052175.5183637,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon gives OpenAI's ad business a boost, letting its advertisers into ChatGPT\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_018YWQxyYBSSrV3viZ9moJt1"
+    },
+    {
+      "ts": 1789052180.104873,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 203
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01VWiqEdSsHYKf5GuGyCmwQm"
+    },
+    {
+      "ts": 1789052180.1049192,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Amazon gives OpenAI's ad business a boost, letting its advertisers into ChatGPT\"}",
+      "tool_use_id": "toolu_01VWiqEdSsHYKf5GuGyCmwQm"
+    },
+    {
+      "ts": 1789052180.1049461,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 184,
+        "persona": "market",
+        "reason": "Major competitive pricing move - DeepSeek's new low-cost model charging a fraction of a cent per million tokens, ramping up pressure on OpenAI and Z.ai. Clear market impact with concrete pricing that developers can act on today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LmGUixk3iUAbfu5rUxo5xG"
+    },
+    {
+      "ts": 1789052180.1049936,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"DeepSeek\\u2019s New Low-Cost Model Deals a Fresh Blow to OpenAI, Z.ai\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01LmGUixk3iUAbfu5rUxo5xG"
+    },
+    {
+      "ts": 1789052183.3742144,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01U3bYCYfoK7hqk2sbNDBW5n"
+    },
+    {
+      "ts": 1789052183.6404815,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789052183.6405084,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Apple Unveils the iPhone Duo, a Foldable Phone That Costs $1,999\", \"pick_3\": \"Millions of students can now get access to a free year of Kiro from AWS\", \"pick_4\": \"A new deep learning model maps global methane emissions from space.\", \"pick_7\": \"DeepSeek\\u2019s New Low-Cost Model Deals a Fresh Blow to OpenAI, Z.ai\"}}",
+      "tool_use_id": "toolu_01U3bYCYfoK7hqk2sbNDBW5n"
+    }
+  ],
+  "issue_num": 86
+}
