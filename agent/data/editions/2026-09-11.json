@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-11",
+  "generated_at": "2026-09-11T14:53:57.091326Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "OpenAI stopped selling Pro subscriptions because too many people want Astra",
+      "blurb": "OpenAI paused new Pro sign-ups after demand for its Astra model overwhelmed its systems. Pro subscribers hit compute hardest, so the company is adding capacity before reopening the tier. If you're already a Pro user, you keep access.",
+      "why_it_matters": "When a company can't keep up with AI demand, it picks existing customers over new revenue.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/10/openai-puts-pro-subscriptions-on-hold-due-to-astra-demand/",
+      "tier": 1,
+      "original_headline": "OpenAI puts Pro subscriptions on hold due to Astra demand",
+      "fingerprint": "485e0c4c814926e8"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor just shipped an AI project manager that runs thousands of subagents",
+      "blurb": "Cursor's new Projects feature lets you spin up thousands of AI subagents to tackle large codebases over weeks or months. Instead of losing context between sessions, you can now delegate entire tasks and have agents maintain state across a long-running project.",
+      "why_it_matters": "AI coding tools are moving from autocomplete to autonomous project management",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/projects",
+      "tier": 1,
+      "original_headline": "Cursor Projects",
+      "fingerprint": "13a83d08366b103d"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Universal Music will let you remix its catalog with ElevenLabs AI",
+      "blurb": "Universal Music Group is building a platform with ElevenLabs that lets users create remixes, mashups, and new versions of licensed tracks from its catalog. The multiyear deal marks a major label embracing AI-generated music instead of fighting it.",
+      "why_it_matters": "A top-three record label just decided licensing AI remixes beats blocking them.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/993465/universal-music-elevenlabs-ai",
+      "tier": 1,
+      "original_headline": "Universal Music is launching an AI music platform with ElevenLabs",
+      "fingerprint": "9537f6998b3965a2"
+    },
+    {
+      "slot": "build",
+      "headline": "Slack can now build charts and dashboards for you inside any chat",
+      "blurb": "Slackforce Surfaces lets you ask Slackbot to generate interactive reports, polls, or dashboards by pulling data from conversations and connected apps like Google Drive or Salesforce. You describe what you need in plain language, and AI assembles it without leaving the thread.",
+      "why_it_matters": "Turns Slack from a chat app into a no-code workspace where data lives where discussions happen.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/989853/slackforce-surfaces-launch",
+      "tier": 1,
+      "original_headline": "Slack can now vibe-code interactive charts and reports inside chats",
+      "fingerprint": "9eec57212889f368"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting cost calculator",
+    "kicker": "",
+    "prompt": "I'm about to schedule a recurring meeting. Tell me: if we converted every hour of this meeting into salary cost across all attendees, what's the annual burn? Then give me three async alternatives that would accomplish 80% of the value, and the one signal that means we actually need to meet live.",
+    "tool_hint": "Before you send that calendar invite with eight people on it."
+  },
+  "daily_question": "If you could give an AI agent one work project to run unsupervised for 48 hours, what would you choose?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1789138395.114492,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=11, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789138410.7467942,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 50,
+        "persona": "market",
+        "reason": "Lead story: OpenAI pausing Pro subscriptions due to Astra demand is THE defining AI story today - a major AI lab hitting capacity constraints is concrete, newsworthy, and shows real market dynamics. Affects users directly and signals massive demand."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Emp9S5Avm7SHp9f9CdEvb9"
+    },
+    {
+      "ts": 1789138410.7468586,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI puts Pro subscriptions on hold due to Astra demand\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Emp9S5Avm7SHp9f9CdEvb9"
+    },
+    {
+      "ts": 1789138410.7468972,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 37,
+        "persona": "build",
+        "reason": "Major product launch from Cursor (primary source) - Projects feature enables larger-scale development work with AI agents. Concrete capability developers can try today, with clear 'try this' appeal."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01ByRJvg8AtkuVgxnpiH5keB"
+    },
+    {
+      "ts": 1789138410.7469385,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Cursor Projects\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01ByRJvg8AtkuVgxnpiH5keB"
+    },
+    {
+      "ts": 1789138410.746951,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 41,
+        "persona": "everyday",
+        "reason": "Universal Music + ElevenLabs partnership is a landmark deal making licensed AI music creation possible. Solves the copyright deadlock and gives users legal access to UMG catalog for AI music - concrete and exciting."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017cQGa4k4G333Mez9yhtFDy"
+    },
+    {
+      "ts": 1789138410.7470033,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Universal Music is launching an AI music platform with ElevenLabs\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_017cQGa4k4G333Mez9yhtFDy"
+    },
+    {
+      "ts": 1789138410.747023,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 39,
+        "persona": "build",
+        "reason": "Slack adding vibe-coding for charts/reports is a practical shipped feature people use daily. Interactive dashboards and presentations created via chat in Slack - clear utility and 'I want to try that' factor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011CrnWDReDBUrGGQD2EBtfB"
+    },
+    {
+      "ts": 1789138410.747112,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Slack can now vibe-code interactive charts and reports inside chats\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_011CrnWDReDBUrGGQD2EBtfB"
+    },
+    {
+      "ts": 1789138416.3598778,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_014BpUR5FcAi4be1BdV7g4wf"
+    },
+    {
+      "ts": 1789138416.9865034,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789138416.9865234,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI puts Pro subscriptions on hold due to Astra demand\", \"pick_2\": \"Cursor Projects\", \"pick_3\": \"Universal Music is launching an AI music platform with ElevenLabs\", \"pick_4\": \"Slack can now vibe-code interactive charts and reports inside chats\"}}",
+      "tool_use_id": "toolu_014BpUR5FcAi4be1BdV7g4wf"
+    }
+  ],
+  "issue_num": 87
+}
