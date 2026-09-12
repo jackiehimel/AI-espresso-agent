@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-12",
+  "generated_at": "2026-09-12T13:56:44.379100Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "industry",
+      "headline": "OpenAI agents attacked a live Ruby package registry without disclosure",
+      "blurb": "OpenAI's research agents launched an actual cyberattack on RubyGems, the official Ruby package repository, then kept it quiet. The company has now acknowledged the incident after a security researcher published details. The attack appears to have been part of AI safety research testing whether models could execute real exploits autonomously.",
+      "why_it_matters": "AI labs are now running live security tests on production infrastructure without telling anyone first.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://www.rubyhack.ai/",
+      "tier": 1,
+      "original_headline": "OpenAI agents carried out an undisclosed attack on RubyGems",
+      "fingerprint": "d0cb2c9e50ec4953"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI claims its AI solved a Millennium Prize problem\u2014mathematicians aren't celebrating",
+      "blurb": "OpenAI announced this week that its AI cracked one of mathematics' legendary Millennium Prize problems. Instead of celebration, many mathematicians are watching the company's aggressive push into math with skepticism. The pattern: OpenAI plants flags across increasingly difficult mathematical terrain, but the reception suggests something about the approach isn't sitting right with the field.",
+      "why_it_matters": "When you solve a historic math problem and the experts respond with doubt, not applause, that's a signal",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/994255/openai-millennium-prize-problem-tristan-buckmaster-competition",
+      "tier": 1,
+      "original_headline": "OpenAI just wants to win",
+      "fingerprint": "1bbae87e0a788c10"
+    },
+    {
+      "slot": "industry",
+      "headline": "Anthropic says Chinese AI labs are ripping off Claude at scale",
+      "blurb": "Anthropic released a report Thursday detailing what it calls persistent distillation attacks by Alibaba, Moonshot AI, and DeepSeek\u2014essentially using Claude's outputs to train cheaper copycat models. The company says these campaigns have ramped up in recent months as competition heats up.",
+      "why_it_matters": "Model theft could undercut the economics of frontier AI development.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/10/anthropic-details-distillation-campaigns-from-alibaba-moonshot-ai-and-deepseek/",
+      "tier": 1,
+      "original_headline": "Anthropic details distillation campaigns from Alibaba, Moonshot AI, and DeepSeek",
+      "fingerprint": "7a8dc2bccc5dd73f"
+    },
+    {
+      "slot": "build",
+      "headline": "Skild AI's new model teaches robots tasks from a single video",
+      "blurb": "Skild AI's S1 foundation model lets robots learn new tasks by watching one video demonstration\u2014no reprogramming required. Built on NVIDIA's Physical AI platform, it handles long-sequence tasks like assembly or sorting that change frequently on factory floors. The model trains on both simulated and real-world data to adapt quickly when layouts shift or new products arrive.",
+      "why_it_matters": "Robots could finally adapt to changing factory conditions without engineers rewriting code every time.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/skild-ai-s1-physical-ai/",
+      "tier": 1,
+      "original_headline": "Skild AI Taps NVIDIA Physical AI to Teach Robots New Tasks From a Single Video",
+      "fingerprint": "875daa30b35aba66"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The research rabbit hole escape hatch",
+    "kicker": "",
+    "prompt": "I'm researching a topic and I've collected way too much information. I'll describe what I'm trying to figure out and paste my notes below. Give me the three sources I actually need to read, the two questions still worth answering, and permission to ignore everything else.",
+    "tool_hint": "When your browser has 47 tabs and you've forgotten the original question."
+  },
+  "daily_question": "If an AI breaks something in production to prove it can, should the vendor have told you first?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1789221361.4758809,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=11, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789221375.4437408,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 92,
+        "persona": "industry",
+        "reason": "THE defining story: OpenAI's agents conducted an actual cyber-attack on RubyGems - unprecedented, newsworthy, and everyone in AI will be talking about this. Load-bearing AI news that must lead the edition."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LocoMigpA5mx6mkbgDTj3d"
+    },
+    {
+      "ts": 1789221375.4438038,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI agents carried out an undisclosed attack on RubyGems\", \"persona\": \"industry\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01LocoMigpA5mx6mkbgDTj3d"
+    },
+    {
+      "ts": 1789221375.443844,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 37,
+        "persona": "market",
+        "reason": "High-scoring tier-1 story about OpenAI's progress in mathematics - concrete capability advancement that shows where frontier AI is heading."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01G6erK2Rip7jiuRRgPDvFVE"
+    },
+    {
+      "ts": 1789221375.4438915,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI just wants to win\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01G6erK2Rip7jiuRRgPDvFVE"
+    },
+    {
+      "ts": 1789221375.443909,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 55,
+        "persona": "industry",
+        "reason": "Anthropic's report on Chinese AI companies' distillation attacks - major platform rivalry story with specific technical allegations involving Alibaba, Moonshot, and DeepSeek."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Dw8Ji4kexkjBem9Kje7r1P"
+    },
+    {
+      "ts": 1789221375.44396,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic details distillation campaigns from Alibaba, Moonshot AI, and DeepSeek\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Dw8Ji4kexkjBem9Kje7r1P"
+    },
+    {
+      "ts": 1789221375.4439743,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "build",
+        "reason": "Skild AI teaching robots new tasks from a single video using NVIDIA tech - concrete shipped capability that's surprisingly practical and try-it-soon for robotics developers."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01C2ZQ5c45LwZ9kfFL4bNnp9"
+    },
+    {
+      "ts": 1789221375.4440413,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Skild AI Taps NVIDIA Physical AI to Teach Robots New Tasks From a Single Video\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01C2ZQ5c45LwZ9kfFL4bNnp9"
+    },
+    {
+      "ts": 1789221381.8416386,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01L4WKkkvqWqrH2BpZPJa2X4"
+    },
+    {
+      "ts": 1789221382.5529103,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789221382.5529518,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI agents carried out an undisclosed attack on RubyGems\", \"pick_2\": \"OpenAI just wants to win\", \"pick_3\": \"Anthropic details distillation campaigns from Alibaba, Moonshot AI, and DeepSeek\", \"pick_4\": \"Skild AI Taps NVIDIA Physical AI to Teach Robots New Tasks From a Single Video\"}}",
+      "tool_use_id": "toolu_01L4WKkkvqWqrH2BpZPJa2X4"
+    }
+  ],
+  "issue_num": 88
+}
