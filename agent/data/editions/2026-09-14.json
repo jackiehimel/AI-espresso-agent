@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-14",
+  "generated_at": "2026-09-14T16:50:59.011875Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Anthropic CEO says it's time to slow down AI development",
+      "blurb": "Dario Amodei is calling to 'pace the frontier' \u2014 his term for pumping the brakes on new AI models. Anthropic will now give third-party evaluators like METR early access to its models before release to verify safety practices. The move marks a shift from the race-to-ship mentality that's defined the past two years.",
+      "why_it_matters": "The CEO of a leading AI lab is publicly advocating for slower progress.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/994337/anthropic-ceo-slow-down-ai-development",
+      "tier": 1,
+      "original_headline": "Anthropic CEO says it\u2019s time to pump the brakes on AI",
+      "fingerprint": "e1f533d81ce1ddc4"
+    },
+    {
+      "slot": "industry",
+      "headline": "Microsoft publishes 37-page AI code saying people come first",
+      "blurb": "Microsoft released a detailed code of conduct for AI development emphasizing human priorities, joining a growing conversation about slowing down. The move follows Anthropic CEO Dario Amodei's weekend call for coordinated deceleration and recent researcher warnings that AI progress may be outpacing our ability to safely deploy and verify complex systems.",
+      "why_it_matters": "Major labs are publicly acknowledging safety concerns while still shipping faster than ever.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/news/994566/microsoft-humanist-ai-code-of-conduct",
+      "tier": 1,
+      "original_headline": "Microsoft says \u2018people matter more than AI\u2019 following safety concerns",
+      "fingerprint": "46abc64f1ecf5aa1"
+    },
+    {
+      "slot": "build",
+      "headline": "Perplexity's AI agent now runs locally on Windows PCs",
+      "blurb": "Portable Computer is a downloadable version of Perplexity's agent that plans and executes multistep tasks entirely on your machine, accelerated by NVIDIA RTX GPUs. It uses local models to analyze data and complete workflows without sending information to the cloud.",
+      "why_it_matters": "Sensitive work can now stay on-device while an agent handles complex tasks for you.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/local-ai-perplexity-windows-pcs/",
+      "tier": 1,
+      "original_headline": "Perplexity Portable Computer Is Now Available on Windows, Powered by NVIDIA RTX",
+      "fingerprint": "62fe7450037c8756"
+    },
+    {
+      "slot": "everyday",
+      "headline": "iOS 27 code suggests Apple may let you swap Siri for ChatGPT or Claude",
+      "blurb": "A developer digging through iOS 27 beta code found references indicating Apple might let users choose a different AI assistant as their default\u2014like ChatGPT or Claude\u2014instead of Siri. It's still unclear whether this will be a full system replacement or limited to certain features, but the code hints at genuine choice coming to iPhone.",
+      "why_it_matters": "iPhone users could finally pick the AI assistant they actually want to use.",
+      "source_name": "9to5Mac \u2014 AI",
+      "source_url": "https://9to5mac.com/2026/09/14/ios-27-code-shows-you-may-be-able-to-replace-siri-ai-with-claude-or-chatgpt-poll/",
+      "tier": 1,
+      "original_headline": "iOS 27 code shows you may be able to replace Siri AI with Claude or ChatGPT [Poll]",
+      "fingerprint": "b6bade87efe49ab1"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The decision regret vaccine",
+    "kicker": "",
+    "prompt": "I made a decision recently that I keep second-guessing. I'll describe what I chose and what I passed up. Don't tell me if I was right or wrong. Instead, tell me what information would actually change my mind if I learned it tomorrow, versus what's just noise I should ignore.",
+    "tool_hint": "Separates real regret signals from the brain's endless what-if loop."
+  },
+  "daily_question": "If you could replace one default assistant in your life with an AI of your choice, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1789404596.722238,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=15, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789404611.7691064,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "market",
+        "reason": "THE defining AI story today - Anthropic CEO Dario Amodei publicly calling to slow frontier AI development and opening to third-party evaluators. Major policy shift from a leading AI lab. This is what everyone in AI is talking about today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DgYYTEKfiq3aTpzkZt6U6n"
+    },
+    {
+      "ts": 1789404611.7691836,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic CEO says it\\u2019s time to pump the brakes on AI\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01DgYYTEKfiq3aTpzkZt6U6n"
+    },
+    {
+      "ts": 1789404611.7692232,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "industry",
+        "reason": "Microsoft publishing a 37-page humanist AI code of conduct amid safety concerns. Concrete artifact from a tier-1 vendor responding to the broader AI safety conversation. Complements the Anthropic story without being redundant."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01287qh7PJwNxQZ6JJKe6uYm"
+    },
+    {
+      "ts": 1789404611.7692852,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Microsoft says \\u2018people matter more than AI\\u2019 following safety concerns\", \"persona\": \"industry\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01287qh7PJwNxQZ6JJKe6uYm"
+    },
+    {
+      "ts": 1789404611.7693026,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 7,
+        "persona": "build",
+        "reason": "Perplexity launching on Windows with NVIDIA RTX - concrete shipped feature people can try. Local AI agents on PC with privacy benefits. Try-it-today hook with clear capability story."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CTtLKjKCzRRSco8kSqF6cQ"
+    },
+    {
+      "ts": 1789404611.769365,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Perplexity Portable Computer Is Now Available on Windows, Powered by NVIDIA RTX\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01CTtLKjKCzRRSco8kSqF6cQ"
+    },
+    {
+      "ts": 1789404611.769387,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 68,
+        "persona": "everyday",
+        "reason": "iOS 27 code reveals Apple may let users replace Siri with Claude or ChatGPT. Huge user-facing change from Apple - giving users choice of AI assistant. Concrete feature in development that affects millions of iPhone users."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01ESUoWcDGDgYd1rNWR1dF98"
+    },
+    {
+      "ts": 1789404611.7694407,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"iOS 27 code shows you may be able to replace Siri AI with Claude or ChatGPT [Poll]\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01ESUoWcDGDgYd1rNWR1dF98"
+    },
+    {
+      "ts": 1789404619.4393678,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Vmoengtwz87Us4LJp4FJ7m"
+    },
+    {
+      "ts": 1789404620.0134406,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789404620.0134757,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Anthropic CEO says it\\u2019s time to pump the brakes on AI\", \"pick_2\": \"Microsoft says \\u2018people matter more than AI\\u2019 following safety concerns\", \"pick_3\": \"Perplexity Portable Computer Is Now Available on Windows, Powered by NVIDIA RTX\", \"pick_4\": \"iOS 27 code shows you may be able to replace Siri AI with Claude or ChatGPT [Poll]\"}}",
+      "tool_use_id": "toolu_01Vmoengtwz87Us4LJp4FJ7m"
+    }
+  ],
+  "issue_num": 89
+}
