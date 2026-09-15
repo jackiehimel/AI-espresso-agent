@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-15",
+  "generated_at": "2026-09-15T15:29:51.703549Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Apple ships Siri AI, its biggest assistant overhaul in a decade",
+      "blurb": "Apple released Siri AI, a ground-up redesign that can handle multi-step requests, understand context across apps, and learn your preferences without sending data to the cloud. It arrives in iOS 20 this fall and works on iPhone 15 and newer.",
+      "why_it_matters": "Apple just made Siri actually useful \u2014 and kept all your data on-device.",
+      "source_name": "Apple Newsroom",
+      "source_url": "https://www.apple.com/newsroom/2026/09/siri-ai-a-profoundly-more-capable-and-personal-assistant-is-here/",
+      "tier": 1,
+      "original_headline": "Siri AI, a profoundly more capable and personal assistant, is here",
+      "fingerprint": "f942d65bacacf489"
+    },
+    {
+      "slot": "build",
+      "headline": "Salesforce built a reasoning model that does sales calls and support tickets",
+      "blurb": "Salesforce Koa runs on Nvidia's open-weight Nemotron and is trained specifically for sales, marketing, and customer support tasks. It's a domain-specific reasoning model you can deploy for CRM work instead of using a general-purpose lab model.",
+      "why_it_matters": "Shows how companies can tune open models for vertical work rather than pay OpenAI or Anthropic per seat",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/15/salesforce-and-nvidias-new-reasoning-model-is-everything-the-ai-labs-should-fear/",
+      "tier": 1,
+      "original_headline": "Salesforce and Nvidia\u2019s new reasoning model is everything the AI labs should fear",
+      "fingerprint": "9d676cbe947528e9"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI bought a smartphone camera company for $300 million",
+      "blurb": "OpenAI acquired Glass Imaging, a startup founded by ex-Apple engineers who built Portrait Mode. The deal signals OpenAI's push into hardware and suggests future phones could get native AI vision features baked into the camera itself.",
+      "why_it_matters": "OpenAI is moving from software into the physical layer where photos get captured.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/14/openai-buys-smartphone-camera-maker-glass-imaging-for-300-million-report-says/",
+      "tier": 1,
+      "original_headline": "OpenAI buys smartphone camera maker Glass Imaging for $300 million, report says",
+      "fingerprint": "8b93306201223f38"
+    },
+    {
+      "slot": "industry",
+      "headline": "OpenAI, Anthropic, Google, and Musk agree to slow AI development",
+      "blurb": "Sam Altman, Dario Amodei, Demis Hassabis, and Elon Musk loosely agreed over the weekend to 'pace the frontier' of AI development. Critics immediately questioned whether this is a genuine safety measure or a way for the leading labs to protect their lead while smaller competitors catch up.",
+      "why_it_matters": "If the biggest labs slow down, it could either make AI safer or just lock in their advantage.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/995186/is-big-techs-ai-slowdown-a-safety-pact-or-a-cartel",
+      "tier": 1,
+      "original_headline": "Is Big Tech\u2019s AI slowdown a safety pact or a cartel?",
+      "fingerprint": "78cfd87498f1c49b"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The learning gap spotter",
+    "kicker": "",
+    "prompt": "I'm trying to get better at something I'll describe below. I've been working on it for a while but progress feels slow. Tell me: the one skill I'm probably neglecting that would unlock faster improvement, the mistake I'm likely repeating without noticing, and one unconventional resource I should try next.",
+    "tool_hint": "When effort isn't translating to progress and you need a diagnostic."
+  },
+  "daily_question": "If you could slow down one specific AI capability for six months, which would you pick?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1789486149.9064257,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789486163.536055,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 7,
+        "persona": "everyday",
+        "reason": "Major Apple product launch - Siri AI overhaul is the biggest consumer-facing AI story today. Apple Newsroom is the primary source, and this is a shipped feature people can try. The 'profoundly more capable' framing suggests meaningful capability leap."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Np7sbtPPVqCTXxPP4jb18X"
+    },
+    {
+      "ts": 1789486163.5361297,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Siri AI, a profoundly more capable and personal assistant, is here\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Np7sbtPPVqCTXxPP4jb18X"
+    },
+    {
+      "ts": 1789486163.5361664,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "build",
+        "reason": "Salesforce-Nvidia reasoning model collaboration is a major competitive move against OpenAI/Anthropic. Built on open-weight Nemotron, trained for sales/marketing/support - concrete enterprise use case that developers can engage with. Shows platform wars heating up."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FChhLdF3RJPGMkyJSnWC3H"
+    },
+    {
+      "ts": 1789486163.5362139,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Salesforce and Nvidia\\u2019s new reasoning model is everything the AI labs should fear\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01FChhLdF3RJPGMkyJSnWC3H"
+    },
+    {
+      "ts": 1789486163.5362315,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "market",
+        "reason": "OpenAI acquiring smartphone camera maker Glass Imaging for $300M signals strategic move into computer vision hardware/capabilities. Founded by ex-Apple engineers who built Portrait mode - clear expertise acquisition with implications for multimodal AI."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Fik35rnJPHGDyAuJtKL6Hw"
+    },
+    {
+      "ts": 1789486163.5362842,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI buys smartphone camera maker Glass Imaging for $300 million, report says\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Fik35rnJPHGDyAuJtKL6Hw"
+    },
+    {
+      "ts": 1789486163.5363016,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "industry",
+        "reason": "AI industry coordination story involving Altman, Amodei, Hassabis, and Musk discussing slowdown - raises critical questions about whether this is safety collaboration or anticompetitive behavior. Major industry-defining moment with all the key players."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01L2nT9ncp3VMJjvNDw6JdhE"
+    },
+    {
+      "ts": 1789486163.5363722,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Is Big Tech\\u2019s AI slowdown a safety pact or a cartel?\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01L2nT9ncp3VMJjvNDw6JdhE"
+    },
+    {
+      "ts": 1789486169.8529465,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01SQRYCccsc3BsGtqRWLsddi"
+    },
+    {
+      "ts": 1789486170.6881588,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789486170.6881907,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Siri AI, a profoundly more capable and personal assistant, is here\", \"pick_2\": \"Salesforce and Nvidia\\u2019s new reasoning model is everything the AI labs should fear\", \"pick_3\": \"OpenAI buys smartphone camera maker Glass Imaging for $300 million, report says\", \"pick_4\": \"Is Big Tech\\u2019s AI slowdown a safety pact or a cartel?\"}}",
+      "tool_use_id": "toolu_01SQRYCccsc3BsGtqRWLsddi"
+    }
+  ],
+  "issue_num": 90
+}
