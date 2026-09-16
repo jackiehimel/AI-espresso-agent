@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-16",
+  "generated_at": "2026-09-16T15:22:51.576958Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Google just made Gemini Live think out loud before it answers",
+      "blurb": "Gemini 3.8 Live now has an 'Extended Thinking' mode that pauses to reason through problems step-by-step before responding. It's designed for math, coding, and complex questions where you'd rather wait 10 seconds for a thoughtful answer than get a fast wrong one. Available now in Gemini Advanced.",
+      "why_it_matters": "Voice AI is moving from instant responses to deliberate reasoning\u2014closer to how humans actually think through hard problems.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/introducing-gemini-3-8-live-and-3-8-live-extended-thinking/",
+      "tier": 1,
+      "original_headline": "Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking",
+      "fingerprint": "3c6a8b673bc6c000"
+    },
+    {
+      "slot": "industry",
+      "headline": "NVIDIA's new Vera Rubin chip just swept every MLPerf inference benchmark",
+      "blurb": "NVIDIA's Vera Rubin NVL72 topped all categories in the latest MLPerf tests, the industry standard for measuring AI inference speed. The chip handles both text generation and image tasks faster than any competitor, while NVIDIA's software optimizations mean companies can squeeze more performance from existing hardware without buying new servers.",
+      "why_it_matters": "Faster inference means lower costs per AI response and more users served with the same infrastructure.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/vera-rubin-nvl72-mlperf-inference/",
+      "tier": 1,
+      "original_headline": "NVIDIA Vera Rubin NVL72 Delivers Leading Performance in MLPerf Inference v6.1 Debut",
+      "fingerprint": "c220457f57844427"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Amazon opens Alexa+ early access to everyone in India",
+      "blurb": "Amazon is rolling out Alexa+ to all customers in India during an early access phase, including Hindi language support. The assistant can now understand and respond in Hindi alongside English, making voice AI accessible to hundreds of millions more users.",
+      "why_it_matters": "First major voice assistant to ship native Hindi at scale in India's massive market.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/16/amazon-launches-alexa-in-india-with-hindi-support/",
+      "tier": 1,
+      "original_headline": "Amazon launches Alexa+ in India with Hindi support",
+      "fingerprint": "6360d6ddb4942123"
+    },
+    {
+      "slot": "market",
+      "headline": "Meta bundles Instagram, WhatsApp, and AI credits into paid subscriptions",
+      "blurb": "Meta's new \"One\" subscriptions combine its standalone app features with extra AI usage allowances. The bundles are launching globally today in multiple tiers for individuals, creators, and businesses. This follows Meta's recent launch of its Muse AI assistant and builds on bundles that were being tested earlier this year.",
+      "why_it_matters": "Meta's betting people will pay monthly for social media plus AI rather than just ads.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/995453/meta-one-subscriptions-ai",
+      "tier": 1,
+      "original_headline": "Meta&#8217;s new One subscriptions put a price on social media and AI",
+      "fingerprint": "87ecd5641db61580"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The strategy stress test",
+    "kicker": "",
+    "prompt": "I'll describe our current strategy below. Now argue against it like a smart competitor who wants us to fail. Tell me: the one assumption we're making that's probably wrong, the move we're not seeing, and which customer segment will leave us first if we keep this up.",
+    "tool_hint": "Before you commit the next quarter to a plan everyone nodded along to."
+  },
+  "daily_question": "If you could make one AI tool 'think out loud' before answering, which one would you pick?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1789572122.916754,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=11, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789572142.6568615,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 3,
+        "persona": "everyday",
+        "reason": "Major model launch from Google DeepMind - Gemini 3.8 Live with extended thinking capability. This is today's defining AI story: a flagship model update from a tier-1 lab with concrete new features users can try. Clear try-it-today appeal."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01L2UZNm5ZVxGnDweoYvaohb"
+    },
+    {
+      "ts": 1789572142.6569304,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01L2UZNm5ZVxGnDweoYvaohb"
+    },
+    {
+      "ts": 1789572142.6569636,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 22,
+        "persona": "industry",
+        "reason": "NVIDIA's new Vera Rubin NVL72 system debuts with leading MLPerf benchmark results. Hardware milestone that matters to engineers and infrastructure teams - shows what's now possible for inference at scale. Industry-relevant performance story."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WZ5m45C34gazusfMAAmPwP"
+    },
+    {
+      "ts": 1789572142.6569967,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Vera Rubin NVL72 Delivers Leading Performance in MLPerf Inference v6.1 Debut\", \"persona\": \"industry\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01WZ5m45C34gazusfMAAmPwP"
+    },
+    {
+      "ts": 1789572142.657009,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 44,
+        "persona": "everyday",
+        "reason": "Amazon launches Alexa+ in India with Hindi support in early access. Concrete feature launch with language expansion - people can try this now. Shows AI assistants scaling to new markets and languages, practical everyday impact."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Xf9wSDc3AUJKRxZ9eVrhtr"
+    },
+    {
+      "ts": 1789572142.657037,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon launches Alexa+ in India with Hindi support\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Xf9wSDc3AUJKRxZ9eVrhtr"
+    },
+    {
+      "ts": 1789572142.6570437,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "market",
+        "reason": "Meta launches One subscription bundles pairing social media access with its new Muse AI assistant. Business model innovation - shows how platforms are monetizing AI. Market story with clear product hook, not just strategy talk."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017vXQYwBJhcj9nJyqpggppp"
+    },
+    {
+      "ts": 1789572142.6570785,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta&#8217;s new One subscriptions put a price on social media and AI\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_017vXQYwBJhcj9nJyqpggppp"
+    },
+    {
+      "ts": 1789572148.2878115,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_014uX8MfjYA6EzDndwemqCXL"
+    },
+    {
+      "ts": 1789572148.9882023,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789572148.9882374,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking\", \"pick_2\": \"NVIDIA Vera Rubin NVL72 Delivers Leading Performance in MLPerf Inference v6.1 Debut\", \"pick_3\": \"Amazon launches Alexa+ in India with Hindi support\", \"pick_4\": \"Meta&#8217;s new One subscriptions put a price on social media and AI\"}}",
+      "tool_use_id": "toolu_014uX8MfjYA6EzDndwemqCXL"
+    }
+  ],
+  "issue_num": 91
+}
