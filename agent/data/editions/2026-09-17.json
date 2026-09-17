@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-17",
+  "generated_at": "2026-09-17T15:29:10.546595Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Claude can now make docs and slides for you in chat",
+      "blurb": "Anthropic added Docs and Slides to Claude today. You can ask Claude to create documents or presentations directly in chat, then export, edit, and share them. The company is also merging its regular chat and Cowork modes into a single interface with all features available in one place.",
+      "why_it_matters": "Claude now competes directly with Google's workspace integrations, not just as a chatbot.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/996234/anthropic-one-claude-cowork-docs-slides",
+      "tier": 1,
+      "original_headline": "Claude comes for Gemini with its own take on Docs and Slides",
+      "fingerprint": "c23a67ec03806cda"
+    },
+    {
+      "slot": "build",
+      "headline": "Google just opened your smart home to any AI agent",
+      "blurb": "Google Home now supports the Model Context Protocol, meaning AI tools like Claude can directly control your lights, thermostats, and cameras. Any agent that speaks MCP can read your home's data and flip switches without you building custom integrations.",
+      "why_it_matters": "Your smart home just became programmable by any AI that can talk to it.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/996310/google-home-mcp-integration-agentic-ai-smart-home-price-release-date",
+      "tier": 1,
+      "original_headline": "Google will now let any AI agent run your smart home",
+      "fingerprint": "71dce131787b7599"
+    },
+    {
+      "slot": "market",
+      "headline": "Mastercard and Visa are building checkout systems for AI shopping agents",
+      "blurb": "Mastercard and Visa are both rolling out infrastructure that lets AI bots complete purchases on your behalf using your card. American Express is also preparing its system for agent-based shopping. The card networks are building the rails before anyone knows how many people will actually want bots to buy things for them.",
+      "why_it_matters": "Payment infrastructure is betting on AI agents before consumers have asked for them.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/ai/mastercard-inks-deal-as-payment-giants-brace-for-new-era-of-ai-shopping-eb22da8b?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Mastercard Joins Visa in Rolling Out AI Bots That Can Do Your Shopping",
+      "fingerprint": "1c0b43a33c8c18d0"
+    },
+    {
+      "slot": "everyday",
+      "headline": "AI agents can now call restaurants and customer service for you",
+      "blurb": "Meta's Muse and a rival called Instinct both just added phone-calling features. You can ask them to book a table, cancel a subscription, or handle other calls you'd rather not make yourself \u2014 the agent dials, navigates menus, and talks to humans on your behalf.",
+      "why_it_matters": "AI assistants are moving from answering questions to acting as your actual representative on the phone.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/17/rival-ai-agents-instinct-and-metas-muse-both-add-the-ability-to-make-calls/",
+      "tier": 1,
+      "original_headline": "Rival AI agents, Instinct and Meta\u2019s Muse, both add the ability to make calls",
+      "fingerprint": "370675dbb83eb58c"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The priority collision detector",
+    "kicker": "",
+    "prompt": "I have three things competing for my time this week. I'll list them below. For each one, tell me: what happens if it slips by a week, what happens if it slips by a month, and which of the other two it's secretly stealing energy from. Then rank them.",
+    "tool_hint": "When everything feels urgent but you can only do one thing well."
+  },
+  "daily_question": "If an AI agent could handle one annoying errand for you this week, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1789658909.8032207,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789658923.6173942,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 43,
+        "persona": "build",
+        "reason": "Major product launch - Anthropic expanding Claude into productivity suite competing directly with Google Workspace. Concrete shipped features users can try today, clear competitive positioning."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Rmmu9SU7NojwVgBYXUeovr"
+    },
+    {
+      "ts": 1789658923.6174626,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude comes for Gemini with its own take on Docs and Slides\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Rmmu9SU7NojwVgBYXUeovr"
+    },
+    {
+      "ts": 1789658923.6174984,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 42,
+        "persona": "build",
+        "reason": "Google opening its smart home platform to third-party AI agents via MCP is a significant platform move with immediate practical applications. Shows the agent ecosystem maturing."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012SkeW3LPkqM4miDxqS2c6u"
+    },
+    {
+      "ts": 1789658923.6175334,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google will now let any AI agent run your smart home\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_012SkeW3LPkqM4miDxqS2c6u"
+    },
+    {
+      "ts": 1789658923.6175447,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 175,
+        "persona": "market",
+        "reason": "Mastercard, Visa, and Amex all preparing infrastructure for AI shopping agents represents major financial system shift. Concrete business infrastructure enabling agentic future."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01S1sqaoCmNRDJoX5VnhJL77"
+    },
+    {
+      "ts": 1789658923.617603,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Mastercard Joins Visa in Rolling Out AI Bots That Can Do Your Shopping\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01S1sqaoCmNRDJoX5VnhJL77"
+    },
+    {
+      "ts": 1789658923.6176245,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 47,
+        "persona": "everyday",
+        "reason": "AI agents making phone calls for reservations and cancellations is a clear practical capability people can use immediately. Shows agents moving from chat to action."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HhJsLr4m2iqkVR9ngtWwyi"
+    },
+    {
+      "ts": 1789658923.617695,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Rival AI agents, Instinct and Meta\\u2019s Muse, both add the ability to make calls\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01HhJsLr4m2iqkVR9ngtWwyi"
+    },
+    {
+      "ts": 1789658929.4985697,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_017jTe8ENxLQGvPBMkRkCfhX"
+    },
+    {
+      "ts": 1789658930.224089,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789658930.2241204,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Claude comes for Gemini with its own take on Docs and Slides\", \"pick_2\": \"Google will now let any AI agent run your smart home\", \"pick_3\": \"Mastercard Joins Visa in Rolling Out AI Bots That Can Do Your Shopping\", \"pick_4\": \"Rival AI agents, Instinct and Meta\\u2019s Muse, both add the ability to make calls\"}}",
+      "tool_use_id": "toolu_017jTe8ENxLQGvPBMkRkCfhX"
+    }
+  ],
+  "issue_num": 92
+}
