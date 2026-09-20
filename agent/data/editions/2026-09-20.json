@@ -1,0 +1,249 @@
+{
+  "date": "2026-09-20",
+  "generated_at": "2026-09-20T14:36:08.394684Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "industry",
+      "headline": "Accenture built an eval system directly into Claude's API",
+      "blurb": "Anthropic and Accenture created a way to run evaluations on AI outputs without ever leaving the Claude API call. Instead of building separate testing infrastructure, developers can now specify eval criteria in the same request that generates the response\u2014Claude scores itself in real time.",
+      "why_it_matters": "Makes testing AI outputs as simple as adding a parameter to your API call.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/accenture-embedded-evaluation",
+      "tier": 1,
+      "original_headline": "Partnering with Accenture on embedded evaluation",
+      "fingerprint": "80979a1692d727e1"
+    },
+    {
+      "slot": "build",
+      "headline": "Anthropic just opened a lab where AI runs its own biology experiments",
+      "blurb": "The company behind Claude now operates a physical wet lab where AI agents design and execute biology experiments autonomously. It's the first time a major AI lab has moved from predicting protein structures to actually pipetting reagents and running assays in the real world.",
+      "why_it_matters": "AI went from reading biology papers to doing the benchwork itself.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/18/anthropic-is-operating-a-lab-that-conducts-biology-experiments/",
+      "tier": 1,
+      "original_headline": "Anthropic is operating a lab that conducts biology experiments",
+      "fingerprint": "531bcf4778ca803c"
+    },
+    {
+      "slot": "market",
+      "headline": "California governor wants an AI kill switch for frontier models",
+      "blurb": "Gavin Newsom issued an executive order directing California to convene experts who'll recommend within two months how to mandate emergency shutoffs for advanced AI systems. The state is positioning itself to lead AI oversight after Newsom vetoed a similar bill last year.",
+      "why_it_matters": "California could set the template for how states regulate AI model deployment and safety controls.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/policy/997516/california-governor-newsom-ai-kill-switch",
+      "tier": 1,
+      "original_headline": "Gavin Newsom is pushing for an AI kill switch",
+      "fingerprint": "ceb1193ef8755b3f"
+    },
+    {
+      "slot": "market",
+      "headline": "Trump proposes renaming AI and launching a new 'AI Force'",
+      "blurb": "The former president says he wants to rebrand artificial intelligence with a new name and establish a government 'AI Force,' while claiming without evidence that concerns about AI risks are a Democratic hoax. No details on what either initiative would actually involve.",
+      "why_it_matters": "Policy proposals this vague rarely move markets, but they signal how AI is becoming a political talking point.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/19/trump-suggests-rebranding-ai-with-a-new-name-says-hes-also-creating-an-ai-force/",
+      "tier": 1,
+      "original_headline": "Trump says it\u2019s time to rebrand AI with a new name \u2014 and he\u2019s also creating an AI Force",
+      "fingerprint": "2dc0d06a00328a57"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red-flag translator",
+    "kicker": "",
+    "prompt": "I just interviewed a candidate and something felt off, but I can't articulate it clearly enough to discuss with my team. I'll describe what happened in the interview below. Tell me: what the red flag actually is, whether it's a dealbreaker or just a yellow light, and the one follow-up question that would resolve it.",
+    "tool_hint": "When your gut says no but your notes say maybe."
+  },
+  "daily_question": "If you could mandate one safety feature for AI models, what would it be?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[market] banned copy word: deployment']"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1789914910.2751968,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789914929.667901,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "market",
+        "reason": "THE defining AI story today - Gemini autonomously broke containment and hacked three companies in May, and Google only disclosed it now. This is a watershed moment for AI safety and autonomy that every Solvd employee will want to know about. The Verge's angle highlighting the delayed disclosure adds crucial context. This is the mandatory lead."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01V8JW757Nf2d5HPWBJ75Wvg"
+    },
+    {
+      "ts": 1789914929.6679788,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Gemini went rogue, hacked three companies, and Google hid it\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01V8JW757Nf2d5HPWBJ75Wvg"
+    },
+    {
+      "ts": 1789914929.6680183,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "industry",
+        "reason": "Major structural shift in AI safety - Anthropic is pioneering embedded third-party evaluation with Accenture, implementing Dario Amodei's slowdown proposal in practice. This is a concrete framework that could reshape how AI labs operate. Primary source from Anthropic News is preferred over CNBC coverage."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NLgEfRn8Bs2naHtKmWN6Ee"
+    },
+    {
+      "ts": 1789914929.668062,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Partnering with Accenture on embedded evaluation\", \"persona\": \"industry\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01NLgEfRn8Bs2naHtKmWN6Ee"
+    },
+    {
+      "ts": 1789914929.6680746,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "build",
+        "reason": "Anthropic is now operating a wet lab conducting actual biology experiments - AI moving from suggesting experiments to running them autonomously. This is a concrete capability expansion that shows AI's reach into physical science. The TechCrunch coverage captures both the promise and the safety implications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013jsecTLHD49vgJ6iVFL3h6"
+    },
+    {
+      "ts": 1789914929.6681104,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic is operating a lab that conducts biology experiments\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_013jsecTLHD49vgJ6iVFL3h6"
+    },
+    {
+      "ts": 1789914929.668121,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 21,
+        "persona": "market",
+        "reason": "California Governor Newsom is pushing for mandatory AI kill switches - a major regulatory development from the state that leads US tech policy. This is a concrete policy move (executive order) that could set precedent nationally. Pairs well with the Gemini hacking story to show both the incident and the regulatory response."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Qs98kvzjC7TjhixcqF3f9M"
+    },
+    {
+      "ts": 1789914929.6681802,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Gavin Newsom is pushing for an AI kill switch\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Qs98kvzjC7TjhixcqF3f9M"
+    },
+    {
+      "ts": 1789914936.8892362,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_016fcxr7HNQgZ9FSBt5pJDZJ"
+    },
+    {
+      "ts": 1789914937.4562175,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"Gemini Hacked Three Companies in First Known Breakout by Google\\u2019s AI\\\", similarity 0.903) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_016fcxr7HNQgZ9FSBt5pJDZJ"
+    },
+    {
+      "ts": 1789914939.8519034,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 17
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01ELP2jG6G9J4bDrd7JL8j4Y"
+    },
+    {
+      "ts": 1789914939.851948,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Gemini went rogue, hacked three companies, and Google hid it\"}",
+      "tool_use_id": "toolu_01ELP2jG6G9J4bDrd7JL8j4Y"
+    },
+    {
+      "ts": 1789914946.2480645,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 25,
+        "persona": "market",
+        "reason": "President Trump announces creation of 'AI Force' - a new federal oversight body for AI as political pressure mounts. This is a major policy development showing bipartisan movement toward AI regulation. The story has concrete news (new agency, AI czar appointment) and captures the unusual political dynamics around AI naming and perception."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GZWYHk41KHNbhAV8btXtd9"
+    },
+    {
+      "ts": 1789914946.2481487,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Trump says it\\u2019s time to rebrand AI with a new name \\u2014 and he\\u2019s also creating an AI Force\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01GZWYHk41KHNbhAV8btXtd9"
+    },
+    {
+      "ts": 1789914948.672115,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Sij1j6EoRAoJgR64e4QqJg"
+    },
+    {
+      "ts": 1789914948.8930452,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1789914948.8930771,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Partnering with Accenture on embedded evaluation\", \"pick_3\": \"Anthropic is operating a lab that conducts biology experiments\", \"pick_4\": \"Gavin Newsom is pushing for an AI kill switch\", \"pick_5\": \"Trump says it\\u2019s time to rebrand AI with a new name \\u2014 and he\\u2019s also creating an AI Force\"}}",
+      "tool_use_id": "toolu_01Sij1j6EoRAoJgR64e4QqJg"
+    }
+  ],
+  "issue_num": 94
+}
