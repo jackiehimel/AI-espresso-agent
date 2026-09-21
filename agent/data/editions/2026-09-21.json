@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-21",
+  "generated_at": "2026-09-21T16:51:31.060925Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Amazon blocked Meta's Muse AI agent from shopping on its site",
+      "blurb": "Meta's Muse AI agent can no longer buy things on Amazon after the retailer cut it off over the weekend. Users now see a popup saying the 'unauthorized AI agent' violates Amazon's terms of service. Meta apparently didn't tell Amazon it was building a shopping agent that would crawl their site.",
+      "why_it_matters": "The first major AI agent turf war just started \u2014 and it's over who controls your shopping data.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/998078/amazon-blocks-meta-muse-ai-agent-shopping",
+      "tier": 1,
+      "original_headline": "Amazon blocks Meta\u2019s Muse AI agent",
+      "fingerprint": "b2e62f1a093e381d"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google's first laptops start at $899 with built-in AI",
+      "blurb": "Google announced pricing for its first 'Googlebooks' laptops, made by Dell, HP, Lenovo, Acer, and ASUS. Starting at $899, the laptops come with built-in AI features and mark Google's entry into the high-end laptop market where AI capabilities are now standard.",
+      "why_it_matters": "Google is competing directly with Windows and Mac laptops in premium hardware for the first time.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-09-21/google-rolls-out-899-plus-googlebooks-from-dell-hp-lenovo-acer-asus",
+      "tier": 1,
+      "original_headline": "Google Rolls Out $899-Plus Googlebooks from Dell, HP, Lenovo, Acer, ASUS",
+      "fingerprint": "cd812b373c763dd6"
+    },
+    {
+      "slot": "market",
+      "headline": "Anthropic files for IPO while its CEO warns against racing to AGI",
+      "blurb": "The company behind Claude is going public with $100 billion in annualized revenue, even as CEO Dario Amodei publicly argues that some advanced AI models should slow down. The IPO prospectus acknowledges safety risks while betting investors will fund exactly the kind of scale-up Amodei has cautioned against.",
+      "why_it_matters": "A company can warn about AI risks and still ask Wall Street to fund the race.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/09/18/technology/anthropic-ipo-ai-safety.html",
+      "tier": 1,
+      "original_headline": "Anthropic Pursues IPO Despite Its A.I. Safety Warnings",
+      "fingerprint": "e54f39c8728b7f70"
+    },
+    {
+      "slot": "build",
+      "headline": "Legal AI startup Harvey is ditching OpenAI to cut its inference bill",
+      "blurb": "Harvey, the $15.6 billion legal AI company, is moving away from GPT-4 and other closed models because inference costs got too high. The company built its business on fine-tuning OpenAI's models for lawyers, but soaring AI bills are pushing it toward open-source alternatives it can run itself.",
+      "why_it_matters": "When your AI costs eat your margins, you stop renting and start hosting",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-09-21/startups-like-harvey-embrace-open-models-to-cut-reliance-on-anthropic-openai",
+      "tier": 1,
+      "original_headline": "Startups Like Harvey Embrace Open Models to Cut Reliance on Anthropic, OpenAI",
+      "fingerprint": "d666e7d779695483"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting postmortem",
+    "kicker": "",
+    "prompt": "I just sat through a meeting that felt like a waste. Describe what happened below \u2014 who talked, what we covered, how long it ran. Tell me: was this meeting necessary, what decision or artifact should have come out of it, and what format would have accomplished that in half the time.",
+    "tool_hint": "Right after the meeting that could've been a Slack thread."
+  },
+  "daily_question": "If you were running a company's AI budget, what would you cut first\u2014expensive frontier models or the tools built on top of them?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1790009442.5230026,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790009463.6521957,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 16,
+        "persona": "market",
+        "reason": "Today's defining story: Amazon blocking Meta's Muse AI agent is a major platform war development that shows the stakes of AI agents in e-commerce. Clear subject+verb, involves two tier-1 companies, and signals the battle lines being drawn in the AI agent era."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FEQbnAvz2auj9bKZkwoDJy"
+    },
+    {
+      "ts": 1790009463.6522794,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon blocks Meta\\u2019s Muse AI agent\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01FEQbnAvz2auj9bKZkwoDJy"
+    },
+    {
+      "ts": 1790009463.6523347,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 170,
+        "persona": "everyday",
+        "reason": "Google launching Googlebooks at $899+ is a concrete hardware launch with AI features at the center. Primary source (Bloomberg on embargo), clear what shipped, and represents Google's push into premium AI-powered laptops."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019HU85QcWe3aZsuMbnFLwox"
+    },
+    {
+      "ts": 1790009463.6523783,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google Rolls Out $899-Plus Googlebooks from Dell, HP, Lenovo, Acer, ASUS\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_019HU85QcWe3aZsuMbnFLwox"
+    },
+    {
+      "ts": 1790009463.652397,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 129,
+        "persona": "market",
+        "reason": "Anthropic pursuing IPO at $100B annualized revenue is major market news - a defining AI company going public. The tension with Dario's safety warnings adds intrigue. Clear business milestone that shows AI's commercial scale."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015TA84oKwtBwt4gaahsh43V"
+    },
+    {
+      "ts": 1790009463.6524541,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic Pursues IPO Despite Its A.I. Safety Warnings\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_015TA84oKwtBwt4gaahsh43V"
+    },
+    {
+      "ts": 1790009463.6524708,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 162,
+        "persona": "build",
+        "reason": "Harvey ($15.6B legal AI startup) shifting to open models to cut reliance on OpenAI/Anthropic is a significant developer story showing the economics of AI changing. Concrete vendor strategy shift that matters to builders."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019jQvxkQpovTQLgZq4BLJEH"
+    },
+    {
+      "ts": 1790009463.6525285,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Startups Like Harvey Embrace Open Models to Cut Reliance on Anthropic, OpenAI\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_019jQvxkQpovTQLgZq4BLJEH"
+    },
+    {
+      "ts": 1790009469.407125,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_019uuont3cPmy9cZ5HXcrmcR"
+    },
+    {
+      "ts": 1790009469.9234488,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790009469.9234793,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Amazon blocks Meta\\u2019s Muse AI agent\", \"pick_2\": \"Google Rolls Out $899-Plus Googlebooks from Dell, HP, Lenovo, Acer, ASUS\", \"pick_3\": \"Anthropic Pursues IPO Despite Its A.I. Safety Warnings\", \"pick_4\": \"Startups Like Harvey Embrace Open Models to Cut Reliance on Anthropic, OpenAI\"}}",
+      "tool_use_id": "toolu_019uuont3cPmy9cZ5HXcrmcR"
+    }
+  ],
+  "issue_num": 95
+}
