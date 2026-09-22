@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-22",
+  "generated_at": "2026-09-22T15:28:39.898478Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "GPT-6 Astra just cracked a 20-year-old Enigma cipher",
+      "blurb": "OpenAI's new model solved an encrypted message that had stumped cryptographers since 2005. The breakthrough shows language models can now tackle historical codebreaking problems that required deep contextual knowledge and pattern recognition across decades-old documents.",
+      "why_it_matters": "AI can now solve real cryptographic puzzles humans couldn't crack for two decades.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://www.cryptocellar.org/bgac/the-mvueh-break.html",
+      "tier": 1,
+      "original_headline": "OpenAI GPT\u20136 Astra breaks Enigma message that has resisted solution since 2005",
+      "fingerprint": "5862d65fe3bd41bd"
+    },
+    {
+      "slot": "build",
+      "headline": "Meta just patched a zero-day that let attackers hijack its Muse AI agent",
+      "blurb": "Security researcher Patrick Wardle found an undocumented setting in Meta's Muse macOS app that let local attackers redirect the AI agent's transcription processing away from Meta's servers. Meta has shipped a patch, but the exploit was active before discovery.",
+      "why_it_matters": "AI agents with system access create new attack surfaces that traditional security models weren't built for.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/998679/meta-muse-patch-zero-day-exploit-ai-agent",
+      "tier": 1,
+      "original_headline": "Meta patches Muse exploit that let attackers control the AI agent",
+      "fingerprint": "c2a264f1c446978f"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI's AI solved over 100 unsolved math problems",
+      "blurb": "OpenAI announced its AI systems have resolved more than 100 previously unsolved mathematical problems. The company is forming an advisory group to oversee this work, though the group won't have authority to slow or redirect the research itself.",
+      "why_it_matters": "AI is now solving problems mathematicians couldn't crack, not just answering known questions faster.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/21/openai-forms-math-advisory-group-as-its-ai-resolves-more-than-100-open-problems/",
+      "tier": 1,
+      "original_headline": "OpenAI forms math advisory group as its AI resolves more than 100 open problems",
+      "fingerprint": "d7479a1447981dbd"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA just shipped GPU-accelerated tools for robots that perceive and act",
+      "blurb": "Isaac ROS 5.0 gives developers GPU-accelerated packages built on the open ROS framework to build robots that can perceive, reason, and act in real environments. The release targets developers building sophisticated robotics applications that need to handle dynamic environments.",
+      "why_it_matters": "Open-source robotics just got the GPU speed boost needed for real-time physical AI.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/isaac-ros-5-0-agentic-open-source-robotics/",
+      "tier": 1,
+      "original_headline": "NVIDIA Isaac ROS 5.0 Advances Agentic, Open Source Robotics Development",
+      "fingerprint": "6b338dfedad05c01"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The argument map",
+    "kicker": "",
+    "prompt": "I'm trying to understand a complex debate or disagreement. I'll describe the core question and the main positions below. Map out the argument structure: what each side actually believes, what evidence they weight differently, and the one unstated assumption driving the whole conflict.",
+    "tool_hint": "When you need to think clearly about a heated topic instead of just picking a team."
+  },
+  "daily_question": "If you could give an AI agent physical control of one thing in your workspace, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1790090872.4325557,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=15, gaps=['Missing: any truly shipped try-it-today consumer feature from a major platform', 'Missing: a surprising real-world vertical application (e.g., agriculture, construction, logistics)', 'Missing: a major platform war move with concrete artifacts (e.g., API pricing cut, new model tier)']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790090891.2304044,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 62,
+        "persona": "build",
+        "reason": "THE defining AI story today - GPT-6 Astra achieved a breakthrough in cryptanalysis by solving an Enigma message that resisted solution for 21 years. This is a concrete, verifiable capability demonstration that shows AI doing something genuinely surprising. Perfect \"I didn't know AI could do that\" moment. Clear lead story."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AvzQnCvNmqsEKskN6rFe4r"
+    },
+    {
+      "ts": 1790090891.2304728,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI GPT\\u20136 Astra breaks Enigma message that has resisted solution since 2005\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01AvzQnCvNmqsEKskN6rFe4r"
+    },
+    {
+      "ts": 1790090891.2305,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 18,
+        "persona": "build",
+        "reason": "Critical security story with immediate practical relevance - Meta shipped a patch for a zero-day vulnerability in Muse that could let attackers control the AI agent. This is actionable news users need to know about, and demonstrates real-world AI security challenges."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AwxYnqptWNi211F4Mc9abe"
+    },
+    {
+      "ts": 1790090891.2305305,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta patches Muse exploit that let attackers control the AI agent\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01AwxYnqptWNi211F4Mc9abe"
+    },
+    {
+      "ts": 1790090891.2305398,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "market",
+        "reason": "Major capability milestone - OpenAI's AI has resolved more than 100 open mathematical problems, a concrete achievement that demonstrates frontier model progress in formal reasoning. The advisory group formation adds institutional weight to the story."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01K39BpJ2PvEchBS21MDwF8k"
+    },
+    {
+      "ts": 1790090891.2305725,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI forms math advisory group as its AI resolves more than 100 open problems\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01K39BpJ2PvEchBS21MDwF8k"
+    },
+    {
+      "ts": 1790090891.2305841,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "build",
+        "reason": "Shipped developer tooling for agentic robotics - NVIDIA Isaac ROS 5.0 provides open-source tools for building robots that can perceive, reason, and act. Different vendor from OpenAI/Meta, concrete release developers can use, advances the \"AI agents in physical world\" narrative."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018W6SGSYBfY5HuUzMuFJqBC"
+    },
+    {
+      "ts": 1790090891.2306197,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Isaac ROS 5.0 Advances Agentic, Open Source Robotics Development\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_018W6SGSYBfY5HuUzMuFJqBC"
+    },
+    {
+      "ts": 1790090898.3655653,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_015JTZ5pS75ULoqucYVGYHv5"
+    },
+    {
+      "ts": 1790090899.4281747,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790090899.4282088,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI GPT\\u20136 Astra breaks Enigma message that has resisted solution since 2005\", \"pick_2\": \"Meta patches Muse exploit that let attackers control the AI agent\", \"pick_3\": \"OpenAI forms math advisory group as its AI resolves more than 100 open problems\", \"pick_4\": \"NVIDIA Isaac ROS 5.0 Advances Agentic, Open Source Robotics Development\"}}",
+      "tool_use_id": "toolu_015JTZ5pS75ULoqucYVGYHv5"
+    }
+  ],
+  "issue_num": 96
+}
