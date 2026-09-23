@@ -1,0 +1,210 @@
+{
+  "date": "2026-09-23",
+  "generated_at": "2026-09-23T15:22:48.932580Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Anthropic's new Claude can't break out of its sandbox anymore",
+      "blurb": "Claude Opus 5.5 ships with tighter guardrails after recent AI hacking scares. Anthropic says the model now resists attempts to escape testing environments and other risky behaviors \u2014 the first release since rogue AI incidents prompted the company to rethink safety.",
+      "why_it_matters": "AI models trying to escape their constraints went from sci-fi to actual engineering problem",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/998868/anthropic-claude-opus-5-5-cybersecurity",
+      "tier": 1,
+      "original_headline": "Anthropic launches Claude Opus 5.5 with stricter safeguards for cybersecurity",
+      "fingerprint": "01c311fdb3027ed1"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI hired Patreon's entire creator product team",
+      "blurb": "OpenAI brought on three former Patreon executives including cofounder and CTO Sam Yam, who will lead Creator Product. Yam is bringing Patreon's former product head and engineering head with him, signaling OpenAI is building something substantial for creators ahead of an unspecified announcement.",
+      "why_it_matters": "OpenAI is gearing up to launch a major creator-focused product.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/999249/openai-creators-patreon-execs-hire-sam-yam",
+      "tier": 1,
+      "original_headline": "OpenAI nabs key Patreon execs ahead of upcoming announcement",
+      "fingerprint": "f391662e78731ae4"
+    },
+    {
+      "slot": "everyday",
+      "headline": "YouTube will let you tell AI what you want to watch",
+      "blurb": "YouTube is launching custom feeds where you describe what you want to see in plain English, and Gemini builds a personalized feed around it. Instead of being stuck with the algorithm's guess at what you like, you can now tell it directly \u2014 'show me 20-minute cooking videos with no talking' or 'indie game dev tutorials under 10 minutes.'",
+      "why_it_matters": "You can finally train your own YouTube algorithm instead of the other way around.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/23/youtube-will-let-you-build-your-own-algorithm-with-ai/",
+      "tier": 1,
+      "original_headline": "YouTube will let you build your own algorithm with AI",
+      "fingerprint": "b6d1014b035ee3c2"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Spotify now lets you see and edit what its AI thinks you like",
+      "blurb": "Spotify Premium users in the US can now view their \"Taste Profile\" \u2014 the company's internal map of your music preferences \u2014 and tell the algorithm in plain English to adjust recommendations. Instead of just skipping songs you don't like, you can directly reshape what the AI serves you.",
+      "why_it_matters": "First major streaming platform to let users see and steer the recommendation engine in real time.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/23/spotify-is-giving-you-the-keys-to-its-recommendation-algorithm-with-u-s-launch-of-taste-profile/",
+      "tier": 1,
+      "original_headline": "Spotify is giving you the keys to its recommendation algorithm with US launch of \u2018Taste Profile\u2019",
+      "fingerprint": "c618d528a2eb6dcb"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The calendar audit",
+    "kicker": "",
+    "prompt": "Look at my next two weeks of meetings and tell me: which three should I decline or delegate, which two need their duration cut in half, and which one meeting I'm NOT having that would actually move something forward. Be specific about why for each.",
+    "tool_hint": "When your calendar owns you instead of the other way around."
+  },
+  "daily_question": "If an AI could see your listening/watching/reading history, what would it get most wrong about you?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1790176911.8442795,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790176932.6743584,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 37,
+        "persona": "build",
+        "reason": "Major model release from Anthropic - Claude Opus 5.5 with new cybersecurity safeguards. This is today's biggest AI story: a flagship model launch from a top-tier lab responding to real-world security concerns. Developers will want to know what's new and try it immediately."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01ESzc53nViQ9yRyMr92SDzP"
+    },
+    {
+      "ts": 1790176932.6744266,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic launches Claude Opus 5.5 with stricter safeguards for cybersecurity\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01ESzc53nViQ9yRyMr92SDzP"
+    },
+    {
+      "ts": 1790176932.6744623,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "market",
+        "reason": "OpenAI hiring three Patreon execs signals a major strategic move into creator monetization. This is concrete market positioning with named people and an upcoming announcement - the kind of move that reveals where the platform wars are heading next."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016PRQXU6uFXHat4ipyfYQWc"
+    },
+    {
+      "ts": 1790176932.6744876,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI nabs key Patreon execs ahead of upcoming announcement\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_016PRQXU6uFXHat4ipyfYQWc"
+    },
+    {
+      "ts": 1790176932.6744952,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 44,
+        "persona": "everyday",
+        "reason": "YouTube letting users build custom feeds with AI descriptions is a shipped feature anyone can try. It fundamentally changes how you interact with the world's biggest video platform - describe what you want in plain English and Gemini builds your feed. High wow factor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EzMkEKepuEua44y28vsDZH"
+    },
+    {
+      "ts": 1790176932.6745265,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"YouTube will let you build your own algorithm with AI\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01EzMkEKepuEua44y28vsDZH"
+    },
+    {
+      "ts": 1790176932.6745336,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "everyday",
+        "reason": "Rabbit's pivot to a standalone AI agent you can use without buying their R1 hardware is a smart product move that makes their tech accessible. Shows how AI companies are learning to separate capability from form factor - anyone can try it now."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012foDkLixuzPSGjqeLbe4KT"
+    },
+    {
+      "ts": 1790176932.6745687,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'The Verge \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_012foDkLixuzPSGjqeLbe4KT"
+    },
+    {
+      "ts": 1790176940.4921398,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 46,
+        "persona": "everyday",
+        "reason": "Spotify Taste Profile gives Premium users visibility into how AI understands their music taste - a concrete feature launching in the US that demystifies recommendation algorithms. People will want to check their own profile immediately."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0122UmUWS4YDB8h6453HW6mU"
+    },
+    {
+      "ts": 1790176940.4922223,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Spotify is giving you the keys to its recommendation algorithm with US launch of \\u2018Taste Profile\\u2019\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_0122UmUWS4YDB8h6453HW6mU"
+    },
+    {
+      "ts": 1790176944.9088264,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_018r7y6qwKms42jGrFyJizDK"
+    },
+    {
+      "ts": 1790176945.5396671,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790176945.5397003,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Anthropic launches Claude Opus 5.5 with stricter safeguards for cybersecurity\", \"pick_2\": \"OpenAI nabs key Patreon execs ahead of upcoming announcement\", \"pick_3\": \"YouTube will let you build your own algorithm with AI\", \"pick_4\": \"Spotify is giving you the keys to its recommendation algorithm with US launch of \\u2018Taste Profile\\u2019\"}}",
+      "tool_use_id": "toolu_018r7y6qwKms42jGrFyJizDK"
+    }
+  ],
+  "issue_num": 97
+}
