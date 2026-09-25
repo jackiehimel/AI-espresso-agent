@@ -1,0 +1,336 @@
+{
+  "date": "2026-09-25",
+  "generated_at": "2026-09-25T15:47:31.894810Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Anthropic just locked in $12 billion of computing power from Akamai",
+      "blurb": "Anthropic signed a seven-year, $11.6 billion deal with Akamai for AI computing capacity\u2014on top of the $1.8 billion contract the two companies signed earlier this year. That's $13.4 billion total committed to one infrastructure provider, giving Anthropic guaranteed access to the chips and clusters it needs to train future Claude models.",
+      "why_it_matters": "Shows how expensive the race to build frontier AI has become\u2014and how much cash Anthropic is betting on scale.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/videos/2026-09-25/anthropic-akamai-strike-12-billion-ai-computing-deal-video",
+      "tier": 1,
+      "original_headline": "Anthropic, Akamai Strike $12 Billion AI Computing Deal",
+      "fingerprint": "6e4e51b89e096599"
+    },
+    {
+      "slot": "industry",
+      "headline": "Google is training an AI to fly satellites in space",
+      "blurb": "Project Suncatcher is Google's effort to put AI models on satellites that can make decisions in orbit without waiting for ground control. The system would let satellites navigate around debris, adjust paths, and respond to events in real time \u2014 crucial as low Earth orbit gets more crowded.",
+      "why_it_matters": "Autonomous satellites could dodge collisions and adapt faster than human operators can command them.",
+      "source_name": "Google \u2014 Innovation & AI",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/google-research/google-project-suncatcher-facts/",
+      "tier": 1,
+      "original_headline": "Behind Project Suncatcher, our moonshot to put AI in space",
+      "fingerprint": "065a4e75de794a1b"
+    },
+    {
+      "slot": "market",
+      "headline": "Microsoft bundles chat, coding, and agents into one Copilot app",
+      "blurb": "Microsoft just launched a redesigned Copilot that combines three AI tools in one interface: chat, coding assistance, and agents that can act on your behalf. The company is also renaming Scout, its AI personal assistant from Build, to Autopilot.",
+      "why_it_matters": "Microsoft is betting a single AI interface can replace multiple separate tools.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/news/1000532/microsoft-copilot-super-app-chat-coding-autopilot",
+      "tier": 1,
+      "original_headline": "Microsoft thinks its new Copilot \u2018super app\u2019 will be as influential as Office",
+      "fingerprint": "2ef9f93318be8258"
+    },
+    {
+      "slot": "build",
+      "headline": "Amazon sellers can now run an AI assistant that works 24/7",
+      "blurb": "Amazon upgraded its Seller Assistant to handle routine tasks around the clock and launched a plugin that pipes seller data into Claude and Amazon Q. Sellers can ask these AI tools questions about their store performance, inventory, or listings without opening Seller Central.",
+      "why_it_matters": "Third-party sellers get AI that actually touches their business data and acts on it.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/innovation-at-amazon/seller-assistant-plugin-amazon-quick-claude?utm_source=rss",
+      "tier": 1,
+      "original_headline": "Amazon gives sellers an even smarter Seller Assistant and a new plugin for Amazon Quick and Anthropic\u2019s Claude",
+      "fingerprint": "8c8c34d20377056d"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Meta just launched an AI app that builds VR games from text prompts",
+      "blurb": "Meta released Horizon Create for mobile and Horizon Studio for desktop\u2014both let you generate games for its Horizon social platform using AI prompts. The mobile version is designed for quick creation on the go, while the browser app gives more detailed control over what gets built.",
+      "why_it_matters": "Game creation moved from code editors to chat windows you can use on your phone.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/games/999972/meta-horizon-create-studio-ai-games",
+      "tier": 1,
+      "original_headline": "Meta is going to let you build games with AI right on your phone",
+      "fingerprint": "b0a0ffe62d2be767"
+    },
+    {
+      "slot": "industry",
+      "headline": "Google's AI can now remember your stuff without anyone at Google seeing it",
+      "blurb": "DeepMind just added encrypted server-side memory to Private AI Compute, letting personal AI assistants remember context across sessions while keeping that data cryptographically inaccessible to Google itself. The memory lives on servers but stays locked even from employees and subpoenas.",
+      "why_it_matters": "Personal AI that remembers you just became possible without trading away your privacy.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/advancing-private-ai-compute-with-secure-server-side-memory/",
+      "tier": 1,
+      "original_headline": "Advancing Private AI Compute with secure, server-side memory",
+      "fingerprint": "90f2db174a4fdfd1"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The upside-down org chart",
+    "kicker": "",
+    "prompt": "I'll describe my team structure and current responsibilities below. Redesign it as if you were optimizing for learning speed instead of shipping speed. Show me what changes, who should report to whom, and which meetings disappear. Assume the same headcount.",
+    "tool_hint": "When everyone's busy but nobody's getting sharper."
+  },
+  "daily_question": "If you could give an AI agent one job to do 24/7 for the next month, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1790351183.0785763,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=14, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790351197.5083954,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "everyday",
+        "reason": "Lead story: Google's biggest Gemini update - Live Avatar gives the AI a real-time visual persona. This is the defining product launch today, shipped and try-it-today. Primary source (Google DeepMind Blog)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CwAeRKgzeHWsgthf5nCQ9Y"
+    },
+    {
+      "ts": 1790351197.5084653,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Gemini 3.8 Live with Live Avatar\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01CwAeRKgzeHWsgthf5nCQ9Y"
+    },
+    {
+      "ts": 1790351197.5085013,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 197,
+        "persona": "market",
+        "reason": "$12B Anthropic-Akamai computing deal over 7 years - massive infrastructure partnership showing AI scale. Concrete business move with huge numbers."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012TMrkjZrsXSr8zHm4HyPXe"
+    },
+    {
+      "ts": 1790351197.5085375,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic, Akamai Strike $12 Billion AI Computing Deal\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_012TMrkjZrsXSr8zHm4HyPXe"
+    },
+    {
+      "ts": 1790351197.5085492,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "industry",
+        "reason": "Google launching AI satellite tomorrow (Project Suncatcher) - surprising real-world application, concrete timeline. Primary source. Won't compete with other Google picks as this is infrastructure/space angle."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GqK35FgjeM4tY1FM4bsuE2"
+    },
+    {
+      "ts": 1790351197.5085933,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Behind Project Suncatcher, our moonshot to put AI in space\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01GqK35FgjeM4tY1FM4bsuE2"
+    },
+    {
+      "ts": 1790351197.5086129,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 42,
+        "persona": "everyday",
+        "reason": "Gemini can call businesses and wait on hold for you - practical shipped feature on Pixel 11. Screenshot-worthy utility that makes AI feel useful in daily life."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01MrLA8obtzto5ncSMdMeAhz"
+    },
+    {
+      "ts": 1790351197.5086677,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"vendor cap: google already has 2 stories\"}",
+      "tool_use_id": "toolu_01MrLA8obtzto5ncSMdMeAhz"
+    },
+    {
+      "ts": 1790351200.9146297,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "market",
+        "reason": "Microsoft's new Copilot super app - major platform consolidation, company says it will be as influential as Office. Shipped redesign with concrete features."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Gxz3D3txNx8e8B9YsmnKM5"
+    },
+    {
+      "ts": 1790351200.914709,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Microsoft thinks its new Copilot \\u2018super app\\u2019 will be as influential as Office\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Gxz3D3txNx8e8B9YsmnKM5"
+    },
+    {
+      "ts": 1790351208.6222377,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 22,
+        "persona": "build",
+        "reason": "Amazon's enhanced Seller Assistant with 24/7 automation and Claude plugin - practical developer/business tool with clear utility. Primary source (Amazon News)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EZAButqCa9v4AU7618HASF"
+    },
+    {
+      "ts": 1790351208.622315,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon gives sellers an even smarter Seller Assistant and a new plugin for Amazon Quick and Anthropic\\u2019s Claude\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01EZAButqCa9v4AU7618HASF"
+    },
+    {
+      "ts": 1790351208.6223495,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 38,
+        "persona": "everyday",
+        "reason": "Meta letting users build games with AI on their phone - creative tool that makes AI accessible, surprising capability. Fits 'I want to try that' test."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01E2PUULrpWhbGW5dFCP1pJ4"
+    },
+    {
+      "ts": 1790351208.622391,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta is going to let you build games with AI right on your phone\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01E2PUULrpWhbGW5dFCP1pJ4"
+    },
+    {
+      "ts": 1790351213.157643,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Pogr49NVczt78fJTsr5Smm"
+    },
+    {
+      "ts": 1790351214.0056736,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking\\\", similarity 0.88) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01Pogr49NVczt78fJTsr5Smm"
+    },
+    {
+      "ts": 1790351216.3204398,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 12
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KxdBR7sRZpYD4H1kewCswg"
+    },
+    {
+      "ts": 1790351216.3204815,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Introducing Gemini 3.8 Live with Live Avatar\"}",
+      "tool_use_id": "toolu_01KxdBR7sRZpYD4H1kewCswg"
+    },
+    {
+      "ts": 1790351221.3212113,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "industry",
+        "reason": "Google introducing server-side private memory for AI - significant privacy/security advancement for personal AI. Technical but important infrastructure story, primary source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01BDizQtjgy3PsEUbA5s8K2K"
+    },
+    {
+      "ts": 1790351221.3212762,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Advancing Private AI Compute with secure, server-side memory\", \"persona\": \"industry\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01BDizQtjgy3PsEUbA5s8K2K"
+    },
+    {
+      "ts": 1790351222.8901367,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01W6S8G8vhYD7LXg8P1BRCfy"
+    },
+    {
+      "ts": 1790351223.196127,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790351223.1961696,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Anthropic, Akamai Strike $12 Billion AI Computing Deal\", \"pick_3\": \"Behind Project Suncatcher, our moonshot to put AI in space\", \"pick_4\": \"Microsoft thinks its new Copilot \\u2018super app\\u2019 will be as influential as Office\", \"pick_5\": \"Amazon gives sellers an even smarter Seller Assistant and a new plugin for Amazon Quick and Anthropic\\u2019s Claude\", \"pick_6\": \"Meta is going to let you build games with AI right on your phone\", \"pick_7\": \"Advancing Private AI Compute with secure, server-side memory\"}}",
+      "tool_use_id": "toolu_01W6S8G8vhYD7LXg8P1BRCfy"
+    }
+  ],
+  "issue_num": 99
+}
