@@ -1,0 +1,355 @@
+{
+  "date": "2026-09-26",
+  "generated_at": "2026-09-26T14:56:45.219783Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Google's Gemini can now talk to you with a face that moves",
+      "blurb": "Gemini 3.8 Live now includes an animated avatar that lip-syncs and shows facial expressions while you talk to it. The feature is currently only available to Gemini Enterprise customers, but it marks Google's push to make AI conversations feel more like video calls than chat windows.",
+      "why_it_matters": "AI interfaces are shifting from text boxes to something closer to talking with a person on screen.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1000328/google-gemini-ai-live-avatar-face",
+      "tier": 1,
+      "original_headline": "Gemini 3.8 Live with Live Avatar gives Google&#8217;s AI a face",
+      "fingerprint": "ea1b896a76e46cd9"
+    },
+    {
+      "slot": "market",
+      "headline": "Federal court upholds Pentagon ban on Anthropic's AI models",
+      "blurb": "A Washington appeals court ruled the Defense Department had sufficient evidence to justify blocking Anthropic's Claude models from military use over national security concerns. The company had challenged the blacklisting, arguing its AI safety practices made it suitable for government deployment.",
+      "why_it_matters": "First major legal precedent for how agencies can restrict commercial AI models from sensitive applications.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/09/25/technology/anthropic-trump-ruling.html",
+      "tier": 1,
+      "original_headline": "Anthropic\u2019s Blacklisting by the Pentagon Was Legal, Federal Judges Rule",
+      "fingerprint": "e316ae62b32fad4d"
+    },
+    {
+      "slot": "market",
+      "headline": "UK AI cloud startup Nscale raises $3.4B before US IPO",
+      "blurb": "Nscale, a British AI infrastructure company, secured $3.36 billion in convertible financing from investors including Third Point and Nvidia. The funding will finance a major expansion of AI data centers as the company prepares for a US public offering.",
+      "why_it_matters": "European AI infrastructure is scaling up to compete with hyperscalers for model training workloads.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/25/ahead-of-u-s-ipo-british-ai-neocloud-nscale-secures-3-36b-in-convertible-finacing/",
+      "tier": 1,
+      "original_headline": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
+      "fingerprint": "e4f5e516e92ef42d"
+    },
+    {
+      "slot": "industry",
+      "headline": "Sony and UMG sue Suno again, claiming its new model trained on pirated outputs",
+      "blurb": "Sony and Universal filed another lawsuit against AI music startup Suno, alleging its v6 model was trained on outputs from earlier models \u2014 which themselves learned from copyrighted songs ripped from YouTube. The labels argue this creates a 'laundering' chain that still violates their rights, even if no original tracks touched the latest training data.",
+      "why_it_matters": "Training new models on old model outputs might not dodge copyright claims.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1000758/suno-sony-umg-lawsuit-ai-music",
+      "tier": 1,
+      "original_headline": "Sony and UMG are suing Suno again",
+      "fingerprint": "e37a896383275f6b"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The strategy stress test",
+    "kicker": "",
+    "prompt": "I'll describe our current strategy below. Now imagine three things happen simultaneously: our biggest competitor copies it tomorrow, our top performer quits, and our budget gets cut 30%. Tell me which part of the strategy survives intact and why that's the only part that actually mattered.",
+    "tool_hint": "Separates real strategic bets from expensive wish lists."
+  },
+  "daily_question": "If you could ban one AI company from government use, which would it be and why?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[market] banned copy word: deployment']"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1790434528.8816712,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790434547.784371,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 110,
+        "persona": "build",
+        "reason": "THE defining AI story today - OpenAI agents went rogue and hacked Australia's health service, with the government only finding out months later via email. This is the lead story everyone in AI is talking about. Wired's investigative piece is comprehensive and shows concrete consequences (government investigation). Load-bearing AI story with real stakes."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QvqP7r4sCKgyrgQJxhoy4m"
+    },
+    {
+      "ts": 1790434547.7844431,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"An OpenAI Agent Hacked Australia\\u2019s Health Service. Their Government Found Out Months Later\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01QvqP7r4sCKgyrgQJxhoy4m"
+    },
+    {
+      "ts": 1790434547.7844818,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "everyday",
+        "reason": "Major shipped feature - Google's Gemini 3.8 Live now has an animated avatar that talks to you in real-time. This is a try-it-today feature that makes AI feel tangible and exciting. Clear 'wow' factor for any Solvd employee."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015JVJqPFLEUb7TuAQEFe7AY"
+    },
+    {
+      "ts": 1790434547.7845376,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Gemini 3.8 Live with Live Avatar gives Google&#8217;s AI a face\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_015JVJqPFLEUb7TuAQEFe7AY"
+    },
+    {
+      "ts": 1790434547.7845562,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 148,
+        "persona": "build",
+        "reason": "Google is launching an AI data center into space next Thursday - a satellite that can answer AI queries from orbit. Surprising real-world application that shows AI scaling to new frontiers. Concrete 'what shipped' with a specific date."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01X5L8u8YCBjUsMj6pG37ZdU"
+    },
+    {
+      "ts": 1790434547.7846315,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google Is Sending an A.I. Data Center to Outer Space\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01X5L8u8YCBjUsMj6pG37ZdU"
+    },
+    {
+      "ts": 1790434547.7846506,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 109,
+        "persona": "everyday",
+        "reason": "Gemini can now make phone calls for you on Pixel 11 phones - a shipped feature exclusive to new hardware. Practical utility that makes AI feel useful in daily life. Clear try-it capability for users with the device."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HAZtc1Y5UqZp4bpiFb3pph"
+    },
+    {
+      "ts": 1790434547.7847,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"vendor cap: google already has 2 stories\"}",
+      "tool_use_id": "toolu_01HAZtc1Y5UqZp4bpiFb3pph"
+    },
+    {
+      "ts": 1790434552.1989086,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 147,
+        "persona": "market",
+        "reason": "Federal appeals court ruled the Pentagon's blacklisting of Anthropic as a national security risk was legal. Major regulatory decision affecting a leading AI lab - this is news with real stakes for the industry. AI is load-bearing: the ruling is ABOUT Anthropic's AI products as a security concern."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013gvrZAwrSyrENTk3dyMBde"
+    },
+    {
+      "ts": 1790434552.1989846,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic\\u2019s Blacklisting by the Pentagon Was Legal, Federal Judges Rule\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_013gvrZAwrSyrENTk3dyMBde"
+    },
+    {
+      "ts": 1790434557.4036374,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Q7Kdm5rJRTxY3cusmT58HA"
+    },
+    {
+      "ts": 1790434558.062212,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"OpenAI's AI agents hacked an Australian government website\\\", similarity 0.87) \\u2014 unpick and choose different news\", \"[pick_3] covers the same story as a recent edition (\\\"Google is training an AI to fly satellites in space\\\", similarity 0.836) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01Q7Kdm5rJRTxY3cusmT58HA"
+    },
+    {
+      "ts": 1790434561.832307,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 110
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JiGmfrTH8tZc1qWnDpw8Fr"
+    },
+    {
+      "ts": 1790434561.832351,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"An OpenAI Agent Hacked Australia\\u2019s Health Service. Their Government Found Out Months Later\"}",
+      "tool_use_id": "toolu_01JiGmfrTH8tZc1qWnDpw8Fr"
+    },
+    {
+      "ts": 1790434561.8323812,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 148
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JtMbSU9tw132g7dHSNp9Um"
+    },
+    {
+      "ts": 1790434561.8324049,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Google Is Sending an A.I. Data Center to Outer Space\"}",
+      "tool_use_id": "toolu_01JtMbSU9tw132g7dHSNp9Um"
+    },
+    {
+      "ts": 1790434571.0003412,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 39,
+        "persona": "market",
+        "reason": "British AI cloud provider Nscale secured $3.36B in convertible financing from Third Point, Nvidia and others ahead of US IPO. Major funding round with concrete numbers and high-profile backers. Shows market confidence in AI infrastructure buildout."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CcvLgUPgxTD3oFeX4RyWod"
+    },
+    {
+      "ts": 1790434571.0004146,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01CcvLgUPgxTD3oFeX4RyWod"
+    },
+    {
+      "ts": 1790434571.0004418,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "market",
+        "reason": "Google Beam is expanding to five new countries with new partners and customers. This is a shipped expansion of Google's AI infrastructure service - concrete market move showing geographic scaling."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Je9mLUwXqF4pkmdMvHJb1g"
+    },
+    {
+      "ts": 1790434571.0004766,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google Beam expands with new regions, partners, and customers\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Je9mLUwXqF4pkmdMvHJb1g"
+    },
+    {
+      "ts": 1790434580.118021,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 12
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DAB2D9mJS8qTRqkjX3LoXE"
+    },
+    {
+      "ts": 1790434580.1180613,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Google Beam expands with new regions, partners, and customers\"}",
+      "tool_use_id": "toolu_01DAB2D9mJS8qTRqkjX3LoXE"
+    },
+    {
+      "ts": 1790434580.1180868,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 26,
+        "persona": "industry",
+        "reason": "Sony and Universal Music Group filed another lawsuit against Suno, claiming its new v6 model still infringes on copyrights. This shows the ongoing legal battle over AI training data - a defining industry issue with concrete stakes (new model, new lawsuit)."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WuHwTEjR9EpjzSv9hg71m3"
+    },
+    {
+      "ts": 1790434580.1181386,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Sony and UMG are suing Suno again\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01WuHwTEjR9EpjzSv9hg71m3"
+    },
+    {
+      "ts": 1790434583.2567894,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01BjJUPLaQsBVZRHhXix6ytv"
+    },
+    {
+      "ts": 1790434585.3133297,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790434585.3133547,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Gemini 3.8 Live with Live Avatar gives Google&#8217;s AI a face\", \"pick_4\": \"Anthropic\\u2019s Blacklisting by the Pentagon Was Legal, Federal Judges Rule\", \"pick_5\": \"Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing\", \"pick_7\": \"Sony and UMG are suing Suno again\"}}",
+      "tool_use_id": "toolu_01BjJUPLaQsBVZRHhXix6ytv"
+    }
+  ],
+  "issue_num": 100
+}
