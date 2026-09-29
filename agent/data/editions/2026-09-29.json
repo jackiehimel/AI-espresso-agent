@@ -1,0 +1,336 @@
+{
+  "date": "2026-09-29",
+  "generated_at": "2026-09-29T16:51:33.420957Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "AMD is buying Fei-Fei Li's AI startup for $8 billion",
+      "blurb": "AMD announced it's acquiring World Labs, the AI research lab co-founded by prominent researcher Fei-Fei Li, in an all-stock deal worth $8.2 billion. World Labs launched in 2024, hit a $1 billion valuation in months, and just shipped its first commercial product \u2014 a world generation model.",
+      "why_it_matters": "AMD is making its biggest AI bet yet to compete with Nvidia's dominance in AI chips.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1001749/amd-world-labs-ai-acquisition-deal",
+      "tier": 1,
+      "original_headline": "AMD is acquiring AI company World Labs in a deal worth more than $8 billion",
+      "fingerprint": "0a3f2e0ab86caeed"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI shelves its newest AI model after internal safety alarms",
+      "blurb": "OpenAI won't release GPT-6.1 Astra after its own researchers flagged security concerns. The company hasn't detailed what risks triggered the hold, but it's the first time OpenAI has publicly pulled a finished model before launch.",
+      "why_it_matters": "Even AI leaders are hitting limits they won't cross \u2014 at least not yet.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/09/28/technology/openai-astra-safety.html",
+      "tier": 1,
+      "original_headline": "OpenAI Says It Will Not Release Newest Astra A.I. Model Over Safety Concerns",
+      "fingerprint": "988ba07fddd10a60"
+    },
+    {
+      "slot": "build",
+      "headline": "Grok can now be a shared teammate that knows your company's stuff",
+      "blurb": "xAI just launched Team Bots \u2014 Grok instances you can feed your files, connect to your apps, and share across your team so everyone works from the same context. Think of it as a chatbot that actually knows what your team knows, not just generic training data.",
+      "why_it_matters": "First shared-context AI agent you can set up without building your own RAG pipeline.",
+      "source_name": "xAI Blog",
+      "source_url": "https://x.ai/news/team-bots",
+      "tier": 1,
+      "original_headline": "Team Bots: AI coworkers that learn from your team",
+      "fingerprint": "b16433479bac5dca"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Shopify just let AI agents check out and buy things for you",
+      "blurb": "Shopify now allows browser-based AI agents to complete purchases on your behalf, updating order details and finishing checkout once you give the OK. The feature uses WebMCP, a protocol that lets agents interact with websites directly through your browser.",
+      "why_it_matters": "AI can now handle the entire shopping flow, not just browse and recommend.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/28/shopify-opens-checkout-to-browser-based-ai-agents/",
+      "tier": 1,
+      "original_headline": "Shopify opens checkout to browser-based AI agents",
+      "fingerprint": "1ffccc8799b7b067"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Marissa Mayer's new app reads your entire camera roll to learn who you are",
+      "blurb": "Dazzle analyzes every photo on your phone to figure out your hobbies, food preferences, style, and who you spend time with. Mayer's bet: your camera roll reveals more about your life than your email inbox ever could.",
+      "why_it_matters": "Personal AI is moving from text to images as the primary data source for understanding users.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/29/with-dazzle-marissa-mayer-bets-your-camera-roll-has-more-info-on-your-life-than-your-inbox/",
+      "tier": 1,
+      "original_headline": "With Dazzle, Marissa Mayer bets your camera roll has more info on your life than your inbox",
+      "fingerprint": "28d44ebd064a8ec5"
+    },
+    {
+      "slot": "build",
+      "headline": "A team just made ChatGPT drive a Toyota Corolla through a parking lot",
+      "blurb": "Tech workers connected frontier LLMs directly to a car's controls with zero prior training data and had it navigate a simple parking lot course. The models processed camera feeds in real time and made steering, acceleration, and braking decisions on the fly.",
+      "why_it_matters": "You can now wire a chatbot to physical controls and get basic autonomous behavior without specialized training.",
+      "source_name": "404 Media",
+      "source_url": "https://www.404media.co/these-tech-workers-made-chatgpt-drive-a-toyota-corolla/",
+      "tier": 1,
+      "original_headline": "These Tech Workers Made ChatGPT Drive a Toyota Corolla",
+      "fingerprint": "bcb0e25b6d81a5e4"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The feature funeral",
+    "kicker": "",
+    "prompt": "I'll describe a feature or project we've been working on. Write its obituary: what it was supposed to accomplish, why we loved it, and the honest reason it needs to die. Then tell me what we should build instead with that same energy and budget.",
+    "tool_hint": "When you know something isn't working but the team is still attached."
+  },
+  "daily_question": "If you could let an AI agent loose on one part of your job for a week with zero oversight, what would you choose?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1790700611.989227,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790700633.8322017,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 14,
+        "persona": "market",
+        "reason": "Major M&A story: AMD acquiring AI research lab World Labs for $8B+ is a significant consolidation move in the AI chip/infrastructure space. This is the biggest AI story today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Qdy9CXryPVy97DbNXbv8bW"
+    },
+    {
+      "ts": 1790700633.8322744,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AMD is acquiring AI company World Labs in a deal worth more than $8 billion\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Qdy9CXryPVy97DbNXbv8bW"
+    },
+    {
+      "ts": 1790700633.8323057,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 122,
+        "persona": "market",
+        "reason": "OpenAI withholding its newest GPT-6.1 Astra model over safety concerns is major news from a tier-1 AI lab. Shows the stakes around frontier model development."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017Z5pyW3AC25VyopaX9mhvq"
+    },
+    {
+      "ts": 1790700633.8323317,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI Says It Will Not Release Newest Astra A.I. Model Over Safety Concerns\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_017Z5pyW3AC25VyopaX9mhvq"
+    },
+    {
+      "ts": 1790700633.8323395,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "build",
+        "reason": "xAI shipping Team Bots - AI coworkers that learn from your team's files and apps. This is a concrete, shipped feature from primary source that teams can try today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AiHRqcywBh3bCRZeTHE48D"
+    },
+    {
+      "ts": 1790700633.832365,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Team Bots: AI coworkers that learn from your team\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01AiHRqcywBh3bCRZeTHE48D"
+    },
+    {
+      "ts": 1790700633.8323724,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "everyday",
+        "reason": "Shopify enabling AI agents to complete checkout is a significant platform move that makes AI agents more practical. Concrete capability that developers can use."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01BfiFY94MGeT6AuXy9Bj6Gb"
+    },
+    {
+      "ts": 1790700633.8324134,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Shopify opens checkout to browser-based AI agents\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01BfiFY94MGeT6AuXy9Bj6Gb"
+    },
+    {
+      "ts": 1790700633.832425,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 146,
+        "persona": "market",
+        "reason": "Anthropic's IPO filing is major business news - reveals they lost $8B on $4.6B revenue. Important insight into the economics of frontier AI labs."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011irVtjjjsJ4u6McrUYnUZi"
+    },
+    {
+      "ts": 1790700633.8324609,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic warns of \\u2018existential risks to humanity\\u2019 in IPO prospectus\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_011irVtjjjsJ4u6McrUYnUZi"
+    },
+    {
+      "ts": 1790700633.8324726,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "everyday",
+        "reason": "Marissa Mayer's Dazzle analyzes your entire camera roll to understand your life. Novel approach from a notable tech figure - concrete product people can be curious about."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012tJQHVxesUfP5jBHKCKYQL"
+    },
+    {
+      "ts": 1790700633.8325052,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"With Dazzle, Marissa Mayer bets your camera roll has more info on your life than your inbox\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_012tJQHVxesUfP5jBHKCKYQL"
+    },
+    {
+      "ts": 1790700641.8612514,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01XcRstdNXNmk8L3CxnmC7BJ"
+    },
+    {
+      "ts": 1790700642.7135239,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_5] covers the same story as a recent edition (\\\"Anthropic files for IPO while its CEO warns against racing to AGI\\\", similarity 0.829) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01XcRstdNXNmk8L3CxnmC7BJ"
+    },
+    {
+      "ts": 1790700644.6202204,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 146
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DuM4iJ9N7CZYz5yrGMoWNx"
+    },
+    {
+      "ts": 1790700644.620266,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Anthropic warns of \\u2018existential risks to humanity\\u2019 in IPO prospectus\"}",
+      "tool_use_id": "toolu_01DuM4iJ9N7CZYz5yrGMoWNx"
+    },
+    {
+      "ts": 1790700657.1483498,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "market",
+        "reason": "Modal Labs raising $750M at $15.75B valuation (3x in 4 months) shows explosive growth in AI inference infrastructure. Concrete market signal about where AI infrastructure is headed."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NdifNFbyWATNjEsW9giiV3"
+    },
+    {
+      "ts": 1790700657.1484153,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'TechCrunch \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_01NdifNFbyWATNjEsW9giiV3"
+    },
+    {
+      "ts": 1790700661.0063598,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "build",
+        "reason": "Tech workers getting ChatGPT to drive a Toyota Corolla with no prior training is a surprising, concrete demonstration of frontier LLM capabilities in the real world. Shows what's becoming possible."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018Hwsi4Hef9bNeakyg6jBiB"
+    },
+    {
+      "ts": 1790700661.0064163,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"These Tech Workers Made ChatGPT Drive a Toyota Corolla\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_018Hwsi4Hef9bNeakyg6jBiB"
+    },
+    {
+      "ts": 1790700667.117423,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01DWf8f3Y32GcpbTstcsEfTt"
+    },
+    {
+      "ts": 1790700667.3920677,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790700667.3920999,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"AMD is acquiring AI company World Labs in a deal worth more than $8 billion\", \"pick_2\": \"OpenAI Says It Will Not Release Newest Astra A.I. Model Over Safety Concerns\", \"pick_3\": \"Team Bots: AI coworkers that learn from your team\", \"pick_4\": \"Shopify opens checkout to browser-based AI agents\", \"pick_6\": \"With Dazzle, Marissa Mayer bets your camera roll has more info on your life than your inbox\", \"pick_7\": \"These Tech Workers Made ChatGPT Drive a Toyota Corolla\"}}",
+      "tool_use_id": "toolu_01DWf8f3Y32GcpbTstcsEfTt"
+    }
+  ],
+  "issue_num": 103
+}
