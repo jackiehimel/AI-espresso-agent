@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-30",
+  "generated_at": "2026-09-30T16:44:16.457947Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "FTC opens investigation into OpenAI and Anthropic over consumer harm",
+      "blurb": "The Federal Trade Commission is examining whether the two leading AI labs violated laws against unfair and deceptive business practices. The probe marks the agency's most direct regulatory action against frontier AI companies to date.",
+      "why_it_matters": "Major AI labs now face federal scrutiny that could reshape how they deploy models and communicate capabilities.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/09/30/technology/ftc-openai-anthropic-investigation.html",
+      "tier": 1,
+      "original_headline": "F.T.C. Investigates OpenAI and Anthropic Over Potential Consumer Harms",
+      "fingerprint": "df4ec08fe0f3d0d5"
+    },
+    {
+      "slot": "everyday",
+      "headline": "DoorDash just launched an AI agent you can text to order food",
+      "blurb": "DoorDash now lets you text an AI agent to place orders instead of using the app. The company is betting conversational ordering will help it compete with Uber Eats and Grubhub, especially for people who find apps too clunky or slow.",
+      "why_it_matters": "Ordering food by text could become faster than tapping through menus in an app.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/09/30/doordash-launches-an-ai-agent-you-can-text-to-order-food/",
+      "tier": 1,
+      "original_headline": "DoorDash launches an AI agent you can text to order food",
+      "fingerprint": "2e7175bc9b5ef1ee"
+    },
+    {
+      "slot": "market",
+      "headline": "Google is now paying publishers to show up in AI search results",
+      "blurb": "Google launched a pilot with roughly 100 publishers who get paid when their content appears in AI-generated search answers. The move comes as publishers worry AI overviews are killing their traffic by answering questions directly instead of sending clicks to their sites.",
+      "why_it_matters": "First major search engine to share revenue with the sources its AI is summarizing.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1002665/google-paying-publishers-ai-search-features",
+      "tier": 1,
+      "original_headline": "Google reportedly tests paying publishers for AI search results",
+      "fingerprint": "2b7c474e2dad98da"
+    },
+    {
+      "slot": "build",
+      "headline": "DeepMind can now watermark AI-generated proteins without breaking them",
+      "blurb": "Google's SynthID Bio embeds invisible watermarks into protein sequences that AI generates. The watermark survives in the actual folded protein and doesn't affect how it works biologically. Researchers can detect whether a protein came from a model, even after it's been synthesized in a lab.",
+      "why_it_matters": "You can now track AI-designed proteins in the wild without compromising their function.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/introducing-synthid-bio/",
+      "tier": 1,
+      "original_headline": "Introducing SynthID Bio",
+      "fingerprint": "84b567050ef6571b"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting escape hatch",
+    "kicker": "",
+    "prompt": "I have a meeting on my calendar. Tell me three questions I can send in advance that \u2014 if answered clearly \u2014 would make the meeting unnecessary. Then tell me the one-line message to propose skipping it that doesn't sound passive-aggressive.",
+    "tool_hint": "Before you spend an hour in a room that could've been three replies."
+  },
+  "daily_question": "If you could watermark one thing AI creates to track its origin, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1790786613.1236029,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=14, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790786629.1867044,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 146,
+        "persona": "market",
+        "reason": "Lead story - FTC launching investigation into OpenAI and Anthropic for potential consumer harms is today's defining AI news. Major AI labs under federal scrutiny for unfair/deceptive practices is the story everyone in AI will be talking about today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018SLVRfWh4u1vPExE1bKqtu"
+    },
+    {
+      "ts": 1790786629.1867778,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"F.T.C. Investigates OpenAI and Anthropic Over Potential Consumer Harms\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_018SLVRfWh4u1vPExE1bKqtu"
+    },
+    {
+      "ts": 1790786629.186813,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "everyday",
+        "reason": "DoorDash's AI texting agent is a concrete shipped feature users can try immediately. Strong 'I want to try that' factor - just text an AI to order food. Platform competition angle (vs Uber Eats/Grubhub) adds stakes."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01McRhLWvm2aPqBfpByY45B4"
+    },
+    {
+      "ts": 1790786629.186856,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"DoorDash launches an AI agent you can text to order food\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01McRhLWvm2aPqBfpByY45B4"
+    },
+    {
+      "ts": 1790786629.1868677,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "market",
+        "reason": "Google piloting payments to publishers for AI search contributions is a major platform policy shift that could reshape AI-content economics. Addresses a core tension in the ecosystem with a concrete business model test."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Kwg2aWiPtCuXYZjsEYE7FT"
+    },
+    {
+      "ts": 1790786629.1869195,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google reportedly tests paying publishers for AI search results\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Kwg2aWiPtCuXYZjsEYE7FT"
+    },
+    {
+      "ts": 1790786629.186936,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 9,
+        "persona": "build",
+        "reason": "SynthID Bio from DeepMind demonstrates watermarking AI-generated proteins while preserving function - a surprising 'I didn't know AI could do that' capability at the intersection of AI and synthetic biology. Novel application area."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Hzi5wXgUyjNcK2vnSjHE1p"
+    },
+    {
+      "ts": 1790786629.1869814,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing SynthID Bio\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Hzi5wXgUyjNcK2vnSjHE1p"
+    },
+    {
+      "ts": 1790786635.9537318,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01FH2LkHrPpAqsYTEshd5GFM"
+    },
+    {
+      "ts": 1790786636.9688442,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790786636.9688718,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"F.T.C. Investigates OpenAI and Anthropic Over Potential Consumer Harms\", \"pick_2\": \"DoorDash launches an AI agent you can text to order food\", \"pick_3\": \"Google reportedly tests paying publishers for AI search results\", \"pick_4\": \"Introducing SynthID Bio\"}}",
+      "tool_use_id": "toolu_01FH2LkHrPpAqsYTEshd5GFM"
+    }
+  ],
+  "issue_num": 104
+}
