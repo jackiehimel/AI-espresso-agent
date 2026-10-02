@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-02",
+  "generated_at": "2026-10-02T16:33:48.651217Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "ChatGPT can now virtually try on clothes using your photo",
+      "blurb": "OpenAI added shopping features to ChatGPT that let you upload a photo of yourself and see how clothes and accessories would look on you. You can also save items you like to a Favorites library for later.",
+      "why_it_matters": "AI moved from answering questions to showing you what you'd look like in that jacket.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/01/chatgpt-can-now-virtually-try-on-clothes-for-you/",
+      "tier": 1,
+      "original_headline": "ChatGPT can now virtually try on clothes for you",
+      "fingerprint": "91f4ddc8512c2db1"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google's Gemini Live can now narrate whatever your phone camera sees",
+      "blurb": "A new Guided Vision feature in Gemini Live gives real-time audio descriptions of anything you point your Android camera at. You can ask it to read fine print, describe your surroundings, or help you find objects around you \u2014 all through live voice interaction while the camera stays open.",
+      "why_it_matters": "Turns your phone into a seeing-eye AI that talks you through the physical world in real time.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1003756/google-gemini-live-guided-vision",
+      "tier": 1,
+      "original_headline": "Google\u2019s new Guided Vision feature can help you read the fine print",
+      "fingerprint": "7ce606584b7cbb3a"
+    },
+    {
+      "slot": "build",
+      "headline": "Suno's AI music generator now does voiceovers with background music",
+      "blurb": "Suno launched a feature that generates spoken voices from scripts or prompts, with background music to match. The new Speech tool is live in public beta on web and mobile, letting you create voiceovers and soundtracks together in one go.",
+      "why_it_matters": "AI audio tools are merging \u2014 one prompt now gets you narration plus soundtrack.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1003925/suno-speech-ai-voice-feature-beta-availability",
+      "tier": 1,
+      "original_headline": "AI music maker Suno now generates spoken words",
+      "fingerprint": "ea88b6158f1fef7b"
+    },
+    {
+      "slot": "build",
+      "headline": "OpenAI's GPT-6 Astra Ultrafast runs 8x faster on NVIDIA Blackwell GPUs",
+      "blurb": "GPT-6 Astra Ultrafast is now live in the OpenAI API and for select ChatGPT Work and Codex users, generating tokens up to 8x faster than Astra Standard mode by using inference optimizations built for NVIDIA's Blackwell architecture.",
+      "why_it_matters": "Faster inference means lower latency for production apps and cheaper costs at scale.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast/",
+      "tier": 1,
+      "original_headline": "How NVIDIA GPUs Help Accelerate OpenAI\u2019s GPT-6 Astra Ultrafast",
+      "fingerprint": "508072308383bec0"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The learning receipt",
+    "kicker": "",
+    "prompt": "I just finished a book, course, or deep research dive. Before I forget everything, help me create a one-page document with: the three ideas I'll actually use, the one mental model that changed how I see something, and the specific situation where I'll apply this next week.",
+    "tool_hint": "Turns passive consumption into active retention before the details evaporate."
+  },
+  "daily_question": "If your phone camera could narrate your life in real time, what's one moment you'd immediately mute?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1790958790.0442178,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=13, gaps=[\"Amazon's new Fire TV hardware launches (consumer electronics, not AI-hook strong enough)\", 'Google September AI update video (monthly recap, no single shipped capability)', 'Apple iPhone/Mac/iPad updates (product cycles, not AI-first)', 'Prime Video content drops (entertainment, AI incidental)', 'NVIDIA fellowship applications open (academic funding, not a shipped product)', 'Pope Leo XIV criticizes AI art (commentary, not a shipped capability)', 'Tesla Q3 deliveries beat estimates (auto sales, AI not load-bearing)', 'Nike restructuring / job cuts (business news, AI not central)', 'Federal court dismisses AI Overviews lawsuits (legal outcome, not a product launch)', \"Paramount-Warner merger named 'Skydance' (media M&A, AI not the hook)\", 'License plate surveillance / Flock cameras (privacy/surveillance, downweighted)', 'Cambridge Analytica lawsuit penalty (legal/past scandal, AI incidental)', 'ChatGPT fake witnesses in murder appeal (hallucination cautionary tale, downweighted)', 'AI hallucinations making customers worse (service-job frustration, downweighted)', 'Data center design / camouflage debate (sociology of infrastructure, not a shipped product)', 'Home Assistant cloud rebrand (branding news, not AI capability)', 'Supabase acquiring Turso (database M&A, AI not central)', 'America.gov tracking cookie (privacy/government IT, AI not the hook)', 'Meta tax avoidance via AI data centers (investigative tax story, not a product)', 'Russian propaganda AI music (geopolitics/misinformation, downweighted)']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790958804.2701383,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 46,
+        "persona": "everyday",
+        "reason": "Top-ranked story (90). OpenAI ships virtual try-on feature for ChatGPT - concrete, try-it-today capability that shows AI expanding into practical shopping use cases. Strong 'I want to try that' factor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0118ykUeAVauEuRvfq4LwZne"
+    },
+    {
+      "ts": 1790958804.2702043,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"ChatGPT can now virtually try on clothes for you\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_0118ykUeAVauEuRvfq4LwZne"
+    },
+    {
+      "ts": 1790958804.2702334,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "everyday",
+        "reason": "Score 86. Google launches Guided Vision in Gemini Live today - real-time audio descriptions for accessibility. Shipped feature with clear practical utility, launching today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016GDwA96wdLZFAAsCJ2vjVg"
+    },
+    {
+      "ts": 1790958804.2702734,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google\\u2019s new Guided Vision feature can help you read the fine print\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_016GDwA96wdLZFAAsCJ2vjVg"
+    },
+    {
+      "ts": 1790958804.270284,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "build",
+        "reason": "Score 82. Suno expands from AI music into spoken voice generation - new capability launch showing AI platform evolution. Concrete feature developers and creators can use."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01G8SjYAA3MEBcwADCgqZkRC"
+    },
+    {
+      "ts": 1790958804.2703264,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AI music maker Suno now generates spoken words\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01G8SjYAA3MEBcwADCgqZkRC"
+    },
+    {
+      "ts": 1790958804.2703416,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "build",
+        "reason": "Score 80. GPT-6 Astra Ultrafast now available on NVIDIA Blackwell GPUs via OpenAI API - significant model/infrastructure news for developers. Shows capability advancement with concrete availability."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DCW8baVknD1WMdfeGCCTAB"
+    },
+    {
+      "ts": 1790958804.2703984,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"How NVIDIA GPUs Help Accelerate OpenAI\\u2019s GPT-6 Astra Ultrafast\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01DCW8baVknD1WMdfeGCCTAB"
+    },
+    {
+      "ts": 1790958809.5994942,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01JxXQdbBKwhjMwwp35tAra2"
+    },
+    {
+      "ts": 1790958810.285731,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1790958810.285762,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"ChatGPT can now virtually try on clothes for you\", \"pick_2\": \"Google\\u2019s new Guided Vision feature can help you read the fine print\", \"pick_3\": \"AI music maker Suno now generates spoken words\", \"pick_4\": \"How NVIDIA GPUs Help Accelerate OpenAI\\u2019s GPT-6 Astra Ultrafast\"}}",
+      "tool_use_id": "toolu_01JxXQdbBKwhjMwwp35tAra2"
+    }
+  ],
+  "issue_num": 106
+}
