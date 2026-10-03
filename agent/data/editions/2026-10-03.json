@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-03",
+  "generated_at": "2026-10-03T15:06:35.260156Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "industry",
+      "headline": "Anthropic is spending $100M to train 10,000 engineers on Claude",
+      "blurb": "The company behind Claude is launching a free training program to teach enterprise engineers how to build with its AI models. The goal: train 10,000 people and close what Anthropic calls the 'enterprise AI talent gap' \u2014 companies want to deploy AI but lack in-house expertise.",
+      "why_it_matters": "AI companies are now competing on education, not just model performance",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/claude-frontier-academy",
+      "tier": 1,
+      "original_headline": "Anthropic invests $100 million to train 10,000 engineers and tackle the enterprise AI talent gap",
+      "fingerprint": "92af72ad75efa449"
+    },
+    {
+      "slot": "everyday",
+      "headline": "OpenAI's Dot agents can order your dinner between spreadsheet tasks",
+      "blurb": "OpenAI's new Dots platform gives you AI agents that handle work tasks but can also grab you a burrito. Unlike Meta's friendlier Muse, Dots feels like enterprise software first\u2014workplace tools that happen to run errands on the side.",
+      "why_it_matters": "AI agents are landing in your work apps, not just as chatbots but as coworkers who multitask.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1004096/openai-chatgpt-dots-hands-on-agent",
+      "tier": 1,
+      "original_headline": "OpenAI\u2019s Dot agent is enterprise software that can also order your dinner",
+      "fingerprint": "a70c219279901813"
+    },
+    {
+      "slot": "build",
+      "headline": "Apple is locking down Mac disk access because of AI agents",
+      "blurb": "Apple is adding new permission controls for full disk access on Mac, citing the security risk from AI agents that can read and modify files autonomously. The changes mean users will need to explicitly grant apps deeper system access, even if they've already approved it once.",
+      "why_it_matters": "First major OS vendor treating AI agents as a distinct security threat class.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1004295/apple-limit-mac-disk-access-ai-agents",
+      "tier": 1,
+      "original_headline": "Apple will limit Mac disk access as AI agents \u2018substantially\u2019 increase risk",
+      "fingerprint": "3708c3aadab8ea0e"
+    },
+    {
+      "slot": "market",
+      "headline": "Google's AI model topped CDC's flu hospitalization forecasts",
+      "blurb": "The Centers for Disease Control ranked Google's science AI model first among all submissions for predicting flu-related hospital admissions. Google applied its medical AI work to public health forecasting, outperforming traditional epidemiological models in accuracy.",
+      "why_it_matters": "AI can now predict hospital strain weeks ahead, giving health systems time to staff up.",
+      "source_name": "Google \u2014 Innovation & AI",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/google-research/google-science-ai-flu-forecasts/",
+      "tier": 1,
+      "original_headline": "Google's AI ranks #1 for predicting flu hospitalizations.",
+      "fingerprint": "62e3edb4889a2180"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The research rabbit hole escape",
+    "kicker": "",
+    "prompt": "I've been researching a topic for way too long and I'm drowning in tabs and half-ideas. I'll dump my messy notes below. Give me: the one question I actually need to answer, three sources that would answer it, and permission to stop reading everything else.",
+    "tool_hint": "When you've got 47 browser tabs and zero conclusions."
+  },
+  "daily_question": "If an AI agent could access one thing on your computer that's currently off-limits, what would make you most nervous?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1791039951.444885,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=14, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1791039967.4563723,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "industry",
+        "reason": "Lead story: Anthropic's $100M commitment to train 10,000 engineers is the biggest AI talent/investment story today. Primary source (Anthropic News). Addresses the enterprise AI skills gap everyone talks about - concrete, strategic, and reflects where the industry is heading."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PkVrs6pwGnxruAXhMVZXSU"
+    },
+    {
+      "ts": 1791039967.4564548,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic invests $100 million to train 10,000 engineers and tackle the enterprise AI talent gap\", \"persona\": \"industry\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01PkVrs6pwGnxruAXhMVZXSU"
+    },
+    {
+      "ts": 1791039967.456493,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 30,
+        "persona": "everyday",
+        "reason": "OpenAI's new Dots agent platform - major product launch from tier-1 lab. Concrete new capability users can engage with, spanning work and personal tasks. The 'cute little guys who can do your b[idding]' angle makes AI feel accessible and exciting."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01VevxSnbT99KdP6XeJ6LNUv"
+    },
+    {
+      "ts": 1791039967.4565334,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI\\u2019s Dot agent is enterprise software that can also order your dinner\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01VevxSnbT99KdP6XeJ6LNUv"
+    },
+    {
+      "ts": 1791039967.456547,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "build",
+        "reason": "Apple responding to AI agent security risks with new Mac disk access limits - shows how AI agents are changing platform security design. Practical for developers and power users, demonstrates AI's real infrastructure impact."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018hbtS94Cjc9sjtRToKGcKd"
+    },
+    {
+      "ts": 1791039967.4565947,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple will limit Mac disk access as AI agents \\u2018substantially\\u2019 increase risk\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_018hbtS94Cjc9sjtRToKGcKd"
+    },
+    {
+      "ts": 1791039967.4566092,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 25,
+        "persona": "market",
+        "reason": "Google's AI ranking #1 in CDC flu forecasting evaluation - surprising real-world validation of AI capability in healthcare. Concrete government endorsement (CDC) makes this credible and newsworthy. Shows AI doing something genuinely useful."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AARdL9QeD2vRYzCKSMLeXY"
+    },
+    {
+      "ts": 1791039967.4566643,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google's AI ranks #1 for predicting flu hospitalizations.\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01AARdL9QeD2vRYzCKSMLeXY"
+    },
+    {
+      "ts": 1791039974.5855381,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01WsE4C4a5v5Utw84ttisvrz"
+    },
+    {
+      "ts": 1791039976.4676368,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1791039976.467683,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Anthropic invests $100 million to train 10,000 engineers and tackle the enterprise AI talent gap\", \"pick_2\": \"OpenAI\\u2019s Dot agent is enterprise software that can also order your dinner\", \"pick_3\": \"Apple will limit Mac disk access as AI agents \\u2018substantially\\u2019 increase risk\", \"pick_4\": \"Google's AI ranks #1 for predicting flu hospitalizations.\"}}",
+      "tool_use_id": "toolu_01WsE4C4a5v5Utw84ttisvrz"
+    }
+  ],
+  "issue_num": 107
+}
