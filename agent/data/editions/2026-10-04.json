@@ -1,0 +1,248 @@
+{
+  "date": "2026-10-04",
+  "generated_at": "2026-10-04T15:43:43.437374Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Meta open sourced code to build your own Muse AI gadgets",
+      "blurb": "Meta released the code behind Muse, letting developers put its AI agent on custom hardware like e-ink displays, HDMI sticks, or anything else they dream up. You can now build standalone Muse devices instead of just using the app.",
+      "why_it_matters": "AI agents are jumping off phones and into physical objects you can actually build yourself.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1004330/meta-muse-ai-gadgets-home-link",
+      "tier": 1,
+      "original_headline": "Meta open sources code to let you make Muse AI gadgets",
+      "fingerprint": "7e85c6330bc8a345"
+    },
+    {
+      "slot": "build",
+      "headline": "GitHub Copilot can now control your desktop apps for you",
+      "blurb": "Copilot can now interact with apps on your Mac or Windows machine through its CLI and desktop app in public preview. Instead of just suggesting code, it can click buttons, fill forms, and navigate software on your behalf while you work.",
+      "why_it_matters": "AI coding assistants just became AI operating assistants.",
+      "source_name": "GitHub Changelog",
+      "source_url": "https://github.blog/changelog/2026-10-01-github-copilot-can-now-interact-with-desktop-apps",
+      "tier": 2,
+      "original_headline": "GitHub Copilot can now interact with desktop apps with computer use",
+      "fingerprint": "7947fcc825e6db5e"
+    },
+    {
+      "slot": "market",
+      "headline": "Sean Parker is turning Stability AI into a music company",
+      "blurb": "The Napster founder who once upended the music industry is now rebuilding Stability AI with a focus on music generation \u2014 this time with record label backing and investment. Parker's betting the labels will embrace AI-generated music if they control it from the start.",
+      "why_it_matters": "The same person who forced music labels into streaming is now positioning them to own the AI music transition.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/02/sean-parker-is-rebuilding-stability-ai-around-music/",
+      "tier": 1,
+      "original_headline": "Sean Parker is rebuilding Stability AI around music",
+      "fingerprint": "623ae6a9f387ffb7"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Meta's Muse AI can now shop, compare prices, and check out for you",
+      "blurb": "Meta announced Muse partnerships with Walmart, Gap, Sephora, Expedia, Wayfair, and Best Buy. The AI agent can browse products, compare options across retailers, add items to cart, and complete checkout on your behalf\u2014turning 'I need running shoes under $100' into a finished purchase.",
+      "why_it_matters": "AI agents are moving from answering questions to completing entire purchase workflows autonomously.",
+      "source_name": "CNBC \u2014 Technology",
+      "source_url": "https://www.cnbc.com/2026/10/03/meta-muse-shopping-ai-agent.html",
+      "tier": 1,
+      "original_headline": "Meta's Muse can shop and check out for you. Here's how it works",
+      "fingerprint": "0df96a5210adf78c"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The priority collision detector",
+    "kicker": "",
+    "prompt": "I have three things competing for my attention this week. I'll list them below. For each one, tell me: what it unlocks if I finish it, what it costs if I delay it, and which of the other two it's secretly blocking. Then rank them by actual consequence, not urgency.",
+    "tool_hint": "When everything feels equally important and you're context-switching yourself to death."
+  },
+  "daily_question": "If an AI agent could control one app on your computer right now, which would you trust it with\u2014and which would you never?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1791128581.7224853,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1791128593.3008482,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "build",
+        "reason": "Apple responding to AI agent risks with new macOS security controls - major platform security story driven by AI capabilities, affects developers building agents"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015EZJ5jWNdQ29LqzAvxRKFM"
+    },
+    {
+      "ts": 1791128593.3009274,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple says it\\u2019s tightening macOS \\u2018Full Disk Access\\u2019 controls due to new risks from AI agents\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_015EZJ5jWNdQ29LqzAvxRKFM"
+    },
+    {
+      "ts": 1791128593.300962,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "build",
+        "reason": "Meta open-sourcing Muse gadget code - significant developer story, lets builders create their own AI agent hardware"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01F7a3GorzSdkb1Rb3QqLmcF"
+    },
+    {
+      "ts": 1791128593.300988,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta open sources code to let you make Muse AI gadgets\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01F7a3GorzSdkb1Rb3QqLmcF"
+    },
+    {
+      "ts": 1791128593.3009949,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 226,
+        "persona": "build",
+        "reason": "GitHub Copilot gains computer use capability - major new feature for developers, can now interact with desktop apps in public preview"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EXBur7vHAAQtvQRSUtzJa5"
+    },
+    {
+      "ts": 1791128593.301018,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"GitHub Copilot can now interact with desktop apps with computer use\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01EXBur7vHAAQtvQRSUtzJa5"
+    },
+    {
+      "ts": 1791128593.3010242,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "market",
+        "reason": "Sean Parker rebuilding Stability AI around music - interesting market story with high-profile founder returning to music industry with AI, concrete product direction"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XFkkfx9wEgDW7kTkioDTkm"
+    },
+    {
+      "ts": 1791128593.301049,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Sean Parker is rebuilding Stability AI around music\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01XFkkfx9wEgDW7kTkioDTkm"
+    },
+    {
+      "ts": 1791128599.0145617,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_012L37ArSTeHcxn9GxB3y1Ne"
+    },
+    {
+      "ts": 1791128599.7076056,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"Apple is locking down Mac disk access because of AI agents\\\", similarity 0.921) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_012L37ArSTeHcxn9GxB3y1Ne"
+    },
+    {
+      "ts": 1791128603.7088115,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 31
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QVfru7r7Vi8z9B1uHo9bYR"
+    },
+    {
+      "ts": 1791128603.7088716,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Apple says it\\u2019s tightening macOS \\u2018Full Disk Access\\u2019 controls due to new risks from AI agents\"}",
+      "tool_use_id": "toolu_01QVfru7r7Vi8z9B1uHo9bYR"
+    },
+    {
+      "ts": 1791128603.708902,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 179,
+        "persona": "everyday",
+        "reason": "Meta Muse can now shop and checkout for you - concrete consumer feature with major retail partnerships (Walmart, Gap, Sephora, etc), people can try it today"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01K75Q2Bwj4fAnd9sxfzriWR"
+    },
+    {
+      "ts": 1791128603.7089493,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta's Muse can shop and check out for you. Here's how it works\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01K75Q2Bwj4fAnd9sxfzriWR"
+    },
+    {
+      "ts": 1791128604.6220667,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01EXHNTHcHF2R1SaRT3HYcc5"
+    },
+    {
+      "ts": 1791128604.8777936,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1791128604.877849,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"Meta open sources code to let you make Muse AI gadgets\", \"pick_3\": \"GitHub Copilot can now interact with desktop apps with computer use\", \"pick_4\": \"Sean Parker is rebuilding Stability AI around music\", \"pick_5\": \"Meta's Muse can shop and check out for you. Here's how it works\"}}",
+      "tool_use_id": "toolu_01EXHNTHcHF2R1SaRT3HYcc5"
+    }
+  ],
+  "issue_num": 108
+}
