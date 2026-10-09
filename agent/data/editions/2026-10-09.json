@@ -1,0 +1,314 @@
+{
+  "date": "2026-10-09",
+  "generated_at": "2026-10-09T17:24:30.735859Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "industry",
+      "headline": "Anthropic just launched a team to help governments defend critical infrastructure",
+      "blurb": "Anthropic's new Cyber Mission unit will work with the U.S. and allied governments to deploy Claude for cybersecurity defense \u2014 think protecting power grids, water systems, and transportation networks from AI-powered attacks. The team includes former NSA and White House cyber officials.",
+      "why_it_matters": "AI companies are now building specialized government defense teams as cyber threats become AI-augmented.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/anthropic-cyber-mission",
+      "tier": 1,
+      "original_headline": "Introducing the Anthropic Cyber Mission",
+      "fingerprint": "7c1481cd70d5ea5a"
+    },
+    {
+      "slot": "build",
+      "headline": "Anthropic will scan your open-source code for security holes, for free",
+      "blurb": "Anthropic just launched OSS Scanner, a free service that uses Claude to find security vulnerabilities in open-source projects. Maintainers who opt in get periodic scans from Anthropic's strongest models at no cost, potentially catching issues earlier in the development cycle.",
+      "why_it_matters": "Free AI security scanning could help small open-source teams catch bugs they'd otherwise miss.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1008521/anthropic-open-source-oss-scanner",
+      "tier": 1,
+      "original_headline": "Anthropic launches free AI security scans for open-source projects",
+      "fingerprint": "b6814b1d7b88349e"
+    },
+    {
+      "slot": "market",
+      "headline": "Arena, the site that ranks AI models, just hit a $3.1B valuation",
+      "blurb": "The company behind LMArena\u2014the leaderboard where people vote on which AI gives better answers\u2014raised $200 million from Lightspeed and Khosla. It's now worth $3.1 billion, nearly double its valuation from 10 months ago. Arena is expanding beyond quality rankings to measure whether models lie or follow instructions poorly.",
+      "why_it_matters": "The neutral benchmark everyone uses to compare models is now a multi-billion-dollar business.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/08/popular-ai-leaderboard-arena-nearly-doubles-valuation-to-3-1b-valuation-in-10-months/",
+      "tier": 1,
+      "original_headline": "Popular AI leaderboard Arena nearly doubles valuation to $3.1B valuation in 10 months",
+      "fingerprint": "1fe56dd1bbd3f35f"
+    },
+    {
+      "slot": "market",
+      "headline": "Andreessen Horowitz backs viral AI model Jev at $7.5 billion",
+      "blurb": "TypeSafe AI raised $870 million just weeks after launching Jev, an AI model that went viral immediately. Andreessen Horowitz led the round, valuing the startup at $7.5 billion despite having barely any operating history.",
+      "why_it_matters": "A viral launch can now command unicorn valuations in weeks, not years.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-10-09/andreessen-horowitz-backs-jev-maker-at-7-5-billion-value",
+      "tier": 1,
+      "original_headline": "Andreessen Horowitz Backs Jev Maker at $7.5 Billion Value",
+      "fingerprint": "1b28e9cd9cfd47c1"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google's new app transcribes meetings on your laptop with zero internet",
+      "blurb": "Google released a free experimental note-taking app called AI Edge Foresight that transcribes and summarizes meetings entirely offline on macOS. It runs a local AI model on your device, so nothing gets sent to the cloud\u2014similar to apps like Granola and Wispr Flow, but without needing connectivity.",
+      "why_it_matters": "Private meetings can now stay fully offline while still getting AI transcription and summaries.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1007985/google-ai-notetaking-app-transcribe-offline",
+      "tier": 1,
+      "original_headline": "Google\u2019s AI note-taking app transcribes your meetings completely offline",
+      "fingerprint": "415f8e8ae77bdda5"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor's iOS app can now control coding agents running on your Mac",
+      "blurb": "Cursor just shipped remote control for local agents \u2014 you can now see what AI is building on your laptop and reply from your phone. The feature works through the Cursor iOS app, letting you supervise and steer agent runs without being at your desk.",
+      "why_it_matters": "You can now babysit long-running AI builds from anywhere, not just your laptop.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/remote-control-local-agents",
+      "tier": 1,
+      "original_headline": "Remote control for local agents",
+      "fingerprint": "536f6c64a29969ea"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting worth-it calculator",
+    "kicker": "",
+    "prompt": "I have a recurring meeting I'll describe below. Calculate its annual cost in salary hours, then tell me: the one decision it needs to produce to justify that cost, who could skip it without consequence, and whether we should kill it, shrink it, or make it quarterly.",
+    "tool_hint": "Before you accept that calendar invite for the next six months."
+  },
+  "daily_question": "If you could give one AI tool root access to your work machine, which would you trust and why?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1791566585.5314665,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=11, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1791566607.1500459,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "industry",
+        "reason": "Major new security initiative from Anthropic, a tier-1 AI lab. This is a significant long-term commitment that reflects the industry's growing focus on cybersecurity applications. Primary source from Anthropic News."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AwJZdxaNRPBqDfJ1ZsrhJu"
+    },
+    {
+      "ts": 1791566607.1501217,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing the Anthropic Cyber Mission\", \"persona\": \"industry\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01AwJZdxaNRPBqDfJ1ZsrhJu"
+    },
+    {
+      "ts": 1791566607.1501567,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 52,
+        "persona": "build",
+        "reason": "Google turning Gemini into an agentic AI that can execute tasks across business systems is a major capability unlock. This is the platform war story of the day - agentic AI going mainstream for enterprises."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014ekZYE4VkCXjwxrLHjprdk"
+    },
+    {
+      "ts": 1791566607.150195,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google brings agentic AI to Gemini, starting with businesses\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_014ekZYE4VkCXjwxrLHjprdk"
+    },
+    {
+      "ts": 1791566607.1502068,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "build",
+        "reason": "Free AI security scanning for open-source projects is both immediately useful and shows AI applied to a critical developer need. People can try OSS Scan today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019VXJuqHEfYnprwwJxUN7Fe"
+    },
+    {
+      "ts": 1791566607.1502612,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic launches free AI security scans for open-source projects\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_019VXJuqHEfYnprwwJxUN7Fe"
+    },
+    {
+      "ts": 1791566607.1502793,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 50,
+        "persona": "market",
+        "reason": "Arena (LMArena leaderboard) nearly doubling to $3.1B valuation in 10 months is a significant market story. The leaderboard is widely used by the AI community for model benchmarking."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014AhMkhzYUhxY2YFaZxmmss"
+    },
+    {
+      "ts": 1791566607.1503394,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Popular AI leaderboard Arena nearly doubles valuation to $3.1B valuation in 10 months\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_014AhMkhzYUhxY2YFaZxmmss"
+    },
+    {
+      "ts": 1791566607.1503575,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 194,
+        "persona": "market",
+        "reason": "Jev, a viral new AI model, raising $870M at $7.5B valuation weeks after launch is a remarkable market story. Shows the pace of AI model competition and venture appetite."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Ed4gLzkmLWGxDSERozKiwt"
+    },
+    {
+      "ts": 1791566607.1504028,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Andreessen Horowitz Backs Jev Maker at $7.5 Billion Value\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01Ed4gLzkmLWGxDSERozKiwt"
+    },
+    {
+      "ts": 1791566607.1504195,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 40,
+        "persona": "everyday",
+        "reason": "Google's offline AI transcription app is a shipped feature people can try immediately. Offline transcription solves privacy concerns and shows on-device AI capabilities advancing."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QN2Kwt1pki3wMrgUqxRuEb"
+    },
+    {
+      "ts": 1791566607.1504664,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google\\u2019s AI note-taking app transcribes your meetings completely offline\", \"persona\": \"everyday\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01QN2Kwt1pki3wMrgUqxRuEb"
+    },
+    {
+      "ts": 1791566617.3270388,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01LB251iHuKiVnHoMZ6MHYiJ"
+    },
+    {
+      "ts": 1791566617.9611804,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_2] covers the same story as a recent edition (\\\"Google is launching a one-stop Gemini agent for your work tasks\\\", similarity 0.808) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01LB251iHuKiVnHoMZ6MHYiJ"
+    },
+    {
+      "ts": 1791566621.1100223,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 52
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01S3euAyDyU4xGBpPhn8G9cR"
+    },
+    {
+      "ts": 1791566621.1100705,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Google brings agentic AI to Gemini, starting with businesses\"}",
+      "tool_use_id": "toolu_01S3euAyDyU4xGBpPhn8G9cR"
+    },
+    {
+      "ts": 1791566628.0505488,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "build",
+        "reason": "Cursor's remote control for local AI agents from iOS is a shipped feature developers can use today. Shows the evolution of AI coding assistants toward mobile control of autonomous agents."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Me5rXefwDPR7uXguwVhnSw"
+    },
+    {
+      "ts": 1791566628.0506299,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Remote control for local agents\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01Me5rXefwDPR7uXguwVhnSw"
+    },
+    {
+      "ts": 1791566629.2938018,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_014wDxSBda3XToCkbtMHbiuv"
+    },
+    {
+      "ts": 1791566629.5985355,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1791566629.5985773,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Introducing the Anthropic Cyber Mission\", \"pick_3\": \"Anthropic launches free AI security scans for open-source projects\", \"pick_4\": \"Popular AI leaderboard Arena nearly doubles valuation to $3.1B valuation in 10 months\", \"pick_5\": \"Andreessen Horowitz Backs Jev Maker at $7.5 Billion Value\", \"pick_6\": \"Google\\u2019s AI note-taking app transcribes your meetings completely offline\", \"pick_7\": \"Remote control for local agents\"}}",
+      "tool_use_id": "toolu_014wDxSBda3XToCkbtMHbiuv"
+    }
+  ],
+  "issue_num": 112
+}
