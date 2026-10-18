@@ -1,9 +1,12 @@
 """Unit tests for the Hybrid Discovery Agent pipeline (no LLM calls)."""
 
 import datetime as dt
+import json
 import sys
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
@@ -353,6 +356,58 @@ class ReadCandidateTests(unittest.TestCase):
         state = _state()
         r = el._tool_read_candidate(state, {"id": 999})
         self.assertIn("error", r)
+
+
+class EditorToolResultTests(unittest.TestCase):
+    def _wire_result(self, name, result):
+        import espresso_agent as ea
+        captured = []
+
+        def create(**kwargs):
+            if len(captured) == 0:
+                captured.append(None)
+                return SimpleNamespace(content=[SimpleNamespace(
+                    type="tool_use", id="read-1", name=name, input={"id": 1},
+                )])
+            captured.append(kwargs["messages"][-1]["content"][0]["content"])
+            return SimpleNamespace(content=[])
+
+        with (
+            mock.patch.object(ea, "USE_ANTHROPIC", True),
+            mock.patch("anthropic.Anthropic", return_value=SimpleNamespace(messages=SimpleNamespace(create=create))),
+            mock.patch.object(el, "_dispatch_tool", return_value=result),
+        ):
+            el._run_editor_loop(_state(), [])
+        return captured[-1]
+
+    def _decode(self, wire):
+        try:
+            return json.loads(wire)
+        except json.JSONDecodeError:
+            self.fail("editor received truncated, invalid tool-result JSON")
+
+    def test_read_result_preserves_bounded_evidence_without_full_rss(self):
+        body = ("VERIFIED ARTICLE EVIDENCE " * 200)[:2500]
+        result = {"candidate": _candidate(1, "AI feature", body=body, blurb="RAW RSS " * 20000), "cached": True}
+        data = self._decode(self._wire_result("read_candidate", result))
+        self.assertEqual(data["candidate"]["body"], body)
+        self.assertFalse(data["candidate"].get("blurb"), "duplicate RSS must not replace verified body")
+        self.assertTrue(data["cached"])
+        self.assertEqual(len(result["candidate"]["blurb"]), len("RAW RSS " * 20000))
+
+    def test_search_result_keeps_every_candidate_id_and_complete_json(self):
+        result = {"added": 5, "entries": [
+            _candidate(i, f"AI feature number {i}", blurb="Snippet " * 25)
+            for i in range(5)
+        ]}
+        data = self._decode(self._wire_result("search_news", result))
+        self.assertEqual([c["id"] for c in data["entries"]], list(range(5)))
+        self.assertEqual(data["added"], 5)
+
+    def test_read_failure_keeps_a_bounded_summary(self):
+        result = {"candidate": _candidate(1, "AI feature", blurb="RSS summary " * 2000), "body_source": "none"}
+        data = self._decode(self._wire_result("read_candidate", result))
+        self.assertLessEqual(len(data["candidate"]["blurb"]), 200)
 
 
 class RankHeadlinesTests(unittest.TestCase):

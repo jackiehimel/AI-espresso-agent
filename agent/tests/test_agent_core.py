@@ -13,6 +13,9 @@ import unittest
 from unittest import mock
 from pathlib import Path
 
+import httpx
+from anthropic import BadRequestError, InternalServerError
+
 # make agent/ importable when tests run from repo root
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
@@ -316,6 +319,98 @@ class FreshnessTests(unittest.TestCase):
 
 
 class AgentRetryTests(unittest.TestCase):
+
+    def _run_api_failure(self, error, expected_attempts, allow_fallback=False):
+        with (
+            mock.patch.dict(ea.os.environ, {
+                "ESPRESSO_AGENT_MAX_ATTEMPTS": "2",
+                "ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK": "1" if allow_fallback else "0",
+            }),
+            mock.patch.object(ea, "USE_ANTHROPIC", False),
+            mock.patch.object(ea, "load_sources", return_value=([], {})),
+            mock.patch.object(ea, "fetch_all_candidates", return_value=[]),
+            mock.patch.object(ea, "load_archive", return_value=set()),
+            mock.patch.object(ea, "_load_archive_records_compacted", return_value=[]),
+            mock.patch.object(ea, "recent_archive_headlines", return_value=[]),
+            mock.patch.object(ea, "rank_and_select", side_effect=AssertionError("must not fall back")) as fallback,
+            mock.patch.object(el, "agentic_select", side_effect=error) as select,
+        ):
+            with self.assertRaises(type(error)) as caught:
+                ea.run(__import__("datetime").date(2026, 10, 18), dry_run=True, mode="agent")
+            self.assertIs(caught.exception, error)
+            self.assertEqual(select.call_count, expected_attempts)
+            fallback.assert_not_called()
+
+    def test_monthly_api_spend_limits_stop_without_retry_or_fallback(self):
+        for scope in ("", "workspace "):
+            with self.subTest(scope=scope):
+                message = (
+                    f"You have reached your specified {scope}API usage limits. "
+                    "You will regain access on 2026-11-01 at 00:00 UTC."
+                )
+                error = BadRequestError(
+                    message,
+                    response=httpx.Response(400, request=httpx.Request("POST", "https://api.anthropic.com/v1/messages")),
+                    body={"type": "error", "error": {"type": "invalid_request_error", "message": message}},
+                )
+                self._run_api_failure(error, 1, allow_fallback=True)
+
+    def test_unrelated_bad_request_keeps_existing_retry_behavior(self):
+        error = BadRequestError(
+            "Invalid request",
+            response=httpx.Response(400, request=httpx.Request("POST", "https://api.anthropic.com/v1/messages")),
+            body={"error": {"message": "Invalid request"}},
+        )
+        self._run_api_failure(error, 2)
+
+    def test_monthly_spend_limit_in_editor_stops_without_reranking(self):
+        """Exercise real run -> selection -> editor, injecting only SDK failure."""
+        for scope in ("", "workspace "):
+            with self.subTest(scope=scope):
+                message = f"You have reached your specified {scope}API usage limits."
+                error = BadRequestError(
+                    message,
+                    response=httpx.Response(400, request=httpx.Request("POST", "https://api.anthropic.com/v1/messages")),
+                    body={"error": {"message": message}},
+                )
+                client = mock.Mock()
+                client.messages.create.side_effect = error
+                enriched = [
+                    {"id": i, "headline": f"Story {i}", "source": "Example", "body": "Verified body"}
+                    for i in range(4)
+                ]
+                with (
+                    mock.patch.dict(ea.os.environ, {
+                        "ESPRESSO_AGENT_MAX_ATTEMPTS": "2",
+                        "ESPRESSO_ALLOW_DETERMINISTIC_FALLBACK": "1",
+                    }),
+                    mock.patch.object(ea, "USE_ANTHROPIC", True),
+                    mock.patch.object(ea, "Anthropic", return_value=client, create=True),
+                    mock.patch("anthropic.Anthropic", return_value=client),
+                    mock.patch.object(ea, "load_sources", return_value=([], {})),
+                    mock.patch.object(ea, "fetch_all_candidates", return_value=[]),
+                    mock.patch.object(ea, "load_archive", return_value=set()),
+                    mock.patch.object(ea, "_load_archive_records_compacted", return_value=[]),
+                    mock.patch.object(ea, "recent_archive_headlines", return_value=[]),
+                    mock.patch.object(el, "discover_via_search", return_value=[]),
+                    mock.patch.object(el, "rank_headlines", return_value={"ranked": []}) as rank,
+                    mock.patch.object(el, "prefetch_bodies", return_value=enriched),
+                    mock.patch.object(el, "write_agent_failure_artifact"),
+                    mock.patch.object(ea, "rank_and_select", side_effect=AssertionError("must not fall back")),
+                ):
+                    with self.assertRaises(BadRequestError) as caught:
+                        ea.run(__import__("datetime").date(2026, 10, 18), dry_run=True, mode="agent")
+                    self.assertIs(caught.exception, error)
+                    self.assertEqual(rank.call_count, 1)
+                    self.assertEqual(client.messages.create.call_count, 1)
+
+    def test_temporary_api_error_keeps_existing_retry_behavior(self):
+        error = InternalServerError(
+            "Temporary server error",
+            response=httpx.Response(500, request=httpx.Request("POST", "https://api.anthropic.com/v1/messages")),
+            body={"error": {"message": "Temporary server error"}},
+        )
+        self._run_api_failure(error, 2)
 
     def test_agent_mode_retries_after_agentic_failure(self):
         day = __import__("datetime").date(2026, 5, 26)

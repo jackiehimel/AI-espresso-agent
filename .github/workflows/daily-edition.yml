@@ -196,7 +196,7 @@ jobs:
             echo ""
             echo "Check the generate job logs for agent, render, or email errors."
             echo ""
-            echo "_Optional Slack: set \`SLACK_WEBHOOK_URL\` to enable webhook alerts._"
+            echo "Slack delivery status is reported by the notification step below."
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Optional Slack failure notification
@@ -205,8 +205,9 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           if [ -z "${SLACK_WEBHOOK_URL:-}" ]; then
-            echo "SLACK_WEBHOOK_URL not set; skipping Slack notification."
-            exit 0
+            echo "::error::SLACK_WEBHOOK_URL not set; skipping Slack notification. No alert delivered."
+            echo "Slack alert not delivered: SLACK_WEBHOOK_URL is not configured." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
 
           python - <<'PY' > payload.json
@@ -229,7 +230,17 @@ jobs:
           print(json.dumps(payload))
           PY
 
-          curl --fail --show-error --silent --max-time 10 --retry 2 \
+          if ! RESPONSE=$(curl --fail --show-error --silent --max-time 10 --retry 2 \
             -H "Content-Type: application/json" \
             -d @payload.json \
-            "$SLACK_WEBHOOK_URL" || echo "::warning::Slack failure notification failed"
+            "$SLACK_WEBHOOK_URL"); then
+            echo "::error::Slack failure notification failed"
+            echo "Slack alert not delivered: webhook request failed." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          if [ "$RESPONSE" != "ok" ]; then
+            echo "::error::Slack failure notification failed: response did not confirm delivery."
+            echo "Slack alert not delivered: webhook response did not confirm delivery." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo "Slack alert delivered." >> "$GITHUB_STEP_SUMMARY"
