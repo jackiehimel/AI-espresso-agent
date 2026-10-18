@@ -1,0 +1,254 @@
+{
+  "date": "2026-10-18",
+  "generated_at": "2026-10-18T22:29:06.588759Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "ChatGPT can now read your Chrome tabs and fill out forms for you",
+      "blurb": "OpenAI's Chrome extension now lets ChatGPT see all your open browser tabs when you tag it. Ask it to compare products across tabs, fill out registration forms, or draft emails based on what you're looking at \u2014 without leaving Chrome. The sidebar version can also control tabs to send messages, download files, and organize your workspace.",
+      "why_it_matters": "AI assistants are moving from chat windows into your actual workflow, handling multi-tab research and data entry.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs",
+      "tier": 1,
+      "original_headline": "ChatGPT can peek at your Chrome tabs now",
+      "fingerprint": "8ae9aed0108773f4"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Amazon just turned Bee into a wearable AI that remembers your conversations",
+      "blurb": "Amazon launched Bee Frontier (a wristband) and Bee Eclipse (a magnetic phone attachment) that listen to your conversations, pull out key details, and turn them into summaries, to-dos, and reminders. Both connect to Alexa+ for hands-free access and to Amazon.com for personalized shopping suggestions based on what you've talked about.",
+      "why_it_matters": "Amazon is betting you'll wear an always-on AI that captures ambient conversations to compete with Meta's smart glasses.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/devices/amazon-personal-ai-bee-frontier-bee-eclipse?utm_source=rss",
+      "tier": 1,
+      "original_headline": "Amazon introduces 2 new AI products from Bee: Bee Frontier and Bee Eclipse",
+      "fingerprint": "17015fc27229ad85"
+    },
+    {
+      "slot": "build",
+      "headline": "Google just cut quantum computing's biggest bottleneck by 40x",
+      "blurb": "Google showed that 'magic state cultivation' works on real quantum hardware, reducing errors 40x. Magic states enable useful quantum programs, but making them error-free normally eats up 95% of a quantum computer's power. The new technique filters out bad attempts while creating the states, leaving far more room for actual computing.",
+      "why_it_matters": "Quantum computers can now spend their resources on solving problems instead of fixing themselves.",
+      "source_name": "Google \u2014 Innovation & AI",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/quantum-computing/magic-state-cultivation-quantum-computing/",
+      "tier": 1,
+      "original_headline": "Bringing the magic: Google breaks open a bottleneck in quantum computing",
+      "fingerprint": "2d1044d0bc893974"
+    },
+    {
+      "slot": "build",
+      "headline": "Mistral just shipped a tiny time-series model that beats bigger forecasters",
+      "blurb": "Timestral, Mistral's first time-series foundation model, tops three major benchmarks at just 209M parameters\u2014two-thirds smaller than previous leaders. It handles multivariate forecasts and runs on CPUs, meaning companies can now forecast sensor data, supply chains, or cash flows without massive compute or training from scratch every time.",
+      "why_it_matters": "Enterprise forecasting just got cheaper and faster without sacrificing accuracy.",
+      "source_name": "Mistral News",
+      "source_url": "https://mistral.ai/news/timestral",
+      "tier": 1,
+      "original_headline": "Introducing Timestral",
+      "fingerprint": "3241d3e42985f489"
+    },
+    {
+      "slot": "build",
+      "headline": "Cursor's cloud agents can now build shareable interactive canvases",
+      "blurb": "Cursor shipped three upgrades to its cloud coding agents: they can now create interactive canvases you can share with your team via link, there's a new API to spin up and manage cloud environments programmatically, and environments now handle up to 300 repos while loading five times faster.",
+      "why_it_matters": "Coding agents just became collaborative tools, not just solo dev assistants.",
+      "source_name": "Cursor Changelog (official)",
+      "source_url": "https://cursor.com/changelog/cloud-agent-canvases-and-environments",
+      "tier": 1,
+      "original_headline": "Cloud Agent Canvases and Environment Improvements",
+      "fingerprint": "86aab16af854b76e"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA ships open models that run AI agents on laptops and servers",
+      "blurb": "NVIDIA released three open-weight models designed for always-on agents. Super VL runs multimodal workflows at 5x the speed of competitors in its class. Bolt 74B fits in 24GB of RAM and runs locally on RTX laptops. Bolt E4B runs conversational agents in just 4GB. All three are free to download, fine-tune, and deploy on your own hardware.",
+      "why_it_matters": "You can now run production AI agents entirely on infrastructure you control.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/",
+      "tier": 1,
+      "original_headline": "Open From Data Center to Desktop: NVIDIA Expands Nemotron Family With Highest Efficiency Super VL and Bolt Models",
+      "fingerprint": "29c19cdba20e1205"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The skill investment audit",
+    "kicker": "",
+    "prompt": "I'll describe what I currently do at work and what I want to be doing in two years. Tell me: the one skill I should double down on, the one I'm overinvesting in, and the uncomfortable learning project I should start this month that nobody will appreciate until later.",
+    "tool_hint": "When your learning list is long but your time isn't infinite."
+  },
+  "daily_question": "If an AI could remember everything you said this week, what's the one thing you'd want it to forget?",
+  "notes": [
+    "mode: agent"
+  ],
+  "agent_trace": [
+    {
+      "ts": 1792362496.1741931,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792362513.960635,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "everyday",
+        "reason": "Lead story - ChatGPT's Chrome extension now reads your active tabs. Concrete shipped feature everyone can try, high wow factor. Perfect \"show don't tell\" hook."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Y12H9T1WuTwYJMCBrCB4kN"
+    },
+    {
+      "ts": 1792362513.9607074,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"ChatGPT can peek at your Chrome tabs now\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Y12H9T1WuTwYJMCBrCB4kN"
+    },
+    {
+      "ts": 1792362513.960751,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 17,
+        "persona": "everyday",
+        "reason": "Major product launch from Amazon's Bee - two new AI wearables (Frontier and Eclipse) that remember moments. Primary source, tangible consumer products."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WyeykF3NYxLjmYwNNs4aN7"
+    },
+    {
+      "ts": 1792362513.9608138,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon introduces 2 new AI products from Bee: Bee Frontier and Bee Eclipse\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01WyeykF3NYxLjmYwNNs4aN7"
+    },
+    {
+      "ts": 1792362513.9608326,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "build",
+        "reason": "Google breakthrough in quantum computing bottleneck - \"magic state\" advancement. Technical achievement with clear capability hook, primary source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019ZtBBhkrrg7AczZVEM9B2a"
+    },
+    {
+      "ts": 1792362513.9608915,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Bringing the magic: Google breaks open a bottleneck in quantum computing\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_019ZtBBhkrrg7AczZVEM9B2a"
+    },
+    {
+      "ts": 1792362513.9609113,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 9,
+        "persona": "build",
+        "reason": "Mistral launches Timestral - specialized time-series forecasting models (5M-209M params), CPU-efficient and zero-shot ready. Developer-focused with immediate utility."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DCape4M3hz8h2xoW9HtYkt"
+    },
+    {
+      "ts": 1792362513.9609907,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Timestral\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01DCape4M3hz8h2xoW9HtYkt"
+    },
+    {
+      "ts": 1792362513.961015,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 26,
+        "persona": "build",
+        "reason": "Cursor cloud agents now build interactive canvases - concrete shipped feature for developers. Platform advancement in AI coding tools."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JTDxoxwKdmxyN9aprdYnGW"
+    },
+    {
+      "ts": 1792362513.961067,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Cloud Agent Canvases and Environment Improvements\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01JTDxoxwKdmxyN9aprdYnGW"
+    },
+    {
+      "ts": 1792362513.9610898,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "build",
+        "reason": "NVIDIA releases Nemotron 3.5 Super VL - open 120B parameter model with fastest task completion. Major open model release, accessible from data center to desktop."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PTVgcpL9KVuQguWonRpHiK"
+    },
+    {
+      "ts": 1792362513.9611387,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Open From Data Center to Desktop: NVIDIA Expands Nemotron Family With Highest Efficiency Super VL and Bolt Models\", \"persona\": \"build\", \"pick_count\": 6}",
+      "tool_use_id": "toolu_01PTVgcpL9KVuQguWonRpHiK"
+    },
+    {
+      "ts": 1792362518.2201962,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01FtwdT2mXQvPD3mCLaTHGLV"
+    },
+    {
+      "ts": 1792362518.7730575,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 6 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792362518.773097,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"ChatGPT can peek at your Chrome tabs now\", \"pick_2\": \"Amazon introduces 2 new AI products from Bee: Bee Frontier and Bee Eclipse\", \"pick_3\": \"Bringing the magic: Google breaks open a bottleneck in quantum computing\", \"pick_4\": \"Introducing Timestral\", \"pick_5\": \"Cloud Agent Canvases and Environment Improvements\", \"pick_6\": \"Open From Data Center to Desktop: NVIDIA Expands Nemotron Family With Highest Efficiency Super VL and Bolt Models\"}}",
+      "tool_use_id": "toolu_01FtwdT2mXQvPD3mCLaTHGLV"
+    }
+  ],
+  "issue_num": 114
+}
