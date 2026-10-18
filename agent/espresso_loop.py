@@ -21,7 +21,7 @@ import re
 import subprocess
 import sys
 import time
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field, asdict, replace
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -733,8 +733,21 @@ def _build_editor_brief(state: AgentState, gaps: list[str]) -> str:
     )
 
 
+def _editor_tool_result_json(name: str, result: dict) -> str:
+    """Keep tool JSON complete without sending duplicate full-text RSS."""
+    if name == "read_candidate" and isinstance(result.get("candidate"), dict):
+        candidate = dict(result["candidate"])
+        if candidate.get("body"):
+            candidate["body"] = candidate["body"][:2500]
+            candidate.pop("blurb", None)
+        elif "blurb" in candidate:
+            candidate["blurb"] = (candidate["blurb"] or "")[:200]
+        result = {**result, "candidate": candidate}
+    return json.dumps(result)
+
+
 def _run_editor_loop(state: AgentState, vendor_patterns) -> bool:
-    from espresso_agent import USE_ANTHROPIC, CLAUDE_MODEL
+    from espresso_agent import USE_ANTHROPIC, CLAUDE_MODEL, _is_monthly_spend_limit
     if not USE_ANTHROPIC:
         raise RuntimeError("ANTHROPIC_API_KEY not set")
     from anthropic import Anthropic
@@ -750,6 +763,8 @@ def _run_editor_loop(state: AgentState, vendor_patterns) -> bool:
                 messages=messages, tools=EDITOR_TOOLS,
             )
         except Exception as e:
+            if _is_monthly_spend_limit(e):
+                raise
             state.trace.append(TraceEvent(
                 ts=time.time(), role="editor", kind="error",
                 result_summary=f"LLM call failed: {e}",
@@ -777,10 +792,10 @@ def _run_editor_loop(state: AgentState, vendor_patterns) -> bool:
                 name=name, args=tool_input, tool_use_id=block.id,
             ))
             result = _dispatch_tool(name, tool_input, state, vendor_patterns)
-            result_str = json.dumps(result)[:600]
+            result_str = _editor_tool_result_json(name, result)
             state.trace.append(TraceEvent(
                 ts=time.time(), role="editor", kind="tool_result",
-                name=name, result_summary=result_str, tool_use_id=block.id,
+                name=name, result_summary=result_str[:600], tool_use_id=block.id,
             ))
             print(f"  [editor {state.tool_calls}] {name}({tool_input}) → {result_str[:120]}", file=sys.stderr)
             tool_results.append({
@@ -978,12 +993,16 @@ def agentic_select(
         selected = []
         for slot, entry in state.picks.items():
             cid = entry["id"]
+            # Rewrite from the same bounded evidence the editor verified.
+            excerpt = (entry.get("body") or "")[:2500]
             if cid in cand_by_id:
-                cand = cand_by_id[cid]
+                cand = replace(cand_by_id[cid], blurb=excerpt)
             else:
                 cand = Candidate(
                     headline=entry["headline"], url=entry["url"],
                     source_name=entry.get("source", ""), tier=entry.get("tier", 2),
+                    blurb=excerpt, paywall=bool(entry.get("paywall")),
+                    vertical=entry.get("vertical"), published_date=entry.get("published_date"),
                 )
             cand._agent_slot = entry.get("persona", "market")
             selected.append(cand)

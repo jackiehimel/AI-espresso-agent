@@ -45,6 +45,7 @@ from urllib.parse import urljoin, urlparse
 
 import yaml
 import httpx
+from anthropic import BadRequestError
 import subprocess
 from bs4 import BeautifulSoup
 
@@ -115,6 +116,15 @@ BROWSER_HEADERS = {
 USE_ANTHROPIC = bool(os.environ.get("ANTHROPIC_API_KEY"))
 if USE_ANTHROPIC:
     from anthropic import Anthropic
+
+
+def _is_monthly_spend_limit(error: Exception) -> bool:
+    return isinstance(error, BadRequestError) and any(
+        message in str(error) for message in (
+            "You have reached your specified API usage limits",
+            "You have reached your specified workspace API usage limits",
+        )
+    )
 
 
 # ───────────────────────────────────────────────────────────────────────
@@ -1287,6 +1297,10 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
                     )
                 break
             except Exception as e:
+                # A monthly spend cap will not recover on another agent attempt.
+                if _is_monthly_spend_limit(e):
+                    print("[espresso] Anthropic monthly spend limit reached; stopping retries.", file=sys.stderr)
+                    raise
                 last_error = e
                 if isinstance(e, AgenticSelectFailed):
                     fail_path = write_agent_failure_artifact(date, e.trace, e.meta)

@@ -1,5 +1,7 @@
 """Guards on production daily-edition workflow (no deterministic fallback in CI)."""
 
+import json
+import os
 import re
 import shutil
 import subprocess
@@ -8,6 +10,8 @@ import tempfile
 import textwrap
 import unittest
 from pathlib import Path
+
+import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW = REPO_ROOT / ".github" / "workflows" / "daily-edition.yml"
@@ -41,7 +45,7 @@ class DailyEditionWorkflowTests(unittest.TestCase):
         self.assertIn("SLACK_WEBHOOK_URL", text)
         self.assertIn("if [ -z \"${SLACK_WEBHOOK_URL:-}\" ]; then", text)
         self.assertIn("skipping Slack notification", text)
-        self.assertIn("::warning::Slack failure notification failed", text)
+        self.assertIn("::error::Slack failure notification failed", text)
 
     def test_render_output_is_parsed_without_stdin_heredoc_conflict(self):
         text = WORKFLOW.read_text(encoding="utf-8")
@@ -113,6 +117,72 @@ class DailyEditionWorkflowTests(unittest.TestCase):
         self.assertIsNotNone(match)
         header = match.group(1)
         self.assertNotIn("if:", header, f"render must not have `if:`: {header!r}")
+
+
+class FailureNotificationBehaviorTests(unittest.TestCase):
+    """Run the workflow's real shell with a local fake transport, never Slack."""
+
+    def _notify(self, webhook="", curl_status=0, response="ok"):
+        workflow = yaml.safe_load(WORKFLOW.read_text(encoding="utf-8"))
+        step = next(
+            step for step in workflow["jobs"]["notify-failure"]["steps"]
+            if "SLACK_WEBHOOK_URL" in step.get("env", {})
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            curl = root / "curl"
+            curl.write_text(
+                "#!/bin/sh\n"
+                "cp payload.json sent-payload.json\n"
+                "printf '%s' \"$FAKE_RESPONSE\"\n"
+                "exit \"$FAKE_STATUS\"\n",
+                encoding="utf-8",
+            )
+            curl.chmod(0o755)
+            summary = root / "summary.md"
+            summary.touch()
+            result = subprocess.run(
+                ["bash", "--noprofile", "--norc", "-eo", "pipefail", "-c", step["run"]],
+                cwd=root,
+                env={
+                    "PATH": str(root) + os.pathsep + os.environ["PATH"],
+                    "SLACK_WEBHOOK_URL": webhook,
+                    "RUN_URL": "https://github.com/example/repo/actions/runs/123",
+                    "GITHUB_STEP_SUMMARY": str(summary),
+                    "FAKE_STATUS": str(curl_status),
+                    "FAKE_RESPONSE": response,
+                },
+                text=True,
+                capture_output=True,
+            )
+            payload = root / "sent-payload.json"
+            return result, summary.read_text(), json.loads(payload.read_text()) if payload.exists() else None
+
+    def test_unset_webhook_reports_no_alert_and_fails(self):
+        result, summary, payload = self._notify()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("::error::", result.stdout)
+        self.assertIn("not delivered", summary)
+        self.assertIsNone(payload)
+
+    def test_transport_or_http_failure_reports_no_alert_and_fails(self):
+        for status in (6, 22, 28):
+            with self.subTest(curl_status=status):
+                result, summary, _ = self._notify("https://example.invalid/hook", status)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("not delivered", summary)
+                self.assertNotIn("Slack alert delivered", summary)
+
+    def test_http_success_with_rejected_body_fails(self):
+        result, summary, _ = self._notify("https://example.invalid/hook", response="invalid_payload")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("not delivered", summary)
+
+    def test_confirmed_delivery_succeeds_and_links_run(self):
+        result, summary, payload = self._notify("https://example.invalid/hook")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Slack alert delivered", summary)
+        self.assertIn("https://github.com/example/repo/actions/runs/123", json.dumps(payload))
 
 
 class DedupeGuardBehaviorTests(unittest.TestCase):
