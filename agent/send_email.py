@@ -91,8 +91,12 @@ def _build_email_safe_html(html: str) -> str:
     dateline = container.select_one(".dateline")
     footer = container.select_one(".footer")
 
+    story_cards = container.select(".story-cards .card")
+    grid_cols = 3 if len(story_cards) == 5 else EMAIL_GRID_COLS
+    # Three-column copy wraps more; keep the same floor across all five cards.
+    card_height = 440 if len(story_cards) == 5 else EMAIL_CARD_MIN_HEIGHT
     story_cells = []
-    for card in container.select(".story-cards .card"):
+    for card in story_cards:
         img = card.select_one(".card-image")
         category = card.select_one(".category")
         headline_link = card.select_one(".headline-link")
@@ -122,9 +126,9 @@ def _build_email_safe_html(html: str) -> str:
         source_href = source_link.get("href", "#") if source_link else "#"
 
         story_cells.append(
-            f"<td align=\"center\" valign=\"top\" width=\"{100 // EMAIL_GRID_COLS}%\" style=\"padding:0 6px 18px 6px;\">"
-            f"<table role=\"presentation\" width=\"{EMAIL_CARD_MAX_WIDTH}\" height=\"{EMAIL_CARD_MIN_HEIGHT}\" cellpadding=\"0\" cellspacing=\"0\" "
-            f"style=\"width:100%;max-width:{EMAIL_CARD_MAX_WIDTH}px;height:{EMAIL_CARD_MIN_HEIGHT}px;min-height:{EMAIL_CARD_MIN_HEIGHT}px;"
+            f"<td align=\"center\" valign=\"top\" width=\"{100 // grid_cols}%\" style=\"padding:0 6px 18px 6px;\">"
+            f"<table role=\"presentation\" width=\"{EMAIL_CARD_MAX_WIDTH}\" height=\"{card_height}\" cellpadding=\"0\" cellspacing=\"0\" "
+            f"style=\"width:100%;max-width:{EMAIL_CARD_MAX_WIDTH}px;height:{card_height}px;min-height:{card_height}px;"
             f"background:#FFFFFF;border:1px solid #EFE5D6;border-radius:12px;\">"
             f"<tr><td align=\"center\" valign=\"top\" height=\"{EMAIL_IMAGE_ROW_HEIGHT}\" "
             f"style=\"height:{EMAIL_IMAGE_ROW_HEIGHT}px;padding:12px 12px 0 12px;\">"
@@ -144,10 +148,10 @@ def _build_email_safe_html(html: str) -> str:
         )
 
     story_rows = []
-    for i in range(0, len(story_cells), EMAIL_GRID_COLS):
-        chunk = story_cells[i:i + EMAIL_GRID_COLS]
-        if len(chunk) < EMAIL_GRID_COLS:
-            chunk += [f"<td width=\"{100 // EMAIL_GRID_COLS}%\"></td>"] * (EMAIL_GRID_COLS - len(chunk))
+    for i in range(0, len(story_cells), grid_cols):
+        chunk = story_cells[i:i + grid_cols]
+        if len(chunk) < grid_cols:
+            chunk += [f"<td width=\"{100 // grid_cols}%\"></td>"] * (grid_cols - len(chunk))
         story_rows.append("<tr>" + "".join(chunk) + "</tr>")
 
     prompt_row = ""
@@ -159,7 +163,7 @@ def _build_email_safe_html(html: str) -> str:
         prompt_code = prompt_card.select_one(".prompt-code")
         prompt_max = EMAIL_OUTER_MAX_WIDTH - 32
         prompt_row = (
-            f"<tr><td align=\"center\" colspan=\"{EMAIL_GRID_COLS}\" style=\"padding:0 6px 18px 6px;\">"
+            f"<tr><td align=\"center\" colspan=\"{grid_cols}\" style=\"padding:0 6px 18px 6px;\">"
             f"<table role=\"presentation\" width=\"{prompt_max}\" cellpadding=\"0\" cellspacing=\"0\" "
             f"style=\"width:100%;max-width:{prompt_max}px;background:#FFF8E8;border:1px dashed #C9A671;border-radius:12px;\">"
             "<tr><td style=\"padding:14px;\">"
@@ -185,14 +189,14 @@ def _build_email_safe_html(html: str) -> str:
         "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#F4EFE6;\">"
         "<tr><td align=\"center\" style=\"padding:24px 16px;\">"
         f"<table role=\"presentation\" width=\"{EMAIL_OUTER_MAX_WIDTH}\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;max-width:{EMAIL_OUTER_MAX_WIDTH}px;\">"
-        f"<tr><td colspan=\"{EMAIL_GRID_COLS}\" style=\"text-align:center;padding:8px 16px 10px 16px;\">"
+        f"<tr><td colspan=\"{grid_cols}\" style=\"text-align:center;padding:8px 16px 10px 16px;\">"
         f"<h1 style=\"margin:0;font-size:44px;line-height:1;font-weight:800;color:#1A1108;\">{wordmark_html}</h1>"
         f"<p style=\"margin:6px 0 0 0;font-size:20px;font-weight:550;color:#5C4A3A;\">{escape(tagline_text)}</p>"
         f"<p style=\"margin:8px 0 0 0;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#8B6F47;\">{escape(dateline_text)}</p>"
         "</td></tr>"
         f"{''.join(story_rows)}"
         f"{prompt_row}"
-        f"<tr><td colspan=\"{EMAIL_GRID_COLS}\" style=\"text-align:center;padding:28px 16px 8px 16px;font-size:11px;color:#8B6F47;line-height:1.7;letter-spacing:0.04em;\">"
+        f"<tr><td colspan=\"{grid_cols}\" style=\"text-align:center;padding:28px 16px 8px 16px;font-size:11px;color:#8B6F47;line-height:1.7;letter-spacing:0.04em;\">"
         f"{footer_html}</td></tr>"
         "</table></td></tr></table></body></html>"
     )

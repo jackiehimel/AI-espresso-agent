@@ -24,7 +24,7 @@ import sys
 from pathlib import Path
 
 from load_env import load_env_file
-from card_config import STORY_CARD_COUNT
+from card_config import validate_story_count
 from render_html import DATA_EDITIONS_DIR, EDITIONS_DIR, render_edition
 from render_images import render_images
 
@@ -76,6 +76,7 @@ def main() -> int:
 
     print(f"[render] reading {edition_json}", file=sys.stderr)
     edition_data = json.loads(edition_json.read_text())
+    story_count = validate_story_count(edition_data)
 
     if args.images_only:
         issue_num = args.issue_num
@@ -89,7 +90,7 @@ def main() -> int:
             "md_path": str(EDITIONS_DIR / f"edition_{issue_num}_variant_c.md"),
             "image_paths": [
                 EDITIONS_DIR / image_filename(issue_num, i)
-                for i in range(1, STORY_CARD_COUNT + 2)
+                for i in range(1, story_count + 2)
             ],
         }
         print("[render] --images-only: skipping HTML", file=sys.stderr)

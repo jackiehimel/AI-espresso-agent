@@ -30,7 +30,7 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
-from card_config import ALLOWED_STORY_COUNTS, MAX_STORY_COUNT, STORY_CARD_COUNT
+from card_config import MAX_STORY_COUNT, STORY_CARD_COUNT, validate_story_count
 from editorial import slot_label
 
 
@@ -440,16 +440,26 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }}
   .footer a {{ color: #8B6F47; text-decoration: underline; }}
 
-  /* Desktop layouts per story count so rows stay full (no dangling card).
-     Editions ship 4 or 6 stories (enforced in the ship and render gates).
+  /* Desktop layouts per story count. Five uses equal-width rows of three and two.
+     Editions normally ship 4-5 stories; six needs an editorial exception.
      n4 uses the base rules above. */
   @media (min-width: 1280px) {{
+    .edition-grid--n5 {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
+    .edition-grid--n5 .story-cards {{ grid-column: 1 / span 3; }}
+    .edition-grid--n5 .prompt-card {{ grid-column: 4; grid-row: 1 / 3; }}
     .edition-grid--n6 {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
     .edition-grid--n6 .story-cards {{
       grid-column: 1 / span 3;
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }}
     .edition-grid--n6 .prompt-card {{ grid-column: 4; grid-row: 1 / 3; }}
+  }}
+
+  @media (min-width: 960px) {{
+    .edition-grid--n5 .story-cards {{ grid-template-columns: repeat(6, minmax(0, 1fr)); }}
+    .edition-grid--n5 .story-cards .card {{ grid-column: span 2; }}
+    .edition-grid--n5 .story-cards .card:nth-child(4) {{ grid-column: 2 / span 2; }}
+    .edition-grid--n5 .story-cards .card:nth-child(5) {{ grid-column: 4 / span 2; }}
   }}
 
   @media (max-width: 1279px) and (min-width: 960px) {{
@@ -742,10 +752,7 @@ def render_edition(
     """
     data = json.loads(edition_json_path.read_text())
     stories = data.get("stories", [])
-    if len(stories) not in ALLOWED_STORY_COUNTS:
-        raise ValueError(
-            f"Edition has {len(stories)} stories; need exactly 4 or 6."
-        )
+    validate_story_count(data)
     prompt = data.get("try_this_prompt") or {}
     story_limit = min(len(stories), MAX_STORY_COUNT)
 

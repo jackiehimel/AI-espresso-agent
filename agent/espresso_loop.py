@@ -4,9 +4,9 @@ AI Espresso — Hybrid Discovery Agent.
 Pipeline:
   1. Rank ALL candidate headlines+blurbs in one LLM call (no lossy funnel)
   2. Pre-fetch article bodies for the top 20 candidates
-  3. Agentic Editor loop: pick 4 or 6 stories using tools (pick, search_news,
+  3. Agentic Editor loop: pick 4-5 stories, exceptionally 6, using tools (pick, search_news,
      read_candidate, ship_edition). Deterministic validation gates only.
-  4. Fallback: if budget exhausted, trim to an even count and force-ship.
+  4. Fallback: preserve 4-5 picks; six still requires an exception rationale.
 
 No LLM Critic. No finalization contract. No forced convergence.
 The Editor's judgment is final; deterministic gates catch structural issues.
@@ -28,7 +28,7 @@ from urllib.parse import urlparse
 
 import httpx
 
-from card_config import ALLOWED_STORY_COUNTS, largest_allowed_even_count
+from card_config import ALLOWED_STORY_COUNTS, largest_allowed_count, six_story_exception_error
 from constitution import constitution_prompt_block
 from dedupe_gate import ArchiveIndex, exact_repeat_reason, semantic_repeats
 from freshness import infer_date_from_text, infer_date_from_url
@@ -132,12 +132,11 @@ _RANKER_SYSTEM = (
 
 _EDITOR_SYSTEM = (
     "You are the Editor for AI Espresso. You have pre-ranked candidates "
-    "with article bodies. Select exactly 4 or 6 stories for today's edition "
+    "with article bodies. Select 4 or 5 stories for today's edition "
     "using the tools provided. Call ship_edition when ready.\n\n"
     "STRATEGY:\n"
     "  1. Review the ranked candidates (they already have bodies).\n"
-    "  2. Pick 4 strong stories. Go to 6 only when the pool is genuinely\n"
-    "     strong enough for two more that clear the bar. Never ship 5.\n"
+    "  2. Pick 4 or 5 strong stories. Never add filler to fill a grid.\n"
     "  3. If the pool feels thin, use search_news to find alternatives.\n"
     "  4. Call ship_edition. Deterministic gates will validate.\n"
     "  5. If ship fails, fix the issue and try again.\n\n"
@@ -146,9 +145,12 @@ _EDITOR_SYSTEM = (
     "  • At most 2 stories from the same vendor (Google/Apple/OpenAI/etc.).\n"
     "  • At most 2 stories from the same outlet (e.g. Wired, Bloomberg, TechCrunch).\n"
     "  • All picks must have verified article bodies.\n"
-    "  • Ship exactly 4 or 6 stories (never 3 or 5). Prefer 4 unless the pool\n"
-    "    is strong enough for 6. If you find yourself at 5, either add a 6th\n"
-    "    strong story or unpick the weakest down to 4.\n"
+    "  • Normally ship 4 or 5 stories; six is allowed only when absolutely necessary.\n"
+    "    For six, ship_edition must include sixth_story_id and exception_reason.\n"
+    "    Identify the specific selected story that cannot be omitted or delayed,\n"
+    "    and explain what readers would lose by limiting today's edition to five.\n"
+    "    Use a substantive reason (10+ words, 60-1200 characters), not 'strong pool'.\n"
+    "    Never ship seven stories. The separate prompt tile is not a news story.\n"
     "  • Assign a persona tag to each pick: market, everyday, build, or industry.\n"
     "    These are rendering labels, not constraints on selection.\n\n"
     + _EDITORIAL_RUBRIC
@@ -290,9 +292,10 @@ class AgentState:
     trace: list[TraceEvent] = field(default_factory=list)
     search_calls_used: int = 0
     max_age_days: int = 3
+    six_story_exception: dict | None = None
 
 
-MIN_PICKS = 3
+MIN_PICKS = 4
 MAX_PICKS = 6
 MAX_SEARCH_CALLS = 3
 SOURCE_CAP = 2
@@ -357,6 +360,7 @@ def _tool_pick(state: AgentState, args: dict, vendor_patterns) -> dict:
     found["pick_reason"] = reason
     found["persona"] = persona
     state.picks[slot] = found
+    state.six_story_exception = None
     if nv:
         state.vendor_counts[nv] = state.vendor_counts.get(nv, 0) + 1
     if src_key:
@@ -377,6 +381,7 @@ def _tool_unpick(state: AgentState, args: dict, vendor_patterns) -> dict:
     for slot, pick in list(state.picks.items()):
         if int(pick.get("id", -1)) == int(cid):
             state.picks.pop(slot)
+            state.six_story_exception = None
             nv = _detect_vendor(pick.get("headline", ""), pick.get("url", ""), vendor_patterns)
             if nv and state.vendor_counts.get(nv, 0) > 0:
                 state.vendor_counts[nv] -= 1
@@ -387,15 +392,9 @@ def _tool_unpick(state: AgentState, args: dict, vendor_patterns) -> dict:
     return {"error": f"no pick with id={cid}"}
 
 
-def _trim_picks_to_even(state: AgentState, vendor_patterns) -> list[str]:
-    """Drop the weakest picks until the count is supported (6 or 4).
-
-    Deterministic ship backstop for the budget-exhausted path: an odd pick set is
-    trimmed to ``largest_allowed_even_count`` so an odd edition can never ship.
-    Non-tier-1, lowest-ranked picks are dropped first so the tier-1 rail
-    survives. Returns the headlines removed (empty if no trim was needed).
-    """
-    target = largest_allowed_even_count(len(state.picks))
+def _trim_picks_to_supported_count(state: AgentState, vendor_patterns) -> list[str]:
+    """Preserve five; drop weakest non-tier-1 picks if six lacks an exception."""
+    target = largest_allowed_count(len(state.picks), exceptional_six=_six_story_exception_error(state) is None)
     if target >= len(state.picks):
         return []
     ordered = sorted(
@@ -403,6 +402,7 @@ def _trim_picks_to_even(state: AgentState, vendor_patterns) -> list[str]:
         key=lambda kv: (int(kv[1].get("tier", 99)) == 1, kv[1].get("score", 0)),
     )
     removed = []
+    state.six_story_exception = None
     for slot, pick in ordered[: len(state.picks) - target]:
         state.picks.pop(slot, None)
         removed.append(pick.get("headline", ""))
@@ -549,22 +549,25 @@ def _perplexity_search(query: str) -> tuple[list[dict] | None, str | None]:
     return hits or None, "no results" if not hits else None
 
 
+def _six_story_exception_error(state: AgentState) -> str | None:
+    error = six_story_exception_error(state.six_story_exception, [p["headline"] for p in state.picks.values()])
+    if error:
+        return error
+    if not any(p.get("id") == state.six_story_exception["candidate_id"]
+               and p["headline"] == state.six_story_exception["original_headline"] for p in state.picks.values()):
+        return "six-story exception must identify a selected story"
+    return None
+
+
 def _validate_ship(state: AgentState) -> dict:
     errors = []
     n = len(state.picks)
     if n not in ALLOWED_STORY_COUNTS:
-        if n == 5:
-            errors.append(
-                "edition needs exactly 4 or 6 stories, have 5 — add a 6th "
-                "strong story or unpick the weakest down to 4"
-            )
-        elif n == 3:
-            errors.append(
-                "edition needs exactly 4 or 6 stories, have 3 — add a 4th "
-                "strong story"
-            )
-        else:
-            errors.append(f"edition needs exactly 4 or 6 stories, have {n}")
+        errors.append(f"edition needs 4 or 5 stories (six only by exception), have {n}")
+    if n == 6:
+        exception_error = _six_story_exception_error(state)
+        if exception_error:
+            errors.append(exception_error)
 
     have_t1 = sum(1 for p in state.picks.values() if int(p.get("tier", 99)) == 1)
     if have_t1 < 1:
@@ -637,6 +640,14 @@ def _validate_ship(state: AgentState) -> dict:
 
 
 def _tool_ship(state: AgentState, args: dict) -> dict:
+    state.six_story_exception = None
+    if len(state.picks) == 6:
+        cid = args.get("sixth_story_id")
+        pick = next((p for p in state.picks.values() if type(cid) is int and p.get("id") == cid), None)
+        if pick:
+            reason = args.get("exception_reason")
+            state.six_story_exception = {"candidate_id": cid, "original_headline": pick["headline"],
+                                         "reason": reason.strip() if isinstance(reason, str) else reason}
     gate = _validate_ship(state)
     if not gate["ok"]:
         return {"shipped": False, "errors": gate["errors"]}
@@ -692,13 +703,18 @@ EDITOR_TOOLS: list[dict] = [
     },
     {
         "name": "ship_edition",
-        "description": "Finalize the edition. Requires exactly 4 or 6 picks with verified bodies.",
-        "input_schema": {"type": "object", "properties": {}},
+        "description": "Finalize 4-5 verified stories. Six requires a specific exception explaining why five is insufficient.",
+        "input_schema": {"type": "object", "properties": {
+            "sixth_story_id": {"type": "integer", "description": "Selected candidate that cannot be omitted or delayed; required for six stories."},
+            "exception_reason": {"type": "string", "description": "Why this specific story is necessary today and five would omit essential coverage; 10+ words, 60-1200 characters."},
+        }},
     },
 ]
 
 
 def _dispatch_tool(name: str, args: dict, state: AgentState, vendor_patterns) -> dict:
+    if state.shipped:
+        return {"error": "edition already finalized; no further tools may change the slate"}
     if name == "pick":
         return _tool_pick(state, args, vendor_patterns)
     if name == "unpick":
@@ -729,7 +745,7 @@ def _build_editor_brief(state: AgentState, gaps: list[str]) -> str:
         f"Coverage gaps from ranking: {gaps or '(none)'}\n\n"
         f"CANDIDATES (pre-ranked, bodies pre-fetched):\n{candidates_block}\n\n"
         f"Archive (last 30d): {', '.join(state.archive_headlines[:10]) or '(none)'}\n\n"
-        "Select exactly 4 or 6 stories using tools. Call ship_edition when ready."
+        "Select 4 or 5 stories using tools; six only with a specific exception rationale. Call ship_edition when ready."
     )
 
 
@@ -960,15 +976,14 @@ def agentic_select(
 
     ok = _run_editor_loop(state, vendor_patterns)
 
-    # Fallback: if budget exhausted, trim to an even count and force-ship only
-    # if the normal ship gate still passes. Odd counts must never ship.
+    # Fallback preserves normal 4-5 story slates. It cannot invent a six-story exception.
     if not ok and len(state.picks) >= MIN_PICKS:
-        removed = _trim_picks_to_even(state, vendor_patterns)
+        removed = _trim_picks_to_supported_count(state, vendor_patterns)
         if removed:
             state.trace.append(TraceEvent(
-                ts=time.time(), role="system", kind="trim_to_even",
+                ts=time.time(), role="system", kind="trim_to_supported_count",
                 result_summary=(
-                    f"trimmed {len(removed)} weakest pick(s) to even count: {removed}"
+                    f"trimmed {len(removed)} weakest pick(s) to supported count: {removed}"
                 ),
             ))
         gate = _validate_ship(state)
@@ -984,6 +999,7 @@ def agentic_select(
     meta = {
         "editor_notes": "",
         "working_memory": {},
+        "six_story_exception": state.six_story_exception,
         "shipped": state.shipped,
         "salvaged": not ok and state.shipped,
         "salvage_reason": "budget_exhausted_force_ship" if not ok and state.shipped else None,
