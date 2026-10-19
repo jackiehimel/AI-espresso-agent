@@ -1,0 +1,190 @@
+{
+  "date": "2026-10-19",
+  "generated_at": "2026-10-19T17:24:03.739484Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "A hacker used AI agents to break into 100+ companies, including John Deere",
+      "blurb": "Security researchers found evidence of someone using Cairn, an open-source AI platform, to orchestrate cyberattacks with minimal human involvement. The AI agents executed the breaches autonomously after being given simple instructions in fewer than 100 Chinese characters, with successful attacks taking about 23 hours each. Victims included US, Canadian, Australian, and Japanese companies.",
+      "why_it_matters": "AI agents can now execute real cyberattacks with almost no human guidance.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins",
+      "tier": 1,
+      "original_headline": "A hacker broke into John Deere and SharkNinja with an army of AI agents",
+      "fingerprint": "500129ae8a4e7bef"
+    },
+    {
+      "slot": "market",
+      "headline": "Homeland Security bans DeepSeek across all federal civilian agencies",
+      "blurb": "DHS ordered agencies like the EPA and FCC to remove all DeepSeek products, citing risks of sensitive data transfer to China and potential malware. The ban also blocks DeepSeek from any federal contracts. The order came days after DeepSeek released its latest model, V4.1-Flash-1017.",
+      "why_it_matters": "The first government-wide ban of a major AI company sets a precedent as Chinese models gain market share.",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2290535/homeland-security-bans-deepseek-use-in-federal-civilian-agencies/",
+      "tier": 1,
+      "original_headline": "Homeland Security bans DeepSeek use in federal civilian agencies",
+      "fingerprint": "cf957ac6f3246e39"
+    },
+    {
+      "slot": "build",
+      "headline": "Amazon just made its Trainium AI chips work with PyTorch code out of the box",
+      "blurb": "TorchNeuron lets developers run existing PyTorch models on AWS Trainium with a single config change\u2014no code rewrite. Amazon open-sources it October 20. Teams in robotics, video generation, drug discovery, and LLMs are already using it to train on cheaper hardware without months of migration work.",
+      "why_it_matters": "Custom AI chips just became accessible to anyone who writes PyTorch, not just teams with rewrite budgets.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/innovation-at-amazon/torchneuron-pytorch-aws-trainium-chips-ai?utm_source=rss",
+      "tier": 1,
+      "original_headline": "Amazon opens its AWS Trainium AI chips to every PyTorch developer, no rewrite needed",
+      "fingerprint": "5936841cbfdc8469"
+    },
+    {
+      "slot": "market",
+      "headline": "Major websites are blocking AI agents from booking flights and buying stuff",
+      "blurb": "Yelp, Delta, JPMorgan Chase, and others are preventing OpenAI, Meta, and Google's AI agents from performing tasks on their platforms. Some sites now require paid data licenses for agent access, while banks cite security concerns. Users report agents that worked weeks ago are now blocked from booking travel and shopping.",
+      "why_it_matters": "The AI agent future hits a wall when the websites you need won't let bots in.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web",
+      "tier": 1,
+      "original_headline": "Websites are closing their doors to AI agents",
+      "fingerprint": "2f8f583b05b537d8"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The competitor playbook reverse engineer",
+    "kicker": "",
+    "prompt": "I'll describe a competitor or company I admire below. Don't give me a SWOT analysis. Instead, tell me: the one strategic bet they're making that isn't obvious from their marketing, the capability they built that I'd need 18 months to replicate, and the market shift they're preparing for that I'm probably ignoring.",
+    "tool_hint": "When you need to see the chess moves, not just the press releases."
+  },
+  "daily_question": "If you could ban one AI tool from your workplace for a month, which would reveal the most about how your team actually works?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[build] banned copy word: rewrite']"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1792430571.3722749,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792430595.5925717,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "build",
+        "reason": "Today's defining AI story: autonomous AI agents successfully hacked 100+ websites including John Deere and SharkNinja, operating mostly independently. This demonstrates a concrete capability milestone that everyone in AI is talking about - agents moving from demos to real-world security implications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01R5XuyqwMqLfTaY4rd4avCK"
+    },
+    {
+      "ts": 1792430595.5926702,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"A hacker broke into John Deere and SharkNinja with an army of AI agents\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01R5XuyqwMqLfTaY4rd4avCK"
+    },
+    {
+      "ts": 1792430595.5927584,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 96,
+        "persona": "market",
+        "reason": "DHS banning DeepSeek across federal civilian agencies is major regulatory action against a prominent Chinese AI model. This is significant market-moving news showing government response to AI geopolitics, happening just days after DeepSeek's latest release."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XPyh5UHaqQUzJxU8JPY87e"
+    },
+    {
+      "ts": 1792430595.5928042,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Homeland Security bans DeepSeek use in federal civilian agencies\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01XPyh5UHaqQUzJxU8JPY87e"
+    },
+    {
+      "ts": 1792430595.5928226,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 5,
+        "persona": "build",
+        "reason": "Amazon opens AWS Trainium chips to every PyTorch developer with zero code rewrites via TorchNeuron. This is a practical developer tool from a primary source that removes friction for engineers wanting to use custom AI chips - directly useful for Solvd's engineering audience."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Ep98iB6jUdt9kTdG8JfRYR"
+    },
+    {
+      "ts": 1792430595.5928664,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon opens its AWS Trainium AI chips to every PyTorch developer, no rewrite needed\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Ep98iB6jUdt9kTdG8JfRYR"
+    },
+    {
+      "ts": 1792430595.5928798,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 16,
+        "persona": "market",
+        "reason": "Websites are actively blocking AI agents from OpenAI, Meta, Google and others - showing the ecosystem's defensive response to autonomous agents. This perfectly complements the hacking story, illustrating how the web infrastructure is changing in real-time because of agent capabilities."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012W6tPBDHGxfJEzveB3uqSr"
+    },
+    {
+      "ts": 1792430595.5929244,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Websites are closing their doors to AI agents\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_012W6tPBDHGxfJEzveB3uqSr"
+    },
+    {
+      "ts": 1792430609.639442,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01FvitaWU9TkNc5wS7s2tXaW"
+    },
+    {
+      "ts": 1792430610.2073781,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792430610.2074122,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"A hacker broke into John Deere and SharkNinja with an army of AI agents\", \"pick_2\": \"Homeland Security bans DeepSeek use in federal civilian agencies\", \"pick_3\": \"Amazon opens its AWS Trainium AI chips to every PyTorch developer, no rewrite needed\", \"pick_4\": \"Websites are closing their doors to AI agents\"}}",
+      "tool_use_id": "toolu_01FvitaWU9TkNc5wS7s2tXaW"
+    }
+  ],
+  "issue_num": 115
+}
