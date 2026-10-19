@@ -13,7 +13,7 @@ import espresso_agent as ea
 import espresso_loop as el
 
 
-def generation_fixture(*, fail_first_editor=False, search_only=False):
+def generation_fixture(*, fail_first_editor=False, search_only=False, story_count=4, exception_args=None):
     day = dt.date(2026, 10, 18)
     candidates = [
         ea.Candidate(
@@ -22,7 +22,7 @@ def generation_fixture(*, fail_first_editor=False, search_only=False):
             source_name=f"Source {i}", tier=1 if i == 0 else 2,
             blurb=("RAW_RSS_DUPLICATION " * 6000) if i == 0 else "",
             published_date=day.isoformat(),
-        ) for i in range(4)
+        ) for i in range(story_count)
     ]
     enriched = [
         {"id": i, "headline": c.headline, "url": c.url,
@@ -34,7 +34,7 @@ def generation_fixture(*, fail_first_editor=False, search_only=False):
     ]
     if search_only:
         enriched[-1]["id"] = 10000
-    requests, rewrites, selected = [], [], []
+    requests, rewrites, selected, editions = [], [], [], []
     editor_calls = 0
     select = el.agentic_select
 
@@ -58,14 +58,14 @@ def generation_fixture(*, fail_first_editor=False, search_only=False):
                 type="tool_use", name="pick", id=f"pick-{i}",
                 input={"id": entry["id"], "reason": "verified useful AI feature", "persona": "build"},
             ) for i, entry in enumerate(enriched)]
-            blocks.append(SimpleNamespace(type="tool_use", name="ship_edition", id="ship", input={}))
+            blocks.append(SimpleNamespace(type="tool_use", name="ship_edition", id="ship", input=exception_args or {}))
             return SimpleNamespace(content=blocks)
         prompt = kwargs["messages"][0]["content"]
         if prompt.startswith("Rewrite this story"):
             rewrites.append(prompt)
             value = {"headline": "AI assistant adds a useful feature", "blurb": "A verified capability is now available.", "why_it_matters": "Readers can try the new feature."}
         else:
-            value = {"ranked": [{"id": i, "score": 90} for i in range(4)], "gaps": []}
+            value = {"ranked": [{"id": i, "score": 90} for i in range(story_count)], "gaps": []}
         return SimpleNamespace(content=[SimpleNamespace(text=json.dumps(value))])
 
     client = SimpleNamespace(messages=SimpleNamespace(create=create))
@@ -85,14 +85,30 @@ def generation_fixture(*, fail_first_editor=False, search_only=False):
         mock.patch.object(el, "write_agent_failure_artifact", return_value=Path("offline-failure.json")),
         mock.patch.object(ea, "build_prompt_tile", return_value={"prompt": "offline prompt"}),
         mock.patch.object(ea, "build_daily_question", return_value="Offline question?"),
+        mock.patch.object(ea, "write_edition", side_effect=lambda edition,**kw: editions.append(edition) or Path("offline-edition.json")),
     ):
         ea.run(day, dry_run=True, mode="agent")
     return {"requests": requests, "rewrites": rewrites, "candidates": candidates, "selected": selected,
             "enriched": enriched, "discovery_calls": discovery.call_count,
-            "prefetch_calls": prefetch.call_count}
+            "prefetch_calls": prefetch.call_count, "edition":editions[-1]}
 
 
 class SelectedEvidenceTests(unittest.TestCase):
+    def test_five_story_generation_and_six_story_exception_survive_rewrite(self):
+        reason=('This newly released security fix closes an actively exploited AI agent flaw; '
+                'waiting until tomorrow would leave readers without an urgent deployment warning.')
+        for n,args in ((5,{}),(6,{'sixth_story_id':5,'exception_reason':reason})):
+            with self.subTest(n=n):
+                run=generation_fixture(story_count=n,exception_args=args)
+                self.assertEqual(len(run['edition'].stories),n)
+                self.assertEqual(len(run['rewrites']),n)
+                if n==6:
+                    exception=run['edition'].six_story_exception
+                    self.assertEqual(exception['reason'],reason)
+                    self.assertEqual(exception['original_headline'],run['edition'].stories[-1].original_headline)
+                else:
+                    self.assertIsNone(run['edition'].six_story_exception)
+
     def test_rewrite_uses_verified_excerpt_not_full_rss_or_empty_summary(self):
         run = generation_fixture()
         self.assertEqual(len(run["rewrites"]), 4)

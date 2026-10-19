@@ -237,11 +237,10 @@ class ShipGateTests(unittest.TestCase):
         r = el._tool_ship(state, {})
         self.assertTrue(r["shipped"])
 
-    def test_ship_fails_with_odd_5_picks(self):
+    def test_ship_succeeds_with_five_picks(self):
         state = self._make_state_with_picks(5)
         r = el._tool_ship(state, {})
-        self.assertFalse(r["shipped"])
-        self.assertTrue(any("4 or 6" in e for e in r["errors"]))
+        self.assertTrue(r["shipped"])
 
     def test_ship_fails_with_2_picks(self):
         state = self._make_state_with_picks(2)
@@ -429,17 +428,17 @@ class FallbackShipTests(unittest.TestCase):
     def test_fallback_blocks_3_picks_on_budget_exhaustion(self):
         state = self._make_state_with_picks(3)
         state.tool_calls = state.hard_budget
-        self.assertEqual(el._trim_picks_to_even(state, []), [])
+        self.assertEqual(el._trim_picks_to_supported_count(state, []), [])
         gate = el._validate_ship(state)
         self.assertFalse(gate["ok"])
         self.assertTrue(any("have 3" in e for e in gate["errors"]))
 
-    def test_fallback_trims_odd_5_to_even_4(self):
+    def test_fallback_preserves_five(self):
         state = self._make_state_with_picks(5)
         state.tool_calls = state.hard_budget
-        removed = el._trim_picks_to_even(state, [])
-        self.assertEqual(len(removed), 1)
-        self.assertEqual(len(state.picks), 4)
+        removed = el._trim_picks_to_supported_count(state, [])
+        self.assertEqual(removed, [])
+        self.assertEqual(len(state.picks), 5)
         self.assertTrue(el._validate_ship(state)["ok"])
 
     def _make_state_with_picks(self, n=3):

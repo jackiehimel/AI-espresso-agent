@@ -186,7 +186,7 @@ def _pick(idx, tier=2, score=50, headline=None):
     }
 
 
-class EvenCountShipGateTests(unittest.TestCase):
+class StoryCountShipGateTests(unittest.TestCase):
 
     def _state(self, n):
         picks = {f"pick_{i}": _pick(i, tier=1 if i == 1 else 2) for i in range(1, n + 1)}
@@ -198,20 +198,18 @@ class EvenCountShipGateTests(unittest.TestCase):
     def test_four_ships(self):
         self.assertTrue(el._validate_ship(self._state(4))["ok"])
 
-    def test_six_ships(self):
-        self.assertTrue(el._validate_ship(self._state(6))["ok"])
+    def test_six_requires_exception(self):
+        self.assertFalse(el._validate_ship(self._state(6))["ok"])
 
-    def test_five_blocked_with_guidance(self):
-        gate = el._validate_ship(self._state(5))
-        self.assertFalse(gate["ok"])
-        self.assertTrue(any("have 5" in e for e in gate["errors"]))
+    def test_five_ships(self):
+        self.assertTrue(el._validate_ship(self._state(5))["ok"])
 
     def test_three_blocked_when_enforced(self):
         gate = el._validate_ship(self._state(3))
         self.assertFalse(gate["ok"])
         self.assertTrue(any("have 3" in e for e in gate["errors"]))
 
-class TrimToEvenTests(unittest.TestCase):
+class TrimToSupportedCountTests(unittest.TestCase):
 
     def _state_with(self, picks):
         return el.AgentState(
@@ -219,7 +217,7 @@ class TrimToEvenTests(unittest.TestCase):
             candidates=[], archive_headlines=[], picks=dict(picks),
         )
 
-    def test_five_trims_to_four_dropping_lowest_score(self):
+    def test_five_preserved_including_lowest_score(self):
         state = self._state_with({
             "pick_1": _pick(1, tier=1, score=90),
             "pick_2": _pick(2, score=80),
@@ -227,9 +225,9 @@ class TrimToEvenTests(unittest.TestCase):
             "pick_4": _pick(4, score=60),
             "pick_5": _pick(5, score=10),
         })
-        removed = el._trim_picks_to_even(state, [])
-        self.assertEqual(len(state.picks), 4)
-        self.assertEqual(removed, ["AI story number 5"])
+        removed = el._trim_picks_to_supported_count(state, [])
+        self.assertEqual(len(state.picks), 5)
+        self.assertEqual(removed, [])
 
     def test_trim_keeps_tier1_even_if_lowest_score(self):
         state = self._state_with({
@@ -239,19 +237,19 @@ class TrimToEvenTests(unittest.TestCase):
             "pick_4": _pick(4, score=60),
             "pick_5": _pick(5, score=50),
         })
-        el._trim_picks_to_even(state, [])
-        self.assertEqual(len(state.picks), 4)
+        el._trim_picks_to_supported_count(state, [])
+        self.assertEqual(len(state.picks), 5)
         tiers = [int(p.get("tier", 99)) for p in state.picks.values()]
         self.assertIn(1, tiers)
 
-    def test_six_is_left_untouched(self):
+    def test_six_without_exception_trims_weakest_to_five(self):
         state = self._state_with({f"pick_{i}": _pick(i) for i in range(1, 7)})
-        self.assertEqual(el._trim_picks_to_even(state, []), [])
-        self.assertEqual(len(state.picks), 6)
+        self.assertEqual(len(el._trim_picks_to_supported_count(state, [])), 1)
+        self.assertEqual(len(state.picks), 5)
 
     def test_three_is_left_untouched_but_not_shippable(self):
         state = self._state_with({f"pick_{i}": _pick(i) for i in range(1, 4)})
-        self.assertEqual(el._trim_picks_to_even(state, []), [])
+        self.assertEqual(el._trim_picks_to_supported_count(state, []), [])
         self.assertEqual(len(state.picks), 3)
         self.assertFalse(el._validate_ship(state)["ok"])
 

@@ -139,7 +139,7 @@ class PublicHtmlPolishTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            with self.assertRaisesRegex(ValueError, "Edition has 2 stories; need exactly 4 or 6\\."):
+            with self.assertRaisesRegex(ValueError, "Edition has 2 stories"):
                 render_edition(edition, issue_num=77, editions_dir=out)
 
     def test_render_rejects_three_story_edition(self):
@@ -188,10 +188,10 @@ class PublicHtmlPolishTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            with self.assertRaisesRegex(ValueError, "Edition has 3 stories; need exactly 4 or 6\\."):
+            with self.assertRaisesRegex(ValueError, "Edition has 3 stories"):
                 render_edition(edition, issue_num=88, editions_dir=out)
 
-    def test_render_rejects_five_story_edition(self):
+    def test_render_accepts_five_story_edition(self):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp)
             edition = self._write_four_story_fixture(out)
@@ -208,8 +208,9 @@ class PublicHtmlPolishTests(unittest.TestCase):
                 }
             )
             edition.write_text(json.dumps(data), encoding="utf-8")
-            with self.assertRaisesRegex(ValueError, "Edition has 5 stories; need exactly 4 or 6\\."):
-                render_edition(edition, issue_num=89, editions_dir=out)
+            result = render_edition(edition, issue_num=89, editions_dir=out)
+            self.assertEqual(len(result["stories"]), 5)
+            self.assertEqual(len(result["image_paths"]), 6)
 
 
 class IssueNumberingTests(unittest.TestCase):

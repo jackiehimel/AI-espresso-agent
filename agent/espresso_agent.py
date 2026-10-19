@@ -194,6 +194,7 @@ class Edition:
     generated_at: str = ""
     model: str = CLAUDE_MODEL
     notes: list[str] = field(default_factory=list)
+    six_story_exception: dict | None = None
 
 
 # ───────────────────────────────────────────────────────────────────────
@@ -1223,6 +1224,7 @@ def build_daily_question(client: Any, stories: list[Story]) -> str:
 
 
 def write_edition(edition: Edition, dry_run: bool = False) -> Path:
+    from card_config import STORY_COUNT_POLICY
     out = EDITIONS_DIR / f"{edition.date}.json"
     payload = {
         "date": edition.date,
@@ -1232,7 +1234,10 @@ def write_edition(edition: Edition, dry_run: bool = False) -> Path:
         "try_this_prompt": edition.try_this_prompt,
         "daily_question": edition.daily_question,
         "notes": edition.notes,
+        "story_count_policy": STORY_COUNT_POLICY,
     }
+    if edition.six_story_exception is not None:
+        payload["six_story_exception"] = edition.six_story_exception
     trace = getattr(edition, "agent_trace", None)
     if trace:
         payload["agent_trace"] = trace
@@ -1388,6 +1393,7 @@ def run(date: dt.date, dry_run: bool = False, use_cache: bool = False, mode: str
         generated_at=dt.datetime.utcnow().isoformat() + "Z",
         model=CLAUDE_MODEL,
         notes=edition_notes,
+        six_story_exception=agent_meta.get("six_story_exception") if agent_used else None,
     )
     edition.notes.append(f"mode: {'agent' if agent_used else 'deterministic'}")
     if not any(s.tier == 1 for s in stories):
