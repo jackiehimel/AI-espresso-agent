@@ -1,0 +1,244 @@
+{
+  "date": "2026-10-20",
+  "generated_at": "2026-10-20T15:36:21.269620Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "This robot picks things up faster than a human\u2014and investors just bet $1.45B on it",
+      "blurb": "Eka Robotics built a gripper and AI model that picks up 1,500 objects per hour (humans do ~600) with 95%+ reliability. The robot moves so fast it could hurt itself, which means the AI is confident enough to work at dangerous speeds. Veteran roboticists call it a 'wow factor' breakthrough\u2014one compared the emotional impact to when robots first learned to walk reliably.",
+      "why_it_matters": "Picking things up has been robotics' hardest problem; this is the first system that looks like it actually solved it.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/20/eka-is-worth-1-45-billion-thanks-to-a-physical-ai-model-that-has-experts-raving/",
+      "tier": 1,
+      "original_headline": "Eka is worth $1.45B thanks to a physical AI model that has experts raving",
+      "fingerprint": "b6bbe05af691f23f"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Perplexity's agent can now run entirely on your Mac, no internet needed",
+      "blurb": "Perplexity Pro subscribers can now run the Computer agent fully offline on Apple silicon Macs. The local mode handles planning, reasoning, and file tasks on-device\u2014reading messages and emails, finding deadlines, creating notes\u2014without sending data to the cloud unless you explicitly approve it.",
+      "why_it_matters": "Privacy-focused AI that works when you're offline, on a plane, or just don't want your files leaving your laptop.",
+      "source_name": "9to5Mac \u2014 AI",
+      "source_url": "https://9to5mac.com/2026/10/20/perplexitys-computer-can-now-run-entirely-on-your-mac-even-offline/",
+      "tier": 1,
+      "original_headline": "Perplexity\u2019s Computer can now run entirely on your Mac, even offline",
+      "fingerprint": "15419fadf25e9138"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Yelp's AI can now call restaurants to check wait times for you",
+      "blurb": "Yelp's new Check for Me feature lets you enter your party size, then sends an AI agent to call the restaurant and text you back with the current wait time. The app is also getting OpenTable integration for booking and can now remember your preferences across chats.",
+      "why_it_matters": "Agent-to-agent calls are becoming normal\u2014your AI talking to a restaurant's AI to save you a phone call.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/20/yelp-can-now-call-on-your-behalf-to-check-wait-times-at-a-restaurant/",
+      "tier": 1,
+      "original_headline": "Yelp can now call on your behalf to check wait times at a restaurant",
+      "fingerprint": "f7d9da012cf43c0f"
+    },
+    {
+      "slot": "market",
+      "headline": "Salesforce buys AI marketing platform Braze for $5.7 billion",
+      "blurb": "Salesforce is acquiring Braze, a platform that uses AI to help marketers personalize campaigns and automate customer messaging. The deal gives Salesforce deeper tools for targeting customers across email, push notifications, and in-app messages \u2014 all powered by predictive AI that decides when and what to send.",
+      "why_it_matters": "Salesforce is betting billions that AI-driven marketing automation is the next must-have for enterprise sales teams.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-10-20/salesforce-to-buy-marketing-platform-braze-for-5-7-billion",
+      "tier": 1,
+      "original_headline": "Salesforce to Buy Marketing Platform Braze for $5.7 Billion",
+      "fingerprint": "84c940be9794c0e4"
+    },
+    {
+      "slot": "market",
+      "headline": "Ex-OpenAI research chief built a $1.5B startup making AI for factory floors",
+      "blurb": "Bob McGrew's Arda raised $230 million to build AI assistants that help manufacturing engineers design and reconfigure assembly lines in days instead of months. The software is already running at defense contractor Anduril. McGrew says it does for factory engineers what Claude or Cursor does for programmers.",
+      "why_it_matters": "AI coding assistants are now jumping from software development to physical production lines.",
+      "source_name": "CNBC \u2014 Technology",
+      "source_url": "https://www.cnbc.com/2026/10/20/ex-openai-executive-builds-1point5-billion-ai-manufacturing-startup-arda.html",
+      "tier": 1,
+      "original_headline": "Former OpenAI exec has quietly built $1.5 billion startup, betting AI can revive U.S. manufacturing",
+      "fingerprint": "be2a63449c1b18e5"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The priority knife fight",
+    "kicker": "",
+    "prompt": "I have way too much on my plate. Below I'll list everything I'm supposed to deliver this month. Force-rank them by real impact, then tell me which two I should visibly de-prioritize, what I'll lose by doing that, and the exact sentence I use to explain it to my team or manager.",
+    "tool_hint": "When everything is urgent and you need to disappoint someone on purpose."
+  },
+  "daily_question": "If you could give one physical task to an AI robot today, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1792510524.6166027,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=17, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792510544.5818105,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "build",
+        "reason": "$1.45B robotics startup with a physical AI model that experts say is genuinely breakthrough - the first robotic arm actually good at picking up a wide range of objects. Concrete capability that shows where AI+robotics is heading."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018AQF3GQH2CDf9ohibstAoT"
+    },
+    {
+      "ts": 1792510544.5818915,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Eka is worth $1.45B thanks to a physical AI model that has experts raving\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_018AQF3GQH2CDf9ohibstAoT"
+    },
+    {
+      "ts": 1792510544.581925,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 70,
+        "persona": "everyday",
+        "reason": "Perplexity's Computer feature now runs entirely on-device and offline on Mac - a major privacy/capability shift users can try today. Shows AI moving from cloud-dependent to truly local."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JnaiRjugp6rxzs2GwymTMK"
+    },
+    {
+      "ts": 1792510544.58196,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Perplexity\\u2019s Computer can now run entirely on your Mac, even offline\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01JnaiRjugp6rxzs2GwymTMK"
+    },
+    {
+      "ts": 1792510544.5819683,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 26,
+        "persona": "everyday",
+        "reason": "Yelp can now make phone calls on your behalf to check restaurant wait times - surprising, practical AI that makes you think \"I didn't know AI could do that.\" Try-it-this-week feature."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01MjqK54LJfTd6iepHhYG5Bj"
+    },
+    {
+      "ts": 1792510544.5820017,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Yelp can now call on your behalf to check wait times at a restaurant\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01MjqK54LJfTd6iepHhYG5Bj"
+    },
+    {
+      "ts": 1792510544.5820122,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "build",
+        "reason": "Amazon's TorchNeuron is a direct shot at breaking Nvidia's PyTorch dominance - platform war with a shipped developer tool that changes the AI infrastructure landscape. Stakes are clear."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013zn1Uiq9ENuiAh1spJpJCi"
+    },
+    {
+      "ts": 1792510544.5820484,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'TechCrunch \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_013zn1Uiq9ENuiAh1spJpJCi"
+    },
+    {
+      "ts": 1792510544.5820572,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 162,
+        "persona": "market",
+        "reason": "Salesforce acquiring Braze for $5.7B is a major AI-powered marketing platform consolidation move - shows how AI capabilities are reshaping enterprise software M&A at scale."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XPRkzfwkShELbenRWVbzDR"
+    },
+    {
+      "ts": 1792510544.5820875,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Salesforce to Buy Marketing Platform Braze for $5.7 Billion\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01XPRkzfwkShELbenRWVbzDR"
+    },
+    {
+      "ts": 1792510548.519111,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 182,
+        "persona": "market",
+        "reason": "Former OpenAI exec Bob McGrew quietly built a $1.5B startup betting AI can revive US manufacturing - shows top AI talent moving from labs to industrial applications with serious backing."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01F5K8Tt2ASFZoGFFvWrYRiZ"
+    },
+    {
+      "ts": 1792510548.5191758,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Former OpenAI exec has quietly built $1.5 billion startup, betting AI can revive U.S. manufacturing\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01F5K8Tt2ASFZoGFFvWrYRiZ"
+    },
+    {
+      "ts": 1792510554.7767231,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01ShjyUTJdPrFKdv6vJFYuj1"
+    },
+    {
+      "ts": 1792510555.2642086,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792510555.2642496,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Eka is worth $1.45B thanks to a physical AI model that has experts raving\", \"pick_2\": \"Perplexity\\u2019s Computer can now run entirely on your Mac, even offline\", \"pick_3\": \"Yelp can now call on your behalf to check wait times at a restaurant\", \"pick_4\": \"Salesforce to Buy Marketing Platform Braze for $5.7 Billion\", \"pick_5\": \"Former OpenAI exec has quietly built $1.5 billion startup, betting AI can revive U.S. manufacturing\"}}",
+      "tool_use_id": "toolu_01ShjyUTJdPrFKdv6vJFYuj1"
+    }
+  ],
+  "issue_num": 116
+}
