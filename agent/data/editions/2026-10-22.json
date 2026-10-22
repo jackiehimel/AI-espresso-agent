@@ -1,0 +1,222 @@
+{
+  "date": "2026-10-22",
+  "generated_at": "2026-10-22T15:50:36.563305Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "A PHP security flaw just took down government sites worldwide",
+      "blurb": "Governments and companies in Kenya, the Netherlands, and beyond are racing to patch a critical vulnerability in PHP, the programming language that runs roughly 75% of all websites. The scramble left many sites temporarily offline as admins rushed emergency fixes to prevent hackers from exploiting the flaw.",
+      "why_it_matters": "If you run anything on PHP, you need to patch now \u2014 this affects three-quarters of the web.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/10/22/world/php-vulnerability-websites-cybersecurity-ai.html",
+      "tier": 1,
+      "original_headline": "PHP Security Flaw Sets Off Global Rush to Patch, Leaving Websites Offline",
+      "fingerprint": "5ca720126643206d"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Anthropic's new Claude Duet agent can monitor your apps and do your busywork",
+      "blurb": "Claude Duet is Anthropic's new AI agent that briefs you each morning on what's happening across your connected apps, then watches them all day and pings you only when something needs attention. You can hand it tasks from scheduling meetings to building dashboards or prototyping web apps. It runs in a virtual machine with browser access and asks permission before sensitive actions like payments.",
+      "why_it_matters": "Another AI agent competing to become your always-on work assistant across all your tools.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1015843/anthropic-claude-duet-ai-agent",
+      "tier": 1,
+      "original_headline": "Anthropic takes on Muse with Claude Duet, its new AI agent",
+      "fingerprint": "a37be6539fe8ec56"
+    },
+    {
+      "slot": "market",
+      "headline": "DeepSeek raises $15B two days after US bans its AI from federal agencies",
+      "blurb": "The Chinese AI lab closed one of the country's biggest funding rounds\u2014backed by battery maker CATL and Tencent\u2014just 48 hours after Washington ordered civilian agencies to remove DeepSeek software over security concerns. The company raised $7B in June and is reportedly eyeing a China IPO next year.",
+      "why_it_matters": "US restrictions aren't slowing Chinese AI funding\u2014they may be accelerating it.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/22/deepseek-reportedly-raises-15b-days-after-us-restrictions/",
+      "tier": 1,
+      "original_headline": "DeepSeek reportedly raises $15B days after US restrictions",
+      "fingerprint": "f60ba56a58ab679a"
+    },
+    {
+      "slot": "build",
+      "headline": "Recursive shipped a laptop coding model built mostly by AI",
+      "blurb": "Flint is a free coding assistant that runs offline on your laptop, using only 2.5 billion parameters at a time. Recursive says its automated research system handled nearly every step of development, letting a small team build the model from scratch in under four months. You can download it now on Hugging Face.",
+      "why_it_matters": "First real test of AI building better AI, running locally without cloud fees or data leaving your machine.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/21/recursive-launches-flint-a-laptop-coding-model-it-says-was-largely-built-by-ai/",
+      "tier": 1,
+      "original_headline": "Recursive launches Flint, a laptop coding model it says was largely built by AI",
+      "fingerprint": "d79bb424c0f5c552"
+    },
+    {
+      "slot": "market",
+      "headline": "Walmart will let AI agents shop for you while Amazon blocks them",
+      "blurb": "Starting next month, Walmart lets AI agents browse and buy on its site with your approval \u2014 you set spending limits, review purchases separately, and can shut it off anytime. The move uses the Model Context Protocol standard and flips Amazon's approach, which blocked Perplexity and Meta's shopping agents.",
+      "why_it_matters": "The first major retailer actively building infrastructure for AI agents to shop autonomously.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1015715/walmart-ai-shopping-agents",
+      "tier": 1,
+      "original_headline": "Walmart is inviting AI agents to shop for you",
+      "fingerprint": "3b55c3e2da359052"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring regret vaccine",
+    "kicker": "",
+    "prompt": "I'm about to hire someone and I'm 80% sure they're right. Describe the candidate in a few sentences below. Now tell me: the specific moment six months in when I'll regret this hire, the yellow flag I'm probably ignoring right now, and the one question I should ask in the final interview that will surface it.",
+    "tool_hint": "Before you extend the offer and spend three months onboarding the wrong person."
+  },
+  "daily_question": "If an AI agent could automate one repetitive task at your job this week, what would you actually trust it to do unsupervised?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1792684186.7690928,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[\"Today's defining AI story is the PHP vulnerability (176) discovered by AI and coordinated globally\u2014it belongs in slot 1.\", 'Claude Duet (52) is a major agent launch from a tier-1 lab, competing directly with Meta Muse and OpenAI Dots.', 'Walmart welcoming AI agents (53) while Amazon blocks them is a concrete platform-war story with shipped capability.', \"DeepSeek's $15B raise days after US ban (57) is a geopolitical+market power move with high stakes.\", \"Recursive's Flint (61) is a self-improving AI coding model\u2014concrete capability with try-it-today potential.\", '1Password for agents (46) is a shipped security feature enabling agent workflows\u2014practical and new.', 'NVIDIA Minerva (31) is a new AIOps platform for AI factories\u2014shipped infrastructure with clear utility.', 'NVIDIA Cosmos (34) opens training tools for world models\u2014developers can try this now.', 'Terminal X (11) matching senior investor judgment is a concrete AI-reaches-professional-grade milestone.', \"Meta's new share class (51) is a major corporate restructure to fund AI\u2014market-relevant.\", 'Meta Muse 10M users (60) is a shipped agent with traction\u2014shopping is a top use case.', 'Patch the Planet (4) is a coordinated global security response using AI agents\u2014industry-defining.', 'OpenAI+PerturbAI brain cell research (6) is distributed AI agents at scale in science\u2014concrete use case.', 'Nirva $33M (56) is a privacy-first AI pendant shipping this year\u2014try-it-today hardware.', 'Meta $25B penalty (177) is the largest-ever tech fine\u2014AI-era privacy precedent.', 'Blacksmith unicorn (64) is a Sequoia-backed AI code testing platform\u2014developer tool with traction.', 'Cohere Rerank 5 (17) is a shipped enterprise search model\u2014developers can use this.', \"ChatGPT Ads 26 countries (5) is a global ad platform expansion\u2014OpenAI's commercialization scales.\", 'Apple Australia ruling (121) is a major App Store opening\u2014Epic wins, developers get alternatives.', 'DeepSeek IPO-track raise (191) is a second $15B round with investor frenzy\u2014market signal.']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792684206.0583754,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 176,
+        "persona": "build",
+        "reason": "Critical global security story affecting PHP, a foundational web technology. Governments worldwide scrambling to patch - this is urgent, concrete, and affects developers directly."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DQxpKcBHmEyk6HxaK6AGxc"
+    },
+    {
+      "ts": 1792684206.0584645,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"PHP Security Flaw Sets Off Global Rush to Patch, Leaving Websites Offline\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01DQxpKcBHmEyk6HxaK6AGxc"
+    },
+    {
+      "ts": 1792684206.0584984,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 52,
+        "persona": "everyday",
+        "reason": "Major product launch from Anthropic entering the AI agent race. Direct competitor to Meta's Muse and OpenAI's Dots - this is a significant market move in the hottest AI category right now."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KPTK4GjJ7wQ7Fh9cb28oKj"
+    },
+    {
+      "ts": 1792684206.058533,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic takes on Muse with Claude Duet, its new AI agent\", \"persona\": \"everyday\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01KPTK4GjJ7wQ7Fh9cb28oKj"
+    },
+    {
+      "ts": 1792684206.0585458,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 57,
+        "persona": "market",
+        "reason": "DeepSeek's $15B raise is one of China's largest funding rounds, happening days after US restrictions. Massive capital move with clear geopolitical stakes in the AI race."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FTAwhyV4TjLsMa59V1GERg"
+    },
+    {
+      "ts": 1792684206.058587,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"DeepSeek reportedly raises $15B days after US restrictions\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01FTAwhyV4TjLsMa59V1GERg"
+    },
+    {
+      "ts": 1792684206.0586028,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 61,
+        "persona": "build",
+        "reason": "Coding model that was itself built by AI - meta and fascinating. Laptop-sized, free, and shows AI building AI. Appeals to developers and reflects where the technology is heading."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QwxqH27KFkFcZ6D5EySPTP"
+    },
+    {
+      "ts": 1792684206.05865,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Recursive launches Flint, a laptop coding model it says was largely built by AI\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01QwxqH27KFkFcZ6D5EySPTP"
+    },
+    {
+      "ts": 1792684206.058665,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 53,
+        "persona": "market",
+        "reason": "Walmart opening its platform to AI agents is a concrete signal that agent shopping is going mainstream. One of the world's largest retailers making this move is significant validation."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PnpompPjsdt8Gox3QCpRNk"
+    },
+    {
+      "ts": 1792684206.0587053,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Walmart is inviting AI agents to shop for you\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01PnpompPjsdt8Gox3QCpRNk"
+    },
+    {
+      "ts": 1792684212.0008128,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_013R2zYW2Gv3aaYbmomKnG31"
+    },
+    {
+      "ts": 1792684212.5118015,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792684212.511841,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"PHP Security Flaw Sets Off Global Rush to Patch, Leaving Websites Offline\", \"pick_2\": \"Anthropic takes on Muse with Claude Duet, its new AI agent\", \"pick_3\": \"DeepSeek reportedly raises $15B days after US restrictions\", \"pick_4\": \"Recursive launches Flint, a laptop coding model it says was largely built by AI\", \"pick_5\": \"Walmart is inviting AI agents to shop for you\"}}",
+      "tool_use_id": "toolu_013R2zYW2Gv3aaYbmomKnG31"
+    }
+  ],
+  "issue_num": 118
+}
