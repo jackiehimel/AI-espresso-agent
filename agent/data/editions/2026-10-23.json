@@ -1,0 +1,222 @@
+{
+  "date": "2026-10-23",
+  "generated_at": "2026-10-23T15:41:18.738722Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "OpenAI is raising $30B at a $1.25 trillion valuation",
+      "blurb": "OpenAI is close to securing another private funding round\u2014$30 billion led by Coatue and UAE investors at a $1.25 trillion pre-money valuation. That would make it the most valuable private company ever. The company filed confidential IPO paperwork in June after raising at an $852 billion valuation in March.",
+      "why_it_matters": "The valuation sets a new ceiling for AI companies before they even go public.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/22/openai-working-on-new-30b-raise-at-1-25t-valuation-ahead-of-ipo/",
+      "tier": 1,
+      "original_headline": "OpenAI working on new $30B raise at $1.25T valuation ahead of IPO",
+      "fingerprint": "7941e1872f599c93"
+    },
+    {
+      "slot": "build",
+      "headline": "OpenAI's Decisions API makes AI apps answer 10x faster",
+      "blurb": "OpenAI just released a specialized API that makes GPT-6 Luna answer classification, routing, and yes/no questions up to 10x faster than the standard chat API. It handles up to 400 questions per request and now supports images, JSON inputs, and prompt caching. Teams are using it for everything from transaction categorization to document routing.",
+      "why_it_matters": "Fast, cheap decisions let you put AI in the hot path without killing user experience.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/index/decisions-api",
+      "tier": 1,
+      "original_headline": "Build more responsive apps with the Decisions API",
+      "fingerprint": "d6f5dd47697796fc"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Microsoft's AI tool diagnoses medical cases 4x better than doctors",
+      "blurb": "Microsoft's Diagnostic Orchestrator uses multiple AI agents to mimic a medical panel \u2014 ordering tests, reviewing symptoms, and reaching diagnoses. On complex cases from medical journals, it hit 83% accuracy versus 36% for doctors with references and 22% without. The company published its benchmark, SDBench, in Science and plans to open-source it.",
+      "why_it_matters": "AI might finally deliver on years of healthcare promises, moving from research to tools doctors could actually use.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1016690/suleyman-microsoft-diagnostic-orchestrator-science-medical-superintelligence",
+      "tier": 1,
+      "original_headline": "Microsoft says its AI tool is better than doctors at diagnosing conditions",
+      "fingerprint": "7a13568df629c32a"
+    },
+    {
+      "slot": "industry",
+      "headline": "Anthropic donates Agent Skills standard to Linux Foundation",
+      "blurb": "Agent Skills, the open format that teaches AI agents specialized tasks through simple markdown files, is moving to the Agentic AI Foundation under Linux. Since launching in December, 70+ platforms including ChatGPT, Cursor, and GitHub Copilot have integrated it, with 1 million skills published and 280 million installed.",
+      "why_it_matters": "A vendor-neutral home means agents can share specialized knowledge across platforms without lock-in.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation",
+      "tier": 1,
+      "original_headline": "Donating Agent Skills to the Agentic AI Foundation",
+      "fingerprint": "6c4954c7a92f30d0"
+    },
+    {
+      "slot": "build",
+      "headline": "1Password lets AI agents log into your accounts without ever seeing your password",
+      "blurb": "When an agent tries to log in on your behalf, 1Password sends you an alert to approve it, then fills in the credentials itself\u2014the agent never touches your actual password. Works with Claude, ChatGPT, Grok, and others. Launching the same day U.S. banks started detecting agents inside customer accounts.",
+      "why_it_matters": "Agents need access to do useful work, but handing over passwords creates permanent risk\u2014this splits the difference.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+      "tier": 1,
+      "original_headline": "1Password launches a way for AI agents to log in on your behalf without seeing your password",
+      "fingerprint": "3926c322469c95b4"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The strategy stress test",
+    "kicker": "",
+    "prompt": "I'll describe our current strategy below. Assume three things go wrong at once: a competitor copies our best feature, our biggest customer leaves, and our top performer quits. Walk me through what still works, what breaks immediately, and which assumption we're over-indexing on.",
+    "tool_hint": "Before you present the plan that sounds bulletproof in the conference room."
+  },
+  "daily_question": "If you could give an AI agent access to ONE of your accounts today, which would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1792770033.687273,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792770049.9472396,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 60,
+        "persona": "market",
+        "reason": "The biggest AI story today - OpenAI pursuing a record-breaking $1.25 trillion valuation with a $30B raise ahead of IPO. This is the defining market moment everyone in AI will be discussing."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013hZwpLkqMScVnq8rxh36EC"
+    },
+    {
+      "ts": 1792770049.9473147,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI working on new $30B raise at $1.25T valuation ahead of IPO\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_013hZwpLkqMScVnq8rxh36EC"
+    },
+    {
+      "ts": 1792770049.9473562,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 4,
+        "persona": "build",
+        "reason": "Shipped developer feature from OpenAI - the Decisions API offers fast, low-cost decision-making capabilities that developers can implement this week. Concrete, actionable, try-it-today hook."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01URLpkFdFpCV6Ht4pg8e588"
+    },
+    {
+      "ts": 1792770049.947403,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Build more responsive apps with the Decisions API\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01URLpkFdFpCV6Ht4pg8e588"
+    },
+    {
+      "ts": 1792770049.9474201,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 56,
+        "persona": "everyday",
+        "reason": "Microsoft claiming its Diagnostic Orchestrator outperforms doctors is a major 'I didn't know AI could do that' moment in healthcare - one of AI's most anticipated real-world applications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Dwx7EknJa6H1xwF1eLLH4w"
+    },
+    {
+      "ts": 1792770049.947472,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Microsoft says its AI tool is better than doctors at diagnosing conditions\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Dwx7EknJa6H1xwF1eLLH4w"
+    },
+    {
+      "ts": 1792770049.9474876,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "industry",
+        "reason": "Anthropic donating Agent Skills to the Agentic AI Foundation is a significant infrastructure move - creating an open standard for agent capabilities. Primary source, industry-shaping news."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FJZJ8WWduvoV1fj28bMkLE"
+    },
+    {
+      "ts": 1792770049.947541,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Donating Agent Skills to the Agentic AI Foundation\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01FJZJ8WWduvoV1fj28bMkLE"
+    },
+    {
+      "ts": 1792770049.9475653,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 61,
+        "persona": "build",
+        "reason": "1Password shipping agent authentication solves a critical practical problem - how AI agents access accounts without exposing credentials. Real security innovation people can use now."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KtpHDZcT7jW1k6wfmMtUDx"
+    },
+    {
+      "ts": 1792770049.9476223,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"1Password launches a way for AI agents to log in on your behalf without seeing your password\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01KtpHDZcT7jW1k6wfmMtUDx"
+    },
+    {
+      "ts": 1792770054.6055496,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01SJqtTp2TmNEXVtWmySJkTM"
+    },
+    {
+      "ts": 1792770055.1929095,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792770055.1929526,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI working on new $30B raise at $1.25T valuation ahead of IPO\", \"pick_2\": \"Build more responsive apps with the Decisions API\", \"pick_3\": \"Microsoft says its AI tool is better than doctors at diagnosing conditions\", \"pick_4\": \"Donating Agent Skills to the Agentic AI Foundation\", \"pick_5\": \"1Password launches a way for AI agents to log in on your behalf without seeing your password\"}}",
+      "tool_use_id": "toolu_01SJqtTp2TmNEXVtWmySJkTM"
+    }
+  ],
+  "issue_num": 119
+}
