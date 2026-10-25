@@ -1,0 +1,282 @@
+{
+  "date": "2026-10-25",
+  "generated_at": "2026-10-25T14:55:15.063904Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "NVIDIA's new Minerva platform spots GPU problems before they tank your training run",
+      "blurb": "Minerva connects telemetry from GPUs, networks, and storage into a live knowledge graph that can trace a slow training job to a single degraded component\u2014even in clusters with hundreds of thousands of GPUs. It uses ML to detect anomalies, predict failures, and group event storms into root causes instead of flooding operators with alerts.",
+      "why_it_matters": "One bad GPU can slow an entire cluster; this finds it before you lose days of compute.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/minerva-platform-infrastructure/",
+      "tier": 1,
+      "original_headline": "NVIDIA Unveils Minerva to Bring End-to-End Observability for AI Factories",
+      "fingerprint": "f1798fd6c75958df"
+    },
+    {
+      "slot": "build",
+      "headline": "Cerebras fits a 3-trillion-parameter model across 57 wafer chips",
+      "blurb": "Cerebras published the architecture behind running Kimi K3\u2014a 3T-parameter open model that rivals GPT-5.6 on coding benchmarks\u2014at 1,000+ tokens per second. They split dense attention layers (one per 44 GB wafer) from linear layers (two per wafer), using 4-bit weights and an 8-bit KV cache to keep everything on-chip across 57 wafers.",
+      "why_it_matters": "Shows how multi-wafer clusters let you serve frontier models without off-chip memory bottlenecks.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://www.cerebras.ai/blog/how-we-deploy-trillion-parameter-frontier-models-on-cerebras",
+      "tier": 1,
+      "original_headline": "Cerebras Deploys Trillion-Parameter AI Models",
+      "fingerprint": "e1290fec0682db45"
+    },
+    {
+      "slot": "build",
+      "headline": "Hugging Face's DNA model lets you ask plain-English questions about genes",
+      "blurb": "The new Carbon-X model runs on a laptop and answers conversational questions about how DNA changes affect gene activity and health. It's trained on both genomic sequences and natural language, so researchers (and potentially patients) can ask 'what does this mutation do?' instead of reading numeric predictions.",
+      "why_it_matters": "Makes genomic research accessible to non-geneticists who can now query DNA like they'd query ChatGPT.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/hugging-face-new-ai-biology-model-chat-with-dna/",
+      "tier": 1,
+      "original_headline": "Hugging Face\u2019s New AI Biology Model Lets You Chat With DNA",
+      "fingerprint": "aed46284a780619e"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Block made an AI that learned to talk by listening, not reading",
+      "blurb": "Jack Dorsey's Block released Dessa, a voice AI trained only on human speech\u2014no text. It runs locally on a MacBook Pro and holds surprisingly natural conversations, though it sometimes mistakes who it's talking to or goes on unexpected tangents about Superman movies. The demos show it playing guessing games and even getting 'teary' about a surprise Paris trip.",
+      "why_it_matters": "Training AI on speech instead of text could make voice assistants feel more human.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1017906/jack-dorsey-block-dessa-ai-voice-speech",
+      "tier": 1,
+      "original_headline": "Jack Dorsey\u2019s Block made an AI model that talks to you like an awkward new friend",
+      "fingerprint": "401f05b5d372aaa7"
+    },
+    {
+      "slot": "industry",
+      "headline": "OpenAI fired three safety researchers over Signal chats about transparency",
+      "blurb": "The researchers were pushing to keep AI system internals visible to outsiders, but OpenAI terminated them for mishandling sensitive information in private messages. The firings highlight growing tension between safety teams advocating for external scrutiny and companies tightening control over what gets shared about their models.",
+      "why_it_matters": "The clash shows how far AI labs will go to protect internal details, even from their own safety advocates.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/ai/the-signal-chats-that-cost-openai-researchers-their-jobs-594c5853?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "The Signal Chats That Cost OpenAI Researchers Their Jobs",
+      "fingerprint": "74351c6f1fc65d4e"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The decision shadow",
+    "kicker": "",
+    "prompt": "I made a decision recently that I'm second-guessing. I'll describe what I chose and why. Don't tell me if it was right or wrong. Instead, tell me what this decision reveals about my actual priorities versus my stated priorities, and which future decisions just got easier or harder because of it.",
+    "tool_hint": "When you need to learn from a choice instead of just regretting it."
+  },
+  "daily_question": "If you could only keep one: a model that predicts failures before they happen, or one that explains its reasoning after the fact?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1792940056.4201553,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792940075.852891,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 39,
+        "persona": "build",
+        "reason": "THE defining AI story today - OpenAI announces major policy reversal, cutting frontier models off from live internet training weeks after engineers said it wouldn't work. Major implications for how leading labs will train future models."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NQbacFsYHGskr9suKpEdsD"
+    },
+    {
+      "ts": 1792940075.8529756,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI says it will no longer train its AI models on the live internet, citing \\u201csignificant risks\\u201d\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01NQbacFsYHGskr9suKpEdsD"
+    },
+    {
+      "ts": 1792940075.8530152,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 18,
+        "persona": "build",
+        "reason": "NVIDIA launches Minerva AIOps platform for end-to-end observability in AI factories - concrete product for teams running AI infrastructure at scale, helps find problems earlier."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0192H8a1ACiPDLwaFudUTF3k"
+    },
+    {
+      "ts": 1792940075.8530705,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Unveils Minerva to Bring End-to-End Observability for AI Factories\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_0192H8a1ACiPDLwaFudUTF3k"
+    },
+    {
+      "ts": 1792940075.8530831,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 71,
+        "persona": "build",
+        "reason": "Cerebras explains how they deploy trillion-parameter frontier models - technical breakthrough making massive models practical, answers one of the most frequently asked questions in AI infrastructure."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PfGt4tyLgLEbMMKwsjoYqY"
+    },
+    {
+      "ts": 1792940075.8531396,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Cerebras Deploys Trillion-Parameter AI Models\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01PfGt4tyLgLEbMMKwsjoYqY"
+    },
+    {
+      "ts": 1792940075.8531554,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 105,
+        "persona": "build",
+        "reason": "Hugging Face ships open-source AI model that speaks the language of DNA - surprising biology application that lets researchers understand genetic changes through chat interface."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01ELgN4QsLnopr83V42tRVJb"
+    },
+    {
+      "ts": 1792940075.8532178,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Hugging Face\\u2019s New AI Biology Model Lets You Chat With DNA\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01ELgN4QsLnopr83V42tRVJb"
+    },
+    {
+      "ts": 1792940075.8532465,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "everyday",
+        "reason": "Block launches Dessa, an AI model trained from scratch on pure human conversation - Jack Dorsey's company entering AI with unique approach, concrete model people can try."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019vhb9Q3UTKevRQyegtP8FZ"
+    },
+    {
+      "ts": 1792940075.8532882,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Jack Dorsey\\u2019s Block made an AI model that talks to you like an awkward new friend\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_019vhb9Q3UTKevRQyegtP8FZ"
+    },
+    {
+      "ts": 1792940080.7294605,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01X7jFNZXtHdy6AiCGrbgLEs"
+    },
+    {
+      "ts": 1792940081.3050187,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"OpenAI now trains its frontier AI models with no internet access\\\", similarity 0.815) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01X7jFNZXtHdy6AiCGrbgLEs"
+    },
+    {
+      "ts": 1792940083.8505933,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 39
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014o5xmD1V32hz2fsfLz5UMv"
+    },
+    {
+      "ts": 1792940083.8506432,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI says it will no longer train its AI models on the live internet, citing \\u201csignificant risks\\u201d\"}",
+      "tool_use_id": "toolu_014o5xmD1V32hz2fsfLz5UMv"
+    },
+    {
+      "ts": 1792940087.6745222,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 154,
+        "persona": "industry",
+        "reason": "Major internal drama at OpenAI - three safety researchers fired for mishandling sensitive information while fighting to keep AI systems visible to outsiders. Significant stakes around transparency and safety culture at leading lab."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01PiGeewdy9AUZabsw6nv9fj"
+    },
+    {
+      "ts": 1792940087.6746109,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"The Signal Chats That Cost OpenAI Researchers Their Jobs\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01PiGeewdy9AUZabsw6nv9fj"
+    },
+    {
+      "ts": 1792940088.9174292,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_011tuDv1Xn5LLwuUPzk1TKky"
+    },
+    {
+      "ts": 1792940089.167611,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1792940089.1676502,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"NVIDIA Unveils Minerva to Bring End-to-End Observability for AI Factories\", \"pick_3\": \"Cerebras Deploys Trillion-Parameter AI Models\", \"pick_4\": \"Hugging Face\\u2019s New AI Biology Model Lets You Chat With DNA\", \"pick_5\": \"Jack Dorsey\\u2019s Block made an AI model that talks to you like an awkward new friend\", \"pick_6\": \"The Signal Chats That Cost OpenAI Researchers Their Jobs\"}}",
+      "tool_use_id": "toolu_011tuDv1Xn5LLwuUPzk1TKky"
+    }
+  ],
+  "issue_num": 121
+}
