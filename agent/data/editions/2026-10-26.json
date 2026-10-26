@@ -1,0 +1,309 @@
+{
+  "date": "2026-10-26",
+  "generated_at": "2026-10-26T17:11:29.975576Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Anthropic just filed to go public",
+      "blurb": "The maker of Claude filed its S-1 with the SEC today, setting up an IPO on Nasdaq under ticker 'ANT.' No share count or price range yet \u2014 this is the formal start of the process that lets underwriters (Goldman, Morgan Stanley) begin gauging investor appetite.",
+      "why_it_matters": "First major AI lab to tap public markets since the ChatGPT wave began.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/s1-sec",
+      "tier": 1,
+      "original_headline": "Anthropic files S-1 with the SEC for proposed initial public offering",
+      "fingerprint": "6bd9d25918643fd9"
+    },
+    {
+      "slot": "market",
+      "headline": "SpaceX just locked in $40B to lease GPUs instead of buying them",
+      "blurb": "Apollo Global will buy Nvidia's next-gen chips and lease them to SpaceX over five years, starting in early 2027. SpaceX says it's seeing under one-year payback on AI infrastructure as its Grok chatbot and cloud business now pull in more revenue than Starlink and rockets combined\u2014$7.6B of $14.6B total last quarter.",
+      "why_it_matters": "The biggest AI companies are now financing compute like airlines lease planes\u2014capital-light, fast to scale.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/26/spacex-locks-in-40b-gpu-financing-deal-with-apollo/",
+      "tier": 1,
+      "original_headline": "SpaceX locks in $40B GPU financing deal with Apollo",
+      "fingerprint": "e48e8448f853b940"
+    },
+    {
+      "slot": "market",
+      "headline": "Meta plans to raise $95 billion to build more AI infrastructure",
+      "blurb": "The Facebook parent announced it will raise up to $95 billion through stock offerings and debt to fund data centers, chips, and what it calls 'personal superintelligence.' It's one of the largest corporate fundraising plans in tech history, signaling Meta expects its AI spending to keep climbing beyond the $65 billion it already committed for 2025.",
+      "why_it_matters": "Meta is betting nearly $100 billion that AI infrastructure will define the next decade of competition",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/ai/meta-plans-35-billion-stock-offering-to-power-ai-buildout-eyes-95-billion-total-plan-10b8947e?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Meta Plans up to $95 Billion in Financing to Power Its AI Growth",
+      "fingerprint": "783c41b4257d37a1"
+    },
+    {
+      "slot": "everyday",
+      "headline": "OpenAI built Fanatics a 'complete the outfit' feature in 24 hours",
+      "blurb": "Fanatics launched Shop the Look across NFL, NBA, MLB, and NHL stores\u2014an AI system that suggests matching gear when you're buying a jersey. OpenAI's Codex helped engineers build and test the first 50 product recommendations in under a day, then scale to 30,000 items.",
+      "why_it_matters": "AI just collapsed weeks of e-commerce dev work into a single day.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/index/fanatics-streamline-fan-experience",
+      "tier": 1,
+      "original_headline": "How Fanatics and OpenAI streamline the fan experience",
+      "fingerprint": "1a906269131ddd58"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The skill expiration label",
+    "kicker": "",
+    "prompt": "I'll describe a skill I currently rely on. Tell me: what external force will make it worth half as much in three years, what adjacent skill I should be building now, and one way to hedge so I'm valuable either way.",
+    "tool_hint": "When you suspect your expertise has a shelf life but aren't sure what to do about it."
+  },
+  "daily_question": "If you had $40 billion to spend on AI right now \u2014 would you lease compute or buy it outright?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1793034620.0188375,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793034634.7463129,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "market",
+        "reason": "Anthropic filing for IPO is the defining AI story of the day - a major AI lab going public is massive market news that everyone in AI will be talking about. Primary source from Anthropic itself."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SsPi2YLDB1mtf66tATCva6"
+    },
+    {
+      "ts": 1793034634.746381,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic files S-1 with the SEC for proposed initial public offering\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01SsPi2YLDB1mtf66tATCva6"
+    },
+    {
+      "ts": 1793034634.746417,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 26,
+        "persona": "market",
+        "reason": "$40 billion GPU financing commitment from Apollo to SpaceX represents one of the largest AI infrastructure deals ever announced - concrete, massive scale, and shows the capital flowing into AI compute."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01VTtc5mJ9x3NNpVVuDgu7sB"
+    },
+    {
+      "ts": 1793034634.7464588,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SpaceX locks in $40B GPU financing deal with Apollo\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01VTtc5mJ9x3NNpVVuDgu7sB"
+    },
+    {
+      "ts": 1793034634.746468,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 142,
+        "persona": "market",
+        "reason": "Meta announcing up to $95 billion in financing for AI infrastructure and 'personal superintelligence' is another massive capital commitment story - shows the scale of investment in AI from a tier-1 tech giant."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CHQf5PqNnpAdNXPMEbndtQ"
+    },
+    {
+      "ts": 1793034634.746524,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta Plans up to $95 Billion in Financing to Power Its AI Growth\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01CHQf5PqNnpAdNXPMEbndtQ"
+    },
+    {
+      "ts": 1793034634.7465403,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 35,
+        "persona": "build",
+        "reason": "OpenAI cutting frontier models off from live internet training is a major policy reversal with significant implications for how future models are developed - concrete operational change from a leading AI lab."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016FzvjYh1cZzL7gHxFvE78A"
+    },
+    {
+      "ts": 1793034634.74659,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI says it will no longer train its AI models on the live internet, citing \\u2018significant risks\\u2019\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_016FzvjYh1cZzL7gHxFvE78A"
+    },
+    {
+      "ts": 1793034641.4781594,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_019pP1FnEKhXtEFzQWuTa84w"
+    },
+    {
+      "ts": 1793034642.1644874,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_4] covers the same story as a recent edition (\\\"OpenAI now trains its frontier AI models with no internet access\\\", similarity 0.81) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_019pP1FnEKhXtEFzQWuTa84w"
+    },
+    {
+      "ts": 1793034644.2045054,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 35
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013uEjHX2Dvao64YPkDE1VRX"
+    },
+    {
+      "ts": 1793034644.2045567,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI says it will no longer train its AI models on the live internet, citing \\u2018significant risks\\u2019\"}",
+      "tool_use_id": "toolu_013uEjHX2Dvao64YPkDE1VRX"
+    },
+    {
+      "ts": 1793034651.9665997,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "build",
+        "reason": "Block shipping a voice model that runs locally on MacBook M4 Max and sounds 'eerily human' is a concrete technical achievement - shows AI voice synthesis becoming powerful enough to run on-device with impressive quality."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013A96EggLTPxKKn7cBY5d4L"
+    },
+    {
+      "ts": 1793034651.9666846,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Block\\u2019s new voice model sounds eerily human\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_013A96EggLTPxKKn7cBY5d4L"
+    },
+    {
+      "ts": 1793034654.351249,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01MYpxfdhyJyDYCXHJy8h7F4"
+    },
+    {
+      "ts": 1793034654.6005373,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_5] covers the same story as a recent edition (\\\"Block made an AI that learned to talk by listening, not reading\\\", similarity 0.808) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01MYpxfdhyJyDYCXHJy8h7F4"
+    },
+    {
+      "ts": 1793034656.268484,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 32
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014kEAPX6X7QB36rByjimvkt"
+    },
+    {
+      "ts": 1793034656.2685435,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Block\\u2019s new voice model sounds eerily human\"}",
+      "tool_use_id": "toolu_014kEAPX6X7QB36rByjimvkt"
+    },
+    {
+      "ts": 1793034663.10821,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "everyday",
+        "reason": "Fanatics using OpenAI to power 'Shop the Look' feature for game-day outfits is a concrete, shipped AI application in e-commerce that shows AI moving into practical consumer experiences beyond chatbots."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019cY9eyoaYZQR76UAdZXHqx"
+    },
+    {
+      "ts": 1793034663.1082752,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"How Fanatics and OpenAI streamline the fan experience\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_019cY9eyoaYZQR76UAdZXHqx"
+    },
+    {
+      "ts": 1793034667.751396,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_012YYKe8XaAM5DmqCgR7azn3"
+    },
+    {
+      "ts": 1793034668.0221548,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793034668.022193,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Anthropic files S-1 with the SEC for proposed initial public offering\", \"pick_2\": \"SpaceX locks in $40B GPU financing deal with Apollo\", \"pick_3\": \"Meta Plans up to $95 Billion in Financing to Power Its AI Growth\", \"pick_6\": \"How Fanatics and OpenAI streamline the fan experience\"}}",
+      "tool_use_id": "toolu_012YYKe8XaAM5DmqCgR7azn3"
+    }
+  ],
+  "issue_num": 122
+}
