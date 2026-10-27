@@ -1,43 +1,47 @@
 {
   "schema_version": 1,
-  "published_at": "2026-10-26T17:12:25.332906+00:00",
+  "published_at": "2026-10-27T16:17:38.425853+00:00",
   "source_repo": "jackiehimel/AI-espresso-agent",
   "source_ref": "main",
   "edition": {
-    "number": 122,
-    "base": "edition_122_variant_c",
+    "number": 123,
+    "base": "edition_123_variant_c",
     "variant": "c",
-    "date": "2026-10-26"
+    "date": "2026-10-27"
   },
   "artifacts": {
     "html": {
-      "path": "editions/edition_122_variant_c.html",
-      "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_122_variant_c.html"
+      "path": "editions/edition_123_variant_c.html",
+      "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_123_variant_c.html"
     },
     "markdown": {
-      "path": "editions/edition_122_variant_c.md",
-      "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_122_variant_c.md"
+      "path": "editions/edition_123_variant_c.md",
+      "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_123_variant_c.md"
     },
     "assets": [
       {
-        "path": "editions/edition_122/assets/variant_c_01.png",
-        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_122/assets/variant_c_01.png"
+        "path": "editions/edition_123/assets/variant_c_01.png",
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_123/assets/variant_c_01.png"
       },
       {
-        "path": "editions/edition_122/assets/variant_c_02.png",
-        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_122/assets/variant_c_02.png"
+        "path": "editions/edition_123/assets/variant_c_02.png",
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_123/assets/variant_c_02.png"
       },
       {
-        "path": "editions/edition_122/assets/variant_c_03.png",
-        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_122/assets/variant_c_03.png"
+        "path": "editions/edition_123/assets/variant_c_03.png",
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_123/assets/variant_c_03.png"
       },
       {
-        "path": "editions/edition_122/assets/variant_c_04.png",
-        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_122/assets/variant_c_04.png"
+        "path": "editions/edition_123/assets/variant_c_04.png",
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_123/assets/variant_c_04.png"
       },
       {
-        "path": "editions/edition_122/assets/variant_c_05.png",
-        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_122/assets/variant_c_05.png"
+        "path": "editions/edition_123/assets/variant_c_05.png",
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_123/assets/variant_c_05.png"
+      },
+      {
+        "path": "editions/edition_123/assets/variant_c_06.png",
+        "url": "https://raw.githubusercontent.com/jackiehimel/AI-espresso-agent/main/editions/edition_123/assets/variant_c_06.png"
       }
     ]
   }
