@@ -1,0 +1,223 @@
+{
+  "date": "2026-10-28",
+  "generated_at": "2026-10-28T17:04:06.556105Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Google just shipped Gemini 4 Carbon, built to find and patch security holes",
+      "blurb": "DeepMind's new frontier model ranks #1 on the latest AI benchmark and leads on cybersecurity tasks \u2014 finding vulnerabilities at 88% accuracy, exploiting them at 55%, and patching code at 71%. It's designed for multi-day agent runs on complex engineering problems. Rolling out first to cyber defenders, then developers at $2 per million input tokens.",
+      "why_it_matters": "Google's newest model is explicitly optimized for the security work companies actually need agents to do.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+      "tier": 1,
+      "original_headline": "Gemini 4 Carbon: Our next frontier model",
+      "fingerprint": "198bf369278f32bc"
+    },
+    {
+      "slot": "industry",
+      "headline": "Anthropic is now running its own drug discovery programs",
+      "blurb": "Anthropic's life sciences team partnered with six biotech companies and launched internal drug programs\u2014including treatments for rare childhood muscular dystrophy\u2014where Claude handles scientific and operational work. The goal is to speed up every stage of drug development, from target identification to clinical trial design, not just molecule generation.",
+      "why_it_matters": "AI labs are moving from tool-makers to participants in the drug development pipeline itself",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/research/early-progress-drug-development",
+      "tier": 1,
+      "original_headline": "Early progress on accelerating drug development with Claude",
+      "fingerprint": "574a283ed48df71e"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Amazon's new Alexa Home Map shows your whole house in 3D",
+      "blurb": "You can now see and control every connected device in your home from a single interactive 3D map. Walk through your house with an iPhone to scan rooms, then place your Echo devices, Ring cameras, lights, and thermostats exactly where they sit. The map updates in real time, showing which lights are on and who's moving around your yard.",
+      "why_it_matters": "No more guessing which Alexa command controls which room\u2014just tap the map.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/devices/alexa-home-map-3d-smart-home-view?utm_source=rss",
+      "tier": 1,
+      "original_headline": "Meet Alexa Home Map, an interactive 3D map that lets you see and control your home",
+      "fingerprint": "4ae25cbb5905e2e8"
+    },
+    {
+      "slot": "build",
+      "headline": "Nvidia just shipped a free transcription model that runs on a single chip",
+      "blurb": "Nemotron 3.5 Transcribe handles 40 languages, tells eight speakers apart, and processes hour-long recordings \u2014 all while running on hardware from a robotics controller to a datacenter GPU. It's designed for recorded audio (not livestreams) and targets meeting transcription and medical documentation apps.",
+      "why_it_matters": "Free, on-device transcription means developers can build voice apps without cloud API costs or privacy concerns.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/28/voice-ai-in-vogue-nvidia-releases-new-open-transcription-model/",
+      "tier": 1,
+      "original_headline": "Voice AI in vogue: Nvidia releases new open transcription model",
+      "fingerprint": "b7ded9bca6ab78db"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Chrome can now pull flight numbers and tracking codes from your Gmail to fill forms",
+      "blurb": "Google's updating Chrome's autofill to scan your Gmail for things like confirmation numbers, membership IDs, and addresses when you're filling out web forms. It's opt-in, ties into Gemini's existing Google Apps integration, and works on desktop and mobile. Think Apple's auto-fill verification codes, but for any form field Chrome thinks it can help with.",
+      "why_it_matters": "Another reason to stay locked into Google's ecosystem \u2014 and let AI read your email.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/28/chromes-ai-powered-autofill-can-now-dig-through-your-gmail-to-fill-out-forms/",
+      "tier": 1,
+      "original_headline": "Chrome\u2019s AI-powered Autofill can now dig through your Gmail to fill out forms",
+      "fingerprint": "ac3cb0ce044bd27f"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The energy audit",
+    "kicker": "",
+    "prompt": "Look at my calendar for the past two weeks. I'll paste it below. Tell me which three recurring activities are stealing the most energy relative to their actual impact. Then rank my week by which days I'm set up to do my best thinking versus which days I'm just context-switching into oblivion.",
+    "tool_hint": "When you're busy all the time but can't remember the last thing you actually finished."
+  },
+  "daily_question": "If you could point one AI agent at your messiest personal data pile, what would it be?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[everyday] banned copy word: ecosystem']"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1793206990.2392085,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=15, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793207010.4453948,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "market",
+        "reason": "Google's new frontier model launch with state-of-the-art cybersecurity - this is today's biggest AI story and must lead the edition"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017ArGoyc3BB4iFTRqok1VRJ"
+    },
+    {
+      "ts": 1793207010.4454951,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Gemini 4 Carbon: Our next frontier model\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_017ArGoyc3BB4iFTRqok1VRJ"
+    },
+    {
+      "ts": 1793207010.445536,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "industry",
+        "reason": "Anthropic using Claude to accelerate drug development - major real-world application showing AI's potential to cure disease"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017WpJHUcLK5cyMj5po5fCfW"
+    },
+    {
+      "ts": 1793207010.4455667,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Early progress on accelerating drug development with Claude\", \"persona\": \"industry\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_017WpJHUcLK5cyMj5po5fCfW"
+    },
+    {
+      "ts": 1793207010.4455774,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "everyday",
+        "reason": "Alexa Home Map interactive 3D control - concrete try-it-today feature that makes smart home control visual and intuitive"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015g5EorJobd3TdgHHwu26WE"
+    },
+    {
+      "ts": 1793207010.4456255,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meet Alexa Home Map, an interactive 3D map that lets you see and control your home\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_015g5EorJobd3TdgHHwu26WE"
+    },
+    {
+      "ts": 1793207010.4456384,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 46,
+        "persona": "build",
+        "reason": "Nvidia's new open transcription model supporting 40 languages - developers can try this free speech-to-text tool immediately"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FthWXVZMmzUxU2DNBEZs6D"
+    },
+    {
+      "ts": 1793207010.4456842,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Voice AI in vogue: Nvidia releases new open transcription model\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01FthWXVZMmzUxU2DNBEZs6D"
+    },
+    {
+      "ts": 1793207010.445695,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 43,
+        "persona": "everyday",
+        "reason": "Chrome AI Autofill mining Gmail for forms - practical feature that pulls flight confirmations and tracking info automatically"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LnXwaUYvShDi2ktJeczqSg"
+    },
+    {
+      "ts": 1793207010.445742,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Chrome\\u2019s AI-powered Autofill can now dig through your Gmail to fill out forms\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01LnXwaUYvShDi2ktJeczqSg"
+    },
+    {
+      "ts": 1793207015.6925344,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01XVtAxFgUBjWx6K7Ntrai8o"
+    },
+    {
+      "ts": 1793207017.9651625,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793207017.9652112,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Gemini 4 Carbon: Our next frontier model\", \"pick_2\": \"Early progress on accelerating drug development with Claude\", \"pick_3\": \"Meet Alexa Home Map, an interactive 3D map that lets you see and control your home\", \"pick_4\": \"Voice AI in vogue: Nvidia releases new open transcription model\", \"pick_5\": \"Chrome\\u2019s AI-powered Autofill can now dig through your Gmail to fill out forms\"}}",
+      "tool_use_id": "toolu_01XVtAxFgUBjWx6K7Ntrai8o"
+    }
+  ],
+  "issue_num": 124
+}
