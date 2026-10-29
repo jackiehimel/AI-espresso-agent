@@ -1,0 +1,222 @@
+{
+  "date": "2026-10-29",
+  "generated_at": "2026-10-29T17:21:57.022930Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Google's Gemini 4 Carbon can hunt bugs and run engineering tasks for days",
+      "blurb": "Google just released Gemini 4 Carbon, a new frontier model that tops benchmarks for finding security vulnerabilities and generating secure code. It beat Claude Opus 5.5 and GPT-6 Astra on several tests, and Google says internal teams have watched it run for days straight on complex multi-step engineering work without shortcuts or getting derailed by prompt injection.",
+      "why_it_matters": "A model that can autonomously debug and secure code for days changes what engineers can delegate.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1021339/google-gemini-4-carbon-cybersecurity-frontier",
+      "tier": 1,
+      "original_headline": "Google launches Gemini 4 Carbon with a \u2018significant leap\u2019 in cybersecurity",
+      "fingerprint": "8da58ba0f1a3228b"
+    },
+    {
+      "slot": "build",
+      "headline": "Mistral just open-sourced a 1-trillion-parameter coding and security model",
+      "blurb": "Mistral Large 4 (nicknamed Le Chonk) is now fully open-weight after three weeks of additional training pushed it to the top of coding benchmarks. The trillion-parameter model leads open models in coding and cybersecurity tasks, offers three reasoning modes to balance cost and performance, and runs entirely on European infrastructure for organizations that need data sovereignty.",
+      "why_it_matters": "A frontier model you can download, customize, and run yourself just became the best open option for code.",
+      "source_name": "Mistral News",
+      "source_url": "https://mistral.ai/news/mistral-large-4-oss",
+      "tier": 1,
+      "original_headline": "Le Chonk: Built for Coders, Trusted by Defenders.",
+      "fingerprint": "8079ffa06ca78723"
+    },
+    {
+      "slot": "market",
+      "headline": "DoorDash is buying Instacart for $17 billion",
+      "blurb": "The deal combines America's largest restaurant delivery app with its biggest grocery delivery platform. DoorDash gets Instacart's 600,000 shoppers and relationships with every major supermarket chain, while Instacart users get access to restaurant delivery in a single app.",
+      "why_it_matters": "One company will now control most of what Americans order to their door.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/10/29/technology/doordash-instacart-acquisition-delivery.html",
+      "tier": 1,
+      "original_headline": "DoorDash to Buy Instacart for $17 Billion, Uniting 2 Delivery Giants",
+      "fingerprint": "0c3734bd7506eac8"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Wabi now builds mini apps on the fly as your AI assistant",
+      "blurb": "Wabi, founded by Replika's Eugenia Kuyda, just raised $55M at a $1.25B valuation after pivoting from a prompt-to-app builder into an AI messenger that generates custom interfaces on demand. Think meal planners, restaurant trackers, or trivia games built in chat as you need them.",
+      "why_it_matters": "Another bet that the future of AI isn't a text box \u2014 it's apps that write themselves.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/29/wabi-the-ai-agent-that-builds-mini-apps-now-valued-at-1-25b-after-latest-round/",
+      "tier": 1,
+      "original_headline": "Wabi, the AI agent that builds mini apps, now valued at $1.25B after latest round",
+      "fingerprint": "4450d05732f58db3"
+    },
+    {
+      "slot": "build",
+      "headline": "AI is finding so many bugs that engineers can't fix them fast enough",
+      "blurb": "AI tools are now discovering security flaws faster than development teams can patch them, creating a new bottleneck in software security. Engineers across Silicon Valley are racing to prioritize and fix vulnerabilities before hackers can exploit them.",
+      "why_it_matters": "The bug-finding bottleneck has shifted from discovery to remediation.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/10/28/technology/silicon-valley-bugs-ai.html",
+      "tier": 1,
+      "original_headline": "AI Is Finding a Flood of Bugs, and Silicon Valley Is Rushing to Fix Them",
+      "fingerprint": "d0080278c55b7201"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation floor",
+    "kicker": "",
+    "prompt": "I'm about to negotiate something I'll describe below. Don't give me tactics or scripts. Instead: tell me the worst deal I could accept and still walk away feeling fine in six months, then tell me the one thing I'm probably overvaluing that the other side doesn't care about at all.",
+    "tool_hint": "Before you counter-offer on salary, contracts, or splitting equity."
+  },
+  "daily_question": "If an AI agent found 100 bugs in your codebase tomorrow, how many could your team actually ship fixes for this quarter?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1793294469.1328268,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793294482.6784356,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 47,
+        "persona": "build",
+        "reason": "Lead story: Google's Gemini 4 Carbon is a major frontier model launch with concrete capabilities in cybersecurity, coding, and agentic tasks - the biggest AI product launch today. This is try-it-today material from a tier-1 lab."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SMupPB5GbaBKtJXMgD3udm"
+    },
+    {
+      "ts": 1793294482.6785228,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google launches Gemini 4 Carbon with a \\u2018significant leap\\u2019 in cybersecurity\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01SMupPB5GbaBKtJXMgD3udm"
+    },
+    {
+      "ts": 1793294482.678559,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 14,
+        "persona": "build",
+        "reason": "Mistral's 1T parameter Le Chonk going open-weight is huge for the developer community - a massive multimodal model now available for anyone to download and run. Strong 'I want to try that' factor."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TVSaJtECYxuooSVYtEtzWi"
+    },
+    {
+      "ts": 1793294482.678601,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Le Chonk: Built for Coders, Trusted by Defenders.\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01TVSaJtECYxuooSVYtEtzWi"
+    },
+    {
+      "ts": 1793294482.6786213,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 165,
+        "persona": "market",
+        "reason": "DoorDash acquiring Instacart for $17B unites two delivery giants - while not purely AI, both companies are heavy AI users for logistics, recommendations, and routing. Major market-moving consolidation story."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Jnt5X1W56ZBQw9MGABp18N"
+    },
+    {
+      "ts": 1793294482.678682,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"DoorDash to Buy Instacart for $17 Billion, Uniting 2 Delivery Giants\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01Jnt5X1W56ZBQw9MGABp18N"
+    },
+    {
+      "ts": 1793294482.6787,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 52,
+        "persona": "everyday",
+        "reason": "Wabi hits unicorn status ($1.25B) as an AI agent that builds mini apps on demand - concrete, accessible capability that shows AI agents moving from concept to valued product. Strong everyday utility angle."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AnKfzELfZucYTxxsGAJ5Vd"
+    },
+    {
+      "ts": 1793294482.6787658,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Wabi, the AI agent that builds mini apps, now valued at $1.25B after latest round\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01AnKfzELfZucYTxxsGAJ5Vd"
+    },
+    {
+      "ts": 1793294482.6787848,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 166,
+        "persona": "build",
+        "reason": "AI finding floods of bugs represents a concrete, shipped capability with immediate real-world impact - ties perfectly to the Gemini 4 Carbon cybersecurity theme and shows AI doing something humans couldn't scale."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DCCsnHcpCthNcvasu6gZht"
+    },
+    {
+      "ts": 1793294482.678858,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AI Is Finding a Flood of Bugs, and Silicon Valley Is Rushing to Fix Them\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01DCCsnHcpCthNcvasu6gZht"
+    },
+    {
+      "ts": 1793294490.686749,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_017yt8NSZLTFfx5LnPQpbwe6"
+    },
+    {
+      "ts": 1793294493.0492735,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793294493.0493047,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Google launches Gemini 4 Carbon with a \\u2018significant leap\\u2019 in cybersecurity\", \"pick_2\": \"Le Chonk: Built for Coders, Trusted by Defenders.\", \"pick_3\": \"DoorDash to Buy Instacart for $17 Billion, Uniting 2 Delivery Giants\", \"pick_4\": \"Wabi, the AI agent that builds mini apps, now valued at $1.25B after latest round\", \"pick_5\": \"AI Is Finding a Flood of Bugs, and Silicon Valley Is Rushing to Fix Them\"}}",
+      "tool_use_id": "toolu_017yt8NSZLTFfx5LnPQpbwe6"
+    }
+  ],
+  "issue_num": 125
+}
