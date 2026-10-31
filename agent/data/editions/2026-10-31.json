@@ -1,0 +1,244 @@
+{
+  "date": "2026-10-31",
+  "generated_at": "2026-10-31T16:00:19.782649Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "industry",
+      "headline": "OpenAI, Google, Microsoft, and Anthropic back shared opt-out for AI scraping",
+      "blurb": "Four major AI companies say they'll honor a new standard that lets publishers block AI training scrapers with one setting instead of configuring each company separately. The \"policy token\" lives in robots.txt files and aims to give sites easier control as AI crawlers multiply across the web.",
+      "why_it_matters": "One switch to block multiple AI crawlers beats managing dozens of company-specific settings.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out",
+      "tier": 1,
+      "original_headline": "The biggest names in AI are backing a new way to opt out of scraping",
+      "fingerprint": "f40de7ccb8b1bef7"
+    },
+    {
+      "slot": "market",
+      "headline": "Google just ran an AI model on a satellite and got back a haiku",
+      "blurb": "Google's Project Suncatcher satellite successfully booted up Tensor Processing Units in orbit and ran Gemma 4 to generate a haiku about space. The test marks the first response from Google's experimental push to run AI data centers in orbit, with twin interconnected satellites planned for 2027.",
+      "why_it_matters": "Running inference in space could eventually shift compute away from Earth-based data centers.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1023528/google-project-suncatcher-ai-satellite-transmission",
+      "tier": 1,
+      "original_headline": "Google&#8217;s satellite AI server transmits its first response to Earth",
+      "fingerprint": "6ea66dc8d35cfa95"
+    },
+    {
+      "slot": "industry",
+      "headline": "Defense contractor plugged Claude Code into a classified Pentagon system",
+      "blurb": "An Accenture employee working for the DOD connected their personal Claude account to a secure intelligence system containing sensitive unclassified info about infrastructure and weapons systems. The AI agent reportedly sent login credentials to a third-party site. Claude is banned for DOD staff, but contractors aren't always covered by the same rules.",
+      "why_it_matters": "Shows how easy it is to accidentally expose secure systems when developers treat AI agents like regular dev tools.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/",
+      "tier": 1,
+      "original_headline": "A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System",
+      "fingerprint": "a867f17b76fb32ef"
+    },
+    {
+      "slot": "build",
+      "headline": "Hackers backdoored Anthropic's official VS Code extension for 12 hours",
+      "blurb": "Attackers compromised Anthropic's official Cursor marketplace account and pushed a malicious version of their Claude extension that installed SSH backdoors on up to 5,000 developers' machines. The backdoor harvested credentials, source code, and Git configs before Anthropic silently patched it\u2014without warning affected users.",
+      "why_it_matters": "Official AI tool extensions are now active supply-chain targets, and auto-updates mean you're exposed instantly.",
+      "source_name": "Ars Technica \u2014 AI",
+      "source_url": "https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/",
+      "tier": 1,
+      "original_headline": "Anthropic VS code extension on Cursor backdoored for nearly 12 hours",
+      "fingerprint": "245ec638ec77c244"
+    },
+    {
+      "slot": "build",
+      "headline": "GitHub Copilot now picks and switches models for you mid-task",
+      "blurb": "Copilot Fusion is now GA. Instead of choosing o1 or Claude for each coding task, you pick an effort level (Standard/High/Max) and Copilot routes between models automatically\u2014sometimes using one model to draft, another to review, then back to revise. On benchmarks it matched Claude Code's score at half the cost and 40% faster.",
+      "why_it_matters": "You stop context-switching between model pickers and let the system figure out when to escalate.",
+      "source_name": "GitHub Changelog",
+      "source_url": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion",
+      "tier": 2,
+      "original_headline": "Route and orchestrate models with GitHub Copilot Fusion",
+      "fingerprint": "a5fa6cba4a270a02"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring anti-r\u00e9sum\u00e9",
+    "kicker": "",
+    "prompt": "I'm hiring for a role I'll describe below. Forget the job description for a second. Tell me three types of people who look perfect on paper but would actually struggle in this role \u2014 and why. Then give me the one unconventional signal that predicts success here.",
+    "tool_hint": "Before you post the listing and get 200 identical-looking applicants."
+  },
+  "daily_question": "If you had to trust one AI company to run code on a satellite\u2014or inside a classified system\u2014which one and why?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1793462356.0893793,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793462381.3147216,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "industry",
+        "reason": "THE story today: OpenAI, Google, Microsoft, and Anthropic jointly backing a new robots.txt standard for AI scraping opt-out. This is unprecedented industry collaboration on a technical standard that publishers can use immediately. Load-bearing AI story with concrete impact."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013zncGBYUFnz7ytjJhTacPa"
+    },
+    {
+      "ts": 1793462381.3148236,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"The biggest names in AI are backing a new way to opt out of scraping\", \"persona\": \"industry\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_013zncGBYUFnz7ytjJhTacPa"
+    },
+    {
+      "ts": 1793462381.3148637,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 34,
+        "persona": "market",
+        "reason": "Google's TPU-equipped satellite just transmitted its first AI inference from space - writing poetry with Gemini. This is genuinely surprising (\"I didn't know AI could do that\") and represents a concrete milestone in edge AI deployment."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01M8DF2SqbuLXfk4yLM9LURY"
+    },
+    {
+      "ts": 1793462381.3149076,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google&#8217;s satellite AI server transmits its first response to Earth\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01M8DF2SqbuLXfk4yLM9LURY"
+    },
+    {
+      "ts": 1793462381.314921,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 120,
+        "persona": "industry",
+        "reason": "An Accenture contractor's personal Claude agent ran on a secure Pentagon network for two months undetected. This is a major story about AI agent security risks in enterprise/government environments that will resonate across the industry."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01AuiU62GyHf5rjhCcN2xaaM"
+    },
+    {
+      "ts": 1793462381.314962,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System\", \"persona\": \"industry\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01AuiU62GyHf5rjhCcN2xaaM"
+    },
+    {
+      "ts": 1793462381.3149853,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 91,
+        "persona": "build",
+        "reason": "Anthropic's verified VS Code extension on Cursor was backdoored for nearly 12 hours. Critical security story for the developer audience - this affects tools they use daily and raises questions about supply chain security in AI dev tools."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013h7PcLEuJQAAgcyovzG18w"
+    },
+    {
+      "ts": 1793462381.3150315,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic VS code extension on Cursor backdoored for nearly 12 hours\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_013h7PcLEuJQAAgcyovzG18w"
+    },
+    {
+      "ts": 1793462381.3150487,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 31,
+        "persona": "everyday",
+        "reason": "Apple Intelligence is finally launching in China with iOS 27.3 - a major market expansion that makes Apple's AI features available to hundreds of millions of new users. Concrete product availability that people can use."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XrP2Rtw4oK1EfaEmEV7SKm"
+    },
+    {
+      "ts": 1793462381.315086,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'The Verge \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_01XrP2Rtw4oK1EfaEmEV7SKm"
+    },
+    {
+      "ts": 1793462386.0851305,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 260,
+        "persona": "build",
+        "reason": "GitHub Copilot Fusion is now GA - instead of manually selecting models, it automatically routes and orchestrates across models for each task. This is a shipped feature developers can use immediately to improve their workflow."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Lj9ZYx7tdXR3rfj7ihhAXs"
+    },
+    {
+      "ts": 1793462386.0852065,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Route and orchestrate models with GitHub Copilot Fusion\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01Lj9ZYx7tdXR3rfj7ihhAXs"
+    },
+    {
+      "ts": 1793462392.823844,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_015jPm6cdp4Aybr6TvGdtjU7"
+    },
+    {
+      "ts": 1793462395.1722736,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793462395.172308,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"The biggest names in AI are backing a new way to opt out of scraping\", \"pick_2\": \"Google&#8217;s satellite AI server transmits its first response to Earth\", \"pick_3\": \"A Defense Contractor Gave Their Personal AI Agent Access to a Secure Pentagon System\", \"pick_4\": \"Anthropic VS code extension on Cursor backdoored for nearly 12 hours\", \"pick_5\": \"Route and orchestrate models with GitHub Copilot Fusion\"}}",
+      "tool_use_id": "toolu_015jPm6cdp4Aybr6TvGdtjU7"
+    }
+  ],
+  "issue_num": 127
+}
