@@ -1,0 +1,222 @@
+{
+  "date": "2026-11-01",
+  "generated_at": "2026-11-01T17:03:40.323167Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Google just got a haiku back from an AI chip in orbit",
+      "blurb": "Google's Project Suncatcher satellite responded to its first prompt from space this week \u2014 a Gemma model running on a TPU in orbit generated a haiku about being in space. Next up: stress tests to see how the chips handle radiation and thermal extremes, then twin interconnected satellites in 2027.",
+      "why_it_matters": "Running AI compute in space could eventually handle workloads without ground infrastructure limits.",
+      "source_name": "Google \u2014 Innovation & AI",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-satellite-response/",
+      "tier": 1,
+      "original_headline": "We\u2019ve received our first response from the Project Suncatcher prototype satellite.",
+      "fingerprint": "e66413085176c913"
+    },
+    {
+      "slot": "market",
+      "headline": "Apple Intelligence is launching in China \u2014 with Alibaba's chatbot instead of Siri",
+      "blurb": "Apple's AI features are coming to China in an iOS 27.3 beta next week, but not the new Siri. Instead, Chinese users get notification summaries, translation, rewriting tools, and visual intelligence \u2014 plus integration with Alibaba's Qwen chatbot where ChatGPT appears elsewhere. Apple trained a separate LLM specifically for the Chinese market.",
+      "why_it_matters": "Apple is shipping different AI backends in different countries to navigate regulatory barriers.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1023974/apple-intelligence-china-ios-27-3",
+      "tier": 1,
+      "original_headline": "Apple Intelligence is finally coming to China with iOS 27.3",
+      "fingerprint": "c6fa1061f1d7a5f3"
+    },
+    {
+      "slot": "build",
+      "headline": "DeepSeek drops a coding agent that runs more on its own",
+      "blurb": "DeepSeek released a prototype coding agent designed to work more autonomously than earlier versions, positioning it as an alternative to Anthropic's Claude Code. The tool aims to handle coding tasks with less hand-holding from developers.",
+      "why_it_matters": "Another low-cost Chinese AI lab is pushing into agentic coding tools that actually ship.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-11-01/deepseek-drops-enhanced-coding-agent-with-aim-to-rival-anthropic",
+      "tier": 1,
+      "original_headline": "DeepSeek Drops Enhanced Coding Agent With Aim to Rival Anthropic",
+      "fingerprint": "dce50c0c7138f521"
+    },
+    {
+      "slot": "industry",
+      "headline": "An AI agent just did brain surgery on a live mouse",
+      "blurb": "A biotech startup connected Claude to a robotic surgical rig and had it perform a gene therapy injection into a mouse's brain\u2014choosing the treatment, coordinates, and controlling the needle itself. The goal: train AI on what actually happens in labs, not just published papers that skip the failures and real-time decisions.",
+      "why_it_matters": "AI moving from analyzing experiments to running them changes what counts as research data.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/an-ai-agent-did-brain-surgery-on-live-mouse/",
+      "tier": 1,
+      "original_headline": "An AI Agent Injected Drugs Into a Live Mouse\u2019s Brain",
+      "fingerprint": "69beb0ceafa9d751"
+    },
+    {
+      "slot": "market",
+      "headline": "OpenAI cuts funding target from $30B to $20B, closes just $11B so far",
+      "blurb": "OpenAI's latest round isn't going as planned. The company originally aimed for $30 billion at a $1.4 trillion valuation, then dropped to $1.25 trillion, and now has lowered its target to $20 billion with only $11 billion secured. UAE investors are leading the round, and the WSJ says some big investors gave a 'tepid' response.",
+      "why_it_matters": "Even OpenAI is finding it harder to raise money as investors cool on AI infrastructure spending.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/10/31/openai-reportedly-lowers-funding-target-for-new-round/",
+      "tier": 1,
+      "original_headline": "OpenAI reportedly lowers funding target for new round",
+      "fingerprint": "0653f33b66bac439"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The meeting receipt",
+    "kicker": "",
+    "prompt": "I just finished a meeting. I'll describe what we discussed below. Give me: the one decision we actually made, the one decision we thought we made but didn't, and the single question that\u2014if answered next\u2014would prevent a follow-up meeting.",
+    "tool_hint": "Right after the call ends, while everyone's calendar is still open."
+  },
+  "daily_question": "If you had to bet on one AI story from this week still mattering in five years, which would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1793552567.8297095,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793552589.3908842,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "everyday",
+        "reason": "Google just put the first TPU in space running Gemini Gemma 4, and it's sending back poetry. This is the concrete, shipped, genuinely surprising story that defines today - primary source with video of the team's reaction beats secondary coverage."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015bn2N2agVQ8J7LR3xLVkAj"
+    },
+    {
+      "ts": 1793552589.3909655,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"We\\u2019ve received our first response from the Project Suncatcher prototype satellite.\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_015bn2N2agVQ8J7LR3xLVkAj"
+    },
+    {
+      "ts": 1793552589.3909976,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 26,
+        "persona": "market",
+        "reason": "Apple Intelligence finally launching in China with iOS 27.3 is a major market expansion for Apple's AI strategy. Shows the platform wars heating up in the world's largest market."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CzVHQ32esxf1GGMd2MK2s3"
+    },
+    {
+      "ts": 1793552589.3910239,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple Intelligence is finally coming to China with iOS 27.3\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01CzVHQ32esxf1GGMd2MK2s3"
+    },
+    {
+      "ts": 1793552589.39103,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 175,
+        "persona": "build",
+        "reason": "DeepSeek shipping an autonomous coding agent to rival Claude Code is concrete competition developers can try. Platform wars with a shipped artifact that engineers will want to test."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015mu9BGMDRen2Pi31KPSnhZ"
+    },
+    {
+      "ts": 1793552589.3910508,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"DeepSeek Drops Enhanced Coding Agent With Aim to Rival Anthropic\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_015mu9BGMDRen2Pi31KPSnhZ"
+    },
+    {
+      "ts": 1793552589.3910553,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 107,
+        "persona": "industry",
+        "reason": "An AI agent autonomously choosing and injecting gene therapy into a live mouse is a startling real-world capability demonstration. This is exactly the 'I didn't know AI could do that' moment that shows where autonomous agents are heading."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_013pVG4uzymQmNKkZGNd7gym"
+    },
+    {
+      "ts": 1793552589.3910854,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"An AI Agent Injected Drugs Into a Live Mouse\\u2019s Brain\", \"persona\": \"industry\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_013pVG4uzymQmNKkZGNd7gym"
+    },
+    {
+      "ts": 1793552589.3910942,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 36,
+        "persona": "market",
+        "reason": "OpenAI slashing its funding target by billions signals a major shift in AI market expectations. When the leading AI company tempers its ambitions, that's news the industry needs to understand."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FPu3Bzp2iP4V6JZf48GZ1T"
+    },
+    {
+      "ts": 1793552589.3911173,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI reportedly lowers funding target for new round\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01FPu3Bzp2iP4V6JZf48GZ1T"
+    },
+    {
+      "ts": 1793552594.36732,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01ANWrDRRKaJGH8B4rmfprhP"
+    },
+    {
+      "ts": 1793552596.6417248,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793552596.6417532,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"We\\u2019ve received our first response from the Project Suncatcher prototype satellite.\", \"pick_2\": \"Apple Intelligence is finally coming to China with iOS 27.3\", \"pick_3\": \"DeepSeek Drops Enhanced Coding Agent With Aim to Rival Anthropic\", \"pick_4\": \"An AI Agent Injected Drugs Into a Live Mouse\\u2019s Brain\", \"pick_5\": \"OpenAI reportedly lowers funding target for new round\"}}",
+      "tool_use_id": "toolu_01ANWrDRRKaJGH8B4rmfprhP"
+    }
+  ],
+  "issue_num": 128
+}
