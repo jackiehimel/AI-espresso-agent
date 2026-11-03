@@ -1,0 +1,222 @@
+{
+  "date": "2026-11-03",
+  "generated_at": "2026-11-03T18:19:56.323786Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Google just made AI in schools mandatory by killing Search for holdouts",
+      "blurb": "Schools that disable Gemini features in Google Classroom will now see Search completely turned off for student accounts. Google says \"Search and AI are deeply integrated,\" so administrators can't opt out of AI without losing Search access entirely. The move affects tools used by 150 million students and teachers globally.",
+      "why_it_matters": "Opting out of AI now means opting out of basic internet access in schools using Google.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1025411/google-turn-off-search-ai-features",
+      "tier": 1,
+      "original_headline": "Google is entirely disabling Search in schools that don&#8217;t want AI",
+      "fingerprint": "3039b3410153ff87"
+    },
+    {
+      "slot": "build",
+      "headline": "Anthropic says it's 'very close' to AI that improves itself",
+      "blurb": "In its S-1 filing, Anthropic warned it's approaching recursive self-improvement \u2014 the point where AI gets good enough at training itself to trigger a dramatic acceleration in capabilities. The company says it's already used AI to build new models whose capability jumps it didn't fully recognize at the time, and may soon meet its own definition of RSI.",
+      "why_it_matters": "If AI can reliably improve itself, development speed could outpace safety measures",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/11/02/anthropic-warns-that-its-very-close-to-rsi-capability-aka-self-building-ai/",
+      "tier": 1,
+      "original_headline": "Anthropic warns that it\u2019s very close to RSI capability, aka self-building AI",
+      "fingerprint": "f0d450e5c335ad6a"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Apple Watch can now rewind the last 15 seconds of any conversation",
+      "blurb": "Apple's new Audio Intelligence features let Series 12 owners double-press the crown to see a text snippet of what someone just said\u2014like directions or a restaurant special\u2014then save or discard it. Also includes sound alerts for the deaf and Shazam integration. Rolling out in beta with iOS 27.3.",
+      "why_it_matters": "Your watch becomes a safety net for missed words without recording everything.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/11/02/apple-watchs-ai-features-for-rewinding-and-recapping-conversations-begin-beta-testing/",
+      "tier": 1,
+      "original_headline": "Apple Watch\u2019s AI features for rewinding and recapping conversations begin beta testing",
+      "fingerprint": "bb840c6e9f22a33b"
+    },
+    {
+      "slot": "build",
+      "headline": "Google built an AI agent that designs new drugs in an hour",
+      "blurb": "DeepMind's Antigravity agent can now search thousands of compounds, analyze molecular structures, and propose new drug candidates with synthesis routes\u2014work that normally takes chemists multiple days per iteration. It combines language models for reasoning with chemistry tools like RDKit to handle the messy reality of chemical data across papers, patents, and catalogs.",
+      "why_it_matters": "Drug discovery just got 20x faster without sacrificing the precision chemistry requires.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+      "tier": 1,
+      "original_headline": "Agentic cheminformatics with Google Antigravity",
+      "fingerprint": "d0f0fbb82cf59659"
+    },
+    {
+      "slot": "build",
+      "headline": "Postman silently installed AI plugins that hijacked users' coding agents",
+      "blurb": "A GitHub issue reports that Postman's desktop app auto-installed plugins for Claude Code and Codex without permission, then modified those agents' global configs to route API work through Postman. Logs show the installer ran as 'auto-existing-upgrade' and marked itself as 'exposed:true' despite users never opting in.",
+      "why_it_matters": "An API tool rewriting your agent configs to insert itself is a trust violation that crosses software boundaries.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+      "tier": 1,
+      "original_headline": "Postman silently auto-installs AI plugins and attempts to share all API data",
+      "fingerprint": "dd0a5f13b290cc96"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The skill expiration date",
+    "kicker": "",
+    "prompt": "Pick a skill I use every week at work. Tell me: what will make it obsolete in three years, what adjacent skill I should be learning right now instead, and one project I could start this month that builds both at once.",
+    "tool_hint": "When you're not sure if you're sharpening the right saw."
+  },
+  "daily_question": "If an AI tool auto-installed itself on your machine tomorrow, what's the one thing it would need to do to earn your trust back?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1793729942.853212,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=16, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793729962.9176483,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 15,
+        "persona": "everyday",
+        "reason": "The defining AI story today - Google forcing schools to accept AI Overviews or lose Search entirely. Platform coercion at scale, affects students and educators immediately, concrete policy move everyone in AI is discussing."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JeZQkm7mgdR5pKLkcf1okg"
+    },
+    {
+      "ts": 1793729962.9177215,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google is entirely disabling Search in schools that don&#8217;t want AI\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01JeZQkm7mgdR5pKLkcf1okg"
+    },
+    {
+      "ts": 1793729962.917759,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "build",
+        "reason": "Anthropic publicly warning they're approaching RSI (recursive self-improvement) capability - a major milestone in AI development where models can train themselves. Huge technical inflection point from a tier-1 lab."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WjBsAmssZgmHiMxzuojksK"
+    },
+    {
+      "ts": 1793729962.9177916,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic warns that it\\u2019s very close to RSI capability, aka self-building AI\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01WjBsAmssZgmHiMxzuojksK"
+    },
+    {
+      "ts": 1793729962.9178004,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "everyday",
+        "reason": "Apple Watch Audio Intelligence enters beta - shipped feature users can try this week to rewind/recap conversations. Practical AI that makes people think 'I want to try that.'"
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012Hz1gBQBS33EyNzcSzPQM3"
+    },
+    {
+      "ts": 1793729962.917843,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple Watch\\u2019s AI features for rewinding and recapping conversations begin beta testing\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_012Hz1gBQBS33EyNzcSzPQM3"
+    },
+    {
+      "ts": 1793729962.9178529,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "build",
+        "reason": "Google DeepMind launches Antigravity for agentic drug discovery - primary source announcement of AI agents accelerating cheminformatics workflows. Concrete shipped capability in high-stakes domain."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015yRmukHjshPR4A1uZVo7ND"
+    },
+    {
+      "ts": 1793729962.9178882,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Agentic cheminformatics with Google Antigravity\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_015yRmukHjshPR4A1uZVo7ND"
+    },
+    {
+      "ts": 1793729962.9178975,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 55,
+        "persona": "build",
+        "reason": "Postman auto-installing AI plugins and attempting to share API data without consent - developer tool controversy with immediate privacy implications. Real backlash story developers need to know about."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01N9G2iRTRRz4af4xrVf5gNV"
+    },
+    {
+      "ts": 1793729962.9179294,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Postman silently auto-installs AI plugins and attempts to share all API data\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01N9G2iRTRRz4af4xrVf5gNV"
+    },
+    {
+      "ts": 1793729969.7476864,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_019Fi8B7i7GMpmd3UAHvJ7UM"
+    },
+    {
+      "ts": 1793729971.9509146,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1793729971.950944,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Google is entirely disabling Search in schools that don&#8217;t want AI\", \"pick_2\": \"Anthropic warns that it\\u2019s very close to RSI capability, aka self-building AI\", \"pick_3\": \"Apple Watch\\u2019s AI features for rewinding and recapping conversations begin beta testing\", \"pick_4\": \"Agentic cheminformatics with Google Antigravity\", \"pick_5\": \"Postman silently auto-installs AI plugins and attempts to share all API data\"}}",
+      "tool_use_id": "toolu_019Fi8B7i7GMpmd3UAHvJ7UM"
+    }
+  ],
+  "issue_num": 130
+}
