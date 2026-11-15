@@ -13,10 +13,10 @@ Contract (one argv: JSON string):
 Writes {filename}.png and exits 0 on success.
 
 Backends (first available):
-  1. GEMINI_API_KEY / GOOGLE_API_KEY → Nano Banana via Gemini API
-     - Default: gemini-3.1-flash-image-preview (Nano Banana 2)
-     - Optional: GEMINI_IMAGE_MODEL=gemini-3-pro-image-preview (Nano Banana Pro)
-  2. OPENAI_API_KEY → gpt-image-1 (fallback only; stricter moderation)
+  1. GEMINI_API_KEY / GOOGLE_API_KEY → Gemini image model chain
+     - Primary: GEMINI_IMAGE_MODEL (default gemini-3.1-flash-image)
+     - Fallback: GEMINI_IMAGE_FALLBACK_MODEL (default gemini-2.5-flash-image)
+  2. OPENAI_API_KEY → gpt-image-1 (final fallback; stricter moderation)
 
 Set ESPRESSO_IMAGE_BACKEND=openai to force OpenAI even when Gemini is configured.
 """
@@ -55,7 +55,18 @@ def _size_gemini(aspect_ratio: str) -> str:
     return "16:9" if aspect_ratio == "16:9" else "1:1"
 
 
-def _generate_gemini(prompt: str, out_path: Path, aspect_ratio: str) -> None:
+def _gemini_models() -> tuple[str, str]:
+    primary = os.environ.get("GEMINI_IMAGE_MODEL") or "gemini-3.1-flash-image"
+    fallback = os.environ.get("GEMINI_IMAGE_FALLBACK_MODEL") or "gemini-2.5-flash-image"
+    return primary, fallback
+
+
+def _generate_gemini(
+    prompt: str,
+    out_path: Path,
+    aspect_ratio: str,
+    model: str | None = None,
+) -> None:
     from google import genai
     from google.genai import types
 
@@ -63,11 +74,7 @@ def _generate_gemini(prompt: str, out_path: Path, aspect_ratio: str) -> None:
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY not set")
     client = genai.Client(api_key=api_key)
-    # Nano Banana 2 — https://ai.google.dev/gemini-api/docs/image-generation
-    model = os.environ.get(
-        "GEMINI_IMAGE_MODEL",
-        "gemini-3.1-flash-image-preview",
-    )
+    model = model or _gemini_models()[0]
     response = client.models.generate_content(
         model=model,
         contents=[prompt[:8000]],
@@ -151,15 +158,28 @@ def main() -> int:
     openai_key = os.environ.get("OPENAI_API_KEY")
 
     if backend != "openai" and gemini_key:
-        try:
-            _generate_gemini(prompt, out_path, aspect_ratio)
-            if out_path.stat().st_size > 10_000:
-                print("backend: gemini (nano banana)", file=sys.stderr)
+        models = list(dict.fromkeys(_gemini_models()))
+        for index, model in enumerate(models):
+            try:
+                _generate_gemini(prompt, out_path, aspect_ratio, model=model)
+                if out_path.stat().st_size <= 10_000:
+                    raise RuntimeError("generated image is too small")
+                print(f"backend: gemini [{model}]", file=sys.stderr)
                 return 0
-        except Exception as e:
-            msg = str(e).replace("\n", " ")[:500]
-            errors.append(f"gemini: {msg}")
-            print(f"  [gemini failed, trying openai] {msg}", file=sys.stderr)
+            except Exception as e:
+                msg = str(e).replace("\n", " ")[:500]
+                errors.append(f"gemini {model}: {msg}")
+                if index + 1 < len(models):
+                    next_backend = models[index + 1]
+                elif openai_key:
+                    next_backend = "openai"
+                else:
+                    next_backend = ""
+                if next_backend:
+                    print(
+                        f"  [{model} failed, trying {next_backend}] {msg}",
+                        file=sys.stderr,
+                    )
 
     if openai_key and backend in ("", "openai"):
         try:

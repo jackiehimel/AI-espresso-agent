@@ -518,8 +518,14 @@ def _run_image_cli(prompt: str, filename_no_ext: Path, aspect_ratio: str) -> boo
             timeout=300,
             env=env,
         )
+        if result.stderr and result.stderr.strip():
+            print(result.stderr.rstrip(), file=sys.stderr)
         if result.returncode != 0:
-            print(f"  [error] {result.stderr[:300]}", file=sys.stderr)
+            if not result.stderr or not result.stderr.strip():
+                print(
+                    f"  [error] image generator exited {result.returncode} without details",
+                    file=sys.stderr,
+                )
             if _restore_prior_if_available():
                 print("  [keep] preserving previous illustration after generation error", file=sys.stderr)
                 return True
