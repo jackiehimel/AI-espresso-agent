@@ -1,0 +1,244 @@
+{
+  "date": "2026-11-17",
+  "generated_at": "2026-11-17T19:41:38.063722Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Google's Gemini can now call businesses and buy things for you",
+      "blurb": "Google is rolling out Tasks mode to hundreds of millions of users for free. Flip a toggle in the Gemini app and it can call to book appointments, make purchases through Google Pay, and log into websites on your behalf. One exec used it to call car dealerships for a service appointment.",
+      "why_it_matters": "Your phone's AI assistant just became something that can actually do errands instead of just answering questions.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/11/17/google-expands-access-to-gemini-tasks-which-can-help-with-calls-purchases/",
+      "tier": 1,
+      "original_headline": "Google expands access to Gemini Tasks, which can help with calls, purchases",
+      "fingerprint": "0edd175b3ab61a91"
+    },
+    {
+      "slot": "market",
+      "headline": "Isomorphic Labs raises $5B to take AI-designed drugs into human trials",
+      "blurb": "The DeepMind spinoff that uses AI to design drugs just raised $5 billion from Sequoia, a16z, and others. The company says its AI models have produced drugs with 'positive preclinical results' in cancer and immune diseases, and it's now moving toward clinical trials. Founded by Nobel laureate Demis Hassabis, Isomorphic has deals with Eli Lilly, Novartis, and J&J.",
+      "why_it_matters": "AI-designed drugs are about to be tested in humans for the first time at scale.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/11/17/isomorphic-labs-raises-5b-as-it-looks-to-take-drug-candidates-to-clinical-trials/",
+      "tier": 1,
+      "original_headline": "Isomorphic Labs raises $5B as it looks to take drug candidates to clinical trials",
+      "fingerprint": "49edb7c62c48b8a0"
+    },
+    {
+      "slot": "market",
+      "headline": "Robotics startup Genesis AI raises $500M to build general-purpose robots",
+      "blurb": "Genesis AI just closed a $500 million round to build what CEO Zhou Xian calls 'the world's best general-purpose robot.' The startup is betting on AI-powered robots that can handle multiple tasks rather than single-purpose machines.",
+      "why_it_matters": "Half a billion dollars signals serious investor belief that robotics is ready to move beyond narrow factory tasks.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/cio-journal/genesis-ai-a-robotics-startup-raises-500-million-35198457?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Genesis AI, a Robotics Startup, Raises $500 Million",
+      "fingerprint": "da664baecd616e72"
+    },
+    {
+      "slot": "build",
+      "headline": "Microsoft just shipped two coding models that cost half what GPT-4 does",
+      "blurb": "MAI Code 2 handles production debugging, multi-file edits, and repo-wide reasoning at 40% the cost of GPT-4o while delivering 98% of its performance on everyday coding tasks. Code 2 Flash is even cheaper for high-volume work like code explanations and routine fixes. Both are tuned for the work developers actually do in GitHub Copilot, not research or long-horizon agent tasks.",
+      "why_it_matters": "Production-quality code assistance just became affordable enough to run on every pull request.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/",
+      "tier": 1,
+      "original_headline": "MAI Code 2 and Code 2 Flash",
+      "fingerprint": "b76a81cb9290173d"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA's new Vera Rubin chip trains AI agents twice as fast per GPU",
+      "blurb": "NVIDIA's Vera Rubin platform swept every MLPerf training benchmark in its debut, delivering 2x performance per GPU over the previous generation and 10x better efficiency for agentic AI workloads. The chip scaled nearly perfectly from 256 to 1,024 GPUs, cutting training time from 16 minutes to 4 minutes on DeepSeek-V3.",
+      "why_it_matters": "Faster training means smarter AI agents reach production weeks sooner and adapt to new data in real time.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/mlperf-training-endpoints-vera-rubin/",
+      "tier": 1,
+      "original_headline": "NVIDIA Sweeps MLPerf Training and Endpoints as Vera Rubin Debuts With Leading Performance",
+      "fingerprint": "509ffc74d868e667"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation floor plan",
+    "kicker": "",
+    "prompt": "I'm heading into a negotiation I'll describe below. Tell me: the one thing I should ask for first that makes everything else easier, the concession I should offer that costs me little but signals flexibility, and the exact phrase I should use if they go silent.",
+    "tool_hint": "Before salary talks, vendor contracts, or any conversation where you need to move numbers."
+  },
+  "daily_question": "If you could give an AI agent one task to handle for the next month\u2014no questions asked\u2014what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1794944448.2136042,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=14, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1794944464.3365386,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 48,
+        "persona": "everyday",
+        "reason": "Google's Gemini Tasks is the lead story - a major capability expansion where AI agents can now make calls, log into websites, and make purchases on your behalf. This is a concrete, try-it-today feature that represents a significant step in AI agent capabilities."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TYaHnpvGD4vj8MnwzgQnDD"
+    },
+    {
+      "ts": 1794944464.336616,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google expands access to Gemini Tasks, which can help with calls, purchases\", \"persona\": \"everyday\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01TYaHnpvGD4vj8MnwzgQnDD"
+    },
+    {
+      "ts": 1794944464.336657,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 57,
+        "persona": "market",
+        "reason": "Isomorphic Labs' $5B raise is a massive funding story for Demis Hassabis's AI drug discovery company. This represents one of the largest AI funding rounds and signals major progress in taking AI-discovered drugs to clinical trials."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LkwPF3MXJZDgxtHdMjcL2z"
+    },
+    {
+      "ts": 1794944464.336705,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Isomorphic Labs raises $5B as it looks to take drug candidates to clinical trials\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01LkwPF3MXJZDgxtHdMjcL2z"
+    },
+    {
+      "ts": 1794944464.3367178,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 165,
+        "persona": "market",
+        "reason": "Genesis AI's $500M raise for general-purpose robotics from WSJ provides tier-1 coverage of a major funding event in AI robotics, complementing the Isomorphic story with a different application domain."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01D7GrV9W12yczxB2bUXvmyW"
+    },
+    {
+      "ts": 1794944464.336789,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Genesis AI, a Robotics Startup, Raises $500 Million\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01D7GrV9W12yczxB2bUXvmyW"
+    },
+    {
+      "ts": 1794944464.3368125,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 52,
+        "persona": "build",
+        "reason": "Proton Lumo Desktop launch offers a privacy-focused alternative to ChatGPT with local task automation across files and apps. This addresses developer and power-user concerns about privacy while delivering concrete functionality."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011h5MMAWNDo1tcwmiGUVPyA"
+    },
+    {
+      "ts": 1794944464.3368676,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"source cap: 'TechCrunch \\u2014 AI' already has 2 stories; pick from a different outlet\"}",
+      "tool_use_id": "toolu_011h5MMAWNDo1tcwmiGUVPyA"
+    },
+    {
+      "ts": 1794944464.336887,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 82,
+        "persona": "build",
+        "reason": "Microsoft's MAI Code 2 and Code 2 Flash launch represents a significant coding model release focused on everyday coding at scalable prices, relevant for developers across Solvd."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01U5tsNigCQdaMHjK4nFoWMk"
+    },
+    {
+      "ts": 1794944464.3369362,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"MAI Code 2 and Code 2 Flash\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01U5tsNigCQdaMHjK4nFoWMk"
+    },
+    {
+      "ts": 1794944467.5698195,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 33,
+        "persona": "build",
+        "reason": "NVIDIA Vera Rubin platform debuts with leading MLPerf benchmark performance, representing a major hardware milestone for AI training and inference that impacts developers and infrastructure teams."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019SN62PJ14cy77J8oS1cx2c"
+    },
+    {
+      "ts": 1794944467.5699048,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA Sweeps MLPerf Training and Endpoints as Vera Rubin Debuts With Leading Performance\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_019SN62PJ14cy77J8oS1cx2c"
+    },
+    {
+      "ts": 1794944473.0834496,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01DcwKbLp4qJXHcjbf1e8ujE"
+    },
+    {
+      "ts": 1794944473.466963,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1794944473.4669893,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Google expands access to Gemini Tasks, which can help with calls, purchases\", \"pick_2\": \"Isomorphic Labs raises $5B as it looks to take drug candidates to clinical trials\", \"pick_3\": \"Genesis AI, a Robotics Startup, Raises $500 Million\", \"pick_4\": \"MAI Code 2 and Code 2 Flash\", \"pick_5\": \"NVIDIA Sweeps MLPerf Training and Endpoints as Vera Rubin Debuts With Leading Performance\"}}",
+      "tool_use_id": "toolu_01DcwKbLp4qJXHcjbf1e8ujE"
+    }
+  ],
+  "issue_num": 133
+}
