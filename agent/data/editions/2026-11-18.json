@@ -1,0 +1,516 @@
+{
+  "date": "2026-11-18",
+  "generated_at": "2026-11-18T19:18:15.886385Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "OpenAI ships two new models that do more work for less money",
+      "blurb": "GPT-6.2 Astra is built for complex professional work\u2014writing slides, code, and documents that follow your templates closely. GPT-6.2 Sol handles everyday tasks and multistep workflows. Both models score higher on professional benchmarks while using fewer tokens, so you hit usage limits less often. API pricing for Astra dropped 20%, with 60% off cached inputs.",
+      "why_it_matters": "You can now run more complex workflows on the same budget and hit rate limits less.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
+      "tier": 1,
+      "original_headline": "Introducing GPT-6.2 Astra and Sol",
+      "fingerprint": "1867dec8d021e7a2"
+    },
+    {
+      "slot": "build",
+      "headline": "AI found a Java bug that can break into banks and hospitals",
+      "blurb": "OpenAI's unreleased GPT-6 Cyber model helped researchers find a memory flaw in Java triggered by feeding its decoder 64 'A' characters plus an equals sign. The bug can let attackers gain full system access on platforms used by 90% of Fortune 500 companies, banks, hospitals, and government agencies. Oracle patched it Tuesday, but unpatched systems could stay vulnerable for years.",
+      "why_it_matters": "AI is now finding exploits in code that powers critical infrastructure worldwide.",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2320797/ai-found-a-hole-in-java-and-it-starts-with-aaaaaaaa/",
+      "tier": 1,
+      "original_headline": "AI found a hole in Java, and it starts with 'AAAAAAAA...'",
+      "fingerprint": "f678c7ef6eead599"
+    },
+    {
+      "slot": "market",
+      "headline": "Nvidia stops selling H200 chips to China after CEO resignation",
+      "blurb": "Nvidia's interim CEO announced the company will no longer ship its advanced H200 AI chips to China, despite having White House approval to do so. The reversal comes days after former CEO Jensen Huang resigned following reports of an affair with a suspected Chinese intelligence operative, and after 600,000 chips sat stuck in Hong Kong awaiting Beijing's import approval.",
+      "why_it_matters": "The world's leading AI chip maker just walked away from its second-largest market.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1036445/nvidia-h200-ai-chips-china-stop-selling",
+      "tier": 1,
+      "original_headline": "Nvidia isn\u2019t selling any more AI chips to China",
+      "fingerprint": "b4a7d32b0175d15c"
+    },
+    {
+      "slot": "build",
+      "headline": "SpaceX just replaced five accounting jobs with Grok Bots",
+      "blurb": "SpaceX's shared services division gave five Grok Bots full ownership of accounting processes\u2014provisioning customer accounts, generating invoices, applying payments, handling collections. Each bot runs its process end-to-end and only escalates to a human when it needs judgment. They work 24/7 and handle more volume than the people who used to do these jobs.",
+      "why_it_matters": "Real companies are now assigning entire business processes to AI agents, not just tasks.",
+      "source_name": "xAI Blog",
+      "source_url": "https://x.ai/news/grok-bot-accounting",
+      "tier": 1,
+      "original_headline": "Building an accounting team with Grok Bot",
+      "fingerprint": "d761eabe55b70039"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Apple Watch can now rewind and transcribe your last 15 seconds of conversation",
+      "blurb": "The new Live Rewind feature lets you double-tap your Apple Watch crown to get a transcript of what someone just said. A companion feature, Siri Recap, can listen all day and summarize your conversations by evening. Privacy advocates say it normalizes recording people without consent\u2014the same concern raised by smart glasses.",
+      "why_it_matters": "Wearables that silently record everyone around you are moving from sci-fi to your wrist.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/apple-watch-audio-intelligence-live-rewind-siri-recap/",
+      "tier": 1,
+      "original_headline": "The Apple Watch\u2019s Live Rewind Can Record and Rewind Spoken Conversations. It\u2019s Pretty Awkward",
+      "fingerprint": "80d3c34bd56d3874"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The decision audit trail",
+    "kicker": "",
+    "prompt": "I made a big decision three months ago and now I'm second-guessing it. I'll describe what I chose and why. Don't tell me if it was right or wrong. Instead: show me what evidence would prove I should reverse it, what evidence would prove I should double down, and which evidence I'm probably ignoring right now.",
+    "tool_hint": "When you're spiraling over a past choice instead of evaluating it cleanly."
+  },
+  "daily_question": "If AI could rewind and transcribe the last 15 seconds of ANY conversation in your life, which one would you choose?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1795029416.7726803,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795029432.3758578,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 4,
+        "persona": "build",
+        "reason": "The biggest AI story today - OpenAI's GPT-6.2 release with concrete improvements in coding, computer use, and efficiency at lower cost. This is the defining launch everyone in AI is talking about."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019pU22Qp4CwELCiGGmeZ53S"
+    },
+    {
+      "ts": 1795029432.3759286,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing GPT-6.2 Astra and Sol\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_019pU22Qp4CwELCiGGmeZ53S"
+    },
+    {
+      "ts": 1795029432.3759594,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 139,
+        "persona": "build",
+        "reason": "AI discovered a critical Java vulnerability affecting banks, hospitals, and Fortune 500 companies - a stunning real-world demonstration of AI's capability in security research with immediate high-stakes impact."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_019YYZ42Kk2P2RJoxqkcDnEt"
+    },
+    {
+      "ts": 1795029432.3759944,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AI found a hole in Java, and it starts with 'AAAAAAAA...'\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_019YYZ42Kk2P2RJoxqkcDnEt"
+    },
+    {
+      "ts": 1795029432.3760023,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 48,
+        "persona": "market",
+        "reason": "Major market story - Nvidia has stopped all advanced AI chip sales to China despite White House approval. This is a significant shift in the AI chip landscape with global implications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016CqED1VH9MM5sJsbhnGtG3"
+    },
+    {
+      "ts": 1795029432.3760343,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia isn\\u2019t selling any more AI chips to China\", \"persona\": \"market\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_016CqED1VH9MM5sJsbhnGtG3"
+    },
+    {
+      "ts": 1795029432.37604,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 42,
+        "persona": "build",
+        "reason": "Google's AlphaGenome and AlphaGenome Atlas represent a major advance in genome mapping for disease research - practical AI application in healthcare with real scientific impact."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015j7mgTJuhGJuSdfDbbmNZe"
+    },
+    {
+      "ts": 1795029432.3760657,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"How genome mapping can help researchers better understand disease\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_015j7mgTJuhGJuSdfDbbmNZe"
+    },
+    {
+      "ts": 1795029432.3760724,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 45,
+        "persona": "everyday",
+        "reason": "Disney's AI-powered Star Wars animatronics that interact naturally with guests - a surprisingly advanced everyday application that shows AI making entertainment more immersive and magical."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NkKTkGsbRkL6ishayPky7L"
+    },
+    {
+      "ts": 1795029432.376104,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Disney\\u2019s new Star Wars animatronics interact with guests using AI\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01NkKTkGsbRkL6ishayPky7L"
+    },
+    {
+      "ts": 1795029438.5702045,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 45
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012obt5up9CAWp6rVMi2tFsa"
+    },
+    {
+      "ts": 1795029438.5702853,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Disney\\u2019s new Star Wars animatronics interact with guests using AI\"}",
+      "tool_use_id": "toolu_012obt5up9CAWp6rVMi2tFsa"
+    },
+    {
+      "ts": 1795029438.570312,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 49,
+        "persona": "everyday",
+        "reason": "Suno expands beyond AI music into AI video generation - users can now create complete audiovisual content. A concrete new feature people can try immediately that shows multimodal AI becoming more accessible."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CwP2DcMb8VBTLo5PhMZLqC"
+    },
+    {
+      "ts": 1795029438.570368,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Suno now lets you make AI videos for your AI music\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01CwP2DcMb8VBTLo5PhMZLqC"
+    },
+    {
+      "ts": 1795029441.7940927,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 49
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012HYohGmCvZ2KqzfJtJPx2q"
+    },
+    {
+      "ts": 1795029441.794147,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Suno now lets you make AI videos for your AI music\"}",
+      "tool_use_id": "toolu_012HYohGmCvZ2KqzfJtJPx2q"
+    },
+    {
+      "ts": 1795029441.7941701,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 14,
+        "persona": "everyday",
+        "reason": "Gemini Tasks can now make calls, pay bills, and complete errands for users - a concrete AI agent feature people can use today that demonstrates practical everyday automation becoming real."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JnGRiSgACPMq6zSUth149b"
+    },
+    {
+      "ts": 1795029441.7942226,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Put Gemini to work for you\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01JnGRiSgACPMq6zSUth149b"
+    },
+    {
+      "ts": 1795029446.1148243,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 14
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01K8cufT6DUULvfCQSpb7n32"
+    },
+    {
+      "ts": 1795029446.1148646,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Put Gemini to work for you\"}",
+      "tool_use_id": "toolu_01K8cufT6DUULvfCQSpb7n32"
+    },
+    {
+      "ts": 1795029446.1148884,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 47,
+        "persona": "everyday",
+        "reason": "Will Wright (SimCity, The Sims creator) is building a game that uses AI to map your memories - a surprising and creative application from a legendary game designer that makes AI feel personal and innovative."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Rxoq5d2JzhuMBapWEg8FVd"
+    },
+    {
+      "ts": 1795029446.114955,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Will Wright\\u2019s next game uses AI to map your memories\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01Rxoq5d2JzhuMBapWEg8FVd"
+    },
+    {
+      "ts": 1795029452.6931171,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 47
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CJLeauPTA9BcuESES6XzX6"
+    },
+    {
+      "ts": 1795029452.6931667,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Will Wright\\u2019s next game uses AI to map your memories\"}",
+      "tool_use_id": "toolu_01CJLeauPTA9BcuESES6XzX6"
+    },
+    {
+      "ts": 1795029452.693189,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "build",
+        "reason": "ChatGPT for Sales with 30+ partner plugins helps sellers research prospects and prepare pitches - a concrete productivity tool that shows AI agents moving into professional workflows with practical immediate value."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0167R1eucGoKZ3FAqXfokvae"
+    },
+    {
+      "ts": 1795029452.6932302,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing ChatGPT for Sales\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_0167R1eucGoKZ3FAqXfokvae"
+    },
+    {
+      "ts": 1795029458.1137142,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 6
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GDth5Av9bRGPMKoUyNhG33"
+    },
+    {
+      "ts": 1795029458.113752,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Introducing ChatGPT for Sales\"}",
+      "tool_use_id": "toolu_01GDth5Av9bRGPMKoUyNhG33"
+    },
+    {
+      "ts": 1795029458.1137738,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 42
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_016mezxad35aQmRXLzcxGjHJ"
+    },
+    {
+      "ts": 1795029458.1137898,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"How genome mapping can help researchers better understand disease\"}",
+      "tool_use_id": "toolu_016mezxad35aQmRXLzcxGjHJ"
+    },
+    {
+      "ts": 1795029458.1137958,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 16,
+        "persona": "build",
+        "reason": "Five Grok Bots at SpaceXSI each own an entire accounting job end-to-end - a concrete real-world deployment showing AI agents handling complete business functions autonomously."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HtbKyr5t57sdeSzYAwL83a"
+    },
+    {
+      "ts": 1795029458.1138446,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Building an accounting team with Grok Bot\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01HtbKyr5t57sdeSzYAwL83a"
+    },
+    {
+      "ts": 1795029458.1138532,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 47,
+        "persona": "everyday",
+        "reason": "Will Wright (SimCity, The Sims creator) is building a game that uses AI to map your memories - a surprising and creative application from a legendary game designer that makes AI feel personal and innovative."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015CdLMTpkwee2dPdWq9fHH3"
+    },
+    {
+      "ts": 1795029458.1138887,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Will Wright\\u2019s next game uses AI to map your memories\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_015CdLMTpkwee2dPdWq9fHH3"
+    },
+    {
+      "ts": 1795029464.7147872,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 47
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01HW6F1CkhR7LC4v9uNABW75"
+    },
+    {
+      "ts": 1795029464.7148373,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Will Wright\\u2019s next game uses AI to map your memories\"}",
+      "tool_use_id": "toolu_01HW6F1CkhR7LC4v9uNABW75"
+    },
+    {
+      "ts": 1795029464.7148588,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 134,
+        "persona": "everyday",
+        "reason": "Apple Watch's Live Rewind can record and transcribe missed conversations - a concrete new feature with immediate utility that shows ambient AI recording becoming mainstream, even if socially awkward."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RounPXois5GbhERb8o9To6"
+    },
+    {
+      "ts": 1795029464.7149105,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"The Apple Watch\\u2019s Live Rewind Can Record and Rewind Spoken Conversations. It\\u2019s Pretty Awkward\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01RounPXois5GbhERb8o9To6"
+    },
+    {
+      "ts": 1795029470.2003314,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01BG8VBqeP6A5yEqd4Eeuuz6"
+    },
+    {
+      "ts": 1795029470.6355867,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795029470.635616,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Introducing GPT-6.2 Astra and Sol\", \"pick_2\": \"AI found a hole in Java, and it starts with 'AAAAAAAA...'\", \"pick_3\": \"Nvidia isn\\u2019t selling any more AI chips to China\", \"pick_10\": \"Building an accounting team with Grok Bot\", \"pick_12\": \"The Apple Watch\\u2019s Live Rewind Can Record and Rewind Spoken Conversations. It\\u2019s Pretty Awkward\"}}",
+      "tool_use_id": "toolu_01BG8VBqeP6A5yEqd4Eeuuz6"
+    }
+  ],
+  "issue_num": 134
+}
