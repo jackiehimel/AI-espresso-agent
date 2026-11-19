@@ -1,0 +1,222 @@
+{
+  "date": "2026-11-19",
+  "generated_at": "2026-11-19T19:24:35.430539Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Anthropic just priced its IPO at $83 a share",
+      "blurb": "The Claude maker is going public with 980 million shares at $83 each, valuing the company at over $81 billion. Trading starts November 19, 2026 on Nasdaq under the ticker ANT. Anthropic will raise about $79 billion from the offering, with existing shareholders selling a small portion.",
+      "why_it_matters": "One of OpenAI's main competitors is about to become a public company with serious capital.",
+      "source_name": "Anthropic News",
+      "source_url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering",
+      "tier": 1,
+      "original_headline": "Anthropic prices initial public offering",
+      "fingerprint": "75038eb780829610"
+    },
+    {
+      "slot": "build",
+      "headline": "Gemini can now click around your Mac for you",
+      "blurb": "Google's Mac app now has computer use \u2014 it can open your files, navigate apps, and handle multi-step tasks like filling forms or building presentations. You pick which apps it can touch, and watch it work in a live preview window. Rolling out now in the US.",
+      "why_it_matters": "Desktop AI agents just went from demo to daily tool on the platform most developers actually use.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1037902/google-gemini-macos-ai-computer-use",
+      "tier": 1,
+      "original_headline": "Gemini on Mac can now use your computer",
+      "fingerprint": "5605e5a1922a3b83"
+    },
+    {
+      "slot": "everyday",
+      "headline": "ChatGPT now transcribes your voice as you speak",
+      "blurb": "ChatGPT's new Live Dictation feature transcribes your audio in real time as you talk, instead of waiting until you finish recording. The 10-minute recording limit is gone, and you can edit the live transcript in the prompt box. Rolling out now on web, desktop, and mobile for all ChatGPT plans.",
+      "why_it_matters": "Voice input just became as fast as typing for getting prompts into ChatGPT.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1037634/openai-chatgpt-live-dictation",
+      "tier": 1,
+      "original_headline": "ChatGPT can transcribe as you speak now with Live Dictation",
+      "fingerprint": "a972784fb1f16b2d"
+    },
+    {
+      "slot": "market",
+      "headline": "Google ships Gemini 4 Neon, a fast agent that scores #2 on Vals",
+      "blurb": "Neon ranks #3 on Artificial Analysis's Intelligence Index and #2 on the Vals Index, with a 1-million-token context window. It's priced at $3 per million input tokens and $15 per million output tokens. Rolling out today in the Gemini API, Google AI Studio, and to Pro/Ultra subscribers.",
+      "why_it_matters": "Google's latest model prioritizes speed and steerability over pure capability \u2014 a shift toward deployable agents.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/introducing-gemini-4-neon/",
+      "tier": 1,
+      "original_headline": "Introducing Gemini 4 Neon",
+      "fingerprint": "89201f099282437f"
+    },
+    {
+      "slot": "build",
+      "headline": "OpenAI built an AI agent that debugs ChatGPT performance while engineers sleep",
+      "blurb": "OpenAI's Performance Factory uses Codex agents to automatically investigate slowdowns, write fixes, and verify they worked\u2014handling 17 investigations daily. In three months, it root-caused over 600 performance issues without human intervention. Engineers now define workflows once and let agents handle the recurring debugging work.",
+      "why_it_matters": "Shows agents moving from chat assistants to autonomous systems that run entire engineering workflows.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast",
+      "tier": 1,
+      "original_headline": "How OpenAI\u2019s Performance Factory keeps ChatGPT fast",
+      "fingerprint": "4ef39b3c47791b4d"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red flag translator",
+    "kicker": "",
+    "prompt": "I just interviewed a candidate and something felt off, but I can't articulate it. I'll describe what they said and how they said it below. Tell me: what specific concern my gut is flagging, one question I should have asked but didn't, and whether this is a dealbreaker or just a data point.",
+    "tool_hint": "When your instinct says no but you need words for the debrief."
+  },
+  "daily_question": "If an AI agent could run one repetitive task for you overnight while you sleep, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1795116227.0403497,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795116244.0682714,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "market",
+        "reason": "The defining AI story today - Anthropic going public at $83/share is a landmark moment for the AI industry. Major AI lab IPO is mandatory lead story, using primary source (Anthropic News) over secondary coverage."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XbsspAT5DVb1x1YTCC1oCc"
+    },
+    {
+      "ts": 1795116244.068338,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic prices initial public offering\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01XbsspAT5DVb1x1YTCC1oCc"
+    },
+    {
+      "ts": 1795116244.0683725,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 48,
+        "persona": "build",
+        "reason": "Gemini can now control your Mac for multi-step tasks - concrete shipped capability that developers and power users can try immediately. Computer use is a major capability expansion."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TpaC5vnRk2Hex5bMZHzWiX"
+    },
+    {
+      "ts": 1795116244.0683956,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Gemini on Mac can now use your computer\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01TpaC5vnRk2Hex5bMZHzWiX"
+    },
+    {
+      "ts": 1795116244.0684013,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 50,
+        "persona": "everyday",
+        "reason": "ChatGPT Live Dictation transcribes as you speak - immediate practical feature that makes voice interaction faster and more natural. Try-it-today utility that any user can benefit from."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YCpNeqzPFaySo2PRZ8Pb1n"
+    },
+    {
+      "ts": 1795116244.0684273,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"ChatGPT can transcribe as you speak now with Live Dictation\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01YCpNeqzPFaySo2PRZ8Pb1n"
+    },
+    {
+      "ts": 1795116244.0684352,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "market",
+        "reason": "Gemini 4 Neon launch brings frontier-level intelligence with fast task completion across complex software environments - major new model release from Google DeepMind with concrete capability claims."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01RABJxKHyNSyNcPADfCaxxA"
+    },
+    {
+      "ts": 1795116244.0684628,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Introducing Gemini 4 Neon\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01RABJxKHyNSyNcPADfCaxxA"
+    },
+    {
+      "ts": 1795116244.068474,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "build",
+        "reason": "OpenAI's Performance Factory uses Codex to automatically find and fix performance issues keeping ChatGPT fast - technical deep-dive showing how AI is building AI infrastructure. Appeals to engineers and reveals competitive moat."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FeNDrtMNdVQJvTGoKA4fQX"
+    },
+    {
+      "ts": 1795116244.0684988,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"How OpenAI\\u2019s Performance Factory keeps ChatGPT fast\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01FeNDrtMNdVQJvTGoKA4fQX"
+    },
+    {
+      "ts": 1795116250.1855335,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01FjesQcdraT23pTVBoAzyKp"
+    },
+    {
+      "ts": 1795116250.8377855,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795116250.837813,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Anthropic prices initial public offering\", \"pick_2\": \"Gemini on Mac can now use your computer\", \"pick_3\": \"ChatGPT can transcribe as you speak now with Live Dictation\", \"pick_4\": \"Introducing Gemini 4 Neon\", \"pick_5\": \"How OpenAI\\u2019s Performance Factory keeps ChatGPT fast\"}}",
+      "tool_use_id": "toolu_01FjesQcdraT23pTVBoAzyKp"
+    }
+  ],
+  "issue_num": 135
+}
