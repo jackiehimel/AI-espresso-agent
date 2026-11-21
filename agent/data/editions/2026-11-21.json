@@ -1,0 +1,313 @@
+{
+  "date": "2026-11-21",
+  "generated_at": "2026-11-21T17:56:13.824606Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Anthropic mathematician just solved a 167-year-old math problem",
+      "blurb": "Levent Alp\u00f6ge, who works at Anthropic, claims he's proved the Riemann hypothesis\u2014one of math's biggest unsolved problems about how prime numbers are distributed. He wrote the proof in Lean, a formal verification language, so computers can check it's valid. Other mathematicians have confirmed the code compiles, though it'll take time to verify the logic holds.",
+      "why_it_matters": "If it stands, it's one of the biggest math breakthroughs in a century\u2014and it happened at an AI lab.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/11/20/ai-claimed-a-solution-to-the-167-year-old-riemann-hypothesis-and-a-human-did-too/",
+      "tier": 1,
+      "original_headline": "AI claimed a solution to the 167-year-old Riemann hypothesis \u2014 and a human did, too",
+      "fingerprint": "f7a1b163633d4eba"
+    },
+    {
+      "slot": "build",
+      "headline": "OpenAI blocked 99.6% of attacks trying to steal GPT's hidden reasoning",
+      "blurb": "OpenAI's new defenses stop attackers from extracting the chain-of-thought steps their models use to reach answers. In red-team tests, success rates for stealing this protected reasoning dropped from 54% to 0.2%. The company is treating distillation attacks\u2014where bad actors use model outputs to train unfiltered clones\u2014like biosecurity threats.",
+      "why_it_matters": "If attackers can steal reasoning traces, they can build uncensored versions of frontier models.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/index/combatting-adversarial-distillation",
+      "tier": 1,
+      "original_headline": "Combatting adversarial distillation",
+      "fingerprint": "f467bdf08fad3c53"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Signal just blocked Siri and Gemini from reading your chats",
+      "blurb": "Signal disabled screenshots on iOS and Android by default to stop AI agents from scanning messages. Users can turn screenshots back on in settings, but Signal's president says OS makers aren't giving developers good tools to block agent access without breaking core features.",
+      "why_it_matters": "Apps now have to choose between user privacy and basic functions like screenshots.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app",
+      "tier": 1,
+      "original_headline": "Signal is blocking Gemini and Siri AI from reading your screen",
+      "fingerprint": "35e8af112463a274"
+    },
+    {
+      "slot": "market",
+      "headline": "Apple is hiring engineers to build an AI agent that works across apps",
+      "blurb": "A now-removed job listing shows Apple wants an engineer to lead development of an agentic assistant that can browse the web, write code, control apps, and call services. The listing says the engineer will work with Siri, UI, and Apple's AI model teams \u2014 and that the agent should move between tools like a browser, terminal, and editor the way people do.",
+      "why_it_matters": "Apple is joining the race to build agents that can actually do things, not just answer questions.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/tech/1038227/apple-ai-agent-engineer-job-listing",
+      "tier": 1,
+      "original_headline": "Apple is hiring engineers to build its own AI agent",
+      "fingerprint": "0cf30cde43aa34b0"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The career move stress test",
+    "kicker": "",
+    "prompt": "I'm considering a career move I'll describe below. Don't tell me if it's a good idea \u2014 I've already done that math. Instead, tell me the three things I'll miss most about what I'm leaving, then rank them by how hard they'll be to get back if this doesn't work out.",
+    "tool_hint": "Before you resign over compensation when you actually care about autonomy."
+  },
+  "daily_question": "If you could give an AI agent full access to one app on your phone, which app would you trust it with?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1795283718.0804083,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795283731.7412333,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "market",
+        "reason": "Anthropic's IPO closing is the defining AI business story today - a major lab going public marks a pivotal market moment. This is what everyone in AI is talking about."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01WhtZxamYnBC5XgmfyVYHzs"
+    },
+    {
+      "ts": 1795283731.7413132,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic announces closing of initial public offering, including full exercise of underwriters\\u2019 option to purchase additional shares, and closing of concurrent private placement\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01WhtZxamYnBC5XgmfyVYHzs"
+    },
+    {
+      "ts": 1795283731.7413492,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 36,
+        "persona": "build",
+        "reason": "AI claiming to solve the 167-year-old Riemann hypothesis is a mind-blowing capability demonstration - exactly the kind of \"I didn't know AI could do that\" story that gets people excited about what's possible."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0151oNWdLv1ttPEXwt9vbzmd"
+    },
+    {
+      "ts": 1795283731.7414093,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AI claimed a solution to the 167-year-old Riemann hypothesis \\u2014 and a human did, too\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_0151oNWdLv1ttPEXwt9vbzmd"
+    },
+    {
+      "ts": 1795283731.741429,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "build",
+        "reason": "OpenAI's layered approach to combatting adversarial distillation is important technical work addressing a real security challenge - relevant for developers and shows the sophistication of modern AI safety efforts."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SKahFNUdQtbS3f7uFpzuYF"
+    },
+    {
+      "ts": 1795283731.7414742,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Combatting adversarial distillation\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01SKahFNUdQtbS3f7uFpzuYF"
+    },
+    {
+      "ts": 1795283731.7414956,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "everyday",
+        "reason": "Google putting AI chats directly on its homepage is a major product shift that will affect billions of users - this is a concrete, shipped change people will see today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GrMx1UBfDst4SahTftHbZq"
+    },
+    {
+      "ts": 1795283731.7415414,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google is putting AI chats right on the homepage\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01GrMx1UBfDst4SahTftHbZq"
+    },
+    {
+      "ts": 1795283731.74156,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 28,
+        "persona": "everyday",
+        "reason": "Signal blocking AI agents from reading screens is a surprising privacy move that shows AI's real-world implications - practical and relevant to anyone using Signal or concerned about AI access to personal data."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_012c4vMpQURhLjSCeDq5yhqG"
+    },
+    {
+      "ts": 1795283731.741603,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Signal is blocking Gemini and Siri AI from reading your screen\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_012c4vMpQURhLjSCeDq5yhqG"
+    },
+    {
+      "ts": 1795283737.4556909,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_016kkez5HcvjsqyhYaSHnQ1M"
+    },
+    {
+      "ts": 1795283737.8813581,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"Anthropic prices initial public offering\\\", similarity 0.829) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_016kkez5HcvjsqyhYaSHnQ1M"
+    },
+    {
+      "ts": 1795283740.1305869,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 0
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KEisu1jtvidPnXqnJs4CfN"
+    },
+    {
+      "ts": 1795283740.1306376,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Anthropic announces closing of initial public offering, including full exercise of underwriters\\u2019 option to purchase additional shares, and closing of concurrent private placement\"}",
+      "tool_use_id": "toolu_01KEisu1jtvidPnXqnJs4CfN"
+    },
+    {
+      "ts": 1795283744.1482918,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "market",
+        "reason": "Google partnering with Blue Origin on Project Suncatcher's first heavy-lift launch is a fascinating moonshot story that combines AI ambitions with space infrastructure - exactly the kind of surprising capability expansion that gets people excited."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GmsvJpDq128kYk97p56Uha"
+    },
+    {
+      "ts": 1795283744.148359,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"error\": \"vendor cap: google already has 2 stories\"}",
+      "tool_use_id": "toolu_01GmsvJpDq128kYk97p56Uha"
+    },
+    {
+      "ts": 1795283750.3665345,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 32
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TDbVekRfUfmpbeu3tyd3vU"
+    },
+    {
+      "ts": 1795283750.36658,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Google is putting AI chats right on the homepage\"}",
+      "tool_use_id": "toolu_01TDbVekRfUfmpbeu3tyd3vU"
+    },
+    {
+      "ts": 1795283750.3666065,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "market",
+        "reason": "Apple hiring engineers to build its own AI agent signals a major strategic shift - this is Apple entering the agentic AI race with concrete hiring moves, showing where the platform wars are headed."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01G5ePjdJuhiKuSBJKoJv83n"
+    },
+    {
+      "ts": 1795283750.3666558,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Apple is hiring engineers to build its own AI agent\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01G5ePjdJuhiKuSBJKoJv83n"
+    },
+    {
+      "ts": 1795283751.9629714,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01UFmoTvXBQzrreK9Q7vZjcB"
+    },
+    {
+      "ts": 1795283752.1676269,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 4 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795283752.1676617,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"AI claimed a solution to the 167-year-old Riemann hypothesis \\u2014 and a human did, too\", \"pick_3\": \"Combatting adversarial distillation\", \"pick_5\": \"Signal is blocking Gemini and Siri AI from reading your screen\", \"pick_6\": \"Apple is hiring engineers to build its own AI agent\"}}",
+      "tool_use_id": "toolu_01UFmoTvXBQzrreK9Q7vZjcB"
+    }
+  ],
+  "issue_num": 137
+}
