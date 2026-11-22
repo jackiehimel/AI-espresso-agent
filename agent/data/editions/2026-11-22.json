@@ -1,0 +1,282 @@
+{
+  "date": "2026-11-22",
+  "generated_at": "2026-11-22T18:19:01.422818Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "Google will launch AI data centers into orbit in 2029",
+      "blurb": "Google's partnering with Blue Origin to send satellites \u2014 each with the computing power of a data center rack \u2014 into sun-synchronous orbit. Project Suncatcher aims to run AI infrastructure in space using solar power that's always available above the atmosphere.",
+      "why_it_matters": "If it works, cloud computing could move beyond Earth's power and cooling constraints.",
+      "source_name": "Google \u2014 Innovation & AI",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/google-research/blue-origin-project-suncatcher-partnership/",
+      "tier": 1,
+      "original_headline": "We\u2019re partnering with Blue Origin on our first heavy-lift Project Suncatcher launch.",
+      "fingerprint": "e19cfd07cb704fe3"
+    },
+    {
+      "slot": "build",
+      "headline": "Google built a fake internet to train Chrome's AI browsing agents",
+      "blurb": "Chrome's team created the 'Mirror Dimension' \u2014 a controlled but realistic alternate web with social media, banking sites, and hidden attacks \u2014 because letting untrained AI agents loose on the real internet is risky, and limited test environments make models behave differently when they know they're being tested. AI agents navigate these fake sites and face prompt-injection attacks to learn judgment before touching real user data.",
+      "why_it_matters": "You can't safely train web agents on toy sites or the live internet \u2014 you need a full-scale sandbox.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/google-built-a-giant-mirror-dimension-internet-to-test-its-chrome-ai-agents/",
+      "tier": 1,
+      "original_headline": "Google Built a Giant \u2018Mirror Dimension\u2019 Internet to Test Its Chrome AI Agents",
+      "fingerprint": "958a03f7a2281fe6"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Banks are banning AI agents from logging into your account",
+      "blurb": "Wells Fargo, Chase, and Bank of America have all updated their terms in recent months to either ban or warn against third-party AI agents that automate tasks like shopping or bill pay. The agents require your login credentials and can click on your behalf \u2014 which banks say puts you 'AT YOUR OWN RISK.' Amazon and United Airlines are blocking them too.",
+      "why_it_matters": "If you've given an AI agent your bank password, your account terms may have just changed.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/banks-are-cracking-down-on-ai-agents/",
+      "tier": 1,
+      "original_headline": "Banks Have Had It Up to Here With Your AI Agent",
+      "fingerprint": "065b7444fbb791c8"
+    },
+    {
+      "slot": "build",
+      "headline": "NVIDIA's newest AI chips are now running in Azure data centers",
+      "blurb": "Microsoft is rolling out Azure VMs powered by NVIDIA Vera Rubin NVL72 systems \u2014 the infrastructure behind reasoning models and agentic apps. The companies are also working to extend confidential computing across rack-scale AI infrastructure, so enterprises can run sensitive models without exposing proprietary data during processing.",
+      "why_it_matters": "Cloud access to frontier AI hardware just got faster for companies building agents.",
+      "source_name": "NVIDIA Blog",
+      "source_url": "https://blogs.nvidia.com/blog/microsoft-ignite-accelerated-computing-azure-windows-pcs/",
+      "tier": 1,
+      "original_headline": "NVIDIA and Microsoft Expand Accelerated Computing From Azure to Windows PCs",
+      "fingerprint": "a69f33b7081e7a0d"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Signal just blocked screenshots to fight AI agents scanning your chats",
+      "blurb": "Signal now restricts screenshots on Android and iOS by default, following similar Windows protections. President Meredith Whittaker says OS-level AI agents that scan screens pose an 'existential threat' to private messaging \u2014 capturing sensitive data outside Signal's control and breaking its privacy guarantees. Users can disable the restriction if they want.",
+      "why_it_matters": "Your OS might be feeding your private messages to AI without asking you first.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/11/21/signal-restricts-mobile-screenshots-as-it-confronts-existential-threat-of-ai-surveillance/",
+      "tier": 1,
+      "original_headline": "Signal restricts mobile screenshots as it confronts \u2018existential threat\u2019 of AI surveillance",
+      "fingerprint": "e165924e497c0aac"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The priority collision test",
+    "kicker": "",
+    "prompt": "I have three things competing for my time this week. I'll list them below. For each one, tell me: what happens if it slips by two weeks, who actually notices, and which of the other two it's secretly enabling or blocking. Then rank them by consequence, not urgency.",
+    "tool_hint": "When everything feels urgent but you can only pick one."
+  },
+  "daily_question": "If you could ban one AI capability for security reasons, what would it be?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1795371476.4472132,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=18, gaps=['Major AI lab ships a new model or feature users can try this week', 'Concrete developer-facing API or tooling change with immediate utility', 'AI capability demo that shows something previously impossible']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795371494.6143744,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "market",
+        "reason": "The defining AI story of the day - Anthropic's IPO has closed, marking a watershed moment for the AI industry. This is the biggest market event in AI this week and belongs in slot 1."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Tz9ev5sjogPSQendaiCbrk"
+    },
+    {
+      "ts": 1795371494.614488,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic announces closing of initial public offering, including full exercise of underwriters\\u2019 option to purchase additional shares, and closing of concurrent private placement\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01Tz9ev5sjogPSQendaiCbrk"
+    },
+    {
+      "ts": 1795371494.6145225,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 16,
+        "persona": "build",
+        "reason": "Google partnering with Blue Origin on Project Suncatcher heavy-lift launch is a concrete moonshot partnership that shows AI infrastructure scaling to space. Surprising and ambitious."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01MrX8yccDuUAjir8Tu11Czt"
+    },
+    {
+      "ts": 1795371494.6145806,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"We\\u2019re partnering with Blue Origin on our first heavy-lift Project Suncatcher launch.\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01MrX8yccDuUAjir8Tu11Czt"
+    },
+    {
+      "ts": 1795371494.6145985,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 103,
+        "persona": "build",
+        "reason": "Google built a parallel 'mirror dimension' internet to train Chrome AI agents - this is a 'wow really?' architecture move that shows the extraordinary infrastructure needed for AI agent training."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01QR3EWKXR8igTbCaMWHc5t6"
+    },
+    {
+      "ts": 1795371494.6146488,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google Built a Giant \\u2018Mirror Dimension\\u2019 Internet to Test Its Chrome AI Agents\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01QR3EWKXR8igTbCaMWHc5t6"
+    },
+    {
+      "ts": 1795371494.614671,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 94,
+        "persona": "everyday",
+        "reason": "Major US banks are banning third-party AI agents from accessing accounts - this is real-world friction as AI agents hit mainstream adoption. Affects anyone trying to use AI for banking."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01URfFbXWtndbR29LhG1R55Y"
+    },
+    {
+      "ts": 1795371494.6147237,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Banks Have Had It Up to Here With Your AI Agent\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01URfFbXWtndbR29LhG1R55Y"
+    },
+    {
+      "ts": 1795371500.835043,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "build",
+        "reason": "NVIDIA and Microsoft expanding their collaboration from Azure to Windows PCs for AI deployment - this is a major platform partnership that brings enterprise AI capabilities to consumer devices."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015MNY2PmT3Z9fpEUkwwPvaJ"
+    },
+    {
+      "ts": 1795371500.8351133,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"NVIDIA and Microsoft Expand Accelerated Computing From Azure to Windows PCs\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_015MNY2PmT3Z9fpEUkwwPvaJ"
+    },
+    {
+      "ts": 1795371506.344181,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01Nv49G7G6yiZjyxekqCv8mZ"
+    },
+    {
+      "ts": 1795371506.8347816,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"Anthropic prices initial public offering\\\", similarity 0.829) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01Nv49G7G6yiZjyxekqCv8mZ"
+    },
+    {
+      "ts": 1795371509.057836,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 0
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01GjSdfom4JJRrT9CiCStE1S"
+    },
+    {
+      "ts": 1795371509.057885,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Anthropic announces closing of initial public offering, including full exercise of underwriters\\u2019 option to purchase additional shares, and closing of concurrent private placement\"}",
+      "tool_use_id": "toolu_01GjSdfom4JJRrT9CiCStE1S"
+    },
+    {
+      "ts": 1795371514.5772274,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 24,
+        "persona": "everyday",
+        "reason": "Signal is restricting mobile screenshots across iOS and Android to combat AI surveillance - a major security-focused messaging platform taking concrete action against AI threats. This is a significant product change affecting millions of users."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01DNHpyoV3xoFFTDf1bTTfMM"
+    },
+    {
+      "ts": 1795371514.5773056,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Signal restricts mobile screenshots as it confronts \\u2018existential threat\\u2019 of AI surveillance\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01DNHpyoV3xoFFTDf1bTTfMM"
+    },
+    {
+      "ts": 1795371515.662449,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01ESWEeaYkwBapbvmqddS2KB"
+    },
+    {
+      "ts": 1795371515.881718,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795371515.8817494,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_2\": \"We\\u2019re partnering with Blue Origin on our first heavy-lift Project Suncatcher launch.\", \"pick_3\": \"Google Built a Giant \\u2018Mirror Dimension\\u2019 Internet to Test Its Chrome AI Agents\", \"pick_4\": \"Banks Have Had It Up to Here With Your AI Agent\", \"pick_5\": \"NVIDIA and Microsoft Expand Accelerated Computing From Azure to Windows PCs\", \"pick_6\": \"Signal restricts mobile screenshots as it confronts \\u2018existential threat\\u2019 of AI surveillance\"}}",
+      "tool_use_id": "toolu_01ESWEeaYkwBapbvmqddS2KB"
+    }
+  ],
+  "issue_num": 138
+}
