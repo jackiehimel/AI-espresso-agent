@@ -1,0 +1,283 @@
+{
+  "date": "2026-11-23",
+  "generated_at": "2026-11-23T22:30:19.757574Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "Nvidia reinstates Jensen Huang as CEO after government pressure",
+      "blurb": "Nvidia's board brought back Jensen Huang as CEO in what Bloomberg calls one of the most startling corporate comebacks in history. The reversal followed pressure from the Trump administration. The stock posted its biggest rally in decades on the news.",
+      "why_it_matters": "Political intervention in corporate leadership decisions is now shaping the AI industry's power structure.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-11-23/nvidia-reinstates-jensen-huang-as-ceo-with-government-input",
+      "tier": 1,
+      "original_headline": "Nvidia Rehires Huang in Stunning Reversal After Trump Push",
+      "fingerprint": "93d060b4797c7705"
+    },
+    {
+      "slot": "build",
+      "headline": "Claude can now review your pull requests and ship fixes itself",
+      "blurb": "Anthropic's new Claude Ship lets the AI review PRs, fix failing CI checks, resolve merge conflicts, and even approve routine changes if your team allows it. Two new agents handle the work: PR Steward jumps in when tests fail or conflicts arise, while Claude Approvals can greenlight standard changes based on your policies.",
+      "why_it_matters": "AI agents are now doing the grunt work of code review and deployment, not just writing code.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/1040134/anthropic-claude-ship-ai-pull-requests",
+      "tier": 1,
+      "original_headline": "Claude AI can review pull requests and ship fixes on its own now",
+      "fingerprint": "f3bbec24d77dca45"
+    },
+    {
+      "slot": "build",
+      "headline": "OpenAI and Cisco built a tool that patches Linux security holes without restarting",
+      "blurb": "Shirudo is an open-source runtime that lets security teams block exploits on running Linux systems while they roll out permanent fixes. In a test, a Codex-generated shield stopped a Java4Shell attack on Elasticsearch without taking the service offline. It uses eBPF to observe suspicious activity and apply targeted protections without waiting days or weeks for patches.",
+      "why_it_matters": "Teams can now protect critical systems from zero-day exploits without downtime or waiting for patches.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/index/introducing-shirudo",
+      "tier": 1,
+      "original_headline": "OpenAI and Cisco introduce Shirudo",
+      "fingerprint": "930f081d6d599b06"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Google Search can now read your credit card bills and Drive files",
+      "blurb": "Google's adding Wallet and Drive to Personal Intelligence in AI Mode. Opt in and Search will answer questions using your spending history, documents, and chat logs\u2014like surfacing which card gives you the best rewards or pulling info from scattered project files. You control which apps connect in Search settings.",
+      "why_it_matters": "Search stops being a generic oracle and becomes a personal assistant that knows your actual context.",
+      "source_name": "Google AI Blog",
+      "source_url": "https://blog.google/products-and-platforms/products/search/google-search-personal-intelligence-apps/",
+      "tier": 1,
+      "original_headline": "A more tailored Google Search that\u2019s uniquely yours",
+      "fingerprint": "7b05fbdd19db4afd"
+    },
+    {
+      "slot": "market",
+      "headline": "Amazon acquires Decart's chip optimization stack to speed up AI inference",
+      "blurb": "Amazon is buying Decart's optimization technology and hiring its founding team to make its Trainium chips run AI models faster and cheaper. Decart built a full-stack approach that optimizes both hardware and software together, which Amazon has been testing since 2025 on everything from language models to agentic systems.",
+      "why_it_matters": "Faster, cheaper inference means more companies can actually afford to run AI at scale.",
+      "source_name": "Amazon News (About Amazon)",
+      "source_url": "https://www.aboutamazon.com/news/company-news/amazon-decart-ai-optimization?utm_source=rss",
+      "tier": 1,
+      "original_headline": "Amazon to purchase Decart's AI optimization technology to advance chip and model innovation for customers",
+      "fingerprint": "9f51140f757450fd"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The assumption inventory",
+    "kicker": "",
+    "prompt": "I'm about to start learning something new and I'll describe it below. List the three assumptions I'm probably making about how hard it will be, how long it takes, or what I need to know first. Then tell me which assumption to test in the next hour.",
+    "tool_hint": "Before you buy the textbook or book the course."
+  },
+  "daily_question": "If one AI tool could read everything in your work account tomorrow, which would you trust most\u2014and why?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[build] banned copy word: deployment']"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1795472969.7624054,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795472986.5832582,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 173,
+        "persona": "market",
+        "reason": "THE defining AI story today - Jensen Huang's stunning return to Nvidia after Trump push is one of the most startling corporate comebacks in history. This is mandatory slot 1 material that everyone in AI is talking about."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NCgXZtCYMT2s7tmsD7PPMe"
+    },
+    {
+      "ts": 1795472986.5833416,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia Rehires Huang in Stunning Reversal After Trump Push\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01NCgXZtCYMT2s7tmsD7PPMe"
+    },
+    {
+      "ts": 1795472986.5833745,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "market",
+        "reason": "Major milestone - Anthropic going public is a defining moment for the AI industry. Primary source from Anthropic News. This is a market-moving event that signals the maturation of frontier AI labs."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_011bhtUR8H8YE9vqvxARFWhj"
+    },
+    {
+      "ts": 1795472986.5834045,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic announces closing of initial public offering, including full exercise of underwriters\\u2019 option to purchase additional shares, and closing of concurrent private placement\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_011bhtUR8H8YE9vqvxARFWhj"
+    },
+    {
+      "ts": 1795472986.583412,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "build",
+        "reason": "Shipped feature developers can try today - Claude can now autonomously review PRs and ship fixes. This is a concrete capability that passes the \"I want to try that\" test for engineering teams."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01TkNK3JjXirLYW6CoZY4q3K"
+    },
+    {
+      "ts": 1795472986.5834332,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Claude AI can review pull requests and ship fixes on its own now\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01TkNK3JjXirLYW6CoZY4q3K"
+    },
+    {
+      "ts": 1795472986.5834394,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 1,
+        "persona": "build",
+        "reason": "OpenAI and Cisco shipped an open-source Linux security runtime that teams can deploy today. Concrete developer tool with immediate utility for protecting production systems."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_015R3UbrU9SvbCLMHUWzCkTj"
+    },
+    {
+      "ts": 1795472986.5834603,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI and Cisco introduce Shirudo\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_015R3UbrU9SvbCLMHUWzCkTj"
+    },
+    {
+      "ts": 1795472986.5834658,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 8,
+        "persona": "everyday",
+        "reason": "Google shipped Personal Intelligence in Search - users can now get tailored results by connecting their Gmail, Drive, Photos, and Wallet. Concrete consumer feature anyone can try this week."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01SZmPEqnTeT7BonyWex65ka"
+    },
+    {
+      "ts": 1795472986.5834863,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"A more tailored Google Search that\\u2019s uniquely yours\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01SZmPEqnTeT7BonyWex65ka"
+    },
+    {
+      "ts": 1795472988.5702024,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01E9N498aUFUvEBxdnLsEZuk"
+    },
+    {
+      "ts": 1795472989.0949583,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_2] covers the same story as a recent edition (\\\"Anthropic prices initial public offering\\\", similarity 0.829) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01E9N498aUFUvEBxdnLsEZuk"
+    },
+    {
+      "ts": 1795472991.2457397,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 0
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Gjpzx4qqj5wQNLzH5S4Q2a"
+    },
+    {
+      "ts": 1795472991.245787,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Anthropic announces closing of initial public offering, including full exercise of underwriters\\u2019 option to purchase additional shares, and closing of concurrent private placement\"}",
+      "tool_use_id": "toolu_01Gjpzx4qqj5wQNLzH5S4Q2a"
+    },
+    {
+      "ts": 1795472994.3908415,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 13,
+        "persona": "market",
+        "reason": "Amazon is acquiring Decart's AI optimization technology to advance chip and model innovation for AWS customers. Major acquisition from primary source that signals Amazon's push in AI infrastructure."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_017HgdzPgEkKbj2aHeLiHoLa"
+    },
+    {
+      "ts": 1795472994.390909,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon to purchase Decart's AI optimization technology to advance chip and model innovation for customers\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_017HgdzPgEkKbj2aHeLiHoLa"
+    },
+    {
+      "ts": 1795472995.6390202,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_011MjqWFgdVrSLCHBgV5bcjh"
+    },
+    {
+      "ts": 1795472995.8510847,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795472995.8511353,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"Nvidia Rehires Huang in Stunning Reversal After Trump Push\", \"pick_3\": \"Claude AI can review pull requests and ship fixes on its own now\", \"pick_4\": \"OpenAI and Cisco introduce Shirudo\", \"pick_5\": \"A more tailored Google Search that\\u2019s uniquely yours\", \"pick_6\": \"Amazon to purchase Decart's AI optimization technology to advance chip and model innovation for customers\"}}",
+      "tool_use_id": "toolu_011MjqWFgdVrSLCHBgV5bcjh"
+    }
+  ],
+  "issue_num": 139
+}
