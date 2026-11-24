@@ -1,0 +1,324 @@
+{
+  "date": "2026-11-24",
+  "generated_at": "2026-11-24T21:03:07.300144Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "everyday",
+      "headline": "Meta's Muse AI can now organize your saved Instagram posts for you",
+      "blurb": "Instagram users can now chat with Muse directly in DMs to get context on posts, turn recipe videos into grocery lists, or organize saved content into custom folders. You can share posts with Muse and ask it to add restaurants to travel plans or find deals on products you've seen.",
+      "why_it_matters": "AI assistants are moving from separate apps into the places you already spend time.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/11/24/meta-brings-its-muse-ai-assistant-directly-into-instagram-dms/",
+      "tier": 1,
+      "original_headline": "Meta brings its Muse AI assistant directly into Instagram DMs",
+      "fingerprint": "c120c336307552d9"
+    },
+    {
+      "slot": "market",
+      "headline": "Tidal will delete 29 million AI-generated songs next month",
+      "blurb": "The streaming service is banning AI music outright on December 9th after labeling attempts failed. AI tracks made up 43% of new uploads in the last 90 days, but 96% of them got zero plays. Tidal will reject an estimated 80,000-85,000 AI tracks daily going forward.",
+      "why_it_matters": "First major streaming platform to ban AI music entirely, not just label or demote it.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/entertainment/1041362/tidal-ai-music-ban",
+      "tier": 1,
+      "original_headline": "Tidal will start banning AI-generated music next month",
+      "fingerprint": "fa25930da1a74ef6"
+    },
+    {
+      "slot": "build",
+      "headline": "DeepMind's AI agents just made quantum computers 12\u00d7 more efficient",
+      "blurb": "Teams of Gemini 4 agents competed to optimize quantum algorithms for fusion energy and drug design, cutting computing costs by nearly 12\u00d7 through collaborative problem-solving and formal proof. The agents met every four hours to trade ideas, gradually reducing the resources needed to run simulations that today's quantum hardware can't yet handle.",
+      "why_it_matters": "AI is now solving the bottleneck that keeps quantum computers from tackling real problems.",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
+      "tier": 1,
+      "original_headline": "Finding faster quantum algorithms with agents and formal verification",
+      "fingerprint": "79561fb7999982f3"
+    },
+    {
+      "slot": "everyday",
+      "headline": "OpenAI's models now run the manager that trains your support bots",
+      "blurb": "Richpanel built an AI manager called Boss AI that sets up customer support agents automatically\u2014writing procedures, connecting tools, and configuring workflows that used to require a dedicated engineer. It uses GPT-6 Astra and Sol for setup accuracy, then GPT-6 Luna for the actual customer conversations. Companies are automating half their support tickets in a month.",
+      "why_it_matters": "AI agents are now deploying other AI agents, eliminating the engineering bottleneck in automation.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/business/customer-stories/richpanel-ai-customer-support",
+      "tier": 1,
+      "original_headline": "Richpanel helps companies automate 50% of support in 30 days",
+      "fingerprint": "cedcfcecfafee25c"
+    },
+    {
+      "slot": "build",
+      "headline": "Hackers' AI agents just found and exploited a zero-day on their own",
+      "blurb": "Amazon says attackers used Cairn, an open-source pentesting framework, to autonomously discover and exploit a vulnerability in a medical imaging app\u2014no human help beyond 'get root access.' The same AI tool built for defenders breached at least 10 organizations, exposed over 1 million records, and created persistent admin accounts.",
+      "why_it_matters": "Offensive AI agents are already operating at machine speed with minimal human oversight.",
+      "source_name": "Ars Technica \u2014 AI",
+      "source_url": "https://arstechnica.com/security/2026/11/amazon-says-hackers-ai-agents-found-and-exploited-0-day-with-little-human-input/",
+      "tier": 1,
+      "original_headline": "Amazon says hackers' AI agents found and exploited 0-day with little human input",
+      "fingerprint": "a3a4cd640c331e8d"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The strategy translator",
+    "kicker": "",
+    "prompt": "I'll describe a strategy or goal we've set. Translate it into three concrete decisions: one thing we'll stop doing, one thing we'll start saying no to, and one resource we'll move this quarter. If the strategy doesn't change any of those three things, tell me it's not actually a strategy.",
+    "tool_hint": "When the roadmap sounds impressive but nothing's different on Monday."
+  },
+  "daily_question": "If an AI agent found a security hole in your code before you shipped it, would you feel relieved or replaced?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1795554125.0271618,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=20, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795554142.0202367,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 155,
+        "persona": "market",
+        "reason": "The Riemann Hypothesis has stumped mathematicians for 167 years - this is a historic breakthrough showing AI achieving something the world's best mathematical minds couldn't. Anthropic researcher using Claude to crack one of math's most famous unsolved problems is a paradigm-shift moment for AI capabilities."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01KGgK7r838tGfms4RuM2vNQ"
+    },
+    {
+      "ts": 1795554142.0203414,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"The Most Famous Problem in Math Was Just Solved by AI\\u2014and This Human\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01KGgK7r838tGfms4RuM2vNQ"
+    },
+    {
+      "ts": 1795554142.020394,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 32,
+        "persona": "build",
+        "reason": "Anthropic shipping Claude Ship removes a critical bottleneck in AI-assisted development - agents can now review, fix, and approve code changes autonomously. This is a concrete developer tool people can try immediately, automating the entire code review workflow."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CT4MtBVhua8XsNJmxQDGFd"
+    },
+    {
+      "ts": 1795554142.020434,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Anthropic launches Claude Ship, letting AI agents review, fix, and approve code changes\", \"persona\": \"build\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01CT4MtBVhua8XsNJmxQDGFd"
+    },
+    {
+      "ts": 1795554142.0204468,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 27,
+        "persona": "everyday",
+        "reason": "Meta bringing Muse directly into Instagram DMs means millions of users get AI assistance without leaving their primary messaging app. This is a major distribution play that makes AI more accessible to everyday users."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01NRtarCkB4nAHYQRWG3Qaww"
+    },
+    {
+      "ts": 1795554142.0204935,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Meta brings its Muse AI assistant directly into Instagram DMs\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01NRtarCkB4nAHYQRWG3Qaww"
+    },
+    {
+      "ts": 1795554142.0205107,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 18,
+        "persona": "market",
+        "reason": "Tidal's December 9th ban on AI-generated music (affecting 29k tracks) is a major platform taking a hard stance on synthetic content. This sets precedent for how streaming services will handle AI music and represents a significant policy shift in the industry."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Uv2LwBREkLJJD4NapJBEzV"
+    },
+    {
+      "ts": 1795554142.0205657,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Tidal will start banning AI-generated music next month\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01Uv2LwBREkLJJD4NapJBEzV"
+    },
+    {
+      "ts": 1795554142.0205874,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 6,
+        "persona": "build",
+        "reason": "Google DeepMind using AI agents with formal verification to improve quantum algorithms for fusion and chemistry shows AI advancing fundamental computational science. This bridges two cutting-edge domains and demonstrates concrete scientific acceleration."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01M5rqYG1Y7gSwEZnRSEsxmx"
+    },
+    {
+      "ts": 1795554142.020628,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Finding faster quantum algorithms with agents and formal verification\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01M5rqYG1Y7gSwEZnRSEsxmx"
+    },
+    {
+      "ts": 1795554149.2177348,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01EHFu7z69pmzCJAuKD4kTwD"
+    },
+    {
+      "ts": 1795554149.844838,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": false, \"errors\": [\"[pick_1] covers the same story as a recent edition (\\\"AI claimed a solution to the 167-year-old Riemann hypothesis \\u2014 and a human did, too\\\", similarity 0.804) \\u2014 unpick and choose different news\", \"[pick_2] covers the same story as a recent edition (\\\"Claude AI can review pull requests and ship fixes on its own now\\\", similarity 0.838) \\u2014 unpick and choose different news\"]}",
+      "tool_use_id": "toolu_01EHFu7z69pmzCJAuKD4kTwD"
+    },
+    {
+      "ts": 1795554152.353821,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 155
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01X2ZBGVsEn3qKvNsh7peM6H"
+    },
+    {
+      "ts": 1795554152.3538783,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"The Most Famous Problem in Math Was Just Solved by AI\\u2014and This Human\"}",
+      "tool_use_id": "toolu_01X2ZBGVsEn3qKvNsh7peM6H"
+    },
+    {
+      "ts": 1795554152.3539114,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 32
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01UE2dMQzMkMigFpkEt9F6Vb"
+    },
+    {
+      "ts": 1795554152.3539338,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"Anthropic launches Claude Ship, letting AI agents review, fix, and approve code changes\"}",
+      "tool_use_id": "toolu_01UE2dMQzMkMigFpkEt9F6Vb"
+    },
+    {
+      "ts": 1795554159.6203349,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 4,
+        "persona": "everyday",
+        "reason": "Richpanel automating 50% of customer support in 30 days using GPT-6 models shows concrete, measurable business impact. This is a real-world application with specific numbers that demonstrates AI's practical value in everyday business operations."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_018nz65SymbLrZbUB7sgrsFj"
+    },
+    {
+      "ts": 1795554159.6204114,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Richpanel helps companies automate 50% of support in 30 days\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_018nz65SymbLrZbUB7sgrsFj"
+    },
+    {
+      "ts": 1795554159.6204424,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 69,
+        "persona": "build",
+        "reason": "Amazon's Cairn AI framework finding and exploiting 0-day vulnerabilities with minimal human input demonstrates a major capability shift - AI agents can now discover novel security flaws autonomously. This has huge implications for both offensive and defensive security."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01N9tH39vxNxqUdEpoPrijvw"
+    },
+    {
+      "ts": 1795554159.6204877,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Amazon says hackers' AI agents found and exploited 0-day with little human input\", \"persona\": \"build\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01N9tH39vxNxqUdEpoPrijvw"
+    },
+    {
+      "ts": 1795554162.5962849,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01EmLewfEhEv5sk4tJWueZnE"
+    },
+    {
+      "ts": 1795554163.1654608,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795554163.1654947,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_3\": \"Meta brings its Muse AI assistant directly into Instagram DMs\", \"pick_4\": \"Tidal will start banning AI-generated music next month\", \"pick_5\": \"Finding faster quantum algorithms with agents and formal verification\", \"pick_6\": \"Richpanel helps companies automate 50% of support in 30 days\", \"pick_7\": \"Amazon says hackers' AI agents found and exploited 0-day with little human input\"}}",
+      "tool_use_id": "toolu_01EmLewfEhEv5sk4tJWueZnE"
+    }
+  ],
+  "issue_num": 140
+}
