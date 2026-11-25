@@ -1,0 +1,264 @@
+{
+  "date": "2026-11-25",
+  "generated_at": "2026-11-25T20:26:23.147167Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "OpenAI's GPT-6 can now design proteins from scratch using just reasoning and code",
+      "blurb": "GPT-6 designs new protein structures and amino acid sequences without calling specialized biology models\u2014it reasons through the math, physics, and chemistry, then writes code to generate designs. Lab tests with partner Onava showed five proteins based on GPT-6.2 designs binding to their targets. The model can also take prompts like \"attach here\" or \"fold this shape.\"",
+      "why_it_matters": "General AI models are replacing specialized scientific tools in molecular design.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+      "tier": 1,
+      "original_headline": "GPT-6 models demonstrate intrinsic protein-design capabilities",
+      "fingerprint": "232cfd9180ec7b99"
+    },
+    {
+      "slot": "market",
+      "headline": "SpaceX can now launch up to 1 million AI satellites into orbit",
+      "blurb": "The FCC just approved SpaceX's 'Starmind' constellation \u2014 satellites with AI chips that beam compute back to Earth via laser. SpaceX must launch one by 2033 and hit 1 million by 2040. Google and Blue Origin are racing similar projects.",
+      "why_it_matters": "Data centers are moving to space where solar power is constant and cooling is free",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/science/1042278/spacex-fcc-starmind-ai-space-data-centers",
+      "tier": 1,
+      "original_headline": "FCC signs off on SpaceX\u2019s plan to put up to 1 million data center satellites into space",
+      "fingerprint": "a63067a19bd98203"
+    },
+    {
+      "slot": "build",
+      "headline": "OpenAI researchers just disproved a 70-year-old math conjecture",
+      "blurb": "OpenAI published a proof showing the polynomial Hirsch conjecture is false. The conjecture claimed you could navigate between vertices of certain geometric shapes in polynomial time\u2014a question tied to how efficiently optimization algorithms work. The team posted the paper on GitHub, marking a rare pure-math contribution from an AI lab.",
+      "why_it_matters": "Major optimization algorithms rely on assumptions this conjecture supported\u2014now those need rethinking.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://github.com/openai/math/blob/main/preprints/Superpolynomial-graph-diameter-of-simple-polytopes-November-24-2026/paper.pdf",
+      "tier": 1,
+      "original_headline": "The polynomial Hirsch conjecture is false [pdf]",
+      "fingerprint": "c871334c01d28e8a"
+    },
+    {
+      "slot": "build",
+      "headline": "Google releases 10 papers on integer factoring and game theory \u2014 from an AI named Cogentic",
+      "blurb": "Google just dropped a folder of research papers authored by something called Cogentic, covering decades-old computer science problems like integer factorization, discrete logarithms, and Nash equilibria. The factorization paper claims a faster-than-expected algorithm, and several others tackle problems in computational game theory and learning theory.",
+      "why_it_matters": "If the factorization results hold, they could affect cryptography assumptions used across the internet.",
+      "source_name": "Hacker News (front page)",
+      "source_url": "https://github.com/google-research/google-research/tree/master/cogentic_research_papers",
+      "tier": 1,
+      "original_headline": "Google releases Cogentic papers on integer factorization, discrete logs and more",
+      "fingerprint": "63fbc32fe2efc9be"
+    },
+    {
+      "slot": "market",
+      "headline": "ElevenLabs is raising money at a $33 billion valuation",
+      "blurb": "The AI voice company behind hyper-realistic text-to-speech is in early funding talks that would value it at $33 billion. That's more than double its last raise and puts it in the same tier as companies like Anthropic and Databricks.",
+      "why_it_matters": "Voice AI is becoming infrastructure-grade \u2014 investors are betting billions on it.",
+      "source_name": "Bloomberg Technology",
+      "source_url": "https://www.bloomberg.com/news/articles/2026-11-25/elevenlabs-in-early-talks-for-2027-funding-at-33-billion-value",
+      "tier": 1,
+      "original_headline": "ElevenLabs in Early Talks for 2027 Funding at $33 Billion Value",
+      "fingerprint": "4d21aa134968551f"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The negotiation floor-finder",
+    "kicker": "",
+    "prompt": "I'm negotiating something I'll describe below. I need to find my walk-away point. Ask me three questions \u2014 one about what happens if I say no, one about what I'm afraid to lose, and one about what I'd tell a friend in my position. Then tell me my actual floor.",
+    "tool_hint": "Before you counter-offer or sign anything you'll regret."
+  },
+  "daily_question": "If you could point one of today's AIs at any unsolved problem for 72 hours, what would you pick?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1795638321.607672,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795638339.9397545,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "build",
+        "reason": "Lead story: GPT-6 models can now design proteins from scratch using reasoning and code - major scientific capability breakthrough from OpenAI with lab-verified binding evidence. This is THE AI story today."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01CFnzvh8Esa5UFLbedJ8HNh"
+    },
+    {
+      "ts": 1795638339.9398372,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"GPT-6 models demonstrate intrinsic protein-design capabilities\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01CFnzvh8Esa5UFLbedJ8HNh"
+    },
+    {
+      "ts": 1795638339.939869,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 20,
+        "persona": "market",
+        "reason": "FCC approves SpaceX to deploy up to 1 million AI chip-equipped satellites - unprecedented infrastructure scale for AI compute in space. Massive platform story."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_014izz1xujDgbPx6GksvnK63"
+    },
+    {
+      "ts": 1795638339.9399142,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"FCC signs off on SpaceX\\u2019s plan to put up to 1 million data center satellites into space\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_014izz1xujDgbPx6GksvnK63"
+    },
+    {
+      "ts": 1795638339.9399211,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 68,
+        "persona": "build",
+        "reason": "AI solves the polynomial Hirsch conjecture - a longstanding mathematical problem disproved using OpenAI's reasoning models. Major scientific breakthrough demonstrating AI mathematical capabilities."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01XUKdP7AuBwddS2yV8BJaVR"
+    },
+    {
+      "ts": 1795638339.9399607,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"The polynomial Hirsch conjecture is false [pdf]\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01XUKdP7AuBwddS2yV8BJaVR"
+    },
+    {
+      "ts": 1795638339.9399672,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 76,
+        "persona": "build",
+        "reason": "Google releases Cogentic research papers on integer factorization and discrete logarithms - significant advances in cryptographic computation using AI reasoning systems."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01JA7NoxQBxdvVdWoZXoV1UV"
+    },
+    {
+      "ts": 1795638339.9399924,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Google releases Cogentic papers on integer factorization, discrete logs and more\", \"persona\": \"build\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01JA7NoxQBxdvVdWoZXoV1UV"
+    },
+    {
+      "ts": 1795638339.9399977,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 29,
+        "persona": "everyday",
+        "reason": "OpenAI merges ChatGPT and Work with unified usage limits - directly affects millions of daily users who may hit caps sooner. Practical impact story balancing the technical breakthroughs."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01T25BcqBDesnBTcPxVconqJ"
+    },
+    {
+      "ts": 1795638339.9400167,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI says heavy ChatGPT users may hit limits sooner as it merges Chat and Work\", \"persona\": \"everyday\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01T25BcqBDesnBTcPxVconqJ"
+    },
+    {
+      "ts": 1795638346.479724,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "unpick",
+      "args": {
+        "id": 29
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0114XWnbwjL2VhdTMu6Fzg9y"
+    },
+    {
+      "ts": 1795638346.4797697,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "unpick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"removed\": \"OpenAI says heavy ChatGPT users may hit limits sooner as it merges Chat and Work\"}",
+      "tool_use_id": "toolu_0114XWnbwjL2VhdTMu6Fzg9y"
+    },
+    {
+      "ts": 1795638352.3313322,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 182,
+        "persona": "market",
+        "reason": "ElevenLabs raising at $33B valuation - major AI voice company reaching unicorn territory, shows continued investor confidence in specialized AI applications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0112Hi1HH4bmpAPALB3J69fG"
+    },
+    {
+      "ts": 1795638352.3314023,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"ElevenLabs in Early Talks for 2027 Funding at $33 Billion Value\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_0112Hi1HH4bmpAPALB3J69fG"
+    },
+    {
+      "ts": 1795638358.0799916,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_011hM6rNYqUJA5cN9LCNtWcP"
+    },
+    {
+      "ts": 1795638358.7121234,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795638358.7121649,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"GPT-6 models demonstrate intrinsic protein-design capabilities\", \"pick_2\": \"FCC signs off on SpaceX\\u2019s plan to put up to 1 million data center satellites into space\", \"pick_3\": \"The polynomial Hirsch conjecture is false [pdf]\", \"pick_4\": \"Google releases Cogentic papers on integer factorization, discrete logs and more\", \"pick_6\": \"ElevenLabs in Early Talks for 2027 Funding at $33 Billion Value\"}}",
+      "tool_use_id": "toolu_011hM6rNYqUJA5cN9LCNtWcP"
+    }
+  ],
+  "issue_num": 141
+}
