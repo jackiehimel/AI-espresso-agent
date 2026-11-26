@@ -1,0 +1,223 @@
+{
+  "date": "2026-11-26",
+  "generated_at": "2026-11-26T20:02:33.247260Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "build",
+      "headline": "An AI just proved math's most famous problem in 17 million lines of code",
+      "blurb": "Anthropic researcher Levent Alp\u00f6ge used Claude to generate a proof of the 167-year-old Riemann hypothesis in the Lean programming language. The code compiles and appears sound, but the proof is so long and counterintuitive that hundreds of mathematicians are now racing to decode it into something humans can actually understand and build on.",
+      "why_it_matters": "A machine-checkable proof exists, but nobody knows yet what new math it contains or how it works.",
+      "source_name": "Wired \u2014 AI",
+      "source_url": "https://www.wired.com/story/ai-solved-maths-most-famous-problem/",
+      "tier": 1,
+      "original_headline": "AI Solved Math\u2019s Most Famous Problem. Now Humans Are Struggling to Understand It",
+      "fingerprint": "2125d7fdd0fb879b"
+    },
+    {
+      "slot": "market",
+      "headline": "SpaceX can now launch 1 million satellites to run AI in orbit",
+      "blurb": "The FCC approved SpaceX's Starmind plan to deploy satellites running AI compute in space by 2040. The company argues orbital data centers use solar power and skip ground facilities' energy and water costs. Critics say space's vacuum traps heat with 'basic physical limits' on radiation cooling, and a million satellites risk collisions and massive space junk.",
+      "why_it_matters": "If it works, AI computing moves off-planet. If it doesn't, we get orbital debris at unprecedented scale.",
+      "source_name": "Engadget \u2014 AI",
+      "source_url": "https://www.engadget.com/2329071/spacex-gets-fcc-approval-to-deploy-1-million-satellites-for-its-ai-orbital-data-center/",
+      "tier": 1,
+      "original_headline": "SpaceX gets FCC approval to deploy 1 million satellites for its AI orbital data center",
+      "fingerprint": "f73d223e1e34bf67"
+    },
+    {
+      "slot": "build",
+      "headline": "DeepMind built an AI that identifies unknown molecules from mass spec data",
+      "blurb": "Mass Spec Skills translates tandem mass spectrometry readings into molecular structures, helping scientists identify compounds in blood, soil, or plant samples that don't match any reference library. It runs inside Google Antigravity and matches frontier-level accuracy even with a lightweight model, potentially solving the \"dark matter\" problem where 90-95% of detected signals go unidentified.",
+      "why_it_matters": "Could unlock the vast majority of molecules scientists detect but can't currently identify",
+      "source_name": "Google DeepMind Blog",
+      "source_url": "https://deepmind.google/blog/interpreting-mass-spectra-with-google-antigravity/",
+      "tier": 1,
+      "original_headline": "From spectrum to structure: Identifying molecules with Mass Spec Skills for Google Antigravity",
+      "fingerprint": "51f1f10a95866ce1"
+    },
+    {
+      "slot": "everyday",
+      "headline": "Two amateur astronomers used ChatGPT to find new planets in old telescope data",
+      "blurb": "An OpenAI engineer and a startup founder independently used Codex and Astra to comb through millions of star observations from NASA's Kepler telescope. Both found candidate exoplanets that professional astronomers had missed\u2014signals now worth a closer look with more powerful instruments.",
+      "why_it_matters": "AI tools are letting anyone with curiosity search datasets that used to require specialized training.",
+      "source_name": "OpenAI News",
+      "source_url": "https://openai.com/index/searching-for-distant-planets-with-astra",
+      "tier": 1,
+      "original_headline": "Searching for distant planets with Astra",
+      "fingerprint": "2732140e16bf10b4"
+    },
+    {
+      "slot": "market",
+      "headline": "Nvidia pauses chip shipments to Southeast Asia after US closes remote-access loophole",
+      "blurb": "Nvidia told partners to halt GPU shipments to the region after Washington closed a loophole that let Chinese companies remotely access AI computing power housed in Southeast Asian data centers. The move targets cloud providers who were essentially renting US chips to Chinese customers.",
+      "why_it_matters": "US export controls are now reaching beyond physical borders to block remote AI compute access.",
+      "source_name": "WSJ \u2014 Tech",
+      "source_url": "https://www.wsj.com/tech/nvidia-tells-partners-to-pause-shipments-to-southeast-asia-5b791cb0?mod=rss_Technology",
+      "tier": 1,
+      "original_headline": "Nvidia Tells Partners to Pause Shipments to Southeast Asia",
+      "fingerprint": "b6d92b10b5dc06f3"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The research rabbit hole escape",
+    "kicker": "",
+    "prompt": "I'm researching a topic and I've collected way too much information. I'll dump my notes and links below. Give me: the one insight that actually changes how I should think about this, two things I can safely ignore, and the single follow-up question worth chasing.",
+    "tool_hint": "When you've got 47 tabs open and forgot what you were originally looking for."
+  },
+  "daily_question": "If you could give AI access to one dataset it doesn't have yet, what would you want it to solve?",
+  "notes": [
+    "mode: agent",
+    "copy_warnings: ['[build] banned copy word: unlock']"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1795723305.0084336,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[]",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795723320.3096335,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 107,
+        "persona": "build",
+        "reason": "Major breakthrough: AI solved a famous unsolved math problem with a 17-million-line proof that mathematicians are now struggling to verify. This is the \"I didn't know AI could do that\" story - concrete achievement that shows AI capability in pure mathematics."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01LG1tDqHqTpQS5MEZLoHX6L"
+    },
+    {
+      "ts": 1795723320.309745,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"AI Solved Math\\u2019s Most Famous Problem. Now Humans Are Struggling to Understand It\", \"persona\": \"build\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01LG1tDqHqTpQS5MEZLoHX6L"
+    },
+    {
+      "ts": 1795723320.3097832,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 117,
+        "persona": "market",
+        "reason": "FCC approved SpaceX to deploy 1 million satellites for an AI orbital data center - audacious infrastructure play that's both surprising and concrete. Major market move with real-world implications."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01Jx8AgKVSfHQMUG52Wz2ogT"
+    },
+    {
+      "ts": 1795723320.3098118,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"SpaceX gets FCC approval to deploy 1 million satellites for its AI orbital data center\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_01Jx8AgKVSfHQMUG52Wz2ogT"
+    },
+    {
+      "ts": 1795723320.309818,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 5,
+        "persona": "build",
+        "reason": "Google DeepMind shipped Mass Spec Skills for Antigravity - empowers scientists to interpret molecular spectra. Primary source from DeepMind, concrete tool scientists can use today for drug discovery and chemistry."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01EU3bpwUVNMSTTRw872YUnd"
+    },
+    {
+      "ts": 1795723320.3098452,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"From spectrum to structure: Identifying molecules with Mass Spec Skills for Google Antigravity\", \"persona\": \"build\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01EU3bpwUVNMSTTRw872YUnd"
+    },
+    {
+      "ts": 1795723320.3098521,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 0,
+        "persona": "everyday",
+        "reason": "Amateur astronomers using OpenAI's Astra and Codex to discover exoplanets in public NASA data - inspiring story showing AI democratizing science. Primary source from OpenAI, real people trying something exciting."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01YWXF8uV9wG2NaxiTgU4CcL"
+    },
+    {
+      "ts": 1795723320.3098767,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Searching for distant planets with Astra\", \"persona\": \"everyday\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01YWXF8uV9wG2NaxiTgU4CcL"
+    },
+    {
+      "ts": 1795723320.3098829,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 153,
+        "persona": "market",
+        "reason": "NVIDIA halting AI chip shipments to Southeast Asia following Washington closing remote-access loophole - major geopolitical market move affecting AI infrastructure. WSJ tier-1 source, more authoritative than Engadget duplicate."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01So9f22BtPXwkhfVocqsmXp"
+    },
+    {
+      "ts": 1795723320.3099222,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia Tells Partners to Pause Shipments to Southeast Asia\", \"persona\": \"market\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01So9f22BtPXwkhfVocqsmXp"
+    },
+    {
+      "ts": 1795723326.0152428,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01UxBy81MLEUFNTrtB5KBAMP"
+    },
+    {
+      "ts": 1795723328.2698581,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795723328.2698898,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"AI Solved Math\\u2019s Most Famous Problem. Now Humans Are Struggling to Understand It\", \"pick_2\": \"SpaceX gets FCC approval to deploy 1 million satellites for its AI orbital data center\", \"pick_3\": \"From spectrum to structure: Identifying molecules with Mass Spec Skills for Google Antigravity\", \"pick_4\": \"Searching for distant planets with Astra\", \"pick_5\": \"Nvidia Tells Partners to Pause Shipments to Southeast Asia\"}}",
+      "tool_use_id": "toolu_01UxBy81MLEUFNTrtB5KBAMP"
+    }
+  ],
+  "issue_num": 142
+}
