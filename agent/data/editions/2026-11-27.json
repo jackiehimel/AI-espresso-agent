@@ -1,0 +1,222 @@
+{
+  "date": "2026-11-27",
+  "generated_at": "2026-11-27T19:51:25.133470Z",
+  "model": "claude-sonnet-4-5",
+  "stories": [
+    {
+      "slot": "market",
+      "headline": "OpenAI countersues Apple for allegedly blocking its hardware suppliers",
+      "blurb": "OpenAI claims Apple is threatening suppliers who work with the ChatGPT maker and encouraged employees to store corporate files on personal devices. The countersuit escalates a legal fight Apple started in July, when it accused OpenAI of stealing iPhone and Apple Watch design secrets through former Apple employees now working on OpenAI's consumer hardware plans.",
+      "why_it_matters": "Two of tech's biggest players are now accusing each other of industrial espionage over AI hardware.",
+      "source_name": "9to5Mac \u2014 AI",
+      "source_url": "https://9to5mac.com/2026/11/27/openai-countersues-apple-alleging-trade-secret-theft-and-supplier-threats/",
+      "tier": 1,
+      "original_headline": "OpenAI countersues Apple, alleging trade secret theft and supplier threats",
+      "fingerprint": "78d001dff77bf688"
+    },
+    {
+      "slot": "market",
+      "headline": "Nvidia's CEO apologizes to employees, says he's in therapy",
+      "blurb": "Jensen Huang returned to Nvidia and told employees he violated the company's code of conduct and 'made some terrible mistakes.' He acknowledged entering therapy. The specific violations weren't detailed in public statements.",
+      "why_it_matters": "The face of the AI chip industry just admitted serious misconduct at the company powering most AI development.",
+      "source_name": "NYT \u2014 Technology",
+      "source_url": "https://www.nytimes.com/2026/11/24/technology/jensen-huang-apology-nvidia-ceo.html",
+      "tier": 1,
+      "original_headline": "Jensen Huang Apologizes to Nvidia Employees, Says He Is in Therapy",
+      "fingerprint": "b34b78b9e0c07b99"
+    },
+    {
+      "slot": "everyday",
+      "headline": "OpenAI is merging ChatGPT and Work \u2014 heavy users will hit limits faster",
+      "blurb": "OpenAI started rolling out a unified ChatGPT experience that shares one usage meter across chat and work tasks. The company admits its heaviest users will hit rate limits sooner than before, even while paying the same subscription price. The basic 'Instant' model stays unlimited.",
+      "why_it_matters": "If you're a power user, you'll get less access to advanced models for the same money.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/",
+      "tier": 1,
+      "original_headline": "OpenAI says heavy ChatGPT users may hit limits sooner as it merges Chat and Work",
+      "fingerprint": "98897ab3ceec2dc4"
+    },
+    {
+      "slot": "market",
+      "headline": "Nvidia stops shipping AI chips to Southeast Asia",
+      "blurb": "Nvidia told Dell and Super Micro to halt server shipments to Malaysia, Singapore, Thailand, and Indonesia while it checks whether partners meet U.S. export rules. Chinese companies have been accessing Nvidia chips remotely through data centers in those countries \u2014 a loophole the Commerce Department closed earlier this month.",
+      "why_it_matters": "About a quarter of China's AI computing power comes from these remote data centers.",
+      "source_name": "TechCrunch \u2014 AI",
+      "source_url": "https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/",
+      "tier": 1,
+      "original_headline": "Nvidia hits pause on chip shipments to Southeast Asia",
+      "fingerprint": "81c5ada3547aa232"
+    },
+    {
+      "slot": "industry",
+      "headline": "42 state AGs move to block Character.AI from selling user chats in bankruptcy",
+      "blurb": "A bipartisan coalition says Character.AI plans to auction off chat histories from 21 million US accounts\u2014including 2.1 million minors\u2014with no privacy protections or deletion options. The first bidder was incorporated just days before the auction, with no listed parent company or investors.",
+      "why_it_matters": "Your AI chat logs could become an asset sold to the highest bidder when companies go bankrupt.",
+      "source_name": "The Verge \u2014 AI",
+      "source_url": "https://www.theverge.com/policy/1042620/character-ai-sale-state-ags-block-selling-users-chats",
+      "tier": 1,
+      "original_headline": "42 state AGs are trying to stop Character.AI from selling users\u2019 chats",
+      "fingerprint": "3a61904afede6063"
+    }
+  ],
+  "try_this_prompt": {
+    "title": "The hiring red-flag translator",
+    "kicker": "",
+    "prompt": "I just interviewed a candidate and something felt off, but I can't articulate it yet. I'll describe what they said and how they said it below. Tell me: the specific behavior I'm reacting to, whether it predicts actual job performance, and the one follow-up question that would confirm or kill my concern.",
+    "tool_hint": "For when your gut speaks but your debrief doc stays blank."
+  },
+  "daily_question": "If you found out an AI tool was selling your chat history, would you keep using it?",
+  "notes": [
+    "mode: agent"
+  ],
+  "story_count_policy": "4-5-exceptional-6",
+  "agent_trace": [
+    {
+      "ts": 1795809040.649823,
+      "role": "system",
+      "kind": "handoff",
+      "name": "",
+      "args": null,
+      "result_summary": "ranked=20, enriched=19, gaps=[\"Lead story must be OpenAI vs. Apple countersuit (68) or Jensen's apology (128/95)\u2014both are THE defining AI story today. Jensen returning was yesterday's news; today is the fallout and the legal war.\", \"GPT-6.2 Astra solving a historical mystery (61) is the strongest 'try it today' capability story\u2014concrete, surprising, shipped.\", 'ChatGPT usage-meter squeeze (22) is the most reader-relevant OpenAI move this week\u2014hits heavy users directly.', 'Nvidia halting Southeast Asia shipments (19/134) and Blackwell chips at Alice Huang site (162) are major geopolitical AI stories.', 'Character.AI bankruptcy data fight (12) is privacy horror at scale but framed as a legal/regulatory action with AI load-bearing.', 'Air Force cloud breach (100/173) is a major cybersecurity story but AI is incidental\u2014borderline for inclusion.', 'Amazon-Meta Muse talks (15) are platform-war news with a shipped artifact (the block itself).', 'S&P Nvidia downgrade threat (21) is a governance story with Jensen at center\u2014acceptable as market fallout.', 'Nothing Ear Note (14) and Android widgets (11) are concrete try-it features\u2014good everyday/build candidates.', 'Convex AI phoning home (56) is developer outrage with 71 HN points\u2014borderline but concrete.', 'Q.ANT photonic chips (91) and Poland-Palantir deal (166) are strong industry stories but lack wow factor for general audience.']",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795809056.952747,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 68,
+        "persona": "market",
+        "reason": "The defining AI story today - OpenAI and Apple in direct legal combat over trade secrets and supplier threats. This is the story everyone in AI will be talking about. 9to5Mac is covering as tier-1 news source."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01FvdT13ESQzGEjY828J8ksM"
+    },
+    {
+      "ts": 1795809056.9528186,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI countersues Apple, alleging trade secret theft and supplier threats\", \"persona\": \"market\", \"pick_count\": 1}",
+      "tool_use_id": "toolu_01FvdT13ESQzGEjY828J8ksM"
+    },
+    {
+      "ts": 1795809056.9528487,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 128,
+        "persona": "market",
+        "reason": "Jensen Huang's first all-hands since his controversial return - acknowledges violations, therapy, and mistakes. Major leadership moment at the most important AI hardware company. NYT is primary news source over Wired duplicate."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_0193hUXZHXf84BcPsKgPkqHP"
+    },
+    {
+      "ts": 1795809056.9528892,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Jensen Huang Apologizes to Nvidia Employees, Says He Is in Therapy\", \"persona\": \"market\", \"pick_count\": 2}",
+      "tool_use_id": "toolu_0193hUXZHXf84BcPsKgPkqHP"
+    },
+    {
+      "ts": 1795809056.9529006,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 22,
+        "persona": "everyday",
+        "reason": "OpenAI shipping a concrete product change that will affect millions of ChatGPT users this week - merged usage limits across Chat and Work. People will feel this immediately in their daily workflows."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01W61ubz2GegTZH9qdXpvdAt"
+    },
+    {
+      "ts": 1795809056.952944,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"OpenAI says heavy ChatGPT users may hit limits sooner as it merges Chat and Work\", \"persona\": \"everyday\", \"pick_count\": 3}",
+      "tool_use_id": "toolu_01W61ubz2GegTZH9qdXpvdAt"
+    },
+    {
+      "ts": 1795809056.9529665,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 19,
+        "persona": "market",
+        "reason": "Nvidia halting chip shipments to four Southeast Asian countries as US tightens China restrictions - major geopolitical AI hardware story with immediate market impact. TechCrunch coverage is concise and clear."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01MvFSfXagkSF3Yq1bec7m3X"
+    },
+    {
+      "ts": 1795809056.9530191,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"Nvidia hits pause on chip shipments to Southeast Asia\", \"persona\": \"market\", \"pick_count\": 4}",
+      "tool_use_id": "toolu_01MvFSfXagkSF3Yq1bec7m3X"
+    },
+    {
+      "ts": 1795809056.9530365,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "pick",
+      "args": {
+        "id": 12,
+        "persona": "industry",
+        "reason": "42 state AGs blocking Character.AI from selling user chat data - massive privacy and legal story affecting millions of AI users. Shows government taking action on AI data practices."
+      },
+      "result_summary": "",
+      "tool_use_id": "toolu_01C4xzV6vuvrJ3jCp5ZKjhPh"
+    },
+    {
+      "ts": 1795809056.9530911,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "pick",
+      "args": null,
+      "result_summary": "{\"ok\": true, \"picked\": \"42 state AGs are trying to stop Character.AI from selling users\\u2019 chats\", \"persona\": \"industry\", \"pick_count\": 5}",
+      "tool_use_id": "toolu_01C4xzV6vuvrJ3jCp5ZKjhPh"
+    },
+    {
+      "ts": 1795809061.617509,
+      "role": "editor",
+      "kind": "tool_call",
+      "name": "ship_edition",
+      "args": {},
+      "result_summary": "",
+      "tool_use_id": "toolu_01KmAc6tx3gJYcA2iMrRsX1a"
+    },
+    {
+      "ts": 1795809063.9422793,
+      "role": "editor",
+      "kind": "finalize",
+      "name": "",
+      "args": null,
+      "result_summary": "shipped 5 stories",
+      "tool_use_id": ""
+    },
+    {
+      "ts": 1795809063.942309,
+      "role": "editor",
+      "kind": "tool_result",
+      "name": "ship_edition",
+      "args": null,
+      "result_summary": "{\"shipped\": true, \"picks\": {\"pick_1\": \"OpenAI countersues Apple, alleging trade secret theft and supplier threats\", \"pick_2\": \"Jensen Huang Apologizes to Nvidia Employees, Says He Is in Therapy\", \"pick_3\": \"OpenAI says heavy ChatGPT users may hit limits sooner as it merges Chat and Work\", \"pick_4\": \"Nvidia hits pause on chip shipments to Southeast Asia\", \"pick_5\": \"42 state AGs are trying to stop Character.AI from selling users\\u2019 chats\"}}",
+      "tool_use_id": "toolu_01KmAc6tx3gJYcA2iMrRsX1a"
+    }
+  ],
+  "issue_num": 143
+}
